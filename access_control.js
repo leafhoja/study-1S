@@ -21,7 +21,6 @@ window.ACCESS_CONTROL = {
     "現代経済理論": 1,
     "力学A": 1,
     "数学基礎理論演習1S": 1,
-    "数学基礎理論演習1A": 1,
     "英語一列": 1,
     "ジェンダー論": 1,
     "情報": 1
@@ -160,12 +159,6 @@ window.ACCESS_CONTROL = {
       "yosou/yosou_lin_02": 1,
       "yosou/yosou_lin_03": 1,
       "yosou/yosou_lin_04": 1
-    },
-
-    // 数学基礎理論演習1A: 過去問（小テスト）ごと
-    "数学基礎理論演習1A": {
-      "kakomon/kakomon_calc_01": 1,
-      "kakomon/kakomon_lin_01": 1
     },
 
     // 英語一列: セッションごと（本文・対訳ページはセットで一緒に管理）
