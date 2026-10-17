@@ -1,7 +1,7 @@
 {
   "name": "学習ノート",
   "short_name": "学習ノート",
-  "description": "東京大学 2026年度 S・Aセメスター 学習ノートサイト",
+  "description": "東京大学 2026年度 Sセメスター 学習ノートサイト",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",

@@ -26,30 +26,6 @@
       width: 100%;
       padding: 2.8rem 1.5rem 4rem;
     }
-    .semester-nav {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 1.8rem;
-      padding: 5px;
-      background: var(--surface);
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      width: fit-content;
-      max-width: 100%;
-    }
-    .semester-nav a {
-      padding: 10px 18px;
-      border-radius: 8px;
-      color: #4a5568;
-      font-size: .9rem;
-      font-weight: 700;
-      text-decoration: none;
-      text-align: center;
-    }
-    .semester-nav a:hover { background: var(--bg); }
-    .semester-nav a[aria-current] { background: var(--primary); color: #fff; }
-    .semester-nav a:focus-visible { outline: 3px solid var(--primary-lt); outline-offset: 2px; }
-    .semester-section { scroll-margin-top: 90px; }
     .section-label {
       font-size: .78rem;
       font-weight: 700;
@@ -108,30 +84,11 @@
 
 <!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero portal-hero">
   <h1>学習ノート</h1>
-  <p class="subtitle">東京大学 2026年度</p>
+  <p class="subtitle">東京大学 2026年度 Sセメスター</p>
 </div>
 
 <main class="portal-main">
-  <nav class="semester-nav" aria-label="セメスター切り替え">
-    <a href="#a" aria-controls="a" aria-current="true">Aセメスター</a>
-    <a href="#s" aria-controls="s">Sセメスター</a>
-  </nav>
-  <section class="semester-section" id="a" aria-labelledby="a-heading">
-    <h2 class="section-label" id="a-heading">Aセメスターの教科</h2>
-    <div class="grid">
-      <a class="card" href="英語一列_1A/" data-subject="英語一列_1A">
-        <div class="icon">📚</div>
-        <div class="title">英語一列②</div>
-        <div class="sub">Session 14〜18 読解ノート</div>
-      </a>
-      <a class="card" href="アルゴリズム入門/" data-subject="アルゴリズム入門">
-        <div class="icon">🔀</div>
-        <div class="title">アルゴリズム入門</div>
-        <div class="sub">講義ノート・過去問解説</div>
-      </a>
-    </div>
-  </section>
-  <section class="semester-section" id="s" aria-labelledby="s-heading" hidden>
+  <section id="s" aria-labelledby="s-heading">
     <h2 class="section-label" id="s-heading">Sセメスターの教科</h2>
     <div class="grid">
       <a class="card" href="熱力学/" data-subject="熱力学">
@@ -194,26 +151,6 @@
   <a href="admin.html">管理者ページ</a>
 </div>
 
-<script>
-  // URLでセメスターを切り替える。指定がなければAを表示し、戻る・進むにも対応する。
-  (function () {
-    function showSemester() {
-      var current = location.hash === '#s' ? 's' : 'a';
-      document.querySelectorAll('.semester-section').forEach(function (section) {
-        section.hidden = section.id !== current;
-      });
-      document.querySelectorAll('.semester-nav a').forEach(function (link) {
-        if (link.getAttribute('href') === '#' + current) {
-          link.setAttribute('aria-current', 'true');
-        } else {
-          link.removeAttribute('aria-current');
-        }
-      });
-    }
-    window.addEventListener('hashchange', showSemester);
-    showSemester();
-  })();
-</script>
 <script src="common.js"></script>
 <script>
   // 権限設定だけは毎回取り直す。設定更新直後に古いキャッシュで教科を表示しないため。
