@@ -1,0 +1,54 @@
+/* アルゴリズム入門：共通レイアウトに科目の配色と本文部品を追加 */
+:root { --primary:#164e63; --primary-dk:#123e50; --primary-lt:#0e7490; --accent:#0e7490; --accent2:#164e63; --accent-soft:#ecfeff; --text:#263746; --muted:#627584; --border:#d6e4e9; }
+.container { max-width:960px; margin:0 auto; padding:32px 20px 60px; }
+p { margin:0 0 .9rem; }
+h3 { color:var(--accent2); font-size:1.08rem; margin:1.8rem 0 .7rem; }
+h3:first-child { margin-top:0; }
+h4 { color:var(--accent2); margin:1.2rem 0 .5rem; }
+ul,ol { padding-left:1.6rem; margin-bottom:1rem; }
+li { margin:.3rem 0; }
+.intro-box { background:var(--surface); padding:22px 26px; margin-bottom:28px; border-left:4px solid var(--accent); border-radius:12px; box-shadow:var(--shadow-sm); }
+.intro-box p:last-child { margin-bottom:0; }
+.section { margin-bottom:28px; background:var(--surface); border-radius:12px; box-shadow:var(--shadow-sm); overflow:hidden; scroll-margin-top:76px; }
+.sec-header { padding:16px 24px; background:var(--primary); color:white; }
+.sec-header h2 { font-size:1.2rem; margin:0; }
+.sec-body { padding:24px; }
+.def,.thm,.prop,.cor,.ex,.note,.mot,.sol,.warn { padding:14px 18px; border-radius:7px; margin:18px 0; border-left:4px solid var(--accent); background:#ecfeff; }
+.sol,.thm { border-color:#2f855a; background:#f0fff4; }
+.warn { border-color:#b7791f; background:#fffaf0; }
+.box-label { display:block; font-weight:700; color:var(--primary); margin-bottom:6px; font-size:.88rem; }
+code { font-family:Menlo,Consolas,monospace; font-size:.88em; overflow-wrap:anywhere; }
+pre { overflow-x:auto; padding:18px; margin:16px 0; background:#132e3c; color:#e5f5fc; border-radius:8px; line-height:1.65; tab-size:4; }
+pre code { white-space:pre; overflow-wrap:normal; }
+.table-wrap,.mathblock { max-width:100%; overflow-x:auto; margin:16px 0; }
+table { width:100%; border-collapse:collapse; font-size:.9rem; }
+th,td { text-align:left; vertical-align:top; border:1px solid var(--border); padding:9px 12px; }
+th { color:var(--primary); background:var(--accent-soft); }
+details { margin:16px 0; }
+summary { cursor:pointer; padding:10px 14px; font-weight:700; color:var(--primary); background:var(--accent-soft); border-radius:6px; }
+.proof-body { padding:16px; border-left:3px solid var(--border); }
+.toc { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px; }
+.toc a { color:var(--primary); background:var(--surface); border:1px solid var(--border); border-radius:6px; padding:6px 12px; text-decoration:none; }
+.page-nav { display:flex; justify-content:space-between; gap:16px; margin-top:32px; }
+.navbar-links { min-width:0; }
+.sidenav-toggle-btn { border:0; background:rgba(255,255,255,.13); color:white; border-radius:5px; font-size:1.2rem; padding:3px 10px; margin-right:12px; cursor:pointer; flex-shrink:0; }
+.sidenav { position:fixed; left:0; top:0; bottom:0; width:min(310px,88vw); background:white; z-index:310; transform:translateX(-105%); transition:transform .2s; box-shadow:4px 0 24px #0003; display:flex; flex-direction:column; visibility:hidden; }
+.sidenav-open { transform:translateX(0); visibility:visible; }
+.sidenav-header { display:flex; align-items:center; justify-content:space-between; padding:18px; color:var(--primary); border-bottom:1px solid var(--border); }
+.sidenav-close-btn { border:0; background:transparent; padding:6px 10px; font-size:1.2rem; cursor:pointer; }
+.sidenav-body { overflow-y:auto; padding:12px 0 28px; }
+.sidenav-group-title { padding:10px 20px; color:var(--muted); font-size:.78rem; font-weight:700; }
+.sidenav-item { display:block; padding:8px 20px; text-decoration:none; color:var(--text); border-left:4px solid transparent; }
+.sidenav-item:hover,.sidenav-current { background:var(--accent-soft); border-left-color:var(--accent); }
+.sidenav-current { font-weight:700; }
+.sidenav-backdrop { position:fixed; inset:0; background:#0005; z-index:300; }
+@media(max-width:640px) { .container { padding:24px 14px 44px; } .sec-body { padding:18px 16px; } .sec-header { padding:14px 16px; } .navbar-inner { padding:0 12px; } .navbar-brand { font-size:.8rem; } th,td { padding:7px 9px; } }
+@media(prefers-reduced-motion:reduce) { .sidenav { transition:none; } }
+
+/* カードの基本配置。色・罫線・ホバーは subject-home.css に従う。 */
+.year-grid { display:grid; }
+.card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:16px; }
+a.card { display:block; text-decoration:none; }
+.card-tag { font-size:.78rem; font-weight:700; }
+.card h3 { margin:.4rem 0 .6rem; font-size:1.05rem; }
+.card p { margin:0; font-size:.88rem; line-height:1.75; }

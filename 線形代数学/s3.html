@@ -1,0 +1,593 @@
+<!DOCTYPE html><!-- 「§3 Kernel と Image — 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>§3 Kernel と Image — 線形代数学①</title>
+  <link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams',
+        macros: {
+          R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}',
+          Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}'
+        }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="s3">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>§3 線形写像の Kernel と Image</h1>
+  <p class="subtitle">講義ノート② をもとに作成</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#def3-1">定義3.1 核と像</a>
+    <a href="#cor3-2">系3.2 部分空間性</a>
+    <a href="#compute">具体的な計算</a>
+    <a href="#thm3-3">定理3.3 単射の特徴付け</a>
+    <a href="#cor3-4">系3.4 行列表示</a>
+    <a href="#cor3-5">系3.5 $m &lt; n$ のとき</a>
+    <a href="#thm3-6">定理3.6 次元の不変性</a>
+  </div>
+
+  <!-- =================== 定義3.1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="def3-1">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 3.1</div>
+      <h2>核（kernel）と像（image）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 3.1</span>
+        $V, W$: $\mathbb{K}$-ベクトル空間，$T: V\to W$ を $\mathbb{K}$-線形写像とする。
+        <div class="mathblock">
+          $$\operatorname{Ker}(T) = \{v\in V \mid T(v)=0\} \subseteq V$$
+          $$\operatorname{Im}(T) = \{T(v) \mid v\in V\} \subseteq W$$
+        </div>
+        をそれぞれ $T$ の<strong>核（kernel）</strong>、<strong>像（image）</strong>という。
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — Ker と Im の意味</span>
+        <table class="axiom-table">
+          <tr><th></th><th>定義</th><th>直感的意味</th><th>どこに属するか</th></tr>
+          <tr>
+            <td><strong>$\operatorname{Ker}(T)$</strong></td>
+            <td>$T$ でゼロに送られる $V$ の元全体</td>
+            <td>$T$ によって「潰される」部分</td>
+            <td>$V$ の部分空間</td>
+          </tr>
+          <tr>
+            <td><strong>$\operatorname{Im}(T)$</strong></td>
+            <td>$T$ の値域（$T$ で到達できる $W$ の元全体）</td>
+            <td>$T$ の「写し先」全体</td>
+            <td>$W$ の部分空間</td>
+          </tr>
+        </table>
+        <ul style="margin-top:.5rem">
+          <li>$\operatorname{Ker}(T) = \{0\}$ ならば $T$ は単射（定理 3.3）。</li>
+          <li>$\operatorname{Im}(T) = W$ ならば $T$ は全射。</li>
+          <li>どちらも満たせば $T$ は同型写像（全単射な線形写像）。</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — Ker と Im の役割をもう少し詳しく</span>
+        <p>
+          $T: V\to W$ を線形写像とする。$V$ の元を入力、$W$ の元を出力として考える。
+        </p>
+        <ul>
+          <li>
+            <strong>$\operatorname{Ker}(T)$ は「$T$ が区別できない部分」</strong>：
+            $v_1, v_2\in V$ が $T(v_1)=T(v_2)$ を満たすとき、両者の差 $v_1-v_2$ は
+            $T(v_1-v_2)=T(v_1)-T(v_2)=0$（線形性より）なので $v_1-v_2\in\operatorname{Ker}(T)$。
+            つまり「$T$ の目には同じに見える 2 つのベクトル」は必ず差が $\operatorname{Ker}(T)$ に入る。
+            $\operatorname{Ker}(T)=\{0\}$（差が必ず $0$）のとき初めて $T$ は単射（区別できない対が存在しない）になる。
+          </li>
+          <li>
+            <strong>$\operatorname{Im}(T)$ は「$T$ が到達できる範囲」</strong>：
+            $\operatorname{Im}(T)\subseteq W$ は、$T$ の出力が $W$ のどこに広がっているかを表す。
+            $\operatorname{Im}(T)=W$ のとき $T$ は全射（$W$ のすべてに到達できる）。
+            $\operatorname{Im}(T)\subsetneq W$ のとき、$W$ には「$T$ で到達できない領域」がある。
+          </li>
+        </ul>
+        <p style="margin-top:.5rem">
+          <strong>行列 $A\in M_{m,n}(\mathbb{K})$ の場合の具体的意味</strong>：
+        </p>
+        <ul>
+          <li>
+            $\operatorname{Ker}(T_A) = \{x\in\mathbb{K}^n\mid Ax=0\}$：
+            斉次連立方程式 $Ax=0$ の解全体。
+            これが $\{0\}$ だけ（自明解のみ）のとき、$T_A$ は単射。
+          </li>
+          <li>
+            $\operatorname{Im}(T_A) = \{Av\mid v\in\mathbb{K}^n\} = \langle A\text{ の列ベクトル}\rangle$：
+            $A$ の列ベクトルが張る空間（列空間）。
+            これが $\mathbb{K}^m$ 全体に等しいとき、$T_A$ は全射（すなわち $Ax=b$ がすべての $b$ に対して解を持つ）。
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系3.2 =================== -->
+  <div class="section" id="cor3-2">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 3.2</div>
+      <h2>系 3.2 — Ker と Im は部分空間</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="prop">
+        <span class="box-label">系 3.2</span>
+        $T: V\to W$ を $\mathbb{K}$-線形写像とする。
+        <ul>
+          <li>$\operatorname{Ker}(T)$ は $V$ の部分空間</li>
+          <li>$\operatorname{Im}(T)$ は $W$ の部分空間</li>
+        </ul>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>系 3.2 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          <strong>$\operatorname{Ker}(T)$ が $V$ の部分空間であること</strong>：<br>
+          (S1) $T(0)=0$（系1.5(1)）なので $0\in\operatorname{Ker}(T)$。✓<br>
+          (S2) $x,y\in\operatorname{Ker}(T)$（すなわち $T(x)=T(y)=0$）とすると、$T(x+y)=T(x)+T(y)=0+0=0$（(L1) より）。よって $x+y\in\operatorname{Ker}(T)$。✓<br>
+          (S3) $x\in\operatorname{Ker}(T)$, $a\in\mathbb{K}$ とすると、$T(ax)=aT(x)=a\cdot 0=0$（(L2) より）。よって $ax\in\operatorname{Ker}(T)$。✓<br><br>
+
+          <strong>$\operatorname{Im}(T)$ が $W$ の部分空間であること</strong>：<br>
+          (S1) $T(0)=0\in\operatorname{Im}(T)$。✓<br>
+          (S2) $w_1=T(v_1)$, $w_2=T(v_2)\in\operatorname{Im}(T)$ とすると、$w_1+w_2=T(v_1)+T(v_2)=T(v_1+v_2)\in\operatorname{Im}(T)$（(L1) より）。✓<br>
+          (S3) $w=T(v)\in\operatorname{Im}(T)$, $a\in\mathbb{K}$ とすると、$aw=aT(v)=T(av)\in\operatorname{Im}(T)$（(L2) より）。✓
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — §2 との接続と証明の構造</span>
+        <p>
+          系 3.2 の証明は §2 の定義 2.1（部分空間の 3 条件 (S1)〜(S3)）を確認しているだけ。
+          しかし、<strong>線形写像の性質 (L1)(L2) が、そのまま (S2)(S3) の証明道具になっている</strong>点が構造的に美しい。
+        </p>
+        <table class="axiom-table" style="margin-top:.5rem">
+          <tr>
+            <th>部分空間の条件</th><th>証明で使う線形写像の性質</th><th>なぜ成り立つか</th>
+          </tr>
+          <tr>
+            <td>(S1) $0\in\operatorname{Ker}(T)$</td>
+            <td>系 1.5(1)：$T(0)=0$</td>
+            <td>(L2) で $a=0$ とすると $T(0)=T(0\cdot 0)=0\cdot T(0)=0$</td>
+          </tr>
+          <tr>
+            <td>(S2) $\operatorname{Ker}(T)$ が加法に閉じている</td>
+            <td>(L1)：$T(x+y)=T(x)+T(y)$</td>
+            <td>$T(x)=T(y)=0$ なら $T(x+y)=0+0=0$</td>
+          </tr>
+          <tr>
+            <td>(S3) $\operatorname{Ker}(T)$ がスカラー倍に閉じている</td>
+            <td>(L2)：$T(ax)=aT(x)$</td>
+            <td>$T(x)=0$ なら $T(ax)=a\cdot 0=0$</td>
+          </tr>
+          <tr>
+            <td>(S2) $\operatorname{Im}(T)$ が加法に閉じている</td>
+            <td>(L1)</td>
+            <td>$w_1=T(v_1), w_2=T(v_2)$ なら $w_1+w_2=T(v_1+v_2)\in\operatorname{Im}(T)$</td>
+          </tr>
+          <tr>
+            <td>(S3) $\operatorname{Im}(T)$ がスカラー倍に閉じている</td>
+            <td>(L2)</td>
+            <td>$w=T(v)$ なら $aw=aT(v)=T(av)\in\operatorname{Im}(T)$</td>
+          </tr>
+        </table>
+        <p style="margin-top:.5rem">
+          つまり「(L1) が (S2) に、(L2) が (S3) に、それぞれ対応している」という対称的な構造がある。
+          これは「線形写像は部分空間を保つ」という重要な原理の現れ。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 具体的計算 =================== -->
+  <div class="section" id="compute">
+    <div class="sec-header">
+      <div class="sec-tag">Computation</div>
+      <h2>Ker と Im の具体的な計算</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">例 F — $2\times 2$ 行列の場合</span>
+        <p>$A = \begin{pmatrix}1&2\\2&4\end{pmatrix}$, $T_A:\mathbb{R}^2\to\mathbb{R}^2$, $v\mapsto Av$ とする。$\operatorname{Ker}(T_A)$ と $\operatorname{Im}(T_A)$ を求めよ。</p>
+        <div class="sol">
+          <span class="box-label">解答</span>
+          <strong>$\operatorname{Ker}(T_A)$ の計算</strong>：$Av=0$ を解く。
+          $$\begin{pmatrix}1&2\\2&4\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}x+2y\\2x+4y\end{pmatrix} = \begin{pmatrix}0\\0\end{pmatrix}$$
+          第 2 行 $= 2\times$ 第 1 行なので、実質 $x+2y=0$。自由変数 $y=t$ として $x=-2t$。
+          $$\operatorname{Ker}(T_A) = \left\{t\begin{pmatrix}-2\\1\end{pmatrix}\ \middle|\ t\in\mathbb{R}\right\}$$
+          これは $\mathbb{R}^2$ の 1 次元部分空間（原点を通る直線）。$\operatorname{Ker}(T_A)\ne\{0\}$ なので <strong>$T_A$ は単射でない</strong>（定理 3.3）。<br><br>
+
+          <strong>$\operatorname{Im}(T_A)$ の計算</strong>：$A$ の列ベクトルの span。
+          $$\operatorname{Im}(T_A) = \left\langle\begin{pmatrix}1\\2\end{pmatrix},\begin{pmatrix}2\\4\end{pmatrix}\right\rangle = \left\langle\begin{pmatrix}1\\2\end{pmatrix}\right\rangle$$
+          （$\begin{pmatrix}2\\4\end{pmatrix}=2\begin{pmatrix}1\\2\end{pmatrix}$ なので 2 列目は不要）。$\operatorname{Im}(T_A)\ne\mathbb{R}^2$ なので <strong>$T_A$ は全射でない</strong>。
+        </div>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 G — $2\times 3$ 行列の場合（$m &lt; n$）</span>
+        <p>$T:\mathbb{R}^3\to\mathbb{R}^2$, $T\begin{pmatrix}x\\y\\z\end{pmatrix} = \begin{pmatrix}x+y\\y+z\end{pmatrix}$（行列表示 $A=\begin{pmatrix}1&1&0\\0&1&1\end{pmatrix}$）。</p>
+        <div class="sol">
+          <span class="box-label">解答</span>
+          <strong>$\operatorname{Ker}(T)$ の計算</strong>：$\begin{cases}x+y=0\\y+z=0\end{cases}$
+          より $y=-x$, $z=-y=x$。自由変数 $x=t$：
+          $$\operatorname{Ker}(T) = \left\{t\begin{pmatrix}1\\-1\\1\end{pmatrix}\ \middle|\ t\in\mathbb{R}\right\}\ne\{0\}$$
+          よって $T$ は単射でない（$m=2 < n=3$ なので系 3.5 より当然）。<br><br>
+
+          <strong>$\operatorname{Im}(T)$ の計算</strong>：$A$ の列ベクトルの span：
+          $\left\langle\begin{pmatrix}1\\0\end{pmatrix},\begin{pmatrix}1\\1\end{pmatrix},\begin{pmatrix}0\\1\end{pmatrix}\right\rangle$。
+          $\begin{pmatrix}1\\0\end{pmatrix}$ と $\begin{pmatrix}1\\1\end{pmatrix}$ は平行でない（1次独立）ので $\mathbb{R}^2$（2次元）の基底を成し，$\mathbb{R}^2$ 全体を張る（任意の $\begin{pmatrix}a\\b\end{pmatrix} = (a-b)\begin{pmatrix}1\\0\end{pmatrix} + b\begin{pmatrix}1\\1\end{pmatrix}$）。
+          $$\operatorname{Im}(T) = \mathbb{R}^2$$
+          よって $T$ は全射（値域全体に届く）。
+        </div>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 H — 射影（projection）</span>
+        <p>$T:\mathbb{R}^3\to\mathbb{R}^3$, $T\begin{pmatrix}x\\y\\z\end{pmatrix} = \begin{pmatrix}x\\y\\0\end{pmatrix}$（$xy$ 平面への射影）。</p>
+        <div class="sol">
+          <span class="box-label">解答</span>
+          $\operatorname{Ker}(T) = \{(0,0,z)^T\mid z\in\mathbb{R}\}$（$z$ 軸）。<br>
+          $\operatorname{Im}(T) = \{(x,y,0)^T\mid x,y\in\mathbb{R}\}$（$xy$ 平面）。<br>
+          どちらも $\mathbb{R}^3$ の部分空間（直線と平面）であることが確認できる。<br>
+          <em>幾何的意味</em>：「$z$ 方向の情報が全部潰される」のが核で、「到達できる範囲が $xy$ 平面」が像。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定理3.3 =================== -->
+  <div class="section" id="thm3-3">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem 3.3</div>
+      <h2>定理 3.3 — 単射の特徴付け</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 3.3</span>
+        $T: V\to W$ を $\mathbb{K}$-線形写像とする。以下は同値：
+        <div class="equiv" style="margin-top:.7rem">
+          (a) $T$ は単射（injective）
+          <span class="iff">$\iff$</span>
+          (b) $\operatorname{Ker}(T) = \{0\}$
+        </div>
+      </div>
+
+      <details>
+        <summary>定理 3.3 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          <strong>(a) $\Rightarrow$ (b)</strong>：<br>
+          $x\in\operatorname{Ker}(T)$ とすると $T(x)=0=T(0)$。
+          $T$ が単射であることから $x=0$。よって $\operatorname{Ker}(T)=\{0\}$。<br><br>
+
+          <strong>(b) $\Rightarrow$ (a)</strong>：<br>
+          $x,y\in V$ が $T(x)=T(y)$ を満たすとすると、
+          $$0 = T(x)-T(y) = T(x-y)$$
+          より $x-y\in\operatorname{Ker}(T)=\{0\}$。よって $x-y=0$、すなわち $x=y$。$T$ は単射。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — なぜ「ゼロだけ見れば十分」か</span>
+        <ul>
+          <li>
+            <strong>一般の写像では</strong>：「$f$ が単射」$\iff$「任意の $y$ に対し $f^{-1}(y)$ は高々 1 元」。
+            すべての出力 $y$ について「$y$ に行き着く入力は 1 個以下か」をチェックしなければならない。
+          </li>
+          <li>
+            <strong>線形写像では</strong>：$T(x)=T(y)$ という条件は
+            $T(x)-T(y)=0 \Rightarrow T(x-y)=0$（線形性 (L1) より）と書き換えられる。
+            つまり「$T(x)=T(y)$ だが $x\ne y$」という単射性の反例は、
+            $x-y\ne 0$ だが $T(x-y)=0$、すなわち「$0$ でない元が $0$ に写される」ことと同値。
+            よって「$0$ でない元は $0$ に写されない」$\Leftrightarrow$「$\operatorname{Ker}(T)=\{0\}$」
+            だけチェックすれば十分。
+          </li>
+        </ul>
+        <p style="margin-top:.4rem">
+          <strong>図式で理解する</strong>：
+        </p>
+        <table class="axiom-table">
+          <tr>
+            <th></th><th>一般の写像 $f:X\to Y$</th><th>線形写像 $T:V\to W$</th>
+          </tr>
+          <tr>
+            <td><strong>単射でない例</strong></td>
+            <td>$f(x_1)=f(x_2)=y$（同じ $y$ に 2 個が行く）</td>
+            <td>$T(v_1)=T(v_2)$、つまり $T(v_1-v_2)=0$ で $v_1-v_2\ne 0$</td>
+          </tr>
+          <tr>
+            <td><strong>チェックすべきこと</strong></td>
+            <td>すべての $y\in Y$ について「$f^{-1}(y)$ が 1 個以下か」</td>
+            <td>$y=0$ の場合のみ：「$T^{-1}(\{0\})=\{0\}$ か」</td>
+          </tr>
+        </table>
+        <p style="margin-top:.5rem">
+          線形写像の「原点を原点に写す」という性質（系 1.5(1): $T(0)=0$）と線形性が組み合わさって、
+          単射性の判定が「$T^{-1}(\{0\})$ を調べるだけ」に簡略化される。
+          これは線形写像特有の強力な性質であり、線形代数で核を重要視する理由の一つ。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例題 — 定理 3.3 の適用</span>
+        <p>$T:\mathbb{R}^2\to\mathbb{R}^2$, $T\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}2x+y\\x-3y\end{pmatrix}$（§1 例題 A と同じ）は単射か？</p>
+        <div class="sol">
+          <span class="box-label">解答</span>
+          $\operatorname{Ker}(T)$ を求める：$T\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}0\\0\end{pmatrix}$ を解く。
+          $$\begin{cases}2x+y=0\\x-3y=0\end{cases}$$
+          第 1 式 $\times 3 +$ 第 2 式：$7x=0\Rightarrow x=0$、代入して $y=0$。
+          よって $\operatorname{Ker}(T)=\{0\}$、定理 3.3 より <strong>$T$ は単射</strong>。<br>
+          また $m=n=2$ で単射なので、この場合は全射でもある（全単射、すなわち同型写像）。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系3.4 =================== -->
+  <div class="section" id="cor3-4">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 3.4</div>
+      <h2>系 3.4 — 行列表示との関係</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="cor">
+        <span class="box-label">系 3.4　（$n,m>0$）</span>
+        $T: \mathbb{K}^n\to\mathbb{K}^m$ を $\mathbb{K}$-線形写像、$e_1,\ldots,e_n$ を $\mathbb{K}^n$ の基本単位ベクトル、
+        $$A = \bigl(T(e_1)\mid T(e_2)\mid\cdots\mid T(e_n)\bigr) = \begin{pmatrix}a_{11}&\cdots&a_{1n}\\\vdots&&\vdots\\a_{m1}&\cdots&a_{mn}\end{pmatrix}$$
+        を $T$ の行列表示とする。$x = (x_1,\ldots,x_n)^\top\in\mathbb{K}^n$ に対して、以下は同値：
+        <div style="margin:.6rem 0">
+          (a) $x\in\operatorname{Ker}(T)$
+          <span style="margin: 0 .6rem; color: var(--accent2); font-weight:700;">$\iff$</span>
+          (b) $Ax = 0$
+          <span style="margin: 0 .6rem; color: var(--accent2); font-weight:700;">$\iff$</span>
+          (c) $x_1,\ldots,x_n$ が以下の連立一次方程式の解
+        </div>
+        $$\begin{cases} a_{11}x_1+\cdots+a_{1n}x_n = 0 \\ \quad\vdots \\ a_{m1}x_1+\cdots+a_{mn}x_n = 0 \end{cases}$$
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 系 3.4 の意味</span>
+        <p>
+          核の計算は<em>斉次連立一次方程式を解く</em>ことと同じ。
+          これは §2 例 C の「解空間 $=$ 核」という事実と一致する。
+          行階段形への変形（ガウスの消去法）を使って具体的に計算できる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系3.5 =================== -->
+  <div class="section" id="cor3-5">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 3.5</div>
+      <h2>系 3.5 — $m &lt; n$ のとき単射にならない</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="cor">
+        <span class="box-label">系 3.5</span>
+        $m < n$ ならば、任意の $\mathbb{K}$-線形写像 $T: \mathbb{K}^n\to\mathbb{K}^m$ は単射でない。
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 直感</span>
+        <p>
+          $m < n$ とは「出力の次元が入力の次元より小さい」こと。
+          たとえば $\mathbb{R}^3\to\mathbb{R}^2$：3次元から2次元への写像は必ず「何かを潰す」。
+          完全に区別して写すことはできない。
+        </p>
+      </div>
+
+      <details>
+        <summary>系 3.5 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $m=0$ なら明らかなので $m>0$ とする。
+          $T$ の行列表示を $A=(a_{ij})_{1\le i\le m,1\le j\le n}$ とし、$\tilde{A}$ を $A$ の行標準形（行簡約階段形）とする。
+          $$x\in\operatorname{Ker}(T) \iff Ax=0 \iff \tilde{A}x=0$$
+          $\tilde{A}$ の leading entry（先導成分）の数は $\le m < n$。
+          これは $\tilde{A}x=0$ において（$n$ 個の変数のうち leading entry に対応しない変数が）自由変数が 1 つ以上あることを意味する。
+          よって $\tilde{A}x=0$ の非自明な解（$x\ne 0$）が存在するので $\operatorname{Ker}(T)\ne\{0\}$，
+          定理 3.3 より $T$ は単射でない。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 証明で使う「行標準形」と「自由変数」を詳しく</span>
+        <p>
+          上の証明の鍵は <strong>行標準形（row echelon form）</strong> と <strong>自由変数（free variable）</strong> という概念。
+          ここで丁寧に説明する。
+        </p>
+        <h4 style="margin-top:.7rem; margin-bottom:.3rem; font-size:.93em">行標準形（階段形）とは</h4>
+        <p>
+          行列 $A$ を<em>行基本変形</em>（行の入れ替え・スカラー倍・行の加減）によって変形した
+          <strong>行標準形 $\tilde{A}$</strong> は、次の性質を持つ（階段のような形）：
+        </p>
+        <ul>
+          <li>ゼロ行（全成分が $0$ の行）はすべて下段にある</li>
+          <li>各非零行の最初の非零成分（先導成分・pivot）は、上の行の先導成分より右の列にある</li>
+        </ul>
+        <p>例：$3\times 4$ 行列 $A$ の行標準形 $\tilde{A}$ の典型例（$\square$ が先導成分）：</p>
+        <div class="mathblock">
+          $$\tilde{A} = \begin{pmatrix} \boxed{2} & 1 & 3 & 5 \\ 0 & \boxed{-1} & 0 & 2 \\ 0 & 0 & 0 & 0 \end{pmatrix}$$
+        </div>
+        <p>ここで先導成分は $(1,1)$ 成分と $(2,2)$ 成分の 2 個。第 3 行はゼロ行。</p>
+
+        <h4 style="margin-top:.7rem; margin-bottom:.3rem; font-size:.93em">決定変数・自由変数とは</h4>
+        <p>
+          $\tilde{A}x = 0$ という連立方程式を解くとき、$n$ 個の変数 $x_1,\ldots,x_n$ は 2 種類に分かれる：
+        </p>
+        <ul>
+          <li>
+            <strong>決定変数（pivot 変数）</strong>：先導成分が存在する列に対応する変数。
+            他の変数の値が決まると、その変数の値も一意に決まる（方程式から逆算できる）。
+          </li>
+          <li>
+            <strong>自由変数（free variable）</strong>：先導成分が存在しない列に対応する変数。
+            どんな値をとってもよい（任意の値を代入すると解が得られる）。
+          </li>
+        </ul>
+        <p>
+          <strong>自由変数の個数</strong> $= n - (\text{先導成分の個数}) \ge n - m > 0$（$m < n$ を仮定）。
+        </p>
+        <p style="margin-top:.4rem">
+          自由変数が 1 個以上あれば、その変数に $0$ 以外の値（例えば $1$）を代入した非自明解が得られる。
+          つまり $\operatorname{Ker}(T)\ni x\ne 0$ が存在し、$\operatorname{Ker}(T)\ne\{0\}$、定理 3.3 より $T$ は単射でない。
+        </p>
+
+        <h4 style="margin-top:.7rem; margin-bottom:.3rem; font-size:.93em">具体例：$m=2, n=3$ の場合</h4>
+        <p>$A = \begin{pmatrix}1&2&3\\2&5&7\end{pmatrix}$（$2\times 3$ 行列）に対して $Ax=0$ を解く。</p>
+        <p>行基本変形：第 2 行 $-2\times$ 第 1 行：</p>
+        <div class="mathblock">
+          $$\tilde{A} = \begin{pmatrix}\boxed{1}&2&3\\0&\boxed{1}&1\end{pmatrix}$$
+        </div>
+        <p>
+          先導成分は 2 個（$x_1$ 列と $x_2$ 列）、自由変数は $x_3$（1 個）。
+          $x_3=t$ とおくと：
+          $x_2 = -x_3 = -t$，$x_1 = -2x_2-3x_3 = 2t-3t = -t$。
+        </p>
+        <p>
+          非自明解：$t=1$ で $x=\begin{pmatrix}-1\\-1\\1\end{pmatrix}\ne 0$。
+          よって $\operatorname{Ker}(T)\ne\{0\}$，$T$ は単射でない。
+        </p>
+        <p>
+          $n-m = 3-2 = 1 > 0$ なので「当然」の結果（系 3.5）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定理3.6 =================== -->
+  <div class="section" id="thm3-6">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem 3.6</div>
+      <h2>定理 3.6 — 次元の同型不変性</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 3.6</span>
+        $$\mathbb{K}^m \cong \mathbb{K}^n \implies m = n$$
+      </div>
+
+      <details>
+        <summary>定理 3.6 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $m\ne n$ を仮定して矛盾を導く。同型写像 $T: \mathbb{K}^m\xrightarrow{\sim}\mathbb{K}^n$ が存在するとすると，$T$ も $T^{-1}$ も単射（全単射の定義）。
+          <ul style="margin:0.5rem 0 0.5rem 1.2rem; font-size:0.9rem;">
+            <li>$m > n$ のとき：$T: \mathbb{K}^m \to \mathbb{K}^n$ に系 3.5 を適用（入力次元 $m >$ 出力次元 $n$）→ $T$ は単射でない。矛盾。</li>
+            <li>$m < n$ のとき：$T^{-1}: \mathbb{K}^n \to \mathbb{K}^m$ に系 3.5 を適用（入力次元 $n >$ 出力次元 $m$）→ $T^{-1}$ は単射でない。矛盾。</li>
+          </ul>
+          いずれの場合も矛盾するから，$m = n$。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — この定理の意義</span>
+        <ul>
+          <li>
+            <strong>次元は同型不変量</strong>：$\mathbb{K}^m\cong\mathbb{K}^n$ ならば $m=n$。逆も成り立つ（これは別途証明が必要）。
+            したがって「次元（dimension）」はベクトル空間を分類する基本的な指標となる。
+          </li>
+          <li>
+            <strong>応用</strong>：もし $V\cong\mathbb{K}^m$ かつ $W\cong\mathbb{K}^n$ で $m\ne n$ ならば $V\not\cong W$。
+            次元が違えば同型でないと即座に判定できる。
+          </li>
+          <li>
+            <strong>「次元」の一般定義</strong>：$\mathbb{K}^n$ と同型なベクトル空間を「$n$ 次元ベクトル空間」という。
+            定理 3.6 によりこの $n$ は（同型を選ばず）一意に定まる。
+          </li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 証明の構造を読み解く</span>
+        <p>
+          定理 3.6 の証明は<strong>背理法</strong>を使っている。
+          「$\mathbb{K}^m\cong\mathbb{K}^n$ なのに $m\ne n$」と仮定して矛盾を導く。
+        </p>
+        <p>
+          $m\ne n$ ならば $m > n$ か $m < n$ のどちらか。
+          たとえば $m > n$ とすると、同型写像 $T:\mathbb{K}^m\xrightarrow{\sim}\mathbb{K}^n$ が存在することになる。
+          しかし系 3.5 より（$m > n$ なので $n < m$）、
+          任意の線形写像 $\mathbb{K}^m\to\mathbb{K}^n$ は単射でない。
+          単射でない写像は同型写像になれないから矛盾。
+          $m < n$ の場合は逆写像 $T^{-1}:\mathbb{K}^n\to\mathbb{K}^m$ に同じ議論を適用する。
+        </p>
+        <p style="margin-top:.5rem">
+          <strong>なぜ「次元」が一意に定まると重要なのか</strong>：
+          「$\mathbb{K}^3$ は 3 次元」という事実は自明に見えるが、
+          実は「3 次元と 4 次元が同型でない」という定理 3.6 なしには根拠がない。
+          例えば $\mathbb{R}$-ベクトル空間として見たとき $\mathbb{C}^n \cong \mathbb{R}^{2n}$（$2n$ 次元）であるように、
+          「次元」はどの体（スカラー体）の上で考えるかによって変わる。
+          体を固定したとき、定理 3.6 が「次元は一意に決まる同型不変量」であることを保証する。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 — 次元の判定</span>
+        <ul>
+          <li>$\mathbb{R}^3 \not\cong \mathbb{R}^2$（定理 3.6 より；$3\ne 2$）</li>
+          <li>$\mathbb{C}^4 \cong M_2(\mathbb{C})$（どちらも 4 次元；§1 の例と整合）</li>
+          <li>$M_{m,n}(\mathbb{K}) \cong \mathbb{K}^{mn}$（$mn$ 次元）</li>
+        </ul>
+        <p style="margin-top:.4rem"><em>注</em>：$\mathbb{C}^n$ は $\mathbb{C}$-ベクトル空間として $n$ 次元だが、$\mathbb{R}$-ベクトル空間として見ると $2n$ 次元。
+        スカラー体が変わると次元が変わる点に注意。</p>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

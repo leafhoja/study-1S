@@ -1,0 +1,437 @@
+<!DOCTYPE html><!-- 「符号化と情報量 単語帳｜情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>符号化と情報量 単語帳｜情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-01-word">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>符号化と情報量</h1>
+  <p class="subtitle">情報の表現・符号化・情報量（エントロピー）・標本化と量子化</p>
+</div>
+
+<div class="container">
+
+  <!-- 単語のチェック件数と、一覧の絞り込み・チェック解除の操作をまとめる。 --><div class="word-toolbar">
+    <div class="word-progress">
+      <span class="wp-text">チェック済み 0 / 0</span>
+      <span class="wp-bar"><span class="wp-fill"></span></span>
+    </div>
+    <div class="word-filter-group">
+      <button type="button" class="word-filter-btn active" data-filter="all">すべて</button>
+      <button type="button" class="word-filter-btn" data-filter="unchecked">未チェック</button>
+      <button type="button" class="word-filter-btn" data-filter="checked">チェック済み</button>
+    </div>
+    <button type="button" class="word-reset-btn">リセット</button>
+  </div>
+  <p class="word-hint">チェックはこのブラウザだけに保存されます（他の端末・ブラウザとは同期しません）。</p>
+
+  <h2 class="word-cat-title" id="sub-1">情報表現・記号</h2>
+  <div class="word-list">
+    <!-- 用語の説明とチェック欄をひとまとまりにし、単語帳のひとつの項目として表示する。 --><div class="word-item" data-term-id="enc-001">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">モデル／モデル化</div>
+        <div class="word-def">モデルとは単純化・抽象化された事物・事象・概念のこと。モデル化とは、実際の事物・事象に対応したモデルを構築する過程。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-002">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">記号表現</div>
+        <div class="word-def">事物・事象・心的概念を抽象化したもの。「記号が指し示す対象」と「記号そのもの」の二側面がある。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-003">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">手続き的表現／宣言的表現</div>
+        <div class="word-def">手続き的表現は時間を追った手順の説明、宣言的表現は対象間の関係・属性の説明。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-004">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">パターン表現</div>
+        <div class="word-def">構成要素間の時空間パターンによる表現（例：地図）。記号表現と対比される。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-005">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">提喩・隠喩</div>
+        <div class="word-def">ピクトグラムの修辞法。提喩＝意味的包含関係にある事物で代用（ナイフとフォークで食事場所）、隠喩＝行為の比喩（ゴミ箱アイコン）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-006">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">記号の恣意性</div>
+        <div class="word-def">記号とそれが指す命題との対応づけは恣意的である（国により禁止標識の描き方が異なる等）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-007">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">グラフ／ノード／エッジ／ラベル付きグラフ／有向エッジ（弧）</div>
+        <div class="word-def">図の一種としてのグラフ表現。頂点をノード、つながりをエッジと呼び、向きを持つエッジは有向エッジ（弧）と呼ぶ。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-2">数の表現・符号化</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="enc-008">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">位取り記数法／N進記数法</div>
+        <div class="word-def">記号列 $x_n\cdots x_1$ が $\sum N^{i-1}x_i$ を表す方式。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-009">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">符号化／復号／符号語／符号長</div>
+        <div class="word-def">符号化＝情報をビット列に変換すること。復号＝ビット列から情報を復元すること。符号語＝情報に対応するビット列。符号長＝符号語の長さ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-010">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">固定長符号／可変長符号<span class="word-tag">頻出</span></div>
+        <div class="word-def">固定長符号＝すべての情報に同じ符号長を割り当てる符号。可変長符号＝情報によって符号語の長さが異なる符号。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-011">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">2進符号</div>
+        <div class="word-def">2進数表現をそのまま符号として使う最も単純な符号化（隣接する数でもビット列が大きく変わりうる）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-012">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">グレイ符号<span class="word-tag">頻出</span></div>
+        <div class="word-def">隣り合う数の符号語が必ず1ビットしか違わない（ハミング距離1）符号。ロータリーエンコーダ等の誤読防止に使う。2進数からグレイ符号への変換は「2進数とその1ビット右シフトのXOR」（$G=B\oplus(B\gg1)$）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-013">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">固定小数点数／浮動小数点数</div>
+        <div class="word-def">固定小数点＝n桁中m桁を小数部とする表現。浮動小数点＝符号部・指数部・仮数部に分け1.仮数×2^指数で表す（単精度は1+8+23ビット）。0.1のような小数は2進数で無限循環小数になり厳密表現できない。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-3">文字コード</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="enc-014">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ASCII</div>
+        <div class="word-def">7ビットで128文字を表現する米国の文字符号化方式（$2^7=128$通り）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-015">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">文字化け</div>
+        <div class="word-def">送受信で文字コード体系が食い違うことで生じる誤った解釈。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-016">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">Unicode</div>
+        <div class="word-def">世界の多くの言語約137,929文字（2019年時点）を含む文字集合。ASCIIと互換。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-017">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">UTF-32</div>
+        <div class="word-def">Unicodeの符号化方式のひとつで、固定長符号。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-018">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">UTF-8</div>
+        <div class="word-def">Unicodeの符号化方式のひとつで、可変長符号（ASCII1バイト、欧州・アラビア語2バイト、日中韓等3バイト）。最も広く使用される。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-019">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">UTF-16</div>
+        <div class="word-def">Unicodeの符号化方式のひとつで、可変長符号（多くの文字は2バイト）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-020">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">Han unification</div>
+        <div class="word-def">日中韓で見た目が同じ漢字に同一コードを割り当てる方針。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-021">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">JIS・シフトJIS・EUC-JP</div>
+        <div class="word-def">日本語文字コード体系（複数が混在しており、文字化けの原因になる）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-022">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">符号化と暗号化の違い<span class="word-tag">頻出</span></div>
+        <div class="word-def">符号化（文字コード変換・圧縮等）は誰でも元に戻せる操作で盗聴対策にならない。暗号化は鍵を持つ者だけが元に戻せる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-023">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">標準化と標本化の違い<span class="word-tag">頻出</span></div>
+        <div class="word-def">規格を確立する作業＝標準化。連続量を離散的な時間間隔で測定＝標本化。混同されやすい対比。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-024">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">可逆圧縮／不可逆圧縮</div>
+        <div class="word-def">圧縮後に元データを完全復元できる／できない圧縮方式。PNG（可逆）、JPEG（不可逆）が代表例。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-025">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">平均符号長<span class="word-tag">頻出</span></div>
+        <div class="word-def">(符号化後の文字数)/(符号化前の文字数)。各文字の登場確率×各文字の符号化後の長さ、の総和でも求まる。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-4">標本化と量子化</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="enc-026">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">アナログ表現／アナログ量</div>
+        <div class="word-def">情報を連続量として表すこと。無限の精度を要し完全複製が難しい。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-027">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">デジタル表現／ディジタル量</div>
+        <div class="word-def">情報を離散的に表すこと。一定間隔の尺度に近似し、完全複製・圧縮が容易。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-028">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">標本化（サンプリング）<span class="word-tag">頻出</span></div>
+        <div class="word-def">一定の時間間隔で、連続時間にわたる情報をいくつかの時刻における情報の配列で表すこと（音楽CDは44.1kHz、1秒間に44100回）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-029">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">サンプリング周波数<span class="word-tag">頻出</span></div>
+        <div class="word-def">1秒間あたり何回標本化するか。大きいほど精細にディジタル化できる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-030">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">量子化／量子化ビット数<span class="word-tag">頻出</span></div>
+        <div class="word-def">量子化＝標本化した各時刻の値を、有限個の段階の離散的な整数値で近似すること（音楽CDは16ビット＝65536段階）。量子化ビット数＝何段階の整数値で近似するかを表すビット数。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-031">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">標本化定理（シャノンの定理／ナイキストの定理）<span class="word-tag">頻出</span></div>
+        <div class="word-def">正しく記録できる音の周波数の範囲はサンプリング周波数の半分以下（CD:44.1kHzなら22.05kHz以下）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-032">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ナイキスト周波数</div>
+        <div class="word-def">標本化周波数の半分。これを超えると正しく記録できない。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-033">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">エイリアシング</div>
+        <div class="word-def">サンプリング周波数が小さいと、周波数の高い音が正しく記録できず、再生時に元と大きく異なった波形が復元される現象（画像ならモアレ、音声ならノイズ）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-034">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">周波数解析</div>
+        <div class="word-def">信号を個々の異なる周波数成分の波に分解すること。低周波→高周波の順に足し合わせることで画像圧縮（JPEG）に利用。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-035">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ビットマップ形式／ベクター形式</div>
+        <div class="word-def">画素の集まり（RGB各256階調で1677万色）対 図形要素の集合（SVG等）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-036">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">画素（ピクセル）／解像度／階調</div>
+        <div class="word-def">画素＝デジタル画像を構成する最小の点。解像度＝画素数や画素密度。階調＝明るさ・色の濃さの段階数。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-5">通信路モデル・情報量とエントロピー</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="enc-037">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">通信（コミュニケーション）</div>
+        <div class="word-def">シャノンの情報理論が扱うのは3つの問題のうち「技術的問題」（記号を正確・効率よく伝える問題）のみ。意味論的問題・効果の問題は扱わない。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-038">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">送信者（情報源）／受信者</div>
+        <div class="word-def">記号を伝える側／受け取る側。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-039">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">定常無記憶な情報源</div>
+        <div class="word-def">メッセージが確率論的に独立と仮定できる情報源。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-040">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">自己情報量<span class="word-tag">頻出</span></div>
+        <div class="word-def">確率$p$で起きる事象を伝える情報量 $I(p)=-\log_2 p$（ビット）。非負性・単調性・加法性・単位の調整（$f(1/2)=1$）を満たす関数は対数関数に限られる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-041">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">情報量（場合の数を用いた定義）</div>
+        <div class="word-def">(情報量) = $-\log_2\{$(情報を受け取った後の場合の数)/(情報を受け取る前の場合の数)$\}$。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-042">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">情報エントロピー（平均情報量）<span class="word-tag">頻出</span></div>
+        <div class="word-def">情報源が送るメッセージの情報量の期待値 $H=-\sum p_i\log_2 p_i$。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-043">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">条件付きエントロピー／相互情報量</div>
+        <div class="word-def">条件付きエントロピー＝ある変数を知った後でも残る不確実性。相互情報量＝知ることで減った不確実性（$H-H'$）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-044">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">期待符号長（平均符号長）<span class="word-tag">頻出</span></div>
+        <div class="word-def">$L=\sum p_i \ell_i$（$\ell_i$は符号長）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-045">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">情報源符号化定理<span class="word-tag">頻出</span></div>
+        <div class="word-def">定常無記憶な情報源で $L\ge H$（平均符号長はエントロピーを下回れない）。どんなにうまい符号化でも平均符号長は平均情報量を下回らない。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-046">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ハフマン符号<span class="word-tag">頻出</span></div>
+        <div class="word-def">発生確率の低い2記号を繰り返し1つにまとめて符号木を構成し、頻度の高い記号に短い符号を割り当てる符号化法。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-047">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">接頭符号（瞬時符号）<span class="word-tag">頻出</span></div>
+        <div class="word-def">どの符号語も他の符号語の接頭辞にならない符号。区切り記号なしで一意に復号できる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-048">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">一意復号可能符号</div>
+        <div class="word-def">連結された符号列をただ一通りに元の記号列へ復号できる符号。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-049">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">誤り検出／誤り訂正</div>
+        <div class="word-def">誤り検出（例：パリティ検査）／誤り訂正（例：ハミング符号）。雑音のある通信路での対処。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="enc-050">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">情報量の加法性<span class="word-tag">頻出</span></div>
+        <div class="word-def">独立な二事象が同時に起きたとき、全情報量が各情報量の和になる性質。対数を使って情報量を定義しているのはこの性質を成り立たせるため。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="index.html">← 単語帳トップ</a>
+    <a href="01-符号化と情報量-keypoints.html">押さえておきたい事項 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+<script src="checklist.js"></script>
+</body>
+</html>

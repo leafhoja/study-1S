@@ -1,0 +1,329 @@
+<!DOCTYPE html><!-- 「2023年度 | 情報 共通問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2023年度 | 情報 共通問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kyotsu-2023">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>共通問題 2023年度</h1>
+  <p class="subtitle">7月28日（金）3限｜大問3（うち大問3は選択）</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（DNSとキャッシュ）</a>
+    <a href="#q2">大問2（反復処理アルゴリズム）</a>
+    <a href="#q3">大問3（選択：機械語トレース／GUI・Winny）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>DNSの階層構造とキャッシュ</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>問題1A — ドメインの木構造とIPアドレスの構成</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>空欄A〜Fに語群から適切な用語を選択し、空欄GとHに適切な2進数を記入せよ。但し、空欄AとBに入る用語は<strong>問題1Bに現れる空欄AとBにも入る</strong>ものとする。</p>
+        <p>
+          インターネット上の位置を示す場合には、英数字などを用いたわかりやすい<span class="blank">A</span>（例えばwww.u-tokyo.ac.jp）が使われることが多い。<span class="blank">A</span>はピリオドで分割して後ろから並べると木構造をなす。例えばjpは日本を表す<span class="blank">B</span>で、ac.jpは日本の大学などに割り当てられる<span class="blank">B</span>である。<span class="blank">A</span>とIPアドレスを対応づけるために、DNSでは<span class="blank">A</span>のなす木構造の<span class="blank">C</span>から<span class="blank">D</span>に向けて問い合わせを繰り返し行う。例えば、www.u-tokyo.ac.jpであれば、まずルートサーバに問い合わせることでjpを担当するDNSサーバのIPアドレスを知り、次にjpのサーバからac.jpを担当するDNSサーバのIPアドレスを教わり、と順に繰り返す。IPアドレスはIPv4の場合32ビットの数値だが、IPパケットの配送などでは、そのうち上位のビットを<span class="blank">E</span>、下位ビットを<span class="blank">F</span>と呼んで区別することがある。たとえば、ネットワーク172.16.32.0/20の中のIPアドレスである172.16.39.4の場合、<span class="blank">E</span>と<span class="blank">F</span>は2進表記でそれぞれ<span class="blank">G</span>と<span class="blank">H</span>となる。
+        </p>
+        <p>（語群：MACアドレス・ドメイン・エッジ・ネットワークアドレス・ネットワーク名・根・ノード・葉・パケット・ホスト番号・ホスト名・ポート番号・ルータ）</p>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p><span class="blank">A=ホスト名</span>／<span class="blank">B=ドメイン</span>／<span class="blank">C=根</span>／<span class="blank">D=葉</span>（DNSの問い合わせはルートサーバ＝木の根から、より末端＝葉のサーバへと向かう）</p>
+          <p><span class="blank">E=ネットワークアドレス</span>（上位ビット）／<span class="blank">F=ホスト番号</span>（下位ビット）</p>
+          <p>172.16.39.4を2進数にすると <code>10101100 00010000 00100111 00000100</code>。/20なので先頭20ビットがネットワークアドレス、残り12ビットがホスト番号：</p>
+          <div class="mathblock">G（ネットワークアドレス, 20bit）= 10101100 00010000 0010
+H（ホスト番号, 12bit）　　　　= 0111 00000100</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>A=ホスト名、B=ドメイン、C=根、D=葉、E=ネットワークアドレス、F=ホスト番号、G=10101100000100000010、H=011100000100</div>
+        <div class="note">
+          <span class="box-label">語群の全用語</span>
+          <p><strong>MACアドレス</strong>：主に同一リンク内でネットワークインタフェースを識別するデータリンク層のアドレス。／<strong>ドメイン</strong>：DNSの階層構造における管理上の領域。／<strong>エッジ</strong>：グラフでノード同士を結ぶ辺。／<strong>ネットワークアドレス</strong>：IPアドレスのうち所属ネットワークを示す上位部分。／<strong>ネットワーク名</strong>：ネットワークを表す名称の一般語であり、この設問のDNS上の正式用語ではない。</p>
+          <p><strong>根</strong>：木構造の起点となる最上位ノード。DNSではルートに対応する。／<strong>ノード</strong>：グラフや木を構成する頂点。／<strong>葉</strong>：子を持たない末端ノード。／<strong>パケット</strong>：ネットワークで転送される、制御情報付きのデータ単位。／<strong>ホスト番号</strong>：IPアドレスのうち同一ネットワーク内の機器を区別する下位部分。／<strong>ホスト名</strong>：ネットワーク上の個々のホストを識別する、人が読める階層的な名前。</p>
+          <p><strong>ポート番号</strong>：同じホスト内の通信先アプリケーションを区別する番号。／<strong>ルータ</strong>：異なるIPネットワーク間でパケットを中継する機器。</p>
+        </div>
+      </details>
+
+      <h3>問題1B — DNSキャッシュの挙動</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>DNSにはキャッシュと呼ばれるしくみがある。これは、問合せの結果をしばらくのあいだは記憶しておき、同じサーバのIPアドレスが必要になった際には、DNSサーバに尋ねずに再利用するものである。但し、キャッシュが使われなければ、DNSは<span class="blank">A</span>の各階層に対して順に問合せを行うものとする。また、ルートサーバのIPアドレスは別途記憶しており、キャッシュには記憶しないものとする。以下の問い(a)から(c)に答えよ。</p>
+        <p>
+          (a) www.foo.bar.comへのアクセスに続けてwww.huga.bar.comにアクセスしようとした場合のDNSの手順について、以下の空欄IとJに<span class="blank">B</span>を表す適切な語句を埋めよ。<br>
+          [手順1] www.huga.bar.comのIPアドレスはキャッシュに記憶していないのでわからない。<br>
+          [手順2] www.huga.bar.comのIPアドレスは<span class="blank">I</span>を担当するDNSサーバが知っているが、これのIPアドレスもキャッシュに記憶していないのでわからない。<br>
+          [手順3] <span class="blank">I</span>のサーバのIPアドレスを知っている、<span class="blank">J</span>を担当するDNSサーバのIPアドレスは、www.foo.bar.comにアクセスした際にキャッシュに記憶している。<br>
+          [手順4] <span class="blank">J</span>のサーバに問い合わせる。以降は通常のDNSの手順に従い、www.huga.bar.comのIPアドレスを得る。
+        </p>
+        <p>(b) 最大4つのIPアドレスをキャッシュに記憶できるとする。また、問合せを行った場合、既にIPアドレスを4つ記憶していたならば、最も過去に記憶したものをキャッシュから取り除くものとする。このとき、www.foo.bar.com、www.huga.bar.com、lms.foo.bar.comにこの順にアクセスしたとき、キャッシュにはどのサーバのIPアドレスを記憶しているか。すべて挙げよ。</p>
+        <p>(c) 最大4つのIPアドレスをキャッシュに記憶できるとする。また、問合せを行った場合、既にIPアドレスを4つ記憶していたならば、直近のアクセスが最も過去のものをキャッシュから取り除くものとする。このとき、www.foo.bar.com、www.huga.bar.com、lms.foo.bar.comにこの順にアクセスしたとき、キャッシュにはどのサーバのIPアドレスを記憶しているか。すべて挙げよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p><span class="blank">I=huga.bar.com</span>（www自身のIPを直接知っている、最も末端のサーバ）／<span class="blank">J=bar.com</span>（huga.bar.comを担当するサーバのIPを知っている、1つ上位のサーバ。しかもbar.comのサーバIPは直前のfoo.bar.com解決の際に既にキャッシュ済み）</p>
+          <p>
+            www.foo.bar.comへの初回アクセスで、root→<strong>com</strong>→<strong>bar.com</strong>→<strong>foo.bar.com</strong>の3階層のサーバIPが新たにキャッシュされる（3件）。<br>
+            続けてwww.huga.bar.comへのアクセスでは、キャッシュ済みのbar.comのサーバに直接問い合わせられるので、新たに<strong>huga.bar.com</strong>のサーバIPだけが追加される（計4件、容量ちょうど）。<br>
+            続けてlms.foo.bar.comへのアクセスでは、キャッシュ済みのfoo.bar.comのサーバに直接問い合わせて即座にlmsのIPが得られ、新しいキャッシュ項目は<strong>増えない</strong>。
+          </p>
+          <p>
+            つまりこの一連のアクセスで生成される異なるキャッシュ項目は<strong>com, bar.com, foo.bar.com, huga.bar.comの4件だけ</strong>で、容量4にちょうど収まり、一度も削除（追い出し）が発生しない。したがって(b)のFIFO方式・(c)のLRU方式のどちらでも、最終的にキャッシュに残る内容は<strong>同じ</strong>になる。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>I=huga.bar.com、J=bar.com。(b)(c)いずれも、キャッシュに残るのはcom, bar.com, foo.bar.com, huga.bar.comの4件（削除は一度も発生しない）。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — キャッシュの追い出し方針：FIFO と LRU</span>
+        <p>キャッシュが満杯のときにどれを追い出すかにはいくつかの方針がある。<strong>FIFO</strong>（First In First Out）は単純に「最も昔に記憶したもの」を追い出す。<strong>LRU</strong>（Least Recently Used）は「最後にアクセスされたのが最も昔のもの」を追い出す——同じデータでも、再アクセスされれば「最近使った」扱いになって残りやすくなる点がFIFOと異なる。この問題は一見両者の違いを問うているようで、実際にはキャッシュ容量ぴったりの4件しか生成されず追い出しが発生しないため、結果が一致するという点に気づけるかがポイントだった。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>反復処理アルゴリズムの穴埋め</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>問題2A — 「優4割ルール」の判定</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>某授業において「成績が100点満点のうち80点以上の学生の数は履修者数の4割を超えてはならない」というルールがある。以下は、担当教員がこのルールに従ったかを確認する手順である。但し、手元にあるデータはそれぞれの点を取った学生の数を保持する配列$g$であり、各要素$g_s$（$0\le s\le100$）は「s点を取った学生の数」を表すとする。例えば40点の学生が3名の場合、$g_{40}=3$である。以下の手順の空欄あ〜えを埋めよ。</p>
+        <p>
+          <span class="mathblock">x ← 0
+y ← 0
+s ← 0
+while s ≤ <span class="blank">あ</span> do
+&nbsp;&nbsp;x ← x + <span class="blank">い</span>
+&nbsp;&nbsp;if s ≥ 80 then y ← <span class="blank">う</span> endif
+&nbsp;&nbsp;s ← s + 1
+done
+if <span class="blank">え</span> ≤ 0.4
+then「優4割ルールに従っています」と出力
+else「優4割ルール違反です」と出力
+endif</span>
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>点数0〜100点まで全て走査して合計履修者数xと、80点以上の人数yを集計する。<span class="blank">あ=100</span>（全点数を見尽くす）／<span class="blank">い=g<sub>s</sub></span>（s点の人数を合計に加える）／<span class="blank">う=y+g<sub>s</sub></span>（80点以上ならその人数を高得点者数に加える）／<span class="blank">え=y/x</span>（高得点者の割合）。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>あ=100、い=g<sub>s</sub>、う=y+g<sub>s</sub>、え=y/x</div>
+      </details>
+
+      <h3>問題2B — 環状路線の駅を求める</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>一方向に電車が走る環状路線に$N$個の駅$S_1,S_2,\ldots,S_N$がある。配列$time$の要素$time_i$には、電車が$S_i$を発車してから次の駅を発車するまでの秒数が格納されている。例えば$S_1$を発車してから$S_2$を発車するまでの時間は$time_1$秒、$S_N$を発車してから$S_1$を発車するまでの時間は$time_N$秒である（環状路線であるため$S_N$の次は$S_1$であることに注意する）。配列$time$に格納されている値は正の整数であるとして、以下の問い(a)と(b)に答えよ。</p>
+        <p>(a) 右の手順は、$S_1$を発車してから$T$秒後において、電車が最後に発車した駅を求める手順である。手順中の空欄ア〜ウを下記の選択肢(1)〜(20)を用いて埋めよ。但し$T$は$0 \lt T \lt time_1+time_2+\cdots+time_N$を満たす整数である（つまり電車が環状路線を一周する前についてのみ考える）。また、ちょうど$T$秒後に$S_i$を発車する場合は、$S_i$を最後に発車した駅と考えるものとする。</p>
+        <p>
+          <span class="mathblock">d ← 1
+t ← T
+while <span class="blank">ア</span> do
+&nbsp;&nbsp;t ← <span class="blank">イ</span>
+&nbsp;&nbsp;d ← <span class="blank">ウ</span>
+done
+「最後に発車した駅はS<sub>d</sub>である」と表示</span>
+        </p>
+        <p>(b) $T$が任意の正の整数である場合、つまり電車が環状路線を一周以上する場合も含めて考える。以下の手順中の空欄エとオを選択肢(1)〜(20)を用いて埋めよ。但し、空欄ア〜ウには前問と同じものが入るとする。また、前問と同様に、ちょうど$T$秒後に$S_i$を発車する場合は$S_i$を最後に発車した駅と考えるものとする。</p>
+        <p>
+          <span class="mathblock">d ← 1
+t ← T
+while ア do
+&nbsp;&nbsp;t ← イ
+&nbsp;&nbsp;if d = <span class="blank">エ</span>
+&nbsp;&nbsp;then d ← <span class="blank">オ</span>
+&nbsp;&nbsp;else d ← ウ
+&nbsp;&nbsp;endif
+done
+「最後に発車した駅はS<sub>d</sub>である」と表示</span>
+        </p>
+      </div>
+      <div class="note">
+        <span class="box-label">選択肢（問題2B ア〜オ共通）</span>
+        <p>(1) 0　(2) 1　(3) −1　(4) $N$　(5) $N-1$　(6) $N+1$　(7) $t$　(8) $t-1$　(9) $t+1$　(10) $t-time_d$　(11) $t+time_d$　(12) $d$　(13) $d-1$　(14) $d+1$　(15) $d-time_d$　(16) $d+time_d$　(17) $time_d-t$　(18) $time_d-d$　(19) $t\ge time_d$　(20) $t\le time_d$</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>「駅dを発車してから次の駅までの時間$time_d$」を、経過時間$t$から順に差し引きながら駅番号dを進めていく。$t\ge time_d$である限り（まだ次の駅も発車済みなら）差し引いて先に進む：<span class="blank">ア=(19)t\ge time_d</span>／<span class="blank">イ=(10)t-time_d</span>／<span class="blank">ウ=(14)d+1</span>。</p>
+          <p>(b)では駅番号がNを超えたら1に戻す（環状路線なのでSNの次はS1）：<span class="blank">エ=(4)N</span>／<span class="blank">オ=(1)1</span>。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>ア=(19)、イ=(10)、ウ=(14)、エ=(4)、オ=(1)</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「累積を条件付きで進める」反復処理の型</span>
+        <p>問題2A・2Bはどちらも「配列や時間を先頭から順になめながら、条件を満たすたびにカウンタを進める・値を更新する」という同じ骨格を持つ。環状（周回）構造を扱うときは、通常のインクリメントに加えて「上限に達したら先頭に戻す」分岐（剰余演算 mod に相当）が必要になる、という点が(b)の追加ポイント。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q3">
+    <div class="sec-header"><div class="sec-tag">大問 3（選択）</div><h2>問題A：機械語トレース／問題B：GUIデザインとWinny事件</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="note"><span class="box-label">出題形式</span><p>問題Aと問題Bのうち一方のみを選んで答える（いずれを選ぶべきか担当教員から指示があった場合は、その指示に従う）。ここでは両方を掲載する。</p></div>
+
+      <h3>問題A — 機械語プログラムの実行トレース</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>下表のような機械語のプログラムが主記憶装置に内蔵されているとする。この表ではメモリアドレスが5ビットおよびその内容が10ビットで全て二進数表現されている。前半の5ビットが命令コードと一致する場合、後半の5ビットはアドレス値を表すオペランドを表現している。命令がオペランドを取らない場合は後半の5ビットは00000となっている。前半の5ビットが命令コードと一致しない場合、整数値が二進符号により表現されている。このプログラムをメモリアドレス10000から開始すると00001 10111を出力しプログラムは停止する。</p>
+        <table class="q-table">
+          <tr><th>メモリアドレス</th><th>値</th><th>メモリアドレス</th><th>値</th></tr>
+          <tr><td>10000</td><td>10100 11101</td><td>11000</td><td>10100 11101</td></tr>
+          <tr><td>10001</td><td>10110 11110</td><td>11001</td><td>11110 00000</td></tr>
+          <tr><td>10010</td><td>10101 11101</td><td>11010</td><td>11111 00000</td></tr>
+          <tr><td>10011</td><td>10100 11110</td><td>11011</td><td>11111 00000</td></tr>
+          <tr><td>10100</td><td>10111 11111</td><td>11100</td><td>11111 00000</td></tr>
+          <tr><td>10101</td><td>10101 11110</td><td>11101</td><td>00000 00000</td></tr>
+          <tr><td>10110</td><td>11101 11000</td><td>11110</td><td>00000 01010</td></tr>
+          <tr><td>10111</td><td>11100 10000</td><td>11111</td><td>00000 00001</td></tr>
+        </table>
+        <p>各命令の命令コードおよび（オペランドで指定されたアドレスを$X$としたときの）意味は次の通りである。</p>
+        <table class="q-table">
+          <tr><th>命令</th><th>命令コード</th><th>意味</th></tr>
+          <tr><td>load</td><td>10100</td><td>$X$のデータをACに読み込む</td></tr>
+          <tr><td>store</td><td>10101</td><td>ACのデータを$X$に書き込む</td></tr>
+          <tr><td>add</td><td>10110</td><td>$X$のデータをACの値に加える</td></tr>
+          <tr><td>subtract</td><td>10111</td><td>$X$のデータをACの値から引く</td></tr>
+          <tr><td>jump</td><td>11100</td><td>$X$にプログラムの実行を移す</td></tr>
+          <tr><td>jumpzero</td><td>11101</td><td>ACのデータが0（ゼロ）の場合、$X$にプログラムの実行を移す</td></tr>
+          <tr><td>write</td><td>11110</td><td>ACのデータを出力する</td></tr>
+          <tr><td>halt</td><td>11111</td><td>プログラムの実行を停止する</td></tr>
+        </table>
+        <p>以下の問い(a)から(e)に答えよ。</p>
+        <p>
+          (a) プログラムを実行し、初めてメモリアドレス10001の命令を実行した直後AC の値は00000 01010となる。これは10進数の値では何に対応するか答えよ。<br>
+          (b) プログラムを実行し、初めてメモリアドレス10100の命令を実行した直後AC の値を10進数の整数値で答えよ。<br>
+          (c) プログラムを実行し、初めてメモリアドレス10100の命令を実行した直後のメモリアドレス11101の値はどうなっているか。10桁のビット列で答えよ。<br>
+          (d) メモリアドレス10110の命令およびメモリアドレス10111の命令の種類を何と呼ぶか。4文字で答えよ。<br>
+          (e) このプログラムのメモリアドレス10001の値を変更してプログラムを実行する場合、変更後の値と出力の値の組として正しいものを下記の選択肢から選んで全て答えよ。
+        </p>
+      </div>
+      <div class="note">
+        <span class="box-label">選択肢（問題A (e)）</span>
+        <p><strong>変更後のメモリアドレス10001の値の選択肢</strong>：あ）11101 11001、い）11100 11100、う）11100 10000、え）10110 11111、お）10100 11011</p>
+        <p><strong>出力の値の選択肢</strong>：ア）00000 00010、イ）00000 00000、ウ）11111 00000、エ）01000 00000、オ）00000 01010</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            プログラムをトレースすると、11101番地に結果R（初期値0）、11110番地に回数N（初期値10=<code>00000 01010</code>）、11111番地に定数1が置かれ、「Rに現在のNを加える→Nを1減らす→Nが0になるまで繰り返す→Rを出力」という、$R=10+9+8+\cdots+1=55$を計算するプログラムであることがわかる。
+          </p>
+          <p><strong>(a)</strong> 00000 01010 = 10進数で <strong>10</strong>。</p>
+          <p><strong>(b)</strong> 初回の10100番地（subtract 11111）実行直後：AC = N(10) − 1 = <strong>9</strong>。</p>
+          <p><strong>(c)</strong> 初回の10100番地実行直後、11101番地（R）はその直前の10010番地でR←0+10=10と更新済みなので <strong>00000 01010</strong>（10進で10）。</p>
+          <p><strong>(d)</strong> 10110番地（jumpzero）・10111番地（jump）はどちらも実行順序を変える命令＝<strong>分岐命令</strong>（4文字）。</p>
+          <p>
+            <strong>(e)</strong> 10001番地（本来は「add 11110」＝Nを加える）を書き換えたときの出力を1つずつ確認する：
+          </p>
+          <ul>
+            <li>あ）jumpzero 11001 → 初回のAC(=R=0)で条件成立し即座に11001（write）へ。出力は0のまま＝<strong>イ）00000 00000</strong>。</li>
+            <li>い）jump 11100 → 11100番地は単なるhalt（無関係な余白）。writeを一度も実行せず終了＝出力なし＝<strong>該当する出力の選択肢なし</strong>。</li>
+            <li>う）jump 10000 → 自分自身（プログラム先頭）に戻り続ける無限ループ＝<strong>出力なし</strong>。</li>
+            <li>え）add 11111（定数1を加える） → Rが1ずつ、Nが10から0になるまで＝10回加算される。R=10＝<strong>オ）00000 01010</strong>。</li>
+            <li>お）load 11011 → 11011番地の中身<code>11111 00000</code>を「データ」として読み込む（2進1111100000＝10進992）。以後Rはこの992のまま更新され続け出力される＝<strong>ウ）11111 00000</strong>（=992）。</li>
+          </ul>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a)10 (b)9 (c)0000001010 (d)分岐命令 (e)（あ,イ）（え,オ）（お,ウ）が正しい組（い・うは出力自体が生じない）</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 命令の書き換えというトリック</span>
+        <p>プログラム内蔵方式では命令もデータと同じメモリに置かれるため、「命令の一部を書き換える」ことも「データとして読み込む」ことも自由自在にできてしまう——お）の選択肢のように、本来命令として使うはずのビット列を数値データとして読み込むと、意図しない大きな値になりうる、というのはこの方式の柔軟性（と危うさ）を象徴する典型的な出題。</p>
+      </div>
+
+      <h3>問題B(a) — アフォーダンスとフィッツの法則</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>GUIの画面設計に関する以下の問いに答えよ。</p>
+        <p>
+          (i) GUIの画面設計において、アフォーダンスがうまく活用されていない場合にどのような問題が生じるかを、インタフェース設計におけるアフォーダンスの説明を含めて3文程度で述べよ。<br>
+          (ii) フィッツの法則に基づいて、マウスで操作するGUIの画面設計において注意すべき点を、フィッツの法則の説明を含めて2文程度で述べよ。
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(i) アフォーダンスとは、モノの形状や見た目そのものが利用者に「どう使えばよいか」を直感的に示唆する性質のことである。GUIでこれがうまく活用されていないと、ボタンなのか単なる装飾かが見た目から伝わらず、ユーザはどこをどう操作すればよいか分からず戸惑う。結果として誤操作が増えたり、重要な機能が気づかれずに使われないままになったりする。</p>
+          <p>(ii) フィッツの法則によれば、距離が短く目標が大きいほど到達時間は短くなる。したがって頻繁に使うボタンは大きく、かつポインタの現在位置や画面の隅など到達しやすい場所に配置するのが望ましい。</p>
+        </div>
+      </details>
+
+      <h3>問題B(b) — Winny事件と著作権</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>Winnyは、2002年5月にネットワーク上で公開されたP2P（Peer to Peer：中央のサーバを介さずに、2台のコンピュータが対等な立場で通信を行う）のファイル交換ソフトである。ファイル交換における匿名性の高さを目指したものであり、ファイルを最初に所有していた人物を特定することや、中継した人物が自分の所有しているファイルやファイルの中継先を知ることに困難を伴う。相手が誰かわからない状態で共有したファイルが拡散することや、相手が誰かわからない状態で受け取ったファイルに問題があるということもある。</p>
+        <p>
+          (i) Winnyを利用した行為で著作権侵害にあたるものがあるとすれば、どのような行為が問題となりうるか、簡潔に述べよ。<br>
+          (ii) 2004年5月にWinnyの開発者が逮捕・起訴されたこととその後の一連の裁判は、デジタル情報の所有権管理などの社会的論争を巻き起こしたが、2011年には最高裁において開発者の無罪が確定している。京都府警が2004年に開発者を（誤認）逮捕した際の容疑を述べよ。<br>
+          (iii) Winnyのようなp2pファイル交換ソフトの利用に関するデジタル情報管理のセキュリティについて、著作権侵害以外に起こりうる社会的問題を具体的に挙げよ。<br>
+          (iv) Winnyが社会的議論を巻き起こしたように、今日でも、例えばテキスト生成AIのような新たなツールが、デジタル情報の扱いに関して社会的な議論を巻き起こしている。ChatGPTのような言語生成AIでは、学習した大量のテキストデータをもとにアウトプットが生成される。テキスト生成AIの利用に関して生じうる、デジタル情報の著作権に関連する新たな問題について具体的に論ぜよ。
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(i) 著作権者の許諾なく著作物ファイルをアップロードして不特定多数が取得可能な状態にすること（送信可能化権の侵害）、およびそれをダウンロードして複製すること（複製権の侵害）。</p>
+          <p>(ii) Winnyを利用したユーザーによる著作権侵害を「幇助」した容疑（著作権法違反幇助）。（最高裁で2011年に無罪確定。）</p>
+          <p>(iii) 交換ファイルを介したコンピュータウイルスの蔓延、個人情報・機密情報が意図せず流出・拡散する情報漏洩事件。</p>
+          <p>(iv) 学習データとして著作物を無断で大量利用することの適法性、生成物が既存著作物に酷似してしまうことによる侵害判断の困難さ、生成物の著作者・責任主体が誰かという不明確さ、など。</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2024.html">← 2024年度へ</a>
+    <a href="kakomon_2022.html">2022年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

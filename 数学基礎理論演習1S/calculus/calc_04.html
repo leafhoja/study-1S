@@ -1,0 +1,353 @@
+<!DOCTYPE html><!-- 「微分積分 第4回 常微分方程式 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>微分積分 第4回 常微分方程式 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>/* このページ内の要素に適用する、色・文字サイズ・配置などの指定。 */
+.ode-type { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 0.75rem 1rem; margin: 0.75rem 0; font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem; }
+.ode-type .ode-label { font-weight: 700; color: #166534; font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="calc_03.html" data-page="calculus/calc_03">← 前の回</a>
+      <a href="calc_05.html" data-page="calculus/calc_05">次の回 →</a>
+    </div>
+  </div>
+</nav>
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-calc">
+  <h1>微分積分学演習　第4回</h1>
+  <p class="subtitle">常微分方程式：変数分離・同次形・置換・部分分数</p>
+</div>
+
+<div class="container">
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 常微分方程式（ODE）の型と解法の地図</div>
+  <div class="section-card-body">
+    <p>常微分方程式（Ordinary Differential Equation, ODE）とは，未知関数 $x(t)$ とその導関数の間の方程式だ。解法は方程式の「型」によって異なる。</p>
+    <div class="ode-type"><div class="ode-label">型1：変数分離形</div> $x' = f(t) g(x)$ → 両辺を変数ごとに分けて積分</div>
+    <div class="ode-type"><div class="ode-label">型2：同次形</div> $x' = f(x/t)$ → $u = x/t$ と置換して変数分離形に帰着</div>
+    <div class="ode-type"><div class="ode-label">型3：置換形</div> 繰り返す $t,x$ の組み合わせ $u = u(t,x)$ を置いて変数分離形に変換</div>
+    <div class="ode-type"><div class="ode-label">型4：定係数2階線形</div> $(D-\lambda_1)(D-\lambda_2)x = 0$ に因数分解 → 変数分離を繰り返す</div>
+    <div class="insight-box">
+      <div class="insight-title">💡 一般解・特殊解・初期値問題</div>
+      <ul>
+        <li><strong>一般解：</strong>パラメータ $C$（積分定数）を含む解の族。$x' = x$ の一般解は $x = Ce^t$</li>
+        <li><strong>特殊解：</strong>初期条件 $x(t_0) = x_0$ で $C$ を決めたもの</li>
+        <li><strong>恒等定数解：</strong>$x' = f(x)$ で $f(x_0) = 0$ ならば $x \equiv x_0$ は解</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問題1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">1</span> 4種類のODEの解
+  </div>
+  <div class="section-card-body">
+
+    <h3>(1) $x' = tx$（変数分離形）</h3>
+
+    <div class="problem-box">
+      <h4>問題文</h4>
+      <p>$x' = tx$ を解け。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$x = 0$ は定数解（$C = 0$ に対応）。$x \ne 0$ のとき変数分離：</p>
+      $$\frac{dx}{x} = t\,dt$$
+      <p>両辺を積分：$\ln|x| = \dfrac{t^2}{2} + C_0$，よって $|x| = e^{C_0}e^{t^2/2}$。$C = \pm e^{C_0}$ とおくと</p>
+      $$\boxed{x(t) = Ce^{t^2/2}} \quad (C \in \mathbb{R})$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 変数分離の手順</div>
+        <p>$x' = tx$ は「右辺が $t$ だけの関数と $x$ だけの関数の積」の形：$\dfrac{dx}{dt} = t \cdot x$。$x \ne 0$ のとき両辺を $x$ で割ると $\dfrac{dx}{x} = t\,dt$（左辺は $x$ のみ，右辺は $t$ のみ）。これで変数分離が完了。</p>
+        <p>両辺を積分：$\displaystyle\int \frac{dx}{x} = \int t\,dt$ → $\ln|x| = \dfrac{t^2}{2} + C_0$。指数化して $x = Ce^{t^2/2}$（$C = \pm e^{C_0}$，$x = 0$ は $C = 0$）。</p>
+      </div>
+    </div>
+
+    <h3>(2) ロジスティック方程式 $\dot{x} = x(1-x)$</h3>
+
+    <div class="problem-box">
+      <h4>問題文</h4>
+      <p>$\dot{x} = x(1-x)$ を解け。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>恒等定数解 $x \equiv 0$，$x \equiv 1$ を確認（代入すると両辺が 0）。$x \ne 0, 1$ のとき変数分離：</p>
+      $$\frac{dx}{x(1-x)} = dt$$
+      <p>部分分数分解：$\dfrac{1}{x(1-x)} = \dfrac{1}{x} + \dfrac{1}{1-x}$。積分：</p>
+      $$\ln|x| - \ln|1-x| = t + C_0 \Rightarrow \ln\left|\frac{x}{1-x}\right| = t + C_0$$
+      <p>指数化：$\dfrac{x}{1-x} = De^t$（$D = \pm e^{C_0}$）。$x$ について解くと $x = \dfrac{De^t}{1+De^t}$。$D = 0$ は $x \equiv 0$ に対応。</p>
+      $$\boxed{x = \frac{De^t}{1 + De^t}} \quad (D \in \mathbb{R}), \quad \text{または} \quad x \equiv 1$$
+      <p>$D$ が負のとき定義域は $t \ne \log(-1/D)$ に注意。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p>自律系 $\dot{x} = F(x)$ では<strong>まず平衡点（$F(x) = 0$ の根）を確認</strong>する。$F(x) = x(1-x)$ の根は $x = 0, 1$。これらが恒等定数解。</p>
+      <p>次に $x \ne 0, 1$ の範囲で変数分離。右辺が $x$ だけの関数・左辺が $t$ だけの関数に分けられる形 $x' = F(x)$ は変数分離形。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 ロジスティック方程式の背景</div>
+        <p>この方程式は人口動態や生態学で「環境収容力 $K = 1$ に近づく個体数変動」として現れる。$x = 0$ と $x = 1$ が平衡点で，$0 < x < 1$ では個体数が増加，$x > 1$ では減少する。</p>
+      </div>
+    </div>
+
+    <h3>(3) 同次形 $t\tan(x/t) - x + tx' = 0$</h3>
+
+    <div class="problem-box">
+      <h4>問題文</h4>
+      <p>$t\tan(x/t) - x + tx' = 0$ を解け。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$u = x/t$ とおくと $x = ut$，$x' = u + tu'$。方程式を整理して $x' = (x - t\tan(x/t))/t = x/t - \tan(x/t)$ に代入：</p>
+      $$u + tu' = u - \tan u \Rightarrow tu' = -\tan u$$
+      <p>変数分離：</p>
+      $$\frac{du}{\tan u} = -\frac{dt}{t}$$
+      <p>$\dfrac{du}{\tan u} = \dfrac{\cos u}{\sin u}\,du = d(\ln|\sin u|)$ を積分して</p>
+      $$\ln|\sin u| = -\ln|t| + C \Rightarrow \ln|t \sin u| = C \Rightarrow t\sin u = D$$
+      <p>$u = x/t$ を戻すと</p>
+      $$\boxed{t\sin(x/t) = D} \quad (D \in \mathbb{R})$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 同次形の見抜き方と置換の理由</div>
+        <p>$x' = (x - t\tan(x/t))/t = x/t - \tan(x/t)$。右辺は $x/t$ だけの関数（$x$ と $t$ が比の形にしか現れない）→ <strong>同次形</strong>。$u = x/t$ と置換すると $x = ut$，$x' = u + tu'$。代入後に $t$ と $u$ が分離できる変数分離形になる。</p>
+      </div>
+      <p>同次形の判定：方程式を $x' = (\text{右辺})$ の形に整理したとき，右辺が $x/t$ のみの関数で書けるかを確認する。この問題では $\tan$ が含まれているが，引数が $x/t$ のみなので同次形。</p>
+    </div>
+
+    <h3>(4) 置換による変数分離 $x' + x\cos t = \sin t \cos t$</h3>
+
+    <div class="problem-box">
+      <h4>問題文</h4>
+      <p>$x' + x\cos t = \sin t \cos t$ を解け。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>方程式を整理すると $x' = \cos t(\sin t - x)$。$u = \sin t - x$ と置換する。</p>
+      <p>$u = \sin t - x$ より $u' = \cos t - x'$。$x' = \cos t \cdot u$ を代入：</p>
+      $$u' = \cos t - \cos t \cdot u = \cos t(1 - u)$$
+      <p>変数分離形：$\dfrac{du}{1 - u} = \cos t\,dt$。積分：$-\ln|1-u| = \sin t + C_0$，よって $1-u = Ae^{-\sin t}$，$u = 1 - Ae^{-\sin t}$。</p>
+      <p>$x = \sin t - u$ を戻すと（$C = A$）</p>
+      $$\boxed{x = \sin t - 1 + Ce^{-\sin t}} \quad (C \in \mathbb{R})$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 置換 $u = \sin t - x$ の着想</div>
+        <p>方程式 $x' = \cos t(\sin t - x)$ を見る。右辺に「$\sin t - x$」という $t$ と $x$ が混在する組み合わせが現れている。このままでは変数分離できない。しかし $u := \sin t - x$ を新しい変数とおくと，$u' = \cos t - x'$ より $x' = \cos t - u'$ となる。代入すると $\cos t - u' = \cos t \cdot u$，すなわち $u' = \cos t(1-u)$ という変数分離形が得られる。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 置換の選び方</div>
+        <p>$x' = f(t) \cdot g(t, x)$ の形で，$g$ の中の「$t$ と $x$ の組み合わせ」が繰り返し現れるとき，その組み合わせを $u$ とおく置換が有効。今回は $\sin t - x$ が右辺に $\cos t(\sin t - x)$ の形で現れているので $u = \sin t - x$ が自然な選択。置換後に $u' = \cos t(1-u)$ という変数分離形 $\dfrac{du}{1-u} = \cos t\,dt$ が現れる。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">2</span> 平衡点と変数変換（自律型ODE）
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>Riccati 型の微分方程式</p>
+      $$x' = x^2 - x - 2$$
+      <p>を考える。</p>
+      <ol>
+        <li>この微分方程式の解を一つ見つけよ。</li>
+        <li>(1) で求めた解を $x_0$ とおく。$x = x_0 + u$ と変換することにより，上の微分方程式を $u$ に関する微分方程式に変換せよ。</li>
+        <li>一般解 $x$ を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>(1) 平衡点の発見：</strong>$x^2 - x - 2 = (x-2)(x+1) = 0$ より平衡点は $x = 2$ と $x = -1$。定数関数 $x \equiv 2$，$x \equiv -1$ は解。</p>
+      <p><strong>(2) 変数変換：</strong>$x = 2 + u$ とおくと $x' = u'$。方程式を $u$ で書き直す：</p>
+      $$u' = (2+u)^2 - (2+u) - 2 = 4 + 4u + u^2 - 2 - u - 2 = 3u + u^2 = u(u+3)$$
+      <p><strong>(3) $u' = u(u+3)$ を解く：</strong>$u = 0$（$x \equiv 2$）と $u = -3$（$x \equiv -1$）は恒等定数解。$u \ne 0, -3$ のとき変数分離できる：</p>
+      <p>部分分数 $\dfrac{1}{u(u+3)} = \dfrac{1}{3} \cdot \dfrac{1}{u} - \dfrac{1}{3} \cdot \dfrac{1}{u+3}$。積分：</p>
+      $$\frac{1}{3}\ln\left|\frac{u}{u+3}\right| = t + C_0 \Rightarrow \frac{u}{u+3} = Ce^{3t} \quad (C \ne 0)$$
+      <p>$u$ について解いて $u = \dfrac{3Ce^{3t}}{1 - Ce^{3t}}$，$x = 2 + u$ を戻すと</p>
+      $$\boxed{x(t) = 2 + \frac{3Ce^{3t}}{1 - Ce^{3t}}} \quad (C \in \mathbb{R})$$
+      <p>$C = 0$ のとき $x \equiv 2$ に対応（恒等定数解を含む）。</p>
+      <div style="background:#fff7ed; border:1.5px solid #fb923c; border-radius:8px; padding:1rem 1.25rem; margin:0.75rem 0;">
+        <div style="font-weight:700; font-size:0.85rem; color:#c2410c; font-family:'Noto Sans JP',sans-serif; margin-bottom:0.5rem;">📎 別解：$x \equiv -1$</div>
+        <p>$x \equiv -1$ は $x' = 0$，$x^2 - x - 2 = (-1)^2 -(-1) - 2 = 0$ より，もとの方程式を満たす。これは変数変換後の $u \equiv -3$（$u' = u(u+3) = (-3)(0) = 0$）に対応する恒等定数解であり，上の一般式の $C$ をどう取っても有限時間では表せない。</p>
+        <p>したがって全解は</p>
+        $$x(t) = 2 + \frac{3Ce^{3t}}{1 - Ce^{3t}} \quad (C \in \mathbb{R}), \qquad \text{または} \qquad x \equiv -1$$
+      </div>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p>自律系 $x' = F(x)$ では<strong>まず因数分解して平衡点を求める</strong>。$F(x) = (x-2)(x+1)$ の根 $x = 2, -1$ が平衡点。</p>
+      <p>なぜ変数変換 $x = x_0 + u$（$x_0$ は平衡点）を行うか？ 平衡点付近で $u$ が小さいとき，$u' \approx F'(x_0) u$（線形化）で局所的な振る舞いが分かる。さらに非線形項を含めて厳密に解くことも，変換後の方程式が整理されて解きやすくなるため。</p>
+      <p>今回は $u' = u(u+3)$ という変数分離形に帰着し，部分分数展開 $\dfrac{1}{u(u+3)} = \dfrac{1}{3u} - \dfrac{1}{3(u+3)}$ を用いて積分した。</p>
+    </div>
+
+    <div class="insight-box">
+      <div class="insight-title">💡 平衡点の安定性：相線図（phase line）で読む</div>
+      <p>$x' = F(x) = (x-2)(x+1)$ の符号を考える：</p>
+      <ul>
+        <li>$x < -1$ のとき：$(x-2) < 0$，$(x+1) < 0$ → $F(x) = (+) > 0$，すなわち $x$ が増加</li>
+        <li>$-1 < x < 2$ のとき：$(x-2) < 0$，$(x+1) > 0$ → $F(x) < 0$，すなわち $x$ が減少</li>
+        <li>$x > 2$ のとき：$(x-2) > 0$，$(x+1) > 0$ → $F(x) > 0$，すなわち $x$ が増加</li>
+      </ul>
+      <p>相線図：$\longrightarrow \mathbf{x=-1} \longleftarrow \quad\longrightarrow \mathbf{x=2} \longrightarrow$</p>
+      <p>$x = -1$ は<strong>安定平衡点</strong>（両側から引き寄せられる），$x = 2$ は<strong>不安定平衡点</strong>（両側から離れていく）。これは $F'(-1) = -3 < 0$（安定），$F'(2) = 3 > 0$（不安定）という線形化の判定とも一致する。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">3</span> 二階線形ODE の因数分解による解法
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>線形微分方程式</p>
+      $$x'' - 3x' + 2x = 0$$
+      <p>を考える。</p>
+      <ol>
+        <li>この微分方程式の解 $x$ は，$y' - y = 0$，$z' - 2z = 0$ を満たす関数 $y$，$z$ を用いて $x = y + z$ と表されることを示せ。</li>
+        <li>一般解 $x$ を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答 (1)</div>
+      <p>$y := 2x - x'$，$z := -x + x'$ と定める。このとき</p>
+      $$y' - y = (2x' - x'') - (2x - x') = -(x'' - 3x' + 2x) = 0,$$
+      $$z' - 2z = (-x' + x'') - 2(-x + x') = x'' - 3x' + 2x = 0$$
+      <p>（いずれも問題の方程式 $x'' - 3x' + 2x = 0$ より）。また $y + z = (2x - x') + (-x + x') = x$ であるから，$y$，$z$ は題意を満たす。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答 (2)</div>
+      <p>(1) の $y' - y = 0$ の一般解は $y = Ce^t$（$C$ は実数），$z' - 2z = 0$ の一般解は $z = De^{2t}$（$D$ は実数）。$x = y + z$ に代入して</p>
+      $$\boxed{x(t) = Ce^t + De^{2t}} \quad (C, D \in \mathbb{R})$$
+      <p>が与式の一般解である。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="insight-box">
+        <div class="insight-title">💡 因数分解のアイデア</div>
+        <p>微分演算子 $D = d/dt$ を使うと方程式は $(D^2 - 3D + 2)x = 0$。多項式と同じように因数分解：$D^2 - 3D + 2 = (D-1)(D-2) = (D-2)(D-1)$（定数係数の演算子 $D-1$ と $D-2$ は可換）。特性方程式 $\lambda^2 - 3\lambda + 2 = 0$ の根は $1$ と $2$。</p>
+      </div>
+      <div class="backward-think" style="margin:0.5rem 0 0.75rem;">
+        <div class="bt-title">🔄 $y = 2x - x'$，$z = -x + x'$ はどこから来るか</div>
+        <p>恒等式 $(D-1) - (D-2) = 1$ に着目する。両辺を $x$ に作用させると</p>
+        $$x = (D-1)x - (D-2)x = (x' - x) - (x' - 2x).$$
+        <p>そこで $\tilde z := (D-1)x = x'-x$，$\tilde y := -(D-2)x = -(x'-2x) = 2x-x'$ とおけば $\tilde y + \tilde z = x$（恒等式なのでこれは方程式に依らず常に成立）。これが答案の $y = 2x-x'$，$z = -x+x'$。</p>
+        <p>演算子が可換だから，方程式 $(D-1)(D-2)x = 0$ を使うと</p>
+        $$z' - 2z = (D-2)z = (D-2)(D-1)x = (D-1)(D-2)x = 0,$$
+        $$y' - y = (D-1)y = -(D-1)(D-2)x = -(D-2)(D-1)x = 0$$
+        <p>が得られる。つまり「$x$ を $(D-1)$-成分と $(D-2)$-成分に分解する」という発想で $y,z$ が決まり，可換性のおかげでそれぞれが1階の変数分離形 $y'-y=0$，$z'-2z=0$ を満たす。</p>
+      </div>
+      <p>(2) では $y'-y=0$，$z'-2z=0$ をそれぞれ変数分離で解くだけでよい（一般解 $Ce^t$，$De^{2t}$）。$x=y+z$ の一般解の構造は，特性方程式の根 $\lambda=1,2$ に対応する指数関数解の和になっている。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 特性方程式との対応</div>
+        <p>二階線形定係数 $ax'' + bx' + cx = 0$ は特性方程式 $a\lambda^2 + b\lambda + c = 0$ の根 $\lambda_1, \lambda_2$ を用いて $x = C_1 e^{\lambda_1 t} + C_2 e^{\lambda_2 t}$（$\lambda_1 \ne \lambda_2$ の場合）。今回は $\lambda^2 - 3\lambda + 2 = (\lambda-1)(\lambda-2) = 0$ より $\lambda = 1, 2$。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第4回を理解できているかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$x' = tx$ を変数分離して $\ln|x| = t^2/2 + C_0$，$x = Ce^{t^2/2}$ を導けるか</li>
+          <li>ロジスティック方程式で平衡点（恒等定数解）を先に確認する習慣があるか</li>
+          <li>同次形 $x' = f(x/t)$ を見たとき，$u = x/t$ の置換で変数分離形になることを示せるか</li>
+          <li>$x' = \cos t(\sin t - x)$ のような方程式で $u = \sin t - x$ と置いて変数分離形に帰着できるか</li>
+          <li>自律系 $x' = F(x)$ の平衡点の「安定・不安定」を $F'$ の符号で判定できるか</li>
+          <li>Riccati 型で $x = x_0 + u$（$x_0$ は平衡点）の変換後，$u$ の ODE が変数分離になることを確認できるか</li>
+          <li>二階線形定係数 ODE の特性方程式 $\lambda^2 + b\lambda + c = 0$ を解いて一般解を書けるか</li>
+          <li>積分定数 $\pm e^{C_0}$ を「$C$（任意実数）」に書き直す癖がついているか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- まとめ -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📌 第4回のまとめ：ODEの解法選択</div>
+  <div class="section-card-body">
+    <p>ODEの解法は方程式の構造を見て決まる。</p>
+    <ul>
+      <li><strong>変数分離：</strong>$x' = f(t)g(x)$ の形。両辺を $g(x)$ で割り，$t$ と $x$ を分けて積分</li>
+      <li><strong>同次形：</strong>$x' = f(x/t)$ の形。$u = x/t$ で変数分離形に</li>
+      <li><strong>置換：</strong>繰り返し現れる $t,x$ の組み合わせを $u$ とおいて変数分離形に帰着</li>
+      <li><strong>平衡点変換：</strong>自律系 $x' = F(x)$ で $F(x_0) = 0$ なら $u = x - x_0$ で簡単化</li>
+      <li><strong>因数分解：</strong>定係数線形 → 特性方程式の根が指数関数解</li>
+    </ul>
+    <div class="warn-box">
+      <div class="warn-title">⚠ 積分定数の取り扱い</div>
+      <p>$\pm e^C$ などの任意定数は「$D$（任意実数）」と書き直す。恒等定数解（$x \equiv $ 定数）が別途存在することも確認する。</p>
+    </div>
+  </div>
+</section>
+
+</div>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

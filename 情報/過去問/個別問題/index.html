@@ -1,0 +1,122 @@
+<!DOCTYPE html><!-- 「個別問題 | 情報 過去問」の一覧ページ。掲載されたページへ移動する入口をまとめる。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>個別問題 | 情報 過去問</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body data-nav-page="kobetsu-index">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>過去問 — 個別問題（田中哲郎クラス）</h1>
+  <p class="subtitle">担当教員・クラスごとに内容が異なる部分（大問2〜3、90分の一部）</p>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <p>
+      個別問題は<strong>担当教員・クラスごとに出題内容が大きく異なる</strong>部分で、共通問題とは対照的に
+      年度をまたいだ題材の共通性は「同じ教員が担当し続けている限りで」生まれる。ここに収録しているのは
+      <strong>田中哲郎教員</strong>担当クラス（理科一類・理科二類三類の指定組）の2018・2019・2022・2024・2025年度
+      分であり、他の教員が担当するクラスでは全く異なる問題（例えばプログラミング演習や別分野の内容）が
+      出題されている点に注意してほしい。
+    </p>
+  </div>
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section">
+    <div class="sec-header">
+      <div class="sec-tag">分野マップ</div>
+      <h2>田中哲郎クラスで繰り返し問われる3つの柱</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3>1. 論理回路（ブール代数・組合せ回路）</h3>
+      <div class="def">
+        <span class="box-label">頻出テーマ</span>
+        <p>
+          AND・OR・NOT・NAND の基本素子とMIL記法、真理値表とブール代数表現の相互変換
+          （主加法標準形＝積和標準形／主乗法標準形＝和積標準形）、NANDだけを使った回路の実現
+          （NAND-NANDネットワークによる積和標準形の直接実装）、多数決回路・全加算器の桁上げ出力
+          （$XY+YZ+ZX$）など、代表的な組合せ回路の設計。2018・2022・2024・2025年度の個別問題2〜3で
+          必ず出題されている定番分野。
+        </p>
+      </div>
+
+      <h3>2. オートマトン・形式言語・チューリングマシン</h3>
+      <div class="def">
+        <span class="box-label">頻出テーマ</span>
+        <p>
+          有限状態機械（オートマトン）による「$n$の倍数判定」（2進法・3進法での剰余オートマトン構成）、
+          暗証番号のような特定の部分列を受理する回路の設計、チェック表（動作の追跡表）の穴埋め、
+          そして有限状態機械では解けない問題（$a$の数と$b$の数を比較する問題など、非正則な言語）を
+          チューリングマシンで解く問題。2025年度は「有限状態機械で解けないことの証明」という、
+          正則言語の限界そのものを問う出題も見られる。
+        </p>
+      </div>
+
+      <h3>3. 計算機構成・機械語シミュレータ</h3>
+      <div class="def">
+        <span class="box-label">頻出テーマ</span>
+        <p>
+          ED21・LMC（Little Man Computer）といった簡易機械語シミュレータのプログラムを読み、
+          「何を計算しているプログラムか」「何ステップで実行が終わるか」を答える問題、
+          同じ計算をより少ないステップ数で行うプログラムへの改良（アルゴリズムの効率化）。
+          2018・2019・2022年度の個別問題1で連続して出題されている、初期の計算機アーキテクチャの理解を問う分野。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="box-label">解答について</span>
+    <p>
+      2024年度の個別問題については、クラスメイトが作成した手書きの解答を参考にしつつ作成した部分がある。
+      いずれの年度も、まず与えられた問題そのものの解答を示し、続けて論理回路・オートマトン理論の
+      基礎知識や一般的な解法の型を補足としてまとめている。
+    </p>
+  </div>
+
+  <!-- 年度などの区分ごとに、過去問ページへのリンクをカードで並べる。 --><div class="year-grid">
+    <a class="year-card" href="kakomon_2025.html"><div class="yn">2025</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2024.html"><div class="yn">2024</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2022.html"><div class="yn">2022</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2019.html"><div class="yn">2019</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2018.html"><div class="yn">2018</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2015.html"><div class="yn">2015</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2014.html"><div class="yn">2014</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2013.html"><div class="yn">2013</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2012.html"><div class="yn">2012</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2011.html"><div class="yn">2011</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2010.html"><div class="yn">2010</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2009.html"><div class="yn">2009</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2008.html"><div class="yn">2008</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2007.html"><div class="yn">2007</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2006.html"><div class="yn">2006</div><div class="yc">解答つき</div></a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../../nav.js"></script>
+<script src="../../../common.js"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

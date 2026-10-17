@@ -1,0 +1,318 @@
+<!DOCTYPE html><!-- 「微分積分 予想問題 第3回 微分の定義・Taylor展開とCauchy方程式 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>微分積分 予想問題 第3回 微分の定義・Taylor展開とCauchy方程式 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="yosou_calc_02.html" data-page="yosou/yosou_calc_02">← 前のテーマ</a>
+      <a href="yosou_calc_04.html" data-page="yosou/yosou_calc_04">次のテーマ →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-calc">
+  <h1>微分積分学演習　予想問題　第3回</h1>
+  <p class="subtitle">微分の定義・Cauchy方程式・Taylor展開と誤差評価（全4問）</p>
+</div>
+
+<div class="container">
+
+<!-- 免責 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#fff5f5; color:#c53030;">⚠️ この問題セットについて</div>
+  <div class="section-card-body">
+    <div class="warn-box">
+      <div class="warn-title">AIが作成した予想問題です（実際の試験問題ではありません）</div>
+      <p>演習第3回（<a href="../calculus/calc_03.html">微分の定義とCauchy方程式</a>）に加え，6月の中間試験・レポート課題で扱われたテイラー展開・誤差評価の傾向も踏まえて構成した学習用オリジナル問題です。中間試験（45分・範囲は狭め）に比べ，期末試験（90分）は範囲が広く難易度もやや高めになることを想定して作成しています。全5回20問構成の第3回です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 このテーマの要点</div>
+  <div class="section-card-body">
+    <p>この回は「微分可能性の定義に戻って考える」姿勢と，「Taylor展開・誤差評価・級数の収束範囲」という2本柱で構成する。前者は演習第3回の直接の延長，後者は中間試験後に配布されたレポート課題（$\sqrt{1+x}$ の近似誤差，$\arctan x$ のマクローリン展開など）の傾向を強く反映させている。</p>
+    <div class="def-box">
+      <div class="def-title">この4問で使う道具</div>
+      <ul>
+        <li>微分可能性の定義：$\displaystyle f'(a)=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}$。区分的に定義された関数では，左微分係数 $f'(a^-)$ と右微分係数 $f'(a^+)$ を別々に計算し，一致することを確認する。</li>
+        <li>加法的Cauchy方程式 $g(x+y)=g(x)+g(y)$（連続）$\Longrightarrow$ $g(x)=cx$（$c=g(1)$）——演習第3回・問2の結果。今回はこれを既知の補題として引用してよい。</li>
+        <li>乗法的Cauchy方程式 $f(x+y)=f(x)f(y)$ は，対数を取ることで加法的方程式に帰着できる（ただし帰着の前に $f>0$ を示す必要がある）。</li>
+        <li>Taylorの定理（Lagrangeの剰余項）：$\displaystyle f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(0)}{k!}x^k+R_n(x)$，$\displaystyle R_n(x)=\frac{f^{(n+1)}(c)}{(n+1)!}x^{n+1}$（$c$ は $0$ と $x$ の間のある値）。</li>
+        <li>マクローリン展開の合成（$u=x^2$ などの代入）と，その展開が有効な $x$ の範囲（収束半径）の求め方。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">1</span> 接続点における微分可能性
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★☆☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>関数</p>
+      $$f(x) = \begin{cases} x^2 & (x \le 1) \\ ax+b & (x > 1) \end{cases}$$
+      <p>（$a,b$ は実数の定数）が $x=1$ で微分可能となるように，$a,b$ の値を定めよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>Step 1（連続性）：</strong>$f$ が $x=1$ で微分可能であるためには，まず $x=1$ で連続でなければならない（微分可能性は連続性より強い条件であり，不連続な点では微分係数の定義に現れる差分商そのものが意味を持たない）。</p>
+      $$\lim_{x\to1^-}f(x) = 1^2 = 1,\qquad \lim_{x\to1^+}f(x) = a+b,\qquad f(1)=1$$
+      <p>連続であるためには $a+b=1$ が必要。</p>
+      <p><strong>Step 2（微分可能性）：</strong>連続性の条件のもとで，左右の微分係数を比較する。</p>
+      <p>左側（$x\le1$ では $f(x)=x^2$）：$f'(1^-) = \left.\dfrac{d}{dx}x^2\right|_{x=1} = 2\cdot1 = 2$。</p>
+      <p>右側（$x>1$ では $f(x)=ax+b$）：$f'(1^+) = a$。</p>
+      <p>微分可能であるためには $f'(1^-)=f'(1^+)$，すなわち $a=2$。</p>
+      <p><strong>Step 3（連立）：</strong>$a+b=1$ に $a=2$ を代入して $b=-1$。</p>
+      $$\boxed{a=2,\quad b=-1}$$
+      <p>検算：このとき $f(x)=2x-1$（$x>1$）で，$f(1^+)\to2-1=1=f(1)$ ✓（連続），$f'(1^+)=2=f'(1^-)$ ✓（微分可能）。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>区分的に定義された関数の接続点での微分可能性を問う問題は，「まず連続性，次に微分可能性」という2段階の手順で解くのが定石。この順序には理由がある——微分可能性は連続性より真に強い条件（微分可能 $\Rightarrow$ 連続，逆は成り立たない）なので，もし連続でない点があれば，その時点で微分可能性は自動的に否定される。したがって連続性を先にチェックし，そこで得られる条件（本問では $a+b=1$）を土台として，さらに微分可能性という追加条件（$a=2$）を重ねる，という段取りになる。逆の順序（先に微分係数を比較する）でも計算上は問題ないが，論理的には「連続性の確認を省略した」ことになり，答案としては減点対象になりうる。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 自由度のカウント：なぜ条件は過不足なく2つなのか</div>
+        <p>未知数は $a,b$ の2個。条件も「連続性」「微分可能性」の2個。1つの未知数を1つの条件で消していくイメージを持つと，答えが一意に決まることに納得感が持てる。もし問題文が「$x=1$ で連続」だけを要求していたら，$a+b=1$ という1本の式だけが条件になり，$a,b$ は1次元の自由度（直線上の任意の点）を残したまま決まらない。「微分可能」という条件がもう1本の独立な式を追加することで，ちょうど $a,b$ の2つの自由度を消しきる——このような「未知数の個数と条件の個数を数える」視点は，パラメータを含む接続問題全般（$n$ 個のパラメータに $n$ 個の条件，という設計）に応用できる。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①左右の微分係数を求める際に，どちらの式（$x^2$ か $ax+b$ か）をどちらの側（$x<1$ か $x>1$ か）に対応させるか取り違え，$f'(1^-)=a$，$f'(1^+)=2$ のように逆にしてしまう。②連続性の条件を確認せずにいきなり微分係数だけを比較し，$a=2$ だけを答えて $b$ の条件を出し忘れる（$b$ は微分係数の比較には現れないので，連続性の式を経由しないと求まらない）。③$f(1)$ の値を「右側の式 $a+b$」で計算してしまう（定義より $x=1$ は $x\le1$ の場合に属するので $f(1)=1^2=1$ が正しい）。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 一般化・本番での対応</div>
+        <p>この型の問題は「区分的な多項式・初等関数の接続点で $C^0$（連続）または $C^1$（微分可能）となる条件を求めよ」という形で頻出する。一般に，接続点が1点，未知パラメータが $k$ 個であれば，「連続性1本＋微分可能性1本」の合計2本の条件で $k=2$ 個のパラメータが決まる設計が最も自然（$k\ne2$ の場合は，条件が足りず自由度が残るか，逆に条件過多で解が存在しない可能性がある）。また，もし問題が「2回微分可能」まで要求してきたら，さらに $f''(1^-)=f''(1^+)$ という3本目の条件が必要になる（ただし本問の左側は $x^2$ で2回微分可能だが，右側は $ax+b$ で $f''\equiv0$ なので，$f''(1^-)=2\ne0=f''(1^+)$ となり，実は「2回微分可能」は $a,b$ をどう選んでも実現できないことにも注意——多項式の次数が異なる接続では，高階の微分可能性に本質的な限界がある）。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">2</span> 乗法的Cauchy方程式
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>連続関数 $f:\mathbb{R}\to\mathbb{R}$ が任意の実数 $x,y$ に対して</p>
+      $$f(x+y) = f(x)f(y)$$
+      <p>を満たし，かつ $f$ は恒等的に $0$ ではないとする。このときある定数 $a>0$ が存在して $f(x)=a^x$（$a^x:=e^{x\ln a}$）と表せることを示せ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>Step 1（$f\ge0$ を示す）：</strong>任意の $x\in\mathbb{R}$ に対して</p>
+      $$f(x) = f\!\left(\frac x2+\frac x2\right) = f\!\left(\frac x2\right)^2 \ge 0$$
+      <p><strong>Step 2（$f>0$ を示す）：</strong>もしある $x_0$ で $f(x_0)=0$ となったとすると，任意の実数 $x$ に対して</p>
+      $$f(x) = f\bigl(x_0+(x-x_0)\bigr) = f(x_0)\,f(x-x_0) = 0\cdot f(x-x_0) = 0$$
+      <p>となり，$f$ が恒等的に $0$ となって仮定に矛盾する。よって任意の $x$ に対して $f(x)\ne0$，Step 1 と合わせて $f(x)>0$。</p>
+      <p><strong>Step 3（対数を取り加法的方程式に帰着）：</strong>$f>0$ が確定したので $g(x):=\log f(x)$ が定義できる。$f$ は連続かつ正値，$\log$ は $(0,\infty)$ 上で連続だから，合成 $g=\log\circ f$ も連続。さらに</p>
+      $$g(x+y) = \log\bigl(f(x+y)\bigr) = \log\bigl(f(x)f(y)\bigr) = \log f(x)+\log f(y) = g(x)+g(y)$$
+      <p>すなわち $g$ は連続かつ加法的Cauchy方程式 $g(x+y)=g(x)+g(y)$ を満たす。</p>
+      <p><strong>Step 4（既知の結果を適用）：</strong>演習第3回・問2で示した通り，連続関数 $g:\mathbb{R}\to\mathbb{R}$ が $g(x+y)=g(x)+g(y)$（任意の実数 $x,y$，したがって特に任意の有理数 $x,y$）を満たせば，$c:=g(1)$ として $g(x)=cx$（任意の実数 $x$）。</p>
+      <p><strong>Step 5（$f$ に戻す）：</strong>$g(x)=\log f(x)=cx$ より</p>
+      $$f(x) = e^{g(x)} = e^{cx} = (e^c)^x$$
+      <p>$a:=e^c$ とおけば $a>0$（指数関数の値は常に正）であり，$f(x)=a^x$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>「乗法的な関数方程式 $f(x+y)=f(x)f(y)$ を，対数を取って加法的な方程式 $g(x+y)=g(x)+g(y)$ に変換する」という発想がこの問題の核心。乗法を加法に変換するのは対数の最も基本的な性質（$\log(pq)=\log p+\log q$）だが，この一手はCauchy方程式の分類問題に限らず，指数関数的増殖のモデル化，複利計算，情報量（エントロピー）の加法性など，非常に広い場面で使われる汎用的なテクニックである。「積の構造を和の構造に落とし込めないか」という視点は，今後も繰り返し役に立つ。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ先に $f>0$ を示す必要があるのか</div>
+        <p>$\log$ という関数は定義域が $(0,\infty)$ に限られる。もし $f$ が途中でどこか $0$ 以下の値を取る可能性を排除しないまま「$g(x):=\log f(x)$」と定義してしまうと，$f(x)\le0$ となる $x$ では $g(x)$ がそもそも定義できず，論理に穴が空く。この一手間（Step 1・Step 2）を飛ばして「対数を取ればよい」と結論だけ書いてしまうのは，本問で最も注意すべき論理の落とし穴。逆に言えば，$f\ge0$ を示す Step 1（$f(x)=f(x/2)^2$）と，$f=0$ となる点が存在しないことを示す Step 2 は，この問題の「地味だが本質的に必要な前処理」である。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 演習第3回の結果を「補題」として引用する視点</div>
+        <p>本問の Step 4 では，演習第3回・問2で証明した「連続な加法的Cauchy方程式の解は $g(x)=cx$ に限る」という結果を，証明をやり直すことなくそのまま引用している。本番の試験でも，授業や演習で既に証明済みの定理・命題は，(特に指示がない限り) 自由に既知の事実として使ってよいことが多い。「今回の問題は，過去に証明した結果の上に，対数変換という1段の変換を乗せただけの応用問題である」と見抜けるかどうかが，この問題の難易度を大きく左右する。逆に言えば，こうした「既存の結果を土台にした応用問題」は期末試験で非常に頻出のパターンなので，中間試験・演習で扱った定理は結論だけでも正確に覚えておく価値が高い。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①$f(x_0)=0$ となる可能性を排除せずに，いきなり $g(x):=\log f(x)$ と定義してしまう（論理の欠落）。②Step 1 の式変形を $f(x)=f(x/2+x/2)=f(x/2)+f(x/2)$ のように加法的方程式の性質と混同してしまう（本問は乗法的なので $f(x/2)f(x/2)=f(x/2)^2$ が正しい）。③$a=e^c$ の正値性（指数関数の値は常に正）を確認せずに済ませてしまう（$a>0$ という結論の要求に対応する部分なので明記が必要）。</p>
+      <p><strong>一般化：</strong>$c=0$（すなわち $a=e^0=1$）の場合は $f\equiv1$ となり，これも定理の主張に矛盾なく含まれる（$1^x=1$ で恒等的に $0$ でない条件も満たす）。また，離散版として「$f(nx)=f(x)^n$（$n$ は自然数）」という関係も，本問と同じ発想（対数を取れば $g(nx)=n\,g(x)$ という加法的方程式の整数倍バージョンに帰着する）で扱うことができ，複利計算や人口増加モデルなど指数関数的な現象を特徴づける普遍的な構造として理解しておくとよい。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">3</span> Taylorの定理と誤差評価
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★★☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$x>0$ とする。$\sqrt{1+x}$ を2次近似式 $1+\dfrac x2-\dfrac{x^2}8$ で近似したときの誤差を</p>
+      $$E(x) := \sqrt{1+x} - \left(1+\frac x2-\frac{x^2}8\right)$$
+      <p>とおく。$0<E(x)<\dfrac{x^3}{16}$ が成り立つことを示せ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$f(t):=\sqrt{1+t}=(1+t)^{1/2}$ とおく。導関数を順に計算する。</p>
+      $$f(t)=(1+t)^{1/2},\quad f'(t)=\frac12(1+t)^{-1/2},\quad f''(t)=-\frac14(1+t)^{-3/2},\quad f'''(t)=\frac38(1+t)^{-5/2}$$
+      <p>$t=0$ での値：$f(0)=1$，$f'(0)=\dfrac12$，$f''(0)=-\dfrac14$。</p>
+      <p><strong>Taylorの定理（2次，Lagrangeの剰余項）：</strong>ある $c$（$0$ と $x$ の間）が存在して</p>
+      $$f(x) = f(0)+f'(0)x+\frac{f''(0)}{2}x^2+R_2(x),\qquad R_2(x)=\frac{f'''(c)}{3!}x^3$$
+      <p>ここで</p>
+      $$f(0)+f'(0)x+\frac{f''(0)}{2}x^2 = 1+\frac x2-\frac18x^2$$
+      <p>はまさに問題で与えられた近似式そのものなので，</p>
+      $$E(x) = f(x)-\left(1+\frac x2-\frac{x^2}8\right) = R_2(x)$$
+      <p><strong>剰余項の評価：</strong></p>
+      $$R_2(x) = \frac{f'''(c)}{3!}x^3 = \frac{\frac38(1+c)^{-5/2}}{6}x^3 = \frac{x^3}{16}(1+c)^{-5/2}$$
+      <p>$x>0$ のとき，Taylorの定理における $c$ は $0<c<x$ を満たす。よって $1+c>1$，したがって</p>
+      $$0 < (1+c)^{-5/2} < 1^{-5/2} = 1$$
+      <p>（$(1+c)^{-5/2}$ は $1+c$ の減少関数なので，$1+c>1$ から $(1+c)^{-5/2}<1$ が従う。また $1+c>0$ よりこの値自体は正。）$x^3>0$ も合わせて</p>
+      $$0 < E(x) = \frac{x^3}{16}(1+c)^{-5/2} < \frac{x^3}{16}$$
+      <p>が成り立つ。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p><strong>レポート課題との関連：</strong>この問題は，レポート課題で扱った「$\sqrt{1+x}$ を1次近似 $1+\dfrac x2$ で近似したときの誤差 $E$ が $|E|<\dfrac18x^2$ を満たす」という結果の<strong>2次近似への拡張</strong>である。次数を1つ上げて2次近似にすると，誤差のオーダーも $O(x^2)$ から $O(x^3)$ へちょうど1つ上がる——これは「近似に使う項を増やせば増やすほど誤差は速く小さくなる」というTaylor展開の一般法則の具体例になっている。1次近似の証明を思い出せれば，本問はその手順を1次分だけ真似するだけで（次数を上げて $f'''$ まで計算するだけで）ほぼ同じように解ける，という見通しを立てられるかがまず最初の関門。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 Lagrangeの剰余項の一般形の使い方</div>
+        <p>$n$次のTaylor近似に対する剰余項の一般形は</p>
+        $$R_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!}x^{n+1}\qquad(c\text{は }0\text{ と }x\text{ の間のある値})$$
+        <p>この式を使うためには，$f^{(n+1)}$（本問では $n=2$ なので $f'''$）まで正確に計算しておく必要がある。係数 $\dfrac{1}{(n+1)!}$（本問では $\dfrac1{3!}=\dfrac16$）を落とさないこと，符号を正確に追うことが計算の要。$c$ の具体的な値は分からないままでよく，「$c$ は $0$ と $x$ の間のどこかに存在する」という<strong>存在だけ</strong>を使って不等式評価を完成させる——この「具体的な値は分からなくても，存在範囲さえ分かれば評価が完成する」という論法の型は，剰余項評価に限らず，中間値の定理や平均値の定理を使うあらゆる評価問題で繰り返し登場する。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 $E(x)>0$ という副産物的な考察：この近似は真の値を常に過小評価する</div>
+        <p>不等式 $E(x)>0$ は，$\sqrt{1+x} > 1+\dfrac x2-\dfrac{x^2}8$（$x>0$ で）を意味する。すなわちこの2次近似式は，真の値をわずかに<strong>下回る</strong>形で近似している。これは $f'''(t)=\dfrac38(1+t)^{-5/2}>0$（$t>-1$ で常に正）であることから来ており，もし $f'''$ が負であれば逆に近似式が真の値を上回っていたはずである。「剰余項の符号が近似の過大評価・過小評価のどちらであるかを決める」という関係は，近似の質を議論する上で覚えておく価値がある。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①係数 $\dfrac{1}{3!}=\dfrac16$ を書き忘れ，あるいは $\dfrac{1}{3}$ と誤記する。②$f'''(t)$ の符号や指数 $-5/2$ の計算を誤る（$f''(t)=-\frac14(1+t)^{-3/2}$ をさらに微分する際，係数 $-\frac14\times\left(-\frac32\right)=\frac38$ の掛け算でミスしやすい）。③$c$ の範囲を「$x$ の符号によらず $0<c<x$ に固定できる」と誤解してしまう（本問は $x>0$ という条件があるからこそ $0<c<x$，したがって $1+c>1$ が言える。もし $x<0$ の場合は $x<c<0$ となり，$1+c<1$ となるので評価の向きが変わる点に注意）。</p>
+      <p><strong>一般化・本番での対応：</strong>「$k$ 次近似の誤差評価」は，$k$ を1つ増やすごとに $f^{(k+1)}$ をもう1回計算し，剰余項の係数 $\dfrac{1}{(k+1)!}x^{k+1}$ と $f^{(k+1)}(c)$ の評価域を求める，という同じ手順の繰り返しに過ぎない。本番でこの型の問題（$\sqrt{\cdot}$，$\log(1+\cdot)$，$e^{\cdot}$ などの近似誤差）が出たら，まず「元の関数を $f$ とおいて，何次まで微分すれば与えられた近似式と一致するか」を確認し，その次の階数の導関数の符号・範囲を押さえる，という同じ型で対応できる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">4</span> マクローリン展開・収束半径・極限計算への応用
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★★★</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$h(x) = \log(1+x^2)$ とする。</p>
+      <ol>
+        <li>$h(x)$ のマクローリン展開を求め，その収束半径を答えよ。</li>
+        <li>(1) を用いて $\displaystyle\lim_{x\to0}\frac{\log(1+x^2)-x^2}{x^4}$ を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>既知の展開（$|u|<1$ で成立）：</p>
+      $$\log(1+u) = \sum_{k=1}^{\infty}\frac{(-1)^{k-1}}{k}u^k = u-\frac{u^2}2+\frac{u^3}3-\cdots$$
+      <p>この式に $u=x^2$ を代入すると</p>
+      $$h(x)=\log(1+x^2) = \sum_{k=1}^{\infty}\frac{(-1)^{k-1}}{k}x^{2k} = x^2-\frac{x^4}2+\frac{x^6}3-\cdots$$
+      <p><strong>収束半径：</strong>元の展開は $|u|<1$ で成立するので，$u=x^2$ を代入した展開が成立するための条件は $|x^2|<1 \Longleftrightarrow |x|<1$。よって</p>
+      $$\boxed{\text{収束半径}=1}$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>(1) の展開より</p>
+      $$\log(1+x^2)-x^2 = -\frac{x^4}2+\frac{x^6}3-\frac{x^8}4+\cdots$$
+      <p>両辺を $x^4$（$x\ne0$）で割ると</p>
+      $$\frac{\log(1+x^2)-x^2}{x^4} = -\frac12+\frac{x^2}3-\frac{x^4}4+\cdots$$
+      <p>$x\to0$ のとき，右辺の第2項以降はすべて $0$ に収束するので</p>
+      $$\lim_{x\to0}\frac{\log(1+x^2)-x^2}{x^4} = \boxed{-\frac12}$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p><strong>(1) の発想：既知の展開に「代入する」テクニック</strong></p>
+      <p>$\log(1+x^2)$ を一から係数計算するのではなく，既に知っている $\log(1+u)$ の展開に $u=x^2$ を代入するだけで新しい展開が手に入る，という「合成による展開の構成」がこの問題の核心。この発想は，レポート課題で扱った $\arctan x$ のマクローリン展開（$\arctan x=\displaystyle\int_0^x\frac{1}{1+t^2}dt$ を経由して，$\dfrac{1}{1+t^2}=\displaystyle\sum(-1)^k t^{2k}$ という「$\dfrac1{1-u}$ の展開に $u=-t^2$ を代入する」テクニックを使って導く）とも本質的に同じ発想であり，「基本的な展開（$e^u,\ \log(1+u),\ \dfrac1{1-u},\ (1+u)^\alpha$ など）をいくつか正確に覚えておけば，変数変換だけで様々な合成関数の展開が作れる」という汎用的な指針に繋がる。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 収束半径の「変数の読み替え」</div>
+        <p>$\log(1+u)=\sum\frac{(-1)^{k-1}}{k}u^k$ が収束するのは $|u|<1$ のとき（$u=1$ でも条件収束するが，$u=-1$ では発散する——後述）。これを $x$ の条件に翻訳するには，$u=x^2$ という代入の式をそのまま不等式に当てはめて $|x^2|<1$ とし，これを $x$ について解いて $|x|<1$ を得る，という「代入前の変数の収束範囲を，代入後の変数の範囲に変換し直す」手順を踏む。$u=x^2\ge0$ なので，$u$ が取りうる範囲は $[0,\infty)$ の部分集合であることにも注意すると，$u=-1$ 側の収束・発散の非対称性は今回は関係しないことが分かる（$u=x^2$ が負になることはないため）。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 収束半径の端点での挙動（発展）</div>
+        <p>$u=1$（すなわち $x=\pm1$）のとき，$\log(1+u)=\sum\frac{(-1)^{k-1}}{k}$ は交代調和級数 $1-\frac12+\frac13-\frac14+\cdots$ となり，これは（絶対収束はしないが）条件収束し，値は $\log2$ に収束することが知られている。一方 $u=-1$ では $\sum\frac{(-1)^{k-1}}{k}(-1)^k=-\sum\frac1k$ となり，調和級数に一致して発散する。このように「収束半径のちょうど境界（$|u|=1$）では，代入する値によって収束したりしなかったりする」という繊細な挙動があり，収束半径の内部（$|u|<1$）でしか一様に成り立つ議論ができないことを常に意識しておく必要がある。</p>
+      </div>
+      <p><strong>(2) の発想：極限計算にTaylor展開を使う型</strong></p>
+      <p>$\dfrac00$ 型の極限をロピタルの定理で解こうとすると，$\dfrac{\log(1+x^2)-x^2}{x^4}$ は分母の次数が4次なので，ロピタルを4回（あるいは商の微分が絡んで実質もっと）繰り返す必要があり，計算量が急増する。これに対し，Taylor展開を使えば「分子を高次の項まで展開し，共通因子で割って $x\to0$ の極限を取るだけ」で済み，高次の極限になるほどロピタルよりも圧倒的に見通しがよく速い。この技法は，レポート課題に出てきた次の2つの極限にもそのまま応用できる：</p>
+      <ul>
+        <li>$\displaystyle\lim_{x\to0}\left(\frac{1}{x(x+1)}-\frac{\log(1+x)}{x^2}\right)$ ——分子を通分した上で，$\log(1+x)=x-\frac{x^2}2+\frac{x^3}3-\cdots$ および $\frac{1}{x+1}=1-x+x^2-\cdots$ を代入し，低次の項から順に相殺させて極限を求める。</li>
+        <li>$\displaystyle\lim_{x\to0}\left(\frac{1}{\sin^2x}-\frac{1}{x^2}\right)$ ——$\sin x=x-\frac{x^3}{6}+\cdots$ より $\sin^2x=x^2\left(1-\frac{x^2}{6}+\cdots\right)^2=x^2-\frac{x^4}3+\cdots$ を用いて同様に処理する。</li>
+      </ul>
+      <p>いずれも「展開を分母の次数より1〜2段階高いところまで取り，割り算した後に $x\to0$ とする」という同じ型で解ける。</p>
+      <p><strong>よくある間違い：</strong>①展開の項数を必要な次数より手前で打ち切ってしまい（例えば $x^2$ の項までしか展開せず），$x^4$ で割った後に必要な $x^4$ の係数の情報が消えてしまう（本問では最低でも $x^4$ の項まで展開しないと答えが出ない）。②$O(x^2)$ のようなランダウの記号の意味を誤解し，「$x^2$ より高次の項は展開の中に一切現れない」と早合点してしまう（正しくは「$x\to0$ で $x^2$ より速く $0$ に収束する項をまとめて表す記法」であり，どの次数まで展開したかによって $O(\cdot)$ の中身は変わる）。③収束半径を求める際に $|x^2|<1$ を $|x|<1$ ではなく $x<1$ のように符号を考慮せずに解いてしまう。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第3回（微分の定義・Cauchy方程式・Taylor展開）を自力で解けるかセルフチェック</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>区分的に定義された関数の接続点で，「まず連続性，次に微分可能性」の順で条件を立てられるか</li>
+          <li>左微分係数・右微分係数をそれぞれ正しい式（正しい定義域側）から計算できるか</li>
+          <li>乗法的Cauchy方程式 $f(x+y)=f(x)f(y)$ に対して，まず $f>0$ を示してから対数を取り，加法的方程式に帰着させる手順を再現できるか</li>
+          <li>演習で証明済みの定理（加法的Cauchy方程式の解の形）を，補題として引用しつつ新しい問題に応用できるか</li>
+          <li>Taylorの定理（Lagrangeの剰余項）を使って，$n$次近似の誤差を上下から評価できるか</li>
+          <li>剰余項の中の $c$ の存在範囲（$0$ と $x$ の間）だけを使って不等式を完成させる論法を理解しているか</li>
+          <li>既知のマクローリン展開に変数を代入して，新しい関数の展開を作れるか（$\log(1+u)\to\log(1+x^2)$ など）</li>
+          <li>代入前の変数の収束範囲を，代入後の変数の範囲に正しく変換できるか</li>
+          <li>Taylor展開を使って $0/0$ 型の高次の極限を，ロピタルの定理より速く計算できるか</li>
+          <li>1次近似の誤差評価（レポート課題）が2次近似（本回・問3）にどう拡張されるかを説明できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

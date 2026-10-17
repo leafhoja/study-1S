@@ -1,0 +1,303 @@
+<!DOCTYPE html><!-- 「09 データモデル | 神シケプリ | 情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>09 データモデル | 神シケプリ | 情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kami-09">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">神シケプリ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>神シケプリ 09 — データモデル</h1>
+  <p class="subtitle">ネットワークモデル・階層モデル（木構造）とファイルパス</p>
+  <p class="meta">教科書対応箇所 pp.165-166　pp.169-171</p>
+</div>
+
+<div class="container">
+
+  <div class="def">
+    <span class="box-label">定義 — ネットワークモデル</span>
+    <p>
+      複数の地点・オブジェクトのつながりを、対象を表す<strong>ノード（点）</strong>とつながりを表す
+      <strong>エッジ（線）</strong>で表現するデータモデルを<strong>ネットワークモデル</strong>という。
+      ノードをエッジで結んでできるデータ全体を<strong>グラフ</strong>という。電車の路線図（駅＝ノード、
+      路線＝エッジ）や、WEBサイト間のリンク関係（サイト＝ノード、リンク＝エッジ。リンクは一方向にしか
+      たどれないので有向エッジとみなせる）などが例として挙げられる。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — 階層モデル</span>
+    <p>
+      根から枝分かれしていく構造（<strong>木構造</strong>）でデータの分類を表現するデータモデルを
+      <strong>階層モデル</strong>という。生物の分類（界→門→綱→…）や住所（都道府県→市区町村→…）、
+      URLのドメイン名（.jp や .ac のような、右から左へ辿ると階層が細かくなっていく構造）などが例である。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — ファイルパス</span>
+    <p>
+      フォルダ（ディレクトリ）の中にフォルダが入れ子になっている構造も、階層モデルの一種として表せる。
+      あるフォルダの位置を指定する方法（<strong>パス</strong>）には2種類ある。最上位のディレクトリ
+      （<strong>rootディレクトリ</strong>、記号は <code>/</code>）から順にたどって指定する
+      <strong>絶対パス</strong>と、現在のディレクトリ（作業中の位置）を起点にして指定する
+      <strong>相対パス</strong>である。相対パスでは、1つ上位のフォルダを表す記号として <code>..</code>
+      （ピリオド2つ）を用いる。
+    </p>
+  </div>
+
+  <div class="note">
+    <span class="box-label">出題対策のポイント</span>
+    <p>
+      ターミナルのコマンド操作（<code>pwd</code>, <code>ls</code>, <code>cd</code>, <code>mv</code>）を
+      1行ずつ追い、その時点でのフォルダ階層を頭の中（または紙の上）で組み立てながら解くタイプの問題。
+      焦らず1コマンドずつ状態を更新していくのがコツで、特に <code>mv</code> でフォルダそのものが
+      別の場所に移動した後は、それ以前の階層図をそのまま使い回さず必ず書き直すこと。
+    </p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">第1問（2016年度共通問題2）</a>
+  </div>
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">第1問</div><h2>2016年度共通問題2 — ターミナル操作と階層モデル</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          以下は，フォルダ（ディレクトリ）関連のコマンドの実行結果を示したものである（左上から右下へと
+          続けて実行している）．<code>$</code> はコマンドプロンプト，<code>↵</code> はリターンキーの
+          入力を意味している．ここで使用されているコマンドは，次の表のとおりである．なお，「<code>..</code>」
+          （ピリオド2つ）は，階層構造で1つ上位のフォルダを示す記号である．
+        </p>
+
+        <div style="overflow-x:auto;">
+        <table class="q-table">
+          <tr><th>コマンド</th><th>意味</th></tr>
+          <tr><td><code>pwd↵</code></td><td>現在のフォルダの位置を表示する</td></tr>
+          <tr><td><code>ls↵</code></td><td>現在のフォルダ内の一覧を表示する</td></tr>
+          <tr><td><code>ls x↵</code></td><td>フォルダxの内の一覧を表示する</td></tr>
+          <tr><td><code>cd x↵</code></td><td>現在のフォルダをフォルダxに変更する</td></tr>
+          <tr><td><code>mv x y↵</code></td><td>フォルダxをフォルダyの内に移動する</td></tr>
+        </table>
+        </div>
+
+        <p style="font-size:.85rem;color:var(--muted);margin-top:.6rem;">【左のボックス】</p>
+<pre style="background:#f7f7f5;border:1px solid #ccc;border-radius:6px;padding:.8rem 1rem;font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.82rem;line-height:1.65;overflow-x:auto;margin:.3rem 0 1.1rem;">$ pwd↵
+/home/A
+$ ls↵
+B   C          …⓪
+$ cd B↵
+$ pwd↵
+/home/A/B
+$ ls↵
+D   E
+$ cd D↵
+$ pwd↵
+<span class="blank">1</span>
+$ ls↵
+$ cd ..↵
+$ pwd↵
+/home/A/B
+$ ls E↵
+$ cd ../C↵         右上に続く</pre>
+
+        <p style="font-size:.85rem;color:var(--muted);">【中央のボックス（左のボックスの続き）】</p>
+<pre style="background:#f7f7f5;border:1px solid #ccc;border-radius:6px;padding:.8rem 1rem;font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.82rem;line-height:1.65;overflow-x:auto;margin:.3rem 0 1.1rem;">$ pwd↵
+<span class="blank">2</span>
+$ ls↵
+F   G
+$ ls F↵
+H   I
+$ ls F/H↵
+$ ls F/I↵
+$ ls G↵
+J
+$ ls G/J↵          …①
+$ mv F ..↵
+$ cd ..↵
+$ ls↵
+B   C   F          …②
+$ ls F↵
+H   I
+$ mv B C/G/J↵      右上に続く</pre>
+
+        <p style="font-size:.85rem;color:var(--muted);">【右のボックス（中央のボックスの続き）】</p>
+<pre style="background:#f7f7f5;border:1px solid #ccc;border-radius:6px;padding:.8rem 1rem;font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.82rem;line-height:1.65;overflow-x:auto;margin:.3rem 0 1.1rem;">$ ls↵
+<span class="blank">3</span>          …③
+$ cd C↵
+$ ls↵
+<span class="blank">4</span>
+$ cd <span class="blank">4</span>↵
+$ pwd↵
+<span class="blank">5</span>
+$ ls↵
+J
+$ cd J↵
+$ ls↵
+<span class="blank">6</span>
+$ cd <span class="blank">6</span>↵
+$ ls↵
+<span class="blank">7</span>
+$ pwd↵
+<span class="blank">8</span></pre>
+
+        <img src="img/datamodel-tree.png" alt="⓪の時点で判明しているフォルダの階層構造の例（/→home→A→B,C）" style="max-width:280px;display:block;margin:.8rem auto;">
+        <p style="text-align:center;font-size:.82rem;color:var(--muted);margin-top:-.4rem;">⓪のコマンドを実行した時点で判明しているフォルダの階層構造の例</p>
+
+        <p>
+          (1) ⓪のコマンドを実行した時点で判明しているフォルダの階層構造は，上図のように描くことができる．
+          ①，②，③のコマンドを実行した時点で判明しているフォルダの階層構造全体を上図にならって示せ．
+        </p>
+        <p>(2) 空欄　1　〜　8　を埋めよ．</p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            まず全体の流れを1コマンドずつ追う。出発点は <code>/home/A</code> で、直下に <code>B</code>,
+            <code>C</code> がある（⓪の図）。
+          </p>
+          <p>
+            <strong>①まで（左ボックス〜中央ボックス前半）：</strong>
+            <code>cd B</code> で <code>/home/A/B</code> に移動すると <code>D</code>, <code>E</code> がある。
+            <code>cd D</code> すると <code>pwd</code> は <code>/home/A/B/D</code>（空欄1）となり、
+            <code>ls</code> は何も表示しない（D は空）。<code>cd ..</code> で <code>/home/A/B</code> に
+            戻り、<code>ls E</code> も何も表示しない（E も空）。続けて <code>cd ../C</code> は、
+            <code>/home/A/B</code> から見て「1つ上（<code>/home/A</code>）の中の <code>C</code>」を意味するので
+            <code>/home/A/C</code> に移動する。中央ボックス冒頭の <code>pwd</code> はこの
+            <code>/home/A/C</code>（空欄2）を表示する。<code>ls</code> で <code>F</code>, <code>G</code>
+            を確認し、<code>ls F</code> で <code>H</code>, <code>I</code>（両方とも <code>ls F/H</code>・
+            <code>ls F/I</code> で空と判明）、<code>ls G</code> で <code>J</code>、<code>ls G/J</code>
+            で空（J はまだ空）と分かった時点が①である。①までに判明している構造は、⓪の
+            <code>B</code>（<code>D</code>, <code>E</code> を含む）に加えて、<code>C</code> の下に
+            <code>F</code>（<code>H</code>, <code>I</code>）と <code>G</code>（<code>J</code>）がぶら下がる形。
+          </p>
+          <pre style="background:#fbfcfc;border:1px solid var(--border);border-radius:6px;padding:.8rem 1rem;font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.8rem;line-height:1.5;overflow-x:auto;margin:.6rem 0 1rem;">①時点
+/
+└── home
+    └── A
+        ├── B
+        │   ├── D
+        │   └── E
+        └── C
+            ├── F
+            │   ├── H
+            │   └── I
+            └── G
+                └── J</pre>
+          <p>
+            <strong>②まで（中央ボックス後半）：</strong> <code>mv F ..</code> は、現在のディレクトリ
+            <code>/home/A/C</code> から見て「1つ上（<code>/home/A</code>）」に <code>F</code> を移動する
+            という意味なので、<code>F</code> は <code>C</code> の下から出て <code>A</code> の直下に
+            移動する（中身の <code>H</code>, <code>I</code> はそのままついていく）。続く <code>cd ..</code>
+            で現在のディレクトリは <code>/home/A/C</code> から <code>/home/A</code> に変わり、<code>ls</code>
+            で <code>B</code>, <code>C</code>, <code>F</code>（空欄②の答え）が表示される。<code>ls F</code>
+            で <code>F</code> の中身が依然 <code>H</code>, <code>I</code> のままであることも確認できる。
+            この時点で <code>C</code> の中には <code>G</code>（とその下の <code>J</code>）だけが残っている
+            （<code>F</code> は既に出ていったため）。
+          </p>
+          <pre style="background:#fbfcfc;border:1px solid var(--border);border-radius:6px;padding:.8rem 1rem;font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.8rem;line-height:1.5;overflow-x:auto;margin:.6rem 0 1rem;">②時点
+/
+└── home
+    └── A
+        ├── B
+        │   ├── D
+        │   └── E
+        ├── C
+        │   └── G
+        │       └── J
+        └── F
+            ├── H
+            └── I</pre>
+          <p>
+            <strong>③まで（右ボックス前半）：</strong> <code>mv B C/G/J</code> は、現在のディレクトリ
+            <code>/home/A</code> から見て「<code>C</code> の中の <code>G</code> の中の <code>J</code>」
+            という多階層の相対パスを第2引数に指定しており、<code>B</code>（中身の <code>D</code>, <code>E</code>
+            ごと）を一気に <code>/home/A/C/G/J</code> の中へ移動する。この結果、<code>/home/A</code> の
+            直下からは <code>B</code> がいなくなり、右ボックス冒頭の <code>ls</code> は残った
+            <code>C</code>, <code>F</code>（空欄3）だけを表示する。これが③の状態である。
+          </p>
+          <pre style="background:#fbfcfc;border:1px solid var(--border);border-radius:6px;padding:.8rem 1rem;font-family:'SFMono-Regular',Consolas,Menlo,monospace;font-size:.8rem;line-height:1.5;overflow-x:auto;margin:.6rem 0 1rem;">③時点
+/
+└── home
+    └── A
+        ├── C
+        │   └── G
+        │       └── J
+        │           └── B
+        │               ├── D
+        │               └── E
+        └── F
+            ├── H
+            └── I</pre>
+          <p>
+            <strong>空欄4〜8（右ボックス後半）：</strong> <code>cd C</code> で <code>/home/A/C</code> に
+            移動すると、<code>C</code> の中身はもう <code>G</code> だけ（<code>F</code> は②で既に出て
+            いった）なので <code>ls</code> の答えは <code>G</code>（空欄4）。<code>cd G</code> で移動した
+            後の <code>pwd</code> は <code>/home/A/C/G</code>（空欄5）。<code>ls</code> で <code>J</code>
+            が確認でき、<code>cd J</code> すると、③で <code>B</code> が移動してきているので <code>ls</code>
+            の答えは <code>B</code>（空欄6）。<code>cd B</code> すると、<code>B</code> 自身の中身は
+            一度も変更されていないので <code>ls</code> の答えは元のまま <code>D</code>, <code>E</code>
+            （空欄7）。最後の <code>pwd</code> は、これまでの移動をすべて辿った絶対パス
+            <code>/home/A/C/G/J/B</code>（空欄8）となる。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>1=/home/A/B/D　2=/home/A/C　3=C, F　4=G　5=/home/A/C/G　6=B　7=D, E　8=/home/A/C/G/J/B（木構造は上の解説参照）</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — mvの第2引数はネスト先まで一気に指定できる</span>
+        <p>
+          <code>mv B C/G/J</code> のように、<code>mv</code> の第2引数には「兄弟フォルダ」だけでなく
+          <code>C/G/J</code> のような複数階層にわたる相対パスを直接指定できる点は地味に見落としやすい。
+          これに気づかないと、③の状態で <code>B</code> が <code>C</code> の直下に来たと誤解してしまう
+          （正しくは <code>C</code> の中の <code>G</code> の中の <code>J</code> の中）。フォルダの移動は
+          コマンドが実行された順序どおりに、その時点の階層構造を1つずつ正確に書き換えていく以外に
+          追う方法がない。過去の状態の図をコピーして使い回さず、<code>mv</code> が出てくるたびに図全体を
+          描き直す（または少なくとも動いたノードだけを慎重に付け替える）のが確実である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="08-論理関数.html">← 08 論理関数</a>
+    <a href="10-ユーザインターフェース.html">10 ユーザインターフェースへ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

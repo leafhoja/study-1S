@@ -1,0 +1,865 @@
+<!DOCTYPE html><!-- 「第2章 熱力学第一法則 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>第2章 熱力学第一法則 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="td.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$','$']], displayMath: [['$$','$$']], tags: 'ams',
+    macros: { pd: ['\\left(\\frac{\\partial #1}{\\partial #2}\\right)_{#3}', 3] }
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body data-nav-page="ch2">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">熱力学ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">ホーム</a>
+      <a href="ch0.html" data-page="ch0">第0章</a>
+      <a href="ch1.html" data-page="ch1">第1章</a>
+      <a href="ch2.html" data-page="ch2" class="active">第2章</a>
+      <a href="ch3.html" data-page="ch3">第3章</a>
+      <a href="ch4.html" data-page="ch4">第4章</a>
+      <a href="ch5.html" data-page="ch5">第5章</a>
+      <a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a>
+      <a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2014.html" data-page="kakomon_2014">2014</a>
+      <a href="kakomon_2012.html" data-page="kakomon_2012">2012</a>
+      <a href="kakomon_2011.html" data-page="kakomon_2011">2011</a>
+      <a href="kakomon_2010.html" data-page="kakomon_2010">2010</a>
+      <a href="kakomon_2009.html" data-page="kakomon_2009">2009</a>
+      <a href="kakomon_2008.html" data-page="kakomon_2008">2008</a>
+      <a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+    </div>
+  </div>
+</nav>
+
+<div class="chapter-layout">
+<!-- 本文の各節へ移動できる目次を、横の領域にまとめる。 --><aside class="sidebar">
+  <div class="sidebar-title">第2章 目次</div>
+  <ul class="sidebar-nav">
+    <li><a href="#s2-1">2.1 状態変化と過程</a></li>
+    <li class="sub-item"><a href="#s2-1-op">操作の種類</a></li>
+    <li class="sub-item"><a href="#s2-1-proc">過程の種類</a></li>
+    <li><a href="#s2-2">2.2 熱力学第一法則</a></li>
+    <li class="sub-item"><a href="#s2-2-mech">力学的エネルギー保存との類比</a></li>
+    <li class="sub-item"><a href="#s2-2-int">内部エネルギー</a></li>
+    <li class="sub-item"><a href="#s2-2-first">第一法則の定式化</a></li>
+    <li><a href="#s2-3">2.3 準静的過程</a></li>
+    <li class="sub-item"><a href="#s2-3-work">準静的仕事 $\delta W=-PdV$</a></li>
+    <li class="sub-item"><a href="#s2-3-cycle">サイクル過程</a></li>
+    <li><a href="#s2-4">2.4 熱容量</a></li>
+    <li class="sub-item"><a href="#s2-4-cv">定積熱容量 $C_V$</a></li>
+    <li class="sub-item"><a href="#s2-4-cp">定圧熱容量 $C_P$</a></li>
+    <li class="sub-item"><a href="#s2-4-cp-cv">$C_P - C_V$ の一般式</a></li>
+    <li class="sub-item"><a href="#s2-4-adiab">断熱関係式</a></li>
+    <li class="sub-item"><a href="#s2-4-enthalpy">定圧加熱とエンタルピー</a></li>
+    <li><a href="#s2-5">2.5 理想気体の例</a></li>
+    <li class="sub-item"><a href="#s2-5-def">理想気体の定義</a></li>
+    <li class="sub-item"><a href="#s2-5-mayer">Mayerの関係式</a></li>
+    <li class="sub-item"><a href="#s2-5-adi">断熱曲線</a></li>
+    <li class="sub-item"><a href="#s2-5-gen">断熱曲線の一般的性質</a></li>
+    <li class="sub-item"><a href="#s2-5-poly">ポリトロープ過程</a></li>
+  </ul>
+</aside>
+
+<main class="main-content">
+  <div class="chapter-header">
+    <div class="chapter-badge">第 2 章</div>
+    <h1>熱力学第一法則</h1>
+    <p class="abstract">
+      内部エネルギーという状態量を導入し、仕事と熱を合わせたエネルギー保存則（第一法則）を定式化する。
+      準静的過程に限定することで $\delta W = -PdV$ という仕事の表現が得られ、
+      定積・定圧熱容量や断熱曲線の理論が展開される。
+    </p>
+  </div>
+
+  <!-- ═══ 2.1 ═══ -->
+  <h2 id="s2-1">2.1 状態変化と過程</h2>
+
+  <h3 id="s2-1-op">操作の種類</h3>
+  <p>平衡状態 A から B へ変化させる操作は3種類に分類される：</p>
+
+  <table class="td-table">
+    <thead><tr><th>操作</th><th>内容</th><th>例</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>力学操作</strong></td>
+        <td>すべて仕事で定量的に表現できる</td>
+        <td>体積変化（ピストン）、Jouleの羽根車（摩擦熱）、電気ヒーター（Joule熱）</td>
+      </tr>
+      <tr>
+        <td><strong>熱的操作</strong></td>
+        <td>系と熱源を接触させる<br>何 J 与えたかは直接測れない</td>
+        <td>熱源との接触、炎を当てる</td>
+      </tr>
+      <tr>
+        <td><strong>質的操作</strong></td>
+        <td>粒子数を変える</td>
+        <td>成分の追加・除去（この講義では主に扱わない）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 id="s2-1-proc">過程の種類</h3>
+
+  <table class="td-table">
+    <thead><tr><th>過程</th><th>操作</th><th>例</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>等温過程</strong></td>
+        <td>力学操作＋熱的操作</td>
+        <td>熱源につないだままピストンを引く $A(T,V)\to B(T,V')$。<br>熱源の熱容量が非常に大きい（$\to\infty$）ので温度は一定。</td>
+      </tr>
+      <tr>
+        <td><strong>断熱過程</strong></td>
+        <td>力学操作のみ</td>
+        <td>断熱材で囲んでピストンを引く $A(T,V)\to B(T',V')$。<br>温度も変化する。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ═══ 2.2 ═══ -->
+  <h2 id="s2-2">2.2 熱力学第一法則</h2>
+
+  <h3 id="s2-2-mech">力学的エネルギー保存則との類比</h3>
+  <p>
+    保存力のもとでは、外力に打ち勝って外部の作業者がする仕事は、
+    始状態と終状態のみに依存し、途中の経路には依存しない。これにより位置エネルギーが定義できた：
+  </p>
+  $$W_{A\to B} = U_B - U_A$$
+  <p><small>（外部の作業者がする仕事 = 位置エネルギーの変化）</small></p>
+  <p>
+    例えば重力に逆らって物体をゆっくり持ち上げるとき、外部の作業者がする仕事は経路によらず
+    $\Delta U_\text{位置}$ に等しい（重力そのものがする仕事はその符号反転 $-\Delta U_\text{位置}$ である）。
+  </p>
+  <p>
+    熱力学における第一法則の出発点はこれと類比的だが、同一ではない。
+    <strong>断熱過程のみに限定</strong>すれば、状態 A から B へ変化させる際に
+    外からする仕事は経路によらない。ただしこれは力学のように保存力の性質から論理的に導かれるものではなく、
+    Joule の一連の実験（本節末尾「歴史」参照）によって確立された<strong>経験事実</strong>である。
+  </p>
+
+  <h3 id="s2-2-int">内部エネルギー</h3>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>内部エネルギー $U$</div>
+    <div class="box-body">
+      <p>基準状態 O から可逆（準静的）断熱過程で状態 X に変化させるとき、外からされる仕事を<strong>内部エネルギー</strong>という：</p>
+      $$U_X := W_{O\to X}^{\text{断熱}}$$
+      <p>
+        <small>
+          ここで「可逆」を課すのは、O から X へ実際に到達できる断熱過程の存在を保証するためである。
+          一般の断熱過程は一方向にしか起こらないことがある（例：気体の自由膨張は起きても自然には逆再生しない）が、
+          準静的な断熱過程なら経路をそのまま逆にたどれるので、O→X・X→O のどちら向きが必要でも矛盾なく定義できる。
+        </small>
+      </p>
+      <p>
+        系の全エネルギー $U_\text{全} = U_\text{運動} + U_\text{位置} + U_\text{回転} + \cdots + U$
+        において、巨視的な運動で説明できない残余のエネルギーが $U$（内部エネルギー）である。
+        ミクロには分子の熱運動エネルギーや分子間ポテンシャルエネルギーなどに対応する。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s2-2-first">第一法則の定式化</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">第一法則</span>断熱過程の場合</div>
+    <div class="box-body">
+      断熱過程で状態 A から B へ変化するとき、外からする仕事は途中の経路によらない。
+      実際、基準状態 O を経由する断熱経路 A→O→B をとれば
+      $W_{A\to B}^{\text{断熱}} = W_{A\to O}^{\text{断熱}} + W_{O\to B}^{\text{断熱}}
+      = -W_{O\to A}^{\text{断熱}} + W_{O\to B}^{\text{断熱}} = -U_A + U_B$
+      となり、定義よりこれは経路によらない：
+      $$W_{A\to B}^{\text{断熱}} = U_B - U_A$$
+    </div>
+  </div>
+
+  <p>
+    熱的操作も含む一般の場合を考える。今度は断熱過程に限らず、A から B へ移る際に系にされる仕事を
+    $\widetilde{W}_{A\to B}$、系が受け取る熱を $\widetilde{Q}_{A\to B}$ と書く
+    （チルダは、断熱仕事 $W^{\text{断熱}}$ とは異なり<em>経路に依存しうる量</em>であることを表す記号）。
+    このとき：
+  </p>
+  $$\widetilde{Q}_{A\to B} = (U_B - U_A) - \widetilde{W}_{A\to B}$$
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">第一法則</span>一般の場合（積分形）</div>
+    <div class="box-body">
+      $$U_B - U_A = \widetilde{Q}_{A\to B} + \widetilde{W}_{A\to B}$$
+      <p>
+        左辺は状態量の差（経路によらない）。
+        右辺の $\widetilde{Q}, \widetilde{W}$ はそれぞれ経路に依存する<em>過程量</em>であり、
+        和としての $\widetilde{Q} + \widetilde{W}$ だけが経路によらない値（= $\Delta U$）を与える。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">第一法則</span>微小変化の形</div>
+    <div class="box-body">
+      A と B が無限小だけ離れているとき：
+      $$dU = \delta Q + \delta W$$
+      <p>
+        $\delta Q$：系が受け取った熱（不完全微分；経路に依存）<br>
+        $\delta W$：外から系にされた仕事（不完全微分；経路に依存）<br>
+        $dU$：内部エネルギーの変化（完全微分；経路によらない）
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">符号の約束</span>熱力学でよく使う符号規約</div>
+    <div class="box-body">
+      <ul>
+        <li>$\delta Q > 0$：系に熱が入る</li>
+        <li>$\delta W > 0$：外から系に仕事がされる（ピストンが押し込まれる ≒ 体積減少）</li>
+        <li>よって：$\delta W = -P\,dV$（体積増大 $dV>0$ → 系が外に仕事 → $\delta W < 0$）
+          ※これは<strong>準静的過程</strong>での式。厳密な導出は次節2.3を参照。</li>
+      </ul>
+      <p>
+        <small>
+          教科書によっては「系が外にする仕事」を $W$ と定義し $dU = \delta Q - \delta W$ とするものもある。
+          符号規約が違うだけで物理内容は同じ。注意して使い分けること。
+        </small>
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">歴史</span>エネルギー保存則の発見</div>
+    <div class="box-body">
+      <p>
+        R. Mayer（1814–1878）は 1842 年、「仕事と熱は相互変換可能なエネルギーの2形態だ」と
+        初めて提唱した（しかし数学的なフォローが不十分だとして最初は無視された）。
+        J. Joule（1818–1889）は 1843〜50 年代、精巧な羽根車実験で
+        <strong>熱の仕事当量</strong>（$1\,\mathrm{cal} \approx 4.186\,\mathrm{J}$）を精密測定し確立した。
+        Helmholtz（1821–1894）が 1847 年に数学的に一般化して第一法則を確立した。
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ 2.3 ═══ -->
+  <h2 id="s2-3">2.3 準静的過程</h2>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>準静的過程（quasi-static process）</div>
+    <div class="box-body">
+      系の状態が常に平衡状態を保ちながらゆっくり変化する理想的な過程。
+      <ul>
+        <li>逆過程が存在する（可逆過程）</li>
+        <li>ゆっくりピストンを引く・押す</li>
+        <li>$T_A$ から $T_B$ に温めるとき、$T_A + n\varepsilon$ の熱源を順次くっつけながら温める</li>
+      </ul>
+      現実には「無限にゆっくり」は不可能だが、理論上の重要な概念。
+    </div>
+  </div>
+
+  <h3 id="s2-3-work">準静的過程での仕事</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">公式</span>準静的過程の仕事（気体）</div>
+    <div class="box-body">
+      $$\delta W = -P\,dV$$
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">導出</span>$\delta W = -PdV$ の導出</div>
+    <div class="box-body">
+      <p>
+        断面積 $S$ のピストンを考える。外から圧力 $P_\text{ex}$ がかかっているとき、
+        外から系にかかる力は $F_\text{ex} = P_\text{ex}\cdot S$ で、向きは常に気体を押し込む向き（内向き）である。
+        ピストンが微小距離 $dl$（外向きを正）だけ動くと、外力の向き（内向き）に対する変位成分は $-dl$ となるので、
+        外からの仕事は：
+      </p>
+      $$\begin{aligned}
+        \delta W &= F_\text{ex}\cdot(-dl) \\
+        &= -P_\text{ex}\cdot S\cdot dl \\
+        &= -P_\text{ex}\,dV
+      \end{aligned}$$
+      <p>
+        ここで $dV = S\,dl > 0$（体積が増える）。
+        <strong>準静的過程では</strong>、常に系の圧力と外部の圧力が釣り合っているので $P_\text{ex} = P$。
+        よって：
+      </p>
+      $$\delta W = -P\,dV$$
+      <p>
+        （非準静的な「急激な膨張」では $P_\text{ex} \ne P$ となり、$\delta W \ne -P\,dV$。）
+      </p>
+    </div>
+  </div>
+
+  <p>より一般には（気体以外の系）：</p>
+  <ul>
+    <li>ゴム・針金：$\delta W = X\,dl$（$X$：張力，$l$：伸び）</li>
+    <li>磁性体：$\delta W = \mu_0 H\,dM$（$H$：磁場，$M$：磁化）</li>
+    <li>表面張力：$\delta W = \sigma\,dA$（$\sigma$：表面張力係数，$A$：表面積）</li>
+  </ul>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">計算</span>等温仕事（理想気体）</div>
+    <div class="box-body">
+      <p>温度 $T$ 一定、体積 $V_A \to V_B$ の準静的等温過程：</p>
+      $$\begin{aligned}
+        W_{A\to B}^{\text{等温}} &= -\int_{V_A}^{V_B} P\,dV \\
+        &\underset{PV=nRT}{=} -\int_{V_A}^{V_B}\frac{nRT}{V}dV \\
+        &= -nRT\left[\ln V\right]_{V_A}^{V_B} \\
+        &= -nRT\ln\frac{V_B}{V_A} = nRT\ln\frac{V_A}{V_B}
+      \end{aligned}$$
+      <p>$V_B > V_A$（膨張）なら $W < 0$（系が外に仕事をする）。</p>
+    </div>
+  </div>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">計算</span>等圧仕事</div>
+    <div class="box-body">
+      <p>
+        圧力 $P_A$ 一定のまま，準静的に $V_A \to V_B$ と変化する等圧過程
+        （$A \to C \to B$ の経路のうち等圧の部分 $A\to C$ に相当）：
+      </p>
+      $$\begin{aligned}
+        W_{A\to C} &= \int_{V_A}^{V_B}(-P_A)\,dV \\
+        &= -P_A(V_B - V_A)
+      \end{aligned}$$
+      <p>
+        $P$ が定数なので積分の外に出せるだけで，等温の場合のような対数は現れない。
+        $V_B > V_A$（膨張）なら $W_{A\to C} < 0$（系が外に仕事をする）。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s2-3-cycle">サイクル過程と第一種永久機関の不在</h3>
+
+  <p>
+    A → B → ··· → A と元の状態に戻る過程（サイクル）では $\Delta U = 0$ より：
+  </p>
+  $$\begin{aligned}
+    Q_\text{サイクル} + W_\text{サイクル} &= 0 \\
+    \implies -W_\text{サイクル} &= Q_\text{サイクル}
+  \end{aligned}$$
+  <p>
+    「熱も仕事も与えずに永続的に仕事を取り出す機関（第一種永久機関）は存在しない」
+    ことを意味する。エネルギー保存則の熱力学的表現である。
+  </p>
+
+  <!-- ═══ 2.4 ═══ -->
+  <h2 id="s2-4">2.4 熱容量</h2>
+
+  <p>内部エネルギー $U(T,V)$ の全微分と第一法則 $dU = \delta Q - P\,dV$ から、
+  準静的過程での熱は：</p>
+  $$\begin{aligned}
+    \delta Q &= dU + P\,dV \\
+    &= \left(\frac{\partial U}{\partial T}\right)_V dT + \left(\frac{\partial U}{\partial V}\right)_T dV + P\,dV \\
+    &= \left(\frac{\partial U}{\partial T}\right)_V dT
+      + \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right]dV
+    \quad (\bigstar)
+  \end{aligned}$$
+
+  <h3 id="s2-4-cv">① 定積熱容量 $C_V$</h3>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義・公式</span>定積熱容量</div>
+    <div class="box-body">
+      $(\bigstar)$ で $dV = 0$（体積一定）を代入：
+      $$C_V = \left(\frac{\delta Q}{dT}\right)_V = \left(\frac{\partial U}{\partial T}\right)_V$$
+      <p>
+        物理的意味：体積一定のまま温度を 1 K 上げるのに必要な熱量。
+        体積変化がないので仕事はゼロ、すべての熱が内部エネルギーの増加に使われる。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s2-4-cp">② 定圧熱容量 $C_P$</h3>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義・公式</span>定圧熱容量</div>
+    <div class="box-body">
+      $(\bigstar)$ で $dP = 0$（圧力一定）を適用。
+      状態方程式から $dV = (\partial V/\partial T)_P\,dT$（定圧での体積変化）を代入：
+      $$\begin{aligned}
+        C_P &= \left(\frac{\delta Q}{dT}\right)_P \\
+        &= \left(\frac{\partial U}{\partial T}\right)_V
+          + \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right]\left(\frac{\partial V}{\partial T}\right)_P
+      \end{aligned}$$
+      <p>第1項は $C_V$ に等しい：</p>
+      $$\boxed{C_P = C_V + \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right]\left(\frac{\partial V}{\partial T}\right)_P}$$
+      <p>
+        物理的意味：圧力一定のまま温度を 1 K 上げるのに必要な熱量。
+        体積変化が伴うため外への仕事 $P\,dV$ が含まれ、$C_P \ge C_V$（一般に成立；第4章で証明）。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s2-4-cp-cv">③ $C_P - C_V$ の一般式</h3>
+
+  <p>
+    $(\bigstar)$ で定圧条件 $dV = (\partial V/\partial T)_P\,dT$ を代入すると，
+    $C_P$ の定義から：
+  </p>
+  $$C_P - C_V = \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right]\left(\frac{\partial V}{\partial T}\right)_P$$
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">公式</span>$C_P - C_V$ の $\beta$ による表現</div>
+    <div class="box-body">
+      <p>
+        ここで<strong>体膨張率</strong>
+        $\beta := \dfrac{1}{V}\left(\dfrac{\partial V}{\partial T}\right)_P$
+        （圧力一定のもとで温度を上げたときの体積の相対的な増加率）を導入すると、
+        $(\partial V/\partial T)_P = V\beta$。これを代入すると：
+      </p>
+      $$C_P - C_V = \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right] V\beta$$
+      <p>
+        特に<strong>理想気体</strong>では $(\partial U/\partial V)_T = 0$ である（2.5節「理想気体の例」で証明する）。
+        また $PV=nRT$ より $(\partial V/\partial T)_P = nR/P = V/T$ なので $\beta = 1/T$。これらを代入すると：
+      </p>
+      $$C_P - C_V = PV\beta = P \cdot V \cdot \frac{1}{T} = \frac{PV}{T} = nR$$
+      <p>
+        これがMayerの関係式（2.5節で改めて導出する）。一般気体では $(\partial U/\partial V)_T \ne 0$ だが，
+        <strong>等温圧縮率</strong>
+        $\kappa := -\dfrac{1}{V}\left(\dfrac{\partial V}{\partial P}\right)_T$
+        （温度一定のもとで圧力を上げたときの体積の相対的な減少率；力学的安定性から常に $\kappa>0$）
+        を使い、第4章のMaxwell関係式と組み合わせると：
+        $$C_P - C_V = \frac{TV\beta^2}{\kappa}$$
+        となる（$\beta$，$\kappa$ は測定量なので実用的）。$T>0$，$\kappa>0$，$\beta^2\ge0$ より
+        常に $C_P - C_V \ge 0$ が成立する。
+      </p>
+      <p>
+        <small>
+          別表記：$(\partial V/\partial T)_P = V\beta$，$(\partial P/\partial T)_V = \beta/\kappa$
+          （1章の $\alpha_P=\beta/\kappa$）を直接代入すると，同じ内容がより簡潔に
+          $C_P - C_V = T\left(\dfrac{\partial P}{\partial T}\right)_V\left(\dfrac{\partial V}{\partial T}\right)_P$
+          とも書ける（第4章でエネルギー方程式から同じ式を再導出する）。
+        </small>
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s2-4-adiab">④ 断熱関係式</h3>
+
+  <p>
+    $(\bigstar)$ の係数 $[(\partial U/\partial V)_T + P]$ を $C_P - C_V$ を使って書き直すと：
+    $$\begin{aligned}
+      \left(\frac{\partial U}{\partial V}\right)_T + P
+        &= \frac{C_P - C_V}{(\partial V/\partial T)_P} \\
+      &= \frac{C_P - C_V}{V\beta}
+    \end{aligned}$$
+    これを $(\bigstar)$ に代入すると：
+  </p>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">公式</span>断熱関係式（準静的過程の一般形）</div>
+    <div class="box-body">
+      $$\delta Q = C_V\,dT + \frac{C_P - C_V}{V\beta}\,dV \quad (\bigstar\bigstar)$$
+      <p>
+        断熱過程 $\delta Q = 0$ に適用すると：
+        $$C_V\,dT + \frac{C_P - C_V}{V\beta}\,dV = 0 \quad \text{（断熱関係式）}$$
+        これは $T$ と $V$ の微分方程式であり，状態方程式と組み合わせて解くと断熱曲線が得られる。
+      </p>
+      <p>
+        <strong>なぜ有用か</strong>：
+        $(\partial U/\partial V)_T$ は直接測りにくいが，$C_P$，$C_V$，$\beta$ は実験で測定可能。
+        $(\bigstar\bigstar)$ はこれらの測定量だけで断熱変化を記述できる形。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s2-4-enthalpy">⑤ 定圧加熱とエンタルピー</h3>
+
+  <p>
+    定積加熱（$dV = 0$）では $\delta Q = dU$，つまり熱がすべて内部エネルギーに変わる。
+    では定圧加熱（$dP = 0$）での熱はどう表されるか？
+  </p>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>エンタルピー $H$</div>
+    <div class="box-body">
+      $$H := U + PV$$
+      <p>準静的過程で：</p>
+      $$\begin{aligned}
+        dH &= dU + P\,dV + V\,dP \\
+           &= (\delta Q - P\,dV) + P\,dV + V\,dP \\
+           &= \delta Q + V\,dP
+      \end{aligned}$$
+      <p>定圧過程（$dP = 0$）では：</p>
+      $$\delta Q\big|_{P=\text{const}} = dH$$
+      <p>
+        定積加熱での熱 = $dU$（内部エネルギーの変化）に対応するように，
+        <strong>定圧加熱での熱 = $dH$（エンタルピーの変化）</strong>。
+        化学反応・相転移（大気圧下）は多くが定圧条件で起きるため，
+        エンタルピーは実用的に重要な量（第4章で詳述）。
+      </p>
+    </div>
+  </div>
+
+  <p>$(\bigstar)$ で $dT = 0$（等温）を代入すると：</p>
+  $$\delta Q = \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right]dV$$
+  <p>
+    → <strong>体積変化は等温でも一般には熱の出入りを伴う</strong>。ただし理想気体では
+    $(\partial U/\partial V)_T = 0$ なので $\delta Q = P\,dV$ となる。
+    このとき等温では $\Delta U=0$ なので $Q=-W$、すなわち出入りする熱はすべて外への仕事の分に等しい
+    （2.3節の等温仕事の例と整合する）。
+  </p>
+
+  <!-- ═══ 2.5 ═══ -->
+  <h2 id="s2-5">2.5 理想気体の例</h2>
+
+  <h3 id="s2-5-def">理想気体の定義と性質</h3>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>理想気体（ideal gas）</div>
+    <div class="box-body">
+      以下の2条件を満たす気体：
+      <ol>
+        <li><strong>状態方程式</strong>：$PV = nRT$（ボイル–シャルルの法則）</li>
+        <li><strong>$C_V$ が温度に依存しない</strong>（定積熱容量が一定）</li>
+      </ol>
+      <p>
+        条件①から次の性質①'が導かれる（証明は下記）：
+        $$\left(\frac{\partial U}{\partial V}\right)_T = 0 \quad \text{（内部エネルギーは体積によらない）}$$
+        ①と①'より $dU = C_V\,dT$ となり，$C_V$ が定数ならば $U = C_VT + \text{const}$。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">補足</span>経路を使って $U(T,V)$ の値そのものを求める</div>
+    <div class="box-body">
+      <p>
+        $(\partial U/\partial V)_T=0$ が分かれば，任意の状態 $(T_i,V_i)$ の内部エネルギーを
+        基準状態 $(T_0, V_i)$ から次の経路で計算できる：体積を $V_i$ に固定したまま
+        （定積過程）温度だけを $T_0 \to T_i$ と変化させる。
+      </p>
+      $$\begin{aligned}
+        U(T_i,V_i) - U(T_0,V_i)
+          &= \int_{T_0}^{T_i} dU
+             \quad(V=V_i\ \text{一定}) \\
+          &= \int_{T_0}^{T_i} C_V\,dT = C_V(T_i - T_0)
+      \end{aligned}$$
+      <p>
+        （$V$ を固定しているので $(\partial U/\partial V)_T\,dV$ の項は現れず，$dU = C_V\,dT$ だけが残る。
+        $(\partial U/\partial V)_T = 0$ より，この結果は経由した体積 $V_i$ の値によらない。）
+        「特定の性質をもつ経路に沿って積分すると状態量の値が求まる」という同じ手法は，
+        第3章でエントロピーを具体的に計算する際にも繰り返し使われる。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">実験根拠</span>Joule膨張（断熱自由膨張）実験で $(\partial U/\partial V)_T = 0$ を確認</div>
+    <div class="box-body">
+      <p>
+        断熱容器を仕切りで2室に分け、片方に希薄気体を入れ他方を真空にする。
+        仕切りを取り去ると気体は真空に膨張するが、<strong>温度が変わらない</strong>ことが観測される。
+      </p>
+      <ul>
+        <li>断熱（$\delta Q = 0$）かつ仕事なし（$\delta W = -P_\text{ex}\,dV = 0$、真空へ膨張するので外圧 $P_\text{ex}=0$。
+          この過程は準静的ではない（系内部の圧力 $P\ne0$ に対し $P_\text{ex}\ne P$）ため $\delta W=-PdV$ は使えないが、
+          一般式 $\delta W=-P_\text{ex}dV$ は常に成り立つ）</li>
+        <li>よって $dU = 0$</li>
+        <li>また $dT = 0$（実験事実）</li>
+        <li>$dU = C_V\,dT + (\partial U/\partial V)_T\,dV = 0 + (\partial U/\partial V)_T\,dV = 0$ かつ $dV \ne 0$</li>
+        <li>ゆえに $(\partial U/\partial V)_T = 0$（$U$ は $V$ に依存しない）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">厳密な証明</span>第二法則から $(\partial U/\partial V)_T = 0$</div>
+    <div class="box-body">
+      <p>
+        第三章（第二法則）で示される一般式：
+        $$\left(\frac{\partial U}{\partial V}\right)_T = T\left(\frac{\partial P}{\partial T}\right)_V - P$$
+        （エネルギー方程式。Maxwell 関係式 $(\partial S/\partial V)_T = (\partial P/\partial T)_V$ から導かれる。）
+      </p>
+      <p>理想気体 $PV = nRT$ では：</p>
+      $$\left(\frac{\partial P}{\partial T}\right)_V = \frac{nR}{V} = \frac{P}{T}$$
+      <p>代入すると：</p>
+      $$\left(\frac{\partial U}{\partial V}\right)_T = T \cdot \frac{P}{T} - P = P - P = 0 \quad \checkmark$$
+      <p>
+        これはJoule膨張実験（実験的確認）よりも厳密な理論的証明である。
+        ここに「第1条件 $PV = nRT$」と「第二法則」だけから①'が導かれ，
+        Joule膨張の実験事実は理論の帰結として理解できる。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s2-5-mayer">Mayerの関係式</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>Mayerの関係式（理想気体）</div>
+    <div class="box-body">
+      $$\boxed{C_P = C_V + nR}$$
+      <p>$nR$ は定数なので $C_P > C_V$（理想気体では常に成立）。</p>
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">導出</span>Mayerの関係式</div>
+    <div class="box-body">
+      <p>$C_P$ の定義式に $(\partial U/\partial V)_T = 0$ を代入：</p>
+      $$C_P = C_V + \left[0 + P\right]\left(\frac{\partial V}{\partial T}\right)_P$$
+      <p>$PV = nRT$ から定圧での体積変化：$V = nRT/P \implies (\partial V/\partial T)_P = nR/P$。代入：</p>
+      $$C_P = C_V + P\cdot\frac{nR}{P} = C_V + nR$$
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">歴史</span>Mayerの関係式と比熱の測定</div>
+    <div class="box-body">
+      <p>
+        R. Mayer（1814–1878）は 1842 年に、気体の等圧比熱と等積比熱の差が
+        気体定数 $R$ に比例することを理論的に導出した（測定値からも確認）。
+        これが熱と仕事の等価性（第一法則）の初期の定量的証拠の一つとなった。
+        Mayer は理論先行型だったのに対し、Joule は実験先行型だった。
+        両者はほぼ同時期に独立に同じ結論に達したが、Joule の実験精度が高く評価された。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s2-5-adi">断熱曲線</h3>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>比熱比 $\gamma$</div>
+    <div class="box-body">
+      $$\gamma = \frac{C_P}{C_V} = 1 + \frac{nR}{C_V} > 1$$
+      <ul>
+        <li>単原子理想気体（He, Ar など）：$C_V = \frac{3}{2}nR \implies \gamma = \frac{5}{3} \approx 1.67$</li>
+        <li>二原子理想気体（$\mathrm{N_2}$, $\mathrm{O_2}$ など）：$C_V = \frac{5}{2}nR \implies \gamma = \frac{7}{5} = 1.4$</li>
+        <li>空気（近似）：$\gamma \approx 1.4$</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>理想気体の断熱曲線</div>
+    <div class="box-body">
+      準静的断熱過程（$\delta Q = 0$）では：
+      $$TV^{\gamma-1} = \text{const}, \qquad PV^\gamma = \text{const}$$
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">導出</span>断熱曲線 $PV^\gamma = \text{const}$ の導出</div>
+    <div class="box-body">
+      <p>
+        断熱関係式 $(\bigstar\bigstar)$ を理想気体に適用する。
+        理想気体では $\beta = 1/T$（前節で示した）なので $C_P - C_V = PV\beta = PV/T = nR$。
+        よって $(\bigstar\bigstar)$ の係数は $\dfrac{C_P-C_V}{V\beta} = \dfrac{nR}{V\cdot(1/T)} = \dfrac{nRT}{V}$ となり：
+        $$0 = C_V\,dT + \frac{nRT}{V}\,dV$$
+      </p>
+      <p>また直接でも：$\delta Q = 0$ に $(\partial U/\partial V)_T = 0$，$P = nRT/V$ を使うと同じ式。
+         変数分離して積分する：</p>
+      $$C_V\,\frac{dT}{T} = -nR\,\frac{dV}{V}$$
+      $$C_V\ln T = -nR\ln V + \text{const} \implies T^{C_V} V^{nR} = \text{const}$$
+      <p>$nR = C_P - C_V$ を代入し $1/C_V$ 乗：</p>
+      $$T\cdot V^{(C_P - C_V)/C_V} = T\cdot V^{\gamma - 1} = \text{const}$$
+      <p>$T = PV/(nR)$ を代入して整理：</p>
+      $$PV^\gamma = \text{const}$$
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">比較</span>断熱曲線と等温曲線のどちらが急か</div>
+    <div class="box-body">
+      <ul>
+        <li>等温曲線：$P = nRT/V \implies P \propto 1/V$（傾きの絶対値 $|dP/dV|_T = nRT/V^2 = P/V$）</li>
+        <li>断熱曲線：$P = \text{const}/V^\gamma \implies |dP/dV|_{ad} = \gamma P/V$</li>
+        <li>$\gamma > 1$ なので<strong>断熱曲線の方が急</strong>（同じ点から出発した場合）。</li>
+      </ul>
+      <p>
+        直観的理由：断熱膨張では外への仕事で温度も下がるため、等温膨張より圧力が早く落ちる。
+        グラフでは同じ点を通る断熱曲線が等温曲線の上・左から急激に落ちる形になる。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">計算</span>断熱仕事（理想気体）</div>
+    <div class="box-body">
+      <p>$PV^\gamma = P_A V_A^\gamma = \text{const}$ を使い $V_A \to V_B$ の断熱仕事を計算：</p>
+      $$\begin{aligned}
+        W_{A\to B}^{\text{断熱}} &= -\int_{V_A}^{V_B}P\,dV \\
+        &= -\int_{V_A}^{V_B}\frac{P_A V_A^\gamma}{V^\gamma}dV \\
+        &= -P_A V_A^\gamma\cdot\frac{V^{-\gamma+1}}{-\gamma+1}\Bigg|_{V_A}^{V_B}
+      \end{aligned}$$
+      $$\begin{aligned}
+        &= \frac{P_A V_A^\gamma}{{\gamma-1}}\left(V_B^{1-\gamma} - V_A^{1-\gamma}\right) \\
+        &= \frac{P_B V_B - P_A V_A}{\gamma - 1} \\
+        &= \frac{nR(T_B - T_A)}{\gamma - 1}
+      \end{aligned}$$
+      <p>（$P_A V_A^\gamma V_A^{1-\gamma} = P_A V_A = nRT_A$、$P_A V_A^\gamma V_B^{1-\gamma} = P_B V_B = nRT_B$ を使った。）</p>
+      <p>
+        <small>
+          符号のチェック：膨張（$V_B>V_A$）では断熱冷却により $T_B&lt;T_A$ となるので $W<0$、
+          すなわち系が外に仕事をする。第一法則 $W_{A\to B}^{\text{断熱}}=U_B-U_A=C_V(T_B-T_A)$ とも整合する。
+        </small>
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s2-5-gen">断熱曲線の一般的性質（理想気体に限らない）</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>断熱曲線と等温曲線の比の一般式</div>
+    <div class="box-body">
+      <p>準静的過程のみを仮定（理想気体に限らない）：</p>
+      $$\frac{C_P}{C_V} = \frac{\left(\frac{\partial P}{\partial V}\right)_{ad}}{\left(\frac{\partial P}{\partial V}\right)_T}$$
+      <p>ここで $ad$ は断熱（adiabatic）を意味する。</p>
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">導出</span>一般の断熱曲線の傾き</div>
+    <div class="box-body">
+      <p>$(\bigstar)$ で $\delta Q = 0$ と置き、$dT$ を消去するため $dT = (\partial T/\partial V)_P\,dV + (\partial T/\partial P)_V\,dP$ を代入：</p>
+      $$0 = C_V\left[\left(\frac{\partial T}{\partial V}\right)_P dV + \left(\frac{\partial T}{\partial P}\right)_V dP\right]
+        + \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right]dV$$
+      <p>$dP/dV$ 比（断熱での圧力変化率）として整理すると：</p>
+      $$C_V\left(\frac{\partial P}{\partial V}\right)_{ad} = -C_V\left(\frac{\partial T}{\partial V}\right)_P
+        \cdot\frac{1}{(\partial T/\partial P)_V} - \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right]\cdot\frac{1}{(\partial T/\partial P)_V}$$
+      <p>
+        まず右辺の分子をまとめる。$C_P - C_V = [(\partial U/\partial V)_T + P](\partial V/\partial T)_P$ の両辺を
+        $(\partial V/\partial T)_P$ で割り、逆数の関係 $(\partial T/\partial V)_P = 1/(\partial V/\partial T)_P$ を使うと
+        $(\partial U/\partial V)_T + P = (C_P-C_V)(\partial T/\partial V)_P$ となる。これを代入すると：
+      </p>
+      $$\begin{aligned}
+        C_V\left(\frac{\partial T}{\partial V}\right)_P + \left[\left(\frac{\partial U}{\partial V}\right)_T + P\right]
+        &= C_V\left(\frac{\partial T}{\partial V}\right)_P + (C_P-C_V)\left(\frac{\partial T}{\partial V}\right)_P \\
+        &= C_P\left(\frac{\partial T}{\partial V}\right)_P
+      \end{aligned}$$
+      <p>よって：</p>
+      $$C_V\left(\frac{\partial P}{\partial V}\right)_{ad} = -C_P\left(\frac{\partial T}{\partial V}\right)_P\cdot\frac{1}{(\partial T/\partial P)_V}$$
+      <p>
+        次に、$T,P,V$ の間に成り立つ<strong>三変数の関係式（循環公式）</strong>
+        $$\left(\frac{\partial T}{\partial V}\right)_P\left(\frac{\partial V}{\partial P}\right)_T\left(\frac{\partial P}{\partial T}\right)_V = -1$$
+        を $(\partial T/\partial V)_P$ について解くと $(\partial T/\partial V)_P = -(\partial P/\partial V)_T\,(\partial T/\partial P)_V$ となるので、
+        $\dfrac{(\partial T/\partial V)_P}{(\partial T/\partial P)_V} = -(\partial P/\partial V)_T$。これを代入すると：
+      </p>
+      $$\begin{aligned}
+        C_V\left(\frac{\partial P}{\partial V}\right)_{ad} &= -C_P\cdot\left(-\left(\frac{\partial P}{\partial V}\right)_T\right) \\
+        &= C_P\left(\frac{\partial P}{\partial V}\right)_T \\
+        &\implies \frac{C_P}{C_V} = \frac{(\partial P/\partial V)_{ad}}{(\partial P/\partial V)_T}
+      \end{aligned}$$
+    </div>
+  </div>
+
+  <h3 id="s2-5-poly">ポリトロープ過程</h3>
+
+  <p>
+    等温過程（$PV = \text{const}$）と断熱過程（$PV^\gamma = \text{const}$）を統一する
+    概念として，<strong>ポリトロープ過程</strong>（polytropic process）がある。
+  </p>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>ポリトロープ過程</div>
+    <div class="box-body">
+      $$PV^n = \text{const}$$
+      <p>
+        $n$ を<strong>ポリトロープ指数</strong>という
+        （この節では $n$ をこの指数の記号として使うため、モル数は $nR$ ではなく $N$（大文字）で表す）。
+        特殊値での対応：
+      </p>
+      <table class="td-table">
+        <thead><tr><th>$n$</th><th>対応する過程</th><th>成立する関係</th></tr></thead>
+        <tbody>
+          <tr><td>$0$</td><td>定圧過程（等圧）</td><td>$P = \text{const}$</td></tr>
+          <tr><td>$1$</td><td>等温過程（理想気体）</td><td>$PV = NRT = \text{const}$</td></tr>
+          <tr><td>$\gamma$</td><td>準静的断熱過程</td><td>$PV^\gamma = \text{const}$，$Q = 0$</td></tr>
+          <tr><td>$\infty$</td><td>定積過程（等積）</td><td>$V = \text{const}$</td></tr>
+        </tbody>
+      </table>
+      <p><small>$n \to \infty$ の場合：$PV^n = C$ と書き，両辺の $n$ 乗根 $(PV^n)^{1/n} = C^{1/n}$ で $V P^{1/n} = C^{1/n}$。$n \to \infty$ で $P^{1/n} \to 1$ なので $V \to \text{const}$。</small></p>
+    </div>
+  </div>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">公式</span>ポリトロープ過程の仕事・熱・温度変化（理想気体）</div>
+    <div class="box-body">
+      <p><strong>仕事</strong>（外から系にされる仕事，$n \ne 1$ の場合。前項の断熱仕事の導出と同様の計算による）：</p>
+      $$\begin{aligned}
+        W_{A\to B}^{(n)} &= -\int_{V_A}^{V_B}P\,dV \\
+        &= \frac{P_B V_B - P_A V_A}{n-1} \\
+        &= \frac{NR(T_B - T_A)}{n-1}
+      \end{aligned}$$
+      <p>（$n = 1$ 等温の場合は $W = -NRT\ln(V_B/V_A)$ と既出の式。）</p>
+      <p><strong>熱容量</strong>（ポリトロープ熱容量 $C_n$）：$\delta Q = C_n\,dT$ と定義すると</p>
+      $$\boxed{C_n = C_V\cdot\frac{n - \gamma}{n - 1}}$$
+      <p>従って熱 $Q_{A\to B} = C_n(T_B - T_A) = C_V\dfrac{n-\gamma}{n-1}(T_B - T_A)$。</p>
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">導出</span>ポリトロープ熱容量 $C_n$</div>
+    <div class="box-body">
+      <p>第一法則 $\Delta U = Q + W_{ON}$（ここで $W_{ON}$ は外から系にされる仕事）より $Q = \Delta U - W_{ON}$ を使う。</p>
+      <p>理想気体の $(\partial U/\partial V)_T = 0$ より $\Delta U = C_V(T_B - T_A)$。</p>
+      <p>ポリトロープ仕事（前項の公式より）：$W_{ON} = \dfrac{NR(T_B - T_A)}{n-1}$（$N$ はモル数）。</p>
+      $$\begin{aligned}
+        Q &= C_V(T_B - T_A) - \frac{NR(T_B - T_A)}{n-1} \\
+        &= (T_B - T_A)\!\left(C_V - \frac{NR}{n-1}\right)
+      \end{aligned}$$
+      <p>Mayerの関係式 $NR = C_P - C_V = C_V(\gamma - 1)$ を代入：</p>
+      $$\begin{aligned}
+        Q &= (T_B - T_A)\cdot C_V\!\left(1 - \frac{\gamma-1}{n-1}\right) \\
+        &= (T_B - T_A)\cdot C_V\cdot\frac{n-\gamma}{n-1}
+      \end{aligned}$$
+      <p><strong>特殊値の確認</strong>：</p>
+      <ul>
+        <li>$n = 0$（等圧）：$C_0 = C_V\cdot\dfrac{-\gamma}{-1} = \gamma C_V = C_P$ ✓</li>
+        <li>$n = \gamma$（断熱）：$C_\gamma = 0$（熱のやり取りなし） ✓</li>
+        <li>$n \to \infty$（等積）：$C_n \to C_V$ ✓</li>
+        <li>$n \to 1$（等温）：$C_n \to \pm\infty$（温度一定で無限大の熱が流れる） ✓</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">補足</span>大気の断熱減率</div>
+    <div class="box-body">
+      <p>
+        上昇する空気塊は周囲と熱のやり取りが遅く，準断熱的（$n \approx \gamma$）に膨張して冷える。
+        温度低下率（乾燥断熱減率）を見積もると，状態方程式と $PV^\gamma = \text{const}$ から：
+      </p>
+      $$\frac{dT}{dz} = -\frac{g(\gamma - 1)}{\gamma}\cdot\frac{m}{k_B} \approx -9.8\,\mathrm{K/km}$$
+      <p>（$g$：重力加速度，$m$：空気分子の平均質量，$k_B$：Boltzmann定数）</p>
+      <p>
+        実際の大気の気温減率はこれより小さい（$\sim 6.5\,\mathrm{K/km}$）が、
+        ポリトロープ過程の近似として有用。
+      </p>
+    </div>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="ch1.html" class="prev">第1章 基礎概念</a>
+    <a href="ch3.html" class="next">第3章 第二法則</a>
+  </nav>
+</main>
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer>
+
+<script src="td.js"></script>
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

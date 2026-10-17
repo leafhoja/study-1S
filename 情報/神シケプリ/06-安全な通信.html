@@ -1,0 +1,169 @@
+<!DOCTYPE html><!-- 「06 安全な通信 | 神シケプリ | 情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>06 安全な通信 | 神シケプリ | 情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kami-06">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">神シケプリ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>神シケプリ 06 — 安全な通信</h1>
+  <p class="subtitle">共通鍵暗号・公開鍵暗号・電子指紋・ディジタル署名とPKI</p>
+  <p class="meta">教科書対応箇所 pp.82-83　pp.94-99</p>
+</div>
+
+<div class="container">
+
+  <div class="def">
+    <span class="box-label">定義 — 共通鍵暗号</span>
+    <p>
+      暗号化に使う鍵と復号に使う鍵が共通である暗号を<strong>共通鍵暗号</strong>という。鍵をどう安全に
+      共有するかが課題であり、鍵をそのままネットワーク経由で送ると盗聴される恐れがある。また、
+      通信相手が増えると、相手ごとに別々の鍵が必要になり、鍵の管理も煩雑になる。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — 公開鍵暗号</span>
+    <p>
+      暗号化用の鍵（<strong>公開鍵</strong>）と復号用の鍵（<strong>秘密鍵</strong>）が異なる暗号を
+      <strong>公開鍵暗号</strong>という。受け取り手があらかじめ鍵ペア（公開鍵・秘密鍵）を用意し、
+      公開鍵だけを公開する。秘密鍵さえ漏れなければ盗聴の心配がなく、また相手が何人に増えても
+      鍵ペアは1組で足りる。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — 電子指紋とディジタル署名</span>
+    <p>
+      メッセージを一方向ハッシュ関数にかけて得られる文字列を<strong>電子指紋</strong>といい、
+      メッセージが改竄されていないかの検知に使う。<strong>ディジタル署名</strong>は、電子指紋を
+      送り手の秘密鍵で暗号化したものであり、公開鍵暗号と組み合わせることで、改竄となりすましの
+      両方を防ぐことができる。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — HTTPSとPKI</span>
+    <p>
+      個人情報などを扱う通信では、HTTPを拡張した<strong>HTTPS</strong>が使われる。HTTPSでは、
+      認証局が署名した<strong>ディジタル証明書</strong>によって、通信相手のサーバの身元を確認する。
+      この仕組みを<strong>PKI（Public Key Infrastructure，公開鍵基盤）</strong>という。
+    </p>
+  </div>
+
+  <div class="note">
+    <span class="box-label">出題対策のポイント</span>
+    <p>共通鍵暗号と公開鍵暗号の仕組みについて問う問題が頻出。</p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">第1問（2014年度共通問題1-2）</a>
+  </div>
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">第1問</div><h2>2014年度共通問題1-2 — 共通鍵暗号と公開鍵暗号</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>以下の文章を読んで，あとの設問(1)〜(3)に答えよ．</p>
+        <p>
+          　暗号化において，暗号化する前のメッセージを　<span class="blank">ア</span>　という．また，
+          暗号化されたメッセージを　<span class="blank">ア</span>　に戻すことを　<span class="blank">イ</span>
+          　という．暗号化の方式としては，　<span class="blank">ウ</span>　暗号方式と　<span class="blank">エ</span>
+          　暗号方式の2種類に分類できる．例えば，　<span class="blank">ウ</span>　暗号方式を用いて太郎君が
+          花子さんにメッセージを送ることを考える．太郎君と花子さんは，まず暗号化するための鍵を共有する．
+          そして太郎君は　<span class="blank">ア</span>　をその鍵を用いて暗号化し，暗号文を花子さんに送る．
+          花子さんは暗号文を受け取り，同じ鍵を用いて　<span class="blank">イ</span>　する．次に
+          　<span class="blank">エ</span>　暗号方式を用いる場合を考える．この方式では，まず事前に
+          　<span class="blank">オ</span>　が　<span class="blank">カ</span>　と　<span class="blank">キ</span>
+          　と呼ばれる2つの鍵を作成し，　<span class="blank">カ</span>　を公開する．そして，太郎君は
+          　<span class="blank">カ</span>　を用いて暗号化し，花子さんは送られた暗号文を　<span class="blank">キ</span>
+          　を用いて　<span class="blank">イ</span>　する．
+        </p>
+        <p>
+          問題<br>
+          (1) 　ア　〜　キ　に当てはまる語を答えなさい．<br>
+          (2) 　ウ　暗号方式を用いるときに注意すべきことを1-2行で述べよ．<br>
+          (3) 　エ　暗号方式における2種類の鍵が持つべき性質を2,3個述べよ．
+        </p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>
+            (1) <span class="blank">ア=平文</span>／<span class="blank">イ=復号</span>／<span class="blank">ウ=共通鍵</span>／<span class="blank">エ=公開鍵</span>／<span class="blank">オ=花子さん</span>／<span class="blank">カ=公開鍵</span>／<span class="blank">キ=秘密鍵</span>
+          </p>
+          <p>
+            （判定の根拠：ウの直後で「同じ鍵を用いて復号する」とあるので暗号化・復号が同じ鍵＝共通鍵暗号。
+            エの直後で「2つの鍵」を作り片方だけ公開するとあるので公開鍵暗号で、公開する方がカ＝公開鍵、
+            非公開の方がキ＝秘密鍵。また、鍵ペアを事前に用意するのは受信者である花子さんなので、オ＝花子さん。）
+          </p>
+        </div>
+        <div class="proof-body">
+          <p>
+            (2) 共通鍵暗号方式を用いるときに注意すべきこと：鍵（共通鍵）を送信者・受信者の間でどう安全に
+            共有するかが課題であり、鍵をそのままネットワーク経由で送ると盗聴されるおそれがある。また、
+            通信相手が増えるたびに別々の鍵が必要になり、鍵の管理が煩雑になる。
+          </p>
+          <p>
+            (3) 公開鍵暗号方式における2種類の鍵が持つべき性質：<br>
+            ①公開鍵から対応する秘密鍵を計算によって求めることが事実上不可能であること（一方向性）。<br>
+            ②一方の鍵で暗号化した文は、対応するもう一方の鍵でなければ復号できないこと（鍵ペアとしての対応性）。<br>
+            ③秘密鍵は本人だけが保持し、外部に漏れないよう厳重に管理されること（秘匿性）。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) ア=平文　イ=復号　ウ=共通鍵　エ=公開鍵　オ=花子さん　カ=公開鍵　キ=秘密鍵　(2) 鍵の安全な共有方法と、相手が増えるほど鍵管理が煩雑になる点に注意　(3) ①一方向性（公開鍵から秘密鍵を求めるのは事実上不可能）②鍵ペアとしての対応性③秘密鍵の秘匿性</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — ハイブリッド暗号方式</span>
+        <p>
+          このディジタル署名の仕組み（電子指紋＋公開鍵暗号の組み合わせ）は本文中では出題されていないが、
+          共通鍵・公開鍵それぞれの弱点（鍵配送問題／計算コスト）を踏まえたうえで、実際のHTTPS通信では
+          公開鍵暗号で共通鍵を安全に交換し、その後の本文のやりとりは高速な共通鍵暗号で行うという
+          「ハイブリッド暗号方式」が使われている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="05-インターネット通信.html">← 05 インターネット通信</a>
+    <a href="07-プログラミング.html">07 プログラミングへ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

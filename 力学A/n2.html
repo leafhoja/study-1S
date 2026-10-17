@@ -1,0 +1,469 @@
+<!DOCTYPE html><!-- 「第2章 仕事とエネルギー | 力学A 講義ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第2章 仕事とエネルギー | 力学A 講義ノート</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="n2">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A 講義ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="n1.html" data-page="n1">第1章</a>
+      <a href="n2.html" data-page="n2" class="active">第2章</a>
+      <a href="n3.html" data-page="n3">第3章</a>
+      <a href="n4.html" data-page="n4">第4章</a>
+      <a href="n5.html" data-page="n5">第5章</a>
+      <a href="n6.html" data-page="n6">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>第2章　仕事とエネルギー</h1>
+  <p class="subtitle">運動エネルギー・線積分・保存力とポテンシャル・中心力</p>
+  <p class="meta">講義ノート §4 にもとづく</p>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <strong>この章について</strong><br>
+    運動方程式 $\mathbb F=m\ddot{\mathbf r}$ に速度ベクトルを内積し，時間で積分することで「運動エネルギーと
+    仕事の関係」を導く。そのために必要な「線積分」という道具を整備したあと，力が経路によらない仕事をする
+    （＝保存力である）とはどういうことかを定式化し，そこから「ポテンシャル」と「勾配（grad）」の概念を導入する。
+    最後に，中心力が常に保存力であることを示す。
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#s1">1. 運動エネルギーと仕事の定理</a>
+    <a href="#s2">2. 保存力とポテンシャル</a>
+    <a href="#s3">3. 勾配（grad）の意味</a>
+    <a href="#s4">4. 保存力の判定法（rot）</a>
+    <a href="#s5">5. 中心力は保存力</a>
+  </div>
+
+  <!-- =================== §1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="s1">
+    <div class="sec-header">
+      <div class="sec-tag">Section 1</div>
+      <h2>運動エネルギーと，力のする仕事</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>運動方程式 $\mathbb F = m\ddot{\mathbf r}$ の両辺に $\dot{\mathbf r}$ を内積し，時刻 $t_i$ から $t_f$ まで積分する。</p>
+
+      <div class="mathblock">
+        $$\int_{t_i}^{t_f}\!\! dt\ \mathbb F\cdot\dot{\mathbf r}
+        = \int_{t_i}^{t_f}\!\! dt\ \underbrace{m\ddot{\mathbf r}\cdot\dot{\mathbf r}}_{\displaystyle \frac{d}{dt}\left(\frac12 m \dot{\mathbf r}^{\,2}\right)}
+        = \left[\frac12 m\dot{\mathbf r}^{\,2}\right]_{t_i}^{t_f}
+        = \frac12 m\,\dot{\mathbf r}(t_f)^2 - \frac12 m\,\dot{\mathbf r}(t_i)^2$$
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足</span>
+        $m\ddot{\mathbf r}\cdot\dot{\mathbf r} = \frac{d}{dt}\left(\frac12 m|\dot{\mathbf r}|^2\right)$ は，
+        積の微分法則 $\frac{d}{dt}(\mathbf a\cdot\mathbf a) = 2\dot{\mathbf a}\cdot\mathbf a$ を $\mathbf a = \dot{\mathbf r}$
+        に適用すれば直ちに分かる。右辺 $\frac12 m|\dot{\mathbf r}|^2$ はまさに運動エネルギーである。
+      </div>
+
+      <p>一方，左辺は次のように書ける：</p>
+      <div class="mathblock">
+        $$(\text{左辺}) = \int_{t_i}^{t_f} \mathbb F\cdot\frac{d\mathbf r(t)}{dt}\,dt$$
+      </div>
+
+      <p>
+        これを，区間 $[t_i,t_f]$ を $N$ 個に分割した和の極限として書き直す。分点を $t_0=t_i,t_1,\dots,t_N=t_f$
+        とし，$\Delta t = (t_f-t_i)/N$ とすると：
+      </p>
+      <div class="mathblock">
+        $$= \lim_{N\to\infty}\sum_{n=0}^{N-1} \mathbb F(\mathbf r(t_n))\,\frac{d\mathbf r(t_n)}{dt}\,\Delta t
+        \qquad(\text{微小変位でした仕事の総和})$$
+      </div>
+      <p>
+        ここで $\dfrac{d\mathbf r(t_n)}{dt}\Delta t = \mathbf r(t_{n+1})-\mathbf r(t_n) + O(\Delta t^2) \equiv \Delta \mathbf r_n + O(\Delta t^2)$
+        なので：
+      </p>
+      <div class="mathblock">
+        $$= \lim_{N\to\infty}\sum_{n=0}^{N-1}\mathbb F(\mathbf r_n)\cdot\big(\Delta \mathbf r_n + O(\Delta t^2)\big)$$
+      </div>
+      <p>
+        ここで $O(\Delta t^2) = O(1/N^2)$（$\Delta t = (t_f-t_i)/N = O(1/N)$ より）なので，$N$ 個の項を足し合わせても
+        全体で $N\times O(1/N^2)=O(1/N)\to 0$（$N\to\infty$）。よって高次の項は消え：
+      </p>
+      <div class="mathblock">
+        $$(\text{左辺}) = \lim_{N\to\infty}\sum_{n=0}^{N-1}\mathbb F(\mathbf r_n)\cdot\Delta \mathbf r_n$$
+      </div>
+
+      <div class="note">
+        <span class="box-label">記号 $O(\varepsilon^n)$ について</span>
+        <p>
+          $\varepsilon\to0$ のとき $x\to0$ で，$x/\varepsilon^n = (\text{有限値})\ne0$ となるとき，$x$ は
+          「$O(\varepsilon^n)$ の微小量」であるという。例えば $\varepsilon\to0$ で $\sin\varepsilon\to0$ だが，
+          $\lim_{\varepsilon\to0}\dfrac{\sin\varepsilon}{\varepsilon}=1\ne0$ なので $\sin\varepsilon = O(\varepsilon)$。
+          一方 $1-\cos\varepsilon$ は $O(\varepsilon^2)$（$1-\cos\varepsilon\approx \varepsilon^2/2$ だから）。
+        </p>
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 2.1　線積分</span>
+        <p>これを，経路 $C$ に沿っての「線積分」と呼び，次のように書く：</p>
+        $$\int_C \mathbb F\cdot d\mathbf r \equiv \lim_{N\to\infty}\sum_{n=0}^{N-1}\mathbb F(\mathbf r_n)\cdot\Delta\mathbf r_n
+        = \int_{t_i}^{t_f} dt\, \frac{d\mathbf r}{dt}\,\mathbb F(\mathbf r(t))$$
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>線積分の値が経路のパラメータの取り方によらないことの確認</summary>
+        <div class="proof-body">
+          <p>
+            $t$ は経路 $C$ の「パラメータ」であり，一見すると線積分の値が $t$ の取り方（時間の刻み方）に
+            依存しそうに見える。しかし実際にはそうならないことを確かめる。パラメータを $s$ に取り替え，
+            $t=t(s)$（$\mathbf r(t(s)) \equiv \widetilde{\mathbf r}(s)$）とすると：
+          </p>
+          <div class="mathblock">
+            $$\int_{t_i}^{t_f} dt\,\frac{d\mathbf r}{dt}\mathbb F(\mathbf r(t))
+            = \int_{s_i}^{s_f} ds\,\frac{dt(s)}{dt}\,\mathbb F(\mathbf r(t(s)))\cdot\frac{d\mathbf r(t(s))}{ds}\frac{ds}{dt}$$
+          </div>
+          <p>
+            合成関数の微分 $\dfrac{d\widetilde{\mathbf r}(s)}{ds} = \dfrac{d\mathbf r(t(s))}{dt}\cdot\dfrac{dt(s)}{ds}$
+            を使うと，$\dfrac{dt(s)}{dt}=1$ に注意して整理すると：
+          </p>
+          <div class="mathblock">
+            $$= \int_{s_i}^{s_f} \mathbb F(\widetilde{\mathbf r}(s))\cdot\frac{d\widetilde{\mathbf r}(s)}{ds}\,ds$$
+          </div>
+          <p>
+            となり，$t$ で書いた式と全く同じ形になる。つまり線積分はパラメータの取り方に依存しない
+            （経路 $C$ 自体と，始点・終点だけで決まる）量である。
+          </p>
+        </div>
+        <div class="qed">∎</div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- =================== §2 =================== -->
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <div class="sec-tag">Section 2</div>
+      <h2>保存力とポテンシャル</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 2.2　保存力</span>
+        <p>質点が $A$ から $B$ まで移動したとする。$\mathbb F$ のした仕事 $\int_{C_{A\to B}}\mathbb F\cdot d\mathbf r$ が，
+        一般には経路 $C_{A\to B}$ の取り方に依存する。この仕事が<strong>経路に依らない</strong>とき，$\mathbb F$ を
+        「保存力」という。</p>
+      </div>
+
+      <p>
+        $A\to B$ の仕事が経路によらないことは，$A\to B$ の経路を逆向きにたどれば $\int_{C_{A\to B}}\mathbb F\cdot d\mathbf r = -\int_{C_{B\to A}}\mathbb F\cdot d\mathbf r$
+        となることと合わせて，次の同値な言い換えができる：
+      </p>
+      <div class="equiv">
+        $\mathbb F$ が保存力
+        <span class="iff">⇔</span>
+        $\displaystyle\int_{C_{A\to P\to B}}\mathbb F\cdot d\mathbf r = \int_{C_{A\to Q\to B}}\mathbb F\cdot d\mathbf r$（任意の中継点 $P,Q$ で）
+        <span class="iff">⇔</span>
+        $\displaystyle\oint_{C_{\text{閉}}} \mathbb F\cdot d\mathbf r = 0$（任意の閉曲線で）
+      </div>
+
+      <h3 id="s2-1">ポテンシャルの定義</h3>
+
+      <p>
+        $\mathbb F=\mathbb F(\mathbf r)$ を保存力とする。基準点 $P_0(\mathbf r_0)$ を１つ決めておくと，任意の点
+        $P(\mathbf r)$ へ至る経路に沿った線積分 $\int_{P_0}^{P}\mathbb F\cdot d\mathbf r$ は，経路の取り方によらず
+        $\mathbf r$ だけで決まる値になる（保存力の定義そのもの）。そこで：
+      </p>
+
+      <div class="def">
+        <span class="box-label">定義 2.3　ポテンシャル $U(\mathbf r)$</span>
+        $$\int_{P_0}^{P} \mathbb F(\mathbf r)\cdot d\mathbf r \equiv -U(\mathbf r)$$
+        <p>を満たす関数 $U(\mathbf r)$ を（この基準点に対する）ポテンシャルという。</p>
+      </div>
+
+      <p>これを使うと，§1 の運動エネルギーの式は次のように書き換えられる：</p>
+      <div class="mathblock">
+        $$\int_{\mathbf r_1}^{\mathbf r_2}\mathbb F\cdot d\mathbf r = \frac12m(\dot{\mathbf r}_2)^2 - \frac12m(\dot{\mathbf r}_1)^2$$
+      </div>
+      <p>
+        左辺を，基準点 $\mathbf r_0$ を経由する経路として分解すると：
+      </p>
+      <div class="mathblock">
+        $$\int_{\mathbf r_1}^{\mathbf r_2}\mathbb F\cdot d\mathbf r
+        = \int_{\mathbf r_1}^{\mathbf r_0}\mathbb F\cdot d\mathbf r + \int_{\mathbf r_0}^{\mathbf r_2}\mathbb F\cdot d\mathbf r
+        = U(\mathbf r_1) - U(\mathbf r_2)$$
+      </div>
+      <div class="thm">
+        <span class="box-label">力学的エネルギー保存則</span>
+        $$\frac12m\dot{\mathbf r}_1^{\,2} + U(\mathbf r_1) = \frac12m\dot{\mathbf r}_2^{\,2}+U(\mathbf r_2)$$
+        <p>すなわち $\frac12 m|\dot{\mathbf r}|^2 + U(\mathbf r)$（力学的エネルギー）は運動の間じゅう一定に保たれる。</p>
+      </div>
+
+      <h3 id="s2-2">ポテンシャルと力の関係：勾配（gradient）</h3>
+
+      <p>
+        $U(\mathbf r) = -\int_{\mathbf r_0}^{\mathbf r}\mathbb F\cdot d\mathbf r$ を，経路を $\mathbf r_0=\mathbf r_0,\mathbf r_1,\dots,\mathbf r_N=\mathbf r$
+        とする和の極限で表す：
+      </p>
+      <div class="mathblock">$$U(\mathbf r) = -\lim_{N\to\infty}\sum_{n=0}^{N-1}\mathbb F(\mathbf r_n)\cdot\Delta\mathbf r_n$$</div>
+      <p>
+        $U(\mathbf r+\Delta\mathbf r)$ を考えるには，経路の最後にもう一歩 $\mathbf r_{N+1}=\mathbf r_N+\Delta\mathbf r$ を
+        付け加えればよい：
+      </p>
+      <div class="mathblock">
+        $$U(\mathbf r+\Delta\mathbf r) = -\lim_{N\to\infty}\sum_{n=0}^{N}\mathbb F(\mathbf r_n)\cdot\Delta\mathbf r_n
+        \quad\Longrightarrow\quad
+        U(\mathbf r+\Delta\mathbf r)-U(\mathbf r) = -\mathbb F(\mathbf r)\cdot\Delta\mathbf r + O\!\left(\frac{1}{N^2}\right)$$
+      </div>
+      <p>
+        （最後に付け加えた $1$ 項だけが残り，それ以外は $U(\mathbf r+\Delta\mathbf r)$ と $U(\mathbf r)$ の和の間で相殺する。）
+        $\mathbf r=(x,y,z)$，$\Delta\mathbf r=(\Delta x,\Delta y,\Delta z)$ として成分ごとに書くと：
+      </p>
+      <div class="mathblock">
+        $$\Delta U = -(F_x\Delta x + F_y\Delta y + F_z\Delta z) + O\big((\Delta x,\Delta y,\Delta z)^2\big)$$
+      </div>
+      <p>
+        特に $\Delta y=\Delta z=0$ ととって $\Delta x\to0$ の極限をとれば：
+      </p>
+      <div class="mathblock">
+        $$\lim_{\Delta x\to0}\frac{U(x+\Delta x,y,z)-U(x,y,z)}{\Delta x} = -F_x
+        \quad\Longleftrightarrow\quad \frac{\partial U}{\partial x} = -F_x$$
+      </div>
+      <p>同様に $\dfrac{\partial U}{\partial y}=-F_y$，$\dfrac{\partial U}{\partial z}=-F_z$。まとめると：</p>
+      <div class="mathblock">
+        $$\boxed{\left(\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}\right)U = -(F_x,F_y,F_z)}$$
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 2.4　勾配（gradient）と ナブラ（nabla）</span>
+        <p>これを $\nabla U = -\mathbb F$ と書き，$U$ の「gradient（勾配）」という：</p>
+        $$\operatorname{grad}U \equiv \nabla U = -\mathbb F,\qquad
+        \nabla \equiv \left(\frac{\partial}{\partial x},\frac{\partial}{\partial y},\frac{\partial}{\partial z}\right)\ (\text{“ナブラ”という微分演算子})$$
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §3 =================== -->
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <div class="sec-tag">Section 3</div>
+      <h2>勾配（$\nabla$）の意味</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">2次元の例</span>
+        <p>$U(x,y) = x+2y$ とする。等ポテンシャル線（等 $U$ 線）は $U=0$ のとき $x+2y=0$ という直線（他の
+        $U$ の値に対しても，これに平行な直線群）。このとき：</p>
+        $$\nabla U = (1,2)$$
+      </div>
+
+      <div class="thm">
+        <span class="box-label">勾配ベクトルの意味</span>
+        <p>
+          $\nabla U=(1,2)$ は，直線 $x+2y=0$（等ポテンシャル線）の<strong>法線ベクトル</strong>になっている
+          （保存力 $\mathbb F=-\nabla U$ の向きの逆）。一般に：
+        </p>
+        <ul>
+          <li>$\nabla U$ は，各点で等ポテンシャル面（線）に<strong>垂直</strong>である。</li>
+          <li>$\nabla U$ は，$U$ が<strong>最も急に増加する方向</strong>（最も急なポテンシャルの昇り方）を向く。</li>
+          <li>保存力 $\mathbb F=-\nabla U$ は，したがって，ポテンシャルが最も急に<strong>減少する方向</strong>を向く
+            （ボールは坂を下る方向に転がる，というイメージと一致する）。</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §4 =================== -->
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <div class="sec-tag">Section 4</div>
+      <h2>保存力の判定法：微小な渦（$\operatorname{rot}\mathbb F$）</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        定義 2.2 は「任意の閉曲線 $C$ で $\oint_C \mathbb F\cdot d\mathbf r=0$」であったが，これを直接すべての
+        閉曲線について確かめるのは大変である。そこで，任意の閉曲線を微小な正方形（平行四辺形）ループに
+        分割し，それぞれのループでの線積分がすべてゼロになるかどうかに帰着させる。
+      </p>
+
+      <div class="mathblock">
+        $$\oint_{\text{巨大な閉ループ}}\mathbb F\cdot d\mathbf r = \sum_{I}\oint_{\text{$I$番目の微小ループ}}\mathbb F\cdot d\mathbf r$$
+      </div>
+      <p>
+        （隣接する微小ループの共有辺での線積分は，向きが逆になるため互いに打ち消し合い，外周だけが残る。
+        これを網目状に繰り返し細分していけば，上の等式が成り立つ。）
+      </p>
+
+      <h3 id="s4-1">微小な平行四辺形ループの線積分</h3>
+
+      <p>
+        原点を $\mathbf r$ とし，２つの微小変位ベクトル $\Delta\mathbf u,\Delta\mathbf v$ が張る平行四辺形のループ
+        （$\mathbf r\to\mathbf r+\Delta\mathbf u\to\mathbf r+\Delta\mathbf u+\Delta\mathbf v\to\mathbf r+\Delta\mathbf v\to\mathbf r$）
+        を考える。この線積分は，「$\Delta\mathbf u$ 方向に進んでから $\Delta\mathbf v$ 方向に進む経路」から
+        「$\Delta\mathbf v$ 方向に進んでから $\Delta\mathbf u$ 方向に進む経路」を引いたものに等しい：
+      </p>
+      <div class="mathblock">
+        $$\oint = \big(\mathbb F(\mathbf r)\cdot\Delta\mathbf u + \mathbb F(\mathbf r+\Delta\mathbf u)\cdot\Delta\mathbf v\big)
+        - \big(\mathbb F(\mathbf r)\cdot\Delta\mathbf v + \mathbb F(\mathbf r+\Delta\mathbf v)\cdot\Delta\mathbf u\big)$$
+      </div>
+
+      <details open>
+        <summary>これを整理して $\operatorname{rot}\mathbb F$（回転）が現れることを見る</summary>
+        <div class="proof-body">
+          <p>
+            $\mathbb F(\mathbf r+\Delta\mathbf u)$ をテイラー展開する。各成分について：
+          </p>
+          <div class="mathblock">$$F_x(\mathbf r+\Delta\mathbf u) = F_x(\mathbf r) + \Delta\mathbf u\cdot\nabla F_x(\mathbf r) + O((\Delta u)^2)$$</div>
+          <p>（$y,z$ 成分も同様）。まとめて書くと：</p>
+          <div class="mathblock">$$\mathbb F(\mathbf r+\Delta\mathbf u) = \mathbb F(\mathbf r) + (\Delta\mathbf u\cdot\nabla)\mathbb F + O(\text{高次})$$</div>
+          <p>これを代入すると：</p>
+          <div class="mathblock">
+            $$\oint = \Big(\mathbb F(\mathbf r)\Delta\mathbf u + \{\mathbb F(\mathbf r)+(\Delta\mathbf u\cdot\nabla)\mathbb F\}\Delta\mathbf v\Big)
+            - \Big(\mathbb F(\mathbf r)\Delta\mathbf v + \{\mathbb F(\mathbf r)+(\Delta\mathbf v\cdot\nabla)\mathbb F\}\Delta\mathbf u\Big) + O(\text{高次})$$
+          </div>
+          <p>$\mathbb F(\mathbf r)\Delta\mathbf u$，$\mathbb F(\mathbf r)\Delta\mathbf v$ の項はそれぞれ打ち消し合い：</p>
+          <div class="mathblock">
+            $$= (\Delta\mathbf u\cdot\nabla)\mathbb F\cdot\Delta\mathbf v - (\Delta\mathbf v\cdot\nabla)\mathbb F\cdot\Delta\mathbf u + O(\text{高次})$$
+          </div>
+          <p>添字表記（$i,j$ について和をとる）で書くと：</p>
+          <div class="mathblock">
+            $$= \Delta u_i\,\partial_i F_j\,\Delta v_j - \Delta v_i\,\partial_i F_j\,\Delta u_j
+            = (\Delta u_i \Delta v_j - \Delta u_j \Delta v_i)\,\partial_i F_j$$
+          </div>
+          <p>
+            $\partial_iF_j$ を，$i,j$ について対称な部分と反対称な部分に分けると，$(\Delta u_i\Delta v_j-\Delta u_j\Delta v_i)$
+            が $i\leftrightarrow j$ で反対称であることから，対称部分は寄与せず：
+          </p>
+          <div class="mathblock">
+            $$= (\Delta u_i \Delta v_j - \Delta u_j\Delta v_i)\cdot\frac12(\partial_i F_j - \partial_j F_i)$$
+          </div>
+          <p>
+            ここで，$xy$ 平面内のループ（$\Delta u_z=\Delta v_z=0$）の場合を考えると，$(\Delta u_x\Delta v_y - \Delta u_y\Delta v_x)$
+            は $\Delta\mathbf u$，$\Delta\mathbf v$ の張る平行四辺形の面積（$z$ 成分の外積 $(\Delta\mathbf u\times\Delta\mathbf v)_z$）
+            にほかならない。したがって：
+          </p>
+          <div class="mathblock">
+            $$\underbrace{(\Delta u_x\Delta v_y-\Delta u_y\Delta v_x)}_{(\Delta\mathbf u\times\Delta\mathbf v)_z}\ \underbrace{(\partial_x F_y - \partial_y F_x)}_{(\nabla\times\mathbb F)_z\ =\ \operatorname{rot}\mathbb F\ \text{の}z\text{成分}}$$
+          </div>
+        </div>
+        <div class="qed">∎</div>
+      </details>
+
+      <div class="thm">
+        <span class="box-label">保存力の判定条件</span>
+        <p>
+          微小な平行四辺形ループでの線積分（「微小うず」）は，ループの面積ベクトル $\Delta\mathbf u\times\Delta\mathbf v$
+          と，$\operatorname{rot}\mathbb F \equiv \nabla\times\mathbb F$ の内積に等しい。したがって，
+          $\mathbb F$ が保存力であるための条件は，任意の点・任意の向きの微小ループについてこれがゼロになること，
+          すなわち：
+        </p>
+        $$\boxed{\mathbb F\ \text{が保存力}\ \Longleftrightarrow\ \nabla\times\mathbb F = \mathbf 0\ \ (\text{全空間で})}$$
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §5 =================== -->
+  <div class="section" id="s5">
+    <div class="sec-header">
+      <div class="sec-tag">Section 5</div>
+      <h2>中心力</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 2.5　中心力</span>
+        <p>
+          力 $\mathbb F=\mathbb F(\mathbf r)$ の大きさが $r\equiv|\mathbf r|$ のみの関数で，その方向が $\mathbf r$ 方向
+          （動径方向）であるとき，$\mathbb F$ を「中心力」という。すなわち $\mathbb F(\mathbf r) = f(r)\,\hat{\mathbf r}$
+          （$\hat{\mathbf r}\equiv\mathbf r/r$）と書ける力である。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 2.6　中心力は保存力である</span>
+      </div>
+
+      <details open>
+        <summary>証明</summary>
+        <div class="proof-body">
+          <p>ある経路 $C$（$\mathbf r=\mathbf r(t)$ とパラメータ表示する）に沿った線積分を計算する：</p>
+          <div class="mathblock">
+            $$\int_C \mathbb F(\mathbf r)\cdot d\mathbf r = \int f(|\mathbf r(t)|)\cdot\frac{\mathbf r(t)}{|\mathbf r(t)|}\cdot\frac{d\mathbf r(t)}{dt}\,dt$$
+          </div>
+          <p>ここで，$\mathbf r(t)\cdot\dfrac{d\mathbf r(t)}{dt}$ はスカラー量であり：</p>
+          <div class="mathblock">
+            $$\mathbf r(t)\cdot\frac{d\mathbf r(t)}{dt} = \frac{d}{dt}\left(\frac12|\mathbf r(t)|^2\right) = |\mathbf r(t)|\,\frac{d}{dt}|\mathbf r(t)|$$
+          </div>
+          <p>（$\frac{d}{dt}(\mathbf a\cdot\mathbf a)=2\mathbf a\cdot\dot{\mathbf a}$，かつ $\frac{d}{dt}|\mathbf a|^2 = 2|\mathbf a|\frac{d}{dt}|\mathbf a|$ より。）これを代入すると：</p>
+          <div class="mathblock">
+            $$= \int f(|\mathbf r(t)|)\,\frac{1}{|\mathbf r(t)|}\,|\mathbf r(t)|\,\frac{d}{dt}|\mathbf r(t)|\,dt
+            = \int f(|\mathbf r(t)|)\,d|\mathbf r(t)| = \int f(r)\,dr$$
+          </div>
+          <p>
+            最後の積分は，経路 $C$ の始点と終点における $r$ の値だけで決まり，途中の経路の形（$\varphi$ 方向の
+            動き方など）にはまったく依存しない。したがって中心力は保存力である。
+          </p>
+        </div>
+        <div class="qed">∎</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">見通し</span>
+        <p>
+          この結果は次章以降で繰り返し使われる：振り子にはたらく重力の動径成分，惑星にはたらく万有引力は
+          いずれも中心力（あるいは中心力に帰着する成分）であり，ポテンシャルを使った力学的エネルギー保存則が
+          威力を発揮する。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="n1.html">← 第1章</a>
+    <a href="n3.html">第3章　振り子の運動 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

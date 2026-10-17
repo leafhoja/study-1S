@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#164e63">
+<title>2014年度 過去問解説 | アルゴリズム入門</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+<script>
+MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams'}, options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body class="algorithm-page" data-nav-page="kakomon_2014">
+<nav class="navbar">
+<div class="navbar-inner"><a class="navbar-brand" href="index.html">アルゴリズム入門</a>
+<div class="navbar-links"><a href="../index.html" class="nav-back">← 学習ノート</a><a href="index.html">トップ</a><a href="lecture1.html" data-page="lecture1">第1回</a><a href="lecture2.html" data-page="lecture2">第2回</a><a href="index.html#exams">過去問</a>
+</div>
+</div></nav>
+<div class="hero">
+<h1>2014年度 過去問解説</h1>
+<p class="subtitle">再帰による行列演算・到達確率・数値誤差・順序付き割り当て</p>
+<p class="meta">1A · 共通試験 · 年度は原本の表題に準拠</p>
+</div>
+<main class="container">
+<div class="intro-box">
+<p>共通試験の解答例と解説。再帰による行列演算・到達確率・数値誤差・順序付き割り当てを扱う。問題番号・空欄記号は原本に対応する。<a href="https://lecture.ecc.u-tokyo.ac.jp/johzu/joho-kagaku/exam/common-exam-2014.pdf" target="_blank" rel="noopener">2014年度 共通試験問題（出典）</a>を手元で参照しながら読もう。</p>
+<p>以下は独自に作成した解答例であり、公式解答ではない。原題のコードはRuby。空欄解答はRubyの記法に合わせ、Pythonで示す実装にはその旨を明記する。当時の科目名は「情報科学」。計算量は、特記がなければ基本演算を定数時間とする問題文のモデルで評価する。</p>
+</div>
+<nav class="toc" aria-label="ページ内目次"><a href="#q1">問題1 ベクトルと行列の再帰</a><a href="#q2">問題2 停止したゲームからは流入しない</a><a href="#q3">問題3 数値誤差と面積比</a><a href="#q4">問題4 順序を保った盗賊と捜査官の割り当て</a></nav>
+<section class="section" id="q1">
+<div class="sec-header">
+<h2>問題1 ベクトルと行列の再帰</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答（Ruby）</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>a.length == 0</td></tr>
+<tr><td>B・C</td><td>1..(a.length-1) ・ 1..(b.length-1)</td></tr>
+<tr><td>D</td><td>a[0] + b[0]</td></tr>
+<tr><td>E</td><td>a.length == 0</td></tr>
+<tr><td>F</td><td>inner(v, a[0])</td></tr>
+<tr><td>G</td><td>1..(a.length-1)</td></tr>
+<tr><td>H</td><td>a.length == 0</td></tr>
+<tr><td>I</td><td>vmmult1(a[0], b)</td></tr>
+<tr><td>J</td><td>1..(a.length-1)</td></tr></tbody></table>
+</div>
+<p>(1) 先頭要素を計算し、残りの部分配列に同じ関数を再帰適用する。内積の空列は0、ベクトル和の空列は[]。</p>
+<p>(2) vmmultは行ベクトルvと行列aの積。aを転置しておけば、各行とvの内積が出力の各成分になる。</p>
+<p>(3) mmmult1に渡されたbは既に転置済みである。Iにはvmmultではなくvmmult1を使うと、余計な転置を避けられる。各aの行について、全てのbの列との内積を計算する。</p>
+</div>
+</section>
+<section class="section" id="q2">
+<div class="sec-header">
+<h2>問題2 停止したゲームからは流入しない</h2>
+</div>
+<div class="sec-body">
+<p>(1) 初期条件はP(0,5)=1、その他0。t≥1では、</p>
+<div class="mathblock">$$P(t,a)=\begin{cases}qP(t-1,a+1)&amp;a=0,1,\\pP(t-1,a-1)&amp;a=9,10,\\pP(t-1,a-1)+qP(t-1,a+1)&amp;2\leq a\leq8.\end{cases}$$</div>
+<p>0枚と10枚では以降のゲームを行わないため、そこから1枚・9枚へ流入させない。P(t,0)等は累積確率ではなく、ちょうどt回目にそこへ到達した確率である。</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答（Ruby）</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>0</td></tr>
+<tr><td>B</td><td>q * prob[i-1][j+1]</td></tr>
+<tr><td>C</td><td>p * prob[i-1][j-1]</td></tr>
+<tr><td>D</td><td>p*prob[i-1][j-1] + q*prob[i-1][j+1]</td></tr>
+<tr><td>E</td><td>prob[t][a]</td></tr></tbody></table>
+</div>
+<p>(2) 単純再帰は同じ時刻・所持金の状態を何度も計算するので、呼び出し数が急増する。(3) 既に計算した直前時刻の表を参照すればよい。(4) 上限n枚なら時刻tと金額nの2重ループで$O(tn)$、表全体の領域も$O(tn)$。直前時刻だけ保持すれば領域$O(n)$にもできる。</p>
+<p>(5) 計算量のオーダーは、入力が大きくなったときの資源消費の増え方を、定数係数や低次項を省いて比較する指標。環境に依存する実行時間そのものより、規模を増したときの差を見通しやすい。</p>
+</div>
+</section>
+<section class="section" id="q3">
+<div class="sec-header">
+<h2>問題3 数値誤差と面積比</h2>
+</div>
+<div class="sec-body">
+<p>(1) a=1000はRubyの整数なので1/a=0。Python 3の除算とは違う。(2) a=1000.0なら逆数や1への加算の丸めがあり、近い値の引き算後に誤差が表れる。(3) 1/a⁵は小さく、1へ加えた際に残せる相対精度が低下する。差を取ってa⁵倍すると誤差が目立つ。(4) 1/a⁶は1への加算で完全に失われ、結果0となる。</p>
+<p>(5) A= <strong>1.0</strong>。2⁻⁴⁰は1に加えた結果も正確に表せる。(6) B= <strong>0.0</strong>。2⁻⁶⁰は1へ加えると失われる。</p>
+<p>(7) x=0.4,y=0.2では原点からの距離だけが0.5未満、残り3頂点からは0.5超なので、calc(1)は<strong>3.0</strong>。</p>
+<p>(8) 各頂点の半径0.5の四半円の面積はπ/16。1点がその外にある確率は1−π/16で、4条件の指示変数の期待値の和は $\boxed{4-\pi/4}$。同じ点に対する4条件を独立と仮定する必要はなく、期待値の線形性で計算できる。</p>
+</div>
+</section>
+<section class="section" id="q4">
+<div class="sec-header">
+<h2>問題4 順序を保った盗賊と捜査官の割り当て</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答（Ruby）</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>C[i][0]</td></tr>
+<tr><td>B</td><td>i + 1</td></tr>
+<tr><td>C</td><td>C[j][1]</td></tr>
+<tr><td>D</td><td>max</td></tr>
+<tr><td>E</td><td>rcvr[n-1][m-1] + C[n-1][m-1]</td></tr></tbody></table>
+</div>
+<p>(1) 捜査官0を盗賊iに付けたら、捜査官1は必ずj&gt;iの盗賊に付ける。(2) 捜査官3人なら3個の添字の組を列挙するので$O(N^3)$。</p>
+<p>(3) 末尾の盗賊を担当させない場合と、最後の捜査官に担当させる場合の大きい方。後者では、残りの先頭n−1人に先頭m−1人を最適に配置する。</p>
+<h3>(4) 表を埋める実装（原題のRuby）</h3><pre><code class="language-ruby">for n in 0..N
+  for m in 0..M
+    if m == 0 || n == 0 || m &gt; n
+      rcvr[n][m] = 0
+    else
+      rcvr[n][m] = [rcvr[n-1][m],
+                    rcvr[n-1][m-1] + C[n-1][m-1]].max
+    end
+  end
+end</code></pre><p>回収額が正という原題の前提の下で、必要な人数全員を配置する値が得られる。負の回収額も許す一般化では、不可能な状態を0で初期化すると誤るので−∞などで区別する。計算量は$O(NM)$。</p>
+</div>
+</section>
+<div class="page-nav"><a href="index.html">← 科目トップ</a><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">ページ上部へ ↑</a>
+</div></main>
+<footer class="site-footer">アルゴリズム入門 · 1A · 学習ノート</footer>
+<script src="../common.js"></script>
+<script src="nav.js"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html><!-- 「§7 有限次元ベクトル空間 — 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>§7 有限次元ベクトル空間 — 線形代数学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams',
+        macros: {
+          R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}',
+          Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}',
+          rank: '\\operatorname{rank}'
+        }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="s7">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>§7 有限次元ベクトル空間</h1>
+  <p class="subtitle">講義ノート⑥ をもとに作成</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#lem7-1">補題7.1 生成系の間引き</a>
+    <a href="#thm7-2">定理7.2 生成系からの基底の抽出</a>
+    <a href="#cor7-3">系7.3 有限次元 ⟺ 有限生成</a>
+    <a href="#thm7-4">定理7.4 無限次元の特徴づけ</a>
+    <a href="#thm7-5">定理7.5 部分空間の次元</a>
+    <a href="#summary">まとめ</a>
+  </div>
+
+  <!-- =================== 補題7.1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="lem7-1">
+    <div class="sec-header">
+      <div class="sec-tag">Lemma 7.1</div>
+      <h2>補題 7.1 — 生成系が1次従属なら1本間引ける</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">この節の目標</span>
+        <p>
+          §6 の定理6.7（基底への延長）は「1次独立な組に元を足していくと基底に届く」という主張だった。
+          §7 ではその<strong>逆向き</strong>を考える：$V$ を生成する組（生成系）が大きすぎて1次従属になっているなら，
+          そこから不要な元を間引いて基底そのものを取り出せる。この2つを組み合わせると，
+          「生成系」と「独立系」という2つの近似から，どちらの方向からでも基底に到達できることになる。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">補題 7.1</span>
+        $V$：$\mathbb{K}$-ベクトル空間，$v_1,\ldots,v_s\in V$ が $V$ を生成するが $\mathbb{K}$上1次従属（＝1次独立でない）とする。
+        このとき，ある $i\ (1\le i\le s)$ が存在して，$v_i$ を除いた
+        $$v_1,\ldots,v_{i-1},v_{i+1},\ldots,v_s$$
+        も $V$ を生成する。
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details open>
+        <summary>補題 7.1 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $v_1,\ldots,v_s$ が1次従属なので，$a_1,\ldots,a_s\in\mathbb{K}$ で少なくとも1つは $0$ でないものが存在して
+          $$a_1v_1+\cdots+a_sv_s=0$$
+          が成り立つ。$a_i\neq0$ となる $i$ を1つとると，
+          $$v_i = -\frac{a_1}{a_i}v_1-\cdots-\frac{a_{i-1}}{a_i}v_{i-1}-\frac{a_{i+1}}{a_i}v_{i+1}-\cdots-\frac{a_s}{a_i}v_s$$
+          となり，$v_i\in\langle v_1,\ldots,v_{i-1},v_{i+1},\ldots,v_s\rangle_{\mathbb{K}}$。よって
+          $$\langle v_1,\ldots,v_s\rangle_{\mathbb{K}} = \langle v_1,\ldots,v_{i-1},v_{i+1},\ldots,v_s\rangle_{\mathbb{K}}$$
+          （$v_i$ は右辺の span に既に含まれているので，付け加えても span は変わらない）。
+          左辺は仮定より $V$ に等しいので，右辺，つまり $v_i$ を除いた組も $V$ を生成する。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補題6.6 の対偶になっている</span>
+        <p>
+          補題6.6は「$v_1,\ldots,v_n$ が1次独立のとき，$w\notin\langle v_1,\ldots,v_n\rangle_{\mathbb{K}} \iff v_1,\ldots,v_n,w$ が1次独立」という主張だった。
+          この対偶を取ると「$w\in\langle v_1,\ldots,v_n\rangle_{\mathbb{K}} \iff v_1,\ldots,v_n,w$ が1次従属」となる。
+          補題7.1 の証明はこれを $w=v_i$（残りを $v_1,\ldots,v_n$）の形で使っているにすぎない。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定理7.2 =================== -->
+  <div class="section" id="thm7-2">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem 7.2</div>
+      <h2>定理 7.2 — 生成系を間引いて基底を取り出す</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 7.2</span>
+        $V$：$\mathbb{K}$-ベクトル空間，$v_1,\ldots,v_s\in V$（$s$ は有限）が $V$ を生成するとする。このとき：
+        <ol>
+          <li>$V$ は有限次元であり，$n=\dim V$ とすると $n\le s$。</li>
+          <li>ある $1\le j_1&lt;j_2&lt;\cdots&lt;j_n\le s$ が存在して，$v_{j_1},\ldots,v_{j_n}$ は $V$ の基底になる。</li>
+        </ol>
+      </div>
+
+      <details open>
+        <summary>定理 7.2 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $v_1,\ldots,v_s$ が1次独立なら，生成する＋1次独立で，これ自身が定義6.1により $V$ の基底（$n=s$ の場合）。<br><br>
+          1次独立でないなら，補題7.1 により，ある1本を除いても残りが $V$ を生成する。この「1次従属なら1本間引く」操作を繰り返す。
+          各回で元の個数が1つずつ減り，かつ常に $V$ を生成する状態を保つので，有限回（高々 $s-1$ 回）で
+          <ul>
+            <li>元の個数が $0$ になる（$V=\{0\}$ の場合。空集合は $\{0\}$ の基底とみなせる），または</li>
+            <li>残った組が1次独立になる（このとき生成する＋1次独立＝基底）</li>
+          </ul>
+          のいずれかに到達する。こうして得られた基底は，最初の $v_1,\ldots,v_s$ の一部（部分列）
+          $v_{j_1},\ldots,v_{j_n}$（$1\le j_1&lt;\cdots&lt;j_n\le s$，$n$ はこの基底の元の個数）である。
+          系6.3（$\dim V=n \iff n$ 個の基底が存在）より $\dim V=n$。基底の個数は間引く前の個数を超えないので $n\le s$。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">定理6.7 との対応</span>
+        <p>
+          定理6.7（基底への延長）：1次独立な組 → 元を<strong>足して</strong>基底に到達。<br>
+          定理7.2（本定理）：生成系 → 元を<strong>間引いて</strong>基底に到達。<br>
+          「独立性を保ったまま増やす」と「生成性を保ったまま減らす」という，互いに双対的な2つの操作で，
+          どちらも基底という同じ着地点にたどり着く。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系7.3 =================== -->
+  <div class="section" id="cor7-3">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 7.3</div>
+      <h2>系 7.3 — 有限次元 ⟺ 有限生成</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="cor">
+        <span class="box-label">系 7.3</span>
+        $\mathbb{K}$-ベクトル空間 $V$ が有限次元になるための必要十分条件は，$V$ が有限個の元で生成されることである。
+      </div>
+
+      <details>
+        <summary>系 7.3 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          （$\Rightarrow$）$\dim V=n<+\infty$ とすると，系6.3 より $V$ の $n$ 個の元からなる基底 $v_1,\ldots,v_n$ が存在する。
+          基底は特に生成系なので，$V$ は有限個（$n$ 個）の元で生成される。<br><br>
+          （$\Leftarrow$）$v_1,\ldots,v_s$（有限個）が $V$ を生成するとすると，定理7.2(1) より $V$ は有限次元。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">意味</span>
+        <p>
+          「有限次元」という条件は，一見「同型 $V\cong\mathbb{K}^n$ が存在する」という抽象的な言い方（定義4.1）でしか
+          述べられなかったが，本系により「有限個の元で $V$ 全体を張れるかどうか」という，より直接的で確認しやすい条件と同値になる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定理7.4 =================== -->
+  <div class="section" id="thm7-4">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem 7.4</div>
+      <h2>定理 7.4 — 無限次元であることの特徴づけ</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 7.4</span>
+        $V$：$\mathbb{K}$-ベクトル空間とする。このとき以下は同値：
+        <ol>
+          <li>$V$ は無限次元である。</li>
+          <li>$v_1,v_2,\ldots\in V$ なる無限列で，任意の $r\ge1$ に対して $v_1,\ldots,v_r$ が1次独立になるものが存在する。</li>
+          <li>任意の $n\ge1$ に対して，$V$ の $n$ 次元部分空間が存在する。</li>
+        </ol>
+      </div>
+
+      <details open>
+        <summary>定理 7.4 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          <strong>(1) $\Rightarrow$ (2)：</strong>
+          $v_1,\ldots,v_r$ をすでに1次独立に選べたとする（$r=1$ では $V\neq\{0\}$ から $0\neq v_1\in V$ を1つ取ればよい）。
+          $V$ は無限次元なので，$v_1,\ldots,v_r$ は $V$ の基底ではない（基底なら $\dim V=r<+\infty$ になってしまう）。
+          1次独立なので，基底でない以上 $V$ を生成しない（定義6.1）。よって
+          $$\langle v_1,\ldots,v_r\rangle_{\mathbb{K}} \subsetneq V$$
+          ゆえ $v_{r+1}\in V-\langle v_1,\ldots,v_r\rangle_{\mathbb{K}}$ が取れる。補題6.6 より $v_1,\ldots,v_{r+1}$ は1次独立。
+          これを繰り返せば，任意の長さまで1次独立な列を延ばせる（無限列が得られる）。<br><br>
+
+          <strong>(2) $\Rightarrow$ (3)：</strong>
+          $n\ge1$ を任意に取り，$V_n=\langle v_1,\ldots,v_n\rangle_{\mathbb{K}}$ とおく。
+          $v_1,\ldots,v_n$ は（(2) より）1次独立で，かつ（$V_n$ の定義より）$V_n$ を生成するので，$V_n$ の基底。
+          よって $\dim V_n=n$。これで $n$ 次元部分空間 $V_n\subseteq V$ が得られた。<br><br>
+
+          <strong>(3) $\Rightarrow$ (1)：</strong>
+          対偶を示す。$\dim V=m<+\infty$ と仮定する。$n&gt;m$ をとり，$W$ を $V$ の $n$ 次元部分空間とする（存在するとして矛盾を導く）。
+          $$\mathbb{K}^n \xrightarrow{\ \sim\ } W \hookrightarrow V \xrightarrow{\ \sim\ } \mathbb{K}^m$$
+          という合成（$W\cong\mathbb{K}^n$ の同型，包含写像，$V\cong\mathbb{K}^m$ の同型の3つの合成）を考えると，
+          同型と単射（包含）の合成なので全体として単射な $\mathbb{K}$-線形写像 $\mathbb{K}^n\to\mathbb{K}^m$ が得られる。
+          しかし $n&gt;m$ なので，これは系3.5（$m&lt;n$ なら $\mathbb{K}^n\to\mathbb{K}^m$ の線形写像は単射になれない）に矛盾する。
+          よって「$\dim V&lt;+\infty$ かつ任意の $n$ に対し $n$ 次元部分空間が存在する」は不合理，つまり (3) ならば $V$ は無限次元。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 — $C^\infty((a,b))$ は無限次元（$-\infty\le a&lt;b\le+\infty$）</span>
+        <p>
+          各 $k\ge0$ に対して $x^k:(a,b)\to\mathbb{C},\ x\mapsto x^k$（$x^0=1$）とおく。任意の $p\ge0$ に対して，
+          $1,x,\ldots,x^p\in C^\infty((a,b))$ は $\mathbb{C}$上1次独立であることを示す。
+        </p>
+        <details>
+          <summary>証明（クリックで展開）</summary>
+          <div class="proof-body">
+            $f(x)=\lambda_p x^p+\cdots+\lambda_1 x+\lambda_0$ が任意の $a&lt;x&lt;b$ に対して恒等的に $0$ になるとする。
+            もし $\lambda_p,\ldots,\lambda_0$ のうち $0$ でないものが存在すれば，それらのうち添字が最大になるものを $\lambda_\ell\neq0$
+            （$0\le\ell\le p$）とすると，
+            $$f(x)=\lambda_\ell x^\ell+\cdots+\lambda_1x+\lambda_0,\qquad \lambda_\ell\neq0$$
+            は次数 $\ell$ の多項式であり，代数学の基本定理より $\ell$ 個の根 $\alpha_1,\ldots,\alpha_\ell\in\mathbb{C}$（重複込め）を用いて
+            $$f(x)=\lambda_\ell(x-\alpha_1)\cdots(x-\alpha_\ell)$$
+            と書ける。$\{\alpha_1,\ldots,\alpha_\ell\}\cap(a,b)$ は高々有限集合だから，そこに含まれない $x\in(a,b)$ が取れて，
+            そこでは $f(x)\neq0$ となり，$f\equiv0$ に矛盾する。よって $\lambda_p=\cdots=\lambda_0=0$ でなければならず，
+            $1,x,\ldots,x^p$ は1次独立。
+            <div class="qed">$\blacksquare$</div>
+          </div>
+        </details>
+        <p>
+          任意の $p$ についてこれが成り立つので，$v_k=x^{k-1}\ (k=1,2,\ldots)$ とおけば定理7.4(2) の無限列が得られる。
+          よって定理7.4「(2)$\Rightarrow$(1)」より，$C^\infty((a,b))$ は無限次元である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定理7.5 =================== -->
+  <div class="section" id="thm7-5">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem 7.5</div>
+      <h2>定理 7.5 — 部分空間の次元</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 7.5</span>
+        $V$：$n$ 次元 $\mathbb{K}$-ベクトル空間，$W$ を $V$ の任意の部分空間とする。このとき $W$ は有限次元であり，
+        $$\dim W\le \dim V$$
+        かつ，$\dim W=\dim V$ となることと $W=V$ となることは同値である。
+      </div>
+
+      <details open>
+        <summary>定理 7.5 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $W$ を $V$ の任意の部分空間とする。もし $W$ が有限次元でないなら，定理7.4「(1)$\Rightarrow$(3)」を $W$ 自身に適用すると，
+          任意の $\ell&gt;0$ に対して $W$ は $\ell$ 次元部分空間 $U$ を含む。この $U$ は $V$ の部分空間でもあるので，
+          定理7.4「(3)$\Rightarrow$(1)」より $V$ が無限次元になってしまい，$\dim V=n&lt;+\infty$ に矛盾する。
+          よって $\dim W=m&lt;+\infty$ なるものが存在する。<br><br>
+
+          $v_1,\ldots,v_m$ を $W$ の基底とすると，これは $V$ の1次独立な元でもあるので，定理6.5(1) より $m\le n$。<br><br>
+
+          もし $m=n$ なら，$v_1,\ldots,v_m(=v_1,\ldots,v_n)$ は個数が $n=\dim V$ に一致する1次独立な組なので，
+          系6.4 より $V$ の基底になる。よって
+          $$W = \langle v_1,\ldots,v_m\rangle_{\mathbb{K}} = V$$
+          逆に $W=V$ なら明らかに $\dim W=\dim V$。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 — $\Ker(T)$ に「標準的な」基底はない</span>
+        <p>
+          $T:\mathbb{R}^3\to\mathbb{R},\ (x_1,x_2,x_3)^\top\mapsto x_1+x_2+x_3$ とすると，
+          $$\Ker(T)=\{(x_1,x_2,x_3)^\top\in\mathbb{R}^3 \mid x_1+x_2+x_3=0\}$$
+          は定理7.5 より有限次元で $\dim\Ker(T)\le\dim\mathbb{R}^3=3$。実際には $\Ker(T)$ は原点を通る平面で，
+          $$(1,-1,0)^\top,\ (0,1,-1)^\top$$
+          などが基底になり，$\dim\Ker(T)=2$（真部分空間なので $\ne\dim\mathbb{R}^3$，定理7.5 後半とも整合的）。
+          ただし $\mathbb{R}^3$ 自身には標準基底 $e_1,e_2,e_3$ という「特別な」基底があるのに対し，
+          部分空間 $\Ker(T)$ の基底の取り方には特にこれといった標準的な選び方はなく，
+          上と別の基底（例えば $(1,0,-1)^\top,(0,1,-1)^\top$ など）を選んでも構わない。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== まとめ =================== -->
+  <div class="section" id="summary">
+    <div class="sec-header">
+      <div class="sec-tag">Summary</div>
+      <h2>まとめ — §7 の全体像</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">§7 の核心</span>
+        <table class="axiom-table">
+          <tr><th>結果</th><th>内容</th></tr>
+          <tr>
+            <td>補題7.1</td>
+            <td>生成系が1次従属なら，ある1本を除いてもまだ生成系（無駄な元を間引ける）</td>
+          </tr>
+          <tr>
+            <td>定理7.2</td>
+            <td>有限生成系は間引きを繰り返すことで基底（の部分列）に到達する。$\dim V\le$ 生成系の個数</td>
+          </tr>
+          <tr>
+            <td>系7.3</td>
+            <td>有限次元 $\iff$ 有限個の元で生成される</td>
+          </tr>
+          <tr>
+            <td>定理7.4</td>
+            <td>無限次元 $\iff$ 任意の長さの1次独立列が取れる $\iff$ 任意の $n$ に対し $n$ 次元部分空間が存在</td>
+          </tr>
+          <tr>
+            <td>定理7.5</td>
+            <td>有限次元 $V$ の部分空間 $W$ は自動的に有限次元で $\dim W\le\dim V$。等号は $W=V$ と同値</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <span class="box-label">§6・§7 の繋がり（論理の流れ）</span>
+        <div style="overflow-x:auto">
+          <pre style="font-family:monospace; line-height:2; font-size:.87rem; color:#333">
+定義6.1（基底）── 補題6.6（はみ出す元を足しても独立）
+  ├── 定理6.5（独立な元は最大dim V個）
+  │     └── 定理6.7（独立な組は基底へ延長できる）
+  └── 補題7.1（生成系が従属なら1本間引ける：補題6.6の対偶）
+        └── 定理7.2（生成系は間引いて基底の部分列に到達／dim V≦生成系の個数）
+              ├── 系7.3（有限次元 ⟺ 有限生成）
+              ├── 定理7.4（無限次元の3つの同値な特徴づけ）
+              │     └── 例：C^∞((a,b)) は無限次元（1,x,…,x^p が任意のpで独立）
+              └── 定理7.5（部分空間は自動的に有限次元・dim W≦dim V・等号⟺W=V）
+          </pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

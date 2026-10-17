@@ -1,0 +1,827 @@
+<!DOCTYPE html><!-- 「第1章 熱力学の基本概念 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>第1章 熱力学の基本概念 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="td.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    tags: 'ams',
+    macros: {
+      pd: ['\\left(\\frac{\\partial #1}{\\partial #2}\\right)_{#3}',3]
+    }
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body data-nav-page="ch1">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">熱力学ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">ホーム</a>
+      <a href="ch0.html" data-page="ch0">第0章</a>
+      <a href="ch1.html" data-page="ch1" class="active">第1章</a>
+      <a href="ch2.html" data-page="ch2">第2章</a>
+      <a href="ch3.html" data-page="ch3">第3章</a>
+      <a href="ch4.html" data-page="ch4">第4章</a>
+      <a href="ch5.html" data-page="ch5">第5章</a>
+      <a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a>
+      <a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2014.html" data-page="kakomon_2014">2014</a>
+      <a href="kakomon_2012.html" data-page="kakomon_2012">2012</a>
+      <a href="kakomon_2011.html" data-page="kakomon_2011">2011</a>
+      <a href="kakomon_2010.html" data-page="kakomon_2010">2010</a>
+      <a href="kakomon_2009.html" data-page="kakomon_2009">2009</a>
+      <a href="kakomon_2008.html" data-page="kakomon_2008">2008</a>
+      <a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+    </div>
+  </div>
+</nav>
+
+<div class="chapter-layout">
+<!-- 本文の各節へ移動できる目次を、横の領域にまとめる。 --><aside class="sidebar">
+  <div class="sidebar-title">第1章 目次</div>
+  <ul class="sidebar-nav">
+    <li><a href="#s1-1">1.1 温度と経験温度</a></li>
+    <li class="sub-item"><a href="#s1-1-pd">偏微分の定義</a></li>
+    <li class="sub-item"><a href="#s1-1-beta">定圧膨張率 $\beta$</a></li>
+    <li class="sub-item"><a href="#s1-1-remark">★ 温度の本質</a></li>
+    <li><a href="#s1-2">1.2 熱平衡</a></li>
+    <li class="sub-item"><a href="#s1-2-def">熱平衡の定義</a></li>
+    <li class="sub-item"><a href="#s1-2-0law">第ゼロ法則</a></li>
+    <li class="sub-item"><a href="#s1-2-cap">熱容量</a></li>
+    <li><a href="#s1-3">1.3 状態量と状態方程式</a></li>
+    <li class="sub-item"><a href="#s1-3-def">状態量の定義</a></li>
+    <li class="sub-item"><a href="#s1-3-ext">示量性・示強性</a></li>
+    <li class="sub-item"><a href="#s1-3-dof">状態の自由度</a></li>
+    <li class="sub-item"><a href="#s1-3-taylor1">1変数テイラー展開の復習</a></li>
+    <li class="sub-item"><a href="#s1-3-taylor2">2変数テイラー展開と全微分</a></li>
+    <li class="sub-item"><a href="#s1-3-dP">$dP$ の全微分形</a></li>
+    <li class="sub-item"><a href="#s1-3-triple">偏微分の $-1$ 関係</a></li>
+    <li class="sub-item"><a href="#s1-3-diffV">状態方程式の微分形と $\beta$，$\kappa$，$\alpha_P$</a></li>
+    <li class="sub-item"><a href="#s1-3-exact">完全微分の条件（補足）</a></li>
+  </ul>
+</aside>
+
+<main class="main-content">
+  <div class="chapter-header">
+    <div class="chapter-badge">第 1 章</div>
+    <h1>熱力学の基本概念</h1>
+    <p class="abstract">
+      熱力学の土台となる概念 ―― 温度・熱平衡・状態量 ―― を順に導入する。
+      同時に，状態方程式の微小変化を記述するための数学的道具（偏微分・全微分・テイラー展開）を整備し，
+      実験で測定可能な係数 $\beta$（定圧膨張率），$\kappa$（等温圧縮率），$\alpha_P$（圧力係数）の関係を導く。
+    </p>
+  </div>
+
+  <!-- ═══ 1.1 ═══ -->
+  <h2 id="s1-1">1.1 温度と経験温度</h2>
+
+  <p>
+    日常的な意味での<strong>温度</strong>は，「熱い・冷たい」という感覚を定量化したものであり，
+    物質固有の性質を観測することで間接的に測定される。温度そのものを直接「見る」ことはできない。
+  </p>
+
+  <table class="td-table">
+    <thead><tr><th>温度計の種類</th><th>利用する物性</th></tr></thead>
+    <tbody>
+      <tr><td>水銀温度計・アルコール温度計</td><td>液体の体積（膨張）</td></tr>
+      <tr><td>電子体温計・白金抵抗温度計</td><td>電気抵抗（電気伝導度）</td></tr>
+      <tr><td>熱電対温度計</td><td>熱起電力</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>経験温度（摂氏温度）</div>
+    <div class="box-body">
+      <p>
+        1 気圧のもとで，水の融点を $0\,^\circ\mathrm{C}$，沸点を $100\,^\circ\mathrm{C}$ と定義し，
+        その間を 100 等分したものを 1℃ とする。
+        この「目盛りの付け方（約束）」を<strong>経験温度</strong>という。
+      </p>
+      <p>
+        摂氏温度 $t\,[^\circ\mathrm{C}]$ と熱力学温度 $T\,[\mathrm{K}]$ の変換：
+        $$T\,[\mathrm{K}] = t\,[^\circ\mathrm{C}] + 273.15$$
+        （ここでの $T\,[\mathrm{K}]$ は第3章で厳密に定義される「熱力学温度」を先取りした表記であり，
+        現時点では「絶対零度からの目盛り」という程度の理解でよい。）
+      </p>
+    </div>
+  </div>
+
+  <p>
+    経験温度の目盛りは，$0\,^\circ\mathrm{C}$ と $100\,^\circ\mathrm{C}$ という<strong>2点だけ</strong>を基準に
+    「その間を100等分する」という約束にすぎない。水銀の体積・気体の圧力・電気抵抗など，
+    物質ごとに温度に対する応答の仕方（関数形）は異なるので，2つの基準点で一致するように較正しても，
+    例えば「$50\,^\circ\mathrm{C}$」という<em>中間</em>の目盛りが，水銀温度計と気体温度計とで
+    厳密に一致する保証はどこにもない。
+  </p>
+
+  <p>
+    ここで次の重要な問いが生じる：
+    「<em>水銀で測った温度と気体で測った温度が「同じ」というのは，本当に普遍的なことか？</em>」
+    実際には，十分希薄な気体を使う気体温度計は，中身の気体の種類によらず互いによく一致することが
+    経験的に知られている（理想気体温度目盛り）。これが後の熱力学温度の下敷きになる。
+    しかし，物質に一切依存しない温度を与えるには，熱力学第二法則に基づいて定義される
+    <strong>熱力学温度</strong>（第3章）を待つ必要がある。
+  </p>
+
+  <h3 id="s1-1-pd">偏微分の定義</h3>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>偏微分</div>
+    <div class="box-body">
+      2変数関数 $z = f(x, y)$ の $x$ による偏微分を：
+      $$\left(\frac{\partial f}{\partial x}\right)_y
+        := \lim_{\Delta x \to 0} \frac{f(x + \Delta x,\; y) - f(x,\; y)}{\Delta x}$$
+      と定義する。添字 $y$ は「<strong>$y$ を固定したまま $x$ だけを変化させる</strong>」という意味。
+      <p>
+        熱力学では，固定する量が物理的に重大な意味をもつ。
+        例えば $\left(\dfrac{\partial V}{\partial T}\right)_P$ と
+        $\left(\dfrac{\partial V}{\partial T}\right)_S$ では，
+        固定するものが圧力 $P$ かエントロピー $S$ かで値が異なり，物理的意味も全く違う。
+        添字を省略してはならない。
+      </p>
+      <p>
+        <small>
+          純粋な数学では，$f(x,y)$ という関数の書き方自体が「$y$ を止めて $x$ で微分する」ことを
+          暗に指定しており，$\partial f/\partial x$ に固定変数の添字を書く必要はない。
+          添字 $y$（や $\left(\dfrac{\partial V}{\partial T}\right)_P$ の $P$）を明示的に書くのは，
+          熱力学で同じ記号（$V,T$ など）に対して固定する変数の組み合わせが何通りもあり，
+          どれを固定するかで値も物理的意味も変わってしまうために付ける，物理での慣習である。
+        </small>
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s1-1-beta">定圧膨張率 $\beta$</h3>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>定圧膨張率（熱膨張率） $\beta$</div>
+    <div class="box-body">
+      $$\beta = \frac{1}{V}\left(\frac{\partial V}{\partial T}\right)_P$$
+      <p>
+        圧力 $P$ を一定に保ちながら温度を 1 K 上昇させたとき，
+        体積が相対的にどれだけ変化するかを表す係数。単位は $\mathrm{K}^{-1}$。
+        「体積を $V$ で割る」のは，系の大きさに依存しない（示強性の）係数にするため。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">例</span>理想気体の $\beta$</div>
+    <div class="box-body">
+      <p>理想気体の状態方程式 $PV = nRT$ から $V = nRT/P$（圧力 $P$ 一定）。よって：</p>
+      $$\begin{aligned}
+        \beta &= \frac{1}{V}\left(\frac{\partial V}{\partial T}\right)_P \\
+              &= \frac{1}{V} \cdot \frac{nR}{P} \\
+              &= \frac{1}{V} \cdot \frac{V}{T} \\
+              &= \frac{1}{T} \;\ge 0
+      \end{aligned}$$
+      <p>
+        （3つ目の等号では，状態方程式 $PV=nRT$ より $nR/P = V/T$ となることを使った。）
+        $\beta = 1/T > 0$ は「温度を上げると体積が増える」ことに対応し，
+        $T>0$（熱力学温度は常に正）である限り理想気体では常に成り立つ。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">補足</span>水の異常：$4^\circ\mathrm{C}$ で密度が最大</div>
+    <div class="box-body">
+      <p>
+        ほとんどの物質では $\beta > 0$ だが，<strong>水は $0^\circ\mathrm{C}$ から $4^\circ\mathrm{C}$ の間で $\beta < 0$</strong>。
+        すなわち，温めると縮む（密度が増す）。$4^\circ\mathrm{C}$ で密度が最大となり，
+        湖の底は冬でも約 $4^\circ\mathrm{C}$ に保たれる（$\Rightarrow$ 湖が完全凍結せず水生生物が冬を越せる）。
+      </p>
+      <p>
+        この異常は水分子の水素結合ネットワーク構造に起因するもので，理想気体とは本質的に異なる。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s1-1-remark">★ 温度の本質についての注意</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">重要</span>温度計は使えるが，温度の本質はまだ解明されていない</div>
+    <div class="box-body">
+      <p>
+        温度は，温度計の目盛りを一度約束してしまえば，誰でも簡単に測定できる量である。
+        しかし「<em>温度とは本当は何を測っているのか</em>」という問いに答えるためには：
+      </p>
+      <ul>
+        <li><strong>熱力学第二法則</strong>（Carnotサイクル）から「熱力学温度」を定義するか（第3章），</li>
+        <li><strong>分子運動論・統計力学</strong>で「温度は分子の平均運動エネルギーに比例する量」として理解するか，</li>
+      </ul>
+      <p>のどちらかが必要となる。この第1章では，その答えを保留にしたまま進む。</p>
+    </div>
+  </div>
+
+  <!-- ═══ 1.2 ═══ -->
+  <h2 id="s1-2">1.2 熱平衡</h2>
+
+  <h3 id="s1-2-def">熱平衡の定義と例</h3>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>熱平衡状態</div>
+    <div class="box-body">
+      <p>
+        外部から孤立させた系，あるいは他の系と熱的に接触させた系を十分長い時間放置したとき，
+        マクロな観測量（温度・圧力・体積など）がそれ以上時間変化しなくなった状態を
+        <strong>熱平衡状態</strong>という。2つの系を熱接触させた場合には，
+        両者の間で正味の熱のやり取りがなくなり，共通の温度に達した状態を指す。
+      </p>
+      <ul>
+        <li>マクロには静止している（観測量 = 一定）</li>
+        <li>ミクロには常に揺らいでいる（各分子は熱運動している）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">例</span>食塩水の熱平衡</div>
+    <div class="box-body">
+      <p>
+        容器に入った食塩水は，マクロに見れば「濃度・体積」が時間的に一定 → 熱平衡状態。
+        ミクロに見れば，個々の Na$^+$ や Cl$^-$ は絶えず熱運動しており，
+        局所的な濃度は場所ごとに微妙に異なる。
+        熱力学が扱うのは，あくまでもこの「マクロに見た平均的な状態」である。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">重要</span>熱力学が扱う対象</div>
+    <div class="box-body">
+      熱力学は，<strong>熱平衡状態</strong>と，<strong>熱平衡状態の間の遷移過程</strong>を扱う学問である。
+      平衡でない状態（例：乱流・化学反応の途中・光が当たり続けている系）は
+      通常の熱力学の枠組みの外にある。
+    </div>
+  </div>
+
+  <h3 id="s1-2-0law">熱力学第0法則（熱平衡の推移律）</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">第ゼロ法則</span>熱平衡の存在の保証（経験則）</div>
+    <div class="box-body">
+      <p>
+        物体 A と B が熱平衡にあり，かつ A と C も熱平衡にあるとき，
+        <strong>B と C も熱平衡にある。</strong>
+      </p>
+      <p style="margin-top:.5em;">
+        「A を温度計とみなす」と：「同じ温度計で同じ値を示す物体は互いに熱平衡にある」。
+        これが「温度」という共通尺度の存在を論理的に保証する。
+      </p>
+      <p style="margin-top:.5em;">
+        数学的に言うと，「熱平衡にある」という関係は，反射律（$A$ は $A$ 自身と熱平衡）・
+        対称律（$A,B$ が熱平衡なら $B,A$ も熱平衡）を明らかに満たし，第ゼロ法則はこれに
+        <strong>推移律</strong>を付け加える。3つの性質が揃うとこれは数学的に<strong>同値関係</strong>となり，
+        あらゆる物体を「互いに熱平衡にある物体どうし」のグループ（同値類）に重なりなく分類できる。
+        この各グループに1つずつ数値ラベルを貼ったものが<strong>温度</strong>である。
+        もし第ゼロ法則が成り立たなければ，「A と B が同じ温度」かつ「A と C が同じ温度」であっても
+        「B と C が同じ温度」とは限らず，矛盾のない温度の目盛りをそもそも定義できない。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">歴史</span>なぜ「第ゼロ法則」か</div>
+    <div class="box-body">
+      <p>
+        この法則の内容は第一・第二法則よりも論理的に先立つ（温度概念の前提）が，
+        R. H. Fowler（1889–1944）がその重要性を指摘したのは，
+        第一・第二法則がすでに確立された後のことだった（1930年代）。
+        「後から付け加えた序章」であるため「第ゼロ法則」と命名された。
+      </p>
+    </div>
+  </div>
+
+  <p>
+    第ゼロ法則から，温度という概念が一貫して定義できる。
+    さらに，温度の間の関係から熱容量の非負性が導かれる。
+  </p>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">性質</span>温度の単調性と熱容量の非負性</div>
+    <div class="box-body">
+      <p>
+        温度 $T_1$ の物体 A と温度 $T_2$（$T_1 < T_2$）の物体 B を熱接触させると，
+        （熱は高温側から低温側へ流れるという経験的事実 ―― 厳密には第二法則の帰結として第3章で正当化される ――
+        により）最終的に共通の平衡温度 $T^*$ に落ち着き，
+        $$T_1 < T^* < T_2$$
+        を満たす（中間温度。$T^*$ が $T_2$ を超えたり $T_1$ を下回ったりすることはない）。
+      </p>
+      <p>
+        この事実から，<strong>物体の熱容量は非負</strong>（$C \ge 0$）であることが示される。
+        簡単のため A・B 以外とは熱のやり取りをしない（両者を合わせた系は孤立系）とすると，
+        エネルギー保存（第一法則。第2章で厳密化する）より，A が失った熱量と B が得た熱量は
+        符号を除いて等しい。
+      </p>
+      <ul style="margin-top:.4em;">
+        <li>
+          高温体 A：温度は $T_2 \to T^*$ で下がる（$\Delta T_A = T^*-T_2 < 0$）。
+          熱は流出する（$\Delta Q_A < 0$）ので $C_A = \Delta Q_A/\Delta T_A > 0$。
+        </li>
+        <li>
+          低温体 B：温度は $T_1 \to T^*$ で上がる（$\Delta T_B = T^*-T_1 > 0$）。
+          熱は流入する（$\Delta Q_B > 0$）ので $C_B = \Delta Q_B/\Delta T_B > 0$。
+        </li>
+      </ul>
+      <p>
+        すなわちどちら側でも「熱量の変化」と「温度の変化」は必ず同符号になり，$C \ge 0$
+        （熱を加えると温度は下がらない）が従う。相転移点などの特殊な場合を除き，通常の物質はこの性質を満たす。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s1-2-cap">熱容量の定義</h3>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>熱容量 $C(T)$</div>
+    <div class="box-body">
+      $$C(T) = \lim_{\Delta T \to 0} \frac{\Delta Q}{\Delta T}$$
+      <p>
+        温度 $T$ の物体の温度を微小量 $\Delta T$ だけ上昇させるのに必要な熱量 $\Delta Q$ の比の極限値。
+        単位は $\mathrm{J/K}$。
+        $C \ge 0$（熱容量の非負性）は上記の温度の単調性から保証される。
+      </p>
+      <p>
+        何を一定に保つかによって熱容量の値は変わる：定積熱容量 $C_V$，定圧熱容量 $C_P$（第2章で詳述）。
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ 1.3 ═══ -->
+  <h2 id="s1-3">1.3 状態量と状態方程式</h2>
+
+  <h3 id="s1-3-def">状態量の定義</h3>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>状態量（state variable）</div>
+    <div class="box-body">
+      <strong>状態量</strong>とは，熱平衡状態に対して一意に定まる物理量である。
+      過去の履歴や変化の経路によらず，<em>現在の熱平衡状態だけで決まる</em>。
+      <ul style="margin-top:.4em;">
+        <li><strong>状態量の例</strong>：温度 $T$，体積 $V$，圧力 $P$，内部エネルギー $U$，エントロピー $S$ など</li>
+        <li><strong>状態量でない例</strong>：熱 $Q$，仕事 $W$（これらは「過程量」で経路に依存する）</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 id="s1-3-ext">示量性と示強性</h3>
+
+  <p>
+    状態量は「系の大きさ」に対してどのように変化するかによって2種類に分類される。
+    温度 $T$ 一定のまま系のサイズを2倍にする（粒子数 $N$・体積 $V$ を2倍にする）ことを想定する。
+  </p>
+
+  <table class="td-table">
+    <thead>
+      <tr><th>種類</th><th>定義</th><th>例</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>示量性</strong>（extensive）</td>
+        <td>系を2倍にすると2倍になる<br>$X(T, 2V, 2N) = 2X(T,V,N)$</td>
+        <td>体積 $V$，内部エネルギー $U$，エントロピー $S$，物質量 $n$，磁化 $M$</td>
+      </tr>
+      <tr>
+        <td><strong>示強性</strong>（intensive）</td>
+        <td>系を2倍にしても変わらない<br>$Y(T, 2V, 2N) = Y(T,V,N)$</td>
+        <td>温度 $T$，圧力 $P$，化学ポテンシャル $\mu$，磁場 $H$</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">補足</span>共役ペアとエネルギー</div>
+    <div class="box-body">
+      <p>
+        示量性と示強性は「共役なペア」として現れることが多い：
+        $(S, T)$，$(V, P)$，$(M, H)$，$(n, \mu)$ など。
+        これらのペアの積は「エネルギー」の次元をもつ（例：$P \cdot dV$ は仕事の次元）。
+        この対応は，熱力学関数（Helmholtz自由エネルギー $F$，Gibbs自由エネルギー $G$ など）を
+        理解する上で重要（第4章）。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s1-3-dof">状態量の自由度と状態方程式</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">経験則</span>気体の状態は2つの変数で決まる</div>
+    <div class="box-body">
+      <p>
+        単純な気体（1成分・均一系，磁場や表面張力などの効果を無視できる「単純圧縮系」）では，
+        熱平衡状態を指定するために必要な独立な状態変数の数は<strong>2つ</strong>で十分である。
+        これはボイルの法則・シャルルの法則・ゲイ＝リュサックの法則などの実験事実をまとめると，
+        3つの変数 $P,V,T$ が独立ではなく1本の関係式（状態方程式）で結ばれていることに対応する
+        （$P$–$V$–$T$ 空間の中で，実現可能な熱平衡状態は2次元の曲面をなす）。
+      </p>
+      <p>
+        より一般に，複数の成分・複数の相が共存する系まで含めた自由度の数は
+        <strong>Gibbsの相律</strong>$f = C - P_\text{相} + 2$
+        （$f$：自由に選べる示強変数の数，$C$：成分（物質の種類）の数，$P_\text{相}$：共存する相の数。
+        統計力学の範囲で導かれる結果であり，ここでは結果のみを引用する）で与えられ，
+        1成分・1相の気体では $f = 1 - 1 + 2 = 2$ となって上の経験則と一致する。
+      </p>
+      <p>
+        どの2つを独立変数に選ぶかは一通りに決まっているわけではない。
+        例えば $(T, V)$，$(T, P)$，$(P, V)$ のいずれの組も独立変数として選べる。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>状態方程式</div>
+    <div class="box-body">
+      状態量の間に成立する関係式を<strong>状態方程式</strong>という。
+      状態変数が2つなので，それ以外の状態量はこの2つの関数として表される。
+      <p>例えば $P$ を $(T,V)$ の関数として表したもの：</p>
+      <ul>
+        <li>理想気体：$P = nRT/V$（ボイル–シャルルの法則）</li>
+        <li>ファンデルワールス気体：$\displaystyle\left(P + \frac{n^2 a}{V^2}\right)(V - nb) = nRT$（分子間力と体積を補正）</li>
+      </ul>
+      <p>
+        状態方程式は<strong>実験事実</strong>から得られるもの（理論からだけでは導けない）。
+        ただし，状態方程式の具体的な形は実験で測定できる係数（$\beta$, $\kappa$ など）から
+        組み立てることができる。
+      </p>
+      <p>
+        状態方程式の作り方は大きく2通りある：
+      </p>
+      <ul>
+        <li>
+          <strong>誰かが思いついたモデルから作る</strong>：分子間力や分子自身の体積といった
+          物理的な描像を仮定し，そこから関数形を組み立てる（例：ファンデルワールス気体の
+          $a$（引力の補正），$b$（体積の補正））。
+        </li>
+        <li>
+          <strong>実験データから直接決める</strong>：$P(T,V)$ を系統的に測定し，
+          $T \to T+\Delta T$，$V \to V+\Delta V$ に対する $P \to P+\Delta P$ の変化を
+          $\Delta T, \Delta V$ で表す（次項のテイラー展開・全微分の考え方がここで使われる）。
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 id="s1-3-taylor1">1変数テイラー展開の復習</h3>
+
+  <p>
+    状態方程式の微小変化を扱うために，まずテイラー展開を復習する。
+  </p>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">公式</span>1変数テイラー展開</div>
+    <div class="box-body">
+      <p>$y = f(x)$ が滑らかな関数であれば，$x = x_0$ のまわりで：</p>
+      $$\begin{aligned}
+        f(x) = {}&f(x_0) + f'(x_0)(x - x_0) \\
+        &+ \frac{1}{2!}f''(x_0)(x-x_0)^2 + \cdots
+      \end{aligned}$$
+      <p>$x = x_0 + \Delta x$ と置いて1次の項まで取ると：</p>
+      $$\begin{aligned}
+        \Delta f &= f(x_0 + \Delta x) - f(x_0) \\
+        &\approx f'(x_0)\,\Delta x \quad (\Delta x \to 0)
+      \end{aligned}$$
+      <p>
+        これが「$x$ の微小変化 $\Delta x$ に対する $f$ の変化量の1次近似」。
+        $\Delta x \to 0$ の極限で <em>$dx$，$df$</em> という微分の記号を使う。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s1-3-taylor2">2変数テイラー展開と全微分</h3>
+
+  <p>
+    状態方程式は2変数関数 $z = f(x, y)$ の形をもつ（例：$P = P(T,V)$）。
+    2点 $(x_0, y_0)$ と $(x_0 + \Delta x, y_0 + \Delta y)$ の間での変化を展開する。
+  </p>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">導出</span>2変数テイラー展開 → 全微分</div>
+    <div class="box-body">
+      <p>$\Delta z = f(x_0+\Delta x,\; y_0 + \Delta y) - f(x_0, y_0)$ を計算する。
+      戦略は，1変数のテイラー展開を $x$ 方向・$y$ 方向へ順に2回適用することで，
+      2変数の変化を1変数の変化の積み重ねとして捉えることである。</p>
+
+      <p><strong>Step 1</strong>：$y$ を $y_0 + \Delta y$ に固定して $x$ を $x_0 \to x_0 + \Delta x$ へ動かす（1変数テイラー展開を $x$ について適用）：</p>
+      $$\begin{aligned}
+        f(x_0+\Delta x,\; y_0+\Delta y) &= f(x_0,\; y_0+\Delta y) \\
+          &\quad + \left(\frac{\partial f}{\partial x}\right)_{y_0+\Delta y}\!\!\Delta x + O(\Delta x^2) \tag{1}\label{eq-taylor-1}
+      \end{aligned}$$
+
+      <p><strong>Step 2</strong>：残った $f(x_0,\; y_0+\Delta y)$ を，今度は $y_0$ まわりで1変数テイラー展開する：</p>
+      $$\begin{aligned}
+        f(x_0,\; y_0+\Delta y) &= f(x_0, y_0) \\
+          &\quad + \left(\frac{\partial f}{\partial y}\right)_{x_0}\!\!\Delta y + O(\Delta y^2) \tag{2}\label{eq-taylor-2}
+      \end{aligned}$$
+
+      <p><strong>Step 3</strong>：$\eqref{eq-taylor-1}$ の偏微分係数 $\left(\partial f/\partial x\right)_{y_0+\Delta y}$ は，
+      本来 $y_0+\Delta y$ で評価すべきものだが，これも $y_0$ のまわりでテイラー展開して1次近似する：</p>
+      $$\begin{aligned}
+        \left(\frac{\partial f}{\partial x}\right)_{y_0+\Delta y}
+          &= \left(\frac{\partial f}{\partial x}\right)_{y_0} + O(\Delta y)
+      \end{aligned}$$
+      <p>この置き換えを $\eqref{eq-taylor-1}$ に戻すと $\Delta x \cdot O(\Delta y)$ という項が現れるが，
+      これは $\Delta x$ と $\Delta y$ の積であり1次より高次（2次）の微小量なので，1次近似の範囲では無視してよい。</p>
+
+      <p><strong>Step 4</strong>：$\eqref{eq-taylor-1}$ に $\eqref{eq-taylor-2}$ と Step 3 の置き換えを代入し，$O(\Delta x^2), O(\Delta y^2), \Delta x\cdot O(\Delta y)$ をすべて無視して $\Delta x, \Delta y \to 0$ の極限をとる：</p>
+      $$\begin{aligned}
+        \Delta z &= \left(\frac{\partial f}{\partial x}\right)_{y_0}\Delta x \\
+          &\quad + \left(\frac{\partial f}{\partial y}\right)_{x_0}\Delta y + O(2次以上)
+      \end{aligned}$$
+
+      <p>$\Delta x \to dx$，$\Delta y \to dy$，$\Delta z \to dz$ として，次の<strong>全微分</strong>を得る：</p>
+    </div>
+  </div>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">公式</span>全微分（2変数関数の1次近似）</div>
+    <div class="box-body">
+      $z = f(x, y)$ が滑らかな関数であれば，任意の $(x_0, y_0)$ の近傍で：
+      $$\boxed{dz = \left(\frac{\partial f}{\partial x}\right)_y dx
+             + \left(\frac{\partial f}{\partial y}\right)_x dy}$$
+      これは「$x$ が $dx$，$y$ が $dy$ だけ変化したときの $z$ の変化量 $dz$」の1次近似。
+    </div>
+  </div>
+
+  <h3 id="s1-3-dP">$P(T,V)$ の全微分形</h3>
+
+  <p>
+    気体の圧力 $P$ を $T$（温度）と $V$（体積）の関数 $P = P(T, V)$ と見ると，全微分は：
+  </p>
+  $$dP = \left(\frac{\partial P}{\partial T}\right)_V dT
+       + \left(\frac{\partial P}{\partial V}\right)_T dV$$
+
+  <p>
+    $(T,V)$ が $(T+\Delta T, V + \Delta V)$ に変化したとき，
+    $P$ の変化は $dP = \left(\partial P/\partial T\right)_V \Delta T + \left(\partial P/\partial V\right)_T \Delta V + O(2次)$
+    で近似される。
+  </p>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">等圧変化への適用</span>$dP = 0$（等圧変化）のとき</div>
+    <div class="box-body">
+      <p>等圧変化 $dP = 0$ の場合，上の全微分を $dT$ で割ると：</p>
+      $$\begin{aligned}
+        0 &= \left(\frac{\partial P}{\partial T}\right)_V \\
+          &\quad + \left(\frac{\partial P}{\partial V}\right)_T \left(\frac{\partial V}{\partial T}\right)_P
+      \end{aligned}$$
+      <p>ここで，圧力を一定に保つ経路に沿っているので $dV/dT$ は単なる比ではなく
+      $\left(\partial V/\partial T\right)_P$（$P$ を固定した偏微分）に等しいことを用いた。
+      これは次に導く「偏微分の $-1$ 関係」の $P,V,T$ の場合そのものである。</p>
+    </div>
+  </div>
+
+  <h3 id="s1-3-triple">3変数の偏微分値の $-1$ 関係</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">公式</span>偏微分の三重積 $= -1$</div>
+    <div class="box-body">
+      3つの状態量 $x, y, z$ が1つの方程式 $f(x,y,z) = 0$ で結ばれているとき：
+      $$\boxed{\left(\frac{\partial x}{\partial y}\right)_z
+        \left(\frac{\partial y}{\partial z}\right)_x
+        \left(\frac{\partial z}{\partial x}\right)_y = -1}$$
+      例えば $P, V, T$（状態方程式で1本の拘束がある場合）：
+      $$\left(\frac{\partial P}{\partial V}\right)_T
+        \left(\frac{\partial V}{\partial T}\right)_P
+        \left(\frac{\partial T}{\partial P}\right)_V = -1$$
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">証明</span>三重積 $= -1$ の証明（一般の 3 変数）</div>
+    <div class="box-body">
+      <p>$x, y, z$ が 3 変数だが 1 本の拘束式で結ばれているとする（独立変数は2つ）。</p>
+      <p>$x$ を $y, z$ の関数として全微分する：</p>
+      $$dx = \left(\frac{\partial x}{\partial y}\right)_z dy
+           + \left(\frac{\partial x}{\partial z}\right)_y dz \tag{1}\label{eq-triple-1}$$
+      <p>$y$ を $x, z$ の関数として全微分する：</p>
+      $$dy = \left(\frac{\partial y}{\partial x}\right)_z dx
+           + \left(\frac{\partial y}{\partial z}\right)_x dz \tag{2}\label{eq-triple-2}$$
+      <p>$\eqref{eq-triple-2}$ を $\eqref{eq-triple-1}$ に代入する：</p>
+      $$\begin{aligned}
+        dx &= \left(\frac{\partial x}{\partial y}\right)_z
+             \left[\left(\frac{\partial y}{\partial x}\right)_z dx
+                   + \left(\frac{\partial y}{\partial z}\right)_x dz\right]
+           + \left(\frac{\partial x}{\partial z}\right)_y dz \\
+        &= \left(\frac{\partial x}{\partial y}\right)_z\left(\frac{\partial y}{\partial x}\right)_z dx
+          + \left[\left(\frac{\partial x}{\partial y}\right)_z\left(\frac{\partial y}{\partial z}\right)_x
+                  + \left(\frac{\partial x}{\partial z}\right)_y\right] dz
+      \end{aligned}$$
+      <p>
+        $x$ と $z$ は独立変数なので，$dx$ と $dz$ の係数をそれぞれ比較できる：
+      </p>
+      <ul>
+        <li>$dx$ の係数：$1 = \left(\dfrac{\partial x}{\partial y}\right)_z\left(\dfrac{\partial y}{\partial x}\right)_z$
+          → 逆数の関係（偏微分の逆関係）</li>
+        <li>$dz$ の係数：$0 = \left(\dfrac{\partial x}{\partial y}\right)_z\left(\dfrac{\partial y}{\partial z}\right)_x
+          + \left(\dfrac{\partial x}{\partial z}\right)_y$</li>
+      </ul>
+      <p>$dz$ の係数から：</p>
+      $$\left(\frac{\partial x}{\partial y}\right)_z\left(\frac{\partial y}{\partial z}\right)_x
+        = -\left(\frac{\partial x}{\partial z}\right)_y$$
+      <p>両辺に $\left(\dfrac{\partial z}{\partial x}\right)_y$ を掛けると（逆数の関係から）：</p>
+      $$\left(\frac{\partial x}{\partial y}\right)_z
+        \left(\frac{\partial y}{\partial z}\right)_x
+        \left(\frac{\partial z}{\partial x}\right)_y = -1 \quad \blacksquare$$
+    </div>
+  </div>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">検証</span>理想気体で三重積を確認</div>
+    <div class="box-body">
+      <p>$PV = nRT$ から各偏微分を計算：</p>
+      $$\begin{aligned}
+        \left(\frac{\partial P}{\partial V}\right)_T &= -\frac{nRT}{V^2} = -\frac{P}{V}, \\
+        \left(\frac{\partial V}{\partial T}\right)_P &= \frac{nR}{P}, \\
+        \left(\frac{\partial T}{\partial P}\right)_V &= \frac{V}{nR}
+      \end{aligned}$$
+      <p>積を計算：</p>
+      $$\left(-\frac{P}{V}\right)\cdot\frac{nR}{P}\cdot\frac{V}{nR} = -1 \quad \checkmark$$
+    </div>
+  </div>
+
+  <h3 id="s1-3-diffV">状態方程式の微分形と $\beta$，$\kappa$，$\alpha_P$</h3>
+
+  <p>
+    今度は $V$ を独立変数 $(T, P)$ の関数として表す：$V = V(T, P)$。
+    全微分を取ると：
+  </p>
+  $$dV = \left(\frac{\partial V}{\partial T}\right)_P dT
+       + \left(\frac{\partial V}{\partial P}\right)_T dP$$
+
+  <p>
+    ここで登場する2つの偏微分係数が実験的に測定可能な重要な物理量である。
+  </p>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>定圧膨張率 $\beta$ と等温圧縮率 $\kappa$</div>
+    <div class="box-body">
+      $$\beta = \frac{1}{V}\left(\frac{\partial V}{\partial T}\right)_P
+        \quad\text{（定圧膨張率，熱膨張率）}$$
+      $$\kappa = -\frac{1}{V}\left(\frac{\partial V}{\partial P}\right)_T
+        \quad\text{（等温圧縮率）}$$
+      <p>
+        $\kappa$ の符号：$T$ 一定で圧力 $P$ を増やすと体積 $V$ は減る（$\partial V/\partial P < 0$）。
+        $\kappa$ が<em>正の値</em>になるよう，定義の前に $-1$ をつける。
+        単位：$\beta$ は $\mathrm{K}^{-1}$（温度の逆数），$\kappa$ は $\mathrm{Pa}^{-1}$（圧力の逆数）。
+      </p>
+    </div>
+  </div>
+
+  <p>これらを使うと，全微分式を書き直せる：</p>
+  $$\boxed{dV = V\beta\,dT - V\kappa\,dP}$$
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">例</span>理想気体の $\kappa$</div>
+    <div class="box-body">
+      <p>$V = nRT/P$ から：</p>
+      $$\begin{aligned}
+        \kappa &= -\frac{1}{V}\left(\frac{\partial V}{\partial P}\right)_T \\
+               &= -\frac{1}{V}\cdot\left(-\frac{nRT}{P^2}\right) \\
+               &= \frac{nRT}{PV \cdot P} \\
+               &= \frac{1}{P} > 0
+      \end{aligned}$$
+      <p>
+        $\kappa = 1/P$ は「圧力が高いほど圧縮しにくい」ことを意味する。
+        また，$\beta/\kappa = (1/T)/(1/P) = P/T$ は後述の圧力係数 $\alpha_P$ に等しい。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">公式</span>圧力係数 $\alpha_P = \beta/\kappa$</div>
+    <div class="box-body">
+      <p>定積変化 $dV = 0$ の条件を $dV = V\beta\,dT - V\kappa\,dP$ に代入すると：</p>
+      $$\begin{aligned}
+        0 &= V\beta\,dT - V\kappa\,dP \\
+          &\implies \frac{dP}{dT}\bigg|_{V=\text{const}} = \frac{\beta}{\kappa}
+      \end{aligned}$$
+      <p>すなわち：</p>
+      $$\boxed{\alpha_P := \left(\frac{\partial P}{\partial T}\right)_V = \frac{\beta}{\kappa}}$$
+      <p>
+        $\alpha_P$（<strong>圧力係数</strong>）は「体積一定のまま温度を上げたときの圧力変化率」。
+        $\beta$（膨張しやすさ）と $\kappa$（圧縮のしにくさ）で表せることがわかる。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">三重積との整合性</span>$\alpha_P = \beta/\kappa$ の別導出</div>
+    <div class="box-body">
+      <p>三重積 $= -1$ の公式に $\beta$ と $\kappa$ の定義を代入しても同じ結果が得られる：</p>
+      $$\begin{aligned}
+        \underbrace{\left(\frac{\partial P}{\partial V}\right)_T}_{-1/(V\kappa)}
+          &\cdot \underbrace{\left(\frac{\partial V}{\partial T}\right)_P}_{V\beta} \\
+          &\cdot \left(\frac{\partial T}{\partial P}\right)_V = -1
+      \end{aligned}$$
+      $$\begin{aligned}
+        \frac{-V\beta}{V\kappa}\cdot\left(\frac{\partial T}{\partial P}\right)_V &= -1 \\
+          &\implies \left(\frac{\partial T}{\partial P}\right)_V = \frac{\kappa}{\beta}
+      \end{aligned}$$
+      <p>逆数をとって $\alpha_P = (\partial P/\partial T)_V = \beta/\kappa$。2つの導出が一致する。</p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">応用</span>3つの係数のうち2つで1つが決まる</div>
+    <div class="box-body">
+      <p>
+        $\alpha_P = \beta/\kappa$ より，$\beta$（定圧膨張率），$\kappa$（等温圧縮率），$\alpha_P$（圧力係数）の
+        うち2つを測定すれば残りの1つが求まる。
+        体積一定 $V = \text{const}$ を厳密に保ちながら圧力を測る実験 $\alpha_P$ は難しいが，
+        $\beta$ と $\kappa$ から間接的に計算できる。
+      </p>
+      <p>
+        さらに，第2章で示す一般式 $C_P - C_V = TV\beta^2/\kappa = TV\beta\alpha_P$ に代入すると，
+        $\beta$ と $\kappa$ だけで比熱差も求められる。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s1-3-exact">完全微分の条件（補足）</h3>
+
+  <p>
+    2変数1形式 $\omega = A(x,y)\,dx + B(x,y)\,dy$ が「ある関数 $f$ の全微分 $df$」と書けるための条件を補足する。
+    これは第2章以降（熱の不完全微分・Maxwell関係式）で使う。
+  </p>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>完全微分の条件（Schwarz の定理）</div>
+    <div class="box-body">
+      <p>$\omega = A\,dx + B\,dy$ が完全微分（$\omega = df$ となる $f$ が存在する）であるための必要十分条件：</p>
+      $$\left(\frac{\partial A}{\partial y}\right)_x = \left(\frac{\partial B}{\partial x}\right)_y$$
+      <p>
+        これは混合偏微分の交換可能性（Schwarz の定理）
+        $\dfrac{\partial^2 f}{\partial x\partial y} = \dfrac{\partial^2 f}{\partial y\partial x}$
+        と同値。
+      </p>
+      <p>
+        <strong>熱力学への応用</strong>：$dU = T\,dS - P\,dV$ に対して $A = T$，$B = -P$，$x = S$，$y = V$ とすると：
+        $$\left(\frac{\partial T}{\partial V}\right)_S = -\left(\frac{\partial P}{\partial S}\right)_V$$
+        これが Maxwell 関係式の一つ（第4章）。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">例</span>$\delta Q$ は完全微分でない（理想気体）</div>
+    <div class="box-body">
+      <p>理想気体の準静的過程での熱：$\delta Q = C_V\,dT + (nRT/V)\,dV$（第2章で導出）</p>
+      <p>$A = C_V$，$B = nRT/V$ として条件を確認：</p>
+      $$\left(\frac{\partial A}{\partial V}\right)_T = 0, \quad
+        \left(\frac{\partial B}{\partial T}\right)_V = \frac{nR}{V} \ne 0$$
+      <p>条件を満たさないので，$\delta Q$ は不完全微分 ─ 経路によって $\int \delta Q$ の値が変わる。</p>
+      <p>
+        一方，$dU = C_V\,dT$（理想気体）は明らかに $U = C_V T + \text{const}$ の全微分で，完全微分。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">記法</span>$\delta$ と $d$ の使い分け</div>
+    <div class="box-body">
+      <ul>
+        <li><strong>$dU$，$dS$，$dT$，$dV$，$dP$ など</strong>：完全微分（状態量の変化）</li>
+        <li><strong>$\delta Q$，$\delta W$</strong>：不完全微分（過程量；経路依存）</li>
+      </ul>
+      <p>
+        第一法則 $dU = \delta Q + \delta W$ では，右辺は各々経路依存だが
+        <em>その和だけが</em>経路によらない（$dU$ は完全微分）。
+      </p>
+    </div>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="ch0.html" class="prev">第0章 ガイダンス</a>
+    <a href="ch2.html" class="next">第2章 熱力学第一法則</a>
+  </nav>
+</main>
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer>
+
+<script src="td.js"></script>
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

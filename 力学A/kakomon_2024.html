@@ -1,0 +1,497 @@
+<!DOCTYPE html><!-- 「2024年度 | 力学A 過去問解説」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>2024年度 | 力学A 過去問解説</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kakomon_2024">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A 講義ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="n1.html" data-page="n1">第1章</a>
+      <a href="n2.html" data-page="n2">第2章</a>
+      <a href="n3.html" data-page="n3">第3章</a>
+      <a href="n4.html" data-page="n4">第4章</a>
+      <a href="n5.html" data-page="n5">第5章</a>
+      <a href="n6.html" data-page="n6">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024" class="active">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>力学A 過去問解説</h1>
+  <p class="subtitle">2024年度期末試験</p>
+  <p class="meta">担当：溝口俊弥｜前期課程 Sセメスター</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">問題1 — 平行六面体の体積とポテンシャルの勾配</a>
+    <a href="#q2">問題2 — 保存力の判定とポテンシャル</a>
+    <a href="#q3">問題3 — 極座標で見る振り子の運動</a>
+    <a href="#q4">問題4 — 球の慣性モーメントと転がり運動</a>
+  </div>
+
+  <!-- =================== 問題1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header">
+      <div class="sec-tag">Problem 1</div>
+      <h2>平行六面体の体積とポテンシャルの勾配</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        次の各問いに答えよ。
+      </div>
+
+      <h3>(1) 平行六面体の体積</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        図のように、３次元空間内の１次独立な３つのベクトル $\mathbf{a}$, $\mathbf{b}$, $\mathbf{c}$ に対して、$\mathbf{a}$ と $\mathbf{b}$、$\mathbf{b}$ と $\mathbf{c}$、$\mathbf{c}$ と $\mathbf{a}$ それぞれのベクトルの組できまる３つの平行四辺形の２つずつの組を平行な面としてもつ六面体を平行六面体といい、その体積は
+        $$|(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}|$$
+        で与えられる。ここで $\times$ はベクトルの外積、$\cdot$ はベクトルの内積である。$\mathbf{a}=(2,3,-1)$, $\mathbf{b}=(1,0,2)$, $\mathbf{c}=(1,-1,1)$ のとき、それらがきめる平行六面体の体積を求めよ。
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>まず外積 $\mathbf{a}\times\mathbf{b}$ を成分計算する。外積の第 $i$ 成分は $(\mathbf{a}\times\mathbf{b})_i = \varepsilon_{ijk}a_jb_k$ であり、具体的には</p>
+          <div class="mathblock">
+          $$\mathbf{a}\times\mathbf{b} = (a_yb_z-a_zb_y,\ a_zb_x-a_xb_z,\ a_xb_y-a_yb_x)$$
+          </div>
+          <p>$\mathbf{a}=(2,3,-1)$, $\mathbf{b}=(1,0,2)$ を代入すると</p>
+          <div class="mathblock">
+          $$\mathbf{a}\times\mathbf{b} = \big(3\cdot2-(-1)\cdot0,\ \ (-1)\cdot1-2\cdot2,\ \ 2\cdot0-3\cdot1\big) = (6,\ -5,\ -3)$$
+          </div>
+          <p>これと $\mathbf{c}=(1,-1,1)$ の内積をとると</p>
+          <div class="mathblock">
+          $$(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c} = 6\cdot1 + (-5)\cdot(-1) + (-3)\cdot1 = 6+5-3 = 8$$
+          </div>
+          <p>よって体積は $|(\mathbf{a}\times\mathbf{b})\cdot\mathbf{c}| = |8| = 8$。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          平行六面体の体積は $8$。
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 体積計算の正体は行列式</span>
+        <p>
+          $(\mathbf a\times\mathbf b)\cdot\mathbf c$ は、$\mathbf a,\mathbf b,\mathbf c$ を行（または列）に並べた $3\times3$ 行列の行列式に等しい。実際
+        </p>
+        <div class="mathblock">$$\det\begin{pmatrix}2&3&-1\\1&0&2\\1&-1&1\end{pmatrix}=8$$</div>
+        <p>
+          と計算しても同じ $8$ が得られる。この行列式は、標準基底 $\mathbf e_1,\mathbf e_2,\mathbf e_3$ を $\mathbf a,\mathbf b,\mathbf c$ に写す線形写像のヤコビアン（体積の拡大率）そのものであり、$\mathbf a,\mathbf b,\mathbf c$ が整数ベクトルであることから、それらが張る格子は $\mathbb Z^3$ の中で指数 $8$ の部分格子になっている——結晶の単位胞の体積を格子ベクトルの三重積として求める、固体物理でおなじみの計算とまったく同じ構造である。
+          ちなみに同じ「ヤコビアン＝体積の拡大率」という考え方は、問題4(1)で球の慣性モーメントを求める際に使う体積要素 $r^2\sin\theta\,dr\,d\theta\,d\varphi$ にも姿を変えて現れている。
+        </p>
+      </div>
+
+      <h3>(2) 湯川型ポテンシャルから力を求める</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        ３次元空間内の位置ベクトル $\mathbf{r}$ の点において、保存力 $\mathbf{F}(\mathbf{r})$ のポテンシャル $V(\mathbf{r})$ が
+        $$V(\mathbf{r}) = V_0\,\frac{e^{-\mu|\mathbf{r}|}}{\mu|\mathbf{r}|}$$
+        でで与えられるとする。ただし $V_0$、$\mu$ はそれぞれエネルギーおよび（長さ）$^{-1}$ 次元を持った定数である。直交座標系における $\mathbf{r}$ の座標を $(x,y,z)$ とするとき、そこでの力 $\mathbf{F}(\mathbf{r})$ の各成分を求めよ。
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>保存力とポテンシャルの関係 $\mathbf{F} = -\nabla V$ より、まず $x$ 成分を求める。$r = |\mathbf{r}| = \sqrt{x^2+y^2+z^2}$ とおくと、合成関数の微分（連鎖律）を使って</p>
+          <div class="mathblock">
+          $$\frac{\partial V}{\partial x} = \frac{dV}{dr}\cdot\frac{\partial r}{\partial x}$$
+          </div>
+          <p>ここで</p>
+          <div class="mathblock">
+          $$\frac{\partial r}{\partial x} = \frac{\partial}{\partial x}(x^2+y^2+z^2)^{1/2} = \frac{x}{r}$$
+          </div>
+          <p>次に $V(r) = \dfrac{V_0}{\mu}e^{-\mu r}r^{-1}$ を $r$ で微分すると</p>
+          <div class="mathblock">
+          $$\frac{dV}{dr} = \frac{V_0}{\mu}\left(-\mu e^{-\mu r}r^{-1} - e^{-\mu r}r^{-2}\right) = -\frac{V_0e^{-\mu r}}{\mu r^2}(\mu r+1)$$
+          </div>
+          <p>したがって</p>
+          <div class="mathblock">
+          $$F_x = -\frac{\partial V}{\partial x} = -\frac{dV}{dr}\cdot\frac{x}{r} = \frac{V_0e^{-\mu r}(\mu r+1)}{\mu r^2}\cdot\frac{x}{r} = \frac{V_0e^{-\mu r}(\mu r+1)}{\mu r^3}\,x$$
+          </div>
+          <p>$V(\mathbf{r})$ は $r=|\mathbf{r}|$ のみに依存するので $x,y,z$ に関して対称であり、$F_y$, $F_z$ も同じ係数を $y$, $z$ に掛けた形になる。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$F_x = \frac{V_0e^{-\mu r}(\mu r+1)}{\mu r^3}\,x,\qquad
+          F_y = \frac{V_0e^{-\mu r}(\mu r+1)}{\mu r^3}\,y,\qquad
+          F_z = \frac{V_0e^{-\mu r}(\mu r+1)}{\mu r^3}\,z$$
+          （$r=|\mathbf{r}|$）。まとめて書けば $\mathbf{F}(\mathbf{r}) = \dfrac{V_0e^{-\mu r}(\mu r+1)}{\mu r^3}\,\mathbf{r}$ であり、これは中心力（$\mathbf{r}$ 方向を向く力）になっている。
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — これは湯川の「中間子論」のポテンシャル</span>
+        <p>
+          この $V(\mathbf r)=V_0\,e^{-\mu r}/(\mu r)$ は、湯川秀樹が1935年に核力を説明するために導入した「湯川ポテンシャル」そのものの形をしている。$\mu^{-1}$ は力の届く距離（遮蔽長）を表し、核力においては $\mu\sim m_\pi c/\hbar$（交換される中間子の質量に対応するコンプトン波長の逆数）に対応する——力を媒介する粒子の質量が大きいほど、力の届く距離が短くなるという量子論的な描像が、この1つの式に凝縮されている。
+        </p>
+        <p>
+          実際、求めた力の大きさ $|\mathbf F|=\dfrac{V_0e^{-\mu r}(\mu r+1)}{\mu r^2}$ は、$r\ll\mu^{-1}$（近距離）では $e^{-\mu r}(\mu r+1)\approx 1-\tfrac12(\mu r)^2$ となるので
+        </p>
+        <div class="mathblock">$$|\mathbf F|\approx \frac{V_0}{\mu r^2}\qquad(r\ll\mu^{-1})$$</div>
+        <p>
+          と、電荷（あるいは質量）の積 $V_0/\mu$ を持つクーロン力・万有引力とほぼ同じ逆二乗則になり、逆に $r\gg\mu^{-1}$（遠距離）では指数関数 $e^{-\mu r}$ が急激に効いて力はほぼゼロになる。近距離ではクーロン力のように振る舞い、遮蔽長 $1/\mu$ を超えると指数関数的に消えていく——これが核力が原子核の外にはほとんど及ばない理由を表す数式である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題2 =================== -->
+  <div class="section" id="q2">
+    <div class="sec-header">
+      <div class="sec-tag">Problem 2</div>
+      <h2>保存力の判定とポテンシャル</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        図のように、$xy$ 平面上においてある力 $\mathbf{F}(x,y)$ のベクトル場が４つ与えられている。そのうち、保存力であるものがただ一つある。
+        $$\begin{aligned}
+        (\mathrm{a})\quad \mathbf{F}(x,y) &= (x-y,\ x-y)\\
+        (\mathrm{b})\quad \mathbf{F}(x,y) &= (-y,\ x)\\
+        (\mathrm{c})\quad \mathbf{F}(x,y) &= (x+y,\ y-x)\\
+        (\mathrm{d})\quad \mathbf{F}(x,y) &= (x+y,\ x-y)
+        \end{aligned}$$
+        (1) それはどれか、簡単な理由とともに答えよ。<br>
+        (2) (1) の $\mathbf{F}(x,y)$ のポテンシャル $U(x,y)$ を求めよ。ただし、ポテンシャルの基準点は原点 $(x,y)=(0,0)$ に（すなわち $U(0,0)=0$ となるように）設定せよ。
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+
+          <h4>(1) 保存力の判定</h4>
+          <p>2次元の力 $\mathbf{F}=(F_x,F_y)$ が保存力であるための条件は $\nabla\times\mathbf{F}=\mathbf{0}$、すなわち</p>
+          <div class="mathblock">
+          $$\frac{\partial F_x}{\partial y} = \frac{\partial F_y}{\partial x}$$
+          </div>
+          <p>各場についてこの2つの偏微分を比べる。</p>
+          <table class="axiom-table">
+            <tr><th>場</th><th>$\partial F_x/\partial y$</th><th>$\partial F_y/\partial x$</th><th>一致?</th></tr>
+            <tr><td>(a) $(x-y,\ x-y)$</td><td>$-1$</td><td>$1$</td><td class="ng">✗</td></tr>
+            <tr><td>(b) $(-y,\ x)$</td><td>$-1$</td><td>$1$</td><td class="ng">✗</td></tr>
+            <tr><td>(c) $(x+y,\ y-x)$</td><td>$1$</td><td>$-1$</td><td class="ng">✗</td></tr>
+            <tr><td>(d) $(x+y,\ x-y)$</td><td>$1$</td><td>$1$</td><td class="ok">◯</td></tr>
+          </table>
+          <p>一致するのは (d) だけなので、保存力であるのは (d)。（(b) は原点まわりに回転する典型的な非保存力、(a) は $x=y$ の方向にのみ力が働く縮退した場で、いずれも渦度を持つ。）</p>
+
+          <h4>(2) ポテンシャルを求める</h4>
+          <p>$\mathbf{F}=(x+y,\ x-y) = -\nabla U$ より、まず $x$ について積分する：</p>
+          <div class="mathblock">
+          $$-\frac{\partial U}{\partial x} = x+y \quad\Longrightarrow\quad U = -\frac{1}{2}x^2 - xy + f(y)$$
+          </div>
+          <p>（$f(y)$ は $x$ に依らない、$y$ だけの未知関数）。これを $y$ で微分すると $-\dfrac{\partial U}{\partial y} = x - f'(y)$ となるので、これを $F_y=x-y$ と比較する：</p>
+          <div class="mathblock">
+          $$x - f'(y) = x - y \quad\Longrightarrow\quad f'(y) = y \quad\Longrightarrow\quad f(y) = \frac{1}{2}y^2 + C$$
+          </div>
+          <p>よって</p>
+          <div class="mathblock">
+          $$U(x,y) = -\frac{1}{2}x^2 - xy + \frac{1}{2}y^2 + C$$
+          </div>
+          <p>$U(0,0)=0$ より $C=0$。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          (1) 保存力であるのは <strong>(d) $\mathbf{F}(x,y)=(x+y,\ x-y)$</strong>。<br>
+          (2) $$U(x,y) = -\frac{1}{2}x^2 - xy + \frac{1}{2}y^2$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 検算とこのポテンシャルの形</span>
+        <p>
+          実際に $U=-\tfrac12x^2-xy+\tfrac12y^2$ から力を計算し直すと $-\partial U/\partial x = x+y = F_x$、$-\partial U/\partial y = x-y = F_y$ となり、確かに元の $\mathbf{F}$ と一致する。
+        </p>
+        <p>
+          $\mathbf F=A\mathbf r$（$A=\begin{pmatrix}1&1\\1&-1\end{pmatrix}$）と書くと $U=-\tfrac12\mathbf r^{\mathsf T}A\mathbf r$ であり、$A$ の固有値は特性方程式 $\lambda^2-2=0$ より $\lambda=\pm\sqrt2$ ——符号の異なる2つの固有値を持つ。つまりこの $U$ のヘッセ行列は不定符号で、原点は極小でも極大でもなく鞍点（サドルポイント）になっている。
+          保存力だからといって「ポテンシャルの谷に閉じ込められる」とは限らない好例で、固有値 $-\sqrt2$ に対応する方向に原点からわずかにずれると、質点はそこへ戻ってこず加速しながら離れていく。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題3 =================== -->
+  <div class="section" id="q3">
+    <div class="sec-header">
+      <div class="sec-tag">Problem 3</div>
+      <h2>極座標で見る振り子の運動</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>図のように、重力加速度 $g$ の一様重力中において、長さ $\ell$ の軽い糸とその先につけられた質量 $m$ の質点からなる振り子の運動を考える。</p>
+        <p>振り子の糸の一方の端は、水平な地面から高さ $2\ell$ の位置で固定されている。質点には重力および糸からの張力のみが働き、それ以外の力（抵抗力や摩擦力など）は働かないものとして、次の問いに答えよ。</p>
+      </div>
+
+      <h3>(1) 極座標での運動方程式</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        振り子の糸が固定されている点を原点とする極座標 $(r,\varphi)$ を用いて、この系の運動方程式を書き下せ。ただし、時間変数を $t$、糸の張力の大きさを $T$ とし、鉛直下向き方向を $\varphi=0$ とせよ。また、ここでは動径座標 $r$ が糸の長さ $\ell$ と等しく一定になることを使わず、$r$ の時間微分を含む項も残した形で（つまり授業でやったような、極座標による一般的な加速度の表式を用いて）運動方程式を表せ。
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>極座標における加速度の一般表式（動径方向・角度方向）は</p>
+          <div class="mathblock">
+          $$a_r = \ddot r - r\dot\varphi^2,\qquad a_\varphi = 2\dot r\dot\varphi + r\ddot\varphi$$
+          </div>
+          <p>質点に働く力は重力 $mg$（鉛直下向き、常に一定方向）と張力 $T$（糸に沿って原点向き、すなわち $-\mathbf{e}_r$ 方向）。重力を動径・角度方向に分解すると、$\varphi=0$ が鉛直下向きなので、動径方向成分は $mg\cos\varphi$、角度方向成分は $-mg\sin\varphi$ となる（$\varphi$ が増える向きに戻そうとするので負号）。したがって運動方程式は</p>
+          <div class="mathblock">
+          $$\begin{cases}
+          m(\ddot r - r\dot\varphi^2) = mg\cos\varphi - T\\[2pt]
+          m(2\dot r\dot\varphi + r\ddot\varphi) = -mg\sin\varphi
+          \end{cases}$$
+          </div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$m(\ddot r - r\dot\varphi^2) = mg\cos\varphi - T \qquad\cdots①$$
+          $$m(2\dot r\dot\varphi + r\ddot\varphi) = -mg\sin\varphi \qquad\cdots②$$
+        </div>
+      </details>
+
+      <h3>(2) 張力 $T(\varphi)$</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        この振り子の質点を振れ角 $\varphi_A$ で糸がピンと張った状態で静止させ、その後 (1) の運動方程式に従って運動させる。糸の張力の大きさ $T$ を、質点の角度座標 $\varphi$（$0\le|\varphi|\le|\varphi_A|$）の関数として求めよ。ただし、$0\le\varphi_A\le90^\circ$ とし、糸はたるんだり伸びたりしないものとする。
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>糸がたるまず伸びないので $r=\ell$（一定）、すなわち $\dot r=\ddot r=0$。これを①②に代入すると</p>
+          <div class="mathblock">
+          $$-m\ell\dot\varphi^2 = mg\cos\varphi - T \qquad\Longrightarrow\qquad T = mg\cos\varphi + m\ell\dot\varphi^2 \quad\cdots③$$
+          $$m\ell\ddot\varphi = -mg\sin\varphi \qquad\Longrightarrow\qquad \ddot\varphi = -\frac{g}{\ell}\sin\varphi$$
+          </div>
+          <p>（これは単振り子の運動方程式そのもの。以下の $T$ の計算では、この式自体は使わず、エネルギー保存則から直接 $\dot\varphi^2$ を求める。）</p>
+          <p>力学的エネルギー保存則を用いる。最下点（$\varphi=0$）を高さの基準にとると、角度 $\varphi$ での質点の高さは $\ell(1-\cos\varphi)$。速さは $|\mathbf{v}| = |r\dot\varphi| = \ell|\dot\varphi|$（$r$ は一定なので動径方向の速度成分はゼロ）である。初期（$\varphi=\varphi_A$、静止）とのエネルギー保存則より</p>
+          <div class="mathblock">
+          $$mg\ell(1-\cos\varphi_A) = mg\ell(1-\cos\varphi) + \frac{1}{2}m\ell^2\dot\varphi^2$$
+          </div>
+          <p>整理すると</p>
+          <div class="mathblock">
+          $$\dot\varphi^2 = \frac{2g}{\ell}(\cos\varphi - \cos\varphi_A) \qquad\cdots④$$
+          </div>
+          <p>④を③に代入する：</p>
+          <div class="mathblock">
+          $$T = mg\cos\varphi + m\ell\cdot\frac{2g}{\ell}(\cos\varphi-\cos\varphi_A) = mg\cos\varphi + 2mg(\cos\varphi-\cos\varphi_A)$$
+          </div>
+          <div class="mathblock">
+          $$T = mg(3\cos\varphi - 2\cos\varphi_A) \qquad\cdots⑤$$
+          </div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$T(\varphi) = mg(3\cos\varphi - 2\cos\varphi_A)$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — $r=\ell$ 代入後の角度方向の式</span>
+        ②に $r=\ell$、$\dot r=\ddot r=0$ を代入すると $m\ell\ddot\varphi=-mg\sin\varphi$（$\ell$ は1乗）となり、両辺を $m\ell$ で割って $\ddot\varphi=-\dfrac{g}{\ell}\sin\varphi$ を得る。これは高校物理でもおなじみの単振り子の運動方程式に一致する。
+      </div>
+
+      <h3>(3) 糸が外れた後の落下位置</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        振れ角 $\varphi_A=90^\circ$ からこの振り子の質点を (2) のように運動させ、張力の大きさ $T$ が $3mg$ に等しくなった瞬間、糸は荷重に耐えられなくなって固定点からはずれ、その後質点は一様重力中自由落下するとする。そのとき質点が地面に落ちる位置を求めよ。
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>$\varphi_A=90^\circ$ より $\cos\varphi_A=0$。⑤に代入すると $T=3mg\cos\varphi$ であり、これが $3mg$ となる条件は</p>
+          <div class="mathblock">
+          $$3mg\cos\varphi = 3mg \quad\Longrightarrow\quad \cos\varphi = 1 \quad\Longrightarrow\quad \varphi=0$$
+          </div>
+          <p>（範囲 $0\le|\varphi|\le90^\circ$ では $\cos\varphi=1$ を満たすのは $\varphi=0$ のみ。実際 $T=3mg\cos\varphi$ は $\varphi=0$（最下点）で最大値 $3mg$ をとるので、糸が切れるのはちょうど最下点を通過する瞬間である。）</p>
+          <p>最下点での角速度は④より（$\cos\varphi_A=0$、$\varphi=0$）</p>
+          <div class="mathblock">
+          $$\dot\varphi^2 = \frac{2g}{\ell}(1-0) = \frac{2g}{\ell}$$
+          </div>
+          <p>このときの速さは</p>
+          <div class="mathblock">
+          $$v = \ell|\dot\varphi| = \ell\sqrt{\frac{2g}{\ell}} = \sqrt{2g\ell}$$
+          </div>
+          <p>最下点では質点の速度は水平方向（$\mathbf{e}_\varphi$ 方向が水平になる）を向いている。また最下点の高さは固定点（地面から $2\ell$）から糸の長さ $\ell$ だけ下なので、地面からの高さは $2\ell-\ell=\ell$。</p>
+          <p>糸がはずれた後は水平投射運動になる。鉛直方向は自由落下 $\dfrac12gt^2=\ell$ より</p>
+          <div class="mathblock">
+          $$t = \sqrt{\frac{2\ell}{g}}$$
+          </div>
+          <p>この間の水平方向の移動距離は</p>
+          <div class="mathblock">
+          $$x = v\,t = \sqrt{2g\ell}\cdot\sqrt{\frac{2\ell}{g}} = \sqrt{4\ell^2} = 2\ell$$
+          </div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          質点は、固定点の真下の点から水平に $2\ell$ だけ離れた地点に落ちる。
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — なぜ $\varphi_A=90^\circ$ と $3mg$ なのか</span>
+        <p>
+          ⑤式 $T=mg(3\cos\varphi-2\cos\varphi_A)$ は、振れ角の範囲 $|\varphi|\le\varphi_A$ の中で常に最下点 $\varphi=0$ で最大値 $mg(3-2\cos\varphi_A)$ をとる（$\cos\varphi$ の効き方から単調に決まる）。この問題の設定 $0\le\varphi_A\le90^\circ$ の範囲でこの最大値が $3mg$ に届くのは
+        </p>
+        <div class="mathblock">$$mg(3-2\cos\varphi_A)\ge 3mg \iff \cos\varphi_A\le0 \iff \varphi_A\ge90^\circ$$</div>
+        <p>
+          という条件が必要で、許される範囲では $\varphi_A=90^\circ$ がちょうど等号を満たす境界の場合にあたる。つまり「$T=3mg$ で糸がはずれる」という設定は、$0\le\varphi_A\le90^\circ$ という制約のもとで辛うじて実現できる限界のケースを選んで作られている——$\varphi_A$ がこれよりわずかでも小さければ、張力はどの位置でも $3mg$ に届かず、糸はそもそもはずれない。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題4 =================== -->
+  <div class="section" id="q4">
+    <div class="sec-header">
+      <div class="sec-tag">Problem 4</div>
+      <h2>球の慣性モーメントと転がり運動</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3>(1) 一様な球の慣性モーメント</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        半径が $a$ で密度が一様な質量 $M$ の球の、中心を通る直線のまわりの慣性モーメント $I$ を求めよ。
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>球座標 $(r,\theta,\varphi)$（$\theta$ は回転軸となる直径からの極角、$0\le\theta\le\pi$）をとる。密度は一様なので</p>
+          <div class="mathblock">
+          $$\rho = \frac{M}{\frac{4}{3}\pi a^3}$$
+          </div>
+          <p>回転軸からの距離は $R=r\sin\theta$、体積要素は $dV = r^2\sin\theta\,dr\,d\theta\,d\varphi$ なので、慣性モーメントの定義 $I=\int \rho R^2\,dV$ より</p>
+          <div class="mathblock">
+          $$I = \rho\int_0^a\!\!\int_0^\pi\!\!\int_0^{2\pi} (r\sin\theta)^2\cdot r^2\sin\theta\ d\varphi\,d\theta\,dr
+          = \rho\int_0^a r^4\,dr\int_0^\pi\sin^3\theta\,d\theta\int_0^{2\pi}d\varphi$$
+          </div>
+          <p>各積分を計算する。$\displaystyle\int_0^a r^4\,dr=\frac{a^5}{5}$、$\displaystyle\int_0^{2\pi}d\varphi=2\pi$。$\sin^3\theta$ の積分は、$\sin3\theta=3\sin\theta-4\sin^3\theta$ より $\sin^3\theta=\dfrac{3\sin\theta-\sin3\theta}{4}$ を使うと</p>
+          <div class="mathblock">
+          $$\int_0^\pi\sin^3\theta\,d\theta = \frac{1}{4}\left[-3\cos\theta+\frac{1}{3}\cos3\theta\right]_0^\pi = \frac{4}{3}$$
+          </div>
+          <p>これらをまとめると</p>
+          <div class="mathblock">
+          $$I = \rho\cdot\frac{a^5}{5}\cdot\frac{4}{3}\cdot2\pi = \frac{M}{\frac{4}{3}\pi a^3}\cdot\frac{8\pi a^5}{15} = \frac{2}{5}Ma^2$$
+          </div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$I = \frac{2}{5}Ma^2$$
+        </div>
+      </details>
+
+      <h3>(2) 斜面を転がる時間</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        (1) の球が、水平方向と角度 $\theta$ をなす斜面を滑らずに初速 $0$ で転がるとする。斜面方向長さ $x$ だけ転がるのに要する時間を求めよ。ただし、重力加速度を $g$ とする。また慣性モーメントを $I$ のままにして答えてよい（(1) で正解できなかった人にも得点をあげるため）。
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>斜面方向の座標を $x$、球の中心まわりの回転角を $\varphi$、斜面から受ける摩擦力の大きさを $F$（斜面に沿って上向きを正）とする。回転の運動方程式・並進（斜面方向）の運動方程式・すべらず転がる束縛条件は</p>
+          <div class="mathblock">
+          $$\begin{cases}
+          I\ddot\varphi = Fa\\[2pt]
+          M\ddot x = Mg\sin\theta - F\\[2pt]
+          x = a\varphi
+          \end{cases}$$
+          </div>
+          <p>束縛条件より $\ddot x = a\ddot\varphi$、すなわち $\ddot\varphi = \ddot x/a$。これを回転の式に入れて $F$ を求めると $F = I\ddot x/a^2$。これを並進の式に代入して $F$ を消去する：</p>
+          <div class="mathblock">
+          $$M\ddot x = Mg\sin\theta - \frac{I}{a^2}\ddot x
+          \quad\Longrightarrow\quad
+          \left(M+\frac{I}{a^2}\right)\ddot x = Mg\sin\theta$$
+          </div>
+          <p>よって加速度は一定値</p>
+          <div class="mathblock">
+          $$\ddot x = \alpha \equiv \frac{Mg\sin\theta}{M+\dfrac{I}{a^2}} = \frac{g\sin\theta}{1+\dfrac{I}{Ma^2}}$$
+          </div>
+          <p>初速0の等加速度運動なので $x=\dfrac12\alpha t^2$ より</p>
+          <div class="mathblock">
+          $$t = \sqrt{\frac{2x}{\alpha}} = \sqrt{\frac{2x}{g\sin\theta}\left(1+\frac{I}{Ma^2}\right)}$$
+          </div>
+          <p>(1) の結果 $I=\dfrac25Ma^2$ を用いると $1+\dfrac{I}{Ma^2}=1+\dfrac25=\dfrac75$ なので、数値としては</p>
+          <div class="mathblock">
+          $$t = \sqrt{\frac{2x}{g\sin\theta}\cdot\frac{7}{5}} = \sqrt{\frac{14x}{5g\sin\theta}}$$
+          </div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$t = \sqrt{\frac{2x}{g\sin\theta}\left(1+\frac{I}{Ma^2}\right)}\qquad\left(=\sqrt{\frac{14x}{5g\sin\theta}}\ \ \text{（}I=\tfrac25Ma^2\text{ を代入した場合）}\right)$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 摩擦なしで滑らせた場合との比較</span>
+        <p>
+          同じ斜面を摩擦なしで（質点とみなして）滑らせた場合は $a=g\sin\theta$ の等加速度運動になるので、同じ距離 $x$ を進むのにかかる時間は $t_{\text{滑}}=\sqrt{2x/(g\sin\theta)}$。これに対し転がる球では $I=\tfrac25Ma^2$ より
+        </p>
+        <div class="mathblock">$$\frac{t_{\text{球}}}{t_{\text{滑}}}=\sqrt{1+\frac{I}{Ma^2}}=\sqrt{\frac75}\approx1.183$$</div>
+        <p>
+          球は摩擦なしで滑る場合よりおよそ18%遅く到着する計算になる。これはエネルギーの配分にも対応していて、並進運動エネルギーと回転運動エネルギーの比は常に $1:\dfrac{I}{Ma^2}=1:\dfrac25$、すなわち全運動エネルギーの $\dfrac57$ が並進に、残り $\dfrac27$ が回転に使われる——重力による位置エネルギーの一部が回転にも「分配」されるぶんだけ、並進の加速が遅くなる、という描像である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2023.html">← 2023年度へ</a>
+    <a href="kakomon_2025.html">2025年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

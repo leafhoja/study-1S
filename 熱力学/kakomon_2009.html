@@ -1,0 +1,594 @@
+<!DOCTYPE html><!-- 「2009年度 過去問 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>2009年度 過去問 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="td.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    tags: 'ams',
+    macros: {
+      pd: ['\\left(\\frac{\\partial #1}{\\partial #2}\\right)_{#3}',3]
+    }
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body data-nav-page="exam-2009">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">熱力学ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">ホーム</a>
+      <a href="ch0.html" data-page="ch0">第0章</a>
+      <a href="ch1.html" data-page="ch1">第1章</a>
+      <a href="ch2.html" data-page="ch2">第2章</a>
+      <a href="ch3.html" data-page="ch3">第3章</a>
+      <a href="ch4.html" data-page="ch4">第4章</a>
+      <a href="ch5.html" data-page="ch5">第5章</a>
+      <a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a>
+      <a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2014.html" data-page="kakomon_2014">2014</a>
+      <a href="kakomon_2012.html" data-page="kakomon_2012">2012</a>
+      <a href="kakomon_2011.html" data-page="kakomon_2011">2011</a>
+      <a href="kakomon_2010.html" data-page="kakomon_2010">2010</a>
+      <a href="kakomon_2009.html" data-page="kakomon_2009" class="active">2009</a>
+      <a href="kakomon_2008.html" data-page="kakomon_2008">2008</a>
+      <a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>熱力学 過去問解説</h1>
+  <p class="subtitle">2009年度期末試験</p>
+  <p class="meta">担当：福島孝治｜2009年9月1日 2時限｜試験時間90分｜前期課程 Sセメスター</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（状態方程式 $P=Tf(V)$ を持つ気体，全12問）</a>
+    <a href="#q2">大問2（熱力学第二法則・完全な熱力学関数・Clausius–Clapeyronの式，全5問）</a>
+    <a href="#q3">大問3（感想）</a>
+  </div>
+
+  <div class="source-note">
+    この年度の原本には、大問1についてのみ手書きの模範解答（採点者作成と思われる解答例、(a)〜(l)の12項目）が答案用紙末尾に添付されていた。以下の大問1の解説は、この手書き解答をすべて書き起こし、行間を補って詳細化したもの（検算のうえ、誤りは見当たらなかった）。大問2には模範解答の添付がなかったため、標準的な熱力学の議論に基づいて独自に作成した。大問3は感想を問う設問で、そもそも模範解答が存在しない。
+  </div>
+
+  <!-- ============ 大問1 ============ -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header">
+      <div class="sec-tag">大問 1</div>
+      <h2>状態方程式 $P=Tf(V)$ を持つ気体</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>
+          ある気体について、実験によって次の性質がわかっている。体積 $V$ 一定の条件で、圧力 $P$ は温度 $T$ に比例する。すなわち、状態方程式は、体積のみの関数 $f(V)$ を用いて、
+        </p>
+        <div class="mathblock">$$P = Tf(V)$$</div>
+        <p>
+          と表される。$f(V)\propto\dfrac1V$ のときは理想気体に相当するが、以下では必ずしもそうではない。以下の問いに答えよ。(1)〜(5) は熱力学の一般的な問いであり、(6)〜(12) はこの気体の性質に関する問いである。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">原本の設問番号について</span>
+        <p>
+          原本の問題文は「(1)〜(5) は熱力学の一般的な問いであり，(5)〜(12) はこの気体の性質に関する問いである」と、(5) が両方の範囲に重複して書かれている（原本のタイプミスと思われる）。(5) のエネルギー方程式自体はどんな気体にも成り立つ一般論であり、この気体固有の性質 $P=Tf(V)$ を初めて使うのは(6)からなので、以下では「(1)〜(5) が一般論、(6)〜(12) がこの気体固有の議論」として読み進める。
+        </p>
+      </div>
+
+      <h3 id="q1-1">(1) 熱容量の定義と測定方法</h3>
+      <div class="ex"><span class="box-label">問題</span><p>熱容量とは何かを説明して、その測定方法を提案せよ。</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$C \equiv \lim_{dT\to0}\frac{δQ}{dT}$$
+        測定する際は、どの条件（定積・定圧など）で温度を上げるかを指定する必要がある。
+      </div>
+        <div class="proof-body">
+          <p>
+            <strong>熱容量の定義：</strong>物質の温度を単位温度だけ上げるために必要な熱量のことを熱容量という。温度を $T$ から $T+dT$ に上げるときに必要な熱量を $δQ$ とすると、
+          </p>
+          <div class="mathblock">$$C \equiv \lim_{dT\to0}\frac{δQ}{dT}$$</div>
+          <p>
+            と定義される。ここで注意すべきは、$δQ$ は（$dU$ や $dS$ と違って）状態量の全微分ではなく、経路（どのような過程で温度を上げたか）に依存する量だということである。したがって熱容量 $C$ の値も、温度を上げる際にどの変数を固定するか（体積一定か、圧力一定か、その他か）によって異なる値になる——これが「どの条件で温度を上げるかを指定する必要がある」という模範解答の一文の意味であり、$C_V$（定積熱容量）と $C_P$（定圧熱容量）が一般に異なる値を持つ理由でもある（(3)(8)で詳しく扱う）。
+          </p>
+          <p>
+            <strong>測定方法の提案：</strong>熱容量を実測する標準的な方法は、電気抵抗ヒーターを用いたジュール加熱による量Q熱量計である。試料を断熱容器（定積熱容量を測るなら剛体の固定容積の容器、定圧熱容量を測るなら自由に動けるピストンで外気圧と釣り合わせた容器）に入れ、既知の電力 $P_{\text{elec}}$ の電気ヒーターで既知の時間 $\Delta t$ だけ加熱する。このとき試料に与えられた熱量は $δQ=P_{\text{elec}}\Delta t$ と精密に分かる（電流・電圧を計測すれば電力は正確に求まる）。同時に精密な温度計で加熱前後の温度変化 $\Delta T$ を測定すれば、
+          </p>
+          <div class="mathblock">$$C \approx \frac{P_{\text{elec}}\Delta t}{\Delta T}$$</div>
+          <p>
+            が得られる。$\Delta T$ を十分小さく（かつ温度計の分解能で測定可能な範囲で）保つか、あるいは加熱時間を変えながら複数回測定して $Q$–$\Delta T$ のグラフを描き、その勾配を取れば、定義の極限 $dT\to0$ に近い精度で $C$ が求まる。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-2">(2) 定積熱容量 $C_V=\pd{U}{T}{V}$ の説明</h3>
+      <div class="ex"><span class="box-label">問題</span><p>一般に、定積熱容量 $C_V$ は、内部エネルギー $U$ を用いて、$C_V=\pd{U}{T}{V}$ と表せることを説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$C_V = \pd{U}{T}{V}$$</div>
+        <div class="proof-body">
+          <p>
+            熱力学第一法則は $dU=δQ+δW$。気体の準静的過程での仕事は $δW=-PdV$（気体が外にする仕事の分だけ、気体自身のエネルギーは減るので符号がマイナス）である。したがって、
+          </p>
+          <div class="mathblock">$$δQ = dU + PdV = \pd{U}{T}{V}dT + \pd{U}{V}{T}dV + PdV$$</div>
+          <p>
+            （$U$ を $T,V$ の関数とみて全微分 $dU=\pd{U}{T}{V}dT+\pd{U}{V}{T}dV$ を用いた）。定積過程では $dV=0$ なので、この式の $dV$ を含む項がすべて消え、
+          </p>
+          <div class="mathblock">$$C_V \equiv \lim_{dT\to0}\left.\frac{δQ}{dT}\right|_V = \pd{U}{T}{V}$$</div>
+          <p>
+            となる。定積過程では気体は仕事をしない（$dV=0$）ので、受け取った熱がそのまま内部エネルギーの増加分に等しくなる、という直感どおりの結果である。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-3">(3) 定圧熱容量 $C_P$ の表式</h3>
+      <div class="ex"><span class="box-label">問題</span><p>一般に、定圧熱容量 $C_P$ は、$$C_P = \pd{U}{T}{V} + \left\{\pd{U}{V}{T}+P\right\}\pd{V}{T}{P}$$と表せることを示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$C_P = \pd{U}{T}{V} + \left\{\pd{U}{V}{T}+P\right\}\pd{V}{T}{P}$$
+      </div>
+        <div class="proof-body">
+          <p>(2)で得た一般の関係式</p>
+          <div class="mathblock">$$δQ = \pd{U}{T}{V}dT + \left[\pd{U}{V}{T}+P\right]dV$$</div>
+          <p>
+            を今度は<strong>定圧</strong>（$P$ 一定）の条件で $dT$ で割ればよい。定圧条件では $dV$ を自由にゼロと置くことはできないが、その代わり $V=V(T,P)$ とみて $dV=\pd{V}{T}{P}dT$（$P$ 一定なので $dP=0$ の項は落ちる）と書けるので、これを代入すると
+          </p>
+          <div class="mathblock">$$δQ\big|_P = \left\{\pd{U}{T}{V} + \left[\pd{U}{V}{T}+P\right]\pd{V}{T}{P}\right\}dT$$</div>
+          <p>したがって、定義どおりこれを $dT$ で割れば</p>
+          <div class="mathblock">$$C_P \equiv \left.\frac{δQ}{dT}\right|_P = \pd{U}{T}{V} + \left\{\pd{U}{V}{T}+P\right\}\pd{V}{T}{P}$$</div>
+          <p>
+            (2)の結果 $C_V=\pd{U}{T}{V}$ を使えば、$C_P=C_V+\left\{\pd{U}{V}{T}+P\right\}\pd{V}{T}{P}$ とも書ける——これは(8)で $C_P-C_V$ を具体的に計算する際の出発点になる。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-4">(4) Helmholtz自由エネルギーとMaxwell関係式</h3>
+      <div class="ex"><span class="box-label">問題</span><p>Helmholtzの自由エネルギー $F=U-TS$ から導かれるMaxwell関係式を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$\pd{S}{V}{T} = \pd{P}{T}{V}$$
+      </div>
+        <div class="proof-body">
+          <p>$F=U-TS$ の全微分を計算する。$dU=TdS-PdV$（第一法則＋可逆変化での $δQ=TdS$，$δW=-PdV$）を使うと、</p>
+          <div class="mathblock">$$dF = dU - TdS - SdT = (TdS-PdV) - TdS - SdT = -SdT - PdV$$</div>
+          <p>これを $F(T,V)$ の全微分と比較すると</p>
+          <div class="mathblock">$$\pd{F}{T}{V} = -S, \qquad \pd{F}{V}{T} = -P$$</div>
+          <p>
+            $F$ は状態量なので偏微分の順序を交換できる（$\dfrac{\partial^2F}{\partial T\partial V}=\dfrac{\partial^2F}{\partial V\partial T}$）。したがって
+          </p>
+          <div class="mathblock">$$-\pd{S}{V}{T} = \frac{\partial^2F}{\partial V\partial T} = \frac{\partial^2F}{\partial T\partial V} = -\pd{P}{T}{V}$$</div>
+          <p>両辺に $-1$ を掛けると、求めるMaxwell関係式が得られる：</p>
+          <div class="mathblock">$$\pd{S}{V}{T} = \pd{P}{T}{V}$$</div>
+        </div>
+      </details>
+
+      <h3 id="q1-5">(5) エネルギー方程式</h3>
+      <div class="ex"><span class="box-label">問題</span><p>一般に次の関係式（エネルギー方程式）が成り立つことを示せ。$$\pd{U}{V}{T} = T\pd{P}{T}{V} - P$$</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$\pd{U}{V}{T} = T\pd{P}{T}{V} - P$$</div>
+        <div class="proof-body">
+          <p>$dU=TdS-PdV$ を $V$ で偏微分する（$T$ 一定）と、</p>
+          <div class="mathblock">$$\pd{U}{V}{T} = T\pd{S}{V}{T} - P$$</div>
+          <p>ここに(4)のMaxwell関係式 $\pd{S}{V}{T}=\pd{P}{T}{V}$ を代入すると、求める関係式が得られる：</p>
+          <div class="mathblock">$$\pd{U}{V}{T} = T\pd{P}{T}{V} - P$$</div>
+          <p>
+            以下(6)以降は、この一般的なエネルギー方程式に、この気体固有の状態方程式 $P=Tf(V)$ を代入して具体的な結論を引き出していく。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-6">(6) 内部エネルギーは体積に依存しないことを示す</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この気体の内部エネルギーは体積には依存しないことを示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$\pd{U}{V}{T} = Tf(V) - P = 0$$</div>
+        <div class="proof-body">
+          <p>
+            この気体の状態方程式は $P=Tf(V)$ なので、$\pd{P}{T}{V}=f(V)$。これを(5)のエネルギー方程式に代入すると、
+          </p>
+          <div class="mathblock">$$\pd{U}{V}{T} = Tf(V) - P$$</div>
+          <p>ところが状態方程式そのものより $P=Tf(V)$ が恒等的に成り立っているので、右辺は常にゼロになる：</p>
+          <div class="mathblock">$$\pd{U}{V}{T} = Tf(V) - P = 0$$</div>
+          <p>
+            すなわち $U$ は $V$ に依存しない（$U=U(T)$ のみ）。理想気体（$f(V)\propto1/V$ の特殊な場合）で成り立つ性質が、実は「$P/T$ が体積のみの関数」という、より緩い条件だけからそのまま導かれることが分かる。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-7">(7) 定積熱容量 $C_V$ は温度だけの関数</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この気体の定積熱容量 $C_V$ は温度だけの関数であり、体積に依らないことを示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$\pd{C_V}{V}{T} = \frac{\partial^2U}{\partial V\partial T} = 0$$</div>
+        <div class="proof-body">
+          <p>(2)より $C_V=\pd{U}{T}{V}$。これを $V$ で偏微分すると（$T$ 一定）、</p>
+          <div class="mathblock">$$\pd{C_V}{V}{T} = \frac{\partial}{\partial V}\left(\pd{U}{T}{V}\right) = \frac{\partial^2U}{\partial V\partial T}$$</div>
+          <p>
+            偏微分の順序を交換すると $\dfrac{\partial^2U}{\partial V\partial T}=\dfrac{\partial}{\partial T}\left(\pd{U}{V}{T}\right)$ であり、(6)で $\pd{U}{V}{T}=0$（すべての $T,V$ で恒等的に）を示したので、これを $T$ で偏微分してもやはりゼロ：
+          </p>
+          <div class="mathblock">$$\pd{C_V}{V}{T} = \frac{\partial}{\partial T}(0) = 0$$</div>
+          <p>
+            ゆえに $C_V$ は $V$ に依存せず、$T$ だけの関数 $C_V=C_V(T)$ である。これも理想気体の性質（$C_V$ が体積によらない）が、この気体でもそのまま成り立つことを示している。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-8">(8) $C_P-C_V$ は $P/T$ だけの関数</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この気体の定圧熱容量 $C_P$ と定積熱容量 $C_V$ の差は $P/T$ だけの関数で表されることを示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$C_P - C_V = -\frac{P^2}{T^2}\pd{g}{(P/T)}{P},\qquad g\equiv f^{-1}\ (\text{$P/T$の関数})$$
+      </div>
+        <div class="proof-body">
+          <p>
+            状態方程式 $P=Tf(V)$ は $\dfrac{P}{T}=f(V)$ と書けるので、$f$ が（単調で）逆関数を持てば、$V$ を $P/T$ だけの関数として
+          </p>
+          <div class="mathblock">$$V = f^{-1}\!\left(\frac PT\right) \equiv g\!\left(\frac PT\right)$$</div>
+          <p>
+            と表せる。(3)の結果 $C_P=C_V+\left\{\pd{U}{V}{T}+P\right\}\pd{V}{T}{P}$ に、(6)で示した $\pd{U}{V}{T}=0$ を代入すると、この気体では
+          </p>
+          <div class="mathblock">$$C_P - C_V = P\pd{V}{T}{P}$$</div>
+          <p>
+            という簡単な形になる。$V=g(P/T)$ を合成関数として $T$（$P$ 一定）で微分する：
+          </p>
+          <div class="mathblock">$$\pd{V}{T}{P} = g'\!\left(\frac PT\right)\cdot\pd{(P/T)}{T}{P} = g'\!\left(\frac PT\right)\cdot\left(-\frac{P}{T^2}\right)$$</div>
+          <p>（$P$ 一定のもとで $\dfrac{\partial}{\partial T}\left(\dfrac PT\right)=-\dfrac{P}{T^2}$ を用いた）。これを代入すると、</p>
+          <div class="mathblock">$$C_P-C_V = P\cdot\left(-\frac{P}{T^2}\right)g'\!\left(\frac PT\right) = -\frac{P^2}{T^2}\,g'\!\left(\frac PT\right) = -\left(\frac PT\right)^{\!2} g'\!\left(\frac PT\right)$$</div>
+          <p>
+            右辺は $x\equiv P/T$ の関数 $-x^2g'(x)$ の形になっており、$T$ と $P$ の組み合わせ方によらず、比 $P/T$ という<strong>1つの変数だけ</strong>で決まる。したがって $C_P-C_V$ は $P/T$ だけの関数として表されることが示された。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-9">(9) エントロピー $S$ は温度一定で体積とともに増大</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この気体のエントロピー $S$ は温度一定の条件で体積とともに増大することを示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$\pd{S}{V}{T} = \pd{P}{T}{V} = f(V) > 0$$</div>
+        <div class="proof-body">
+          <p>(4)のMaxwell関係式 $\pd{S}{V}{T}=\pd{P}{T}{V}$ に、この気体の状態方程式から得られる $\pd{P}{T}{V}=f(V)$ を代入すると、</p>
+          <div class="mathblock">$$\pd{S}{V}{T} = f(V)$$</div>
+          <p>
+            状態方程式 $P=Tf(V)$ より $f(V)=P/T$ であり、$P>0$（気体の圧力は正）、$T>0$（絶対温度は正）なので、$f(V)>0$ が常に成り立つ。したがって
+          </p>
+          <div class="mathblock">$$\pd{S}{V}{T} = f(V) > 0$$</div>
+          <p>
+            すなわち、温度一定のもとで体積を増やすとエントロピーは常に増加する。この結果は(10)（不可逆性の証明）と(11)（エントロピー増加量の比較）で直接使われる。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-10">(10) 真空への断熱膨張は不可逆過程であることを示す</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この気体が体積 $V_1$ の状態から真空中に断熱的に膨張して、体積 $V_2$ の状態になる過程は不可逆過程であることを示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>内部エネルギーは体積に依存しないので断熱膨張で温度は変化しない。しかし温度一定でエントロピーは増加する（(9)）ため、断熱過程にもかかわらずエントロピーが増加しており、不可逆過程である。</div>
+        <div class="proof-body">
+          <p>
+            真空への自由膨張では、外部に押し返すものが何もないので仕事はゼロ（$δW=0$）。また容器全体が断熱壁で囲まれているので熱の出入りもない（$δQ=0$）。第一法則より $\Delta U=0$。
+          </p>
+          <p>
+            (6)で示した通り、この気体は $U=U(T)$（体積に依存しない）。したがって $\Delta U=0$ は直ちに $\Delta T=0$（温度不変）を意味する：この気体は真空へ自由膨張しても温度が変わらない（理想気体と同じ性質）。
+          </p>
+          <p>
+            一方、エントロピーは状態量なので、始状態 $(T,V_1)$ と終状態 $(T,V_2)$（同じ温度 $T$）を結ぶ、実際の経路とは<strong>別の可逆な経路</strong>——例えば同じ温度 $T$ を保った準静的等温膨張——に沿って計算してよい。(9)の結果を積分すると、
+          </p>
+          <div class="mathblock">$$\Delta S = \int_{V_1}^{V_2}\pd{S}{V}{T}dV = \int_{V_1}^{V_2}f(V)\,dV > 0 \qquad(\because\, f(V)>0,\ V_2>V_1)$$</div>
+          <p>
+            さて、実際の真空への膨張過程は断熱（$δQ=0$）である。もしこの過程が<strong>可逆</strong>でもあったとすれば、断熱かつ可逆な過程は定義から等エントロピー（$dS=δQ_{\text{rev}}/T=0$）のはずである。しかし実際には $\Delta S>0\neq0$ が成り立ってしまう——これは「断熱かつ可逆」という仮定と矛盾する。
+          </p>
+          <p>したがって、この真空への断熱膨張は<strong>不可逆</strong>過程でなければならない。□</p>
+        </div>
+      </details>
+
+      <h3 id="q1-11">(11) 定積過程と定圧過程、どちらのエントロピー増加が大きいか</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>この気体の温度を $T_1$ から $T_2$ にゆっくりと上げるときに、右図のように体積一定の過程 (A→B) と圧力一定の過程 (A→C) の二つの過程を行うとする。どちらの過程のエントロピー増加が大きいか説明せよ。</p>
+        <div class="diagram">
+          <img src="img/2009/fig-q1-11.png" alt="P-V平面上でT1・T2の等温曲線が描かれ、A点からVを固定して真上に進むとB点（T2上）、A点からPを固定して右に進むとC点（T2上）に至る図。BはAの真上（体積一定）、CはAより体積が大きいT2上の点（圧力一定）。" style="max-width:420px;width:100%;height:auto;">
+          <div class="diagram-cap">$P$–$V$ 平面上の $T_1$・$T_2$ 等温曲線（原本PDFより切り出し）。点Aから体積一定で上に進むとBへ、圧力一定で右に進むとCへ至る。両者ともT₂の等温曲線上にある。</div>
+        </div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>等温過程では体積が大きいほどエントロピーが大きいから、<strong>等圧過程（A→C）の方がエントロピー増加が大きい</strong>。</div>
+        <div class="proof-body">
+          <p>
+            図から、点Aは $T_1$ の等温曲線上にあり、点Bは点Aの真上（体積一定 $V_A$）にありながら $T_2$ の等温曲線上にある。点Cは点Aと同じ圧力 $P_A$ を保ったまま（圧力一定）右へ進んだ先にあり、これも $T_2$ の等温曲線上にある。
+          </p>
+          <p>
+            この気体の等温曲線 $P=Tf(V)$ は、$f(V)$ が単調減少（(12)参照）であることから、$V$ の増加関数として単調に下がる曲線である。したがって、同じ体積 $V_A$ のままでは、より高温の等温曲線（$T_2$）の方がより高い圧力を持つ（B点はA点よりも圧力が高い）。一方、同じ圧力 $P_A$ を保って高温の等温曲線に乗るには、体積を大きくする必要がある——これがまさに点Cであり、$V_C>V_B=V_A$ である。
+          </p>
+          <p>
+            すなわち、点Bと点Cはどちらも同じ温度 $T_2$ 上にあるが、体積は $V_C>V_B$ の関係にある。(9)で示した通り、この気体のエントロピーは温度一定のもとで体積とともに単調に増大する（$\pd{S}{V}{T}=f(V)>0$）。したがって、同じ温度 $T_2$ 上で比べれば
+          </p>
+          <div class="mathblock">$$S(C) > S(B) \qquad(\because\, V_C > V_B,\ \text{同じ}T_2)$$</div>
+          <p>
+            エントロピーは状態量なので、経路によらず $\Delta S_{A\to B}=S(B)-S(A)$，$\Delta S_{A\to C}=S(C)-S(A)$ である。$S(C)>S(B)$ より、
+          </p>
+          <div class="mathblock">$$\Delta S_{A\to C} > \Delta S_{A\to B}$$</div>
+          <p>
+            したがって、<strong>圧力一定の過程（A→C）の方が、体積一定の過程（A→B）よりもエントロピーの増加が大きい</strong>。直感的には、圧力一定で温めると気体は膨張もするため、単に温度を上げるだけの定積加熱よりも「体積が増える分」だけ余計にエントロピーを稼ぐ、と理解できる。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-12">(12) $f(V)$ についてさらに分かること</h3>
+      <div class="ex"><span class="box-label">問題</span><p>関数 $f(V)$ の性質として、$f(V)=P/T$ であることから $f(V)>0$ がわかる。この他に熱力学的性質から $f(V)$ についてわかることを説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$f'(V) < 0$$</div>
+        <div class="proof-body">
+          <p>
+            状態方程式 $P=Tf(V)$ を $V$ で偏微分する（$T$ 一定）と、
+          </p>
+          <div class="mathblock">$$\pd{P}{V}{T} = Tf'(V)$$</div>
+          <p>
+            ここで、熱力学的な<strong>安定性の条件</strong>（力学的安定性）を使う。もし等温圧縮率 $\kappa_T\equiv-\dfrac1V\pd{V}{P}{T}$ が負であれば、体積を少し減らすと圧力がさらに下がってしまい、外圧に押されてさらに収縮する……という暴走が止まらず、安定な平衡状態が存在できない。したがって、安定な物質は必ず
+          </p>
+          <div class="mathblock">$$\kappa_T > 0 \quad\Longleftrightarrow\quad \pd{V}{P}{T} < 0 \quad\Longleftrightarrow\quad \pd{P}{V}{T} < 0$$</div>
+          <p>
+            を満たさなければならない（体積を増やせば圧力は必ず下がる、という直感的にも当然の要請）。これを状態方程式の微分に適用すると、$T>0$ なので、
+          </p>
+          <div class="mathblock">$$\pd{P}{V}{T} = Tf'(V) < 0 \quad\Longrightarrow\quad f'(V) < 0$$</div>
+          <p>
+            すなわち $f(V)$ は $V$ の<strong>単調減少関数</strong>である。これは(11)の図に描かれている等温曲線が、実際に右下がりの単調減少曲線として描かれていることとも整合している。まとめると、この気体の $f(V)$ は「正の値を取り、かつ単調減少する」という、理想気体の $f(V)=nR/V$ と定性的に全く同じ性質を持つ関数である（ただし関数形そのものは理想気体に限定されない、というのが本問全体の主眼である）。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「$P/T$ が体積だけの関数」という緩い仮定の威力</span>
+        <p>
+          本問を通して見えてくるのは、理想気体の状態方程式 $PV=nRT$（すなわち $f(V)=nR/V$）が持つ性質——内部エネルギーが体積に依存しない、$C_V$ が体積に依存しない、断熱自由膨張で温度が変わらない——は、実は「$P/T$ が体積のみの関数である」という、理想気体よりもずっと緩い仮定だけから、そのままそっくり導かれるという点である。これらの性質の根拠は、状態方程式の具体的な関数形（$1/V$ に比例するかどうか）ではなく、「$P/T$ に温度 $T$ が現れない」という構造それ自体にある。2010年度過去問の大問1(7)（実験から $PV=f(T)$ と $U=U(T)$ の2条件を組み合わせて理想気体を導く設問）とは逆向きに、本問は「$P/T=f(V)$（体積のみの関数）」という1つの仮定だけから、理想気体に特有と思われがちな性質の大部分を導出できることを示す好対照な設問になっている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問2 ============ -->
+  <div class="section" id="q2">
+    <div class="sec-header">
+      <div class="sec-tag">大問 2</div>
+      <h2>熱力学第二法則・完全な熱力学関数・Clausius–Clapeyronの式</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3 id="q2-1">(1) ClausiusとKelvinの原理、およびClausius→Kelvinの証明</h3>
+      <div class="ex"><span class="box-label">問題</span><p>熱力学第二法則の具体的な表現であるClausiusの原理とKelvinの原理を説明し、Clausiusの原理からKelvinの原理を示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        Clausiusの原理：低温から高温へ、他に何の変化も残さずに熱を移す過程は存在しない。Kelvinの原理：一つの熱源から熱を受け取り、それを全部仕事に変える以外に何の変化も残さないサイクルは存在しない。背理法により、Kelvinの原理が破れるとClausiusの原理に反する装置が作れることを示す。
+      </div>
+        <div class="proof-body">
+          <p><strong>Clausiusの原理：</strong>「他に何の変化も残さずに、熱を低温の物体から高温の物体へ移すことは不可能である」（熱は自然には低温から高温へは流れない、という日常的な経験則を、熱力学第二法則として定式化したもの）。</p>
+          <p><strong>Kelvin（Thomson）の原理：</strong>「一つの熱源から熱を受け取り、それを全部仕事に変換する以外に、他に何の変化も残さないようなサイクル（循環過程）は存在しない」（熱をすべて仕事に変えてしまう第二種永久機関は作れない、という主張）。</p>
+          <p>
+            <strong>証明（背理法）：</strong>Kelvinの原理が破れると仮定する。すなわち、高温熱源 $T_H$ から熱 $Q$ を受け取り、これを全部仕事 $W=Q$ に変換し、他に何の変化も残さない装置（サイクルK）が存在するとする。
+          </p>
+          <p>
+            この仕事 $W$ を使って、$T_H$ と、これより低温の熱源 $T_L$（$T_L<T_H$）との間で働く<strong>可逆なCarnot冷凍機</strong>を駆動する。Carnot冷凍機は、仕事 $W$ を受け取って低温熱源 $T_L$ から熱 $Q_L$ を吸い上げ、高温熱源 $T_H$ に $Q_L+W$ を放出する（エネルギー保存）。
+          </p>
+          <p>
+            装置K（サイクルを1周してKだけの効果として高温熱源から $Q$ を吸収し外部に仕事 $W=Q$ を出す）と、このCarnot冷凍機（仕事 $W$ を受け取って高温熱源に $Q_L+W$ を放出、低温熱源から $Q_L$ を吸収）を組み合わせて<strong>1つの複合装置</strong>とみなす。外部とやり取りする正味の仕事は、Kが出した $W$ をそのまま冷凍機の駆動に使い切っているので、ちょうど相殺してゼロになる。
+          </p>
+          <p>高温熱源 $T_H$ に対する正味の熱のやり取りは、</p>
+          <div class="mathblock">$$-Q + (Q_L+W) = -Q + Q_L + Q = Q_L$$</div>
+          <p>
+            すなわち高温熱源には正味で $Q_L$ の熱が流れ込む。低温熱源 $T_L$ からは $Q_L$ が正味で吸い出されている。まとめると、この複合装置は<strong>外部と仕事のやり取りをせずに（正味の仕事はゼロ）</strong>、低温熱源 $T_L$ から高温熱源 $T_H$ へ熱 $Q_L$ を移動させただけの結果になっている——これはまさにClausiusの原理が禁じる過程そのものである。
+          </p>
+          <p>
+            したがって、「Kelvinの原理が破れる」という仮定はClausiusの原理と矛盾する。ゆえにClausiusの原理を認める限り、Kelvinの原理も成り立たなければならない。□
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q2-2">(2) Carnotサイクルの説明とCarnotの定理</h3>
+      <div class="ex"><span class="box-label">問題</span><p>Carnotサイクルとは何かを説明せよ。また、Carnotサイクルと同じ熱源の間で働く任意のサイクルの効率はCarnotサイクルの効率を上回れないことを示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        Carnotサイクル：高温 $T_H$・低温 $T_L$ の2つの熱源の間で、2つの等温過程と2つの断熱過程を組み合わせた可逆サイクル。任意のサイクル $X$ が $\eta_X>\eta_C$（Carnot効率）を持つと仮定すると、$X$ の仕事でCarnot冷凍機を駆動する複合装置がClausiusの原理に反することが示せる（背理法）。
+      </div>
+        <div class="proof-body">
+          <p>
+            <strong>Carnotサイクルの説明：</strong>高温熱源 $T_H$・低温熱源 $T_L$（$T_H>T_L$）の2つの熱源だけを使い、次の4つの準静的（可逆）過程を組み合わせて構成されるサイクルをCarnotサイクルという：①高温熱源 $T_H$ に接触させたままの等温膨張（熱 $Q_H$ を吸収）、②熱源から切り離しての断熱膨張（$T_H\to T_L$ まで冷える）、③低温熱源 $T_L$ に接触させたままの等温圧縮（熱を放出）、④熱源から切り離しての断熱圧縮（$T_L\to T_H$ に戻る）。全過程が可逆（準静的）である点がCarnotサイクルの本質であり、動作物質の種類には依らない。
+          </p>
+          <p>
+            <strong>証明（背理法）：</strong>同じ2つの熱源 $T_H,T_L$ の間で働く任意のサイクル $X$（可逆・不可逆を問わない）を考え、その効率を $\eta_X=W_X/Q_H^X$（$Q_H^X$：$X$ が高温熱源から吸収する熱、$W_X$：$X$ が外部にする正味の仕事）とする。Carnotサイクルの効率を $\eta_C$ とし、$\eta_X>\eta_C$ と仮定する。
+          </p>
+          <p>
+            $X$ を順方向に運転して得られる仕事 $W_X$ を使い、同じ2つの熱源の間で働く<strong>Carnot冷凍機（Carnotサイクルの逆回転）</strong>を駆動する。Carnot冷凍機は、仕事 $W_X$ を使って低温熱源から $Q_L^C$ を吸い上げ、高温熱源に $Q_H^C=Q_L^C+W_X$ を放出する。Carnotサイクルの効率の定義（逆回転でも同じ比が成り立つ）より $W_X/Q_H^C=\eta_C$、すなわち $Q_H^C=W_X/\eta_C$。
+          </p>
+          <p>
+            $X$（順方向、高温熱源から $Q_H^X=W_X/\eta_X$ を吸収）とCarnot冷凍機（逆方向、高温熱源に $Q_H^C=W_X/\eta_C$ を放出）を組み合わせると、外部とやり取りする正味の仕事は $X$ が出した $W_X$ をそのまま冷凍機の駆動に使い切るので、ちょうどゼロになる。高温熱源 $T_H$ に対する正味の熱の出入りは、
+          </p>
+          <div class="mathblock">$$Q_H^C - Q_H^X = \frac{W_X}{\eta_C} - \frac{W_X}{\eta_X} = W_X\left(\frac1{\eta_C}-\frac1{\eta_X}\right)$$</div>
+          <p>
+            仮定 $\eta_X>\eta_C$ より $1/\eta_X<1/\eta_C$ なので、この量は<strong>正</strong>——高温熱源には正味で熱が流入する。正味の仕事がゼロなので、エネルギー保存よりこの分はすべて低温熱源から正味で吸い上げられたものである。
+          </p>
+          <p>
+            結局、この複合装置は<strong>外部と正味の仕事のやり取りをせずに</strong>、低温熱源から高温熱源へ熱を移動させるだけの結果になっている——これはClausiusの原理に反する。したがって「$\eta_X>\eta_C$」という仮定は誤りであり、
+          </p>
+          <div class="mathblock">$$\eta_X \le \eta_C$$</div>
+          <p>
+            が任意のサイクル $X$（可逆・不可逆を問わない）について成り立つ。すなわち、同じ2つの熱源の間で働くどんなサイクルも、Carnotサイクルの効率を上回ることはできない。□
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q2-3">(3) Clausiusの不等式と $S$・$F$・$G$ の変化の方向</h3>
+      <div class="ex"><span class="box-label">問題</span><p>Clausiusの不等式を説明し、熱力学関数であるエントロピー $S$、Helmholtzの自由エネルギー $F$、Gibbsの自由エネルギー $G$ の変化の方向を説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$dS \ge \frac{δQ}{T}\qquad(\text{等号は可逆過程})$$
+        断熱孤立系では $S$ は減少しない。定積・等温では $F$ は増加しない。定圧・等温では $G$ は増加しない。
+      </div>
+        <div class="proof-body">
+          <p>
+            <strong>Clausiusの不等式：</strong>可逆・不可逆を問わない一般の過程に対し、熱力学第二法則は次の不等式を要求する。
+          </p>
+          <div class="mathblock">$$dS \ge \frac{δQ}{T}$$</div>
+          <p>
+            （$T$ は熱をやり取りする熱源の温度。等号は準静的＝可逆な過程のときにのみ成り立ち、不可逆な過程では真の不等号になる。）
+          </p>
+          <p><strong>① 孤立系（断熱系）でのエントロピー $S$：</strong> $δQ=0$ の断熱過程では、Clausiusの不等式は $dS\ge0$ となる。すなわち断熱孤立系のエントロピーは決して減少せず、不可逆過程では真に増加する——おなじみのエントロピー増大則である。</p>
+          <p><strong>② 定積・等温でのHelmholtz自由エネルギー $F$：</strong>体積一定（$dV=0$）では気体は仕事をしないので $δQ=dU$（第一法則より）。Clausiusの不等式に代入すると $dS\ge dU/T$、すなわち $dU-TdS\le0$。ここで等温（$dT=0$）を課すと、$F=U-TS$ の微小変化 $dF=dU-TdS-SdT$ の最後の項が消えて $dF=dU-TdS\le0$。すなわち定積・等温のもとで $F$ は決して増加せず、平衡状態で最小になる。</p>
+          <p><strong>③ 定圧・等温でのGibbs自由エネルギー $G$：</strong>定圧（$dP=0$）では、第一法則 $dU=δQ-PdV$ より $δQ=dU+PdV$。Clausiusの不等式より $dS\ge(dU+PdV)/T$、すなわち $dU+PdV-TdS\le0$。$G=U-TS+PV$ の微小変化は一般に $dG=dU-TdS-SdT+PdV+VdP$ であり、等温・定圧（$dT=0,\,dP=0$）では $dG=dU+PdV-TdS\le0$。すなわち定圧・等温のもとで $G$ は決して増加せず、平衡状態で最小になる。</p>
+          <p>
+            以上3つは、いずれも「孤立系全体（系＋熱源）ではエントロピーが増大する」という同一の第二法則を、系が置かれている拘束条件（断熱孤立か、定積・等温か、定圧・等温か）ごとに異なる熱力学関数の言葉に翻訳し直したものにすぎない。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q2-4">(4) 完全な熱力学関数：$U(S,V)$ と $U(T,V)$</h3>
+      <div class="ex"><span class="box-label">問題</span><p>完全な熱力学関数を説明し、エントロピー $S$ と体積 $V$ の関数で表した内部エネルギー $U(S,V)$ が完全な熱力学関数であることを示せ。また、温度 $T$ と $V$ の関数として表した $U(T,V)$ がそうでないことを説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $U(S,V)$ を1回ずつ偏微分するだけで $T=\pd{U}{S}{V}$，$P=-\pd{U}{V}{S}$ が過不足なく求まるので完全。$U(T,V)$ からは $C_V$ と $\pd{U}{V}{T}$ しか分からず、状態方程式 $P(T,V)$ を（$V$ の未知関数を残さずに）決定できないので不完全。
+      </div>
+        <div class="proof-body">
+          <p>
+            <strong>完全な熱力学関数とは：</strong>ある変数の組（その関数にとっての「自然な変数」）で表したときに、その1つの関数を微分するだけで、他のすべての熱力学量（温度・圧力・エントロピー・状態方程式・熱容量など）を、追加の実験データや未知の積分関数を一切必要とせずに導出できる関数のことをいう。
+          </p>
+          <p>
+            <strong>$U(S,V)$ が完全であることの確認：</strong>第一法則 $dU=δQ+δW$ に、可逆変化での $δQ=TdS$，$δW=-PdV$ を代入すると $dU=TdS-PdV$。これを $U(S,V)$ の全微分 $dU=\pd{U}{S}{V}dS+\pd{U}{V}{S}dV$ と比較すると、
+          </p>
+          <div class="mathblock">$$T = \pd{U}{S}{V}, \qquad P = -\pd{U}{V}{S}$$</div>
+          <p>
+            すなわち、関数形 $U(S,V)$ さえ分かれば、$S$ で1回偏微分するだけで温度 $T(S,V)$、$V$ で1回偏微分するだけで圧力 $P(S,V)$ が、積分定数のような未確定な情報を一切残さずに得られる。ここからさらに変数変換すれば状態方程式・Maxwell関係式・熱容量なども、すべて $U(S,V)$ という1つの関数だけから導出できる。これは $(S,V)$ が $U$ にとっての「自然な変数の組」（$dU=TdS-PdV$ に直接現れる変数の組）だからである。
+          </p>
+          <p>
+            <strong>$U(T,V)$ が不完全であることの説明：</strong>$U(T,V)$ が分かっているとき、そこから直接得られる情報は $C_V=\pd{U}{T}{V}$ と $\pd{U}{V}{T}$ の2つだけである。ここで大問1(5)のエネルギー方程式
+          </p>
+          <div class="mathblock">$$\pd{U}{V}{T} = T\pd{P}{T}{V} - P$$</div>
+          <p>
+            を見ると、これは $U$ と $P$ を結びつける関係式ではあるが、これを $P(T,V)$ について解こうとすると、体積 $V$ を固定した各断面ごとに $T$ についての1階の常微分方程式にすぎず、これを積分すると<strong>体積 $V$ ごとに異なる任意の積分定数（すなわち $V$ だけの未知関数）</strong>が必ず残ってしまう。つまり $U(T,V)$ を知っているだけでは、状態方程式 $P(T,V)$ を一意に決定できず、別途、実験や理論から独立に $P(T,V)$ の情報を追加で与えて初めて熱力学全体が確定する。これは $(T,V)$ が $U$ にとっての自然な変数の組ではないことに由来する（$(T,V)$ が自然な変数となる完全な熱力学関数は、$U$ をLegendre変換したHelmholtz自由エネルギー $F(T,V)=U-TS$ の方である）。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q2-5">(5) Clausius–Clapeyronの式と水・氷への応用</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>圧力 $P$ と温度 $T$ を変化させたとき、液相–固相の共存曲線（$P$–$T$曲線）はClausius–Clapeyronの式、</p>
+        <div class="mathblock">$$\frac{dP}{dT} = \frac{Q}{T(v_L-v_S)}$$</div>
+        <p>に従う。ただし、$Q$ は単位質量の固体が液体になるときに吸収する溶解熱であり、$v_L,v_S$ は単位質量あたりの液相、固相での体積とする。この関係式を求め、水と氷の場合に共存曲線のようすを議論せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $g_L(T,P)=g_S(T,P)$（単位質量あたりのGibbs自由エネルギーが共存曲線上で一致）を全微分して整理するとClausius–Clapeyronの式が得られる。水は氷の方が密度が小さい（$v_S>v_L$）という異常な性質を持つため、氷–水の共存曲線は<strong>右下がり</strong>（$dP/dT<0$、圧力を上げると融点が下がる）になる。
+      </div>
+        <div class="proof-body">
+          <p>
+            <strong>導出：</strong>単位質量あたりのGibbs自由エネルギー（比Gibbs自由エネルギー、化学ポテンシャルに相当）を液相・固相についてそれぞれ $g_L(T,P)$，$g_S(T,P)$ とする。液相と固相が共存する平衡状態では、両相の比Gibbs自由エネルギーが等しくなければならない：
+          </p>
+          <div class="mathblock">$$g_L(T,P) = g_S(T,P)$$</div>
+          <p>
+            これが共存曲線 $P=P(T)$ 上のすべての点で成り立つ。比Gibbs自由エネルギーの全微分は、単位質量あたりのエントロピー $s$、体積 $v$ を用いて $dg=-s\,dT+v\,dP$（$G=U-TS+PV$ の微小変化の単位質量版）と書ける。共存曲線に沿って両辺の変化を比較すると、
+          </p>
+          <div class="mathblock">$$dg_L = dg_S \quad\Longrightarrow\quad -s_L\,dT + v_L\,dP = -s_S\,dT + v_S\,dP$$</div>
+          <p>整理すると、</p>
+          <div class="mathblock">$$(v_L-v_S)\,dP = (s_L-s_S)\,dT \quad\Longrightarrow\quad \frac{dP}{dT} = \frac{s_L-s_S}{v_L-v_S}$$</div>
+          <p>
+            固体が液体へ融解する相転移は一定温度・一定圧力での可逆的な平衡過程なので、この間に吸収する熱（溶解熱）$Q$ はそのまま $Q=T(s_L-s_S)$ と表せる（$δQ_{\text{rev}}=Tds$ を積分しただけ）。これを代入すると、求める式が得られる：
+          </p>
+          <div class="mathblock">$$\frac{dP}{dT} = \frac{Q}{T(v_L-v_S)}$$</div>
+          <p>
+            <strong>水と氷への応用：</strong>通常の物質（大多数の固体）は、固体の方が液体より密度が高い（$v_S<v_L$）。融解は吸熱過程なので $Q>0$。したがって通常は $v_L-v_S>0$ より $dP/dT>0$——共存曲線は右上がりで、圧力を上げると融点が上がる、というのが「普通」の振る舞いである。
+          </p>
+          <p>
+            ところが<strong>水は例外的な物質</strong>で、氷（固相）の方が水（液相）より密度が小さい（$v_S>v_L$、氷が水に浮くのはこのため）。これを上式に当てはめると、$Q>0$（融解は吸熱）かつ $v_L-v_S<0$（水の方が体積が小さい）なので、
+          </p>
+          <div class="mathblock">$$\frac{dP}{dT} = \frac{Q}{T(v_L-v_S)} < 0$$</div>
+          <p>
+            すなわち、氷–水の共存曲線は<strong>右下がり</strong>になる。これは「圧力を上げると氷の融点が下がる」ことを意味し、他の大多数の物質とは逆の振る舞いをする、水に特有の異常な性質である。実際にこの効果によって、高圧下では $0^\circ\text{C}$ よりわずかに低い温度でも氷は融解しうる（ただし、日常的によく言われる「スケート靴の刃の圧力で氷が融けて滑る」という説明は、実際にはこの圧力効果だけでは説明しきれないほど小さく、主な要因は刃と氷の摩擦による発熱であることが現在では知られている——とはいえ、Clausius–Clapeyronの式が予言する「水の融解曲線の負の勾配」自体は、実験的に確立された事実である）。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 完全な熱力学関数とCarnotの定理の位置づけ</span>
+        <p>
+          本問(2)で用いた「Carnotサイクルより効率の良いサイクルが存在すると仮定すると、それを使ってCarnot冷凍機を駆動する複合装置がClausiusの原理に反する」という論法は、2010年度過去問の大問1(3)で問われた設問（可逆サイクルに限定した場合）を、可逆・不可逆を問わない<strong>任意のサイクル</strong>に一般化したものになっている。(4)の完全な熱力学関数の議論も2010年度大問3と同じ内容であり、この教員が「$U(S,V)$ 対 $U(T,V)$」という同じ切り口を複数年度にわたって確認させていることが分かる。(5)のClausius–Clapeyronの式は、本問集としては新しい題材（相転移・共存曲線）だが、導出の骨格は「2つの相のGibbs自由エネルギーが共存曲線上で一致する」という、化学熱力学で頻出する基本的な考え方そのものである。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問3 ============ -->
+  <div class="section" id="q3">
+    <div class="sec-header">
+      <div class="sec-tag">大問 3</div>
+      <h2>感想</h2>
+    </div>
+    <div class="sec-body">
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>講義および試験に関して、良かった点、悪かった点等の感想を自由に述べよ。また、講義あるいは自習を通じて、物理学・熱力学から学んだことを述べよ。</p>
+      </div>
+      <div class="note">
+        <span class="box-label">補足</span>
+        <p>この設問は採点対象の知識問題ではなく、受講者自身の感想・学びを問う自由記述式の設問であるため、模範解答は存在しない。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2008.html">← 2008年度へ</a>
+    <a href="kakomon_2010.html">2010年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

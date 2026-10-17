@@ -1,0 +1,766 @@
+/* 現代経済理論 過去問サイト */
+body {
+  font-family: "Hiragino Kaku Gothic Pro", "Yu Gothic", "Noto Sans JP", sans-serif;
+  background: #eef2f7;
+  color: #2d3748;
+  line-height: 1.75;
+  font-size: 15px;
+}
+
+
+/* ===== CONTAINER ===== */
+.container { max-width: 960px; margin: 0 auto; padding: 32px 20px 60px; }
+
+.intro-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 22px 28px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  margin-bottom: 28px;
+  font-size: .92rem;
+  color: #4a5568;
+  border-left: 4px solid #2b6cb0;
+}
+.intro-box strong { color: #1a365d; }
+
+/* ===== EXAM PAGE HEADER ===== */
+.exam-header {
+  background: #fff;
+  border-radius: 13px;
+  padding: 22px 28px;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.07);
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.exam-header .ey { font-size: 2.8rem; font-weight: 800; color: #1a365d; line-height: 1; }
+.exam-header .em { color: #4a5568; font-size: .88rem; }
+.exam-header .em strong { color: #1a365d; }
+
+/* ===== QUESTION CARD ===== */
+.qcard {
+  background: #fff;
+  border-radius: 13px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  overflow: hidden;
+}
+.qcard-body { padding: 20px 24px 14px; }
+.q-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.q-num-badge {
+  background: #2b6cb0;
+  color: #fff;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: .82rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.q-head { flex: 1; }
+.q-topic {
+  display: inline-block;
+  background: #ebf8ff;
+  color: #2b6cb0;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: .72rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: .03em;
+}
+.q-text { font-size: .92rem; line-height: 1.75; color: #2d3748; }
+
+/* ===== OPTIONS ===== */
+.options { list-style: none; padding: 4px 24px 14px 70px; }
+.opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 7px;
+  margin-bottom: 3px;
+  font-size: .88rem;
+  color: #4a5568;
+  transition: background .15s;
+  cursor: pointer;
+  user-select: none;
+}
+.opt:hover { background: #f7fafc; }
+.options.revealed .opt { cursor: default; }
+.options.revealed .opt:hover { background: transparent; }
+.options.revealed .opt.correct:hover { background: #f0fff4; }
+.options.revealed .opt.selected:not(.correct):hover { background: #fff5f5; }
+.opt-label { font-weight: 700; width: 18px; flex-shrink: 0; color: #718096; white-space: nowrap; }
+.correct-mark {
+  display: none;
+  margin-left: auto;
+  background: #276749;
+  color: #fff;
+  padding: 1px 9px;
+  border-radius: 10px;
+  font-size: .68rem;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+/* 正解を表示する（クリック後） */
+.options.revealed .opt.correct {
+  background: #f0fff4;
+  color: #22543d;
+  font-weight: 600;
+}
+.options.revealed .opt.correct .opt-label { color: #22543d; }
+.options.revealed .correct-mark { display: inline-block; }
+/* 不正解の選択（クリック後） */
+.opt.selected:not(.correct) {
+  background: #fff5f5;
+  color: #9b2335;
+}
+.opt.selected:not(.correct) .opt-label { color: #9b2335; }
+
+/* ===== EXPLANATION ACCORDION ===== */
+.exp-toggle {
+  width: 100%;
+  background: #f7fafc;
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  padding: 11px 24px;
+  text-align: left;
+  cursor: pointer;
+  font-size: .82rem;
+  color: #4a5568;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: background .15s;
+  font-family: inherit;
+  letter-spacing: .02em;
+}
+.exp-toggle:hover { background: #edf2f7; }
+.exp-toggle .arrow { margin-left: auto; transition: transform .22s; font-size: .8rem; }
+.exp-toggle.open .arrow { transform: rotate(180deg); }
+
+.exp-body {
+  display: none;
+  padding: 16px 28px 18px;
+  background: #fffbeb;
+  border-top: 1px solid #f6e05e;
+  font-size: .88rem;
+  line-height: 1.85;
+  color: #4a5568;
+}
+.exp-body.open { display: block; }
+.exp-body p { margin-bottom: 8px; }
+.exp-body p:last-child { margin-bottom: 0; }
+.exp-body .formula {
+  background: #f7f9fc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin: 8px 0;
+  font-family: "Courier New", monospace;
+  font-size: .85rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  color: #2d3748;
+}
+.exp-body em { font-style: normal; font-weight: 700; color: #276749; }
+.exp-body .warn { color: #c05621; font-weight: 600; }
+
+/* ===== PAGE NAV ===== */
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 32px;
+}
+.page-nav a {
+  background: #fff;
+  color: #2b6cb0;
+  text-decoration: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  font-size: .88rem;
+  font-weight: 700;
+  transition: box-shadow .18s, transform .18s;
+}
+.page-nav a:hover { box-shadow: 0 5px 16px rgba(0,0,0,.12); transform: translateY(-1px); }
+
+/* ===== TABLE (for Q8/Q19 etc.) ===== */
+.q-table {
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: .85rem;
+}
+.q-table th, .q-table td {
+  border: 1px solid #cbd5e0;
+  padding: 6px 14px;
+  text-align: center;
+}
+.q-table th { background: #ebf8ff; color: #2b6cb0; font-weight: 700; }
+
+/* ===== LECTURE TAB GRID (HOME) ===== */
+.lec-tab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  margin: 20px 0 40px;
+}
+.lec-tab {
+  background: #fff;
+  border-radius: 10px;
+  padding: 10px 12px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  border-left: 4px solid #2b6cb0;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  transition: transform .16s, box-shadow .16s;
+}
+.lec-tab:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.12); }
+.lec-tab .ln-badge {
+  flex-shrink: 0;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: #ebf8ff;
+  color: #2b6cb0;
+  font-weight: 800;
+  font-size: .74rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.lec-tab .ln-body { min-width: 0; }
+.lec-tab .ln-title {
+  font-size: .78rem; font-weight: 700; color: #1a365d;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.lec-tab .ln-lecturer { font-size: .66rem; color: #a0aec0; margin-top: 3px; }
+
+/* ===== LECTURE LIST ===== */
+.lec-list {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  overflow: hidden;
+  margin: 20px 0 36px;
+}
+.lec-row {
+  display: grid;
+  grid-template-columns: 46px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 13px 20px;
+  border-bottom: 1px solid #edf2f7;
+  text-decoration: none;
+  color: inherit;
+  border-left: 4px solid transparent;
+  transition: background .15s, border-color .15s;
+}
+.lec-row:last-child { border-bottom: none; }
+.lec-row.disabled { opacity: .45; pointer-events: none; }
+a.lec-row:hover { background: #f7fafc; border-left-color: #2b6cb0; }
+.rn-badge {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: #ebf8ff;
+  color: #2b6cb0;
+  font-weight: 800;
+  font-size: .82rem;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.lec-row.disabled .rn-badge { background: #f0f0f0; color: #b0b0b0; }
+.lec-row-body { min-width: 0; }
+.lec-row-title {
+  font-size: .93rem; font-weight: 700; color: #1a365d;
+  margin-bottom: 4px; line-height: 1.45;
+}
+.lec-row-meta {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 6px;
+  font-size: .77rem; color: #718096;
+}
+.lec-row-meta .tag-sm {
+  background: #ebf8ff; color: #2b6cb0;
+  padding: 1px 9px; border-radius: 20px;
+  font-size: .68rem; font-weight: 700;
+}
+.lec-row-status {
+  font-size: .78rem; font-weight: 700; color: #a0aec0;
+  white-space: nowrap; flex-shrink: 0;
+}
+a.lec-row .lec-row-status { color: #2b6cb0; font-size: 1.05rem; }
+
+/* ===== LECTURE INDIVIDUAL PAGE ===== */
+
+/* ── lec-grid (index / 講義一覧用) ── */
+.lec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: 16px;
+  margin: 24px 0 40px;
+}
+.lec-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 0;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 12px rgba(0,0,0,.07);
+  border-top: 4px solid #2b6cb0;
+  transition: transform .2s, box-shadow .2s;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.lec-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.13); }
+.lec-card.upcoming { border-top-color: #a0aec0; opacity: .6; pointer-events: none; }
+.lec-card-inner { padding: 18px 20px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.lec-num { font-size: .72rem; font-weight: 700; color: #2b6cb0; letter-spacing: .06em; }
+.lec-title { font-size: .97rem; font-weight: 700; color: #1a365d; line-height: 1.45; }
+.lec-teacher { font-size: .82rem; color: #718096; }
+.lec-tag {
+  display: inline-block;
+  background: #ebf8ff;
+  color: #2b6cb0;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: .72rem;
+  font-weight: 700;
+  margin-top: 4px;
+  align-self: flex-start;
+}
+
+/* ── Hero ── */
+.hero {
+  background: linear-gradient(150deg, #0f2744 0%, #1a365d 45%, #2b6cb0 100%);
+  color: #fff;
+  padding: 44px 24px 40px;
+  text-align: center;
+  position: relative;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: 0; right: 0;
+  height: 22px;
+  background: #eef2f7;
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 20px;
+  padding: 3px 14px;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  margin-bottom: 14px;
+}
+.hero h1 { font-size: 1.75rem; font-weight: 800; margin-bottom: 10px; line-height: 1.3; }
+.hero .subtitle { font-size: .97rem; opacity: .85; margin-bottom: 6px; }
+.hero .meta { font-size: .8rem; opacity: .65; }
+
+/* ── Section cards ── */
+.section-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+}
+.section-card h2 {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #1a365d;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e8f0fb;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: .01em;
+}
+.section-card h2 .h2-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+/* ── Teacher profile ── */
+.teacher-profile { display: flex; gap: 20px; align-items: flex-start; }
+.teacher-icon {
+  width: 58px; height: 58px; border-radius: 50%;
+  background: linear-gradient(135deg, #2b6cb0, #1a365d);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; flex-shrink: 0;
+}
+.teacher-info h3 { font-size: 1.1rem; font-weight: 800; color: #1a365d; margin-bottom: 4px; }
+.teacher-info .affil { font-size: .82rem; color: #718096; margin-bottom: 8px; line-height: 1.6; }
+.teacher-info .specialty { font-size: .88rem; color: #4a5568; line-height: 1.75; }
+
+/* ── Summary prose ── */
+.summary-text { font-size: .93rem; color: #374151; line-height: 1.95; }
+.summary-text p { margin-bottom: 12px; }
+.summary-text p:last-child { margin-bottom: 0; }
+
+/* ── Topic list ── */
+.topic-list { list-style: none; display: flex; flex-direction: column; gap: 14px; margin: 0; padding: 0; }
+.topic-list > li {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  background: #fff;
+  border: 1px solid #dce8f8;
+  border-left: 4px solid #2b6cb0;
+  border-radius: 0 12px 12px 0;
+  overflow: hidden;
+}
+.tn-col {
+  background: #ebf8ff;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 18px 0;
+}
+.tn {
+  font-weight: 800;
+  color: #2b6cb0;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+.topic-content { padding: 18px 22px; }
+.topic-title {
+  font-size: .97rem;
+  font-weight: 700;
+  color: #1a365d;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  display: block;
+}
+.topic-desc {
+  font-size: .88rem;
+  color: #4a5568;
+  line-height: 1.9;
+}
+.topic-desc p { margin-bottom: 9px; }
+.topic-desc p:last-child { margin-bottom: 0; }
+.topic-desc ul { margin: 8px 0 8px 18px; padding: 0; }
+.topic-desc ul li { margin-bottom: 4px; }
+.topic-desc strong { color: #1a365d; font-weight: 700; }
+.topic-desc em { font-style: normal; color: #276749; font-weight: 600; }
+
+/* Insight callout */
+.insight {
+  background: #fffbeb;
+  border-left: 3px solid #f6ad55;
+  border-radius: 0 6px 6px 0;
+  padding: 9px 14px;
+  margin: 11px 0 4px;
+  font-size: .84rem;
+  color: #744210;
+  line-height: 1.8;
+}
+
+/* Definition / formula box */
+.def-box {
+  background: #f7f9fc;
+  border: 1px solid #dce8f8;
+  border-radius: 8px;
+  padding: 10px 16px;
+  margin: 10px 0 4px;
+  font-size: .86rem;
+  color: #2d3748;
+  line-height: 1.8;
+}
+.def-box strong { color: #2b6cb0; }
+
+/* ── Concept tags ── */
+.concept-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.concept-tag { display: inline-block; padding: 5px 14px; border-radius: 20px; font-size: .78rem; font-weight: 700; background: #e6fffa; color: #276749; }
+.concept-tag.t-blue   { background: #ebf8ff; color: #2b6cb0; }
+.concept-tag.t-orange { background: #fffaf0; color: #c05621; }
+.concept-tag.t-purple { background: #faf5ff; color: #6b46c1; }
+.concept-tag.t-red    { background: #fff5f5; color: #9b2335; }
+.concept-tag.t-gray   { background: #f7fafc; color: #4a5568; border: 1px solid #e2e8f0; }
+
+/* ── Exam reference ── */
+.exam-ref-box {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #f6e05e;
+}
+.exam-ref-head {
+  background: linear-gradient(90deg, #fffbeb, #fef9e0);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #f6e05e;
+}
+.exam-ref-head .qlabel {
+  font-size: .78rem;
+  font-weight: 800;
+  color: #c05621;
+  letter-spacing: .04em;
+}
+.exam-ref-body { background: #fffdf0; padding: 18px 20px; }
+.exam-ref-body .qnum { font-size: 1rem; font-weight: 800; color: #1a365d; margin-bottom: 8px; }
+.exam-ref-body .qdesc { font-size: .88rem; color: #4a5568; line-height: 1.9; }
+.exam-ref-body .qdesc strong { color: #1a365d; }
+.exam-points {
+  margin-top: 14px;
+  padding: 14px 18px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+.exam-points p { font-size: .82rem; font-weight: 700; color: #744210; margin-bottom: 8px; }
+.exam-points ul { padding-left: 18px; font-size: .85rem; color: #4a5568; line-height: 1.85; }
+.exam-points ul li { margin-bottom: 4px; }
+
+/* ── Exam year blocks (multi-year Q&A) ── */
+.exam-year-block { margin-bottom: 16px; }
+.exam-year-block:last-child { margin-bottom: 0; }
+.exam-year-head {
+  display: flex; justify-content: space-between; align-items: center;
+  background: linear-gradient(90deg, #1a365d, #2b6cb0);
+  color: #fff; padding: 7px 16px;
+  border-radius: 8px 8px 0 0;
+  font-size: .82rem; font-weight: 800; letter-spacing: .03em;
+}
+.exam-year-head a { color: #bee3f8; font-size: .76rem; font-weight: 600; }
+.exam-year-body {
+  border: 1px solid #bee3f8; border-top: none;
+  border-radius: 0 0 8px 8px;
+  padding: 14px 16px; background: #fffdf0;
+}
+.exam-qa-item {
+  margin-bottom: 13px; padding-bottom: 13px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+.exam-qa-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+.exam-qa-header { display: flex; gap: 8px; align-items: center; margin-bottom: 5px; flex-wrap: wrap; }
+.eq-num {
+  display: inline-block; background: #1a365d; color: #fff;
+  font-size: .72rem; font-weight: 800; padding: 1px 8px;
+  border-radius: 10px; white-space: nowrap;
+}
+.eq-topic { font-size: .78rem; font-weight: 700; color: #2c5282; }
+.exam-qa-q { font-size: .84rem; color: #2d3748; line-height: 1.65; margin-bottom: 8px; }
+.exam-no-data { font-size: .83rem; color: #718096; font-style: italic; padding: 6px 2px; }
+
+/* 講義ページ内の過去問（選択肢つき・解説はクリックで表示） */
+.exam-qa-item .options { padding: 0 0 6px; }
+.exam-qa-item .opt { font-size: .82rem; padding: 6px 8px; }
+.exam-qa-item .exp-toggle {
+  border-top: 1px solid #e2e8f0;
+  border-radius: 6px 6px 0 0;
+  padding: 8px 14px;
+  font-size: .78rem;
+}
+.exam-qa-item .exp-body { padding: 10px 14px 12px; border-radius: 0 0 6px 6px; font-size: .80rem; }
+
+/* ── Lecture back-link on exam pages ── */
+.lec-ref-link {
+  display: inline-block;
+  background: #e9d8fd; color: #553c9a;
+  font-size: .72rem; font-weight: 700;
+  padding: 1px 8px; border-radius: 10px;
+  text-decoration: none; white-space: nowrap;
+  margin-left: 6px;
+}
+.lec-ref-link:hover { background: #b794f4; color: #fff; }
+
+/* ── Lecture navigation ── */
+.lecture-nav {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px; margin-top: 32px; padding-top: 8px;
+}
+.lecture-nav a {
+  background: #fff; color: #2b6cb0; text-decoration: none;
+  padding: 11px 24px; border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.08);
+  font-size: .86rem; font-weight: 700;
+  transition: box-shadow .18s, transform .18s, background .15s;
+  border: 1px solid #dce8f8;
+}
+.lecture-nav a:hover {
+  box-shadow: 0 6px 20px rgba(43,108,176,.18);
+  transform: translateY(-2px);
+  background: #ebf8ff;
+  border-color: #bee3f8;
+}
+.lecture-nav .center { flex: 1; text-align: center; }
+
+/* ── Keyword detail accordion ── */
+.kw-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 16px;
+  border-top: 1px solid #e8f0fb;
+  padding-top: 14px;
+}
+.kw-detail-label {
+  font-size: .72rem;
+  font-weight: 700;
+  color: #a0aec0;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.kw-item {
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+  background: #fff;
+}
+.kw-item[open] { border-color: #bee3f8; }
+.kw-summary {
+  cursor: pointer;
+  padding: 8px 14px;
+  font-size: .84rem;
+  font-weight: 700;
+  color: #2d3748;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  transition: background .15s;
+  user-select: none;
+}
+.kw-summary::-webkit-details-marker { display: none; }
+.kw-summary::marker { display: none; }
+.kw-item[open] .kw-summary { background: #ebf8ff; color: #2b6cb0; }
+.kw-summary::after {
+  content: '▾';
+  margin-left: auto;
+  font-size: .75rem;
+  color: #a0aec0;
+  transition: transform .2s;
+}
+.kw-item[open] .kw-summary::after { transform: rotate(180deg); color: #2b6cb0; }
+.kw-body {
+  padding: 10px 16px 12px;
+  font-size: .86rem;
+  color: #4a5568;
+  line-height: 1.85;
+  border-top: 1px solid #e8f0fb;
+  background: #f7fafc;
+}
+.kw-body strong { color: #1a365d; }
+.kw-body em { font-style: normal; color: #276749; font-weight: 600; }
+
+/* ── サイドナビ（階層メニュー：講義／過去問） ── */
+.sidenav-toggle-btn {
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 6px; color: white; cursor: pointer; font-size: 1rem;
+  padding: .3rem .55rem; line-height: 1; transition: background .15s;
+  flex-shrink: 0; margin-right: .5rem;
+}
+.sidenav-toggle-btn:hover { background: rgba(255,255,255,0.28); }
+
+.sidenav {
+  position: fixed; left: 0; top: 0; height: 100vh; width: 260px;
+  background: #fff; border-right: 1px solid #e2e8f0;
+  box-shadow: 4px 0 20px rgba(0,0,0,.12); z-index: 150;
+  transform: translateX(-100%); transition: transform .25s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.sidenav.sidenav-open { transform: translateX(0); }
+
+.sidenav-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: .9rem .9rem .75rem; border-bottom: 1px solid #e2e8f0; flex-shrink: 0;
+}
+.sidenav-brand {
+  font-weight: 700; font-size: .82rem; color: #2b6cb0; letter-spacing: .04em;
+  text-decoration: none;
+}
+.sidenav-brand:hover { text-decoration: underline; }
+.sidenav-close-btn {
+  background: none; border: none; cursor: pointer; color: #718096;
+  font-size: .85rem; padding: .2rem .4rem; border-radius: 4px; line-height: 1;
+  transition: background .12s;
+}
+.sidenav-close-btn:hover { background: #f7fafc; color: #2d3748; }
+
+.sidenav-body { flex: 1; overflow-y: auto; padding: .4rem 0 2rem; }
+
+.sidenav-group { margin-bottom: .3rem; }
+.sidenav-group-title {
+  padding: .8rem .9rem .4rem; font-size: .72rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+}
+.sidenav-gtitle-lec  { color: #2b6cb0; }
+.sidenav-gtitle-exam { color: #c05621; }
+
+.sidenav-item {
+  display: block; padding: .42rem .9rem .42rem 1.1rem;
+  border-left: 3px solid transparent; font-size: .85rem; color: #2d3748;
+  text-decoration: none; transition: background .12s;
+}
+.sidenav-item:hover { background: #f7fafc; text-decoration: none; }
+.sidenav-item-lec.sidenav-current  { border-left-color: #2b6cb0; background: #ebf8ff; font-weight: 700; }
+.sidenav-item-exam.sidenav-current { border-left-color: #c05621; background: #fffaf0; font-weight: 700; }
+
+/* 指定された画面幅などの条件で、文字サイズや配置を切り替える。 */
+@media (max-width: 899px) {
+  body.sidenav-body-open::after {
+    content: ''; position: fixed; inset: 0; background: rgba(0,0,0,.35);
+    z-index: 140; pointer-events: none;
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+/* 指定された画面幅などの条件で、文字サイズや配置を切り替える。 */
+@media (max-width: 640px) {
+  .year-grid { grid-template-columns: 1fr; }
+  .lec-grid { grid-template-columns: 1fr; }
+  .lec-tab-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .lec-tab { padding: 9px 10px; }
+  .container { padding: 16px 12px 40px; }
+  .exam-header { display: block; padding: 16px 18px; }
+  .exam-header .ey { font-size: 2rem; }
+  .qcard-body { padding: 14px 14px 10px; }
+  .options { padding: 4px 10px 12px 16px; }
+  .opt { font-size: .85rem; }
+  .exp-toggle { padding: 11px 14px; }
+  .exp-body { padding: 14px 16px 16px; }
+  .q-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .page-nav { flex-direction: column; }
+  .page-nav a { text-align: center; }
+  .lec-row { grid-template-columns: 38px 1fr auto; gap: 10px; padding: 12px 14px; }
+  .rn-badge { width: 30px; height: 30px; font-size: .78rem; }
+  .lec-row-title { font-size: .88rem; }
+  .section-card { padding: 20px 16px; }
+  .teacher-profile { flex-direction: column; }
+  .teacher-icon { width: 48px; height: 48px; font-size: 1.3rem; }
+  .topic-list > li { grid-template-columns: 1fr; border-left: none; border-radius: 12px; }
+  .tn-col {
+    justify-content: flex-start;
+    align-items: center;
+    padding: 6px 14px;
+    border-bottom: 1px solid #dce8f8;
+  }
+  .topic-content { padding: 14px 14px; }
+  .lecture-nav { flex-direction: column; }
+  .lecture-nav a { text-align: center; width: 100%; }
+  .hero { padding: 32px 16px 30px; }
+  .hero h1 { font-size: 1.4rem; }
+}

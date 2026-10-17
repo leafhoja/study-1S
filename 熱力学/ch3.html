@@ -1,0 +1,1260 @@
+<!DOCTYPE html><!-- 「第3章 熱力学第二法則 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>第3章 熱力学第二法則 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="td.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$','$']], displayMath: [['$$','$$']], tags: 'ams',
+    macros: { pd: ['\\left(\\frac{\\partial #1}{\\partial #2}\\right)_{#3}', 3] }
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body data-nav-page="ch3">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">熱力学ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">ホーム</a>
+      <a href="ch0.html" data-page="ch0">第0章</a>
+      <a href="ch1.html" data-page="ch1">第1章</a>
+      <a href="ch2.html" data-page="ch2">第2章</a>
+      <a href="ch3.html" data-page="ch3" class="active">第3章</a>
+      <a href="ch4.html" data-page="ch4">第4章</a>
+      <a href="ch5.html" data-page="ch5">第5章</a>
+      <a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a>
+      <a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2014.html" data-page="kakomon_2014">2014</a>
+      <a href="kakomon_2012.html" data-page="kakomon_2012">2012</a>
+      <a href="kakomon_2011.html" data-page="kakomon_2011">2011</a>
+      <a href="kakomon_2010.html" data-page="kakomon_2010">2010</a>
+      <a href="kakomon_2009.html" data-page="kakomon_2009">2009</a>
+      <a href="kakomon_2008.html" data-page="kakomon_2008">2008</a>
+      <a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+    </div>
+  </div>
+</nav>
+
+<div class="chapter-layout">
+<!-- 本文の各節へ移動できる目次を、横の領域にまとめる。 --><aside class="sidebar">
+  <div class="sidebar-title">第3章 目次</div>
+  <ul class="sidebar-nav">
+    <li><a href="#s3-1">3.1 変化の方向</a></li>
+    <li class="sub-item"><a href="#s3-1-rev">可逆・不可逆過程</a></li>
+    <li><a href="#s3-2">3.2 Clausiusの原理</a></li>
+    <li><a href="#s3-3">3.3 Carnotサイクル</a></li>
+    <li class="sub-item"><a href="#s3-3-prop1">性質①: 正の仕事</a></li>
+    <li><a href="#s3-4">3.4 Kelvinの原理</a></li>
+    <li class="sub-item"><a href="#s3-4-equiv">Clausius⟺Kelvinの等価性</a></li>
+    <li class="sub-item"><a href="#s3-4-ostwald">Ostwaldの原理</a></li>
+    <li><a href="#s3-5">3.5 できること/できないこと</a></li>
+    <li><a href="#s3-5b">3.5補 熱ポンプと冷凍機</a></li>
+    <li><a href="#s3-6">3.6 Carnotサイクルの熱効率</a></li>
+    <li class="sub-item"><a href="#s3-6-prop2">性質②: 最大効率</a></li>
+    <li class="sub-item"><a href="#s3-6-calc">理想気体での計算</a></li>
+    <li><a href="#s3-7">3.7 熱力学温度</a></li>
+    <li class="sub-item"><a href="#s3-7-def">関数方程式と温度の定義</a></li>
+    <li class="sub-item"><a href="#s3-7-nonneg">非負性</a></li>
+    <li><a href="#s3-8">3.8 Clausiusの不等式</a></li>
+    <li class="sub-item"><a href="#s3-8">$n$熱源への拡張と証明</a></li>
+    <li><a href="#s3-9">3.9 エントロピー</a></li>
+    <li class="sub-item"><a href="#s3-9-def">経路独立性と状態量の構成</a></li>
+    <li class="sub-item"><a href="#s3-9-incr">エントロピー増大則</a></li>
+    <li class="sub-item"><a href="#s3-9-meas">測り方</a></li>
+    <li class="sub-item"><a href="#s3-9-ideal">理想気体のエントロピー</a></li>
+    <li class="sub-item"><a href="#s3-9-free">断熱自由膨張のエントロピー</a></li>
+    <li class="sub-item"><a href="#s3-9-heat">加熱過程と Clausius 不等式の検証</a></li>
+  </ul>
+</aside>
+
+<main class="main-content">
+  <div class="chapter-header">
+    <div class="chapter-badge">第 3 章</div>
+    <h1>熱力学第二法則</h1>
+    <p class="abstract">
+      第一法則はエネルギー保存則（仕事と熱の等価性）だった。
+      第二法則はその上に「熱と仕事の<strong>非等価性</strong>」を加える：
+      「熱の移動や仕事の取り出しにはできないことがある」。
+      Clausiusの原理・Kelvinの原理を出発点として、Carnotサイクルの最大効率、
+      熱力学温度、Clausiusの不等式、そしてエントロピーを導く。
+    </p>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">整理</span>3+1 つの法則の位置づけ</div>
+    <div class="box-body">
+      <ul>
+        <li><strong>第ゼロ法則</strong>：熱平衡状態（と温度）の存在</li>
+        <li><strong>第一法則</strong>：熱も含めたエネルギー保存則（仕事と熱の等価性）</li>
+        <li><strong>第二法則</strong>：熱と仕事の非等価性・変化の方向性</li>
+        <li><strong>第三法則</strong>（Nernstの定理；本講義では扱わない）：絶対零度でのエントロピーはゼロ</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ 3.1 ═══ -->
+  <h2 id="s3-1">3.1 変化の方向</h2>
+
+  <p>
+    自然現象には方向性がある。例えば：
+  </p>
+  <ul>
+    <li>断熱壁で囲まれた2室 A（温度 $T_A$）と B（温度 $T_B > T_A$）を繋ぐと、
+    熱は自発的に B → A に移って中間温度 $T^*$ で釣り合う。逆は起きない。</li>
+    <li>気体を真空に膨張させると広がるが、自発的に縮んで元に戻ることはない。</li>
+  </ul>
+  <p>
+    第一法則だけではこれらの方向性を説明できない（エネルギー的にはどちらも許容される）。
+    方向性を与えるのが第二法則である。
+  </p>
+
+  <h3 id="s3-1-rev">可逆過程と不可逆過程</h3>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>可逆過程（reversible process）</div>
+    <div class="box-body">
+      系が状態 A から B に変化したとき、<strong>系だけでなく，系が影響を及ぼした外界（接触した熱源や仕事のやり取り相手など）も含めて，
+      すべてを元の状態に戻す逆の変化を実現できる</strong>とき，その過程を<strong>可逆</strong>という。
+      逆にたどった結果，系にも外界にも何の痕跡も残らない，というのが可逆の本質である。
+      <ul>
+        <li>準静的過程は可逆</li>
+        <li>可逆を示す方法：逆過程を明示的に構成する</li>
+        <li>不可逆を示す方法：可逆と仮定して原理（Clausius/Kelvin）に矛盾を導く（背理法）</li>
+      </ul>
+      <p>
+        この「外界にも痕跡を残さない」という条件は以降の証明で繰り返し使われる。
+        例えば Carnot サイクルを逆向きに運転する議論では，可逆な過程を逆にたどっても，
+        元の過程で熱源とやり取りした熱・仕事がそっくりそのまま逆向きになるだけで，
+        新たな効果や矛盾が生じないことを前提にしている。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">重要</span>準静的過程と可逆過程の関係</div>
+    <div class="box-body">
+      <p>
+        <strong>準静的過程</strong>（quasi-static process）は「系が常に平衡状態を保ちながら変化する」過程，
+        <strong>可逆過程</strong>は「逆過程を辿れる」過程。両者の関係は次のようになる：
+      </p>
+      <ul>
+        <li><strong>準静的 + 摩擦なし・散逸なし</strong> → 可逆（例：摩擦のないピストンのゆっくりとした移動）</li>
+        <li><strong>準静的でも摩擦あり</strong> → 不可逆（系は平衡だが散逸でエントロピーが増大）</li>
+        <li><strong>急激な過程（非準静的）</strong> → 不可逆（例：Joule 膨張，急激な圧縮）</li>
+      </ul>
+      <p>
+        この講義では特に断らない限り，「準静的 ≒ 可逆」として扱う。
+        Carnot サイクルはすべての過程が準静的かつ可逆であることを明示的に仮定している。
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ 3.2 ═══ -->
+  <h2 id="s3-2">3.2 Clausiusの原理</h2>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">Clausiusの原理</span>第二法則の一つの表現</div>
+    <div class="box-body">
+      1つの系がサイクルを行って<strong>低温の熱源から熱をもらって高温の熱源に移す</strong>、
+      かつ他には何もしない、ということはできない。
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">歴史</span>R. Clausius（1822–1888）</div>
+    <div class="box-body">
+      <p>
+        Rudolf Clausius はドイツの物理学者。1850 年に熱力学第二法則を初めて定式化し、
+        1865 年に<strong>エントロピー</strong>（entropy）という言葉を作った。
+        語源はギリシャ語の「trope（変化・変換）」で、
+        「energy（エネルギー）」と対になる言葉として意図的に命名した。
+        Clausius は「宇宙のエントロピーは最大値に向かう」という言葉でも知られる。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">例</span>高温→低温の熱移動は不可逆</div>
+    <div class="box-body">
+      <p>
+        高温の熱源（温度 $T_1$）から低温の熱源（温度 $T_2$）へ，接触によって熱 $Q$ が移動する過程は不可逆である。
+      </p>
+      <p>
+        （証明）熱源は温度が変化しない大きな熱溜めなので，熱が移動しても $T_1, T_2$ 自体は変わらない。
+        つまりこの過程の前後で「2つの熱源」全体は同じ状態（同じ温度の組）に戻っており，
+        実質的に変化したのは移動した熱 $Q$ だけである。この過程が可逆であれば，その<strong>逆過程</strong>，
+        すなわち低温熱源 $T_2$ から高温熱源 $T_1$ へ熱 $Q$ が移動し，他には何も変化を残さない過程が実現できることになる。
+        これはまさに Clausius の原理が禁じる「低温から熱をもらって高温に移す，他には何もしない」サイクルに他ならない。矛盾。
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ 3.3 ═══ -->
+  <h2 id="s3-3">3.3 Carnotサイクル</h2>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>Carnotサイクル</div>
+    <div class="box-body">
+      異なる温度の熱源を<strong>2つだけ</strong>使う<strong>可逆サイクル</strong>。すべての過程が準静的。
+      <ul>
+        <li>熱源を2つしか使わないので断熱過程が必然的に含まれる</li>
+        <li>作業物質は何でもよい（理想気体・窒素・ゴム・磁石など）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">歴史</span>S. Carnot（1796–1832）と蒸気機関の時代</div>
+    <div class="box-body">
+      <p>
+        Sadi Carnot はフランスの陸軍将校で物理学者。
+        彼が生きた 19 世紀初頭のフランスは産業革命期のイギリスに技術的に遅れていた。
+        蒸気機関の効率を理論的に研究し、1824 年（28 歳）に
+        <em>「火の動力についての考察」</em>を出版した。
+      </p>
+      <p>
+        この著作でCarnotは<strong>「最も効率的な熱機関は可逆機関である」</strong>という
+        画期的な結論を導いた。しかし当時は「熱素（カロリック）説」を前提にしており、
+        後にClausiusらが正しい形に修正した。
+        Carnotは 36 歳でコレラで死去し、大半の資料が焼却されてしまった。
+        後世への影響は絶大で、「熱力学の父」と呼ばれることもある。
+      </p>
+    </div>
+  </div>
+
+  <p>
+    温度 $T_1$（高温）の熱源から熱 $Q_1$ をもらい、仕事 $W$ を外に取り出し、
+    温度 $T_2 < T_1$（低温）の熱源に熱 $Q_2$ を渡すサイクル。
+    第一法則より：
+  </p>
+  $$Q_1 = W + Q_2 \implies W = Q_1 - Q_2$$
+  <p>熱効率：$\eta = W/Q_1 = 1 - Q_2/Q_1$</p>
+
+  <h3 id="s3-3-prop1">性質①: 外に正の仕事をする</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">性質①</span>Carnotサイクルは $W > 0$</div>
+    <div class="box-body">
+      <p>
+        $W \le 0$ と仮定して矛盾を導く（背理法）。<strong>逆Carnotサイクル</strong>
+        （$T_2$ から熱 $Q_2$ をもらい、仕事 $W$ をもらい、$Q_1 = Q_2 + W$ を $T_1$ に渡す）を考えると、
+        $W \le 0$ の仮定は，この逆サイクルが外部から仕事をもらう必要がない
+        （$W=0$ なら仕事の出入りなし，$W<0$ ならむしろ余った仕事 $-W>0$ を出力する）ことを意味する。
+      </p>
+      <p>
+        <strong>$W = 0$ の場合</strong>：逆Carnotサイクルは $T_2$ から $Q_2$ をもらい，$T_1$ に $Q_1=Q_2$ を渡すだけで，
+        仕事の出入りは一切ない。低温から高温への熱の移動だけが起こる「他には何もしない」サイクルであり，
+        Clausius の原理に反する。
+      </p>
+      <p>
+        <strong>$W < 0$ の場合</strong>：逆Carnotサイクルは $T_2$ から $Q_2$ をもらい，$T_1$ に $Q_1=Q_2+W&lt;Q_2$ を渡し，
+        さらに余剰の仕事 $-W>0$ を外部に出力する。この余った仕事 $-W$ は，摩擦などによって常に100%熱に変換できる
+        （力学的な仕事を熱に変えること自体はエネルギー保存則の範囲内で自明に可能である）。
+        この熱をそのまま $T_1$ に追加で渡すと，合体系全体では：
+      </p>
+      <ul>
+        <li>$T_1$ が受け取る熱の合計：$Q_1 + (-W) = (Q_2+W) - W = Q_2$</li>
+        <li>$T_2$ が失う熱：$Q_2$</li>
+        <li>外部との仕事の出入り：逆Carnotサイクルの出力 $-W$ を摩擦がすべて消費するので正味ゼロ</li>
+      </ul>
+      <p>
+        すなわち，$T_2$ から熱 $Q_2$ をもらって $T_1$ に $Q_2$ をそのまま渡すだけで，他には何も残らない。
+        これも Clausius の原理に反する。
+      </p>
+      <p>
+        どちらの場合も矛盾するので $W \le 0$ は成立し得ず，逆Carnotサイクルは常に正の仕事の投入を必要とする。
+        したがって（同じ $W$ を共有する）元の順方向の Carnot サイクルも $W > 0$，
+        すなわち<strong>Carnotサイクルは必ず外に正の仕事をする</strong>。
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ 3.4 ═══ -->
+  <h2 id="s3-4">3.4 Kelvinの原理</h2>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">Kelvinの原理</span>第二法則の別表現</div>
+    <div class="box-body">
+      1つの熱源から熱をもらって<strong>100% 仕事に変換</strong>し、
+      かつ他には何もしないサイクルは存在しない。
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">歴史</span>Lord Kelvin（1824–1907）</div>
+    <div class="box-body">
+      <p>
+        William Thomson（後の Lord Kelvin）はスコットランドの物理学者・工学者。
+        10 歳でグラスゴー大学に入学し、22 歳で同大学の教授に就任という天才。
+        熱力学の第二法則（Kelvin の原理）の定式化（1851 年）のほか、
+        絶対温度の概念の確立、海底電信ケーブルの設計、地球の年齢の見積もり（後に外れることになるが）
+        など幅広い業績を残した。
+        単位ケルビン（K）は彼の名を冠する。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>永久機関の分類</div>
+    <div class="box-body">
+      <ul>
+        <li><strong>第一種永久機関</strong>：エネルギー保存則を破る機関（第一法則が禁じる）</li>
+        <li><strong>第二種永久機関</strong>：エネルギー保存則は満たすが、海水の熱で自走する車など、
+        熱を 100% 仕事に変換する機関（第二法則が禁じる）</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="box box-imp">
+    <div class="box-head"><span class="box-tag">試験頻出</span>等温膨張は Kelvin の原理を破るか？</div>
+    <div class="box-body">
+      <p>
+        <strong>問題</strong>：温度 $T$ の理想気体が熱浴（温度 $T$）と接触して等温膨張し，
+        外に仕事 $W$ を取り出した。$\Delta U = 0$（理想気体）なので熱浴から吸収した熱 $Q = W$
+        がすべて仕事に変換された。これは Kelvin の原理に反するか？
+      </p>
+      <p>
+        <strong>答え</strong>：<strong>反しない。</strong>
+      </p>
+      <p>
+        Kelvin の原理の正確な文言は「<em>サイクル（循環過程）において</em>，
+        1つの熱源から熱をもらい 100% 仕事に変換することはできない」である。
+        等温膨張では気体が $(T, V_A) \to (T, V_B)$（$V_B > V_A$）と体積が変化しており，
+        <strong>元の状態に戻っていない（サイクルではない）</strong>。
+      </p>
+      <p>
+        もし気体を元の状態 $(T, V_A)$ に戻そうとすると，等温圧縮が必要になり，
+        外から仕事を加えるか熱を捨てるかしなければならない。
+        可逆等温圧縮なら圧縮に要する仕事 $= W$（膨張で得た仕事と等しい）なので，
+        サイクル全体では $Q_{\rm net} = 0$，$W_{\rm net} = 0$。
+        Kelvin の原理は破れない。
+      </p>
+      <p>
+        <strong>要点</strong>：等温膨張は「仕事を取り出す」が「サイクルでない」，
+        Kelvin の原理は「サイクルで熱の 100% 仕事変換が不可能」という原理。
+        この区別が重要。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s3-4-equiv">Clausius ⟺ Kelvin の等価性</h3>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">証明</span>Clausius ⟹ Kelvin（背理法）</div>
+    <div class="box-body">
+      <p>
+        <strong>前提</strong>：Clausius の原理が成立。<br>
+        <strong>仮定</strong>（背理）：Kelvin の原理が成り立たない、すなわち
+        熱源 $T_1$ から熱 $Q$ をもらい 100% 仕事 $W = Q$ に変換する機関 C が存在するとする。
+      </p>
+      <p>
+        この仕事 $W$ を逆 Carnot サイクル $\bar{C}$（$T_2$ から熱 $Q_2$ をもらい、
+        $T_1$ に熱 $Q_1 = Q_2 + W$ を渡す）に投入する合体系を考える：
+      </p>
+      <ul>
+        <li>$T_1$ の熱源への正味の熱移動：$Q_1 - Q = Q_2 > 0$</li>
+        <li>$T_2$ の熱源からの正味の熱移動：$-Q_2 < 0$（熱が流出）</li>
+        <li>外部への仕事：ゼロ（C の出力をすべて $\bar{C}$ に入れた）</li>
+      </ul>
+      <p>
+        合体系は「$T_2$ から熱 $Q_2$ をもらい、$T_1$ に移し、他には何もしない」サイクルになる。
+        これは Clausius の原理に反する。矛盾。ゆえに Kelvin の原理が成立。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">証明（概略）</span>Kelvin ⟹ Clausius（背理法）</div>
+    <div class="box-body">
+      <p>
+        <strong>前提</strong>：Kelvin の原理が成立。<br>
+        <strong>仮定</strong>（背理）：Clausius の原理が成り立たない、すなわち
+        低温熱源 $T_2$ から熱 $Q$ を受け取り、高温熱源 $T_1$ に熱 $Q$ を渡し、他には何もしないサイクル $C$ が存在するとする。
+      </p>
+      <p>
+        これに、$T_1$ から熱 $Q$ をもらい仕事 $W = Q - Q_2$（$Q_2 < Q$）を外に取り出し、
+        $T_2$ に $Q_2$ を渡す通常の Carnot サイクル $C'$ を合体させる：
+      </p>
+      <ul>
+        <li>$T_1$ の熱源への正味の熱移動：$C$ が渡す $Q$ と $C'$ が受け取る $Q$ が相殺してゼロ</li>
+        <li>$T_2$ の熱源との正味の熱移動：$C$ が受け取る $Q$（$T_2$ が失う）と $C'$ が渡す $Q_2$（$T_2$ が得る）の差引きで、
+        $T_2$ は正味 $Q - Q_2 = W$ を失う</li>
+        <li>外部への仕事：$C'$ の出力 $W$ がそのまま合体系の出力になる</li>
+      </ul>
+      <p>
+        合体系は「$T_1$ とは正味のやり取りがなく、$T_2$ から熱 $W$ をもらい、これを100% 仕事 $W$ に変換する」サイクルになる。
+        これは Kelvin の原理に反する。矛盾。ゆえに Clausius の原理が成立する。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s3-4-ostwald">Ostwaldの原理</h3>
+  <p>
+    <strong>第二種永久機関は存在しない</strong>（Kelvin の原理と等価）。
+    例えば海の熱（常温）を吸収して船を動かすことはできない。
+    Ostwald は Wilhelm Ostwald（1853–1932）、ノーベル化学賞受賞者（1909 年）。
+  </p>
+
+  <!-- ═══ 3.5 ═══ -->
+  <h2 id="s3-5">3.5 できることとできないこと</h2>
+
+  <table class="td-table">
+    <thead><tr><th>できること</th><th>できないこと</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>
+          <ul>
+            <li>仕事→熱 の 100% 変換（Joule の羽根車・摩擦熱）</li>
+            <li>不完全熱機関（$\eta < 1$：高温から熱をもらい一部を仕事に変換）</li>
+            <li>不完全熱ポンプ（仕事を投入して低温→高温；冷蔵庫・エアコン）</li>
+            <li>熱の自発移動（高温→低温）</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>不可逆過程の逆過程（全般）</li>
+            <li>摩擦熱の逆（熱→仕事 100%）：Kelvin の原理</li>
+            <li>理想気体の断熱自由膨張の逆過程</li>
+            <li>第二種永久機関</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">証明</span>理想気体の断熱自由膨張は不可逆</div>
+    <div class="box-body">
+      <p>
+        状態 (a)（小さい箱，体積 $V_A$，温度 $T$）→ (b)（大きい箱，体積 $V_B$，温度 $T$）への
+        断熱自由膨張が不可逆であることを示す。理想気体では自由膨張の前後で温度が変わらない
+        （$U = C_VT$ のみに依存し，自由膨張は $\delta Q = 0,\ \delta W = 0$ より $dU=0$，よって $dT=0$）ので，
+        (a), (b) はともに同じ温度 $T$ にある。
+      </p>
+      <p>
+        逆過程 (b)→(a) が仕事も熱もなしにできると仮定する（☆，背理法の仮定）。
+      </p>
+      <p>
+        ここで，状態 (a) に熱源 $T$ を接触させた状況を (a')，状態 (b) に同じ熱源 $T$ を接触させた状況を (b') と呼ぶ。
+        気体の温度はどちらの場合も熱源と同じ $T$ なので，熱源をくっつけても気体の状態（圧力・体積・温度）は変化しない。
+        つまり (a') は気体に関する限り (a) と，(b') は (b) と<strong>同一の状態</strong>である
+        （違いは「たまたま熱源が接触しているかどうか」という周辺の設定だけ）。
+      </p>
+      <p>
+        まず (a') から，熱源 $T$ と接触させたまま等温準静的過程で (a')→(b') と膨張させる。
+        この等温膨張では気体は熱源から熱 $Q > 0$ を受け取り，仕事 $-W = Q$ を外に行う
+        （$\Delta U = 0$ なので受け取った熱がすべて仕事になる）。
+        次に，(b') は気体としては (b) と同一の状態なので，☆ による逆過程をそのまま適用して (b')→(a') に戻す
+        （☆ の仮定より熱・仕事のやり取りなしにこれが可能）。
+      </p>
+      <p>
+        以上を合わせると，全体として：$T$ の熱源から熱 $Q$ だけをもらい，これを 100% 仕事 $Q$ に変換し，
+        気体は元の状態 (a) に戻るサイクルが構成できたことになる。これは Kelvin の原理に反する。矛盾。
+        ゆえに ☆ は誤りであり，断熱自由膨張 (a)→(b) は不可逆である。
+      </p>
+      <p>
+        <strong>注</strong>：この証明では理想気体の性質「自由膨張前後で温度が変わらない」が本質的に使われている。
+        一般の気体では自由膨張で温度が変わるため，膨張前後の状態を同じ等温線上に乗せることができず，
+        この等温過程との接続による証明は使えない（エントロピーの概念が必要になる）。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">証明</span>摩擦による熱発生は不可逆</div>
+    <div class="box-body">
+      <p>
+        摩擦で外から仕事 $W > 0$ が物体に投入され，熱 $Q = W$ として蓄積された（物体の温度が上昇した）。
+        この過程が可逆だと仮定する。
+        すると逆過程が存在し，物体がその熱 $Q$ をすべて外への仕事 $W = Q$ に変換して元の状態に戻ることができる。
+      </p>
+      <p>
+        このサイクル全体は「温度 $T$ の物体（1つの熱源）から熱 $Q$ をもらい，100% 仕事 $W = Q$ に変換し，
+        他には何の変化も残さない」という循環過程である。
+        これは Kelvin の原理に反する。矛盾。
+      </p>
+      <p>
+        <strong>まとめ</strong>：「仕事 → 熱」は 100% 可能（Joule の羽根車）だが不可逆。
+        逆の「熱 → 仕事 100%」は Kelvin の原理が禁じる。
+        仕事と熱は「エネルギーの量として等価，変換の方向性として非等価」。
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ 3.5補 ═══ -->
+  <h2 id="s3-5b">3.5補 熱ポンプと冷凍機</h2>
+
+  <p>
+    Carnot サイクルを逆向きに運転すると<strong>熱ポンプ</strong>（heat pump）になる。
+    仕事 $W > 0$ を外から投入することで，低温熱源（$T_2$）から熱 $Q_2$ を汲み上げ，
+    高温熱源（$T_1$）に熱 $Q_1 = Q_2 + W$ を送る。これは Clausius の原理に反しない
+    （仕事を消費しているから）。
+  </p>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>熱ポンプと冷凍機の成績係数（COP）</div>
+    <div class="box-body">
+      <p>第一法則より $Q_1 = Q_2 + W$（$Q_1, Q_2, W > 0$）。</p>
+      <table class="td-table">
+        <thead>
+          <tr><th>機器</th><th>目的</th><th>成績係数 COP</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>熱ポンプ</strong>（暖房用）</td>
+            <td>高温側への放熱 $Q_1$ を最大化</td>
+            <td>$\varepsilon_H = \dfrac{Q_1}{W} = \dfrac{Q_1}{Q_1 - Q_2}$</td>
+          </tr>
+          <tr>
+            <td><strong>冷凍機・クーラー</strong></td>
+            <td>低温側からの吸熱 $Q_2$ を最大化</td>
+            <td>$\varepsilon_C = \dfrac{Q_2}{W} = \dfrac{Q_2}{Q_1 - Q_2}$</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>$\varepsilon_H = \varepsilon_C + 1 > 1$ が常に成立。ヒートポンプは「仕事を熱に変える」だけでなく，低温源から熱をくみ上げるため効率が 1 を超える。</p>
+    </div>
+  </div>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>可逆（Carnot）熱ポンプの COP</div>
+    <div class="box-body">
+      <p>逆 Carnot サイクルでは $Q_2/Q_1 = T_2/T_1$（熱力学温度の定義，後述）なので：</p>
+      $$\begin{aligned}
+        \varepsilon_H^{\rm Carnot}
+        &= \frac{Q_1}{Q_1 - Q_2} \\
+        &= \frac{1}{1 - Q_2/Q_1} \\
+        &= \frac{1}{1 - T_2/T_1} \\
+        &= \frac{T_1}{T_1 - T_2}
+      \end{aligned}$$
+      $$\begin{aligned}
+        \varepsilon_C^{\rm Carnot}
+        &= \frac{Q_2}{Q_1 - Q_2} \\
+        &= \frac{T_2}{T_1 - T_2}
+      \end{aligned}$$
+      <p>
+        一般の（不可逆な）熱ポンプ・冷凍機の COP はこれを超えられない（Carnot が最大）。
+        なぜなら，COP が Carnot より大きければ逆 Carnot と組み合わせて
+        Clausius の原理に反するサイクルが構成できる（上と同様の背理法）。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">例</span>エアコンの性能</div>
+    <div class="box-body">
+      <p>
+        室外温度 $T_1 = 303\,\mathrm{K}$（$30\,^\circ\mathrm{C}$，熱を捨てる高温側），
+        室内温度 $T_2 = 300\,\mathrm{K}$（$27\,^\circ\mathrm{C}$，熱を汲み上げる低温側）の冷房用エアコンの
+        Carnot COP（理論上限）。定義に合わせ，COP の式の $T_1$ は常に高温側（ここでは排熱先の室外），
+        $T_2$ は低温側（冷却対象の室内）に取ることに注意する：
+      </p>
+      $$\begin{aligned}
+        \varepsilon_C^{\rm Carnot} &= \frac{T_2}{T_1 - T_2} \\
+        &= \frac{300}{3} = 100
+      \end{aligned}$$
+      <p>
+        すなわち理論上は $1\,\mathrm{W}$ の電力で $100\,\mathrm{W}$ の冷却が可能。
+        実際の機器は不可逆性から大幅に下回るが（COP $\approx 3\sim6$），
+        それでも電気ヒーターより遥かに高効率で暖房・冷房できる。
+        温度差が小さいほど COP が高くなるため，外気温との差が小さい季節の方が効率的。
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ 3.6 ═══ -->
+  <h2 id="s3-6">3.6 Carnotサイクルの熱効率</h2>
+
+  <h3 id="s3-6-prop2">性質②: Carnotサイクルの熱効率が最大</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">Carnotの定理</span>性質②</div>
+    <div class="box-body">
+      <p>同じ高温熱源 $T_1$ から同じ熱量 $Q_1$ を受け取る任意のサイクル $C'$ と Carnotサイクル $C$ を比較する。</p>
+      $$W_{C'} \le W_C$$
+      <p>等号成立：$C'$ が可逆サイクル。</p>
+      <p>つまり<strong>Carnotサイクルが最高効率</strong>で、その効率は作業物質によらない普遍的な量。</p>
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">証明</span>Carnotが最大効率（背理法）</div>
+    <div class="box-body">
+      <p>$W' > W$ と仮定（$C'$ の方が効率が高い）。</p>
+      <p>
+        $C'$ の余分な仕事 $W' - W > 0$ と逆Carnotサイクル $\bar{C}$ を合体させる：
+      </p>
+      <ul>
+        <li>$C'$：$T_1$ から $Q_1$ を受け取り、$W'$ を出力、$Q_1' = Q_1 - W'$ を $T_2$ へ</li>
+        <li>$\bar{C}$：仕事 $W$ をもらい、$T_2$ から $Q_2 = Q_1 - W$ を受け取り、$Q_1$ を $T_1$ へ</li>
+      </ul>
+      <p>合体系での $T_2$ の熱収支：$C'$ が放出 $Q_1' = Q_1 - W'$、$\bar{C}$ が吸収 $Q_2 = Q_1 - W$</p>
+      <p>差引き $T_2$ からの正味吸収 $= Q_1 - W' - (Q_1 - W) = W - W' < 0$（放出）</p>
+      <p>→ $T_2$ から $T_1$ へ、仕事ゼロで正味の熱移動が起きる。Clausius の原理に反する。矛盾。</p>
+      <p><strong>補足</strong>：この証明は作業物質に全く依存しない点が重要。</p>
+    </div>
+  </div>
+
+  <h3 id="s3-6-calc">理想気体のCarnotサイクルによる効率の計算</h3>
+
+  <p>
+    理想気体の Carnot サイクル（P-V 図で時計回り）：
+    B→C（等温膨張 $T_1$）→ C→D（断熱膨張）→ D→A（等温圧縮 $T_2$）→ A→B（断熱圧縮）
+  </p>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>Carnot効率</div>
+    <div class="box-body">
+      $$\boxed{\eta = 1 - \frac{Q_2}{Q_1} = 1 - \frac{T_2}{T_1}}$$
+      <p>どんな作業物質を使っても（理想気体・窒素・ゴムなどでCarnotサイクルを計算しても）同じ結果。</p>
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">計算</span>理想気体での Carnot 効率の導出</div>
+    <div class="box-body">
+      <p>B→C（等温膨張、温度 $T_1$）：$U_B = U_C$（$U = C_VT$ のみ）なので</p>
+      $$Q_1 = -W_{B\to C} = nRT_1\ln\frac{V_C}{V_B}$$
+      <p>
+        D→A（等温圧縮、温度 $T_2$）：放出する熱（符号に注意）。
+        圧縮なので気体が受け取る仕事 $W_{D\to A} = -nRT_2\ln(V_A/V_D) > 0$
+        （$V_A < V_D$ より $\ln(V_A/V_D) < 0$）。$\Delta U = 0$ より気体が受け取る熱は
+        $-W_{D\to A}$（負：気体は熱を放出する）なので，放出する熱 $Q_2$（正の量として定義）は
+        その符号を反転させた $W_{D\to A}$ 自身に等しい：
+      </p>
+      $$\begin{aligned}
+        Q_2 &= W_{D\to A} \\
+        &= -nRT_2\ln\frac{V_A}{V_D} \\
+        &= nRT_2\ln\frac{V_D}{V_A}
+      \end{aligned}$$
+      <p>
+        断熱曲線 $TV^{\gamma-1} = \text{const}$ から：
+        A→B は $T_2 V_A^{\gamma-1} = T_1 V_B^{\gamma-1}$，
+        C→D は $T_1 V_C^{\gamma-1} = T_2 V_D^{\gamma-1}$
+      </p>
+      <p>
+        この2式はいずれも同じ断熱曲線の式から出ており，共通の $T_1$ と $T_2$ を含んでいる。
+        辺々を割ればこれらの温度が消去され，体積だけの関係式が得られる：
+      </p>
+      $$\begin{aligned}
+        \frac{V_A^{\gamma-1}}{V_B^{\gamma-1}} &= \frac{V_D^{\gamma-1}}{V_C^{\gamma-1}} \\
+        &\implies \frac{V_A}{V_B} = \frac{V_D}{V_C} \\
+        &\implies \frac{V_C}{V_B} = \frac{V_D}{V_A}
+      \end{aligned}$$
+      <p>よって $\ln(V_C/V_B) = \ln(V_D/V_A)$ が成立し：</p>
+      $$\begin{aligned}
+        \frac{Q_2}{Q_1} &= \frac{nRT_2\ln(V_D/V_A)}{nRT_1\ln(V_C/V_B)} \\
+        &= \frac{T_2}{T_1}
+      \end{aligned}$$
+      $$\eta = 1 - \frac{T_2}{T_1}$$
+    </div>
+  </div>
+
+  <!-- ═══ 3.7 ═══ -->
+  <h2 id="s3-7">3.7 熱力学温度</h2>
+
+  <h3 id="s3-7-def">関数方程式と温度の定義</h3>
+
+  <p>
+    Carnot サイクルでは，熱の比 $Q_2/Q_1$（低温側への放熱/高温側からの吸熱）が
+    作業物質に依存せず $T_1, T_2$ だけで決まる（Carnot の定理の帰結）。
+    この比を関数 $f$ で表す：
+  </p>
+  $$\frac{Q_2}{Q_1} = f(T_1, T_2) \qquad (T_1 > T_2)$$
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">導出</span>関数方程式から熱力学温度 $Q_2/Q_1 = T_2/T_1$ を導く</div>
+    <div class="box-body">
+      <p><strong>Step 1：関数方程式の導出</strong></p>
+      <p>
+        3つの熱源 $T_0 > T_1 > T_2$ を用意し，各対の間に Carnot サイクルを動かす。
+        $f$ は作業物質に依存しない普遍的な関数（Carnot の定理・性質②の帰結）なので，
+        どの温度の組を選んでも同じ関数形 $f$ が使える：
+        $Q_1/Q_0 = f(T_0, T_1)$，$Q_2/Q_0 = f(T_0, T_2)$，$Q_2/Q_1 = f(T_1, T_2)$。
+        これら3つの関係式から $Q_0$ を消去すると：
+      </p>
+      $$\begin{aligned}
+        f(T_1, T_2) &= \frac{Q_2}{Q_1} \\
+        &= \frac{Q_2/Q_0}{Q_1/Q_0} \\
+        &= \frac{f(T_0, T_2)}{f(T_0, T_1)}
+      \end{aligned}$$
+      <p>右辺から $T_0$ が消えるので，$f$ は<strong>変数分離型</strong>でなければならない：</p>
+      $$\boxed{f(T_1, T_2) = \frac{F(T_2)}{F(T_1)}}$$
+      <p>
+        実際，$f(T_0, T) = F(T)/F(T_0)$ と書けば，
+        $f(T_0, T_2)/f(T_0, T_1) = F(T_2)/F(T_1) = f(T_1, T_2)$ が成立する。
+        $F$ の形は未定だが，$T_1 > T_2$ のとき $Q_2/Q_1 < 1$ だから
+        $F$ は<strong>単調増加</strong>関数でなければならない。
+      </p>
+      <p><strong>Step 2：スケールの固定（$F$ の選択）</strong></p>
+      <p>
+        最も自然な単調増加関数として $F(T) = T$（比例）を選ぶと：
+      </p>
+      $$\frac{Q_2}{Q_1} = \frac{T_2}{T_1}$$
+      <p>
+        これが<strong>熱力学温度（Kelvin 温度）の定義</strong>となる。
+        $F(T) = cT^a$（$c > 0, a > 0$）など別の選択も可能だが，
+        $F(T) = T$ が実験値と最も整合し最も単純。
+      </p>
+      <p><strong>Step 3：$T_0 = 273.15\,\mathrm{K}$ の実験的決定</strong></p>
+      <p>
+        熱力学温度のスケール（単位）は，1気圧での水の凝固点を $T_0$，沸点を $T_0 + 100$ として，
+        その間で Carnot サイクルを運転し熱の比を測ることで定まる：
+      </p>
+      $$\frac{Q_{\rm 凝固}}{Q_{\rm 沸騰}} = \frac{T_0}{T_0 + 100}$$
+      <p>
+        実験的に $Q_{\rm 凝固}/Q_{\rm 沸騰} \approx 0.732$ が得られるので，
+        $T_0/(T_0 + 100) = 0.732 \implies T_0 = 273.15\,\mathrm{K}$。
+        これが摂氏 $0\,^\circ\mathrm{C} = 273.15\,\mathrm{K}$ に対応することも確認できる。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>熱力学温度（Kelvin温度）</div>
+    <div class="box-body">
+      $$\frac{Q_2}{Q_1} = \frac{T_2}{T_1}$$
+      <p>
+        となるように定義した温度 $T$ を<strong>熱力学温度</strong>（単位 K）という。
+        定数の不定性（スケール）は、1 気圧での水の凝固点を $T_0$、沸点を $T_0 + 100$ として
+        Carnot サイクルを回し熱の比を測ることで $T_0 = 273.15\,\mathrm{K}$ と定まる（実験可能）。
+      </p>
+      <p>
+        理想気体の Carnot 計算で $Q_2/Q_1 = T_2/T_1$ が成立することを確認済み
+        → 理想気体温度計の示す温度は熱力学温度と一致する。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s3-7-nonneg">熱力学温度の非負性</h3>
+
+  <p>
+    $T_1 > T_2$ の Carnot サイクルでは，性質①（3.3節：$W>0$）より $\eta = W/Q_1 > 0$，
+    かつ Kelvin の原理（熱源1つから100%仕事への変換は不可能，すなわち $\eta = 1$ は許されない）より
+    $\eta < 1$。合わせて：
+  </p>
+  $$0 < \eta = 1 - \frac{T_2}{T_1} < 1$$
+  <p>
+    これを整理すると $0 < T_2/T_1 < 1$ が得られる。この比だけからは $T_1, T_2$ 自体の符号は決まらないが，
+    3.7節 Step 3 で水の凝固点を $T_0 = 273.15\,\mathrm{K} > 0$ という具体的な正の値に実験的に定めており，
+    任意の熱源は Carnot サイクルを介してこの $T_0$ と比較できる。$T_0>0$ を基準に比の関係
+    $0 < T/T_0 < 1$ または $0 < T_0/T < 1$ を辿れば，どんな熱源の熱力学温度も $T_0$ と同じ符号，
+    すなわち正でなければならないことが分かる：
+  </p>
+  $$\therefore\quad \text{任意の熱源は } T > 0 \quad(\text{熱力学温度は必ず正})$$
+  <p>
+    絶対零度 $T = 0$ は極限概念であり到達不可能（第三法則）。
+  </p>
+
+  <!-- ═══ 3.8 ═══ -->
+  <h2 id="s3-8">3.8 Clausiusの不等式</h2>
+
+  <p>
+    Carnot サイクルの性質 $Q_1/T_1 + Q_2/T_2 = 0$ は2つの熱源の場合だった。
+    これを $n$ 個の熱源とやり取りする<strong>任意のサイクル $C$</strong> に拡張し、
+    換算熱 $\sum Q_i/T_i$ に対する不等式を導く。
+  </p>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>Clausiusの不等式</div>
+    <div class="box-body">
+      $n$ 個の熱源（温度 $T_i$）とやり取りする任意のサイクル $C$（$Q_i$：熱源 $T_i$ から受け取る熱）：
+      $$\begin{aligned}
+        \sum_{i=1}^n \frac{Q_i}{T_i} &\le 0 \\
+        \xrightarrow{\;n\to\infty\;} \oint_C \frac{\delta Q}{T} &\le 0
+      \end{aligned}$$
+      $$\begin{cases} {<}\,0 & C \text{ が不可逆サイクル} \\ {=}\,0 & C \text{ が可逆サイクル} \end{cases}$$
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">証明</span>Clausiusの不等式</div>
+    <div class="box-body">
+      <p>
+        <strong>設定</strong>：$n$ 個の熱源（温度 $T_i$）とやり取りするサイクル $C$ と、参照熱源（温度 $T_0$）を用意する。
+        ここで $Q_i$ は符号付きの量とする：$C$ が熱源 $T_i$ から実際に熱を吸収すれば $Q_i > 0$、
+        逆に $C$ が熱源 $T_i$ に熱を放出すれば $Q_i < 0$ である
+        （3.3節の Carnot サイクルでは $Q_1, Q_2$ をともに正の量として定義したが、
+        ここでは熱源の数も出入りの方向も任意の一般のサイクルを扱うため、符号を明示的に持たせる）。
+      </p>
+
+      <p><strong>Step 1：Carnotサイクルの挿入</strong></p>
+      <p>各熱源 $T_i$ と参照熱源 $T_0$ の間で Carnot サイクル $C_i$ を動かす。記号を定める：</p>
+      <ul>
+        <li>$Q_i$：サイクル $C$ が熱源 $T_i$ から受け取る熱</li>
+        <li>$Q_i'$：Carnot サイクル $C_i$ が熱源 $T_i$ から受け取る熱　（条件 $Q_i = -Q_i'$ を課す）</li>
+        <li>$Q_i''$：Carnot サイクル $C_i$ が参照熱源 $T_0$ から受け取る熱</li>
+      </ul>
+      <p>
+        $C_i$ を「熱源 $T_i$ から $Q_i'=-Q_i$ を受け取る」ように運転する，
+        すなわち $Q_i>0$（$C$ が $T_i$ から熱を奪う）なら $C_i$ は逆に $T_i$ へ熱 $Q_i$ を渡して埋め合わせる，
+        という取り決めである。この条件 $Q_i = -Q_i'$ により，$C$ が熱源 $T_i$ から奪う熱と
+        $C_i$ が熱源 $T_i$ に補う熱がちょうど相殺し，熱源 $T_i$ への正味の出入りはゼロになる。
+        合体系 $C + \sum C_i$ は参照熱源 $T_0$ <em>のみ</em>とやり取りするサイクルになる。
+      </p>
+
+      <p><strong>Step 2：換算熱の計算</strong></p>
+      <p>Carnot サイクル $C_i$（温度 $T_i$ と $T_0$ の間）に Carnot の性質を適用：</p>
+      $$\begin{aligned}
+        \frac{Q_i'}{T_i} + \frac{Q_i''}{T_0} &= 0 \\
+        \implies Q_i'' &= -\frac{T_0}{T_i}Q_i' = \frac{T_0}{T_i}Q_i
+      \end{aligned}$$
+      <p>サイクル $C$ の換算熱を書き換える（$Q_i = -Q_i'$ を利用）：</p>
+      $$\begin{aligned}
+        \sum_{i=1}^n \frac{Q_i}{T_i}
+        &= \sum_{i=1}^n \frac{-Q_i'}{T_i} \\
+        &= \sum_{i=1}^n \frac{Q_i''}{T_0} \\
+        &= \frac{1}{T_0}\sum_{i=1}^n Q_i''
+      \end{aligned}$$
+      <p>すなわち「サイクル $C$ の換算熱」＝「参照熱源 $T_0$ が受け取る総熱量を $T_0$ で割ったもの」。
+      サイクル $C$ の換算熱は熱源 $T_0$ の換算熱と等しい。</p>
+
+      <p><strong>Step 3：全系の仕事</strong></p>
+      <p>第一法則より $W = \sum Q_i$（$C$ のサイクル），$W_i = Q_i' + Q_i''$（各 $C_i$）。全仕事：</p>
+      $$\begin{aligned}
+        W_\text{tot} &= W + \sum_{i=1}^n W_i \\
+        &= \sum_{i=1}^n Q_i + \sum_{i=1}^n (Q_i' + Q_i'')
+      \end{aligned}$$
+      <p>$Q_i = -Q_i'$ より $Q_i + Q_i' = 0$、よって：</p>
+      $$W_\text{tot} = \sum_{i=1}^n Q_i'' = T_0 \sum_{i=1}^n \frac{Q_i}{T_i}$$
+
+      <p><strong>Step 4：Kelvinの原理から不等式を導く</strong></p>
+      <p>合体系は $T_0$ のみとやり取りするサイクル。Kelvin の原理より：</p>
+      <ul>
+        <li>① $W_\text{tot} > 0$ は不可能（1つの熱源のみで正の仕事 → Kelvin の原理に反する）</li>
+        <li>② したがって $W_\text{tot} \le 0$、すなわち $\sum Q_i'' \le 0$</li>
+      </ul>
+      $$\therefore\quad \sum_{i=1}^n \frac{Q_i}{T_i} \le 0$$
+      <p>
+        等号（$W_\text{tot} = 0$）：合体系が何もしない → $C$ は可逆サイクル。<br>
+        不等号（$W_\text{tot} < 0$）：$C$ は不可逆サイクル。
+      </p>
+      <p>
+        <strong>連続極限</strong>：熱源を無数に細かくとる（$n \to \infty$、準静的過程の極限）。
+        各瞬間に系が接触する熱源の温度を $T$、その瞬間にやり取りする微小熱量を $\delta Q$ とすれば，
+        有限和 $\sum_i Q_i/T_i$ は経路に沿ったリーマン和として振る舞い，
+        $n \to \infty$ でそのまま線積分 $\oint \delta Q/T$ に収束する。
+        不等式 $\sum Q_i/T_i \le 0$ は任意の有限の $n$ で成り立つので，この極限でも不等号の向きは保たれる：
+      </p>
+      $$\oint_C \frac{\delta Q}{T} \le 0$$
+      <p>等号成立は $C$ が可逆サイクルのとき、不等号は不可逆サイクルのとき。</p>
+    </div>
+  </div>
+
+  <!-- ═══ 3.9 ═══ -->
+  <h2 id="s3-9">3.9 エントロピー</h2>
+
+  <h3 id="s3-9-def">エントロピーの定義</h3>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">証明</span>可逆過程での換算熱は経路によらない（$S$ が状態量であること）</div>
+    <div class="box-body">
+      <p>
+        状態 A から状態 B への2つの異なる可逆経路 $K_1$，$K_2$ を考える。
+        $K_1$ で A→B に行き，$K_2$ を逆向き（$K_2^{-1}$）に B→A に戻るサイクルは
+        <strong>完全可逆サイクル</strong>なので，Clausius の不等式が等号で成立：
+      </p>
+      $$\begin{aligned}
+        \oint\frac{\delta Q}{T}
+        &= \int_{A\xrightarrow{K_1}B}\frac{\delta Q}{T}
+          + \int_{B\xrightarrow{K_2^{-1}}A}\frac{\delta Q}{T} \\
+        &= 0
+      \end{aligned}$$
+      <p>可逆過程を逆に辿ると換算熱の符号が反転するので：</p>
+      $$\begin{aligned}
+        \int_{B\xrightarrow{K_2^{-1}}A}\frac{\delta Q}{T}
+        &= -\int_{A\xrightarrow{K_2}B}\frac{\delta Q}{T}
+      \end{aligned}$$
+      <p>代入すると：</p>
+      $$\begin{aligned}
+        \int_{A\xrightarrow{K_1}B}\frac{\delta Q}{T}
+        &= \int_{A\xrightarrow{K_2}B}\frac{\delta Q}{T}
+      \end{aligned}$$
+      <p>
+        $K_1$ と $K_2$ は任意の可逆経路だから，<strong>可逆過程での換算熱 $\int_{A\to B}^{\rm 可逆}\delta Q/T$
+        は経路によらない</strong>。これは差 $S_B - S_A$ として一意に定まる状態量（エントロピー差）を定義する。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">類比</span>「経路によらない量」から「状態量」が生まれる</div>
+    <div class="box-body">
+      <p>熱力学では「特定の条件下で経路によらない積分」が状態量を定義するパターンが繰り返す：</p>
+      <table class="td-table">
+        <thead><tr><th>積分量</th><th>経路の条件</th><th>生まれる状態量</th></tr></thead>
+        <tbody>
+          <tr><td>仕事 $\int \delta W$</td><td>断熱過程</td><td>内部エネルギー $U$</td></tr>
+          <tr><td>換算熱 $\displaystyle\int \frac{\delta Q}{T}$</td><td>可逆過程</td><td>エントロピー $S$</td></tr>
+        </tbody>
+      </table>
+      <p>ガス仕事 $\int P\,dV$ は一般には経路に依存するが，断熱（$\delta Q = 0$）に限ると
+      経路によらず $\Delta U$ に等しい（Joule の実験）。
+      同様に換算熱 $\int \delta Q/T$ は一般には経路に依存するが，
+      可逆過程に限ると経路によらず $S_B - S_A$ に等しい。</p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">構成</span>基準状態からエントロピーを定義する</div>
+    <div class="box-body">
+      <p>基準状態 $O$ を1つ固定し，そこから各状態への可逆経路で換算熱を積分する：</p>
+      $$\begin{aligned}
+        S_A &= S_O + \int_{O \to A}^{\!\text{可逆}} \frac{\delta Q}{T}, \\
+        S_B &= S_O + \int_{O \to B}^{\!\text{可逆}} \frac{\delta Q}{T}
+      \end{aligned}$$
+      <p>差を取ると $S_O$ が消え：</p>
+      $$\begin{aligned}
+        S_B - S_A
+        &= \int_{O \to B}^{\!\text{可逆}} \frac{\delta Q}{T}
+          - \int_{O \to A}^{\!\text{可逆}} \frac{\delta Q}{T} \\
+        &= \int_{A \to B}^{\!\text{可逆}} \frac{\delta Q}{T}
+      \end{aligned}$$
+      <p>この差は $O$ の選び方によらない（$S_O$ が消えるから）。
+      $A, B$ が無限に近い場合の微小変化で：
+      $dS = \delta Q/T$（可逆過程）。</p>
+    </div>
+  </div>
+
+  <p>
+    以上より，A → B の可逆過程での換算熱から状態量（エントロピー）が定義できる。
+  </p>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>エントロピー $S$</div>
+    <div class="box-body">
+      基準状態 O から可逆過程で A に変化するときの換算熱：
+      $$S_A = \int_{O\to A}^{\text{可逆}}\frac{\delta Q}{T} + S_O$$
+      差分として：
+      $$S_B - S_A = \int_{A\to B}^{\text{可逆}}\frac{\delta Q}{T}$$
+      微小変化（準静的・可逆過程）：
+      $$dS = \frac{\delta Q}{T} \iff \boxed{\delta Q = T\,dS}$$
+    </div>
+  </div>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">基本関係式</span>第一法則＋第二法則</div>
+    <div class="box-body">
+      準静的過程において $\delta Q = T\,dS$，$\delta W = -P\,dV$ を $dU = \delta Q + \delta W$ に代入：
+      $$\boxed{dU = T\,dS - P\,dV}$$
+      <p>
+        $U$ を $S, V$ の関数として見たときの基本関係式。
+        係数比較より：
+        $$\begin{aligned}
+          T &= \left(\frac{\partial U}{\partial S}\right)_V, \\
+          -P &= \left(\frac{\partial U}{\partial V}\right)_S
+        \end{aligned}$$
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s3-9-incr">エントロピー増大則</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>エントロピー増大則</div>
+    <div class="box-body">
+      A → B の過程 K*（可逆・不可逆いずれでもよい）を，B → A の可逆過程 $K_\text{可逆}$ で閉じてサイクルを作る。
+      エントロピー差 $S_B - S_A$ は可逆経路の換算熱としてのみ定義されているので，
+      戻りの経路を可逆に選ぶことで，K* を含むサイクル全体に Clausius の不等式を適用できる：
+      $$\begin{aligned}
+        \oint\frac{\delta Q}{T} &= \int_{A\xrightarrow{K^*}B}\frac{\delta Q}{T} + \int_{B\xrightarrow{K_\text{可逆}}A}\frac{\delta Q}{T} \\
+        &\le 0
+      \end{aligned}$$
+      <p>$\int_{B\to A}^{\text{可逆}}\delta Q/T = -(S_B - S_A)$ を代入して整理すると：</p>
+      $$\int_{A\xrightarrow{K^*}B}\frac{\delta Q}{T} \le S_B - S_A$$
+      <p>特に断熱過程（$\delta Q = 0$）では：</p>
+      $$0 \le S_B - S_A \implies \boxed{\Delta S \ge 0}$$
+      <p>等号は K* が可逆（準静的）の場合。断熱過程でエントロピーは減少しない。</p>
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">別証明</span>不可逆サイクル $C''$ を使った導出</div>
+    <div class="box-body">
+      <p>
+        A → B の不可逆断熱過程と B → A の可逆過程からなるサイクル $C''$ を構成する。
+        戻りの経路をわざわざ可逆に取るのは，エントロピー差 $S_B - S_A$ が可逆経路の換算熱として
+        定義されているためであり，これにより $C''$ の換算熱を具体的に評価できる：
+      </p>
+      $$\begin{aligned}
+        \oint_{C''}\frac{\delta Q}{T}
+        &= \underbrace{\int_{A\to B}^{\text{不可逆断熱}}\frac{\delta Q}{T}}_{=\,0} \\
+        &\quad + \underbrace{\int_{B\to A}^{\text{可逆}}\frac{\delta Q}{T}}_{-(S_B - S_A)} \\
+        &< 0
+      \end{aligned}$$
+      <p>Clausius の不等式より $C''$ は不可逆（断熱部分が不可逆）なので $< 0$。第一項は断熱より $0$，第二項は $-(S_B - S_A)$ なので：</p>
+      $$\begin{aligned}
+        0 - (S_B - S_A) &< 0 \\
+        \implies S_B - S_A &> 0 \\
+        \implies &\ \boxed{\Delta S \ge 0}
+      \end{aligned}$$
+      <p>断熱不可逆過程 A → B でエントロピーは必ず増加する。$\square$</p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">豆知識</span>「エントロピーは増大する」の正確な意味</div>
+    <div class="box-body">
+      <p>
+        「エントロピー増大則」はしばしば誤解される。正確には：
+      </p>
+      <ul>
+        <li>孤立系（断熱かつ外と仕事のやり取りなし）では $\Delta S \ge 0$</li>
+        <li>局所的・部分的なエントロピーは減少してもよい（冷蔵庫の中の食べ物は「整理」される）</li>
+        <li>全宇宙を孤立系と見ると、宇宙のエントロピーは単調増加（Clausius の言葉）</li>
+      </ul>
+      <p>
+        統計力学では、エントロピーは系の「乱雑さ」の尺度（$S = k_B \ln W$）として理解される。
+        平衡状態は最も「乱雑な」状態であり、そこに自発的に向かうことが増大則の正体。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s3-9-meas">エントロピーの測り方</h3>
+
+  <p>
+    基本関係式 $dU = TdS - PdV$ と $C_V = (\partial U/\partial T)_V$ から：
+  </p>
+  $$\begin{aligned}
+    C_V &= T\left(\frac{\partial S}{\partial T}\right)_V \\
+    \implies \left(\frac{\partial S}{\partial T}\right)_V &= \frac{C_V}{T}
+  \end{aligned}$$
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">公式</span>エントロピーの測定</div>
+    <div class="box-body">
+      定積過程 $(T_0, V) \to (T, V)$：
+      $$S(T,V) - S(T_0, V) = \int_{T_0}^{T}\frac{C_V(T')}{T'}dT'$$
+      定圧過程 $(T_0, P) \to (T, P)$：
+      $$S(T,P) - S(T_0, P) = \int_{T_0}^{T}\frac{C_P(T')}{T'}dT'$$
+      <p>
+        $C_V \ge 0$ なので（安定条件；第4章）、定積でエントロピーは温度の単調増加関数。
+        熱容量を温度の関数として実験で測定すれば、エントロピー差を数値積分で求められる。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s3-9-ideal">理想気体のエントロピー</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">公式</span>理想気体のエントロピー（Sackur-Tetrode式の古典極限）</div>
+    <div class="box-body">
+      $$S(T,V) - S(T_0, V_0) = C_V\ln\frac{T}{T_0} + nR\ln\frac{V}{V_0}$$
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">導出（2通り）</span>理想気体のエントロピー計算</div>
+    <div class="box-body">
+      <p>
+        <strong>方法1（経路 A → C → B）</strong>：始状態 $A=(T_0,V_0)$，終状態 $B=(T,V)$ を，
+        中間状態 $C=(T_C, V)$ を経由する2段階の経路で結ぶ。
+      </p>
+      <ul>
+        <li>
+          A → C：断熱可逆過程（体積を $V_0 \to V$ まで変化）。エントロピー一定（$S_C = S_A$）で，
+          断熱曲線の関係 $T_0 V_0^{\gamma-1} = T_C V^{\gamma-1}$ より
+          $T_C = T_0 (V_0/V)^{\gamma-1}$。
+        </li>
+        <li>
+          C → B：体積 $V$ を固定した定積過程（$T_C \to T$）。上の公式より
+          $S_B - S_C = C_V\ln(T/T_C)$。
+        </li>
+      </ul>
+      <p>
+        $S_A = S_C$ なので $S_B - S_A = S_B - S_C = C_V \ln(T/T_C)$ に $T_C$ を代入すると：
+      </p>
+      $$\begin{aligned}
+        S_B - S_A &= C_V\ln\frac{T}{T_0(V_0/V)^{\gamma-1}} \\
+        &= C_V\ln\frac{T}{T_0} + C_V(\gamma-1)\ln\frac{V}{V_0}
+      \end{aligned}$$
+      <p>
+        理想気体では $C_P - C_V = nR$ と $\gamma = C_P/C_V$ より $C_V(\gamma - 1) = C_P - C_V = nR$ なので：
+      </p>
+      $$S_B - S_A = C_V\ln\frac{T}{T_0} + nR\ln\frac{V}{V_0}$$
+      <p>方法2（直接）と同じ結果が得られる。</p>
+      <p><strong>方法2（直接）</strong>：基本関係式から $dS$ を求める：</p>
+      $$\begin{aligned}
+        dU &= T\,dS - P\,dV \\
+        \implies dS &= \frac{dU + P\,dV}{T} \\
+        &= \frac{C_V\,dT + P\,dV}{T}
+      \end{aligned}$$
+      <p>理想気体 $P/T = nR/V$ を代入：</p>
+      $$\begin{aligned}
+        dS &= \frac{C_V}{T}dT + \frac{nR}{V}dV \\
+        &= d\!\left(C_V\ln T + nR\ln V\right)
+      \end{aligned}$$
+      <p>
+        右辺は $T$ だけに依存する項 $C_V\,dT/T$ と $V$ だけに依存する項 $nR\,dV/V$ の和になっており，
+        変数がきれいに分離されている（＝全微分の形）ので，そのまま項別に積分できる。
+      </p>
+      <p>積分して：</p>
+      $$\int_A^B dS = C_V\ln\frac{T}{T_0} + nR\ln\frac{V}{V_0}$$
+    </div>
+  </div>
+
+  <h3 id="s3-9-free">断熱自由膨張のエントロピー変化</h3>
+
+  <p>
+    断熱自由膨張（Joule 膨張）は $\delta Q = 0$ であるが不可逆過程なので $\Delta S > 0$ のはずである。
+    エントロピーは状態量なので，始状態と終状態が同じであれば経路によらず同じ値が得られる。
+    そこで，<strong>始状態と終状態を結ぶ可逆経路</strong>（等温膨張）でエントロピー変化を計算する。
+  </p>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">計算</span>断熱自由膨張のエントロピー変化（理想気体）</div>
+    <div class="box-body">
+      <p>
+        始状態：$(T, V_A)$，終状態：$(T, V_B)$（$V_B > V_A$）。
+        理想気体では断熱自由膨張で温度は変わらないので（$dU = 0$，$U = C_V T$ から $dT = 0$），
+        両状態は同じ温度 $T$ を持つ。
+      </p>
+      <p>等温可逆膨張 $(T,V_A) \to (T,V_B)$ でエントロピー変化を計算：</p>
+      $$\begin{aligned}
+        dS &= \frac{\delta Q_{\rm rev}}{T} \\
+        &= \frac{dU + P\,dV}{T} \\
+        &= \frac{P\,dV}{T} \\
+        &= \frac{nR}{V}\,dV
+      \end{aligned}$$
+      $$\begin{aligned}
+        \Delta S &= \int_{V_A}^{V_B}\frac{nR}{V}\,dV \\
+        &= nR\ln\frac{V_B}{V_A} > 0
+      \end{aligned}$$
+      <p>
+        実際の断熱自由膨張では $\delta Q = 0$ なので $\int \delta Q/T = 0$，
+        しかし $\Delta S = nR\ln(V_B/V_A) > 0$ であり，
+      </p>
+      $$\begin{aligned}
+        0 = \int \frac{\delta Q}{T} &< \Delta S \\
+        &= nR\ln\frac{V_B}{V_A}
+      \end{aligned}$$
+      <p>
+        これは Clausius の不等式 $\int \delta Q/T \le S_B - S_A$（不可逆過程は厳密な不等号）と整合する。
+        断熱自由膨張は明確に不可逆であることがエントロピーの言葉で表現される。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s3-9-heat">具体例：熱移動過程の Clausius 不等式検証</h3>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">例</span>温度 $T_0$ の物体を熱源 $T$（$T > T_0$）で直接加熱する</div>
+    <div class="box-body">
+      <p>
+        定積熱容量 $C_V$ の物体（体積一定，初温 $T_0$）を温度 $T > T_0$ の熱源に直接接触させて
+        終温 $T$ まで加熱する過程 $K$。
+        この過程は可逆か不可逆か？Clausius の不等式を使って定量的に確かめる。
+      </p>
+      <p><strong>【左辺】実際の過程 $K$ での換算熱</strong></p>
+      <p>
+        熱源の温度が $T$（一定）なので，換算熱の積分は
+        熱浴の温度 $T$ で割ることに注意：
+      </p>
+      $$\begin{aligned}
+        \int_K \frac{\delta Q}{T_{\rm 熱源}}
+        &= \frac{1}{T}\int_{T_0}^{T} C_V\,dT' \\
+        &= \frac{C_V(T - T_0)}{T}
+      \end{aligned}$$
+      <p><strong>【右辺】エントロピー変化（同じ始点・終点の可逆経路で計算）</strong></p>
+      <p>
+        $T_0 \to T_0+\varepsilon \to T_0+2\varepsilon \to \cdots$ と温度の熱源を無数に接触させる
+        準静的経路 $K'$ を考えると：
+      </p>
+      $$\begin{aligned}
+        S_B - S_A &= \int_{K'} \frac{\delta Q}{T'} \\
+        &= \int_{T_0}^{T} \frac{C_V\,dT'}{T'} \\
+        &= C_V\ln\frac{T}{T_0}
+      \end{aligned}$$
+      <p><strong>不等式の確認</strong>：$x = T/T_0 > 1$ とおくと：</p>
+      $$\begin{aligned}
+        \underbrace{\frac{C_V(T - T_0)}{T}}_{\displaystyle= C_V\!\left(1 - \frac{1}{x}\right)}
+        &\;\overset{?}{\le}\;
+        \underbrace{C_V\ln\frac{T}{T_0}}_{\displaystyle= C_V\ln x} \\
+        &\;=\; S_B - S_A
+      \end{aligned}$$
+      <p>
+        $g(x) = \ln x - \bigl(1 - 1/x\bigr)$ とすると $g(1) = 0$，$g'(x) = (x-1)/x^2 > 0$（$x > 1$）。
+        よって $x > 1$ では $g(x) > 0$，すなわち：
+      </p>
+      $$\begin{aligned}
+        \int_K\frac{\delta Q}{T} &= C_V\!\left(1 - \frac{1}{x}\right) \\
+        &\;<\; C_V\ln x = S_B - S_A
+      \end{aligned}$$
+      <p>
+        等号が成り立たない（$< $）ので，過程 $K$（直接接触での加熱）は<strong>不可逆</strong>。
+        <br>
+        <strong>エントロピー生成量</strong>（不可逆の度合いの指標）：
+      </p>
+      $$\begin{aligned}
+        \sigma &\;=\; (S_B - S_A) - \int_K\frac{\delta Q}{T} \\
+        &= C_V\ln\frac{T}{T_0} - \frac{C_V(T-T_0)}{T} > 0
+      \end{aligned}$$
+      <p>
+        $T \to T_0$ の極限（無限小の温度差での加熱）で $\sigma \to 0$（可逆過程に近づく）ことも確認できる。
+        これは準静的過程の考え方と整合する。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">注意</span>エントロピー計算のポイント</div>
+    <div class="box-body">
+      <p>
+        不可逆過程のエントロピー変化を計算するときは，<strong>実際の不可逆経路ではなく，
+        同じ始点・終点を結ぶ可逆経路を使う</strong>。
+        エントロピーは状態量なので，どの可逆経路を使っても答えは同じ。
+      </p>
+      <p>
+        よくある間違い：断熱自由膨張では $\delta Q = 0$ だから $\Delta S = 0$ と計算してしまうこと。
+        $\delta Q = 0$ は実際の過程での熱だが，エントロピーの定義には
+        <em>可逆過程での</em>換算熱 $\delta Q_{\rm rev}/T$ を使わなければならない。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-imp">
+    <div class="box-head"><span class="box-tag">重要</span>断熱過程で許される状態変化の範囲</div>
+    <div class="box-body">
+      エントロピー増大則 $\Delta S \ge 0$ により、断熱変化では：
+      <ul>
+        <li><strong>準静的断熱</strong>（可逆）：$\Delta S = 0$（断熱曲線上のみを移動）</li>
+        <li><strong>非準静的断熱</strong>（不可逆）：$\Delta S > 0$（P-V グラフで断熱曲線より上の領域のみ到達可能）</li>
+      </ul>
+      <p>
+        P-V グラフにおいて「等エントロピー曲線」が断熱曲線であり、
+        断熱変化ではその曲線上か「上側」（同じ体積での圧力が高い側，すなわちエントロピーが大きい側）にしか移動できない。
+      </p>
+    </div>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="ch2.html" class="prev">第2章 第一法則</a>
+    <a href="ch4.html" class="next">第4章 熱力学関数</a>
+  </nav>
+</main>
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer>
+
+<script src="td.js"></script>
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

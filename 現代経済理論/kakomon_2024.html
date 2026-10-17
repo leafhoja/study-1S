@@ -1,0 +1,795 @@
+<!DOCTYPE html><!-- 「2024年度 期末試験 | 現代経済理論」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>2024年度 期末試験 | 現代経済理論</title>
+  <link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-nav-page="exam-2024">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">現代経済理論 過去問</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">HOME</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024" class="active">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>2024年度 期末試験</h1>
+  <p class="subtitle">7月19日 2限｜試験時間 90分｜全26問</p>
+  <p class="meta">担当：渡辺安虎（経済学研究科）</p>
+</div>
+
+<div class="container">
+
+<!-- Q1 -->
+<!-- ひとつの問題の問題文・解答・解説を、同じカードにまとめる。 --><div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">1</div>
+      <div class="q-head">
+        <span class="q-topic">計量経済学・因果推論</span><a href="講義/第1回.html" class="lec-ref-link">→ 第1回</a>
+        <p class="q-text">ある市が新しい放課後プログラムを実施したところ、参加生徒の成績が前年と比較して向上しました。因果関係を立証するために、どのような追加情報が最も役立ちますか。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>プログラムを実施していない同等の市からの生徒の成績データ</li>
+    <li class="opt"><span class="opt-label">(b)</span>プログラムの影響に関する教師からの定性的なフィードバック</li>
+    <li class="opt"><span class="opt-label">(c)</span>プログラムの前後における参加生徒の成績の縦断的データ</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>AとC<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>因果推論には<em>比較対照（コントロール群）</em>と<em>時系列変化（前後比較）</em>の両方が重要。</p>
+    <p><strong>(a) 対照群（非実施の市）</strong>：プログラムが原因で成績が上がったのか、それとも全国的な学力向上など外部要因のせいかを区別できる。差の差（DiD）推定の基礎。</p>
+    <p><strong>(c) 縦断データ（前後比較）</strong>：同じ生徒の成績変化を追跡することで、個人固定効果を除去できる。</p>
+    <p>AとCを組み合わせると「参加校の前後変化 - 非参加校の前後変化」という差の差推定が可能になり、より強い因果の根拠となる。(b)定性フィードバックや(c)単独では外部要因を排除できない。</p>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">2</div>
+      <div class="q-head">
+        <span class="q-topic">計量経済学・因果推論</span><a href="講義/第1回.html" class="lec-ref-link">→ 第1回</a>
+        <p class="q-text">銃の所有率が高い州ほど銃暴力の発生率が高いことが研究で明らかになりました。因果関係を導き出す能力を最も強化する追加情報は何ですか。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>これらの州では長年にわたって銃の所有率が一貫して高かったことを示すデータ</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>貧困や人口密度などの潜在的な要因を制御した後も、関連性が残っているという証拠<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>銃の所有と銃暴力を結びつける説得力のある生物学的メカニズム</li>
+    <li class="opt"><span class="opt-label">(d)</span>他の国での調査結果の再現</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>因果推論の大きな障壁は<em>交絡因子（confounders）</em>の存在。「銃所有率が高い州は同時に貧困率も高く、貧困が銃暴力の真の原因かもしれない」という可能性を排除できなければ相関にとどまる。</p>
+    <p>(b) 貧困・人口密度などをコントロールしても相関が残るなら、交絡因子の影響を排除した上でも関連が見られることを示し、因果関係の証拠として最も強力。</p>
+    <p>(a)時系列の一貫性は時間的順序を示すが交絡因子を排除しない。(c)生物学的メカニズムは社会科学では馴染みにくい。(d)他国での再現は外的妥当性であり因果の証拠ではない。</p>
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">3</div>
+      <div class="q-head">
+        <span class="q-topic">金融政策・数理モデル</span><a href="講義/第11回.html" class="lec-ref-link">→ 第11回</a>
+        <p class="q-text">中央銀行が数理モデル分析を活用する目的を選んで下さい。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>経済の見通しを立てる。</li>
+    <li class="opt"><span class="opt-label">(b)</span>金融市場を理解する。</li>
+    <li class="opt"><span class="opt-label">(c)</span>戦略を考える</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>上記全て。<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>中央銀行（日本銀行、FRBなど）における数理モデルの活用目的は多岐にわたる：</p>
+    <p>・<strong>経済見通し</strong>：GDP・物価・雇用の予測、「展望レポート」などの中期見通し作成。<br>
+    ・<strong>金融市場理解</strong>：国債市場・為替市場のダイナミクス分析、リスク評価。<br>
+    ・<strong>戦略策定</strong>：政策金利の最適パスの検討、量的緩和の規模・効果の試算、シナリオ分析。</p>
+    <p>これら全てに数理モデル（DSGEモデル、VARモデル、機械学習モデルなど）が活用されているため、(d)が正解。</p>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">4</div>
+      <div class="q-head">
+        <span class="q-topic">疫学マクロモデル・コロナ</span><a href="講義/第11回.html" class="lec-ref-link">→ 第11回</a>
+        <p class="q-text">「コロナ死者数を一人減少させるために国全体としてどの程度の経済的な犠牲を受け入れるか」という問いを考える際に特に重要だと考えられるコンセプトを選んで下さい。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>比較優位</li>
+    <li class="opt"><span class="opt-label">(b)</span>埋没費用</li>
+    <li class="opt"><span class="opt-label">(c)</span>囚人のジレンマ</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>統計的生命価値<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p><em>統計的生命価値（VSL: Value of Statistical Life）</em>とは、「死亡リスクを1単位下げることに対して、社会として支払う意思がある金額（WTP）」を人口全体に拡大したもの。</p>
+    <p>コロナ政策の費用便益分析では、「感染対策による経済損失（費用）」と「救われる命の価値（便益）」を比較する必要がある。このとき「命1つの価値をどう金銭換算するか」にVSLを用いる（米国では1人あたり約1,000万ドル程度が使われる）。</p>
+    <p>比較優位は貿易の概念、埋没費用は意思決定の概念、囚人のジレンマはゲーム理論の概念であり、この文脈では主役ではない。</p>
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">5</div>
+      <div class="q-head">
+        <span class="q-topic">会計・財務</span><a href="講義/第5回.html" class="lec-ref-link">→ 第5回</a>
+        <p class="q-text">ビッグ・バスを説明しているものを選べ。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>業績改善を目的とした人員削減</li>
+    <li class="opt"><span class="opt-label">(b)</span>多額の設備投資</li>
+    <li class="opt"><span class="opt-label">(c)</span>優秀な経営者への経営者交代</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>極端な利益圧縮型の利益調整<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p><em>ビッグ・バス（Big Bath）</em>：経営者（特に新任CEO）が就任初年度に、将来の損失・減損などを一気に前倒し計上し、当期利益を極端に圧縮する利益調整行動。「今期をひどくしておいて、次期から好業績に見せる」戦略。前任者への責任転嫁も可能。「お風呂で一気に汚れを落とす」というメタファーから命名。</p>
+    <p>(a)「業績改善目的の人員削減」：これはリストラクチャリングであり、会計上の利益調整行動ではない（ただし人員削減に伴う退職費用の計上がビッグバスの一部になることはある）。(b)「多額の設備投資」：これは資本支出（CAPEX）であり、利益調整とは別の経営判断。(c)「優秀な経営者への交代」：人事の問題であり利益調整行動ではない（ただし新経営者が就任後にビッグバスを行うことはある）。</p>
+  </div>
+</div>
+
+<!-- Q6 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">6</div>
+      <div class="q-head">
+        <span class="q-topic">ファイナンス・効率的市場</span><a href="講義/第5回.html" class="lec-ref-link">→ 第5回</a>
+        <p class="q-text">効率的市場仮説において半強度の効率性について説明しているものを選べ。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>一般に公開されない内部情報について市場が効率的</li>
+    <li class="opt"><span class="opt-label">(b)</span>過去の株価系列の情報に対して市場が効率的</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>新聞記事や財務諸表などの公開された情報に対して市場が効率的<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>まだ発生してない将来事象について市場が効率的</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>効率的市場仮説（EMH）の3段階：</p>
+    <p>・<strong>弱形態</strong>：<em>過去の株価系列</em>情報に対して効率的 → テクニカル分析で超過収益不可。<br>
+    ・<strong>半強形態</strong>：<em>公開情報（新聞・決算・アナリストレポート等）</em>に対して効率的 → ファンダメンタル分析で超過収益不可。<br>
+    ・<strong>強形態</strong>：内部情報も含む<em>全情報</em>に対して効率的 → インサイダー取引でも超過収益不可。</p>
+    <p>「半強度（半強形態）」は公開情報への効率性。</p>
+    <p>(a)「一般に公開されない内部情報」は<em>強形態</em>の説明。(b)「過去の株価系列」は<em>弱形態</em>の説明。(d)「まだ発生していない将来事象」はEMHの3分類のどれにも属さない（EMHは現時点で入手可能な情報が対象であり、まだ存在しない情報は定義外）。</p>
+  </div>
+</div>
+
+<!-- Q7 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">7</div>
+      <div class="q-head">
+        <span class="q-topic">計量経済学・ルーカス批判</span><a href="講義/第3回.html" class="lec-ref-link">→ 第3回</a>
+        <p class="q-text">(i) Y=F(X)を推定してもF(·)の形状が政策変更で変化するため正しい予測ができないという批判がルーカス批判。<br>
+        (ii) 構造モデルを推定しても将来政策の不確実性があり因果推論を取り入れる必要があるという批判がルーカス批判。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>(i),(ii)とも正しい</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>(i)のみ正しい<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>(ii)のみ正しい</li>
+    <li class="opt"><span class="opt-label">(d)</span>(i),(ii)とも正しくない</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p><strong>(i) 正しい。</strong>ルーカス批判（1976）の本質：経済主体は合理的期待のもと行動しており、政策が変わると行動パターン（F(·)）も変化する。そのため過去データから推定した縮約形モデルを政策評価に使えない。</p>
+    <p><strong>(ii) 誤り。</strong>ルーカス批判への応答は「個々の主体の最適化行動を明示的に組み込んだ構造モデル（DSGEモデル）を使え」ということ。「因果推論を取り入れよ」という主張はルーカス批判とは別の方法論的議論（構造計量経済学vs.縮約形因果推論の議論）。</p>
+  </div>
+</div>
+
+<!-- Q8 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">8</div>
+      <div class="q-head">
+        <span class="q-topic">ゲーム理論・ナッシュ均衡</span><a href="講義/第3回.html" class="lec-ref-link">→ 第3回</a>
+        <p class="q-text">以下のゲームについて：<br>
+        (i) {協力しない, 協力しない}はパレート劣位のため逸脱インセンティブがありナッシュ均衡ではない。<br>
+        (ii) 複数のナッシュ均衡が存在する。</p>
+        <table class="q-table">
+          <tr><th></th><th>協力する</th><th>協力しない</th></tr>
+          <tr><td>協力する</td><td>5, 6</td><td>-2, 5</td></tr>
+          <tr><td>協力しない</td><td>4, -3</td><td>0, 1</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>(i),(ii)とも正しい</li>
+    <li class="opt"><span class="opt-label">(b)</span>(i)のみ正しい</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>(ii)のみ正しい<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>(i),(ii)とも正しくない</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>全NE候補を確認：</p>
+    <p><strong>{協力する, 協力する}(5,6)：</strong>P1: 5 vs 協力しないで4。5&gt;4、逸脱しない。P2: 6 vs 協力しないで5。6&gt;5、逸脱しない。→ <em>NE ✓</em></p>
+    <p><strong>{協力する, 協力しない}(-2,5)：</strong>P1: -2 vs 協力しないで0。-2&lt;0、逸脱。→ NEでない。</p>
+    <p><strong>{協力しない, 協力する}(4,-3)：</strong>P1: 4 vs 協力するで5。4&lt;5、逸脱。→ NEでない。</p>
+    <p><strong>{協力しない, 協力しない}(0,1)：</strong>P1: 0 vs 協力するで-2。0&gt;-2、逸脱しない。P2: 1 vs 協力するで-3。1&gt;-3、逸脱しない。→ <em>NE ✓</em></p>
+    <p>NE は {協力する,協力する} と {協力しない,協力しない} の2つ → <strong>(ii)正しい。</strong></p>
+    <p><strong>(i) 誤り。</strong>{協力しない,協力しない}はパレート劣位（{協力する,協力する}より両者とも悪い）だが、NE定義は「一方的逸脱で改善しないこと」。パレート劣位であってもNEでありうる（囚人のジレンマと類似）。</p>
+  </div>
+</div>
+
+<!-- Q9 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">9</div>
+      <div class="q-head">
+        <span class="q-topic">マッチング理論</span><a href="講義/第4回.html" class="lec-ref-link">→ 第4回</a>
+        <p class="q-text">安定マッチング問題において、マッチング（μ）の安定性の定義として最も適切なものを選んでください。（全企業の定員は1）</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>個人合理性を満たし、さらにブロッキングペアが「少なくとも1組存在する」。</li>
+    <li class="opt"><span class="opt-label">(b)</span>μと異なるマッチングで全員が今より良くなるものが存在しない（パレート最適）。</li>
+    <li class="opt"><span class="opt-label">(c)</span>アンマッチよりは相手を好む（個人合理性のみ）。</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>個人合理性を満たし、かつブロッキングペア（互いにμの相手より好む未マッチペア）が存在しない。<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>2023年Q5と同じ内容。安定マッチングの定義は2条件の同時成立：<br>
+    ①<em>個人合理性</em>：全参加者がアンマッチより自分の相手を好む（もしくはアンマッチ）。<br>
+    ②<em>ブロッキングペアなし</em>：マッチしていない学生sと企業Fで「sはFを今の相手より好み、FもsをFの今の相手より好む」という組み合わせが存在しない。</p>
+    <p>(a)はブロッキングペアが「存在する」＝不安定。(b)はパレート最適。(c)は①のみ。</p>
+  </div>
+</div>
+
+<!-- Q10 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">10</div>
+      <div class="q-head">
+        <span class="q-topic">マッチング理論・ゲールシャプレー</span><a href="講義/第4回.html" class="lec-ref-link">→ 第4回</a>
+        <p class="q-text">Q6と同じマッチング問題（学生1: A&gt;B、学生2: B&gt;A、企業A: 2&gt;1、企業B: 1&gt;2）。学生提案型GSアルゴリズムを適用したとき、最も適切な記述を選べ。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt correct"><span class="opt-label">(a)</span>学生たちは自分だけが希望順位を偽っても、より望ましいマッチングを得ることはできない。<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(b)</span>少なくとも一人の学生は希望順位を偽ってより望ましいマッチングを得ることができる。</li>
+    <li class="opt"><span class="opt-label">(c)</span>このマッチング問題には安定マッチングが一つだけ存在する。</li>
+    <li class="opt"><span class="opt-label">(d)</span>企業たちは自分だけが希望順位を偽っても、より望ましいマッチングを得ることはできない。</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>ゲールシャプレー（GS）アルゴリズムの重要な性質：</p>
+    <p><strong>学生提案型GSアルゴリズム</strong>は<em>学生にとって耐戦略的（strategy-proof）</em>。どの学生も、他の学生が正直に申告している状況では、自分だけが希望順位を偽って申告しても、正直に申告した場合より良いマッチングを得ることができない。</p>
+    <p>(b)は誤り。(c)は誤り（安定マッチングは2つ存在する、2023年Q6参照）。</p>
+    <p>(d)は誤り：企業提案型なら企業側が耐戦略的だが、<strong>学生提案型では企業側は必ずしも耐戦略的でない</strong>。企業側は希望順位を操作することで有利なマッチングを得られる場合がある。</p>
+  </div>
+</div>
+
+<!-- Q11 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">11</div>
+      <div class="q-head">
+        <span class="q-topic">ミクロ経済学・需要</span><a href="講義/第9回.html" class="lec-ref-link">→ 第9回</a>
+        <p class="q-text">需要関数とは</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>在庫と販売量の関係をあらわしたもの</li>
+    <li class="opt"><span class="opt-label">(b)</span>生産量と販売量の関係をあらわしたもの</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>価格と販売量の関係をあらわしたもの<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>消費者の効用と販売量の関係をあらわしたもの</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>需要関数（Demand Function）とは、財・サービスの<em>価格と、消費者が購入したいと思う数量（需要量）との関係</em>を表した関数。</p>
+    <p>通常、価格が上がると需要量は下がる（右下がりの需要曲線）。需要関数はこの関係を数式で表す。例: Q<sup>d</sup> = 100 - 2P。</p>
+    <p>(a)「在庫と販売量の関係」：在庫は供給側の概念であり、需要量は在庫量とは独立に決まる（消費者の意思決定であるため）。(b)「生産量と販売量の関係」：これは供給サイドの概念（供給関数や費用関数）に近く、需要関数ではない。(d)「消費者の効用と販売量の関係」：効用は需要関数の<em>背景</em>にある概念だが、需要関数が直接表すのは効用ではなく<em>価格と需要量</em>の関係。</p>
+  </div>
+</div>
+
+<!-- Q12 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">12</div>
+      <div class="q-head">
+        <span class="q-topic">価格最適化・ミクロ経済学</span><a href="講義/第9回.html" class="lec-ref-link">→ 第9回</a>
+        <p class="q-text">コンバージョン（顧客が購入に至る割合）と価格の関係が<br>
+        conversion (%) = 0.35 − 0.001 × price<br>
+        で与えられたとして、売上が一番大きくなる price を選択しなさい。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>100</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>175<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>200</li>
+    <li class="opt"><span class="opt-label">(d)</span>300</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>売上 = price × conversion = price × (0.35 - 0.001 × price)</p>
+    <div class="formula">Revenue(p) = p × (0.35 - 0.001p) = 0.35p - 0.001p²
+
+最大化の1階条件：
+dRevenue/dp = 0.35 - 0.002p = 0
+p* = 0.35 / 0.002 = 175</div>
+    <p>確認：Revenue(175) = 175 × (0.35 - 0.175) = 175 × 0.175 = 30.625</p>
+    <p>（p=100: 100×0.25=25、p=200: 200×0.15=30、p=300: 300×0.05=15）</p>
+  </div>
+</div>
+
+<!-- Q13 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">13</div>
+      <div class="q-head">
+        <span class="q-topic">デジタル経済・ネットワーク効果</span><a href="講義/第7回.html" class="lec-ref-link">→ 第7回</a>
+        <p class="q-text">日本は異なる周波数ネットワークが一国の中で形成されている。以下A〜Cから正しいものの組み合わせを選べ。<br>
+        A. 競争的な環境のなかで異なる周波数ネットワークを共存させることは効率的である。<br>
+        B. 事業者が互いに周波数を統一するように調整をすることには問題がある。<br>
+        C. 周波数には外部性は存在しないので、市場競争に任せるべきである。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>AとBが正しい</li>
+    <li class="opt"><span class="opt-label">(b)</span>BとCが正しい</li>
+    <li class="opt"><span class="opt-label">(c)</span>AとCが正しい</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>正解はない<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>A〜C全て誤り → 正解はない。</p>
+    <p><strong>A 誤り：</strong>異なる周波数ネットワークが乱立すると、端末の互換性が失われる（海外ローミング不可、端末コスト増加など）。競争的環境での周波数乱立は非効率。</p>
+    <p><strong>B 誤り：</strong>事業者が周波数を統一するよう調整することは、<em>むしろ望ましい</em>（ネットワーク外部性・互換性の観点から）。独禁法問題になる場合もあるが、電波行政の観点からは統一調整が効率的。</p>
+    <p><strong>C 誤り：</strong>周波数には<em>外部性が存在する</em>（ネットワーク効果、電波干渉など）。外部性があれば市場に任せると失敗するため、政府による規制・調整が必要。</p>
+  </div>
+</div>
+
+<!-- Q14 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">14</div>
+      <div class="q-head">
+        <span class="q-topic">規制経済学・電力</span><a href="講義/第7回.html" class="lec-ref-link">→ 第7回</a>
+        <p class="q-text">日本の電力産業は地域独占と総括原価からなる規制産業でした。以下A〜Cから正しいものの組み合わせを選べ。<br>
+        A. 電力設備の固定費が大きいために、複数の企業を市場に参入させることで平均費用が低減する。<br>
+        B. 政府が限界費用を知らなくても、限界費用での価格づけを企業に強制することが望ましい。<br>
+        C. 地域独占は企業の事業予見性を損なうために、投資が減退する。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>AとBが正しい</li>
+    <li class="opt"><span class="opt-label">(b)</span>BとCが正しい</li>
+    <li class="opt"><span class="opt-label">(c)</span>全ての選択肢が正しい</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>正解はない<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>A〜C全て誤り。</p>
+    <p><strong>A 誤り：</strong>電力設備の固定費が非常に大きいということは「自然独占」が成立することを意味する。1社が独占する方が平均費用が低い（規模の経済）。複数社が参入すると固定費の重複で平均費用が<em>上昇</em>してしまう。</p>
+    <p><strong>B 誤り：</strong>限界費用価格付けが望ましいのは理論上の話。しかし政府が限界費用を<em>知らない</em>状況では強制できない（情報の非対称性問題）。仮に強制できても、固定費が回収できなければ企業は参入しない（自然独占では限界費用&lt;平均費用）。</p>
+    <p><strong>C 誤り：</strong>地域独占は競争がないため事業予見性が<em>高く</em>（収益が安定的に見込める）、長期的な設備投資を促す側面がある。予見性を「損なう」は逆。</p>
+  </div>
+</div>
+
+<!-- Q15 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">15</div>
+      <div class="q-head">
+        <span class="q-topic">経済史・農業史</span><a href="講義/第10回.html" class="lec-ref-link">→ 第10回</a>
+        <p class="q-text">ジャガイモは、19世紀〜20世紀における欧州経済の拡大に寄与した「スーパーフード」とも呼べる食物である。その主な理由を選べ。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>蒸す・焼く・煮込むなど様々な調理方法があるため一般家庭に重宝されたから。</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>小麦や大麦など伝統的な穀物と比べ、収穫量や供給する熱量が多く、一般人の栄養状態を大きく改善したから。<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>栽培が容易だったため各国が重要な税収源とみなし補助金を出すことで栽培を促進したから。</li>
+    <li class="opt"><span class="opt-label">(d)</span>保存が容易だったため各国が外貨獲得のための重要な輸出作物として栽培を促進したから。</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>Nunn & Qian (2011)「The Potato's Contribution to Population and Urbanization」等の研究による。</p>
+    <p>ジャガイモが欧州経済に貢献した主な理由は<em>高い収穫カロリー効率</em>：</p>
+    <p>・同じ面積の耕地から、小麦の2〜4倍のカロリーを生産できる。<br>
+    ・ビタミンCも豊富で栄養状態が大幅に改善。<br>
+    ・人口増加を支え、都市化・工業化を促進。<br>
+    ・農業生産性向上 → 余剰労働力が工業部門に移行 → 産業革命を支えた。</p>
+    <p>(a)調理の多様性は副次的。(c)(d)税収・輸出作物としての役割は主因ではない。</p>
+  </div>
+</div>
+
+<!-- Q16 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">16</div>
+      <div class="q-head">
+        <span class="q-topic">経済史・奴隷貿易</span><a href="講義/第10回.html" class="lec-ref-link">→ 第10回</a>
+        <p class="q-text">15世紀〜20世紀のアフリカ奴隷貿易（推計1千万人以上が輸出）が数世紀にわたり続けられた理由を選べ。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>奴隷貿易は「手軽に儲かった」ため、人の捕獲に多額の懸賞金が掛けられたから。</li>
+    <li class="opt"><span class="opt-label">(b)</span>植民地化したアメリカ大陸が安価な大量労働力を必要としたため、欧州各国が銃器を提供し奴隷化を促進したから。</li>
+    <li class="opt"><span class="opt-label">(c)</span>人をより多く捕まえるための「制度改革」や近隣諸国への侵攻が行われたから。</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>上記全てが要因として複雑に絡みあったから。<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>Nunn (2008)「The Long-term Effects of Africa's Slave Trades」等の研究が示すように、奴隷貿易は複合的要因によって維持された。</p>
+    <p>・アメリカ大陸（プランテーション農業）の安価な労働力需要 + 欧州の銃器提供<br>
+    ・アフリカ内での戦争・制度変化（捕虜を奴隷として売ることで資金を得る）<br>
+    ・一度始まると拡大する悪循環（競争的な奴隷供給メカニズム）<br>
+    ・短期的な経済利益が長期的な社会破壊をもたらした</p>
+    <p>これらが複雑に絡み合って数世紀の継続を可能にした。今日のアフリカの低開発の一因ともなっていると実証研究は示す。</p>
+  </div>
+</div>
+
+<!-- Q17 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">17</div>
+      <div class="q-head">
+        <span class="q-topic">マクロ経済学・貨幣数量説</span><a href="講義/第2回.html" class="lec-ref-link">→ 第2回</a>
+        <p class="q-text">貨幣数量説が成り立っており流通速度が一定と仮定する。経済成長率も貨幣成長率も正であると仮定する。経済成長率が貨幣成長率よりも高い場合、以下のどれが正しいか？</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>貨幣成長率に従って物価が上がっていく</li>
+    <li class="opt"><span class="opt-label">(b)</span>経済成長率と貨幣成長率の差の分だけ物価が上がっていく</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>経済成長率と貨幣成長率の差の分だけ物価が下がっていく<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>貨幣成長率に従って物価が下がっていく</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>貨幣数量説：MV = PY（M:貨幣量、V:流通速度、P:物価、Y:実質GDP）</p>
+    <div class="formula">Vが一定のとき、成長率の関係：
+m + v = π + g  （それぞれの成長率）
+v = 0 → m = π + g
+
+∴ インフレ率 π = m - g
+  （m:貨幣成長率, g:経済成長率）
+
+g > m のとき：π = m - g < 0 （デフレ）
+デフレの大きさ ＝ g - m</div>
+    <p>経済成長率が貨幣成長率を上回ると、実物経済の拡大に対して貨幣供給が不足し、物価が下落（デフレ）する。下落幅はその差（g-m）に相当する。</p>
+    <p>(a)「貨幣成長率mに従って物価が上がる」：π = m - g であり、g &gt; 0 なので π &lt; m。貨幣成長率より物価上昇率は小さく、g &gt; m のときは物価は<em>下落</em>する（上がらない）。(b)「差の分だけ物価が上がる」：g &gt; m のとき π = m - g &lt; 0 なので物価は「<em>下がる</em>」（上がらない）。符号を間違えた選択肢。(d)「貨幣成長率mに従って物価が下がる」：π = m - gであり、貨幣成長率m単体が下落幅ではなく、差（g-m）が下落幅。また「mに従う」という表現は不正確。</p>
+  </div>
+</div>
+
+<!-- Q18 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">18</div>
+      <div class="q-head">
+        <span class="q-topic">金融政策・デフレの罠</span><a href="講義/第2回.html" class="lec-ref-link">→ 第2回</a>
+        <p class="q-text">ある国の中央銀行のインフレ目標が3%、実質利子率が1%で一定と仮定する。この国がデフレ均衡にあるとき、均衡インフレ率は何%か？</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>-3%</li>
+    <li class="opt"><span class="opt-label">(b)</span>-2%</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>-1%<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>0%</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>デフレ均衡ではゼロ下限（ZLB）が拘束される：名目利子率 i = 0。</p>
+    <div class="formula">フィッシャー方程式: i = r + π^e
+ZLBより: i = 0
+実質利子率: r = 1%
+
+0 = 1% + π^e
+π^e = -1%</div>
+    <p>デフレ均衡では、名目利子率がゼロに張りついたまま、均衡インフレ率（期待インフレ率）が -1% になる。これが「デフレの罠」：実質利子率 = 0 - (-1%) = 1% で高止まりし、需要が抑制されさらなるデフレを呼ぶ悪循環。インフレ目標3%は「正常均衡」での目標であり、デフレ均衡での計算には使わない。</p>
+    <p>(a)-3%：インフレ目標値3%をそのまま符号反転させた値。ZLBとフィッシャー方程式を使っておらず誤り。(b)-2%：インフレ目標3% - 実質利子率1% = 2% とし、それを負にした誤計算。デフレ均衡ではZLB（i=0）を使うのであり、インフレ目標は計算に入らない。(d)0%：名目利子率がゼロと混同して均衡インフレ率もゼロとした誤り。フィッシャー方程式で i=0, r=1% とすると π = i-r = 0-1% = -1% となる。</p>
+  </div>
+</div>
+
+<!-- Q19 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">19</div>
+      <div class="q-head">
+        <span class="q-topic">都市経済学・地域特化</span><a href="講義/第8回.html" class="lec-ref-link">→ 第8回</a>
+        <p class="q-text">地域特化の経済が観察される事例として取り上げるのに最もふさわしい街を、「都市経済学入門」の講義内容に即して選びなさい。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>渋谷</li>
+    <li class="opt"><span class="opt-label">(b)</span>新宿</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>秋葉原<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>梅田</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p><em>地域特化の経済（MAR外部性）</em>とは、同一産業の企業が同じ地域に集積することで生まれる効率化・スピルオーバー。</p>
+    <p>秋葉原は<em>電気・電子・アニメ・ゲーム・IT</em>といった特定業種が高度に集積した典型的な地域特化の例。同業者が集まることで情報交換・仕入れコスト低減・専門人材の調達が容易になる。</p>
+    <p>渋谷：IT・スタートアップ集積（多様化の経済の側面も強い）。<br>
+    新宿・梅田：総合的な商業集積で特化の経済よりも多様化の経済（Jacobs外部性）の側面が強い。</p>
+  </div>
+</div>
+
+<!-- Q20 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">20</div>
+      <div class="q-head">
+        <span class="q-topic">都市経済学・出生率</span><a href="講義/第8回.html" class="lec-ref-link">→ 第8回</a>
+        <p class="q-text">大都市への人口集中が出生率に及ぼす影響について述べた文章として最も適切なものを選びなさい。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>人口集中は集積の経済を通じては出生率に影響しない</li>
+    <li class="opt"><span class="opt-label">(b)</span>人口集中は規模の経済を通じて出生率を必ず引き上げる</li>
+    <li class="opt"><span class="opt-label">(c)</span>人口集中は比較優位を通じて出生率を引き下げる効果を持つ</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>人口集中は混雑の不経済を通じて出生率を引き下げる効果を持つ<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>大都市（特に東京）では出生率が低い。メカニズム：</p>
+    <p><em>混雑の不経済</em>（住居費高騰、通勤時間の長さ、保育所の不足）により：<br>
+    ①高い地価・家賃 → 広い住居が持てない → 子育てコスト増大。<br>
+    ②女性の労働市場参加 → 機会費用の上昇（高収入の仕事と育児のトレードオフ）。<br>
+    ③保育所不足・待機児童問題。</p>
+    <p>比較優位は貿易の概念で出生率との関係は直接的ではない。規模の経済は「必ず引き上げる」とは言えない。集積の経済も出生率への影響は負（混雑コストを通じて）の側面がある。</p>
+  </div>
+</div>
+
+<!-- Q21 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">21</div>
+      <div class="q-head">
+        <span class="q-topic">ファイナンス・先渡し価格</span><a href="講義/第12回.html" class="lec-ref-link">→ 第12回</a>
+        <p class="q-text">現在時刻t=0で、ある無配当の株式が一株あたり10,000円で取引されている。満期1年のゼロクーポン債（元本1円）の価格は0.98円。当該株式一株に対する満期1年の先渡し価格として正しいものを選べ。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>9,800円</li>
+    <li class="opt"><span class="opt-label">(b)</span>10,000円</li>
+    <li class="opt"><span class="opt-label">(c)</span>10,020円</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>10,204円<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>ゼロクーポン債の価格 P(0,T) = 0.98 → 1年後のディスカウントファクター = 0.98、無リスク利子率 r = (1/0.98) - 1 ≒ 2.04%</p>
+    <div class="formula">先渡し価格 F = S₀ / P(0,T)
+   = 10,000 / 0.98
+   ≒ 10,204.08 ≒ 10,204円</div>
+    <p>直感：今10,000円の株を現物で保有するか、先渡し契約で1年後に10,204円で買うかは無裁定（コスト-収益が等しい）。今10,000円で買えば、その資金を0.98円で借りること（利子率2.04%）に相当するため、先渡し価格は10,000円に利子を上乗せした価格になる。</p>
+    <p>(a)9,800円：F = S₀ × P(0,T) = 10,000 × 0.98 = 9,800 という誤り。割り算と掛け算を混同している（ディスカウントファクターで<em>割る</em>べきところを<em>かけた</em>）。(b)10,000円：「先渡し価格は現在価格と同じ」という誤解。金利がゼロでなければ利子分を上乗せする必要がある。(c)10,020円：S₀ × (1 + r/50) のような誤った利子率計算や概算ミスによる値。正しい計算は10,000/0.98 = 10,204。</p>
+  </div>
+</div>
+
+<!-- Q22 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">22</div>
+      <div class="q-head">
+        <span class="q-topic">ファイナンス・先渡し価格</span><a href="講義/第12回.html" class="lec-ref-link">→ 第12回</a>
+        <p class="q-text">Q21の株式が半年後に「正」の配当支払い（例えば100円）を行う配当付き株式だとする。その他の条件を不変とした場合、この配当付き株式の一株に対する満期1年の先渡し価格として正しい記述を選べ。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>(1)の先渡し価格より高い。</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>(1)の先渡し価格より低い。<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>(1)の先渡し価格と等しい。</li>
+    <li class="opt"><span class="opt-label">(d)</span>(a)-(c)のいずれであるかは与えられた条件では不明である。</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>配当付き株式の先渡し価格：</p>
+    <div class="formula">F = (S₀ - PV(配当)) / P(0,T)
+
+PV(配当) = 半年後の配当の現在価値 > 0
+
+F_配当付き = (10,000 - PV(D)) / 0.98 < 10,000 / 0.98 = F_無配当</div>
+    <p>配当は満期前に株主に支払われるため、先渡し保有者は配当を受け取れない。その分だけ先渡し価格は無配当の場合より低くなる（配当落ちの効果）。</p>
+    <p>(a)「先渡し価格が高くなる」：配当を受け取れない分、先渡しは不利になるはずなので価格は<em>低く</em>なければ裁定機会が生じる。「高くなる」は逆。(c)「等しい」：配当があれば現物株保有は途中で配当を受け取れるが、先渡し保有者は受け取れない。この非対称性が価格に反映されるため等しくはならない。(d)「条件だけでは不明」：配当が「正」であることは明示されているため、PV(配当)&gt;0 → 先渡し価格が低くなることは確定できる。不明ではない。</p>
+  </div>
+</div>
+
+<!-- Q23 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">23</div>
+      <div class="q-head">
+        <span class="q-topic">国際貿易・グラビティーモデル</span>
+        <p class="q-text">【Q23-24共通】自由貿易協定を結ぶアメリカとカナダのみGDPが2倍になった（世界GDPの当初の半分を占めていた）。他国のGDP・関税等は変化しない。<br><br>
+        Q23: シンプルなグラビティー・モデルに沿ったとき、カナダからアメリカへの輸出額は何倍になるか？</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>4/3倍</li>
+    <li class="opt"><span class="opt-label">(b)</span>2倍</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>8/3倍<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>上記のいずれでもない</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>シンプルグラビティーモデル：X<sub>CA</sub> ∝ Y<sub>C</sub> × Y<sub>A</sub> / Y<sub>world</sub></p>
+    <div class="formula">当初: Y_world = Y, Y_C + Y_A = Y/2, 他国 = Y/2
+
+変化後: Y_C' = 2Y_C, Y_A' = 2Y_A
+Y_world' = 2(Y_C + Y_A) + Y/2 = 2×(Y/2) + Y/2 = Y + Y/2 = 3Y/2
+
+輸出変化比：
+X_CA_new / X_CA_old = (2Y_C × 2Y_A / Y_world') / (Y_C × Y_A / Y_world)
+= (4Y_CY_A × Y) / (Y_CY_A × 3Y/2)
+= 4 / (3/2) = 8/3</div>
+    <p>(a)4/3倍の誤り：世界GDPの変化を考慮せず Y_C・Y_A がそれぞれ2倍になるから輸出は2×2=4倍、と計算したあと分母の世界GDP変化を誤って3/1で割るなどの計算ミス。(b)2倍の誤り：「カナダもアメリカも2倍になったから輸出も2倍」という単純な誤解。分子は Y_C×Y_A ∝ 4倍になるが、分母（世界GDP）も3/2倍に増えることを見落としている。(d)「いずれでもない」：上の計算から8/3倍が明確に導出されるため誤り。</p>
+  </div>
+</div>
+
+<!-- Q24 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">24</div>
+      <div class="q-head">
+        <span class="q-topic">国際貿易・グラビティーモデル（MR）</span>
+        <p class="q-text">Q24: 多角的貿易抵抗指数を考慮に入れた場合のカナダからアメリカへの輸出額について、正しいものを一つ選べ。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>カナダ・アメリカとも高いMRに直面するため、シンプルモデルより大きくなる。</li>
+    <li class="opt"><span class="opt-label">(b)</span>カナダ・アメリカとも高いMRに直面するため、シンプルモデルより小さくなる。</li>
+    <li class="opt"><span class="opt-label">(c)</span>カナダ・アメリカとも低いMRに直面するため、シンプルモデルより大きくなる。</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>カナダ・アメリカとも低いMRに直面するため、シンプルモデルより小さくなる。<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>多角的貿易抵抗指数（MR）を考慮したグラビティー方程式：</p>
+    <div class="formula">X_ij ∝ (Y_i × Y_j / Y_world) × (t_ij / (Π_i × P_j))^(1-σ)
+  σ > 1 なので (1-σ) < 0</div>
+    <p>カナダ・アメリカのGDP倍増 → 相互間の貿易が特に拡大 → 両国にとって最大の貿易相手国が大きくなる → 各国の「平均的な貿易コスト」が改善（他国より安く取引できる巨大な相手が拡大）→ <em>カナダ・アメリカ双方のMRが低下</em>。</p>
+    <p>Π_i↓・P_j↓ → (Π_i × P_j)↓ → t/(Π×P)↑ → (1-σ)乗（負の指数）→ 値が<strong>減少</strong> → 双方向の貿易促進効果が<em>相殺</em>される。</p>
+    <p>直感：カナダとアメリカが双方とも巨大化すると、カナダは「米国だけで十分」、米国も「カナダとの貿易が充実」となり、第三国との貿易が相対的に意味を失う。その結果、二国間の相対的な貿易量はシンプルモデルが予測するほど増えない（MRの低下が相殺効果をもたらす）。</p>
+  </div>
+</div>
+
+<!-- Q25 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">25</div>
+      <div class="q-head">
+        <span class="q-topic">開発経済学・貧困</span>
+        <p class="q-text">CCTやTUPについて紹介した講義に関して、<strong>間違っているものを一つ選べ。</strong></p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt correct"><span class="opt-label">(a)</span>貧困は結局のところ能力や努力の不足によるものだと判明した。<span class="correct-mark">正解（＝誤りの選択肢）</span></li>
+    <li class="opt"><span class="opt-label">(b)</span>心理的な経路で「貧困の罠」が起こりうることが分かった。</li>
+    <li class="opt"><span class="opt-label">(c)</span>TUPが「貧困の罠」からの脱却に有効であることが分かった。</li>
+    <li class="opt"><span class="opt-label">(d)</span>貧困は機会の不平等で起こることが分かった。</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>2023年Q15と同じ内容。(a)が誤り。</p>
+    <p>研究が示したのは「貧困は<em>機会の不平等・心理的制約・制度的障壁</em>によって生まれる」ということ。個人の能力・努力が原因ではない。</p>
+    <p>TUP（Targeting the Ultra-Poor）：BRACの介入プログラム。家畜などの資産を給付し、訓練・生活支援と組み合わせることで貧困の罠から脱出できることが実証された（Bandiera et al.）。</p>
+    <p>(b)正しい記述：心理的経路の貧困の罠 → 貧困状態が自己効力感を下げ、投資・努力への意欲を損なうことが示された。(c)正しい記述：TUPは無作為化比較試験により「貧困の罠」脱却に有効と確認された。(d)正しい記述：機会の不平等（初期資産・信用アクセス・社会ネットワークの格差）が貧困を固定化することが示された。</p>
+  </div>
+</div>
+
+<!-- Q26 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">26</div>
+      <div class="q-head">
+        <span class="q-topic">開発経済学・教育</span>
+        <p class="q-text">「教育分野での開発の問題」に関する議論のうち、<strong>誤っているものを一つ選べ。</strong></p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>MDGsを通じ、途上国での進学率が高まったものの、「学習の危機」が判明した。</li>
+    <li class="opt"><span class="opt-label">(b)</span>異なる教育政策の効果比較において、ランダム化比較試験（RCT）が広く用いられるようになった。</li>
+    <li class="opt"><span class="opt-label">(c)</span>寄生虫駆除が安価で有効な教育政策のツールであることが分かった。</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>条件付き生活保護金支給（CCT）が安価な教育政策のツールであることが分かった。<span class="correct-mark">正解（＝誤りの選択肢）</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>(d)が誤り。CCTは<em>費用がかかる</em>（条件のモニタリング・管理コスト・大規模な資金が必要）ため「安価」とは言えない。CCTの有効性は示されているが、「安価で有効」という表現は不正確。</p>
+    <p>※2023年版(Q16)と微妙に表現が異なる（「安価で有効」→「安価な」）。いずれもCCTが「安価」でないことが誤りの核心。</p>
+    <p>(c)寄生虫駆除（deworming）は低コスト（1人当たり数十〜数百円）で就学率向上に効果的とされる（Kremer & Miguel）。「安価で有効」は寄生虫駆除に当てはまる記述。</p>
+  </div>
+</div>
+
+<!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+  <a href="kakomon_2023.html">← 2023年度へ</a>
+  <a href="kakomon_2025.html">2025年度へ →</a>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// 押されたボタンに対応する解説欄の表示を切り替える。
+function toggleExp(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const opt = e.target.closest('.opt');
+  if (!opt) return;
+  const options = opt.closest('.options');
+  if (!options || options.classList.contains('revealed')) return;
+  options.classList.add('revealed');
+  opt.classList.add('selected');
+});
+</script>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">現代経済理論（渡辺安虎）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

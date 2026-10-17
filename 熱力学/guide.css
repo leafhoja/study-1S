@@ -1,0 +1,206 @@
+/* 熱力学の学習ガイドで、読み進める手順・要点カード・表・移動リンクの見た目を整える。 */
+.guide-main {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 2.8rem 1.3rem 5rem;
+}
+/* ガイドの題名と導入文を、色付きの大きな見出し領域にまとめる。 */
+.guide-hero {
+  padding: 2.2rem 2.4rem;
+  color: #fff;
+  background: linear-gradient(135deg, var(--navy), #315382);
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(26, 43, 74, .18);
+}
+.guide-hero .guide-kicker {
+  margin: 0 0 .35rem;
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,.72);
+}
+.guide-hero h1 { margin: 0; font-size: clamp(1.55rem, 4vw, 2.15rem); }
+.guide-hero .guide-lead {
+  max-width: 740px;
+  margin: 1rem 0 0;
+  font-family: var(--serif);
+  font-size: 1.05rem;
+  line-height: 1.9;
+}
+.guide-hero .guide-lead strong { color: #fff3bd; }
+/* ガイドの使い方を、本文と区別できる枠付きの領域にする。 */
+.guide-usage {
+  margin: 1.25rem 0 2.5rem;
+  padding: 1rem 1.2rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--mid);
+  font-size: .86rem;
+}
+/* 節の間に余白を取り、節の見出しに文字サイズと下線を付ける。 */
+.guide-section { margin-top: 2.5rem; }
+.guide-section h2 {
+  margin: 0 0 1.15rem;
+  padding-bottom: .45rem;
+  color: var(--navy);
+  border-bottom: 2px solid var(--navy);
+  font-size: 1.25rem;
+}
+/* 読む順番を示す項目を縦に並べ、番号と下向きの矢印を配置する。 */
+.route {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.route-step {
+  position: relative;
+  padding: 1.2rem 1.25rem 1.2rem 4.2rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+.route-step .route-num {
+  position: absolute;
+  top: 1.15rem;
+  left: 1.15rem;
+  display: grid;
+  place-items: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-size: .72rem;
+  font-weight: 700;
+}
+.route-step h3 { margin: 0 0 .45rem; font-size: 1.02rem; color: var(--navy); }
+.route-step p { margin: .25rem 0; font-size: .87rem; line-height: 1.78; color: var(--mid); }
+.route-step .route-point { color: var(--ink); font-weight: 700; }
+.route-arrow {
+  display: grid;
+  place-items: center;
+  height: 2rem;
+  color: var(--teal);
+  font-size: 1.15rem;
+  line-height: 1;
+}
+.route-arrow::before { content: "↓"; }
+.route-arrow { font-size: 0; }
+/* 要点をカードの形で並べ、説明・数式・ラベルの見た目を整える。 */
+.guide-cards { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+.guide-card {
+  padding: 1.15rem 1.25rem;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+.guide-card h3 { margin: 0 0 .55rem; font-size: 1rem; color: var(--navy); }
+.guide-card p, .guide-card li { font-size: .86rem; line-height: 1.75; color: var(--mid); }
+.guide-card ul { margin: .35rem 0 0; padding-left: 1.25rem; }
+.guide-card .equation {
+  margin: .7rem 0;
+  text-align: center;
+  color: var(--ink);
+}
+.guide-warning, .guide-check { border: 1px solid var(--rule); }
+.guide-card-label {
+  display: inline-block;
+  margin-bottom: .45rem;
+  padding: .1rem .55rem;
+  border-radius: 999px;
+  background: #eaf0f7;
+  color: var(--navy);
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+/* 特に目立たせる要点を、背景色の付いた中央揃えの行にする。 */
+.guide-keyline {
+  margin: .8rem 0;
+  padding: .75rem 1rem;
+  background: #f3f5f7;
+  border-radius: 6px;
+  text-align: center;
+  font-family: var(--serif);
+  font-weight: 700;
+  color: var(--navy);
+}
+/* 表の幅が画面を越える場合は、横に動かして全体を読めるようにする。 */
+.guide-table-wrap { overflow-x: auto; }
+.guide-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .84rem;
+}
+.guide-table th, .guide-table td {
+  padding: .65rem .75rem;
+  border: 1px solid var(--rule);
+  text-align: left;
+  vertical-align: top;
+}
+.guide-table th { background: #edf2f7; color: var(--navy); }
+/* 移動先リンクを横に並べ、幅が足りなければ次の行へ折り返す。 */
+.guide-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .65rem;
+}
+.guide-links a, .guide-open {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .55rem .85rem;
+  border: 1px solid #aeb8c7;
+  border-radius: 999px;
+  background: #fff;
+  font-size: .82rem;
+  font-weight: 700;
+}
+.guide-links a.guide-open {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+.guide-links a.guide-open:hover { color: #fff; text-decoration: none; background: #294876; }
+/* 前後のページへのリンクを、本文の下で左右に分けて並べる。 */
+.guide-page-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+.guide-page-nav a { font-size: .85rem; font-weight: 700; }
+/* 各ガイドへのカードを、利用できる幅に合わせた列数で並べる。 */
+.guide-index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px;
+  margin-bottom: 3rem;
+}
+.guide-index-card {
+  display: block;
+  padding: 10px 12px;
+  background: var(--paper);
+  border: 0;
+  border-top: 4px solid var(--navy);
+  border-radius: 10px;
+  box-shadow: 0 2px 14px rgba(0,0,0,.08);
+  color: var(--ink);
+  text-decoration: none;
+  transition: transform .18s, box-shadow .18s;
+}
+.guide-index-card:hover { text-decoration: none; transform: translateY(-5px); box-shadow: 0 10px 28px rgba(0,0,0,.13); }
+.guide-index-card strong { display: block; color: var(--navy); font-family: var(--serif); font-size: 1rem; }
+.guide-index-card span { display: block; margin-top: .35rem; font-size: .75rem; line-height: 1.55; color: var(--mid); }
+/* 指定された画面幅などの条件で、文字サイズや配置を切り替える。 */
+@media (max-width: 760px) {
+  .guide-main { padding: 1.5rem 1rem 3.5rem; }
+  .guide-hero { padding: 1.5rem 1.25rem; }
+  .route-step { padding-left: 3.8rem; }
+  .guide-index-grid { grid-template-columns: 1fr 1fr; }
+}

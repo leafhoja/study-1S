@@ -1,0 +1,278 @@
+<!DOCTYPE html><!-- 「2019年度 | 情報 個別問題（田中哲郎クラス）」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2019年度 | 情報 個別問題（田中哲郎クラス）</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2019">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2019年度</h1>
+  <p class="subtitle">田中哲郎クラス｜7月29日 4限｜大問2</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（ED21シミュレータ）</a>
+    <a href="#q2">大問2（チューリングマシン・オートマトン）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>ED21プログラムシミュレータ</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="def">
+        <span class="box-label">ED21 機械語の命令集合（一部）</span>
+        <p>
+          LOAD n：n番地の内容をアキュムレータにコピーする／ADD n：n番地の値をアキュムレータの値に加える／STORE n：アキュムレータの値をn番地に格納する／STOP n：プログラムを終了する／MUL n：アキュムレータの値にn番地の値を掛ける／SUB n：アキュムレータの値からn番地の値を引く／J n：無条件でn番地にジャンプ／JM n：アキュムレータの値が負のときにn番地にジャンプ／JZ n：アキュムレータの値がゼロのときにn番地にジャンプ。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">問題（導入例）</span>
+        <p>たとえば、ED21の機械語で書かれた以下のプログラム（0番地から実行、1000番地=0、1001番地=$n$（$1\le n\le50$）、1002番地=1）を考える。</p>
+        <table class="q-table">
+          <tr><th>番地</th><th>内容</th></tr>
+          <tr><td>0</td><td>LOAD 1000</td></tr>
+          <tr><td>1</td><td>ADD 1001</td></tr>
+          <tr><td>2</td><td>STORE 1000</td></tr>
+          <tr><td>3</td><td>LOAD 1001</td></tr>
+          <tr><td>4</td><td>SUB 1002</td></tr>
+          <tr><td>5</td><td>STORE 1001</td></tr>
+          <tr><td>6</td><td>JZ 8</td></tr>
+          <tr><td>7</td><td>J 0</td></tr>
+          <tr><td>8</td><td>LOAD 1000</td></tr>
+          <tr><td>9</td><td>STOP 0</td></tr>
+          <tr><td>1000</td><td>0</td></tr>
+          <tr><td>1001</td><td>$n$（$1\le n\le50$）</td></tr>
+          <tr><td>1002</td><td>1</td></tr>
+        </table>
+        <p>これは何をするプログラムかというと、「0番地から実行したとき、停止時のアキュムレータに1から$n$までの和を得る」プログラムである。また、その実行ステップ数は$8n+1$となる（最後のSTOP命令も実行ステップに数える）。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>同様にプログラム(1)について、(a) 何をするプログラムか？　(b) 実行ステップ数はいくつか？　を答えなさい。また、プログラム(2)はプログラム(1)と同じ計算をおこなうプログラムである。(c) プログラム(1)と同じ計算をおこなっていることの説明　(d) 実行ステップ数はいくつか？　を答えなさい。プログラム(2)はプログラム(1)と同じ計算をおこなっているにも関わらず、プログラム(1)よりも少ない実行ステップ数で計算できる。（1000番地=$l$、1001番地=$n$、1002番地=$m$、$1\le l,n,m\le100$、$m&lt;n$）</p>
+        <table class="q-table">
+          <tr><th>プログラム(1)　番地</th><th>内容</th></tr>
+          <tr><td>0</td><td>LOAD 1004</td></tr>
+          <tr><td>1</td><td>ADD 1000</td></tr>
+          <tr><td>2</td><td>STORE 1004</td></tr>
+          <tr><td>3</td><td>LOAD 1002</td></tr>
+          <tr><td>4</td><td>ADD 1003</td></tr>
+          <tr><td>5</td><td>STORE 1002</td></tr>
+          <tr><td>6</td><td>SUB 1001</td></tr>
+          <tr><td>7</td><td>JZ 9</td></tr>
+          <tr><td>8</td><td>J 0</td></tr>
+          <tr><td>9</td><td>LOAD 1004</td></tr>
+          <tr><td>10</td><td>STOP 0</td></tr>
+          <tr><td>1000</td><td>$l$（$1\le l\le100$）</td></tr>
+          <tr><td>1001</td><td>$n$（$1\le n\le100$）</td></tr>
+          <tr><td>1002</td><td>$m$（$1\le m&lt;n$）</td></tr>
+          <tr><td>1003</td><td>1</td></tr>
+          <tr><td>1004</td><td>0</td></tr>
+        </table>
+        <table class="q-table">
+          <tr><th>プログラム(2)　番地</th><th>内容</th></tr>
+          <tr><td>0</td><td>LOAD 1001</td></tr>
+          <tr><td>1</td><td>MUL 1000</td></tr>
+          <tr><td>2</td><td>STORE 1001</td></tr>
+          <tr><td>3</td><td>LOAD 1002</td></tr>
+          <tr><td>4</td><td>MUL 1000</td></tr>
+          <tr><td>5</td><td>STORE 1002</td></tr>
+          <tr><td>6</td><td>LOAD 1001</td></tr>
+          <tr><td>7</td><td>SUB 1002</td></tr>
+          <tr><td>9</td><td>STOP 0</td></tr>
+          <tr><td>1000</td><td>$l$（$1\le l\le100$）</td></tr>
+          <tr><td>1001</td><td>$n$（$1\le n\le100$）</td></tr>
+          <tr><td>1002</td><td>$m$（$1\le m&lt;n$）</td></tr>
+        </table>
+        <p style="font-size:.92em;color:var(--muted,#666);">※番地7の次が9になっている（8番地が存在しない）のは原本PDF通り。</p>
+      </div>
+
+      <h3>(a)(b) — プログラム(1)の動作とステップ数</h3>
+      <div class="ex"><span class="box-label">問題</span><p>プログラム(1)は何をするプログラムか。実行ステップ数はいくつか。</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            トレースすると：1004番地の値$R$（初期0）に毎ループ1000番地の$l$を加え続け（$R\mathrel{+}=l$）、1002番地の値$M$（初期$m$）を毎ループ1増やし、$M$が$n$（1001番地）に一致したら停止してRを返す。
+          </p>
+          <p>つまり$M$を$m$から$n$まで1ずつ増やす（$n-m$回）間、$R$に$l$を足し続けるので、<strong>$R=l\times(n-m)$を計算する</strong>プログラムである。</p>
+          <p>非最終ループは9ステップ（LOAD1004,ADD1000,STORE1004,LOAD1002,ADD1003,STORE1002,SUB1001,JZ(不成立),J0）、最終ループは10ステップ（同じ7ステップ+JZ成立+LOAD1004+STOP）。ループ回数は$n-m$回。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a) $l\times(n-m)$を計算する　(b) $9(n-m)+1$ ステップ</div>
+      </details>
+
+      <h3>(c)(d) — プログラム(2)の仕組みとステップ数</h3>
+      <div class="ex"><span class="box-label">問題</span><p>プログラム(2)が同じ計算をしていることを説明し、実行ステップ数を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            プログラム(2)は、1001番地に$n\times l$を、1002番地に$m\times l$を計算してから代入し、最後に$n l - ml$を計算する。分配法則$l(n-m)=nl-ml$により、これはプログラム(1)と同じ$l\times(n-m)$を計算していることになる。
+          </p>
+          <p>ループを使わない直線的な処理（LOAD,MUL,STORE,LOAD,MUL,STORE,LOAD,SUB,STOPの9命令）なので、常に一定の<strong>9ステップ</strong>で終わる——$n-m$がいくつであってもステップ数が変わらないプログラム(1)より速い。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>プログラム(2)は$nl-ml=l(n-m)$を計算しており同じ結果になる。実行ステップ数は常に9。</div>
+      </details>
+
+      <h3>(e) — さらに少ないステップ数のプログラム</h3>
+      <div class="ex"><span class="box-label">問題</span><p>プログラム(1)(2)と同じ計算を、プログラム(2)よりも少ないステップ数で行うプログラムを作成せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>プログラム(2)は2回の掛け算を行ってから引き算しているが、先に$(n-m)$を求めてから$l$を1回だけ掛ければ、掛け算1回・引き算1回で済む：</p>
+        </div>
+        <table class="q-table">
+          <tr><th>番地</th><th>内容</th></tr>
+          <tr><td>0</td><td>LOAD 1001</td></tr>
+          <tr><td>1</td><td>SUB 1002</td></tr>
+          <tr><td>2</td><td>MUL 1000</td></tr>
+          <tr><td>3</td><td>STOP 0</td></tr>
+          <tr><td>1000</td><td>$l$</td></tr>
+          <tr><td>1001</td><td>$n$</td></tr>
+          <tr><td>1002</td><td>$m$</td></tr>
+        </table>
+        <div class="proof-body"><p>$AC=n\to n-m\to (n-m)\times l$、STOPで停止時のアキュムレータに$l(n-m)$が残る。</p></div>
+        <div class="sol"><span class="box-label">解</span>上記4命令のプログラムで<strong>4ステップ</strong>——プログラム(2)の9ステップより大幅に少ない。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「先に引き算、後で掛け算」の方が効率的</span>
+        <p>$l(n-m)=ln-lm$という分配法則は数学的には同じ値を表すが、計算の「手順」としては、先に引き算をしてから1回だけ掛け算する方が、2回掛け算してから引き算するより演算回数が少なく済む。ステップ数（計算量）を意識するとき、数式として等価な変形の中でも「どの順序で計算するか」で実際のコストが大きく変わりうる、という好例。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>チューリングマシンと有限状態機械</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>(1) チューリングマシンのチェック表</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          左図はあるチューリングマシンを表す（q0が受理状態＝2重丸）。遷移規則は「&lt;読んだ文字の集合&gt;:&lt;書き換える文字&gt;,&lt;移動方向&gt;」の形（書き換える文字が読んだ文字と同じ時は省略、空白は「_」、右移動「&gt;」、左移動「&lt;」）。
+        </p>
+        <div class="diagram">
+          <img src="img/2019/turing-machine.png" alt="6状態(q0〜q5)のチューリングマシン。q0(2重丸=受理)はcを読み飛ばし、aを読むとcに書換えてq1へ、bを読むと即q5(罠状態)へ。q1はa,cを読み飛ばしbをcに書換えてq2へ。q2は直後の文字が必ずbでなければならずcに書換えてq3へ。q3はbを読み飛ばし空白でq4へ。q4は何でも読み飛ばして左端まで戻りq0へ。" style="max-width:640px;width:100%;height:auto;">
+          <div class="diagram-cap">6状態のチューリングマシン（原本PDFより切り出し）。q0（2重丸）が受理状態。</div>
+        </div>
+        <p>
+          あるチューリングマシンの動作（チェック表）：ab→拒否、ba→拒否、abb→受理、aa→拒否、bb→拒否、bba→拒否、abbabb→(a)、aabbbb→(b)、bbb→(c)、abbabbabb→(d)、aaabbbbbb→(e)。(f)〜(h)も埋めよ：「このチューリングマシンは文字a,bからなる文字列を入力とする。文字列が(f)時に受理する。入力aabbを与えたとき、停止時の状態は(g)で、テープに残る文字列は(h)になる。」
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            図の遷移を実際にたどる。q0は先頭からcを読み飛ばし、最初の未処理'a'を'c'に書き換えてq1へ（＝aを1個見つけて印をつける）。ここでq0は<strong>'b'を読むと即座にq5（罠状態、抜け出せず非受理）へ落ちる</strong>点が重要——「次の未処理aより手前に未処理bが残っていてはいけない」という制約になる。q1はa,cを読み飛ばして（他のaはスキップしてよい）最初の未処理'b'を'c'に書き換えq2へ。q2は<strong>スキップ猶予なし</strong>で直後の文字を読み、それが'b'なら'c'に書き換えq3へ（'a'や空白ならその場で停止＝拒否）。q3はさらに'b'を読み飛ばし、空白に達したら左へ戻ってq4へ。q4は何でも読み飛ばして先頭の空白まで戻り、q0へ（次のラウンドへ）。q0が先頭から走査して空白に達する（＝全部'c'に消し込み済み）とそこで停止＝<strong>受理</strong>。
+          </p>
+          <p>
+            このため受理されるのは「aが$n$個連続した直後にbがちょうど$2n$個連続する形（$a^nb^{2n}$、$n\ge0$）」——1個の'a'を消し込むたびに、直後から連続する'b'をちょうど2個消し込む、を$n$回繰り返して過不足なく全部消し込める場合に限られる。aとbのブロックが2回以上に分かれている場合は、1回目のブロックを消し込み終えた直後にq3が次の文字（2番目のブロックの'a'）を読んで遷移先がなく即座に停止する（拒否）。
+          </p>
+          <ul>
+            <li>abbabb：1回目の"abb"を消し込んだ直後、q3が4文字目の'a'を読み遷移先がなく<strong>拒否</strong>(a)</li>
+            <li>aabbbb：$a^2b^4$、2ラウンドで過不足なく消し込めて<strong>受理</strong>(b)</li>
+            <li>bbb：先頭が'b'なので即q5へ落ちて<strong>拒否</strong>(c)</li>
+            <li>abbabbabb：やはり1回目の"abb"の直後でq3が停止し<strong>拒否</strong>(d)</li>
+            <li>aaabbbbbb：$a^3b^6$、3ラウンドで過不足なく消し込めて<strong>受理</strong>(e)</li>
+          </ul>
+          <p>
+            (f) 文字列が「aが$n$個（$n\ge0$）連続した直後にbが$2n$個連続する形（$a^nb^{2n}$）」であるとき。
+          </p>
+          <p>
+            (g)(h) 入力aabbを実際にたどる：1ラウンド目でq0が1文字目の'a'を'c'に書き換えq1へ→q1は2文字目の'a'を読み飛ばし3文字目の'b'を'c'に書き換えq2へ→q2は4文字目の'b'を'c'に書き換えq3へ→q3は空白に達しq4で先頭まで戻りq0へ（テープ：c,a,c,c）。2ラウンド目でq0は2文字目の'a'（まだ未処理）を'c'に書き換えq1へ（テープ全体がc,c,c,cになる）→q1は3・4文字目の'c'を読み飛ばして空白に達するが、<strong>q1には空白に対する遷移が定義されていない</strong>ためここで停止する。よって停止時の状態は<strong>q1</strong>、テープに残る文字列は<strong>cccc</strong>（4文字すべて消し込み済み、対応するbが尽きて2個目のaを消し込めなかったため拒否）。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a)拒否 (b)受理 (c)拒否 (d)拒否 (e)受理　(f) $a^nb^{2n}$の形であるとき　(g) q1　(h) cccc</div>
+      </details>
+
+      <h3>(2) 暗証番号オートマトン（abc または bac）</h3>
+      <div class="ex"><span class="box-label">問題</span><p>2つの暗証番号「abc」または「bac」のどちらが押されても解錠する（終了状態になる）ような電子錠に対応するオートマトンを作成して図にしなさい。入力中に正しい暗証番号の列が含まれていたら（途中に他の文字が混じっていても構わず、部分列としてではなく連続した並びとして現れれば）必ず解錠するものとする。入力は「a」「b」「c」の3文字だけと仮定してよい。一度解錠されたら、どんな文字が来ても解錠されたままとする。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>「abc」「bac」どちらのパターンにどこまで一致しているか」を状態として持つ（複数パターンの部分一致を管理する構成法＝Aho-Corasick法の考え方）。$S_0$（無一致）、$S_a$（"a"に一致）、$S_b$（"b"に一致）、$S_{ab}$（"ab"に一致）、$S_{ba}$（"ba"に一致）、解錠（吸収状態）の6状態。</p></div>
+        <table class="q-table">
+          <tr><th>状態</th><th>a</th><th>b</th><th>c</th></tr>
+          <tr><td>$S_0$（開始）</td><td>$S_a$</td><td>$S_b$</td><td>$S_0$</td></tr>
+          <tr><td>$S_a$</td><td>$S_a$</td><td>$S_{ab}$</td><td>$S_0$</td></tr>
+          <tr><td>$S_b$</td><td>$S_{ba}$</td><td>$S_b$</td><td>$S_0$</td></tr>
+          <tr><td>$S_{ab}$</td><td>$S_{ba}$</td><td>$S_b$</td><td>解錠</td></tr>
+          <tr><td>$S_{ba}$</td><td>$S_a$</td><td>$S_{ab}$</td><td>解錠</td></tr>
+          <tr><td>解錠</td><td>解錠</td><td>解錠</td><td>解錠</td></tr>
+        </table>
+        <div class="proof-body">
+          <p>各状態は「これまでに読んだ文字列の末尾が、abc・bacのどの途中まで一致しているか」を表す。たとえば$S_{ab}$（"ab"に一致）の直後に「a」を読むと、末尾は"...aba"となり、これに一致する最長の候補は"ba"（bacの先頭2文字）なので$S_{ba}$に移る、という要領で全遷移を決める。"c"を読んで一致が完成する（$S_{ab}$または$S_{ba}$から）とき、初めて解錠状態に入る。</p>
+          <p>検算：入力「abac」→$S_0\xrightarrow{a}S_a\xrightarrow{b}S_{ab}\xrightarrow{a}S_{ba}\xrightarrow{c}$解錠（"bac"が2〜4文字目に含まれるので正しく解錠）。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>上表の6状態オートマトン。解錠状態が唯一の受理状態で、一度入ると出られない。</div>
+      </details>
+
+      <h3>(3) 5の倍数判定オートマトン</h3>
+      <div class="ex"><span class="box-label">問題</span><p>「0」，「1」からなる2進数を上位の桁から入力して、入力された数が5の倍数の時に終了状態になるオートマトンを作成して図にしなさい。何も入力がない場合は0と等しいので5の倍数だとする。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>状態は「これまでの値を5で割った余り」（0〜4の5通り）。新しい桁$d$を読むと新しい余り$=(2r+d)\bmod5$。余り0が受理（開始状態でもある）。</p></div>
+        <table class="q-table">
+          <tr><th>状態（余り）</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+          <tr><th>0を読む</th><td>0</td><td>2</td><td>4</td><td>1</td><td>3</td></tr>
+          <tr><th>1を読む</th><td>1</td><td>3</td><td>0</td><td>2</td><td>4</td></tr>
+        </table>
+        <div class="proof-body"><p>（例：余り2の状態で1を読むと$2\times2+1=5\equiv0\pmod5$、余り0の受理状態へ。）5状態がちょうど必要（5を法とした余りの種類の数だけ区別が要る）。</p></div>
+        <div class="sol"><span class="box-label">解</span>「余りmod5」を状態とする5状態オートマトン。余り0のみ受理。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 複数パターンの部分一致を1つの機械にまとめる</span>
+        <p>
+          「abc」「bac」のように複数の候補パターンを同時に監視したいとき、それぞれ別々のオートマトンを用意するのではなく、「今どのパターンのどこまでに一致しているか」を1つの状態にまとめてしまうのが定石（Aho-Corasick法の考え方そのもの）。パターン同士が共有する接尾辞・接頭辞（ここでは"a","b"が両パターンの先頭に現れる）をうまく利用することで、状態数を必要最小限に抑えられる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2022.html">← 2022年度へ</a>
+    <a href="kakomon_2018.html">2018年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

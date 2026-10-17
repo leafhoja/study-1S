@@ -1,0 +1,42 @@
+<!DOCTYPE html><!-- 「第5章ナビ 応用例 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja"><!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head><meta charset="UTF-8"><script src="../access_control.js"></script><script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#1a365d"><title>第5章ナビ 応用例 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"><link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="td.css"><link rel="stylesheet" href="guide.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script></head>
+<body data-nav-page="ch5"><!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar"><div class="navbar-inner"><a class="navbar-brand" href="index.html">熱力学ノート</a><div class="navbar-links">
+<a href="../index.html" class="nav-back">← 学習ノート</a><a href="index.html">ホーム</a><a href="ch0.html" data-page="ch0">第0章</a><a href="ch1.html" data-page="ch1">第1章</a><a href="ch2.html" data-page="ch2">第2章</a><a href="ch3.html" data-page="ch3">第3章</a><a href="ch4.html" data-page="ch4">第4章</a><a href="ch5.html" data-page="ch5" class="active">第5章</a><a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a><a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a><a href="kakomon_2025.html" data-page="kakomon_2025">2025</a><a href="kakomon_2023.html" data-page="kakomon_2023">2023</a><a href="kakomon_2014.html" data-page="kakomon_2014">2014</a><a href="kakomon_2012.html" data-page="kakomon_2012">2012</a><a href="kakomon_2011.html" data-page="kakomon_2011">2011</a><a href="kakomon_2010.html" data-page="kakomon_2010">2010</a><a href="kakomon_2009.html" data-page="kakomon_2009">2009</a><a href="kakomon_2008.html" data-page="kakomon_2008">2008</a><a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+</div></div></nav>
+<main class="guide-main">
+<!-- 学習ガイドの題名と導入文を、冒頭の目立つ領域にまとめる。 --><header class="guide-hero"><p class="guide-kicker">CHAPTER 5 READING GUIDE</p><h1>第5章ナビ｜熱力学の道具を現実の物質へ移す</h1><p class="guide-lead">一言でいうと、<strong>第1〜4章で作った「変数を選び、ポテンシャルを書き、微分と平衡条件を読む」方法を、相転移とゴムという異なる系で実践する</strong>章です。</p></header>
+<p class="guide-usage">この章は新しい一つの理論を積み上げるのではなく、二つの応用例からできています。個々の公式よりも、気体以外の対象でも同じ熱力学の手順が働くことを見てください。</p>
+
+<section class="guide-section"><h2>この章が解決したいこと</h2><div class="guide-card"><span class="guide-card-label">中心の問い</span><h3>物質や仕事の形が変わっても、同じ熱力学の考え方を使えるか</h3><p>液体と気体の共存では相の割合が変わり、ゴムでは体積仕事ではなく張力による仕事が現れます。それでも、適切な変数と熱力学関数を選べば、平衡条件や測定可能な応答を同じ手順で導けます。</p><div class="guide-keyline">系を記述する変数を選ぶ → 共役な力と変位を見つける → 適切な関数を書く → 平衡・Maxwell関係式から予測する</div></div></section>
+
+<section class="guide-section"><h2>全体の流れ</h2><!-- 学習の手順を、順番に読む項目と矢印で示す。 --><div class="route">
+<article class="route-step"><span class="route-num">1</span><h3>まず「相が共存する」とは何かを熱力学的に捉える</h3><p>固体・液体・気体は、同じ物質が異なる巨視的状態を取ったものです。一定の $T,P$ で二相が共存するのは、物質を一方から他方へ移しても全体の $G$ が下がらない平衡条件を満たすときです。</p><p class="route-point">目的：相図上の境界を、見た目の変化ではなくGibbs自由エネルギーの釣り合いとして理解する。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">2</span><h3>共存条件を動かし、相境界の傾きを求める</h3><p>温度を少し変えたとき、共存を保つには圧力も変える必要があります。二相の $dG=-S\,dT+V\,dP$ を等しく保つと、Clausius–Clapeyron関係が得られます。</p><div class="guide-keyline">$\displaystyle \frac{dP_S}{dT}=\frac{Q}{T(V_1-V_0)}$</div><p>潜熱 $Q$ と体積差が、沸点や融点の圧力依存を決めます。気液平衡で蒸気体積が支配的と近似すれば、蒸気圧の温度依存へつながります。</p><p class="route-point">目的：測定できる相境界から、潜熱や体積変化を結びつける。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">3</span><h3>van der Waals気体で相転移と安定性を結ぶ</h3><p>臨界温度以下の等温線には、圧縮すると圧力が下がる不安定部分が現れます。現実の系はその曲線をたどらず、二相が共存する水平線へ移ります。Maxwellの等面積則は、その圧力を自由エネルギーの釣り合いから決めます。</p><p>臨界点では液体と気体の区別が消え、等温線の極大・極小が合体します。その変曲点条件から臨界定数を求めます。</p><p class="route-point">目的：第4章の安定条件が破れると、相分離として解消されることを見る。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">4</span><h3>次に、ゴム用の熱力学へ変数を読み替える</h3><p>ゴムでは圧力 $P$ と体積 $V$ の代わりに、張力 $X$ と長さ $l$ が仕事の共役対になります。符号規約を合わせると $dU=T\,dS+X\,dl$、したがって $dF=-S\,dT+X\,dl$ です。</p><p class="route-point">目的：対象が変わっても「力×変位」を見つければ基本式を作り直せると理解する。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">5</span><h3>Maxwell関係式で、張力の温度依存をエントロピーへ結ぶ</h3><p>$F(T,l)$ の混合偏微分から、伸長によるエントロピー変化と張力の温度変化が結ばれます。通常のゴムでは伸ばすと分子鎖の配置数が減り、エントロピーが下がります。</p><p class="route-point">目的：ゴムが縮もうとする力を、単なるエネルギー弾性ではなくエントロピー弾性として説明する。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">6</span><h3>Gough–Joule効果をエントロピー弾性の実験的帰結として読む</h3><p>伸ばしたゴムを加熱すると張力が増し、一定荷重なら縮みます。温度が高いほど、分子鎖をより多くの配置が可能な縮んだ状態へ戻そうとする効果が強くなるためです。</p><p class="route-point">目的：Maxwell関係式が、直感に反する巨視的な現象を予言することを見る。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">7</span><h3>試験例題で一連の道具を組み合わせる</h3><p>与えられたゴムの状態方程式から、内部エネルギーの長さ依存、固定条件の異なる熱容量、等温伸長での熱、断熱曲線を順に求めます。第一法則・Maxwell関係式・熱容量が一つの系でつながります。</p><p class="route-point">目的：公式ごとに問題を分けず、状態方程式から必要な関係を組み立てる練習をする。</p></article>
+</div></section>
+
+<section class="guide-section"><h2>二つの応用を比べる</h2><div class="guide-table-wrap"><table class="guide-table"><thead><tr><th></th><th>2相共存</th><th>ゴム</th></tr></thead><tbody>
+<tr><th>中心変数</th><td>$T,P$ と相の量</td><td>$T,l$</td></tr>
+<tr><th>中心となる関数</th><td>$G(T,P)$</td><td>$F(T,l)$</td></tr>
+<tr><th>平衡・応答</th><td>二相の $G$ の釣り合い</td><td>張力 $X=(\partial F/\partial l)_T$</td></tr>
+<tr><th>得られる予測</th><td>相境界、潜熱、臨界点</td><td>エントロピー弾性、熱収支、断熱曲線</td></tr>
+</tbody></table></div></section>
+
+<section class="guide-section"><h2>この章を読むときの焦点</h2><!-- 学習ガイドの要点や注意をカードの一覧にまとめる。 --><div class="guide-cards">
+<article class="guide-card"><span class="guide-card-label">共通手順</span><h3>最初に自然変数を確認する</h3><p>相共存だから特別、ゴムだから特別と考える前に、外部条件と仕事の対を特定します。使う関数が決まれば、その後の微分操作は第4章と同じです。</p></article>
+<article class="guide-card"><span class="guide-card-label">相転移</span><h3>不安定な一様状態と二相共存を区別する</h3><p>van der Waalsのループ全体が実現するのではありません。不安定領域を避け、二つの安定相へ分かれることで自由エネルギーを下げます。</p></article>
+<article class="guide-card"><span class="guide-card-label">ゴム</span><h3>力の起源を内部エネルギーだけに求めない</h3><p>伸びたゴムが戻る主因は、分子鎖が取りうる配置を増やすことです。第二法則と自由エネルギーが、力学的な張力を説明します。</p></article>
+</div></section>
+
+<section class="guide-section"><h2>本文と併用する</h2><div class="guide-links"><a href="ch5.html#s5-1-phase">相転移と相共存</a><a href="ch5.html#s5-1-cc">Clausius–Clapeyron関係</a><a href="ch5.html#s5-1-maxwell">等面積則と臨界点</a><a href="ch5.html#s5-2">ゴムの熱力学</a><a href="ch5.html#s5-3">ゴムの総合例題</a><a class="guide-open" href="ch5.html">第5章本文を開く →</a></div></section>
+<section class="guide-section"><div class="guide-card"><span class="guide-card-label">読後チェック</span><h3>この章の到達点</h3><ul><li>相共存条件から相境界の傾きへ進む流れを説明できる</li><li>van der Waalsの不安定領域と二相共存の関係が分かる</li><li>ゴム用の基本式と自由エネルギーを書ける</li><li>新しい系でも共役変数と自然変数を選び、熱力学を適用できる</li></ul></div></section>
+<!-- ガイドを読み終えた後に、前後のページへ移動するリンクを置く。 --><nav class="guide-page-nav"><a href="guide4.html">← 第4章ナビ</a><a href="index.html">ナビ一覧へ →</a></nav></main>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer><script src="nav.js"></script><script src="../common.js?v=20260718-texcopy"></script><script src="../access-ui.js"></script></body></html>

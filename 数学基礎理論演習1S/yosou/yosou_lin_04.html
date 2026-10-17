@@ -1,0 +1,357 @@
+<!DOCTYPE html><!-- 「線形代数 予想問題 第4回 双対空間・Hom空間 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>線形代数 予想問題 第4回 双対空間・Hom空間 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="yosou_lin_03.html" data-page="yosou/yosou_lin_03">← 前のテーマ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-linear">
+  <h1>線形代数学演習　予想問題　第4回</h1>
+  <p class="subtitle">核と像の一般論・双対空間・Hom空間（全5問）</p>
+</div>
+
+<div class="container">
+
+<!-- 免責 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#fff5f5; color:#c53030;">⚠️ この問題セットについて</div>
+  <div class="section-card-body">
+    <div class="warn-box">
+      <div class="warn-title">AIが作成した予想問題です（実際の試験問題ではありません）</div>
+      <p>演習第4回（<a href="../linear/lin_04.html">核と像・双対空間・内積</a>）と昨年度の<a href="../kakomon/kakomon_lin_01.html">小テスト</a>と同程度〜少し発展した難易度で構成した学習用オリジナル問題です。全4テーマ・20問構成の第4回（最終回）です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 このテーマの要点</div>
+  <div class="section-card-body">
+    <div class="def-box">
+      <div class="def-title">この5問で使う道具</div>
+      <ul>
+        <li>$\mathrm{Ker}(f),\mathrm{Im}(f)$ は部分空間。単射 $\Leftrightarrow$ $\mathrm{Ker}(f)=\{0\}$</li>
+        <li>$\mathrm{Hom}(V,W)$：$V$ から $W$ への線形写像全体。加法・スカラー倍で $\mathbb{R}$-ベクトル空間になる</li>
+        <li>双対空間 $V^*=\mathrm{Hom}(V,\mathbb{R})$，双対基底 $e_i^*(e_j)=\delta_{ij}$</li>
+        <li>冪等写像（射影）：$f\circ f=f$ ならば $V=\mathrm{Ker}(f)\oplus\mathrm{Im}(f)$</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">1</span> 核・像の部分空間性と具体例
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$V,W$ を $\mathbb{R}$-ベクトル空間，$f\colon V\to W$ を線形写像とする。</p>
+      <ol>
+        <li>$\mathrm{Ker}(f)$，$\mathrm{Im}(f)$ がそれぞれ部分空間であることを示せ。</li>
+        <li>$f$ が単射であることと $\mathrm{Ker}(f)=\{0\}$ が同値であることを示せ。</li>
+        <li>$f\colon\mathbb{R}^3\to\mathbb{R}^3$ を $f(x,y,z)=(x-y,\,y-z,\,z-x)$ で定める。$\mathrm{Ker}(f)$，$\mathrm{Im}(f)$ の基底をそれぞれ求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)(2)</div>
+      <p><strong>(1)：</strong>$f(0)=0$ より $0\in\mathrm{Ker}(f)$。$v_1,v_2\in\mathrm{Ker}(f)$，$c,d\in\mathbb{R}$ なら $f(cv_1+dv_2)=cf(v_1)+df(v_2)=0$ より $cv_1+dv_2\in\mathrm{Ker}(f)$。よって部分空間。$\mathrm{Im}(f)$ も同様：$0=f(0)\in\mathrm{Im}(f)$，$w_i=f(v_i)$ なら $cw_1+dw_2=f(cv_1+dv_2)\in\mathrm{Im}(f)$。</p>
+      <p><strong>(2)：</strong>（$\Rightarrow$）単射なら，$v\in\mathrm{Ker}(f)$ で $f(v)=0=f(0)$ より $v=0$。（$\Leftarrow$）$\mathrm{Ker}(f)=\{0\}$ とする。$f(v_1)=f(v_2)$ なら線形性より $f(v_1-v_2)=0$，すなわち $v_1-v_2\in\mathrm{Ker}(f)=\{0\}$ より $v_1=v_2$。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (3)</div>
+      <p>$f$ の表現行列は $A=\begin{pmatrix}1&-1&0\\0&1&-1\\-1&0&1\end{pmatrix}$。$Av=0$：$x=y$，$y=z$，$z=x$（3式は同値）。よって $x=y=z$。</p>
+      $$\mathrm{Ker}(f)=\mathrm{span}\left\{\begin{pmatrix}1\\1\\1\end{pmatrix}\right\}\quad(1\text{次元})$$
+      <p>次元定理より $\dim\mathrm{Im}(f)=3-1=2$。第1・2列は比例せず1次独立なので</p>
+      $$\mathrm{Im}(f) = \mathrm{span}\left\{\begin{pmatrix}1\\0\\-1\end{pmatrix},\begin{pmatrix}-1\\1\\0\end{pmatrix}\right\}$$
+      <p>（検算：第3列 $(0,-1,1)^{\top}=-(1,0,-1)^{\top}-(-1,1,0)^{\top}$ になっており，余分であることを確認できる。）$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p>(1)(2) は「部分空間の3条件（零元を含む・線形結合で閉じる）」「単射性は $v_1-v_2$ に帰着させる」という<strong>定石通りの証明</strong>。これは特定の $f$ に依存しない一般論であり，任意の線形写像 $f\colon V\to W$（$V,W$ は何でもよい）に対してそのまま通用する。試験で「$\mathrm{Ker}$，$\mathrm{Im}$ が部分空間であることを示せ」「単射性を $\mathrm{Ker}=\{0\}$ で判定せよ」と言われたら，まずこの2つのテンプレートを思い出せば手が止まらない。</p>
+      <p>(3) の $f(x,y,z)=(x-y,y-z,z-x)$ は<strong>成分の差を取る</strong>写像で，$x=y=z$（対角線）を核に持つ点が特徴的。「差を取る」形の写像を見たら，「全部同じ値なら差は $0$」という核の直感と，「差の総和は必ず $0$」という像の制約の両方を疑うとよい。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $\mathrm{Im}(f)$ が平面 $u+v+w=0$ に一致することの逆算</div>
+        <p>出力 $(u,v,w)=(x-y,\,y-z,\,z-x)$ の3成分を足すと $u+v+w=(x-y)+(y-z)+(z-x)=0$ が，$x,y,z$ に関係なく常に成り立つ。つまり $\mathrm{Im}(f)$ は必ず平面 $\Pi=\{(u,v,w)\mid u+v+w=0\}$（2次元）に含まれる。</p>
+        <p>一方，次元定理から $\dim\mathrm{Im}(f)=3-\dim\mathrm{Ker}(f)=3-1=2$ であることは別途分かっている。「$\mathrm{Im}(f)\subseteq\Pi$」かつ「$\dim\mathrm{Im}(f)=\dim\Pi=2$」なので，包含関係にある同次元の部分空間は一致し，$\mathrm{Im}(f)=\Pi$ と<strong>先に断定できる</strong>。具体的な基底を計算する前にこの見通しを立てておくと，答えの形（平面上のベクトルであること）を予想しながら計算できるので検算がしやすい。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 「差を取る写像」はどこに現れるか</div>
+        <p>この $f$ は，3人の得点 $(x,y,z)$ から「1位と2位の差，2位と3位の差，3位と1位の差」を計算するような操作に対応する（差の総和は必ず $0$ になるため，$\mathrm{Im}(f)$ は平面 $u+v+w=0$ に一致し，$\dim\mathrm{Im}(f)=2$ になる）。「全員が同じ点数（$x=y=z$）なら差はすべて $0$」というのが核の直感的な意味であり，これはグラフ理論における巡回グラフの接続行列（サイクルの辺に沿った電位差）とも同じ構造をしている。一般に，$n$ 個の頂点からなるサイクル $C_n$ の「向きづけられた辺に沿った差」を取る写像は，$\mathrm{Ker}$ が定数ベクトル $(1,\ldots,1)$ の1次元，$\mathrm{Im}$ が「全成分の和が $0$」という $(n-1)$ 次元の超平面になる——今回の $n=3$ の場合はその最も小さい例である。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>$\mathrm{Im}(f)$ の基底を「適当に2つの列を選んで終わり」にしてしまう答案が多いが，選んだ2列が本当に1次独立か（比例していないか）を確認する一手間を省略してはいけない。また，3列のうち2列だけで基底になると分かった後も，残りの1列がその2列の1次結合で書けることを検算しておくと，行列 $A$ 自体の書き間違いにも気づける。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">2</span> $\mathrm{Hom}(V,W)$ がベクトル空間であること
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$V,W$ を $\mathbb{R}$-ベクトル空間とし，$\mathrm{Hom}(V,W):=\{f\colon V\to W \mid f\text{ は線形写像}\}$ とする。加法とスカラー倍を</p>
+      $$(f+g)(v):=f(v)+g(v),\qquad (af)(v):=a\cdot f(v)\qquad(f,g\in\mathrm{Hom}(V,W),\ a\in\mathbb{R},\ v\in V)$$
+      <p>で定めるとき，$\mathrm{Hom}(V,W)$ は $\mathbb{R}$-ベクトル空間になることを示せ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>Step 1（演算が $\mathrm{Hom}(V,W)$ に閉じる）：</strong>$f+g$ が線形であること：</p>
+      $$(f+g)(av_1+bv_2)=f(av_1+bv_2)+g(av_1+bv_2)=a(f(v_1)+g(v_1))+b(f(v_2)+g(v_2))=a(f+g)(v_1)+b(f+g)(v_2)$$
+      <p>$af$ も同様に線形であることが確認できる。</p>
+      <p><strong>Step 2（零元）：</strong>零写像 $\mathbf{0}\colon v\mapsto0$ は線形であり，$(f+\mathbf{0})(v)=f(v)$。</p>
+      <p><strong>Step 3（逆元）：</strong>$-f\colon v\mapsto-f(v)$ は線形であり，$(f+(-f))(v)=0=\mathbf{0}(v)$。</p>
+      <p><strong>Step 4（残りの公理）：</strong>加法の交換律・結合律，スカラー倍の分配律などは，すべて $W$ での対応する等式（$W$ はベクトル空間だから成立する）をそのまま「点ごと」に確認するだけで従う。例：$(f+g)(v)=f(v)+g(v)=g(v)+f(v)=(g+f)(v)$。</p>
+      <p>以上より $\mathrm{Hom}(V,W)$ は $\mathbb{R}$-ベクトル空間である。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p><strong>部分空間の証明と何が違うのか。</strong>$\mathrm{Ker}(f)$ のように「既存のベクトル空間 $V$ の部分集合」であれば，零元・線形結合で閉じることの3条件だけで十分だった（残りの公理は $V$ から自動的に引き継がれるため）。ところが $\mathrm{Hom}(V,W)$ は $V$ や $W$ の部分集合ではなく，「線形写像」という新しい対象からなる<strong>新しい集合</strong>であり，加法・スカラー倍も新たに定義している。よって，8つの公理すべてを確認する必要がある——ただしその大半は $W$ の演算規則を「関数の値ごとに」引き継ぐだけなので，実際の手間はそれほど大きくない。</p>
+      <p><strong>証明を4段階に分解する理由。</strong>「ある集合 $X$ に演算を定義してベクトル空間になることを示せ」というタイプの問題は，常に (i) 演算が $X$ に閉じている（結果がまた $X$ の元になる）→ (ii) 零元の存在 → (iii) 逆元の存在 → (iv) 残りの公理，の順で処理すると見通しがよい。(i)〜(iii) は「証明すべき対象が本当に存在するか」を確認する部分で，(iv) は「対応する等式が成り立つか」を確認するだけの部分である。値の集合 $W$ が既にベクトル空間であれば (iv) はほぼ自動的に従う。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 零元・逆元の「定義」はどこから来るのか</div>
+        <p>零写像 $\mathbf{0}\colon v\mapsto 0_W$ という定義は，天下り的に与えられたものではなく，「$f+\mathbf{0}=f$ が成り立つべき」という要求から逆算して決まる。実際 $(f+\mathbf{0})(v)=f(v)+\mathbf{0}(v)$ がすべての $v$ で $f(v)$ に等しくなるためには，$\mathbf{0}(v)=0_W$（$W$ の零元）でなければならない。同様に，$-f$ の定義 $v\mapsto -f(v)$ も「$f+(-f)=\mathbf{0}$」という要求から一意に決まる——$W$ 自身がベクトル空間なので，各 $v$ に対して $f(v)$ の逆元 $-f(v)$ が $W$ の中に存在することがこの議論の土台になっている。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>「関数の集合だから当然ベクトル空間になるはず」と考えて (i) の閉鎖性（$f+g$，$af$ がまた線形写像であること）の証明を省略してしまう答案が多い。一般の集合 $S$ から $W$ への<strong>写像全体</strong> $\mathrm{Map}(S,W)$ は自動的にベクトル空間になるが，そのうち「線形写像」という条件を満たすものだけを集めた $\mathrm{Hom}(V,W)$ が演算で閉じているかどうかは，$f,g$ の線形性の定義式を実際に代入しないと分からない。この一手間を抜くと減点対象になりやすい。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 「関数空間」という発想</div>
+        <p>$\mathrm{Hom}(V,W)$ は「関数の集合にベクトル空間の構造を入れる」という発想の最初の例である。同じ発想は，連続関数全体 $C(\mathbb{R})$ や，多項式全体 $\mathbb{R}[x]$ など，様々な「関数の空間」に共通して使われる。線形写像に限らず，「値の集合が加法・スカラー倍を持つなら，関数全体にも同じ演算を点ごとに定義してベクトル空間にできる」という一般原理を体得しておくと，今後の学習（関数解析や表現論）で同じ議論が繰り返し出てきたときに素早く理解できる。</p>
+        <p>さらに，$V=\mathbb{R}^n$，$W=\mathbb{R}^m$ の場合には，第4問で見るように $\mathrm{Hom}(\mathbb{R}^n,\mathbb{R}^m)$ は $m\times n$ 行列全体 $M_{m,n}(\mathbb{R})$ と（表現行列を通して）同一視できる。行列の空間がベクトル空間になることも，この一般論の特別な場合として理解できる。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">3</span> 双対基底の具体的な計算
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$\mathbb{R}^3$ の基底 $g_1=\begin{pmatrix}1\\1\\1\end{pmatrix},\ g_2=\begin{pmatrix}1\\-1\\1\end{pmatrix},\ g_3=\begin{pmatrix}1\\1\\-1\end{pmatrix}$ に対する双対基底 $g_1^*,g_2^*,g_3^*\in(\mathbb{R}^3)^*$（$g_i^*(g_j)=\delta_{ij}$ を満たす線形汎関数）を求めよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$g_i^*(x,y,z)=a_ix+b_iy+c_iz$ とおく。$g_i^*(g_j)=\delta_{ij}$ という条件は，行列で表すと見通しがよい。$P=(g_1,g_2,g_3)=\begin{pmatrix}1&1&1\\1&-1&1\\1&1&-1\end{pmatrix}$ とすると，$g_i^*$ の係数を並べた行行列を $i$ 行目に持つ行列 $C$（つまり $C=\begin{pmatrix}a_1&b_1&c_1\\a_2&b_2&c_2\\a_3&b_3&c_3\end{pmatrix}$）に対し，条件 $g_i^*(g_j)=\delta_{ij}$ はちょうど $CP=E$，すなわち $C=P^{-1}$ を意味する。</p>
+      <p>$\det P = 1(1-1)-1(-1-1)+1(1+1)=0+2+2=4\ne0$。掃き出し法（または余因子展開）で</p>
+      $$P^{-1} = \frac14\begin{pmatrix}0&2&2\\2&-2&0\\2&0&-2\end{pmatrix} = \begin{pmatrix}0&\tfrac12&\tfrac12\\ \tfrac12&-\tfrac12&0\\ \tfrac12&0&-\tfrac12\end{pmatrix}$$
+      <p>各行が対応する双対基底の係数になるので</p>
+      $$\boxed{g_1^*(x,y,z)=\tfrac12(y+z),\qquad g_2^*(x,y,z)=\tfrac12(x-y),\qquad g_3^*(x,y,z)=\tfrac12(x-z)}$$
+      <p>検算：$g_1^*(g_1)=\tfrac12(1+1)=1$ ✓，$g_1^*(g_2)=\tfrac12(-1+1)=0$ ✓，$g_1^*(g_3)=\tfrac12(1-1)=0$ ✓（他の $g_2^*,g_3^*$ も同様に確認できる）。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p><strong>連立方程式ではなく行列の逆で一気に解く。</strong>双対基底を求める問題は，本質的には「$g_i^*(g_j)=\delta_{ij}$」という9本の連立方程式を解くことだが，$g_i^*$ の係数を並べた行列 $C$ を使うと，条件はまとめて $CP=E$（すなわち $C=P^{-1}$）という1つの行列方程式になる。「基底の行列 $P$ の逆行列の<strong>各行</strong>が，双対基底の係数を与える」という対応を覚えておくと，何度も連立方程式を解き直す手間が省ける。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ「$C=P^{-1}$」の各行が双対基底になるのか（添字で確認）</div>
+        <p>$g_i^*(x,y,z)=a_ix+b_iy+c_iz$ を，行ベクトル $c_i=(a_i,b_i,c_i)$ による内積 $g_i^*(v)=c_i\cdot v$ と見る。$g_j$ を列とする行列を $P=(g_1,g_2,g_3)$ とし，$C$ を行に $c_1,c_2,c_3$ を並べた行列とすると，行列の積の定義そのものから</p>
+        $$(CP)_{ij} = c_i\cdot g_j = g_i^*(g_j)$$
+        <p>が成り立つ。求めたい条件 $g_i^*(g_j)=\delta_{ij}$ はまさに「$CP$ の $(i,j)$ 成分が $\delta_{ij}$」，すなわち $CP=E$ を意味する。$P$ が正則なら右から $P^{-1}$ を掛けて $C=P^{-1}$ と一意に決まる——これが「逆行列の行が双対基底の係数」という対応の正体である。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>$P^{-1}$ の<strong>列</strong>を双対基底の係数だと思い込むミスが非常に多い（$P$ 自身は列に基底ベクトルを並べているため，つい類推してしまう）。しかし上の導出の通り，双対基底の情報は $C=P^{-1}$ の<strong>行</strong>に入っている。計算後は必ず $g_i^*(g_j)=\delta_{ij}$（今回の解答末尾のような検算）を1〜2組確認し，行と列を取り違えていないかチェックする習慣をつけるとよい。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 標準基底のときの特別な場合</div>
+        <p>もし $g_1,g_2,g_3$ が標準基底 $e_1,e_2,e_3$ であれば $P=E$ なので $P^{-1}=E$，つまり $e_i^*(x,y,z)=$（第 $i$ 成分を取り出す関数）になる。これは「双対基底は，各基底ベクトルの成分を読み取る関数」という直感的なイメージにぴったり一致する。今回のように基底が標準基底でない場合は，$P^{-1}$ の計算を通して「入力ベクトルを $g_1,g_2,g_3$ 方向の成分に分解して，その1つを読み取る関数」を構成していることになる。</p>
+        <p>物理・結晶学に馴染みがあれば，この計算は「逆格子ベクトル（reciprocal lattice vectors）」の定義 $b_i\cdot a_j=\delta_{ij}$ とよく似た構造をしていることに気づくだろう。逆格子ベクトルも実格子ベクトルを列に並べた行列の逆行列から計算され，双対基底の物理的な実例になっている。</p>
+      </div>
+      <p><strong>本番での対応：</strong>類題で基底が4本以上（$\mathbb{R}^4$ など）になっても手順は同じ——$P$ を作り，$\det P\ne0$ を確認し，掃き出し法で $P^{-1}$ を求め，各行を読み取るだけでよい。連立方程式を $n$ 個の未知数 $\times\, n$ 本，$n$ 回繰り返すよりずっと速い。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">4</span> $\dim\mathrm{Hom}(V,W)=\dim V\times\dim W$
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$V=W=\mathbb{R}^2$，標準基底を $e_1,e_2$ とする。$1\le i,j\le2$ に対し，線形写像 $\varphi_{ij}\colon\mathbb{R}^2\to\mathbb{R}^2$ を「$e_j\mapsto e_i$，もう一方の基底ベクトルは $0$ に送る」ことで定める。</p>
+      <ol>
+        <li>$\{\varphi_{11},\varphi_{12},\varphi_{21},\varphi_{22}\}$ が $\mathrm{Hom}(\mathbb{R}^2,\mathbb{R}^2)$ の基底であることを示せ。</li>
+        <li>(1) の結果から，$\dim\mathrm{Hom}(\mathbb{R}^2,\mathbb{R}^2)$ を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$\varphi_{ij}$ の表現行列は，$(i,j)$ 成分だけが $1$ で他がすべて $0$ の行列 $E_{ij}$ である（例：$\varphi_{12}$ は $e_2\mapsto e_1$，$e_1\mapsto0$ なので表現行列は $\begin{pmatrix}0&1\\0&0\end{pmatrix}$）。</p>
+      <p><strong>1次独立性：</strong>$c_{11}\varphi_{11}+c_{12}\varphi_{12}+c_{21}\varphi_{21}+c_{22}\varphi_{22}=\mathbf{0}$（零写像）と仮定すると，対応する行列は $\begin{pmatrix}c_{11}&c_{12}\\c_{21}&c_{22}\end{pmatrix}=O$。よってすべての $c_{ij}=0$。</p>
+      <p><strong>全域性：</strong>任意の $f\in\mathrm{Hom}(\mathbb{R}^2,\mathbb{R}^2)$ の表現行列を $A=\begin{pmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{pmatrix}$ とすると，$f=a_{11}\varphi_{11}+a_{12}\varphi_{12}+a_{21}\varphi_{21}+a_{22}\varphi_{22}$（両辺の表現行列を比べれば一致することが分かる）。</p>
+      <p>よって $\{\varphi_{ij}\}$ は $\mathrm{Hom}(\mathbb{R}^2,\mathbb{R}^2)$ の基底。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>基底の個数を数えると $\dim\mathrm{Hom}(\mathbb{R}^2,\mathbb{R}^2)=4=2\times2=\dim\mathbb{R}^2\times\dim\mathbb{R}^2$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p>「$\mathrm{Hom}(V,W)\cong$（$m\times n$ 行列全体）」という同型（$m=\dim W,\,n=\dim V$）は，線形写像が表現行列で完全に記述できるという第1回の事実の言い換えにすぎない。行列単位 $E_{ij}$（$(i,j)$ 成分だけ $1$，他は $0$）が $M_{m,n}(\mathbb{R})$ の基底になることは直感的に明らかで，その「写像バージョン」が $\varphi_{ij}$ である。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $\varphi_{ij}$ の表現行列がちょうど $E_{ij}$ になる理由</div>
+        <p>$\varphi_{ij}$ は「$e_j\mapsto e_i$，もう一方は $0$」と<strong>言葉で</strong>定義されている。これを表現行列の定義（第 $k$ 列 $=\varphi_{ij}(e_k)$）に沿って埋めていくと，$k=j$ 列目は $\varphi_{ij}(e_j)=e_i$（第 $i$ 成分だけ $1$），$k\ne j$ の列目は $\varphi_{ij}(e_k)=0$。したがって表現行列は「$(i,j)$ 成分だけ $1$，他はすべて $0$」——これがまさに行列単位 $E_{ij}$ の定義である。<strong>添字の対応</strong>（入力側の添字 $j$ が列，出力側の添字 $i$ が行）を意識しておくと，$i,j$ を取り違えるミスを防げる。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>$\varphi_{ij}$ の添字 $i,j$ と行列 $E_{ij}$ の対応を逆に覚えてしまう（$e_i\mapsto e_j$ だと誤解する）受験者が多い。定義文を読むときは「$e_j\mapsto e_i$」の<strong>矢印の向き</strong>（$j$ が出発点，$i$ が到達点）を必ず確認すること。</p>
+      <p><strong>別解（同型写像を直接構成する）：</strong>基底を数え上げる代わりに，写像 $\Phi\colon\mathrm{Hom}(\mathbb{R}^2,\mathbb{R}^2)\to M_{2,2}(\mathbb{R})$，$f\mapsto[f]$（表現行列を取る操作）を考えると，$\Phi$ は線形（$[f+g]=[f]+[g]$，$[af]=a[f]$ は表現行列の定義から従う）かつ全単射（各線形写像は表現行列で一意に決まり，任意の行列が表現行列として実現できる）なので同型写像である。同型な空間は次元が等しいので，$\dim\mathrm{Hom}(\mathbb{R}^2,\mathbb{R}^2)=\dim M_{2,2}(\mathbb{R})=4$ と，基底を具体的に数えなくても示せる。今回の $\varphi_{ij}$ による基底の構成は，この同型写像の逆写像を経由して $M_{2,2}(\mathbb{R})$ の標準基底 $E_{ij}$ を $\mathrm{Hom}$ 側に持ってきたものだと理解すると，2つのアプローチが同じ内容であることが見える。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 一般公式 $\dim\mathrm{Hom}(V,W)=\dim V\cdot\dim W$</div>
+        <p>同じ議論は一般の有限次元 $V,W$（$\dim V=n,\dim W=m$）でもそのまま成立し，$\varphi_{ij}\colon e_j\mapsto f_i$（他の基底ベクトルは $0$，$\{e_k\}$ は $V$ の基底，$\{f_k\}$ は $W$ の基底）という $mn$ 個の写像が $\mathrm{Hom}(V,W)$ の基底になる。特に $W=\mathbb{R}$（$\dim W=1$）の場合が双対空間 $V^*=\mathrm{Hom}(V,\mathbb{R})$ であり，$\dim V^*=\dim V\cdot1=\dim V$ という第4回で使った事実がこの一般公式の特別な場合として得られる。「表現行列の成分の数 $=$ 線形写像の空間の次元」という対応を覚えておくと，双対空間や $\mathrm{Hom}$ 空間の次元計算で迷わなくなる。</p>
+        <p><strong>本番での対応：</strong>「$\dim\mathrm{Hom}(V,W)$ を求めよ」という問題が出たら，基底を1個1個数え上げる必要はなく，$\dim V\times\dim W$ を即答してよい（ただし，なぜそうなるかを問われたら，今回のように行列単位に対応する写像が基底になることを説明できるようにしておくこと）。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問5 -->
+<section class="section-card" id="problem5">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">5</span> 冪等行列と直和分解の具体例
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$A=\begin{pmatrix}2&-2\\1&-1\end{pmatrix}$ とし，$f=f_A\colon\mathbb{R}^2\to\mathbb{R}^2$ とする。</p>
+      <ol>
+        <li>$A^2=A$（$f$ が冪等，$f\circ f=f$）であることを確かめよ。</li>
+        <li>$\mathrm{Ker}(f)$，$\mathrm{Im}(f)$ の基底をそれぞれ求め，$\mathbb{R}^2=\mathrm{Ker}(f)\oplus\mathrm{Im}(f)$（直和）であることを確認せよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      $$A^2 = \begin{pmatrix}2&-2\\1&-1\end{pmatrix}\begin{pmatrix}2&-2\\1&-1\end{pmatrix} = \begin{pmatrix}4-2&-4+2\\2-1&-2+1\end{pmatrix} = \begin{pmatrix}2&-2\\1&-1\end{pmatrix} = A\quad\blacksquare$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p><strong>核：</strong>$Av=0 \Leftrightarrow 2x-2y=0 \Leftrightarrow x=y$。$\mathrm{Ker}(f)=\mathrm{span}\{(1,1)^{\top}\}$。</p>
+      <p><strong>像：</strong>$\mathrm{rank}A=1$（第1列と第2列が比例）。第1列 $(2,1)^{\top}$ を用いて $\mathrm{Im}(f)=\mathrm{span}\{(2,1)^{\top}\}$。</p>
+      <p><strong>直和の確認：</strong>$\{(1,1)^{\top},(2,1)^{\top}\}$ が $\mathbb{R}^2$ の基底であることを見る。</p>
+      $$\det\begin{pmatrix}1&2\\1&1\end{pmatrix}=1-2=-1\ne0$$
+      <p>よって1次独立であり，2本で $\mathbb{R}^2$（2次元）を張るので基底。ゆえに $\mathrm{Ker}(f)\cap\mathrm{Im}(f)=\{0\}$ かつ $\mathrm{Ker}(f)+\mathrm{Im}(f)=\mathbb{R}^2$，すなわち $\mathbb{R}^2=\mathrm{Ker}(f)\oplus\mathrm{Im}(f)$。$\blacksquare$</p>
+      <p>（検算：$A(2,1)^{\top}=(4-2,2-1)^{\top}=(2,1)^{\top}$，すなわち $\mathrm{Im}(f)$ の生成元は $f$ で動かない——$f$ は $\mathrm{Im}(f)$ の上では恒等写像になっている。）</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p><strong>なぜ $f\circ f=f$ から直和分解が出るのか（一般論の要点）。</strong>任意の $v$ は $v=f(v)+(v-f(v))$ と分解でき，$f(v)\in\mathrm{Im}(f)$，$v-f(v)\in\mathrm{Ker}(f)$（$f(v-f(v))=f(v)-f(f(v))=f(v)-f(v)=0$ なので）。これで $\mathbb{R}^2=\mathrm{Ker}(f)+\mathrm{Im}(f)$ が分かる。交わりが自明であること（$u\in\mathrm{Ker}(f)\cap\mathrm{Im}(f)\Rightarrow u=f(w)$ かつ $f(u)=0$，しかし $f(u)=f(f(w))=f(w)=u$ なので $u=0$）と合わせると直和になる。今回の具体例では，このことを $\det\ne0$ という初等的な方法で確認した。この一般論は，$V$ が有限次元でなくても（無限次元の関数空間などでも）そのまま成立する，$f\circ f=f$（冪等性）だけから従う純粋に代数的な事実である。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 冪等行列の固有値が $0,1$ しかないことの逆算——別解の出発点</div>
+        <p>$A^2=A$ の両辺に固有ベクトル $v$（$Av=\lambda v$，$v\ne0$）を代入すると，$A^2v=A(\lambda v)=\lambda Av=\lambda^2v$。一方 $A^2v=Av=\lambda v$ なので $\lambda^2v=\lambda v$，すなわち $\lambda(\lambda-1)v=0$。$v\ne0$ より $\lambda(\lambda-1)=0$，つまり<strong>固有値は $0$ か $1$ しかありえない</strong>。この事実は第3回（固有値・対角化）の技法と直結しており，「$A^2=A$ という条件を見たら固有値 $0,1$ を疑う」というパターン認識ができれば，核・像を計算する前に答えの構造を予想できる。</p>
+      </div>
+      <p><strong>別解（固有値から直接解く）：</strong>$\mathrm{tr}\,A=2+(-1)=1$，$\det A=2\cdot(-1)-(-2)\cdot1=-2+2=0$ なので，特性方程式は $\lambda^2-(\mathrm{tr}\,A)\lambda+\det A=\lambda^2-\lambda=\lambda(\lambda-1)=0$。固有値は $\lambda=0,1$（上のバックワード思考の通り）。</p>
+      <ul>
+        <li>$\lambda=0$：$(A-0E)v=0\Leftrightarrow Av=0\Leftrightarrow x=y$。固有ベクトル $(1,1)^\top$——これが $\mathrm{Ker}(f)$ の生成元と一致する（$\lambda=0$ の固有空間はまさに $\mathrm{Ker}(f)$ の定義そのものだから当然）。</li>
+        <li>$\lambda=1$：$(A-E)v=0\Leftrightarrow\begin{pmatrix}1&-2\\1&-2\end{pmatrix}v=0\Leftrightarrow x=2y$。固有ベクトル $(2,1)^\top$——$\mathrm{Im}(f)$ の生成元と一致する（$f$ が $\mathrm{Im}(f)$ の上で恒等写像として作用するのは，$\lambda=1$ の固有空間だから当然）。</li>
+      </ul>
+      <p>異なる固有値 $0,1$ に対応する固有ベクトルは自動的に1次独立（固有値が異なる固有ベクトルの1次独立性という一般定理）なので，$\{(1,1)^\top,(2,1)^\top\}$ が基底になることは行列式を計算しなくても分かる。固有値分解の視点に立てば，「$\det\ne0$ の確認」という手間すら省ける。</p>
+      <p><strong>よくある間違い：</strong>「$\dim\mathrm{Ker}(f)+\dim\mathrm{Im}(f)=2=\dim\mathbb{R}^2$ だから直和である」と，次元の一致だけで直和を結論づけてしまう答案が多いが，これは<strong>不十分</strong>である。次元の一致は「$\mathrm{Ker}(f)+\mathrm{Im}(f)=\mathbb{R}^2$ かつ交わりが $\{0\}$」のうち片方が分かれば他方も従うことを保証するだけであり，最初にどちらか一方（交わりが自明，または和が全体）を独立に確認する必要がある。今回の解答では「2本のベクトルが基底になる（1次独立）」ことを示すことで，交わりの自明性を実質的に確認している。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 冪等行列（射影作用素）の応用</div>
+        <p>$A^2=A$ を満たす行列は「射影作用素」と呼ばれ，統計学の線形回帰（観測データを回帰直線に投影する行列，通称ハット行列）や，量子力学の射影測定など，幅広い分野で登場する。この問題の $A$ は，$\mathrm{Ker}(f)$ の方向（直線 $x=y$）を無視し，$\mathrm{Im}(f)$ の方向（直線 $y=x/2$）に沿って「押しつぶす」変換だと考えると視覚的に理解しやすい。実際 $A$ は対称行列ではないので，これは直交射影ではなく，斜めに押しつぶす一般の射影になっている（$A$ が対称であれば $\mathrm{Ker}(f)\perp\mathrm{Im}(f)$ となり直交射影になるはずだが，今回は $(1,1)\cdot(2,1)=3\ne0$ なので直交していないことも確認できる）。</p>
+        <p><strong>本番での対応：</strong>「$A^2=A$」「$f\circ f=f$」という条件を見たら，(i) 固有値は $0,1$ のみ，(ii) $\mathbb{R}^n=\mathrm{Ker}(f)\oplus\mathrm{Im}(f)$，の2点を即座に思い出せると計算の見通しが立つ。逆に「$A^2=E$」（対合）なら固有値は $\pm1$ のみになる，といった類題にも同じ発想（$A^2=A$ の式に固有ベクトルを代入する）で対応できる。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第4回（核と像の一般論・双対空間・Hom空間）を自力で解けるかセルフチェック</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$\mathrm{Ker}(f),\mathrm{Im}(f)$ が部分空間であることを，零元・線形結合で閉じるの型で証明できるか</li>
+          <li>単射 $\Leftrightarrow$ $\mathrm{Ker}(f)=\{0\}$ の証明で「差を取る」発想を使えるか</li>
+          <li>$\mathrm{Hom}(V,W)$ が新しい集合であるため8公理すべての確認が必要な理由を，部分空間の場合と対比して説明できるか</li>
+          <li>双対基底を求める際に「基底の行列の逆行列の各行」という近道を使えるか</li>
+          <li>$\dim\mathrm{Hom}(V,W)=\dim V\times\dim W$ を，行列単位 $E_{ij}$ に対応する写像 $\varphi_{ij}$ が基底になることから示せるか</li>
+          <li>冪等行列 $A^2=A$ から，核と像がそれぞれ求まり，それらが直和で $\mathbb{R}^2$ 全体を張ることを確認できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- 全体のまとめ -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📌 予想問題セット（全20問）のまとめ</div>
+  <div class="section-card-body">
+    <ul>
+      <li><a href="yosou_lin_01.html">第1回：表現行列・核と像</a> — $AP=Q$ による表現行列の決定，次元定理とその帰結，逆算による写像の構成</li>
+      <li><a href="yosou_lin_02.html">第2回：回転・鏡映・直交行列</a> — 回転・鏡映の具体的な計算，直交行列の分類，$A^n=E$ の解の構造</li>
+      <li><a href="yosou_lin_03.html">第3回：固有値・対角化</a> — 対角化と $A^n$ の計算，Cayley-Hamilton の応用，対称行列の直交対角化，対角化可能性の判定</li>
+      <li><a href="yosou_lin_04.html">第4回：核と像の一般論・双対空間・Hom空間</a> — 抽象的なベクトル空間の証明，双対基底の計算，冪等写像と直和分解</li>
+    </ul>
+    <div class="insight-box">
+      <div class="insight-title">💡 全20問を通して繰り返し使われた発想</div>
+      <p>細かいテーマは違っても，多くの問題が「① 与えられた条件を行列の等式に翻訳する，② 標準的な操作（逆行列・対角化・次元定理）に帰着させる，③ 得られた答えを代入して検算する」という共通の型で解けている。この型を意識しながら復習すると，個々の計算がばらばらの技法ではなく，1つの体系として身につく。</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html><!-- 「2020年度 | 力学A 過去問解説」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>2020年度 | 力学A 過去問解説</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kakomon_2020">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A 講義ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="n1.html" data-page="n1">第1章</a>
+      <a href="n2.html" data-page="n2">第2章</a>
+      <a href="n3.html" data-page="n3">第3章</a>
+      <a href="n4.html" data-page="n4">第4章</a>
+      <a href="n5.html" data-page="n5">第5章</a>
+      <a href="n6.html" data-page="n6">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020" class="active">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>力学A 過去問解説</h1>
+  <p class="subtitle">2020年度期末試験</p>
+  <p class="meta">担当：溝口俊弥｜前期課程 Sセメスター｜公式解答・解説にもとづく</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">問題1（雨滴の終端速度）</a>
+    <a href="#q2">問題2（力のポテンシャル）</a>
+    <a href="#q3">問題3（万有引力と一般相対論的補正）</a>
+  </div>
+
+  <!-- =================== 問題1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header">
+      <div class="sec-tag">問題 1</div>
+      <h2>雨滴にはたらく抵抗力と終端速度</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          空気中を落下する雨の速度を考える。空気は水よりかなり軽いので浮力は無視する。雨の水滴は球状としてその半径を $a$、水滴の速度を $v$ とするとき、
+          粘性抵抗力の大きさは空気の粘性係数を $\eta$ として $6\pi a\eta v$ で与えられ、また慣性抵抗力の大きさは空気の密度を $\rho_0$、抗力係数を $C_D$ として
+          $\frac{1}{2}\pi C_D \rho_0 a^2 v^2$ で与えられるものとする。
+        </p>
+        <p>
+          $a = 2.0\,[\mathrm{mm}]$、$\eta = 1.8\times10^{-5}\,[\mathrm{Pa\,s}]$、$\rho_0 = 1.2\,[\mathrm{kg\,m^{-3}}]$、$C_D = 0.45$ とするとき、
+          粘性抵抗力と慣性抵抗力それぞれの大きさが等しくなるような速度 $v_c$ を有効数字１けたで数値的に求めると
+          $$v_c=（あ）\times10^{（い）}\,[\mathrm{m\,s^{-1}}]$$
+          である。（あ）、（い）に当てはまる数を解答欄にそれぞれ記入せよ。（半角で記入してください。）
+        </p>
+        <p>
+          また、この $v_c$ は実際にふだん体感する雨の速度と比較してかなり小さい。このことは、実際の雨ではどちらの抵抗力がどうだ、ということを意味しているか。解答欄（う）に１文で簡潔に答えよ。
+        </p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            粘性抵抗力と慣性抵抗力が等しいという条件は
+          </p>
+          <div class="mathblock">$$6\pi a\eta v_c = \frac{1}{2}\pi C_D \rho_0 a^2 v_c^2$$</div>
+          <p>
+            両辺を $\pi a v_c$（$v_c\neq0$）で割ると $6\eta = \frac{1}{2}C_D\rho_0 a v_c$ となるから、
+          </p>
+          <div class="mathblock">$$v_c = \frac{12\eta}{C_D \rho_0 a}$$</div>
+          <p>
+            与えられた数値 $a = 2.0\times10^{-3}\,\mathrm{m}$、$\eta = 1.8\times10^{-5}\,\mathrm{Pa\,s}$、$\rho_0 = 1.2\,\mathrm{kg\,m^{-3}}$、$C_D = 0.45$ を代入すると、
+          </p>
+          <div class="mathblock">$$v_c = \frac{12\times1.8\times10^{-5}}{0.45\times1.2\times2.0\times10^{-3}} = \frac{2.16\times10^{-4}}{1.08\times10^{-3}} = 0.20\,[\mathrm{m\,s^{-1}}]$$</div>
+          <p>
+            したがって $v_c = 2\times10^{-1}\,[\mathrm{m\,s^{-1}}]$（有効数字１桁）である。
+          </p>
+          <p>
+            この $v_c$（秒速 $20\,\mathrm{cm}$、雪が落ちる速さよりも遅い）は実際に体感する雨粒の落下速度よりかなり小さい。
+            雨粒が実際にはこれより速い速度で落ちているということは、２つの抵抗力の釣り合いが $v_c$ からずれて、
+            速度の２乗で効いてくる<strong>慣性抵抗の方が主に重力と釣り合って終端速度が決まっている</strong>（＝慣性抵抗が支配的で、粘性抵抗は相対的に弱い）ことを意味する。
+          </p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $v_c = 2\times10^{-1}\,[\mathrm{m\,s^{-1}}]$。実際の雨では慣性抵抗の方が主に効いており、粘性抵抗は弱い。
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 採点講評（公式解説より）</span>
+        <p>
+          数値部分は中学校の計算でも解けるレベルで、ほとんどの人ができていた。一方、抵抗力の大小を問う設問では２割ほどの人が逆（粘性抵抗の方が支配的、と）を書いていた。
+          「慣性抵抗が大きい／強い」「粘性抵抗が小さい／弱い」という趣旨のことが書かれていれば、表現が多少違っても正解とされている。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — $v_c$ の正体はレイノルズ数 $\sim1$ の目安</span>
+        <p>
+          興味深いことに、$v_c=12\eta/(C_D\rho_0 a)$ という条件は、実はレイノルズ数
+          $\mathrm{Re}=\rho_0 v (2a)/\eta$（$2a$ は水滴の直径）がちょうど $1$ 程度になる速度を意味している。実際、
+          水滴が水の密度 $1.0\times10^3\,[\mathrm{kg\,m^{-3}}]$ をもつとして重力と慣性抵抗（$\frac12 C_D\rho_0\pi a^2 v^2$）だけの
+          釣り合いで終端速度を見積もると
+        </p>
+        <div class="mathblock">$$v \approx \sqrt{\frac{\frac43\pi a^3 \times 1.0\times10^3 \times g}{\frac12 C_D\rho_0\pi a^2}} \approx 9.8\,[\mathrm{m\,s^{-1}}]$$</div>
+        <p>
+          となり、これは実際に観測される（直径４mm程度の）雨粒の終端速度（数 $\mathrm{m\,s^{-1}}$ のオーダー）とよく合う。このときの
+          レイノルズ数は $\mathrm{Re}\approx\rho_0 v(2a)/\eta \approx 2.6\times10^3$ で、$v_c$ における $\mathrm{Re}\sim1$ から
+          実に３桁も大きい。抗力係数の実験値が $C_D\approx0.45$（ほぼ一定）とみなせるのも、まさにこの $\mathrm{Re}\sim10^3\text{--}10^5$
+          の範囲（いわゆるニュートン抵抗域）でのことであり、問題設定に与えられた数値どうしが、単なる計算練習ではなく
+          きちんと実際の雨粒のレイノルズ数域を再現するように選ばれていることが分かる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題2 =================== -->
+  <div class="section" id="q2">
+    <div class="sec-header">
+      <div class="sec-tag">問題 2</div>
+      <h2>力のベクトル場とポテンシャル</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>直交座標系において、次のような $(x, y, z)$ 成分を持つ４つの力のベクトル場</p>
+        <div class="mathblock">$$\begin{aligned}
+        (\mathrm{a})\quad \mathbf{F} &= (2x-y,\ x,\ 0)\\
+        (\mathrm{b})\quad \mathbf{F} &= (2y,\ x-y,\ 0)\\
+        (\mathrm{c})\quad \mathbf{F} &= (y,\ y,\ 0)\\
+        (\mathrm{d})\quad \mathbf{F} &= (2x-y,\ y-x,\ 0)
+        \end{aligned}$$</div>
+        <p>
+          のうち、ポテンシャルをもつものは（あ）のみであり、またそのポテンシャルは
+          $$（（い））x^{（う）}+（（え））x^{（お）}y^{（か）}+（（き））y^{（く）}$$
+          ととれる。（あ）に当てはまるものを (a) から (d) から選べ。また（い）から（く）に当てはまる数を解答欄にそれぞれ記入せよ。（半角で記入してください。分数は、例えば $\dfrac12$ なら $1/2$、$-\dfrac12$ なら $-1/2$ のように記入してください。（い）、（え）、（き）が（ ）にはいっているのは係数が負の数になるかもしれないからで、また逆に（ ）があっても負とは限りません。$1$ を $+1$ と書いていいかとか、$-1$ の $1$ を省いていいかとかは質問しないでください。）
+        </p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            $\mathbf{F}$ がある関数 $U(x,y)$ を用いて $\mathbf{F} = -\nabla U = \left(-\dfrac{\partial U}{\partial x}, -\dfrac{\partial U}{\partial y}, 0\right)$ と書けるためには、
+            積分可能条件（回転がゼロであること）
+          </p>
+          <div class="mathblock">$$\frac{\partial F_x}{\partial y} = \frac{\partial F_y}{\partial x}$$</div>
+          <p>が必要である。４つの場についてこれを確かめると：</p>
+          <ul>
+            <li>(a) $F_x=2x-y,\ F_y=x$：$\partial F_x/\partial y = -1$、$\partial F_y/\partial x = 1$。一致しない。</li>
+            <li>(b) $F_x=2y,\ F_y=x-y$：$\partial F_x/\partial y = 2$、$\partial F_y/\partial x = 1$。一致しない。</li>
+            <li>(c) $F_x=y,\ F_y=y$：$\partial F_x/\partial y = 1$、$\partial F_y/\partial x = 0$。一致しない。</li>
+            <li>(d) $F_x=2x-y,\ F_y=y-x$：$\partial F_x/\partial y = -1$、$\partial F_y/\partial x = -1$。一致する。</li>
+          </ul>
+          <p>
+            したがって、ポテンシャルをもつのは <strong>(d)</strong> のみである。
+          </p>
+          <p>
+            (d) のポテンシャル $U(x,y)$ を求める。$-\dfrac{\partial U}{\partial x} = 2x-y$ より $U = -x^2+xy+f(y)$（$f$ は $y$ のみの関数）。
+            これを $y$ で微分して $-\dfrac{\partial U}{\partial y} = y-x$ と比較すると、$-\left(x+f'(y)\right) = y-x$ より $f'(y) = -y$、
+            すなわち $f(y) = -\frac{1}{2}y^2$（積分定数は基準の取り方によるので $0$ とする）。よって
+          </p>
+          <div class="mathblock">$$U = -x^2 + xy - \frac{1}{2}y^2$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          ポテンシャルをもつのは (d) のみで、$U = -x^2 + xy - \dfrac{1}{2}y^2$。
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 採点講評（公式解説より）</span>
+        <p>
+          ポテンシャルをもつ場が (d) であることはほとんどの人が正しく答えられていた。一方で、$\mathbf{F} = -\nabla U$ の符号（マイナス）を忘れて
+          $U = x^2 - xy + \frac{1}{2}y^2$ のように符号を反転させたまま答えてしまった人が結構いた、とのこと。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 対称行列かどうかだけで決まる</span>
+        <p>
+          ４つの場はいずれも $\mathbf{F}=A\mathbf{r}$（$\mathbf{r}=(x,y)$、$A$ は $2\times2$ 定数行列）の形をしている。興味深いことに、
+          回転 $\partial_x F_y - \partial_y F_x = A_{21}-A_{12}$ は $A$ の反対称部分だけで決まるので、ポテンシャルをもつ条件
+          「回転がゼロ」は結局 <strong>$A$ が対称行列であること</strong>とまったく同じになる。実際
+        </p>
+        <div class="mathblock">$$A_{(\mathrm a)}=\begin{pmatrix}2&-1\\1&0\end{pmatrix},\ \
+        A_{(\mathrm b)}=\begin{pmatrix}0&2\\1&-1\end{pmatrix},\ \
+        A_{(\mathrm c)}=\begin{pmatrix}0&1\\0&1\end{pmatrix},\ \
+        A_{(\mathrm d)}=\begin{pmatrix}2&-1\\-1&1\end{pmatrix}$$</div>
+        <p>
+          のうち対称なのは $A_{(\mathrm d)}$ だけで、一つ一つ偏微分を計算しなくても行列を見ただけで (d) が選べる。これは流体力学で
+          速度勾配テンソルを対称部分（歪み速度）と反対称部分（渦度）に分解するのとまったく同じ発想で、対称部分は
+          $U=-\frac12\mathbf r^{\mathsf T}A\mathbf r$（実際 $A_{(\mathrm d)}$ で計算すると $U=-x^2+xy-\frac12y^2$ となり、(d) で求めた答えと一致する）
+          というポテンシャルをもつ「伸び縮み」型の力を、反対称部分はポテンシャルをもたない純粋な「回転」型の力（原点まわりを一定角速度で
+          回すような力）を表している。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題3 =================== -->
+  <div class="section" id="q3">
+    <div class="sec-header">
+      <div class="sec-tag">問題 3</div>
+      <h2>万有引力による運動と一般相対論的補正（近日点移動）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>
+          ３次元空間内において、原点に固定された質量 $M$ の質点から生ずる万有引力による、質量 $m$ の質点が行う運動を考える。時刻 $t$ におけるその質点の位置ベクトルを
+          $\mathbf{r}(t)$ とし、原点からの距離 $r(t) \equiv |\mathbf{r}(t)|$ とするとき、次の問いに答えよ。ただし万有引力定数を $G$ とする。（以下、いつものように時間の関数であることを表す引数 “$(t)$” を省略することがある。）
+        </p>
+      </div>
+
+      <h3 id="q3-1">(1) 運動方程式</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>運動方程式は、$\dot{}$ を時間変数 $t$ に関する微分として
+        $$m\ddot{\mathbf r}=（あ）$$
+        である。（あ）に当てはまるものを次の中から記号で答えよ。</p>
+        <div class="mathblock">$$(\mathrm{a})\ +\frac{GmM}{r^2}\mathbf{r}\qquad (\mathrm{b})\ -\frac{GmM}{r^2}\mathbf{r}\qquad (\mathrm{c})\ +\frac{GmM}{r^3}\mathbf{r}\qquad (\mathrm{d})\ -\frac{GmM}{r^3}\mathbf{r}$$</div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            万有引力は逆２乗則、すなわち大きさが $GmM/r^2$ で向きが原点向き（引力）である。方向は単位ベクトル $-\mathbf{r}/r$ で表されるので、
+          </p>
+          <div class="mathblock">$$m\ddot{\mathbf{r}} = -\frac{GmM}{r^2}\cdot\frac{\mathbf{r}}{r} = -\frac{GmM}{r^3}\mathbf{r}$$</div>
+          <p>
+            $\mathbf{r}$（ベクトル）がそのままかかっているために、分母の次数が見かけ上 $r^3$ になる点に注意する。答えは <strong>(d)</strong>。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(d)：$m\ddot{\mathbf{r}} = -\dfrac{GmM}{r^3}\mathbf{r}$</div>
+      </details>
+
+      <h3 id="q3-2">(2) 万有引力のポテンシャル</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>万有引力のポテンシャル $U$ は $r\equiv|\mathbf{r}|$ のみによってきまる関数であり、無限遠で $U=0$ となるようにポテンシャルの基準をとったとき
+        $$U(r)=（い）$$
+        である。（い）に当てはまるものを次の中から記号で答えよ。</p>
+        <div class="mathblock">$$(\mathrm{a})\ +\frac{GmM}{r}\qquad (\mathrm{b})\ -\frac{GmM}{r}\qquad (\mathrm{c})\ +\frac{GmM}{r^2}\qquad (\mathrm{d})\ -\frac{GmM}{r^2}$$</div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            (1) の力は $\mathbf{F} = -\dfrac{GmM}{r^3}\mathbf{r} = -\nabla U$ を満たすポテンシャルから導かれる。実際 $U(r) = -\dfrac{GmM}{r}$ とおくと
+            $-\dfrac{\partial U}{\partial r} = -\dfrac{GmM}{r^2}$ となり、これが動径方向の力の大きさ（符号込み）に一致し、$r\to\infty$ で $U\to0$ も満たす。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(b)：$U(r) = -\dfrac{GmM}{r}$</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 採点講評（公式解説より）</span>
+        <p>(1)(2) はいずれも公式そのままの問題で、正答率は高かった。(1) では逆２乗則であることは分かっていても、$\mathbf{r}$（ベクトル）がかかっているために分母が３乗になることを見落とすミスが見られた。</p>
+      </div>
+
+      <h3 id="q3-3">(3) 力学的エネルギー保存則と面積速度</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          この系では角運動量が保存するから、質点は初期条件できまる２次元平面内を永遠に運動する。その平面内の任意の原点を通るある直線と $\mathbf{r}(t)$ とのなす角を
+          $\varphi(t)$ とすると、力学的エネルギー保存則は全エネルギーを $E$ としたとき
+        </p>
+        <div class="mathblock">$$\frac{1}{2}m\left(\dot{r}^2 + （う）\right) + U(r) = E$$</div>
+        <p>と表せる。また、面積速度が一定なので
+        $$（え）=\text{一定}$$
+        と書ける。（う）、（え）に当てはまるものを次の中からそれぞれ記号で答えよ。</p>
+        <div class="mathblock">$$(\mathrm{a})\ r\dot\varphi\qquad (\mathrm{b})\ r^2\dot\varphi\qquad (\mathrm{c})\ r\dot\varphi^2\qquad (\mathrm{d})\ r^2\dot\varphi^2$$</div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            極座標での速度の動径成分・角度成分はそれぞれ $\dot r$、$r\dot\varphi$ であるから、速さの２乗は $\dot r^2 + (r\dot\varphi)^2 = \dot r^2 + r^2\dot\varphi^2$。
+            よって運動エネルギーは $\frac12 m(\dot r^2 + r^2\dot\varphi^2)$ となり、エネルギー保存則の空欄は $r^2\dot\varphi^2$（(d)）。
+          </p>
+          <p>
+            一方、面積速度は $\frac12 r^2\dot\varphi$ に比例する量であり、角運動量保存則から $r^2\dot\varphi$（(b)）が定数になる。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>エネルギー保存則の空欄：$r^2\dot\varphi^2$（(d)）。面積速度に対応する保存量：$r^2\dot\varphi$（(b)）。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 採点講評（公式解説より）</span>
+        <p>これも講義で扱った公式そのままの内容で、正答率は高かった。</p>
+      </div>
+
+      <h3 id="q3-4">(4) 有効ポテンシャルへの書き換え</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          (3) の（え）の値を $h$ とする。$h$ を使って（う）から $\dot\varphi$ を消去することにより、(3) の２次元運動のエネルギー保存則は、
+          別の１次元ポテンシャル $V(r)$ の中を質量 $m$ の質点が１次元的な運動をするときのエネルギー保存則
+        </p>
+        <div class="mathblock">$$\frac{1}{2}m\dot{r}^2 + V(r) = E$$</div>
+        <p>
+          と同じになる。ただし $V(r)$ は万有引力のポテンシャル $U(r)$ と遠心力による有効ポテンシャル $U_{cen}(r)$ の和
+          $$V(r)=U(r)+U_{cen}(r)$$
+          で与えられ
+          $$U_{cen}(r)=\frac{m^{（お）}h^{（か）}}{（き）r^{（く）}}$$
+          である。（お）、（か）、（き）、（く）に当てはまる数を解答欄にそれぞれ記入せよ。（半角で記入してください。）
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            $h = r^2\dot\varphi$ より $\dot\varphi = h/r^2$ であるから、(3) の運動エネルギーの角度成分は
+          </p>
+          <div class="mathblock">$$\frac12 m r^2\dot\varphi^2 = \frac12 m r^2\left(\frac{h}{r^2}\right)^2 = \frac{mh^2}{2r^2}$$</div>
+          <p>
+            これがそのまま遠心力による有効ポテンシャル $U_{cen}(r)$ になる。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$$U_{cen}(r) = \frac{mh^2}{2r^2}$$</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 採点講評（公式解説より）</span>
+        <p>これも講義のスライドにあった通りの内容で、全員正解だった（分数を全角文字で書いていた学生が２名いたが、それも正解として扱われた）。</p>
+      </div>
+
+      <h3 id="q3-5">(5) 遠心力の性質</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          ポテンシャルが $U_{cen}(r)$ で与えられる力は（け）である。また、$r\to0$ のとき（こ）の方が支配的（つまりそちらの方がよりきいてくるということ）になる。（け）、（こ）に当てはまるものを次の中からそれぞれ記号で答えよ。
+        </p>
+        <div class="mathblock">$$(\mathrm{a})\ 引力\qquad (\mathrm{b})\ 斥力\qquad (\mathrm{c})\ U_{cen}(r)\ に比べて\ U(r)\qquad (\mathrm{d})\ U(r)\ に比べて\ U_{cen}(r)$$</div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            $U_{cen}(r) = mh^2/(2r^2)$ による力は $-\dfrac{\partial U_{cen}}{\partial r} = +\dfrac{mh^2}{r^3} > 0$、すなわち動径方向正（原点から遠ざかる向き）の力であり、これは<strong>斥力</strong>（遠心力そのもの）である。
+          </p>
+          <p>
+            $U(r)=-GmM/r$ は $r\to0$ で $1/r$ で発散し、$U_{cen}(r)$ は $1/r^2$ で発散する。$r\to0$ では $1/r^2$ の方が $1/r$ より速く発散するので、<strong>$U(r)$ に比べて $U_{cen}(r)$ の方が支配的</strong>になる。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$U_{cen}(r)$ による力は斥力（(b)）。$r\to0$ では $U(r)$ に比べて $U_{cen}(r)$ が支配的（(d)）。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 採点講評（公式解説より）</span>
+        <p>遠心力はもちろん斥力であり、$1/r^2$ で効いてくるため、$r\to0$ では万有引力（$1/r$）よりも強く効いてくる、という内容。</p>
+        <p>
+          この「$U_{cen}\propto1/r^2$ が $U\propto1/r$ に必ず勝つ」という事実こそが、ニュートン重力のもとでは質点が
+          決して原点に落ち込めない（遠心力の壁が無限大になる）ことの理由になっている。興味深いのは、(6) で登場する
+          一般相対論的補正項が $-mh^2a/(2r^3)$、すなわち $1/r^3$ で発散する点である。$1/r^3$ は $1/r^2$ よりも $r\to0$ で
+          さらに速く発散するので、この補正項を加えた $\widetilde V(r)$ では、$r$ が十分小さいところで符号が逆転し、
+          遠心力の壁がむしろ突き破られて $\widetilde V\to-\infty$ になってしまう。つまり系全体として見ると、ある半径より
+          内側では遠心力バリアが「壁」から「崖」に変わり、そこを越えた質点は無限に落ち込んでいく。これはまさに
+          シュヴァルツシルト時空における最内安定円軌道（ISCO）や光子球の存在の核心にある機構であり、(6)(7) の計算は
+          その入り口を覗いていることになる。
+        </p>
+      </div>
+
+      <h3 id="q3-6">(6) 一般相対論的補正：最小点のずれ</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          さて、ここまでは授業でやったことそのままである。次に、質量 $M$ の質点を太陽、質量 $m$ の質点をその周りを公転する惑星とし、万有引力への一般相対論的補正を考えよう。と言っても今の場合は、単に１次元ポテンシャル $V(r)$ に新たな微小項 $\dfrac{mh^2a}{2r^3}$ が付け加わって、(4) が変更されて $V(r)$ の代わりに
+        </p>
+        <div class="mathblock">$$\widetilde{V}(r) \equiv V(r) - \frac{mh^2 a}{2r^3} = U(r) + U_{cen}(r) - \frac{mh^2 a}{2r^3}$$</div>
+        <p>をポテンシャルとするだけでいい。ここで $a$ は長さの次元をもち</p>
+        <div class="mathblock">$$a = \frac{2GM}{c^2}\quad（c\ は光速）$$</div>
+        <p>
+          で与えられる「シュバルツシルト半径」と呼ばれる量であるが、名前は今の場合どうでもいい。
+        </p>
+        <p>
+          授業では、$V(r)$ を最小とする $r$ の値 $r = \dfrac{h^2}{GM} \equiv l$ と、そのときの $V(r)$ の２階の微分係数 $V''(l) = \dfrac{G^4 M^4 m}{h^6}$ を求め、
+          １次元系の $r=l$ 近傍での微小振動の周期が円運動の周期と一致することを確かめた。
+        </p>
+        <p>
+          一方、ポテンシャルが $V(r)$ から $\widetilde{V}(r)$ になったとき、それが最小となる $r$ の値は $l$ から変化するが、太陽系の惑星では $a$ が $l$ に比べて非常に小さい
+          （例えば太陽の $a$ は約 $3\,[\mathrm{km}]$、水星と太陽の $l$ は約 $6\times10^7\,[\mathrm{km}]$）ため、その違いはわずかである。$\widetilde{V}(r)$ を最小とする $r$ の値を $a$ で展開して１次までの近似で求めると
+          $$r=l\ （さ）\ （し）\ a$$
+          となる。（さ）、（し）に当てはまるものを次の中から記号で答えよ。
+          $$(\mathrm a)\ +\qquad(\mathrm b)\ -\qquad(\mathrm c)\ \frac13\qquad(\mathrm d)\ \frac12\qquad(\mathrm e)\ \frac23\qquad(\mathrm f)\ 1\qquad(\mathrm g)\ \frac32\qquad(\mathrm h)\ 2\qquad(\mathrm i)\ 3$$
+        </p>
+        <p>（これがわかると、$h=$（え）であるから、面積速度が同じであるという条件のもとで、$O(a/l)$ までの近似で円運動の周期はポテンシャルが $V(r)$ のときの
+        $$\left(1\ （さ）\ （し）\times2\times\frac al\right)\text{倍}$$
+        になる。）</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>$\widetilde{V}(r)=0$ となる $r$ を求める。</p>
+          <div class="mathblock">$$\begin{aligned}
+          \widetilde{V}'(r) &= +\frac{GMm}{r^2} - \frac{mh^2}{r^3} + \frac{3mh^2 a}{2r^4}\\
+          &= \frac{mh^2}{r^4}\left(\frac{r^2}{l} - r + \frac{3}{2}a\right)
+          \end{aligned}$$</div>
+          <p>（$GM/h^2 = 1/l$ を用いた。）よって $\dfrac{r^2}{l}-r+\dfrac32 a = 0$、すなわち $r^2 - lr + \dfrac32 al = 0$ を解いて</p>
+          <div class="mathblock">$$r = \frac{l}{2}\left(1 \pm \sqrt{1 - 6\frac{a}{l}}\right)$$</div>
+          <p>
+            今 $r$ の $l$ からのずれを考えているので $+$ の枝をとる。$a/l\ll1$ なので $\sqrt{1-6a/l} = 1-3\dfrac{a}{l}+O\!\left(\left(\tfrac{a}{l}\right)^2\right)$ を用いると、
+          </p>
+          <div class="mathblock">$$r = \frac{l}{2}\left(1 + 1 - 3\frac{a}{l}\right) + O\!\left(\left(\tfrac{a}{l}\right)^2\right) = l - \frac{3}{2}a + O\!\left(\left(\tfrac{a}{l}\right)^2\right)$$</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$$r = l - \frac{3}{2}a$$</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足（公式解説より）</span>
+        <p>
+          $h = r^2\dot\varphi$（面積速度一定の条件）が変わらないという前提のもと、$O(a/l)$ までの近似で円運動の周期はポテンシャルが $V(r)$ のときの
+          $\left(1 - \dfrac32\times2\times\dfrac{a}{l}\right) = \left(1-3\dfrac{a}{l}\right)$ 倍になる。
+        </p>
+      </div>
+
+      <h3 id="q3-7">(7) 一般相対論的補正：微小振動の周期のずれと近日点移動</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          $\widetilde{V}(r)$ が最小になる点 $r=l\ （さ）\ （し）a$ を $\equiv\tilde l$ とおくとき、そこでの $\widetilde{V}''(r)$ の値を同様に $a$ １次までの近似で求めると
+          $$\widetilde{V}''(\tilde l)=\left(1\ （す）\ （せ）\frac al\right)\frac{G^4M^4m}{h^6}$$
+          となる。（す）、（せ）に当てはまるものを次の中から記号で答えよ。
+          $$(\mathrm a)\ +\qquad(\mathrm b)\ -\qquad(\mathrm c)\ \frac13\qquad(\mathrm d)\ \frac12\qquad(\mathrm e)\ \frac23\qquad(\mathrm f)\ 1\qquad(\mathrm g)\ \frac32\qquad(\mathrm h)\ 2\qquad(\mathrm i)\ 3$$
+        </p>
+        <p>（すると、微小振動の周期はポテンシャルが $V(r)$ のときの
+        $$\left(1\ （す）\ （せ）\times\left(-\frac12\right)\times\frac al\right)\text{倍}$$
+        になる。）</p>
+        <p>これらの結果は円運動の周期と微小振動の周期が $O(a/l)$ で異なることを示し、$\varphi$ 方向に $2\pi$ より微小に余計に回転しないと $r$ 方向に元に戻らないことを意味する。このようにして、近日点移動をこの近似で実際正しく出すことができる。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <div class="mathblock">$$\begin{aligned}
+          \widetilde{V}''(r) &= -\frac{2GMm}{r^3} + \frac{3mh^2}{r^4} - \frac{6mh^2 a}{r^5}\\
+          &= \frac{mh^2}{r^5}\left(-2\frac{r^2}{l} + 3r - 6a\right)
+          \end{aligned}$$</div>
+          <p>$r=\tilde l = l-\dfrac32 a$ を、$O(a/l)$ までの近似で代入する。$\varepsilon \equiv \dfrac{3a}{2l}$ とおくと $r=l(1-\varepsilon)$ なので</p>
+          <div class="mathblock">$$\frac{1}{r^5} = \frac{1}{l^5}(1-\varepsilon)^{-5} \approx \frac{1}{l^5}(1+5\varepsilon) = \frac{1}{l^5}\left(1+\frac{15a}{2l}\right),\qquad
+          r^2 = l^2(1-\varepsilon)^2 \approx l^2(1-2\varepsilon) = l^2\left(1-\frac{3a}{l}\right)$$</div>
+          <p>これらを代入すると、括弧の中は</p>
+          <div class="mathblock">$$-2\frac{r^2}{l}+3r-6a = -2l\left(1-\frac{3a}{l}\right)+3l\left(1-\frac{3a}{2l}\right)-6a = l - \frac{9}{2}a = l\left(1-\frac{9a}{2l}\right)$$</div>
+          <p>よって、$O(a/l)$ までの精度で</p>
+          <div class="mathblock">$$\begin{aligned}
+          \widetilde{V}''(\tilde l) &= \frac{mh^2}{l^5}\left(1+\frac{15a}{2l}\right)\cdot l\left(1-\frac{9a}{2l}\right)\\
+          &\approx \frac{mh^2}{l^4}\left(1+\frac{15a}{2l}-\frac{9a}{2l}\right) = \frac{mh^2}{l^4}\left(1+3\frac{a}{l}\right)
+          \end{aligned}$$</div>
+          <p>
+            さらに $l=h^2/(GM)$ より $mh^2/l^4 = G^4M^4m/h^6$ であるから、
+          </p>
+          <div class="mathblock">$$\widetilde{V}''(\tilde l) = \left(1+3\frac{a}{l}\right)\frac{G^4M^4m}{h^6}$$</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$$\widetilde{V}''(\tilde l) = \left(1+3\frac{a}{l}\right)\frac{G^4M^4m}{h^6}$$</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 近日点移動について（公式解説より）</span>
+        <p>
+          この結果から、微小振動の周期はポテンシャルが $V(r)$ のときの $\left(1+3\times\left(-\dfrac12\right)\times\dfrac{a}{l}\right) = \left(1-\dfrac{3a}{2l}\right)$ 倍になる。
+          一方 (6) で見たように、円運動の周期は $\left(1-3\dfrac{a}{l}\right)$ 倍になる。両者は $O(a/l)$ で異なり、
+        </p>
+        <div class="mathblock">$$2\pi\times\frac{1-\frac{3a}{2l}}{1-\frac{3a}{l}} = 2\pi\left(1+\frac{3a}{2l}\right)$$</div>
+        <p>
+          だけ角度 $\varphi$ が回転しないと動径方向 $r$ が元の値に戻らないことになる。すなわち、回転方向の角速度は動径方向の振動の角速度に比べて
+          $1+\dfrac{3a}{2l}$ 倍だけ微小に大きい。これは、軌道がほぼ円に近い場合の近日点移動を、この近似のもとで実際に正しく与える計算になっている
+          （一般の楕円軌道の場合には、これが近日点の移動として観測される。この結果は、たとえば R. M. Wald<em> "General Relativity"</em> p.142 の式 (6.3.26)
+          （そこでの $2M$ が本問の $a$、$R_+$ が本問の $l$ に相当）とも一致する）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="index.html">← トップへ</a>
+    <a href="kakomon_2021.html">2021年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

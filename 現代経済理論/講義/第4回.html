@@ -1,0 +1,542 @@
+<!DOCTYPE html><!-- 「第4回 ミクロ経済理論とマーケットデザイン｜現代経済理論」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第4回 ミクロ経済理論とマーケットデザイン｜現代経済理論</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="lec-4">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">現代経済理論</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">HOME</a>
+      <a href="index.html" class="active">講義</a>
+      <a href="../kakomon_2025.html">過去問</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <div class="hero-badge">第4回</div>
+  <h1>ミクロ経済理論とマーケットデザイン</h1>
+  <p class="subtitle">山本 裕一｜東京大学大学院経済学研究科</p>
+  <p class="meta">マッチング理論・DAアルゴリズム・オークション理論・収入同値定理</p>
+</div>
+
+<div class="container">
+
+  <div class="section-card">
+    <h2><span class="h2-icon">👤</span>講師プロフィール</h2>
+    <div class="teacher-profile">
+      <div class="teacher-icon">⚙️</div>
+      <div class="teacher-info">
+        <h3>山本 裕一</h3>
+        <div class="affil">
+          東京大学大学院経済学研究科（2025年〜）<br>
+          東大文二→経済→修士 → Harvard大学院（経済学Ph.D., 2011） → Penn State大学助教授（2011–2019） → 一橋大学（2019–2025） → 現職
+        </div>
+        <div class="specialty">
+          専門：ミクロ経済理論・ゲーム理論・学習理論・行動経済学<br>
+          担当講義：ミクロ経済学I、学部ゼミ、大学院向けゲーム理論<br>
+          今日のテーマ：マーケットデザイン（理論を実社会の「仕組みづくり」に応用する分野）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📖</span>講義概要</h2>
+    <div class="summary-text">
+      <p>
+        ミクロ経済学は「ヒトは合理的である」という公理から出発し、人間・企業の行動と社会現象を数理モデルで体系的に説明する学問だ。
+        「経済学＝お金儲けの理論」という誤解があるが、本来の目的は<strong>税制変更・政策変更がもたらす社会へのインパクトを事前に予測する</strong>ことにある。
+        心理学と違い「実験ベース」ではなく「理論ベース」で、最小限の仮定から最大限の含意を導くのがミクロ経済学の強みだ。
+      </p>
+      <p>
+        本講義では、ミクロ理論の近年の発展形であるマーケットデザインを扱う。
+        Alvin Rothは2002年の論文「Economists as Engineers」で「経済学者は市場の仕組みを設計するエンジニアになるべきだ」と提唱した。
+        今日の2大トピックは①<strong>マッチング理論</strong>（学校選択・研修医配属・臓器移植）と②<strong>オークション理論</strong>（周波数帯・Google広告入札）だ。
+      </p>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📋</span>主なトピック</h2>
+    <ul class="topic-list">
+
+      <li>
+        <div class="tn-col"><span class="tn">1</span></div>
+        <div class="topic-content">
+          <span class="topic-title">マッチングモデルの基本設定</span>
+          <div class="topic-desc">
+            <p>
+              M校の学校（各校に定員k_i）とN人の学生がいる。
+              各学校iは学生に対する選好順序 ≻_i を持ち（テストの点数・学校への近さなど実際の入試で使われる指標）、各学生jも学校への選好順序 ≻_j を持つ。
+              マッチングの目標は「全員が正直に選好を申告する（嘘をつくメリットがない）」かつ「結果が安定している（抜け駆けのペアが存在しない）」仕組みを設計することだ。
+            </p>
+            <div class="def-box">
+              <strong>安定マッチング：</strong>学生j・学校iのペアについて、「jはiをμ(j)（現在のマッチング）より好み、かつiはjをμ(i)より好む」というペア(i,j)が存在しない状態。
+              誰も「メカニズムを抜け駆けして得をしよう」とするインセンティブを持たない。
+            </div>
+            <div class="insight"><strong>記号の読み方：</strong>μ(j)は学生jの配属先、μ(i)は学校iが受け入れた学生集合、≻は「より好む」を表す。たとえばjが現在B校でもA校をより好み、A校も在籍者の誰かよりjを優先するなら、A校とjは双方が乗り換えたい。この「ブロッキング・ペア」が一組もないのが安定であり、単に全員がどこかへ配属されることとは異なる。</div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">2</span></div>
+        <div class="topic-content">
+          <span class="topic-title">ボストンメカニズム（BM）：仕組みと問題点</span>
+          <div class="topic-desc">
+            <p>BostonやNY、UKの公立高校で長年使われてきたメカニズム。手順は以下の通り：</p>
+            <ul>
+              <li>Step 1.1：全学生が第1志望校に割り当てられる</li>
+              <li>Step 1.2：各学校は成績順に仮受入。定員オーバーなら下位学生を拒否</li>
+              <li>Step 2.1：拒否された学生は第2志望校に割り当て → 以下繰り返し</li>
+            </ul>
+            <p>
+              問題：<strong>成績優秀な学生が必ずしも良い学校とマッチしない</strong>。最上位校に行けた点数の学生が2番手校に入ったり、どこにも進学できない学生が出た。
+              原因は「正直申告がリスキー」であること。ボーダーラインの学生が人気第1志望を回避し安全校を第1志望に申告したり、逆に人気校に特攻して失敗する現象が多発した。
+            </p>
+            <div class="insight">
+              経済学の原理：「人が悪いのではなく、メカニズムが悪い」。非対称情報と駆け引きが必要な仕組みが根本的な非効率を生んでいた。
+            </div>
+            <div class="def-box"><strong>なぜ志望順位の嘘が有利になりうるか：</strong>BMでは各校がそのラウンドで受入を確定するため、第1志望で満員になった安全校へ第2志望として行っても席が残らない。そこで本当は人気校Aが第1志望でも、合格確率を考えてBを第1志望と書く誘因が生じる。提出順位が純粋な好みではなく「好み×合格予想」になり、制度側も本当の選好を観察できない。</div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">3</span></div>
+        <div class="topic-content">
+          <span class="topic-title">DAアルゴリズム：仮受入方式で安定性を実現</span>
+          <div class="topic-desc">
+            <p>Gale-Shapleyが1962年に定式化し、Rothが拡張・実装した画期的なメカニズム。仕組み：</p>
+            <ul>
+              <li>Step 1.1：全学生が第1志望校に割り当て</li>
+              <li>Step 1.2：各学校が成績順に学生を<strong>仮受入</strong>（入学確定ではない）。定員オーバーで下位拒否</li>
+              <li>Step 2.1：拒否された学生は次の志望校に割り当て</li>
+              <li>Step 2.2：各学校は手元の学生全体から改めて高順位者を仮受入（既仮受入中も含めて再評価）</li>
+              <li>Step 3以降：アルゴリズム終了時のマッチングが最終結果</li>
+            </ul>
+            <p><strong>安定性の証明（背理法）：</strong>「抜け駆けペア(i, j)が存在する」と仮定すると、DAでは「学生jは志望度の高い学校i全てに拒否されている＝iはjより志望度の高い学生とマッチしている」ことになり矛盾。</p>
+            <p><strong>耐戦略性の直感：</strong>仮受入なので、第1志望を申告しても割り当てが遅くなるだけで損しない。第1志望を回避する必要は全くない。どのような嘘申告をしても正直申告以上に得することはない。</p>
+            <div class="def-box"><strong>BMとの決定的な違い：</strong>DAでは学校が途中で席を確定せず、後から来た優先順位の高い学生と入れ替える。学生はAに挑戦して拒否されてからBへ進んでも、Bで自分より優先順位の低い仮受入者に勝てる。なお「正直申告が支配戦略」は学生提案DAの学生側についての性質であり、学校側にも同じ性質が自動的に成り立つという意味ではない。</div>
+            <div class="insight">
+              GaleとShapleyが定式化、Rothが実装・拡張。Shapley（2012年）・Roth（2012年）がノーベル経済学賞を受賞。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">4</span></div>
+        <div class="topic-content">
+          <span class="topic-title">DAアルゴリズムの実社会への応用と東大進振り</span>
+          <div class="topic-desc">
+            <p>DAアルゴリズムは世界各地で実際に導入され、劇的な改善をもたらした：</p>
+            <ul>
+              <li><strong>アメリカの研修医就活市場「The Match」</strong>：導入前は就活の早期化・青田買いが横行。DA導入後に安定化。日本でも2003年から医師臨床研修マッチング協議会が運用</li>
+              <li><strong>NYの高校入試</strong>：アンマッチ（どこにも入れない）学生が30,000人から3,000人に激減。Boston・Chicago・UK・一部の国の大学入試にも採用</li>
+              <li><strong>UTMDの活動</strong>：企業内部署配属（ブリヂストン・シスメックスで離職率低下）、保育園の入園選考（郡山市など）、公立高校の単願制改革を提案中</li>
+            </ul>
+            <p>
+              <strong>東大進振りの歴史：</strong>1994〜2014年は第1・第2段階ともBM。2016年以降、第2段階はDAに改定。
+              第2段階DAでは<strong>自分の点数が高いか低いかは関係なく、志望学科を正直に申告するのが支配戦略</strong>。
+              第1段階はいまだBMだが（理由は政治的合意の問題）、第2段階では正直申告が最善。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">5</span></div>
+        <div class="topic-content">
+          <span class="topic-title">オークション理論：4つのフォーマット</span>
+          <div class="topic-desc">
+            <p>1人の売り手・多数の買い手という設定で、価格をオークションで決める仕組み。適用先は絵画・骨董品・魚市場・国債・天然資源採掘権・周波数帯・Google広告と幅広い。</p>
+            <ul>
+              <li><strong>せり上げオークション（英国式）</strong>：価格が低いところから競り上がり、最後の残った人が落札</li>
+              <li><strong>第一価格封印入札</strong>：全員が同時に価格を提出、最高入札額者が落札し入札額を支払う</li>
+              <li><strong>第二価格封印入札（ヴィクリーオークション）</strong>：最高入札額者が落札するが、支払いは2番目に高い入札額</li>
+              <li><strong>せり下げオークション（蘭式）</strong>：価格が高いところから下がり、「ストップ」申告時の価格で取引</li>
+            </ul>
+            <p>
+              各買い手は評価額 θ_i ∈ [0, θ̄] を持つ（私的情報）。評価額の分布はF（全員対称）。
+              オークションを通じた情報収集・適正価格の探索が最大の機能だ（ゴッホの絵に X 円払える、など人によって異なる価値を市場が発見する）。
+            </p>
+            <div class="def-box"><strong>モデルの読み方：</strong>θ<sub>i</sub>は買い手iが払ってもよい上限額、b<sub>i</sub>は実際の入札額、β<sub>i</sub>(θ<sub>i</sub>)は評価額から入札額を決める戦略である。落札価格をpとすれば勝者の利得はθ<sub>i</sub>−p、敗者は0。Fが共通という仮定は、各人の評価額が同じ確率分布から生じる対称な環境を表す。</div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">6</span></div>
+        <div class="topic-content">
+          <span class="topic-title">第二価格オークション：正直申告が支配戦略（Vickrey）</span>
+          <div class="topic-desc">
+            <p>第二価格オークションでは、<strong>正直申告 β<sub>i</sub>(θ<sub>i</sub>) = θ<sub>i</sub></strong>が各買い手の（弱い意味での）支配戦略になる。ここでβ<sub>i</sub>は「評価額から入札額を決めるルール」、b<sub>i</sub>=β<sub>i</sub>(θ<sub>i</sub>)はそのルールが出す実際の入札額である。正直戦略は、他人の入札にかかわらず他の入札額より利得が低くならず、状況によっては厳密に高くなる。</p>
+            <div class="def-box">
+              <strong>証明の直感：</strong><br>
+              他人の最高入札額を m<sub>−i</sub>=max<sub>j≠i</sub>b<sub>j</sub> とおく。<br>
+              ・<strong>過大入札 b<sub>i</sub>&gt;θ<sub>i</sub></strong>：m<sub>−i</sub>がθ<sub>i</sub>とb<sub>i</sub>の間にあると、正直入札なら負けて0だが、過大入札では勝ってm<sub>−i</sub>&gt;θ<sub>i</sub>を払い、利得が負になる。それ以外では結果は正直入札と同じで、過大入札の方がよくなる場合はない。<br>
+              ・<strong>過小入札 b<sub>i</sub>&lt;θ<sub>i</sub></strong>：m<sub>−i</sub>がb<sub>i</sub>とθ<sub>i</sub>の間にあると、正直入札なら勝ってθ<sub>i</sub>−m<sub>−i</sub>≥0を得られるが、過小入札では負けて0になる。それ以外では結果は同じで、過小入札の方がよくなる場合はない。<br>
+              <strong>重要：自分の入札額が支払額に影響しない</strong>（支払いは相手の入札額で決まる）
+            </div>
+            <p>結果：評価額が最も高い人が落札 → <strong>財を最も有効活用できる配分（効率的）</strong>。価格は2番目の人の評価額。</p>
+            <div class="insight"><strong>数値例：</strong>評価額が100、70、40なら全員がそのまま入札し、100の人が落札して70を払う。勝者の利得は30。100より低く偽れば落札を逃す可能性があり、100より高く偽れば相手の入札が100を超えた場合に赤字で勝つ可能性があるため、どちらにも利点がない。</div>
+            <div class="insight">
+              Vickrey（1961年）の洞察：「支払額が自分の入札に依存しない」ことが正直申告インセンティブを生む。現在のGoogleの広告オークションに応用。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">7</span></div>
+        <div class="topic-content">
+          <span class="topic-title">第一価格オークション：ベイジアンナッシュ均衡とシェーディング</span>
+          <div class="topic-desc">
+            <p>第一価格では正直申告は均衡にならない（勝っても利益がゼロになるため、必ず入札を下げる「シェーディング」をする）。入札を下げると勝率は下がるが、勝ったときの儲けが増える。このトレードオフが均衡を決める。</p>
+            <div class="def-box">
+              <strong>均衡戦略（F = U[0,1]、買い手N人の場合）：</strong><br>
+              β<sub>i</sub>(θ<sub>i</sub>) = (N−1)/N × θ<sub>i</sub><br><br>
+              自分の評価額を (N-1)/N 倍にシェーディングして入札。Nが大きいほどシェーディングが小さくなる（競争が激しいほど正直申告に近づく）。
+            </div>
+            <p>ここでも、β<sub>i</sub>(·)は戦略ルール、実際の入札額はb<sub>i</sub>=β<sub>i</sub>(θ<sub>i</sub>)である。たとえばN=2、θ<sub>i</sub>=0.8なら、ルールβ<sub>i</sub>(θ)=θ/2に評価額0.8を入れた結果、入札額b<sub>i</sub>=0.4が出る。</p>
+            <div class="insight"><strong>式を数値で読む：</strong>買い手が2人で評価額0.8なら均衡入札は0.4、4人なら0.6。人数が増えるほど低く入札して負ける危険が増すため、係数(N−1)/Nは1へ近づく。この式は評価額が独立な一様分布U[0,1]という特定条件での結果で、一般の分布でも同じ係数になるわけではない。</div>
+            <p>ベイジアンナッシュ均衡：各人が相手の戦略ルール β<sub>j</sub>(·) を正しく予測した上で期待利得を最大化する戦略の組。「高度な読み合いの末の不動点」であり、相手の実際の入札b<sub>j</sub>を事前に知るという意味ではない。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">8</span></div>
+        <div class="topic-content">
+          <span class="topic-title">収入同値定理：第一価格と第二価格で売り手収益は同じ</span>
+          <div class="topic-desc">
+            <p>直感に反するが、第一価格と第二価格のオークションで売り手の<strong>期待収入は等しい</strong>（収入同値定理）。</p>
+            <div class="def-box">
+              <strong>収入同値定理（Revenue Equivalence Theorem）：</strong><br>
+              以下の2条件を満たすオークションは全て同じ期待収益を持つ：<br>
+              (a) 均衡で評価額が最大の人が落札する（効率性）<br>
+              (b) 評価額 θ_i = 0 の人の期待利得はゼロ（参加条件）
+            </div>
+            <p>
+              <strong>証明の鍵：</strong>どのオークション形式でも「取引による社会的余剰 = 勝者の評価額 θ_i」は同じ。
+              余剰を売り手と買い手が分けているだけなので、買い手の期待利得（= U(θ_i) = ∫ x(s)ds）が仕組みによらず一定なら、売り手の期待収益も一定になる。
+              せり上げ・せり下げ・all-pay auctionなど様々な形式も上記条件を満たせば全て収益は等価。
+            </p>
+            <div class="def-box"><strong>式の意味：</strong>x(s)は評価額がsの買い手が落札する確率で、効率的な方式なら「他の全員の評価額がs以下」の確率になる。U(θ)=∫<sub>0</sub><sup>θ</sup>x(s)ds は評価額θの買い手の期待利得。同じ配分確率xと最低タイプの利得0を共有すれば買い手利得が同じになり、総余剰からそれを引いた売り手収入も同じになる、という論理である。</div>
+            <div class="insight">
+              第一価格では買い手がシェーディング（入札を低め）するが、第二価格ではシェーディングなし。第一価格で「もらえる金額が少ない」ように見えるが、落札時の支払額も低いため結果的にトントン。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">9</span></div>
+        <div class="topic-content">
+          <span class="topic-title">周波数帯オークション：設計の難しさと実績</span>
+          <div class="topic-desc">
+            <p>周波数帯は「補完性のある複数財」（MassachusettsとConnecticutの帯域を組み合わせると効果倍増）であるため、通常の単一財封印入札では最適配分が困難。MilgromとWilsonは<strong>組み合わせクロックオークション（同時せり上げ方式）</strong>を設計した。</p>
+            <ul>
+              <li><strong>アメリカ（1993年導入）</strong>：2,300億ドルの収益（国家予算の約3%）。冷戦終結後の民間払い下げ</li>
+              <li><strong>イギリス（2000年）</strong>：225億ポンドの収益。BinmoreがKBEナイト称号を授与</li>
+              <li><strong>Milgrom・Wilson：2020年ノーベル経済学賞受賞</strong></li>
+              <li><strong>日本以外のOECD諸国は全て導入済み</strong></li>
+            </ul>
+            <p>
+              <strong>日本の現状（Beauty Contest）：</strong>携帯電話各社が計画書を総務省に提出し、計画書の優劣でライセンス無料割り当て。
+              「計画書の内容の真偽をキチンと見破れるのか？」という問題があり、入札額は各社の収益予測を正しく反映するのに対し計画書では競争が進まない。
+              さらに総務省の権力の源泉になっており制度変更を嫌がる構造がある。2025年に導入方針が確認された。
+            </p>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">🏷️</span>重要キーワード</h2>
+    <div class="concept-tags">
+      <span class="concept-tag t-blue">マーケットデザイン</span>
+      <span class="concept-tag t-blue">ミクロ経済理論</span>
+      <span class="concept-tag t-blue">ゲーム理論</span>
+      <span class="concept-tag">マッチング理論</span>
+      <span class="concept-tag">ボストンメカニズム（BM）</span>
+      <span class="concept-tag">DAアルゴリズム（延期受入）</span>
+      <span class="concept-tag">安定マッチング</span>
+      <span class="concept-tag">耐戦略性・支配戦略</span>
+      <span class="concept-tag t-purple">Gale-Shapley（1962）</span>
+      <span class="concept-tag t-purple">ベイジアンナッシュ均衡</span>
+      <span class="concept-tag t-blue">第二価格オークション</span>
+      <span class="concept-tag t-blue">第一価格オークション</span>
+      <span class="concept-tag t-orange">収入同値定理</span>
+      <span class="concept-tag t-orange">周波数帯オークション</span>
+      <span class="concept-tag t-orange">シェーディング</span>
+      <span class="concept-tag t-gray">東大進振り（第2段階DA）</span>
+      <span class="concept-tag t-gray">UTMD（マーケットデザインセンター）</span>
+    </div>
+  
+  <div class="kw-detail-list">
+    <p class="kw-detail-label">各キーワードの解説（クリックで展開）</p>
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details class="kw-item">
+      <summary class="kw-summary">マーケットデザイン</summary>
+      <div class="kw-body">ミクロ理論を実社会の「仕組みづくり」に応用する分野。Alvin Roth の言葉で「Economists as Engineers」——経済学者は市場を設計するエンジニアになるべきだという思想。マッチングとオークションが2大柱。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">ミクロ経済理論</summary>
+      <div class="kw-body">「人は合理的」という公理から出発し、最小限の仮定から政策変更のインパクトを事前に予測する理論的基盤。マーケットデザインはその応用形態。「経済学≠お金儲けの理論」という再定義が講義の出発点。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">ゲーム理論</summary>
+      <div class="kw-body">複数のプレイヤーが互いの行動を読み合う状況を分析する理論。マッチングの「正直申告か嘘か」やオークションの「いくら入札するか」はいずれもゲーム理論の問題。マーケットデザインの理論的土台。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">マッチング理論</summary>
+      <div class="kw-body">M校とN人の学生がいるとき、全員が正直に選好を申告し、かつ誰も「抜け駆け」できない安定した割り当てを設計する理論。学校選択・研修医配属・臓器移植に応用される。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">ボストンメカニズム（BM）</summary>
+      <div class="kw-body">かつてBoston・NYの公立高校で使われた方式。「第1志望に殺到→定員超過で拒否→第2志望へ」を繰り返す。正直申告がリスキーになり、成績優秀者が良い学校に行けない非効率が生じる。「人が悪いのではなくメカニズムが悪い」という経済学的教訓の典型例。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">DAアルゴリズム（延期受入）</summary>
+      <div class="kw-body">Gale-Shapley (1962) が設計したBMの改善版。BMとの決定的な違いは<strong>仮受入</strong>——一度割り当てても後でより良い候補が来れば差し替える。この「仮」のおかげで第1志望を正直に書いても損しない。NY高校入試でのアンマッチが30,000人→3,000人に激減した実績あり。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">安定マッチング</summary>
+      <div class="kw-body">「学生jが学校iを現在の相手より好み、かつiもjを現在の相手より好む」というペアが存在しないマッチング。DAアルゴリズムは常に安定マッチングを実現する（背理法で証明）。安定性こそが「誰も抜け駆けしない」という性質の本質。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">耐戦略性・支配戦略</summary>
+      <div class="kw-body">支配戦略 = 「相手の行動にかかわらず、自分にとって常に最善の戦略」。DAでは正直申告が支配戦略——嘘をついても得をしない。BMにはこの性質がない。耐戦略性はメカニズム設計の最重要性質のひとつ。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">Gale-Shapley（1962）</summary>
+      <div class="kw-body">マッチング理論の元祖論文。数学者Galeと経済学者Shapleyがアルゴリズムを定式化し、RothがNY高校入試・研修医配属などに実装・拡張した。Shapley・Rothは2012年ノーベル経済学賞受賞。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">ベイジアンナッシュ均衡</summary>
+      <div class="kw-body">第一価格オークションで登場する均衡概念。各人が相手の戦略を正しく予測した上で期待利得を最大化する戦略の組。支配戦略（相手の出方不問）より弱い均衡概念で、「高度な読み合いの不動点」とも言える。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">第二価格オークション</summary>
+      <div class="kw-body">最高入札者が落札するが、支払いは2番目の入札額（ヴィクリーオークション）。「自分の入札が支払額に影響しない」ため正直申告が支配戦略になる。現在のGoogle広告入札に応用。Vickrey (1961) の洞察。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">第一価格オークション</summary>
+      <div class="kw-body">最高入札者が落札し、自分の入札額を支払う。正直申告は均衡にならず、必ずシェーディングが起きる。均衡はベイジアンナッシュ均衡で求める。第二価格と対比することで収入同値定理が導かれる。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">シェーディング</summary>
+      <div class="kw-body">第一価格オークションで入札を評価額より低めに申告すること。「勝率は下がるが勝ったときの利益が増える」トレードオフの最適解。N人・U[0,1]分布の場合、均衡入札額は評価額の (N-1)/N 倍。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">収入同値定理</summary>
+      <div class="kw-body">直感に反するが、第一価格と第二価格で売り手の<strong>期待収入は等しい</strong>。条件は「効率的（最大評価額者が落札）」かつ「評価額ゼロの人の期待利得ゼロ」の2つ。第一価格でシェーディングされても結果的にトントンになる根拠。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">周波数帯オークション</summary>
+      <div class="kw-body">複数の補完財を同時に売るため単純な封印入札では最適配分が難しい。MilgromとWilsonが組み合わせクロックオークションを設計し、米で2,300億ドル・英で225億ポンドの収益。2020年ノーベル賞。日本は2025年に導入方針が確認された。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">東大進振り（第2段階DA）</summary>
+      <div class="kw-body">1994〜2014年は両段階ともBM。2016年以降、第2段階にDAを導入。自分の点数に関係なく志望学科を正直申告するのが支配戦略になった。「第1段階は今もBM」という政治的背景も講義で言及される。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">UTMD（マーケットデザインセンター）</summary>
+      <div class="kw-body">東大マーケットデザインセンター。ブリヂストン・シスメックスの部署配属や郡山市の保育園入園にDAを応用し、離職率低下などの成果を実証。理論を社会実装する研究機関。</div>
+    </details>
+  </div>
+</div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📝</span>過去問との対応</h2>
+    <div class="exam-ref-box">
+
+      <!-- 2025 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2025年度 期末試験</span>
+          <a href="../kakomon_2025.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q23</span><span class="eq-topic">マッチング・GSアルゴリズム</span></div>
+<div class="exam-qa-q">「安定マッチング問題」において、（学生提案型の）ゲールシャプレーアルゴリズムの説明として最も適切なものを選んでください。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>決まった回数（例えば10回）のステップを遂行した後、全ての仮マッチを確定する。</li>
+<li class="opt"><span class="opt-label">(b)</span>各ステップでマッチングを即確定させ、後で取り消せない。</li>
+<li class="opt"><span class="opt-label">(c)</span>「企業からみた学生の順位nと学生からみた企業の順位n'の和」が最小の学生を選ぶ。</li>
+<li class="opt correct"><span class="opt-label">(d)</span>学生が提案し、企業が仮マッチ（保留）し続け、新しく応募が起きなくなった時点で全ての仮マッチを確定し最終マッチングを出力する。<span class="correct-mark">正解</span></li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>ゲールシャプレー（Deferred Acceptance）アルゴリズム：</p>
+<p>1. 学生が希望第1位の企業に「応募」する。<br/>
+    2. 企業はアンマッチより悪い学生を全員不合格にし、残りから最も好む学生まで定員数を「<em>仮マッチ（保留）</em>」し、他を不合格にする。<br/>
+    3. 不合格になった学生は次の希望先に応募する。<br/>
+    4. 企業は新たに応募してきた学生も含めて再評価し、最も好む学生を仮マッチにする（前の仮マッチが取り消されることもある）。<br/>
+    5. <em>新しく応募が起きなくなった時点</em>で全仮マッチを確定する。</p>
+<p>「受け入れ保留方式（Deferred Acceptance）」と呼ばれる理由は、企業が学生の受け入れを「保留」し続けるから。(a)固定回数で終わらない。(b)即確定はDAでない。(c)n+n'最小は誤ったルール。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q24</span><span class="eq-topic">マッチング問題の安定マッチング数</span></div>
+<div class="exam-qa-q">学生1・2、企業A・B（定員各1）のマッチング問題。学生1:A&gt;B&gt;アンマッチ、学生2:B&gt;A&gt;アンマッチ、企業A:2&gt;1&gt;アンマッチ、企業B:1&gt;2&gt;アンマッチ。この問題に関する解説でもっとも適切なものを選んでください。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>このマッチング問題で学生提案型GSアルゴリズムを適用すると、少なくとも一人の学生は希望順位を偽ってより望ましいマッチングを得ることができる。</li>
+<li class="opt"><span class="opt-label">(b)</span>このマッチング問題で学生提案型GSアルゴリズムを適用することにすると、企業たちは希望順位を偽っても望ましいマッチングを得ることはできない。</li>
+<li class="opt"><span class="opt-label">(c)</span>このマッチング問題には安定マッチングが一つだけ存在する。</li>
+<li class="opt correct"><span class="opt-label">(d)</span>このマッチング問題には安定マッチングが二つだけ存在する。<span class="correct-mark">正解</span></li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>2023年Q6と同じ問題。安定マッチングは2つ存在する。</p>
+<p>・<strong>{1-A, 2-B}：</strong>ブロッキングペアなし → 安定。<br/>
+    ・<strong>{1-B, 2-A}：</strong>{1,A}ペアで企業Aは学生2（現在の相手）を学生1より好む → ブロッキングペアにならない。{2,B}ペアで企業Bは学生1（現在の相手）を学生2より好む → ブロッキングペアにならない → 安定。</p>
+<p>(a) 学生提案型GSは学生にとって耐戦略的（誤り）。(b) 企業提案型GSが企業に耐戦略的。学生提案型では企業は操作の余地がある（誤り）。(c) 安定マッチングは1つでなく2つ（誤り）。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2024年度 期末試験</span>
+          <a href="../kakomon_2024.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q9</span><span class="eq-topic">マッチングの安定性定義</span></div>
+<div class="exam-qa-q">安定マッチング問題において、マッチング（μ）の安定性の定義として最も適切なものを選んでください。（全企業の定員は1）</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>個人合理性を満たし、さらにブロッキングペアが「少なくとも1組存在する」。</li>
+<li class="opt"><span class="opt-label">(b)</span>μと異なるマッチングで全員が今より良くなるものが存在しない（パレート最適）。</li>
+<li class="opt"><span class="opt-label">(c)</span>アンマッチよりは相手を好む（個人合理性のみ）。</li>
+<li class="opt correct"><span class="opt-label">(d)</span>個人合理性を満たし、かつブロッキングペア（互いにμの相手より好む未マッチペア）が存在しない。<span class="correct-mark">正解</span></li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>2023年Q5と同じ内容。安定マッチングの定義は2条件の同時成立：<br/>
+    ①<em>個人合理性</em>：全参加者がアンマッチより自分の相手を好む（もしくはアンマッチ）。<br/>
+    ②<em>ブロッキングペアなし</em>：マッチしていない学生sと企業Fで「sはFを今の相手より好み、FもsをFの今の相手より好む」という組み合わせが存在しない。</p>
+<p>(a)はブロッキングペアが「存在する」＝不安定。(b)はパレート最適。(c)は①のみ。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q10</span><span class="eq-topic">GSアルゴリズムの耐戦略性</span></div>
+<div class="exam-qa-q">Q6と同じマッチング問題（学生1: A&gt;B、学生2: B&gt;A、企業A: 2&gt;1、企業B: 1&gt;2）。学生提案型GSアルゴリズムを適用したとき、最も適切な記述を選べ。</div>
+<ul class="options">
+<li class="opt correct"><span class="opt-label">(a)</span>学生たちは自分だけが希望順位を偽っても、より望ましいマッチングを得ることはできない。<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(b)</span>少なくとも一人の学生は希望順位を偽ってより望ましいマッチングを得ることができる。</li>
+<li class="opt"><span class="opt-label">(c)</span>このマッチング問題には安定マッチングが一つだけ存在する。</li>
+<li class="opt"><span class="opt-label">(d)</span>企業たちは自分だけが希望順位を偽っても、より望ましいマッチングを得ることはできない。</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>ゲールシャプレー（GS）アルゴリズムの重要な性質：</p>
+<p><strong>学生提案型GSアルゴリズム</strong>は<em>学生にとって耐戦略的（strategy-proof）</em>。どの学生も、他の学生が正直に申告している状況では、自分だけが希望順位を偽って申告しても、正直に申告した場合より良いマッチングを得ることができない。</p>
+<p>(b)は誤り。(c)は誤り（安定マッチングは2つ存在する、2023年Q6参照）。</p>
+<p>(d)は誤り：企業提案型なら企業側が耐戦略的だが、<strong>学生提案型では企業側は必ずしも耐戦略的でない</strong>。企業側は希望順位を操作することで有利なマッチングを得られる場合がある。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2023年度 期末試験</span>
+          <a href="../kakomon_2023.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q5</span><span class="eq-topic">マッチングの安定性定義</span></div>
+<div class="exam-qa-q">学生と企業がマッチする「安定マッチング問題」において、マッチング（μ）の安定性の定義として最も適切なものを選んでください。ただし全ての企業の定員は１とします。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>個人合理性を満たし、さらにブロッキングペアが「少なくとも1組存在する」マッチング。</li>
+<li class="opt"><span class="opt-label">(b)</span>μと異なるマッチングで全員が今より良くなるものが存在しない（パレート最適）。</li>
+<li class="opt correct"><span class="opt-label">(c)</span>個人合理性（全員がアンマッチより相手を好む）を満たし、かつブロッキングペア（互いにμの相手より好む未マッチペア）が存在しない。<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>アンマッチよりは望ましい相手とマッチしている（個人合理性のみ）。</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>安定マッチングの定義は2つの条件の<em>両立</em>：</p>
+<p><strong>①個人合理性：</strong>どの参加者も「アンマッチ（誰ともマッチしない）よりは現在の相手の方を好む」。アンマッチより悪い相手とマッチしているなら、その人はそもそもマッチを拒否するはず。</p>
+<p><strong>②ブロッキングペアなし：</strong>マッチしていない学生iと企業fのペアで「iにとってfは今の相手より好き、かつfにとってiは今の相手より好き」という組み合わせが存在しない。こういうペアがあると「抜け駆け」が起きて不安定になる。</p>
+<p>(a)はブロッキングペアが「存在する」不安定な状態。(b)はパレート最適の定義。(d)は個人合理性のみ。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q6</span><span class="eq-topic">マッチング問題の安定マッチング数</span></div>
+<div class="exam-qa-q">学生1・2、企業A・B（定員各1）のマッチング問題。学生1:A&gt;B&gt;アンマッチ、学生2:B&gt;A&gt;アンマッチ、企業A:2&gt;1&gt;アンマッチ、企業B:1&gt;2&gt;アンマッチ。この問題について最も適切なものを選んでください。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>安定マッチングが一つだけ存在する。それは「1とAがマッチし、2とBがマッチする」もの。</li>
+<li class="opt correct"><span class="opt-label">(b)</span>安定マッチングが２つ存在する。「1-A, 2-B」と「1-B, 2-A」の二つ。<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(c)</span>安定マッチングが存在しない。</li>
+<li class="opt"><span class="opt-label">(d)</span>安定マッチングが一つだけ存在する。それは「1とBがマッチし、2とAがマッチする」もの。</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>両方のマッチングを検証する。</p>
+<p><strong>マッチング①「1-A, 2-B」：</strong><br/>
+    ・{1,B}ペア：学生1はBよりAを好む（Aが第1希望）→ 学生1はBと組みたくない → ブロッキングペアにならない。<br/>
+    ・{2,A}ペア：学生2はAよりBを好む（Bが第1希望）→ 学生2はAと組みたくない → ブロッキングペアにならない。<br/>
+    → <em>安定</em></p>
+<p><strong>マッチング②「1-B, 2-A」：</strong><br/>
+    ・{1,A}ペア：学生1はAを好む✓。企業AはA:2&gt;1であり、現在の相手（学生2）の方を学生1より好む → 企業Aは学生1と組みたくない → ブロッキングペアにならない。<br/>
+    ・{2,B}ペア：学生2はBを好む✓。企業BはB:1&gt;2であり、現在の相手（学生1）の方を学生2より好む → 企業Bは学生2と組みたくない → ブロッキングペアにならない。<br/>
+    → <em>安定</em></p>
+<p>よって安定マッチングは2つ存在する。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="lecture-nav">
+    <a href="第3回.html">← 第3回</a>
+    <a href="index.html" class="center">講義一覧</a>
+    <a href="第5回.html">第5回 →</a>
+  </div>
+
+</div>
+
+<script>
+// 押されたボタンに対応する解説欄の表示を切り替える。
+function toggleExp(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const opt = e.target.closest('.opt');
+  if (!opt) return;
+  const options = opt.closest('.options');
+  if (!options || options.classList.contains('revealed')) return;
+  options.classList.add('revealed');
+  opt.classList.add('selected');
+});
+</script>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">現代経済理論（渡辺安虎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+</body>
+</html>

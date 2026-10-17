@@ -1,0 +1,525 @@
+<!DOCTYPE html><!-- 「2023年度 過去問 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>2023年度 過去問 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="td.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    tags: 'ams',
+    macros: {
+      pd: ['\\left(\\frac{\\partial #1}{\\partial #2}\\right)_{#3}',3]
+    }
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body data-nav-page="exam-2023">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">熱力学ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">ホーム</a>
+      <a href="ch0.html" data-page="ch0">第0章</a>
+      <a href="ch1.html" data-page="ch1">第1章</a>
+      <a href="ch2.html" data-page="ch2">第2章</a>
+      <a href="ch3.html" data-page="ch3">第3章</a>
+      <a href="ch4.html" data-page="ch4">第4章</a>
+      <a href="ch5.html" data-page="ch5">第5章</a>
+      <a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a>
+      <a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023" class="active">2023</a>
+      <a href="kakomon_2014.html" data-page="kakomon_2014">2014</a>
+      <a href="kakomon_2012.html" data-page="kakomon_2012">2012</a>
+      <a href="kakomon_2011.html" data-page="kakomon_2011">2011</a>
+      <a href="kakomon_2010.html" data-page="kakomon_2010">2010</a>
+      <a href="kakomon_2009.html" data-page="kakomon_2009">2009</a>
+      <a href="kakomon_2008.html" data-page="kakomon_2008">2008</a>
+      <a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>熱力学 過去問解説</h1>
+  <p class="subtitle">2023年度期末試験</p>
+  <p class="meta">担当：福島孝治｜2023年7月31日 3時限｜試験時間90分｜前期課程 Sセメスター</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（磁石の熱力学＝常磁性体のCurie則）</a>
+    <a href="#q2">大問2（熱力学第二法則）</a>
+    <a href="#q3">大問3（$U(S,V)$ で与えられた気体＝ファンデルワールス気体）</a>
+    <a href="#q4">大問4（感想）</a>
+  </div>
+
+  <div class="source-note">
+    この年度の原本には模範解答の添付がなかったため、以下はすべて標準的な熱力学の議論に基づいて独自に作成した解説である。なお、大問1（磁石の熱力学）は<a href="kakomon_2025.html">2025年度</a>の大問1（ゴムの熱力学）と全く同じ構造の設問（$X$–$l$ を $H$–$M$ に置き換えたもの）になっており、大問2・大問3も2025年度とほぼ共通の題材なので、あわせて参照するとよい。
+  </div>
+
+  <!-- ============ 大問1 ============ -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header">
+      <div class="sec-tag">大問 1</div>
+      <h2>磁石の熱力学（常磁性体・Curie則）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>
+          磁界 $H$ の中にある磁石の熱平衡状態を指定する状態変数に磁石の強さを表す磁気モーメント（磁化）$M$がある。磁化 $M$ は物質の大きさに比例する量である。磁界 $H$ の中で磁化 $M$ の磁石を準静的に $dM$ だけ微小変化させるとき、磁石にされる微小仕事 $δW$ は、$δW=HdM$ と表されるとする。以下では、状態変化に伴う体積変化は極めて小さく、無視できるとする。
+        </p>
+        <p>ここで考える磁石の磁化 $M$ は、温度 $T$ と磁界 $H$ の関数として次の状態方程式に従う：</p>
+        <div class="mathblock">$$M(T,H) = A\frac{H}{T}$$</div>
+        <p>
+          ただし、$A$ は正の定数とする。また、磁化一定の条件での熱容量 $C_M$ は温度に依存しない定数とする。エントロピーを $S$、内部エネルギーを $U$ として、以下の問いに答えよ（簡単のため $H$ と $M$ はスカラーとする）。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">この状態方程式の正体＝Curieの法則</span>
+        <p>
+          $M=AH/T$ は、常磁性体の磁化が磁界に比例し温度に反比例するという<strong>Curieの法則</strong>そのものである（$A$ はCurie定数に相当）。ゴムの $X$–$l$ 系（<a href="kakomon_2025.html#q1">2025年度大問1</a>）と全く同じ数学構造を持つが、この大問はさらに、常磁性体の断熱消磁による極低温冷却（後述(9)）という、現実の低温物理学で使われている技術に直結している点が特徴的。対応関係は $-P\leftrightarrow H$、$V\leftrightarrow M$（ただし符号が逆転していることに注意：$δW=HdM$ であって $-HdM$ ではない）。
+        </p>
+      </div>
+
+      <h3 id="q1-1">(1) 熱力学関係式</h3>
+      <div class="ex"><span class="box-label">問題</span><p>熱力学第一法則と第二法則を $dU=\Box\,dS+\Box\,dM$ と表すとき、空欄を答えよ。</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$dU = T\,dS + H\,dM$$</div>
+        <div class="proof-body">
+          <p>第一法則 $dU=δQ+δW$ に、可逆変化での $δQ=TdS$ と、与えられた $δW=HdM$ を代入するだけでよい。</p>
+          <div class="mathblock">$$dU = TdS + HdM$$</div>
+        </div>
+      </details>
+
+      <h3 id="q1-2">(2) Maxwell関係式</h3>
+      <div class="ex"><span class="box-label">問題</span><p>温度 $T$ と磁化 $M$ の関数としてのHelmholtz自由エネルギー $F(T,M)$ から導かれるMaxwell関係式を答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$F=U-TS,\qquad dF=-S\,dT+H\,dM,\qquad \pd{H}{T}{M} = -\pd{S}{M}{T}$$
+      </div>
+        <div class="proof-body">
+          <p>$F=U-TS$ の微小変化を計算すると</p>
+          <div class="mathblock">$$dF = dU-TdS-SdT = (TdS+HdM)-TdS-SdT = -SdT+HdM$$</div>
+          <p>ゆえに $\pd{F}{T}{M}=-S$、$\pd{F}{M}{T}=H$。偏微分の交換可能性 $\dfrac{\partial^2F}{\partial T\partial M}=\dfrac{\partial^2F}{\partial M\partial T}$ より</p>
+          <div class="mathblock">$$\pd{H}{T}{M} = -\pd{S}{M}{T}$$</div>
+          <p>状態方程式から $\pd{H}{T}{M}$ の具体形も出しておく。$H=\dfrac{T}{A}M$ なので $\pd{H}{T}{M}=\dfrac MA$。よって $\pd{S}{M}{T}=-\dfrac MA$ が(4)以降で使う具体形になる。</p>
+        </div>
+      </details>
+
+      <h3 id="q1-3">(3) 熱容量 $C_M$</h3>
+      <div class="ex"><span class="box-label">問題</span><p>熱容量 $C_M$ を内部エネルギー $U$ を用いて表せ（偏微分を含んでよい）。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$C_M = \pd{U}{T}{M}$$</div>
+        <div class="proof-body">
+          <p>$U(T,M)$ の全微分 $dU=\pd{U}{T}{M}dT+\pd{U}{M}{T}dM$ を、$δQ=dU-δW=dU-HdM$ に代入すると</p>
+          <div class="mathblock">$$δQ = \pd{U}{T}{M}dT + \left[\pd{U}{M}{T}-H\right]dM$$</div>
+          <p>磁化一定（$dM=0$）での熱容量は、この式の $dT$ 係数：</p>
+          <div class="mathblock">$$C_M = \left.\frac{δQ}{dT}\right|_M = \pd{U}{T}{M}$$</div>
+        </div>
+      </details>
+
+      <h3 id="q1-4">(4) $U$ が $M$ に依存しないことを示す</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この磁石の内部エネルギーは $M$ に依存せずに、温度のみに依存することを示せ。つまり $\pd{U}{M}{T}=0$ を示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$\pd{U}{M}{T} = 0$$</div>
+        <div class="proof-body">
+          <p>(1)の関係式を $M$ で偏微分（$T$一定）してエネルギー方程式を作る。</p>
+          <div class="mathblock">$$\pd{U}{M}{T} = T\pd{S}{M}{T} + H = -T\pd{H}{T}{M} + H$$</div>
+          <p>状態方程式 $H=\dfrac TA M$ より $\pd{H}{T}{M}=\dfrac MA = \dfrac HT$（$M=AH/T$ を使って書き換えた）。代入すると</p>
+          <div class="mathblock">$$\pd{U}{M}{T} = -T\cdot\frac HT + H = -H+H = 0$$</div>
+          <p>ゆえに $U=U(T)$。理想気体の $\pd{U}{V}{T}=0$、および2025年度のゴムの $\pd{U}{l}{T}=0$ と全く同じ理由（状態方程式が $H/T=M/A$ の形で $T$ に依存しない比を持つ）による。</p>
+        </div>
+      </details>
+
+      <h3 id="q1-5">(5) $C_H$ と $C_M$ の関係・大小</h3>
+      <div class="ex"><span class="box-label">問題</span><p>磁界一定の条件での熱容量を $C_H$ とすると、$C_H$ を $C_M$ を用いて表せ。また、$C_M$ と $C_H$ のどちらが大きいかを理由とともに説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$C_H = C_M + \frac{HM}{T} \ge C_M$$</div>
+        <div class="proof-body">
+          <p>(4)より $\pd{U}{M}{T}=0$ なので、(3)の $δQ$ の式は</p>
+          <div class="mathblock">$$δQ = C_M\,dT - H\,dM$$</div>
+          <p>まで簡単になる。磁界 $H$ 一定での熱容量は</p>
+          <div class="mathblock">$$C_H = \left.\frac{δQ}{dT}\right|_H = C_M - H\pd{M}{T}{H}$$</div>
+          <p>状態方程式 $M=AH/T$ を $H$ 一定のまま $T$ で微分すると</p>
+          <div class="mathblock">$$\pd{M}{T}{H} = -\frac{AH}{T^2} = -\frac MT$$</div>
+          <p>したがって</p>
+          <div class="mathblock">$$C_H = C_M - H\left(-\frac MT\right) = C_M + \frac{HM}{T}$$</div>
+          <p>
+            $H,M,T$ はすべて正（$H>0$ の場合を考えている）なので $HM/T>0$。ゆえに $C_H\ge C_M$（気体の $C_P\ge C_V$、ゴムの $C_X\ge C_l$ と同じ構造の不等式）。物理的には、磁界一定で温めると磁化 $M$ が変化する（(9)で見るように、$H$ 一定なら温めると $M$ は減る）ため、その分の追加のエネルギーのやり取りが必要になり、$C_M$（磁化を固定して純粋に温度だけを上げる場合）より多くの熱を要する。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-6">(6) 等温磁化での熱 $Q_{0\to1}$</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この磁石を温度 $T$ に保ちながら、ゆっくりと磁化を $M=0$ から $M_1(>0)$ に変化させるとき（準静的等温過程）に磁石に与えられる熱 $Q_{0\to1}$ を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$Q_{0\to1} = -\frac{T}{2A}M_1^2 \;(<0)$$</div>
+        <div class="proof-body">
+          <p>(5)で得た $δQ=C_MdT-HdM$ を等温（$dT=0$）で積分する。$H=\dfrac TA M$（状態方程式を $H$ について解いた形）を使うと</p>
+          <div class="mathblock">$$Q_{0\to1} = -\int_0^{M_1} H\,dM = -\frac TA\int_0^{M_1} M\,dM = -\frac{T}{2A}M_1^2$$</div>
+          <p>
+            $T,A,M_1^2$ はすべて正なので $Q_{0\to1}<0$：<strong>等温で磁化を強めていく過程は発熱過程である。</strong>2025年度のゴムを等温で引っ張ると発熱したのと全く同じ構造（$X\leftrightarrow H$、$l\leftrightarrow M$、伸ばす$\leftrightarrow$磁化を強める、で完全に対応）。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-7">(7) 断熱曲線</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この磁石の断熱曲線を温度 $T$ と磁界 $H$ の関数として求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$C_M\ln T - \frac{AH^2}{2T^2} = \text{const.}$$
+      </div>
+        <div class="proof-body">
+          <p>断熱条件 $δQ=0$ を $δQ=C_MdT-HdM$ に課す。$H=\dfrac TA M$ なので $dQ=C_MdT-\dfrac TA MdM=0$、すなわち</p>
+          <div class="mathblock">$$\frac{dT}{T} = \frac{M}{AC_M}dM \quad\Longrightarrow\quad C_M\ln T = \frac{M^2}{2A}+\text{const.}$$</div>
+          <p>
+            これは磁化 $M$ を使った表現なので、状態方程式 $M=AH/T$（つまり $M^2=A^2H^2/T^2$）を代入して、設問の要求通り $T,H$ の関数に書き換える：
+          </p>
+          <div class="mathblock">$$C_M\ln T = \frac{A^2H^2/T^2}{2A}+\text{const.} = \frac{AH^2}{2T^2}+\text{const.}$$</div>
+          <p>すなわち $C_M\ln T-\dfrac{AH^2}{2T^2}=\text{const.}$（$T$ と $H$ の陰関数の形。$H\to0$ の極限などは(9)で詳しく調べる）。</p>
+        </div>
+      </details>
+
+      <h3 id="q1-8">(8) Carnotサイクル：$M$–$H$ 平面</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この磁石でCarnotサイクルを作るときのサイクルの様子を $M-H$ 平面で図示し、吸熱する過程と放熱する過程を明示せよ。また、サイクルの熱効率を答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$\eta = 1-\frac{T_2}{T_1}$$</div>
+        <div class="diagram">
+        <svg viewBox="0 0 520 320" width="520" data-thermo-plot="magnet-carnot" role="img" aria-labelledby="mh23-title mh23-desc">
+          <title id="mh23-title">数式から描いた磁石のCarnotサイクル</title>
+          <desc id="mh23-desc">横軸M、縦軸Hとし、等温線H=TMと断熱式から生成した反時計回りのCarnotサイクル</desc>
+          <defs>
+            <marker id="arMH23-axis" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#1a2b4a"/></marker>
+            <marker id="arMH23-iso" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#b07820"/></marker>
+            <marker id="arMH23-adi" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#0b6e6e"/></marker>
+          </defs>
+          <g stroke="#1a2b4a" stroke-width="1.7" fill="none"><line x1="65" y1="280" x2="65" y2="20" marker-end="url(#arMH23-axis)"/><line x1="65" y1="280" x2="490" y2="280" marker-end="url(#arMH23-axis)"/></g>
+          <g font-size="15" font-style="italic" fill="#1a2b4a"><text x="38" y="28">H</text><text x="480" y="302">M</text></g>
+          <g fill="none" stroke-width="3">
+            <path data-curve="hot" data-equation="H=2M" stroke="#b07820"/><path data-curve="demagnetize-adiabatic" data-equation="ln(T)-M^2/2=const" stroke="#0b6e6e"/>
+            <path data-curve="cold" data-equation="H=1.4M" stroke="#b07820"/><path data-curve="magnetize-adiabatic" data-equation="ln(T)-M^2/2=const" stroke="#0b6e6e"/>
+            <path data-arrow="hot" stroke="#b07820" marker-end="url(#arMH23-iso)"/><path data-arrow="demagnetize-adiabatic" stroke="#0b6e6e" marker-end="url(#arMH23-adi)"/>
+            <path data-arrow="cold" stroke="#b07820" marker-end="url(#arMH23-iso)"/><path data-arrow="magnetize-adiabatic" stroke="#0b6e6e" marker-end="url(#arMH23-adi)"/>
+          </g>
+          <g fill="#fff" stroke="#1a2b4a" stroke-width="2"><circle data-state="1" r="5"/><circle data-state="2" r="5"/><circle data-state="3" r="5"/><circle data-state="4" r="5"/></g>
+          <g font-size="13" font-weight="700" fill="#1a2b4a"><text data-state-label="1" data-dx="7" data-dy="-7">1</text><text data-state-label="2">2</text><text data-state-label="3" data-dx="-17" data-dy="10">3</text><text data-state-label="4" data-dx="-17" data-dy="-8">4</text></g>
+          <g font-size="12.5"><text x="360" y="80" fill="#8b5b13">T₁：消磁・吸熱</text><text x="225" y="232" fill="#8b5b13">T₂：磁化・放熱</text><text x="258" y="161" fill="#075d5d">断熱消磁</text><text x="380" y="132" fill="#075d5d">断熱磁化</text></g>
+        </svg>
+        <div class="diagram-cap">
+          横軸を磁化 $M$、縦軸を磁界 $H$ とする。規格化して $A=C_M=1$、$T_1=2,T_2=1.4$ とし、等温式 $H=TM$ と断熱式 $\ln T-M^2/2=\text{const.}$（すなわち断熱線上で $H=M C\exp(M^2/2)$）から座標を生成した。同じ $M$ では高温等温線 $H=T_1M$ の方が上にあり、サイクルは気体の $P$–$V$ 図とは逆の反時計回りになる。1→2：高温で消磁・吸熱、2→3：断熱消磁、3→4：低温で磁化・放熱、4→1：断熱磁化。
+        </div>
+      </div>
+        <div class="proof-body">
+          <p>
+            (7)で求めた断熱曲線に沿って高温 $T_1$・低温 $T_2$ の等温線をつなぐと、$T$–$S$ 平面では2025年度のゴムと同様、2本の等温線と2本の断熱線（$S=$一定）からなる長方形になる。Carnotの定理（動作物質によらず可逆熱機関の効率は温度だけで決まる）より、効率は普遍公式
+          </p>
+          <div class="mathblock">$$\eta = 1-\frac{T_2}{T_1}$$</div>
+          <p>で与えられる。$M$–$H$ 平面での向きが気体の $P$–$V$ サイクルと逆転する理由は、2025年度のゴムと全く同じ：$\pd{S}{M}{T}=-\dfrac MA<0$（気体の $\pd{S}{V}{T}=\pd{P}{T}{V}>0$ と符号が逆）だから。</p>
+        </div>
+      </details>
+
+      <h3 id="q1-9">(9) 断熱消磁：温度は上がるか下がるか</h3>
+      <div class="ex"><span class="box-label">問題</span><p>温度 $T_1$ と磁界 $H>0$ の平衡状態にある磁石を断熱的に磁界をゼロにさせるとき、そこで実現する平衡状態の温度は $T_1$ から上がるか下がるかを理由とともに答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>温度は<strong>下がる</strong>（断熱消磁冷却）。</div>
+        <div class="proof-body">
+          <p>
+            断熱（$dS=0$）のもとで $H$ を変化させたときの $T$ の変化を見るため、$dS=0$：$C_MdT/T=(M/A)dM$ に、状態方程式の全微分 $dM=\dfrac AT dH-\dfrac{AH}{T^2}dT$ を代入する。
+          </p>
+          <div class="mathblock">$$\frac{C_M}{T}dT = \frac MA\left(\frac AT dH - \frac{AH}{T^2}dT\right) = \frac MT dH - \frac{MH}{T^2}dT$$</div>
+          <p>$dT$ の項をまとめると</p>
+          <div class="mathblock">$$\left(\frac{C_M}{T}+\frac{MH}{T^2}\right)dT = \frac MT dH \quad\Longrightarrow\quad \pd{T}{H}{S} = \frac{M}{C_M+MH/T}$$</div>
+          <p>
+            $M=AH/T$ を使うと $MH/T=AH^2/T^2>0$ なので分母は正。また $H>0$ のとき $M=AH/T>0$ なので分子も正。ゆえに
+          </p>
+          <div class="mathblock">$$\pd{T}{H}{S} = \frac{AH/T}{C_M+AH^2/T^2} > 0$$</div>
+          <p>
+            すなわち、断熱条件下では $T$ は $H$ の増加関数——$H$ を下げれば（消磁すれば）$T$ も下がり、$H$ を上げれば（磁化を強めれば）$T$ も上がる。したがって、$H>0$ から断熱的に $H=0$ まで下げると、<strong>温度は $T_1$ より下がる</strong>。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 断熱消磁冷却（絶対零度への接近）</span>
+        <p>
+          (9)で示した「断熱的に磁界を弱めると温度が下がる」という性質は、<strong>断熱消磁冷却（adiabatic demagnetization refrigeration）</strong>と呼ばれる、極低温を実現するための代表的な手法の理論的基盤そのものである。手順は本問の(6)(9)をそのまま組み合わせたもの：①強い磁界 $H$ をかけたまま試料を熱浴（例えば液体ヘリウム、温度 $T_0$）に接触させ、等温磁化により余分な熱（(6)で見た発熱）を熱浴に逃がす、②試料を熱浴から断熱的に切り離し、磁界をゆっくりゼロまで下げる（断熱消磁）——(9)の結果により試料の温度は $T_0$ よりもさらに下がる。1933年にGiauque と MacDougall がこの手法で史上初めて1K以下の極低温を実現し、Giauqueはこの功績で1949年にノーベル化学賞を受賞した。核スピンを使った断熱消磁（核断熱消磁）では、今日でもマイクロケルビン領域の極低温を作り出す標準的な手法として使われ続けている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問2 ============ -->
+  <div class="section" id="q2">
+    <div class="sec-header">
+      <div class="sec-tag">大問 2</div>
+      <h2>熱力学第二法則に関する3つの設問</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3 id="q2-1">(1) エントロピー増大則の説明とエントロピーを減らす方法</h3>
+      <div class="ex"><span class="box-label">問題</span><p>熱力学第二法則の表現はたくさん存在する。その一つである「エントロピー増大則」について説明し、エントロピーを減少させる方法を一つ提案せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>エントロピー増大則：孤立系（断熱的に外界から隔離された系）で起こる不可逆過程では、系全体のエントロピーは決して減少せず、平衡状態で最大になる（$\Delta S\ge0$）。減少させる方法の例：系を外界（より低温の熱源）と接触させ、熱を系外へ捨てる。</div>
+        <div class="proof-body">
+          <p>
+            エントロピー増大則は正確には「孤立系（外部と熱・物質のやり取りが一切ない系）において、可逆過程ではエントロピーは変化せず（$\Delta S=0$）、不可逆過程では必ず増加する（$\Delta S>0$）。したがって孤立系のエントロピーは時間とともに単調に増加し、系が到達しうる平衡状態はエントロピーが最大になる状態である」という形で述べられる。これは、あらゆる自発的（不可逆な）過程が持つ一方向性（時間の矢）を定量的に表現したものであり、他の表現（Clausiusの原理、Kelvinの原理）と論理的に同値であることが知られている。
+          </p>
+          <p>
+            孤立系そのものではエントロピーは減らせないが、<strong>系を孤立させず外部と相互作用させれば</strong>系単独のエントロピーは容易に減らせる。最も簡単な方法は、注目する系をより低温の熱源に接触させて熱を放出させること（大問2(2)の設問1（体積一定での冷却）がまさにこの例）。あるいは、外部から仕事を加えて系を圧縮する、外部から系に対して秩序立った操作（本問(1)の磁石なら磁界をかけて磁気モーメントを揃える等）を行うことでも系のエントロピーは減少しうる。いずれの場合も、系の外側（熱源や、仕事をした側の装置）のエントロピーがそれ以上に増加しており、「系＋外部」を合わせた全体としての孤立系のエントロピーは減少しない。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q2-2">(2) 熱を全部仕事に変える等温膨張は第二法則に反するか</h3>
+      <div class="ex"><span class="box-label">問題</span><p>理想気体の入っているピストンに温度 $T$ の熱源を接触して、準静的等温過程で体積を膨張させた。理想気体の内部エネルギーは体積に依存しないため、温度が一定なら内部エネルギーは一定であり、すなわち、$dU=δQ+δW=0$ である。この準静的等温膨張過程では、熱源から熱 $(-δQ)$ をもらってそのまま外に仕事 $(δW)$ に変換している。これは熱力学第二法則に反しないかを説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>反しない。Kelvinの原理が禁じるのは「サイクル」で熱をすべて仕事に変えることであり、この等温膨張は状態が変化する非循環過程だから。</div>
+        <div class="proof-body">
+          <p>
+            Kelvin（トムソン）の原理は、正確には「一つの熱源から熱を受け取り、それを全部仕事に変える以外に何の変化も残さないような<strong>サイクル</strong>は存在しない」というものである。
+          </p>
+          <p>
+            本問の等温膨張では確かに受け取った熱がそっくり仕事に変換されている（$-δQ=δW$）が、これはサイクルではない——気体の体積・圧力は膨張前後で変化しており、始めの状態には戻っていない。「何の変化も残さない」という条件を満たさないので、Kelvinの原理はこの過程を禁止しない。
+          </p>
+          <p>
+            もしこの気体を等温で元の体積に戻そうとすれば、外部から圧縮の仕事を加える必要があり、その大きさはちょうど膨張で得た仕事と等しい。したがって1サイクルとして繰り返しても正味の仕事は取り出せず、単一熱源だけから仕事を汲み出し続ける第二種永久機関にはならない。矛盾はない。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q2-3">(3) 真空への断熱自由膨張が不可逆であることを示す</h3>
+      <div class="ex"><span class="box-label">問題</span><p>理想気体の真空への断熱自由膨張は不可逆過程であることを示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$\Delta S=nR\ln(V_b/V_a)>0$ にもかかわらず断熱（$δQ=0$）——可逆断熱過程なら $\Delta S=0$ のはずなので矛盾。よって不可逆。</div>
+        <div class="proof-body">
+          <p>
+            真空への自由膨張：押し返す相手がないので $δW=0$、断熱壁で囲えば $δQ=0$。ゆえに $\Delta U=0$。理想気体は $U=U(T)$ なので $\Delta U=0\Rightarrow\Delta T=0$（温度不変）。
+          </p>
+          <p>
+            $S$ は状態量なので、同じ始状態 $(T,V_a)$・終状態 $(T,V_b)$ を結ぶ可逆経路（例えば準静的等温膨張）に沿って計算してよい。
+          </p>
+          <div class="mathblock">$$\Delta S = \int\frac{δQ_{\text{rev}}}{T} = \frac1T\int_{V_a}^{V_b}PdV = nR\ln\frac{V_b}{V_a} > 0$$</div>
+          <p>
+            もし自由膨張が可逆過程だったなら、断熱（$δQ=0$）かつ可逆な過程は定義から等エントロピー（$\Delta S=0$）のはずである。しかし実際には $\Delta S>0\ne0$——矛盾する。ゆえに真空への断熱自由膨張は不可逆過程でなければならない。□
+          </p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問3 ============ -->
+  <div class="section" id="q3">
+    <div class="sec-header">
+      <div class="sec-tag">大問 3</div>
+      <h2>$U(S,V)$ で与えられた気体（正体はファンデルワールス気体）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>ある気体について、エントロピー $S$ と体積 $V$ の関数として、完全な熱力学関数である内部エネルギー $U(S,V)$ が次のように与えられる。</p>
+        <div class="mathblock">$$U(S,V) = C\left(\frac{N}{V-Nb}\right)^{R/C}e^{(S-S_0)/C} - \frac{N^2a}{V}$$</div>
+        <p>ここで、$N$ は物質量、$C$、$a$、$b$、$R$、$S_0$ は正の定数である。</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label"><a href="kakomon_2025.html#q3">2025年度大問3</a>との関係</span>
+        <p>
+          2025年度の大問3では $S(U,V)$（エントロピーを $U,V$ の関数として）が与えられたのに対し、今年度は $U(S,V)$（内部エネルギーを $S,V$ の関数として）が与えられている——同じファンデルワールス気体を、互いに逆関数の関係にある2通りの完全な熱力学関数で表現したものになっている（定数の名前が $Nk\leftrightarrow R$ と違う以外は数学的に同一の中身）。
+        </p>
+      </div>
+
+      <h3 id="q3-1">(1) 状態方程式</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この気体の状態方程式を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$P = \frac{RT}{V-Nb} - \frac{N^2a}{V^2}$$
+      </div>
+        <div class="proof-body">
+          <p>
+            $U(S,V)$ が完全な熱力学関数のとき、$T=\pd{U}{S}{V}$、$P=-\pd{U}{V}{S}$ が定義である。まず $T$ を求める。
+          </p>
+          <div class="mathblock">$$T = \pd{U}{S}{V} = \frac1C\cdot C\left(\frac{N}{V-Nb}\right)^{R/C}e^{(S-S_0)/C} = \frac1C\left[U+\frac{N^2a}{V}\right]$$</div>
+          <p>
+            （$U+N^2a/V$ がちょうど右辺の指数関数を含む項そのものであることに注意）。すなわち $U+\dfrac{N^2a}{V}=CT$、つまり $U=CT-\dfrac{N^2a}{V}$——2025年度と全く同じ関係式が得られる。
+          </p>
+          <p>次に $P=-\pd{U}{V}{S}$ を計算する。$g(V)\equiv\left(\dfrac{N}{V-Nb}\right)^{R/C}=N^{R/C}(V-Nb)^{-R/C}$ とおくと</p>
+          <div class="mathblock">$$g'(V) = -\frac RC\,N^{R/C}(V-Nb)^{-R/C-1} = -\frac{R}{C}\cdot\frac{g(V)}{V-Nb}$$</div>
+          <div class="mathblock">$$\pd{U}{V}{S} = C\,e^{(S-S_0)/C}g'(V) + \frac{N^2a}{V^2} = -R\,e^{(S-S_0)/C}g(V)\cdot\frac1{V-Nb} + \frac{N^2a}{V^2}$$</div>
+          <p>
+            ここで $e^{(S-S_0)/C}g(V)=\dfrac{U+N^2a/V}{C}=T$（上で求めた関係）なので、
+          </p>
+          <div class="mathblock">$$\pd{U}{V}{S} = -\frac{RT}{V-Nb} + \frac{N^2a}{V^2}$$</div>
+          <p>したがって</p>
+          <div class="mathblock">$$P = -\pd{U}{V}{S} = \frac{RT}{V-Nb} - \frac{N^2a}{V^2}$$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — やはりファンデルワールス方程式</span>
+        <p>体積の排除効果（$V\to V-Nb$）と分子間引力による圧力減少（$-N^2a/V^2$）を含む、標準的なファンデルワールス方程式（$R$ が理想気体定数、あるいは $Nk$ に相当する役割）である。以降の設問(2)〜(4)は2025年度大問3の(3)〜(5)と実質的に同一の計算になる。</p>
+      </div>
+
+      <h3 id="q3-2">(2) 熱容量</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この気体の熱容量を求めよ。定積熱容量でも定圧熱容量でもどちらでもよい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$C_V = C\quad(\text{一定})$$</div>
+        <div class="proof-body">
+          <p>(1)で $U=CT-N^2a/V$ を得た。定積熱容量の定義より</p>
+          <div class="mathblock">$$C_V = \pd{U}{T}{V} = C$$</div>
+          <p>問題文中の定数 $C$ 自体が、そのまま定積熱容量である。</p>
+        </div>
+      </details>
+
+      <h3 id="q3-3">(3) 断熱準静的膨張：$T_A/T_B$</h3>
+      <div class="ex"><span class="box-label">問題</span><p>体積 $V_A$，温度 $T_A$ の平衡状態 $A$ の気体を断熱壁で囲ったまま体積を $V_B(>V_A)$ へゆっくりと準静的に膨張させる。最終状態の温度を $T_B$ とする。$T_A/T_B$ を求めよ。また、この過程によるエントロピー変化を答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$\frac{T_A}{T_B} = \left(\frac{V_B-Nb}{V_A-Nb}\right)^{R/C},\qquad \Delta S = 0$$
+      </div>
+        <div class="proof-body">
+          <p>準静的かつ断熱＝可逆断熱＝等エントロピー（$S$一定）。$S$一定のとき、$U$ の定義式で $e^{(S-S_0)/C}$ は定数だから、$U+N^2a/V=CT$ とあわせて</p>
+          <div class="mathblock">$$CT = C\cdot(\text{const})\cdot(V-Nb)^{-R/C} \quad\Longrightarrow\quad T\propto (V-Nb)^{-R/C}$$</div>
+          <p>すなわち $T_A(V_A-Nb)^{R/C} = T_B(V_B-Nb)^{R/C}$ より</p>
+          <div class="mathblock">$$\frac{T_A}{T_B} = \left(\frac{V_B-Nb}{V_A-Nb}\right)^{R/C}$$</div>
+          <p>$V_B>V_A$ より右辺 $>1$ なので $T_A>T_B$（断熱膨張で冷える）。エントロピー変化は、可逆断熱の定義よりそのまま $\Delta S=0$。</p>
+        </div>
+      </details>
+
+      <h3 id="q3-4">(4) 真空への断熱膨張（Joule膨張）：$T_A/T_C$</h3>
+      <div class="ex"><span class="box-label">問題</span><p>体積 $V_A$，温度 $T_A$ の平衡状態 $A$ の気体を真空へ断熱膨張をさせて、体積を $V_C(>V_A)$ とした。その後に平衡状態になったときの温度を $T_C$ とすると、$T_A/T_C$ を求めよ。また、この過程によるエントロピー変化を答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$\frac{T_A}{T_C} = \frac{T_A}{T_A-\dfrac{N^2a}{C}\left(\dfrac1{V_A}-\dfrac1{V_C}\right)},\qquad \Delta S = C\ln\frac{T_C}{T_A}+R\ln\frac{V_C-Nb}{V_A-Nb}\;(>0)$$
+      </div>
+        <div class="proof-body">
+          <p>
+            真空への自由膨張なので $δW=0$、断熱壁で囲われているので $δQ=0$。ゆえに $\Delta U=0$。$U=CT-N^2a/V$ を使うと
+          </p>
+          <div class="mathblock">$$CT_A-\frac{N^2a}{V_A} = CT_C-\frac{N^2a}{V_C} \quad\Longrightarrow\quad T_A-T_C = \frac{N^2a}{C}\left(\frac1{V_A}-\frac1{V_C}\right)\;(>0)$$</div>
+          <p>
+            $V_C>V_A$ より $T_A>T_C$：真空への自由膨張でこの気体は冷える（分子間引力に逆らって分子どうしを引き離す分だけ内部エネルギーが使われる、Joule効果）。比は
+          </p>
+          <div class="mathblock">$$\frac{T_A}{T_C} = \frac{T_A}{T_A-\dfrac{N^2a}{C}\left(\dfrac1{V_A}-\dfrac1{V_C}\right)}$$</div>
+          <p>
+            エントロピーは状態量なので、(1)で求めた表式 $S=S_0+C\ln T+R\ln(V-Nb)-R\ln N$（$U(S,V)$ の定義式を $S$ について解けば得られる）を始状態・終状態に代入するだけでよい：
+          </p>
+          <div class="mathblock">$$\Delta S = C\ln\frac{T_C}{T_A} + R\ln\frac{V_C-Nb}{V_A-Nb}$$</div>
+          <p>
+            この過程は断熱・不可逆（自由膨張）なので、大問2(3)と同じ論法により全体として $\Delta S>0$ でなければならない（$T_C<T_A$ による負の寄与より、$V_C>V_A$ による正の寄与の方が必ず大きい）。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q3-5">(5) 断熱可動仕切板：どちらに動くか・エントロピー変化</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>下図のように断熱壁に囲まれた箱を可動な仕切板で二つの部分に分けた。最初、二つの部分は同じ体積 $V_0$ であり、それぞれの部分に同じ物質量の気体をいれ、仕切板を固定して温度をそれぞれ $T_1$ と $T_2$ の平衡状態とした（$T_1>T_2$）。その後、仕切板を可動できるようにすると仕切板はどちらに移動するかを理由とともに答えよ。また、この過程によるエントロピー変化を答えよ。仕切板も断熱壁とする。</p>
+        <div class="diagram">
+          <img src="img/2023/fig-partition.png" alt="断熱壁に囲まれた箱を可動な仕切板で二つに分けた図。左がT1・V0、右がT2・V0、可動後は仕切板が移動してT'1・T'2となる" style="max-width:520px;width:100%;height:auto;">
+          <div class="diagram-cap">左右とも同じ体積 $V_0$・同じ物質量から出発し（左：温度 $T_1$、右：温度 $T_2$、$T_1>T_2$）、仕切板を可動にした後の温度をそれぞれ $T_1',T_2'$ とする（原本PDFより切り出し）。</div>
+        </div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>仕切板は温度の低い側（$T_2$側）へ移動する。エントロピー変化は $\Delta S\ge0$（第二法則より非負だが、断熱ピストン問題の性質上、平衡熱力学だけから厳密な値を計算することはできない）。</div>
+        <div class="proof-body">
+          <p>
+            仕切板も断熱壁なので、両側の気体は熱を直接やり取りできず、仕切板の動きは力学的な力のつり合い（圧力差）だけで決まる。(1)の状態方程式 $P=\dfrac{RT}{V-Nb}-\dfrac{N^2a}{V^2}$ より
+          </p>
+          <div class="mathblock">$$\pd{P}{T}{V} = \frac{R}{V-Nb} > 0$$</div>
+          <p>
+            なので、同じ体積 $V_0$・同じ物質量であれば温度が高いほど圧力も高い。ゆえに最初は $P_1(T_1側)>P_2(T_2側)$ であり、圧力の高い側が仕切板を押すので、<strong>仕切板は低温側（$T_2$側）に向かって移動する</strong>（$T_1$側が膨張し、$T_2$側が圧縮される）。
+          </p>
+          <p>
+            エントロピー変化については、この箱全体は外部から完全に断熱・孤立しているので、エントロピー増大則より過程全体を通じて $\Delta S\ge0$（不可逆に平衡へ向かう自発的な過程なので、実際には $\Delta S>0$）ことは確実に言える。しかし、その<strong>具体的な数値</strong>を求めるには最終的な $T_1',T_2'$（および各側の最終体積）が必要であり、それを決めるには単に「最終的に圧力が等しくなる」という条件だけでは実は不足する——という点が、この問題（断熱ピストン問題）の有名な難しさである（下記補足を参照）。したがって、この設問で要求されている解答は「向きの理由」と「$\Delta S\ge0$ という定性的な結論」までであり、両側の最終温度を具体的な数式で求めることは（追加の仮定なしには）できない。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 断熱ピストン問題（adiabatic piston problem）</span>
+        <p>
+          一見単純なこの設定は、実は熱力学の教科書的には未解決に近い、有名な難問として知られている。仕切板が「断熱的」かつ「摩擦なし」であるとき、力学的平衡（両側の圧力が等しい）にはやがて到達するが、そこで両側の温度が等しくなっている保証はどこにもない——実際、両側の気体分子の詳細な統計力学的振る舞い（仕切板を介した分子スケールのエネルギーゆらぎの受け渡し）を考えないと、最終的な温度差がどこまで解消されるかは古典的な平衡熱力学の枠組みだけでは決定できないことが、Lieb・Callenらの研究で指摘されている。本問はその「入り口」にあたる部分（動く方向と、エントロピーが増えるという定性的事実）だけを問う、良問である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問4 ============ -->
+  <div class="section" id="q4">
+    <div class="sec-header">
+      <div class="sec-tag">大問 4</div>
+      <h2>感想</h2>
+    </div>
+    <div class="sec-body">
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>講義および試験に関して、良かった点、悪かった点等の感想を自由に述べよ。また、講義あるいは自習を通じて、物理学・熱力学から学んだことを述べよ。</p>
+      </div>
+      <div class="note">
+        <span class="box-label">補足</span>
+        <p>この設問は採点対象の知識問題ではなく、受講者自身の感想・学びを問う自由記述式の設問であるため、模範解答は存在しない。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2014.html">← 2014年度へ</a>
+    <a href="kakomon_2025.html">2025年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer>
+
+<script src="thermo-plots.js"></script>
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

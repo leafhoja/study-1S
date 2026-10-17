@@ -1,0 +1,362 @@
+<!DOCTYPE html><!-- 「微分積分 予想問題 第4回 常微分方程式 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>微分積分 予想問題 第4回 常微分方程式 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="yosou_calc_03.html" data-page="yosou/yosou_calc_03">← 前のテーマ</a>
+      <a href="yosou_calc_05.html" data-page="yosou/yosou_calc_05">次のテーマ →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-calc">
+  <h1>微分積分学演習　予想問題　第4回</h1>
+  <p class="subtitle">変数分離形・ロジスティック方程式・2階線形ODE・Riccati方程式（全4問）</p>
+</div>
+
+<div class="container">
+
+<!-- 免責 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#fff5f5; color:#c53030;">⚠️ この問題セットについて</div>
+  <div class="section-card-body">
+    <div class="warn-box">
+      <div class="warn-title">AIが作成した予想問題です（実際の試験問題ではありません）</div>
+      <p>演習第4回（<a href="../calculus/calc_04.html">常微分方程式</a>）と同程度〜少し発展した難易度で構成した学習用オリジナル問題です。中間試験で出題されたロジスティック方程式（$y'=ky(1-y)$ 型）の出題傾向も踏まえ，問2ではこれを一般化した設定を扱っています。期末試験は90分・範囲がより広いことを想定し，中間試験より難易度を適切に引き上げています。全5回20問構成の第4回（常微分方程式）です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 このテーマの要点</div>
+  <div class="section-card-body">
+    <p>常微分方程式のうち，変数分離形の基本的な解法から，非線形方程式に特有の「有限時間爆発」，線形2階ODEの演算子分解，そして非線形の中でも特殊な構造をもつRiccati方程式まで，本回の4問で扱う道具を整理する。</p>
+    <div class="def-box">
+      <div class="def-title">この4問で使う道具</div>
+      <ul>
+        <li>変数分離形：$\dfrac{dy}{g(y)}=f(x)\,dx$ の形に分けて両辺を積分する</li>
+        <li>部分分数分解：$\dfrac{1}{y(M-y)}=\dfrac1M\left(\dfrac1y+\dfrac1{M-y}\right)$ のように積分しやすい形に崩す</li>
+        <li>特殊解を仮定して変換する手法（Riccati型）：既知の解 $x_0$ を使って $x=x_0+\frac1w$（または $x=x_0+u$）とおき，方程式の次数・非線形性を落とす</li>
+        <li>線形2階ODEの「演算子の因数分解」法：$y:=x'-\alpha x$ とおき，1階の線形方程式に帰着させる（重解の場合も含む）</li>
+        <li>非線形方程式では解が有限の $x$（または $t$）の範囲でしか存在しないことがある（有限時間爆発）という視点</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">1</span> 変数分離形と有限時間爆発
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★☆☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>微分方程式 $y'=1+y^2$，$y(0)=0$ を解け。また，この解が存在する $x$ の範囲を求め，その範囲の端点で何が起きるか説明せよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>右辺 $1+y^2$ は $y$ のみの関数なので変数分離形。$1+y^2>0$ より両辺を割ってよい。</p>
+      $$\frac{dy}{1+y^2}=dx$$
+      <p>両辺を積分すると</p>
+      $$\arctan y = x + C$$
+      <p>初期条件 $y(0)=0$ を代入：$\arctan 0 = 0 = 0+C$ より $C=0$。よって $\arctan y = x$，すなわち</p>
+      $$\boxed{y=\tan x}$$
+      <p>$\arctan$ の値域は $\left(-\dfrac\pi2,\dfrac\pi2\right)$ なので，$\arctan y=x$ という関係式自体が $x\in\left(-\dfrac\pi2,\dfrac\pi2\right)$ の範囲でしか意味を持たない。よってこの解は</p>
+      $$\boxed{-\frac\pi2 < x < \frac\pi2}$$
+      <p>の範囲でのみ定義される。$x\to\left(\dfrac\pi2\right)^-$ のとき $y=\tan x\to+\infty$，$x\to\left(-\dfrac\pi2\right)^+$ のとき $y=\tan x\to-\infty$ となり，解は有限の $x$ で無限大に発散する（そこから先へは延長できない）。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p>右辺が $x$ を含まず $y$ だけの式なので自律系の変数分離形。手順は機械的：$dy/(1+y^2)=dx$ として両辺を積分するだけで，積分公式 $\displaystyle\int\frac{dy}{1+y^2}=\arctan y+C$ さえ覚えていれば計算自体は難しくない。<strong>この問題の本当のポイントは，計算が終わったあとに「この解はどこまで存在するか」を確認する部分</strong>にある。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ「解の存在範囲」を別途考える必要があるのか</div>
+        <p>普通，$y'=f(x,y)$ のような方程式を解いて陽的な式 $y=\varphi(x)$ を得ると，その式が意味をなす $x$ の範囲がそのまま解の定義域になる。$y=\tan x$ は数式としては $x=\pm\pi/2+n\pi$ を除く全ての実数で定義されているように見えるが，<strong>元の関係式 $\arctan y=x$ に戻って考えると</strong>，$\arctan$ の主値の値域が $(-\pi/2,\pi/2)$ に限られているため，この積分によって得られた解は最初から $x\in(-\pi/2,\pi/2)$ でしか有効でない。$x=\pi/2$ を超えて「$\tan x$ の次の枝」に乗り移ることは，もとの初期値問題の解として正当化されない（そこでは $y$ が既に $+\infty$ に達してしまっている）。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 有限時間爆発（finite-time blow-up）という現象</div>
+        <p>ここで起きていることは非線形微分方程式に特有の「有限時間爆発」と呼ばれる現象である。右辺 $f(x,y)=1+y^2$ は $(x,y)$ 平面全体で滑らか（$C^\infty$）な関数であり，一見すると解も全ての $x$ に対して存在してよさそうに思える。しかし実際には解は有限の区間 $(-\pi/2,\pi/2)$ でしか存在せず，その端点で $y\to\pm\infty$ となって「消えてしまう」。</p>
+        <p><strong>線形方程式との決定的な違い：</strong>演習第4回・問2や本予想問題の問3で扱うような線形微分方程式 $x'=ax+b(t)$（$a,b(t)$ が全区間で連続）は，どのような初期条件から出発しても，解は考えている区間全体（多くの場合 $t\in\mathbb{R}$ 全体）に渡って存在し続けることが一般論から保証される。つまり<strong>線形微分方程式では有限時間爆発は絶対に起こらない</strong>。これに対し本問のような非線形方程式では，右辺がどれだけ滑らかであっても，解が有限の範囲でしか存在しないことがある。この対比は非線形ODEを学ぶ上で最も基本的な教訓の一つ。</p>
+        <p><strong>なぜ非線形性が爆発の原因になるのか：</strong>直感的には，$y^2$ の項が「$y$ が大きくなるほど増加率 $y'$ をさらに加速させる」という正のフィードバックを作り出しているため。$y$ が少し大きくなると $y'=1+y^2$ はより大きくなり，それによって $y$ はさらに速く増加し，$y'$ はさらに大きくなる……という自己増殖的な過程が起きる。線形方程式 $y'=ay$ では増加率が $y$ に比例するだけ（指数関数的な増加はするが，有限時間で無限大には到達しない）なのに対し，$y^2$ のように $y$ について2次以上の非線形項があると，この増殖が「有限時間で無限大に到達する」ほど急激になりうる。</p>
+      </div>
+      <p><strong>他の典型例：</strong>同じ現象は $y'=y^2$，$y(0)=1$ でも起きる。変数分離すると $-1/y=x+C$，$y(0)=1$ より $C=-1$，よって $y=\dfrac{1}{1-x}$。これは $x\to 1^-$ で $y\to+\infty$ となり，$x=1$ という有限時刻で爆発する。右辺が $y^2$ を含む非線形方程式では，このように初期値がどれほど「穏やか」でも有限時間爆発が起こりうることを覚えておくとよい。</p>
+      <p><strong>よくある間違い：</strong>①$y=\tan x$ という式だけを答えて満足し，定義域 $(-\pi/2,\pi/2)$ に触れない（本問は定義域を求めることこそが主題なので大幅な減点対象），②$\arctan$ の値域を $[0,\pi)$ や $(-\pi,\pi)$ など誤って覚えている，③「爆発する」ことを「解が存在しなくなる」とだけ書き，$y\to\pm\infty$ という具体的な挙動を書かない。</p>
+      <p><strong>一般化・本番での対応：</strong>変数分離形を解いたら，答えの式（今回なら $y=\tan x$）を書いて終わりにせず，必ず「積分の過程で使った関数（$\arctan$，$\ln$ など）の定義域・値域に制約はないか」を確認する癖をつけること。特に $\arctan$，$\arcsin$ のような値域が制限された関数が答えの導出過程に現れたら，そこがそのまま解の存在範囲の手がかりになることが多い。本番で「解の存在範囲を求めよ」「この解を延長できるか」という設問を見たら，まず非線形項（$y^2$，$y^3$，$1/y$ など）の有無を確認するとよい。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">2</span> ロジスティック型方程式の定性的挙動の分類
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$k,M$ を正の定数とし，微分方程式</p>
+      $$y'=ky(M-y),\qquad y(0)=y_0$$
+      <p>を考える（$M$ は「環境収容力」に相当する定数とする）。</p>
+      <ol>
+        <li>一般解を求めよ。</li>
+        <li>平衡点（定数解）をすべて求めよ。</li>
+        <li>初期値 $y_0$ の範囲に応じて，解の挙動（時間発展の様子，$x\to\infty$ での極限，有限時間で爆発する場合はそれも含めて）を分類せよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$y\ne0,M$ のとき変数分離：</p>
+      $$\frac{dy}{y(M-y)}=k\,dx$$
+      <p>部分分数分解：</p>
+      $$\frac{1}{y(M-y)}=\frac1M\left(\frac1y+\frac1{M-y}\right)$$
+      <p>両辺を積分すると</p>
+      $$\frac1M\left(\ln|y|-\ln|M-y|\right)=kx+C_0 \;\Longrightarrow\; \ln\left|\frac{y}{M-y}\right|=Mkx+MC_0$$
+      <p>指数化して $\dfrac{y}{M-y}=Ae^{Mkx}$（$A=\pm e^{MC_0}$）。初期条件 $y(0)=y_0$（$y_0\ne0,M$）より $A=\dfrac{y_0}{M-y_0}$。$y$ について解くと $y=Ae^{Mkx}(M-y)$ より $y(1+Ae^{Mkx})=MAe^{Mkx}$，両辺を $Ae^{Mkx}$ で割って整理すると</p>
+      $$\boxed{y(x)=\frac{M}{1+Be^{-Mkx}}},\qquad B=\frac1A=\frac{M-y_0}{y_0}$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$ky(M-y)=0$ より，平衡点（定数解）は</p>
+      $$\boxed{y\equiv0 \quad\text{と}\quad y\equiv M}$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (3)</div>
+      <p>$B=\dfrac{M-y_0}{y_0}$ の符号・大きさで場合分けする。</p>
+      <p><strong>① $0<y_0<M$ のとき：</strong>$M-y_0>0$，$y_0>0$ より $B>0$。分母 $1+Be^{-Mkx}$ は全ての $x\ge0$ で常に正（$e^{-Mkx}>0$ なので $1$ より大きい）ので，解は全ての $x\ge0$ で well-defined。$x$ が増えると $e^{-Mkx}\to0$ なので分母は単調に $1$ へ減少し，$y$ は単調増加。$x\to\infty$ で $y(x)\to M$。</p>
+      <p><strong>② $y_0>M$ のとき：</strong>$M-y_0<0$，$y_0>0$ より $B<0$ かつ $|B|=\dfrac{y_0-M}{y_0}<1$（$y_0-M<y_0$ のため）。よって $1+Be^{-Mkx}>1-|B|e^{-Mkx}>1-|B|>0$ が常に成り立ち，分母は常に正で解は全ての $x\ge0$ で存在する。$x$ が増えると $Be^{-Mkx}\to0^-$ なので分母は単調に $1$ へ増加し，$y$ は単調減少。$x\to\infty$ で $y(x)\to M$。</p>
+      <p><strong>③ $y_0=0$ または $y_0=M$ のとき：</strong>平衡点そのものなので，$y\equiv0$ または $y\equiv M$（定数解のまま変化しない）。</p>
+      <p><strong>④ $y_0<0$ のとき：</strong>$M-y_0>M>0$，$y_0<0$ より $B=\dfrac{M-y_0}{y_0}<-1$。このとき $1+Be^{-Mkx}=0$ となる $x$ が存在する：$e^{-Mkx}=-1/B\in(0,1)$ を解いて</p>
+      $$x^*=\frac{\ln(-B)}{Mk}>0$$
+      <p>$x\to x^{*-}$ のとき分母 $1+Be^{-Mkx}\to0^+$（$x<x^*$ の範囲では $e^{-Mkx}>-1/B$ なので分母はまだ正）なので $y(x)\to+\infty$……となるところだが，$y_0<0$ から出発しているので実際には $y$ は負のまま減少していく（$y'=ky(M-y)$ で $y<0,M-y>0$ なら $y'<0$）ため，正しくは $y(x)\to-\infty$ として $x\to x^{*-}$ に近づく，<strong>有限時間爆発</strong>が起こる。</p>
+      <p>まとめると，非負の初期値（$0\le y_0\le M$ を含め $y_0\ge0$）では解は大域的に存在し $M$ へ漸近するが，$y_0<0$ という数学的にのみ意味を持つ初期値では有限時間で $-\infty$ に発散する。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p>本問は中間試験で出題されたロジスティック方程式 $y'=ky(1-y)$（$M=1$ の特別な場合に相当）を，一般の環境収容力 $M$ を持つ形に拡張したもの。計算の骨格（部分分数分解 → 変数分離 → 積分 → 指数化）は完全に同じだが，本問では「$F(x)$ を求めよ・単調増加の条件・極限」という中間試験と同じ問い方ではなく，<strong>初期値 $y_0$ の範囲によって解の定性的な挙動がどう変わるかを分類する</strong>という別の角度から問うている。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 符号解析による定性的理解（積分せずに挙動を読む）</div>
+        <p>実は（1)の積分計算をしなくても，$y'=ky(M-y)$ の右辺の符号だけから解の定性的な挙動がかなり分かる。$k>0$ なので符号は $y(M-y)$ の符号で決まる。</p>
+        <ul>
+          <li>$0<y<M$ のとき：$y>0$，$M-y>0$ なので $y'>0$ → $y$ は増加する</li>
+          <li>$y>M$ のとき：$y>0$，$M-y<0$ なので $y'<0$ → $y$ は減少する</li>
+          <li>$y<0$ のとき：$y<0$，$M-y>0$ なので $y'<0$ → $y$ はさらに減少する</li>
+        </ul>
+        <p>つまり $y=M$ は「両側から引き寄せられる」安定な平衡点（$0<y_0<M$ なら増加しながら $M$ に近づき，$y_0>M$ なら減少しながら $M$ に近づく），$y=0$ は「$y_0>0$側からは遠ざけられるが，$y_0<0$側からはさらに遠ざかっていく」不安定な平衡点，という構造が積分せずとも読み取れる。この「符号解析（相線図）」による直感的理解は，演習第4回・問2（Riccati型 $x'=x^2-x-2$）の think-box でも扱われている手法と全く同じであり，自律系 $y'=F(y)$ に共通する強力な道具。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 なぜ $y_0<0$ で爆発が起きるのか，そしてその意味</div>
+        <p>$y_0<0$ という初期値は，個体数や濃度を表すロジスティック方程式の生物学的な文脈では意味を持たない（個体数が負になることはない）。しかし数学的には $y'=ky(M-y)$ はどんな実数 $y_0$ に対しても意味を持つ方程式であり，$y_0<0$ から出発すると $y$ は単調に減少し続け，しかも減少の速さが $|y|$ の増加とともに加速する（$y(M-y)$ で $y\to-\infty$ のとき $y(M-y)\approx -y^2\to-\infty$，つまり $y'$ が $-y^2$ のオーダーで負に大きくなる）ため，問1で見た $y'=y^2$ 型の爆発と本質的に同じメカニズムで有限時間爆発が起こる。<strong>問1（変数分離形の爆発）とのつながり：</strong>非線形項（2次の項）を持つ自励系の微分方程式では，解が「行き過ぎる」方向にはこのように有限時間で無限大へ発散することがある，という一般的な教訓が，全く異なる2つの方程式（$y'=1+y^2$ と $y'=ky(M-y)$）に共通して現れている。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①$B=\dfrac{M-y_0}{y_0}$ の符号を場合分けする際に，$y_0$ と $M$ の大小関係を正しく反映できていない（特に $y_0>M$ のとき $B<0$ になることを見落とし，$B>0$ のケースと同じ式変形をしてしまう），②$y_0<0$ のケースで爆発の方向（$+\infty$ か $-\infty$ か）を，分母が $0$ に近づく様子だけから機械的に判断してしまい，符号解析（$y<0$ の範囲では $y'<0$ で減少し続けるはず）との整合性を確認しない，③平衡点 $y=0,M$ の安定性を問われていないのに，(3)で符号解析に触れず積分結果の代数的な場合分けだけで済ませてしまい，定性的な説明（引き寄せられる／遠ざけられる）を書き忘れる。</p>
+      <p><strong>別解（安定性を線形化で判定する）：</strong>$F(y)=ky(M-y)$ とおくと $F'(y)=k(M-2y)$。$F'(0)=kM>0$ なので $y=0$ は不安定，$F'(M)=-kM<0$ なので $y=M$ は安定。この線形化による判定は，上の符号解析（相線図）と完全に一致する結果を与える，より計算的な確認方法。</p>
+      <p><strong>一般化・本番での対応：</strong>「$y'=ky(M-y)$」のようなロジスティック型の方程式が出たら，まず①部分分数分解で積分し陽的な解を求める，②同時に符号解析（相線図）で定性的な挙動も把握しておく，という2つを両輪で進めるとよい。本番で「$F(x)$ を求めよ」型の問い方をされたら中間試験と同じ手順で計算すればよいし，本問のように「初期値による挙動の分類」を問われたら，積分結果の場合分けと符号解析の両方を根拠として示すと説得力のある答案になる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">3</span> 重解をもつ2階線形ODEの因数分解
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★★☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>微分方程式 $x''-4x'+4x=0$ の一般解を，演習第4回・問2で用いた「1階の演算子に分解する」方法で求めよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$y:=x'-2x$ とおく。このとき $y'=x''-2x'$。与式 $x''-4x'+4x=0$ より $x''=4x'-4x$ なので</p>
+      $$y'=x''-2x' = (4x'-4x)-2x' = 2x'-4x = 2(x'-2x) = 2y$$
+      <p>すなわち $y$ は1階線形微分方程式 $y'=2y$ を満たす（$t$ を独立変数とする）。これを解いて</p>
+      $$y=Ce^{2t}\qquad(C\text{ は任意定数})$$
+      <p>よって $x'-2x=Ce^{2t}$。これは $x$ に関する1階線形微分方程式なので，積分因子 $e^{-2t}$ を両辺に掛ける：</p>
+      $$e^{-2t}x'-2e^{-2t}x = Ce^{2t}\cdot e^{-2t} \;\Longrightarrow\; \left(xe^{-2t}\right)'=C$$
+      <p>（左辺が積の微分公式 $(uv)'=u'v+uv'$ の逆になっていることを確認：$(xe^{-2t})'=x'e^{-2t}-2xe^{-2t}$，まさに左辺と一致）。両辺を積分すると</p>
+      $$xe^{-2t}=Ct+D\qquad(D\text{ は任意定数})$$
+      <p>よって $x=(Ct+D)e^{2t}$。定数の記号を書き直して，一般解は</p>
+      $$\boxed{x(t)=(C_1+C_2t)\,e^{2t}}\qquad(C_1,C_2\in\mathbb{R})$$
+      <p>（検算：$x'=C_2e^{2t}+2(C_1+C_2t)e^{2t}$，$x''=2C_2e^{2t}+2C_2e^{2t}+4(C_1+C_2t)e^{2t}=4C_2e^{2t}+4(C_1+C_2t)e^{2t}$。$x''-4x'+4x = \bigl[4C_2+4(C_1+C_2t)\bigr]e^{2t}-4\bigl[C_2+2(C_1+C_2t)\bigr]e^{2t}+4(C_1+C_2t)e^{2t}$ を展開すると，$e^{2t}$ の係数は $4C_2+4C_1+4C_2t-4C_2-8C_1-8C_2t+4C_1+4C_2t=0$ となり，恒等的に $0$。$\blacksquare$）</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p>演習第4回・問2（$x''-3x'+2x=0$）は特性方程式 $\lambda^2-3\lambda+2=(\lambda-1)(\lambda-2)=0$ が異なる2実根 $\lambda=1,2$ を持つ場合で，$x=y+z$（$y'-y=0,\ z'-2z=0$）という「和への分解」で解いた。本問の特性方程式は</p>
+      $$\lambda^2-4\lambda+4=(\lambda-2)^2=0$$
+      <p>であり，<strong>$\lambda=2$ が重解</strong>になっている点が本質的に異なる。演算子で書けば $(D-2)^2x=0$（$D=d/dt$）。$(D-2)$ が2回繰り返し掛かっているだけなので「和 $y+z$ への分解」は使えず，代わりに $y:=(D-2)x=x'-2x$ とおいて<strong>「入れ子（合成）」の形</strong> $(D-2)y=0$ に帰着させる，というのが模範解答の発想。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ重解の場合に $t$ の1次式 $(C_1+C_2t)$ が現れるのか</div>
+        <p>模範解答の手順を振り返ると，$(D-2)y=0$ を解いて $y=Ce^{2t}$ を得たあと，それを<strong>再び同じ演算子 $(D-2)$ を使う方程式</strong> $(D-2)x=y=Ce^{2t}$ に代入している。つまり「$D-2$ を1回作用させて消える指数関数 $e^{2t}$」を，もう一度 $(D-2)x=(\cdot)$ という同じ形の方程式の右辺（非同次項）として使うことになる。</p>
+        <p>右辺の $e^{2t}$ は，方程式の左辺 $(D-2)x$ に対応する斉次解 $x=e^{2t}$ とちょうど同じ指数関数——これがいわゆる「共鳴（resonance）」の状況である。積分因子 $e^{-2t}$ を掛けて $(xe^{-2t})'=C$ の形にすると，右辺の $Ce^{2t}\cdot e^{-2t}=C$ は定数になり（本来なら指数関数のまま積分すれば指数関数に戻るはずが，共鳴によって定数になってしまう），これを積分すると $xe^{-2t}=Ct+D$ という「$t$ の1次式」が生まれる。もし右辺が斉次解と重ならない指数関数（例えば $e^{3t}$）であれば，積分してもまた指数関数のままで $t$ の因子は出てこない。<strong>重解特有の「$t$ を掛けた形の解」が生まれる正体は，まさにこの共鳴現象</strong>である。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 強制振動の共鳴との類似性（発展）</div>
+        <p>この現象は，物理でいう強制振動（例えば $x''+\omega^2x=F_0\cos(\omega t)$，外力の振動数が固有振動数 $\omega$ と一致する場合）で振幅が時間とともに $t$倍で増大していく「共鳴」現象と，数学的に全く同じ構造を持っている。どちらも「非同次項（外力，あるいは本問での $Ce^{2t}$）が，対応する斉次方程式の解と同じ関数形をしている」ときに，特解の中に $t$ を掛けた項が現れる，という同一の現象。この視点を持っておくと，後で強制振動を学んだときにも「あ，これは重解ODEと同じ話だ」と繋げて理解できる。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①重解の場合にも異なる2実根の場合と同じように $x=C_1e^{2t}+C_2e^{2t}$ という「一般解」を書いてしまう——これは $C_1e^{2t}+C_2e^{2t}=(C_1+C_2)e^{2t}$ と同じことで，実質的に自由度が1つ（$C_1+C_2$ という1つの定数）しかなく，2階の微分方程式に必要な独立な2つの自由度（初期条件 $x(0),x'(0)$ を自由に指定できるだけの自由度）を持たない誤った答案，②積分因子を掛ける段階で $e^{-2t}$ ではなく符号を間違えて $e^{2t}$ を掛けてしまう，③最終的な検算で $x''-4x'+4x$ を展開する際に $t$ の係数と定数項を混同して符号ミスをする。</p>
+      <p><strong>別解（特性方程式から直接）：</strong>特性方程式 $\lambda^2-4\lambda+4=(\lambda-2)^2=0$ が重解 $\lambda=2$ を持つ場合，2階線形定係数ODEの一般論から，一般解は $x=(C_1+C_2t)e^{2t}$ の形になることが知られている（$e^{\lambda t}$ に加えて $te^{\lambda t}$ も独立な解になることを直接代入で確認できる：$x=te^{2t}$ のとき $x'=e^{2t}+2te^{2t}$，$x''=2e^{2t}+2e^{2t}+4te^{2t}=4e^{2t}+4te^{2t}$，$x''-4x'+4x=4e^{2t}+4te^{2t}-4e^{2t}-8te^{2t}+4te^{2t}=0$，確かに解になっている）。この「公式」を知っていれば結果だけはすぐ書けるが，本問はその結果が「演算子の因数分解」という手法からどう導かれるかを問うているので，公式の丸暗記だけでは（2)の過程を問われたときに）対応できない。</p>
+      <p><strong>一般化・本番での対応：</strong>2階線形定係数ODE $ax''+bx'+cx=0$ の特性方程式 $a\lambda^2+b\lambda+c=0$ が①異なる2実根 $\lambda_1\ne\lambda_2$ を持つなら $x=C_1e^{\lambda_1t}+C_2e^{\lambda_2t}$（演習第4回・問2型），②重解 $\lambda$ を持つなら $x=(C_1+C_2t)e^{\lambda t}$（本問型），という2パターンをどちらも「演算子の因数分解」という同じ発想の異なる帰結として理解しておくこと。本番でどちらのパターンかを見分けるには，特性方程式を解く前に判別式 $b^2-4ac$ の符号を確認するのが最速。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">4</span> 非自励Riccati方程式
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★★★</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$t>0$ として微分方程式</p>
+      $$x'=x^2-\frac{2}{t^2}$$
+      <p>を考える。</p>
+      <ol>
+        <li>$x_0(t)=\dfrac1t$ がこの方程式の解であることを確認せよ。</li>
+        <li>$x=x_0+\dfrac1w$（$w=w(t)$）という変換により，この方程式を $w$ に関する1階線形微分方程式に変換せよ。</li>
+        <li>一般解 $x(t)$ を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$x_0(t)=1/t$ のとき $x_0'=-1/t^2$。右辺は</p>
+      $$x_0^2-\frac2{t^2}=\frac1{t^2}-\frac2{t^2}=-\frac1{t^2}$$
+      <p>で $x_0'$ と一致する。よって $x_0(t)=1/t$ は確かに解である。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$x=\dfrac1t+\dfrac1w$ とおくと</p>
+      $$x'=-\frac1{t^2}-\frac{w'}{w^2}$$
+      <p>一方，右辺は</p>
+      $$x^2-\frac2{t^2} = \left(\frac1t+\frac1w\right)^{\!2}-\frac2{t^2} = \frac1{t^2}+\frac{2}{tw}+\frac1{w^2}-\frac2{t^2} = -\frac1{t^2}+\frac2{tw}+\frac1{w^2}$$
+      <p>方程式 $x'=x^2-2/t^2$ に両者を代入すると</p>
+      $$-\frac1{t^2}-\frac{w'}{w^2} = -\frac1{t^2}+\frac2{tw}+\frac1{w^2}$$
+      <p>両辺の $-1/t^2$ が一致しているので消去できて</p>
+      $$-\frac{w'}{w^2} = \frac2{tw}+\frac1{w^2}$$
+      <p>両辺に $-w^2$ を掛けると</p>
+      $$w'=-\frac2tw-1$$
+      <p>すなわち，$w$ に関する1階線形微分方程式</p>
+      $$\boxed{w'+\frac2tw=-1}$$
+      <p>が得られる。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (3)</div>
+      <p>積分因子は $\exp\left(\displaystyle\int\frac2t\,dt\right)=\exp(2\ln t)=t^2$（$t>0$ より $|t|=t$）。両辺に $t^2$ を掛けると</p>
+      $$t^2w'+2tw=-t^2 \;\Longrightarrow\; (t^2w)'=-t^2$$
+      <p>（左辺は積の微分公式の逆であることを確認：$(t^2w)'=2tw+t^2w'$，一致）。両辺を積分すると</p>
+      $$t^2w=-\frac{t^3}3+K\qquad(K\text{ は任意定数})$$
+      <p>よって</p>
+      $$w=-\frac t3+\frac K{t^2} = \frac{K}{t^2}-\frac t3 = \frac{3K-t^3}{3t^2}$$
+      <p>$x=x_0+1/w=\dfrac1t+\dfrac1w$ に戻すと</p>
+      $$x = \frac1t+\frac{3t^2}{3K-t^3}$$
+      <p>定数を $A=3K$ と書き直して，一般解は</p>
+      $$\boxed{x(t)=\frac1t+\frac{3t^2}{A-t^3}}\qquad(A\in\mathbb{R}\text{ は任意定数})$$
+      <p>（$w\equiv0$ に対応する特異な場合，すなわち $x\equiv x_0=1/t$ 自体も方程式の解になっているが，これは上式で「$A\to\infty$」の極限に相当する退化したケースとして別途書き添えてもよい。）$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p>本問は演習第4回・問1（$x'=x^2-x-2$）と同じ「特殊解を1つ見つけて変換する」という手法を，係数が $t$ に依存する<strong>非自励</strong>のRiccati方程式に適用したもの。Riccati方程式（右辺が $x$ の2次式で書ける方程式）は一般には初等関数で解けないが，<strong>1つでも特殊解 $x_0(t)$ が見つかれば</strong>，$x=x_0+1/w$ という変換によって<strong>必ず</strong> $w$ に関する1階線形微分方程式に帰着できる，というのがRiccati方程式の理論の核心。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ「$x_0+u$」ではなく「$x_0+1/w$」という逆数の形を使うのか</div>
+        <p>演習第4回・問1では自励系（係数が定数）だったため $x=x_0+u$ という単純な平行移動で $u'=u(u+3)$ のような扱いやすい形に帰着できた。しかし一般のRiccati方程式 $x'=a(t)x^2+b(t)x+c(t)$ で $x=x_0+u$ とおくと，$x^2=(x_0+u)^2=x_0^2+2x_0u+u^2$ となり，$u$ の2次の項 $a(t)u^2$ が残ってしまい，$u$ に関する方程式もやはりRiccati型（2次）のままで，何も進展しない。</p>
+        <p>そこで $x=x_0+\dfrac1w$ という<strong>逆数</strong>を使う。$w$ が満たすべき方程式を導く際，$x^2=x_0^2+\dfrac{2x_0}{w}+\dfrac1{w^2}$ の中の $1/w^2$ の項が，$x'=-x_0'-w'/w^2$ の中の $-w'/w^2$ の項と<strong>同じ $1/w^2$ のオーダー</strong>であるため，方程式全体を整理すると $1/w^2$ の項どうしがうまく組み合わさり，最終的に $w'$ について1次（線形）の方程式が残る，という仕組みになっている。実際，本問の計算でも $1/w^2$ の項は最終的に両辺から相殺され，$w'+\frac2tw=-1$ という完全に線形な式だけが残った。これがRiccati方程式特有の「逆数変換のからくり」である。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 特殊解 $x_0=1/t$ をどう見つけるか</div>
+        <p>本問では $x_0(t)=1/t$ が天下り的に与えられているが，本番では自分で特殊解を探す必要がある場合もある。方程式 $x'=x^2-2/t^2$ の右辺に $1/t^2$ の項があることから，<strong>$x_0=a/t$（$a$は定数）の形を仮定して代入する</strong>という典型的な探索方法が有効。実際 $x_0=a/t$ のとき $x_0'=-a/t^2$，右辺は $x_0^2-2/t^2=a^2/t^2-2/t^2$。両辺の $1/t^2$ の係数を比較すると</p>
+        $$-a=a^2-2 \;\Longrightarrow\; a^2+a-2=0 \;\Longrightarrow\; (a+2)(a-1)=0 \;\Longrightarrow\; a=1,\,-2$$
+        <p>となり，$x_0=1/t$（$a=1$，本問で使った解）と $x_0=-2/t$（$a=-2$）の<strong>2つの特殊解候補</strong>が得られる。どちらを使っても変換後の計算は実行できる（結果として得られる一般解の見た目の式は異なるが，本質的に同じ解の族を表す）。「$x_0=a/t$ の形を仮定して代入し，$1/t^2$ の係数を比較して $a$ を決める」という探索方法は，右辺が $1/t^2$ のオーダーの項を含むRiccati方程式に対する典型的な第一手なので覚えておくとよい。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①$x^2=(x_0+1/w)^2$ を展開する際に交差項 $2x_0/w=2/(tw)$ を落としてしまい，$1/t^2$ と $1/w^2$ の項だけを残して方程式を間違える，②積分因子を $\exp\left(\int \frac2t\,dt\right)=t^2$ とすべきところを，符号を間違えて $t^{-2}$ としてしまう，③(1)の確認を怠り，$x_0=1/t$ が本当に方程式を満たすかどうかを検算せずに(2)(3)に進んでしまう（特殊解の確認は変換全体の土台なので必ず先に行う）。</p>
+      <p><strong>別解（$a=-2$ の特殊解 $x_0=-2/t$ を使う場合）：</strong>$x=-2/t+1/w$ とおいても同様の手順で $w$ に関する1階線形方程式が得られ（係数は本解答とは異なる），最終的に同じ一般解の族 $x(t)=\dfrac1t+\dfrac{3t^2}{A-t^3}$ に（定数 $A$ の対応関係を調整すれば）帰着することを確認できる。どちらの特殊解を使っても最終的な解の集合は変わらないが，見た目の式や計算の煩雑さは変わりうる。本問のように複数の特殊解候補が見つかったときは，係数がより簡単な方（本問では $a=1$）を選ぶと計算が楽になることが多い。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 一般化：Riccati方程式の理論</div>
+        <p>一般に $x'=a(t)x^2+b(t)x+c(t)$（Riccati方程式）は，特殊解 $x_0(t)$ が1つ分かれば $x=x_0+1/w$ の変換で必ず $w$ に関する1階線形方程式 $w'=-(2a(t)x_0(t)+b(t))w-a(t)$ に帰着できる，という一般論が成り立つ（本問はこの一般論の $a(t)=1,\,b(t)=0,\,c(t)=-2/t^2$ の場合）。逆に言えば，Riccati方程式が「解ける」かどうかは，特殊解を1つ見つけられるかどうかに完全に懸かっている。特殊解が全く見つからない場合は，一般には初等関数で解を書き下すことができない（超越関数や特殊関数が必要になることもある）。</p>
+      </div>
+      <p><strong>本番での対応：</strong>Riccati型の方程式（右辺が $x$ の2次式）が出題されたら，まず特殊解が問題文で与えられていないか確認し，与えられていなければ $x_0=a/t^n$ や $x_0=$（定数）のような簡単な形を仮定して代入し，係数を比較して特殊解を探す。特殊解が見つかったら $x=x_0+1/w$ の変換で機械的に1階線形方程式に帰着させ，積分因子法で解く，という一連の流れをセットで押さえておくこと。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第4回（常微分方程式）を自力で解けるかセルフチェック</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$y'=1+y^2$ を変数分離して $y=\tan x$ を導き，$\arctan$ の値域から解の存在範囲 $(-\pi/2,\pi/2)$ を求められるか</li>
+          <li>「非線形方程式では有限時間爆発が起こりうるが，線形方程式では絶対に起こらない」という対比を説明できるか</li>
+          <li>ロジスティック型方程式 $y'=ky(M-y)$ を部分分数分解で解き，一般解を書けるか</li>
+          <li>初期値 $y_0$ の符号・大きさに応じて，解が単調増加／単調減少／有限時間爆発のどれになるかを分類できるか</li>
+          <li>符号解析（相線図）だけで平衡点の安定・不安定を（積分せずに）判定できるか</li>
+          <li>2階線形定係数ODEで特性方程式が重解を持つ場合，$y:=x'-\alpha x$ の演算子分解から一般解 $(C_1+C_2t)e^{\alpha t}$ を導けるか</li>
+          <li>重解の場合に $t$ の1次式が現れる理由（共鳴）を説明できるか</li>
+          <li>Riccati方程式で特殊解 $x_0$ が与えられたとき，$x=x_0+1/w$ の変換で1階線形方程式に帰着できるか</li>
+          <li>$x_0=a/t^n$ の形を仮定して代入し，係数比較でRiccati方程式の特殊解を自分で探索できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

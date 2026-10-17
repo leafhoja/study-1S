@@ -1,0 +1,203 @@
+<!DOCTYPE html><!-- 「§8 線形写像の行列表示・ランク — 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>§8 線形写像の行列表示・ランク — 線形代数学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams',
+        macros: {
+          R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}',
+          Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}',
+          rank: '\\operatorname{rank}'
+        }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="s8">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>§8 線形写像の行列表示</h1>
+  <p class="subtitle">講義ノート⑥・⑦ をもとに作成</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#def8-1">定義8.1 行列表示</a>
+    <a href="#def8-2">定義8.2 線形写像のランク</a>
+    <a href="#summary">まとめ</a>
+  </div>
+
+  <!-- =================== 定義8.1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="def8-1">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 8.1</div>
+      <h2>定義 8.1 — 線形写像の行列表示</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">この節の目標</span>
+        <p>
+          §1 の例1では，$T:\mathbb{K}^n\to\mathbb{K}^m$ という<strong>具体的な数ベクトル空間の間の</strong>線形写像はすべて
+          行列 $A$ で $T=T_A$ と書けることを見た。では $V,W$ が一般の（$\mathbb{K}^n,\mathbb{K}^m$ そのものとは限らない）
+          有限次元ベクトル空間のとき，線形写像 $L:V\to W$ を「行列」として書くにはどうすればよいか。
+          §6・§7 で手に入れた「基底を選べば $V\cong\mathbb{K}^n$」という事実を使えば，$V,W$ の基底を1組ずつ固定することで
+          $L$ を $\mathbb{K}^n\to\mathbb{K}^m$ の線形写像とみなし直し，行列表示ができる。
+        </p>
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 8.1</span>
+        $V,W$：$\mathbb{K}$-ベクトル空間，$L:V\to W$ を $\mathbb{K}$-線形写像とする。$\dim V=n&lt;+\infty$，$\dim W=m&lt;+\infty$ とし，
+        $$v_1,\ldots,v_n:\ V\text{ の基底},\qquad w_1,\ldots,w_m:\ W\text{ の基底}$$
+        を1組ずつ固定する。系6.2 より
+        $$T_{v_1,\ldots,v_n}:\mathbb{K}^n\xrightarrow{\ \sim\ }V,\qquad T_{w_1,\ldots,w_m}:\mathbb{K}^m\xrightarrow{\ \sim\ }W$$
+        は同型写像なので，合成
+        $$T_{w_1,\ldots,w_m}^{-1}\circ L\circ T_{v_1,\ldots,v_n}\ :\ \mathbb{K}^n\longrightarrow \mathbb{K}^m$$
+        を考えることができる（下図が可換になるように，$\mathbb{K}^n$ を経由して $L$ を見ている）。
+        これは $\mathbb{K}^n\to\mathbb{K}^m$ の $\mathbb{K}$-線形写像なので，§1 の例1により，ただ1つの行列で表される。
+        その行列を $L$ の（$v_1,\ldots,v_n$ と $w_1,\ldots,w_m$ に関する）<strong>行列表示</strong>と呼び，
+        $$[L]^{w_1,\ldots,w_m}_{v_1,\ldots,v_n}\ :=\ T_{w_1,\ldots,w_m}^{-1}\circ L\circ T_{v_1,\ldots,v_n}\ \text{ の行列表示}$$
+        と定める（$m\times n$ 行列になる）。
+      </div>
+
+      <div class="note">
+        <span class="box-label">可換図式</span>
+        <div style="overflow-x:auto">
+          <pre style="font-family:monospace; line-height:1.9; font-size:.9rem; color:#333">
+        V ────────── L ────────→ W
+        ↑                        ↑
+T_{v1,…,vn} ≀                    ≀ T_{w1,…,wm}
+        │                        │
+       K^n ── T_w⁻¹∘L∘T_v ──→ K^m
+          </pre>
+        </div>
+        <p>
+          $v_1,\ldots,v_n$ を固定すると「$\mathbb{K}^n$ の座標 $(x_1,\ldots,x_n)^\top$」と「$V$ の元 $x_1v_1+\cdots+x_nv_n$」が
+          1対1に対応する（$T_{v_1,\ldots,v_n}$ がその対応そのもの）。$W,w_1,\ldots,w_m$ についても同様。
+          $[L]^{w_1,\ldots,w_m}_{v_1,\ldots,v_n}$ は，この「座標」を通して見たときの $L$ の正体であり，
+          基底の選び方を1組固定するごとに定まる（基底を変えれば同じ $L$ でも行列表示は変わりうる —
+          この「基底変換」は過去問にも頻出のテーマで，次回以降で扱う）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定義8.2 =================== -->
+  <div class="section" id="def8-2">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 8.2</div>
+      <h2>定義 8.2 — 線形写像のランク</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 8.2</span>
+        $V,W$：$\mathbb{K}$-ベクトル空間，$T:V\to W$ を $\mathbb{K}$-線形写像とする。
+        <ol>
+          <li>$T$ が<strong>有限ランクを持つ</strong>（of finite rank）とは，$\operatorname{Im}(T)$ が有限次元になることをいう。</li>
+          <li>$T$ が有限ランクを持つとき，$T$ の<strong>ランク</strong> $\operatorname{rank}T$ を
+          $$\operatorname{rank}T=\dim\operatorname{Im}(T)$$
+          で定める。</li>
+        </ol>
+      </div>
+
+      <div class="note">
+        <span class="box-label">§4 の rank との関係</span>
+        <p>
+          $V,W$ が有限次元であるとき，$T:V\to W$ のランクは，$V,W$ の基底を（どのようにとっても）任意に1組ずつ固定したときの
+          行列表示 $[T]^{w_1,\ldots,w_m}_{v_1,\ldots,v_n}$ のランクに等しい。特に $A$ を $m\times n$ 行列とし，$T_A:\mathbb{K}^n\to\mathbb{K}^m$
+          をその定める線形写像とすると，
+          $$\operatorname{rank}A=\dim\bigl(\operatorname{Im}T_A\bigr)$$
+          であり，これは §4 の定理4.7（$\dim\operatorname{Im}(T)=\operatorname{rank}A$）そのものである。
+          つまり定義8.2 は，§4 で行列に対して定義した「rank」を，行列表示を経由せずに一般の線形写像 $T:V\to W$
+          に対して直接定義し直したものになっている——基底を1組固定するたびに具体的な行列 $[T]$ が現れるが，
+          $\operatorname{rank}T=\dim\operatorname{Im}(T)$ 自体は基底の取り方によらない（$\operatorname{Im}(T)$ は $T$ だけで決まる部分空間なので）。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 — 微分作用素のランク</span>
+        <p>
+          $V=\{a_4x^4+a_3x^3+a_2x^2+a_1x+a_0\mid a_i\in\mathbb{C}\}$（次数4以下の複素係数多項式全体，$\dim V=5$）上で，
+          $$D:V\to V,\qquad f(x)\longmapsto f'(x)$$
+          を考える。$D(x^4)=4x^3,\ D(x^3)=3x^2,\ D(x^2)=2x,\ D(x)=1,\ D(1)=0$ より
+          $$\operatorname{Im}(D)=\langle x^3,x^2,x,1\rangle_{\mathbb{C}}\ (=\{\text{次数3以下の多項式}\}),\qquad \dim\operatorname{Im}(D)=4$$
+          なので，定義8.2 より $\operatorname{rank}D=4$。実際，基底 $x^4,x^3,x^2,x,1$ に関する $D$ の行列表示は
+          $$[D]^{x^4,x^3,x^2,x,1}_{x^4,x^3,x^2,x,1}=\begin{pmatrix}0&0&0&0&0\\4&0&0&0&0\\0&3&0&0&0\\0&0&2&0&0\\0&0&0&1&0\end{pmatrix}$$
+          であり，この行列の階数（行標準形の主成分の個数）を数えても，やはり $4$ に一致する。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== まとめ =================== -->
+  <div class="section" id="summary">
+    <div class="sec-header">
+      <div class="sec-tag">Summary</div>
+      <h2>まとめ — §8 の全体像</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">§8 の核心</span>
+        <table class="axiom-table">
+          <tr><th>結果</th><th>内容</th></tr>
+          <tr>
+            <td>定義8.1</td>
+            <td>$V,W$ の基底を1組ずつ固定すると，$L:V\to W$ は $T_w^{-1}\circ L\circ T_v:\mathbb{K}^n\to\mathbb{K}^m$ とみなせ，行列表示 $[L]^{w_1,\ldots,w_m}_{v_1,\ldots,v_n}$ が定まる</td>
+          </tr>
+          <tr>
+            <td>定義8.2</td>
+            <td>$\operatorname{Im}(T)$ が有限次元のとき $T$ は有限ランクを持つといい，$\operatorname{rank}T=\dim\operatorname{Im}(T)$ で定める。$V,W$ が有限次元なら，これは行列表示のランク（§4）と一致する</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <span class="box-label">この先の見通し</span>
+        <p>
+          異なる基底を選んだときに行列表示がどう変わるか（基底変換行列）は
+          <a href="s9.html">§9 座標変換</a> で扱う。また部分空間の和・共通部分の次元の関係は
+          <a href="s10.html">§10 基底延長定理の応用</a> を参照。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

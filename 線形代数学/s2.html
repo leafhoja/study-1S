@@ -1,0 +1,410 @@
+<!DOCTYPE html><!-- 「§2 部分空間 — 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>§2 部分空間 — 線形代数学①</title>
+  <link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams',
+        macros: {
+          R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}',
+          Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}'
+        }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="s2">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>§2 部分空間</h1>
+  <p class="subtitle">講義ノート② をもとに作成</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#def2-1">定義2.1 部分空間</a>
+    <a href="#check">確認手順</a>
+    <a href="#examples">具体例</a>
+    <a href="#nonex">部分空間でない例</a>
+    <a href="#def2-2">定義2.2 生成される部分空間</a>
+    <a href="#span-ex">span の計算例</a>
+  </div>
+
+  <!-- =================== 定義2.1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="def2-1">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 2.1</div>
+      <h2>部分空間（subspace）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 2.1 — 部分空間</span>
+        $V$: $\mathbb{K}$-ベクトル空間，$W\subseteq V$（$W$ は $V$ の部分集合）とする。
+        $W$ が $V$ の <strong>部分空間（subspace）</strong> であるとは、以下の (S1)〜(S3) をすべて満たすことをいう：
+        <ol style="margin-top:.7rem">
+          <li><strong>(S1)</strong> $0\in W$　（零元を含む）</li>
+          <li><strong>(S2)</strong> 任意の $x,y\in W$ に対し $x+y\in W$　（加法について閉じている）</li>
+          <li><strong>(S3)</strong> 任意の $a\in\mathbb{K},\ x\in W$ に対し $ax\in W$　（スカラー倍について閉じている）</li>
+        </ol>
+        <p style="margin-top:.8rem">
+          <strong>重要</strong>：$W$ が $V$ の部分空間ならば、$(W, +|_W, 0, \cdot|_W)$ はそれ自身が $\mathbb{K}$-ベクトル空間の構造をもつ。
+          また、包含写像 $W\hookrightarrow V$（$w\mapsto w$）は $\mathbb{K}$-線形写像である。
+          さらに $V$ 自身も $V$ の部分空間（最大の部分空間）、$\{0\}$ も $V$ の部分空間（最小の部分空間）。
+        </p>
+      </div>
+
+      <div class="note" id="check">
+        <span class="box-label">補足 — 部分空間の確認は 3 条件だけ</span>
+        <p>
+          $W\subseteq V$ が部分空間かどうかを確かめるには、<strong>(S1)〜(S3) の 3 条件だけ</strong>を示せばよい。
+          ベクトル空間の残りの公理 (V4)〜(V11)（可換律・結合律など）は $V$ での成立が $W$ にも自動的に引き継がれるからである。
+        </p>
+        <table class="axiom-table">
+          <tr><th>条件</th><th>何を確認するか</th><th>ポイント</th></tr>
+          <tr>
+            <td>(S1) $0\in W$</td>
+            <td>$W$ が空でないことの確認。零ベクトルが $W$ に属するか？</td>
+            <td>最もよく忘れられる条件。まず確認せよ。</td>
+          </tr>
+          <tr>
+            <td>(S2) 加法に閉じている</td>
+            <td>$W$ の元を 2 つ足しても $W$ に留まるか？</td>
+            <td>「$W$ の元同士の和が $W$ の条件を満たすか」を確認。</td>
+          </tr>
+          <tr>
+            <td>(S3) スカラー倍に閉じている</td>
+            <td>$W$ の元を任意のスカラーで掛けても $W$ に留まるか？</td>
+            <td>「$0$ 倍」「負のスカラー」も含めて任意のスカラーで。</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — なぜ (S1)〜(S3) の 3 条件だけで十分か</span>
+        <p>
+          ベクトル空間の定義 (V1)〜(V11) は 11 条件あった。
+          部分空間を確認するのに (S1)〜(S3) の 3 つだけで十分な理由を明確にしておく。
+        </p>
+        <p>
+          鍵は「$W\subseteq V$」、すなわち $W$ の元はすべて $V$ の元でもある、という事実。
+          $V$ の元として成り立つ性質は、$W$ の元に限定して眺めても当然成り立つ。
+        </p>
+        <ul>
+          <li>
+            <strong>(V4) 可換律 $x+y=y+x$</strong>：
+            $x,y\in W$ であれば $x,y\in V$（$W\subseteq V$ なので）。
+            $V$ では可換律が成り立つから、$W$ の元 $x,y$ に対しても $x+y=y+x$ は自動的に成立する。
+          </li>
+          <li>
+            <strong>(V5) 結合律, (V8)〜(V11)</strong>：
+            同様に、$V$ での成立が $W$ にも引き継がれる。
+          </li>
+          <li>
+            <strong>(V7) 逆元の存在</strong>：
+            $x\in W$ に対して逆元 $-x$ が $W$ に属することは、(S3) から導ける。
+            スカラー $a=-1$ を選べば $(-1)\cdot x = -x \in W$（(S3) より $W$ はスカラー倍に閉じているから）。
+            よって (V7) も (S3) の特別な場合として保証される。
+          </li>
+        </ul>
+        <p style="margin-top:.4rem">
+          したがって「(S2) で和が $W$ に入る（加法に閉じている）」「(S3) でスカラー倍が $W$ に入る（スカラー倍に閉じている）」
+          ことを示しさえすれば、演算が $W$ 内で完結し、$W$ 自身が $\mathbb{K}$-ベクトル空間の構造を持つ。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 「閉じている」の意味を具体的に</span>
+        <p>
+          「加法に<em>閉じている</em>」とは、「$W$ の元を 2 つ足した結果が必ず $W$ に属する」ということ。
+          「$W$ の外に飛び出さない」というイメージ。
+        </p>
+        <ul>
+          <li>
+            <strong>閉じている例</strong>：$W=\{(x,y)\in\mathbb{R}^2\mid y=2x\}$（原点を通る直線）。
+            $\begin{pmatrix}1\\2\end{pmatrix}\in W$ かつ $\begin{pmatrix}3\\6\end{pmatrix}\in W$ のとき、
+            $\begin{pmatrix}1\\2\end{pmatrix}+\begin{pmatrix}3\\6\end{pmatrix}=\begin{pmatrix}4\\8\end{pmatrix}$。
+            $8=2\times 4$ なので確かに $\in W$。
+          </li>
+          <li>
+            <strong>閉じていない例</strong>：$W=\{(x,y)\in\mathbb{R}^2\mid x^2+y^2=1\}$（単位円）。
+            $\begin{pmatrix}1\\0\end{pmatrix}\in W$ かつ $\begin{pmatrix}0\\1\end{pmatrix}\in W$ だが、
+            $\begin{pmatrix}1\\0\end{pmatrix}+\begin{pmatrix}0\\1\end{pmatrix}=\begin{pmatrix}1\\1\end{pmatrix}$
+            は $1^2+1^2=2\ne 1$ なので $\notin W$。加法に閉じていない（だから部分空間でもない）。
+          </li>
+        </ul>
+        <p>
+          スカラー倍も同様：「$W$ の元を任意のスカラーで掛けた結果が必ず $W$ に属する」。
+          特に $a=0$ のとき $(0)\cdot x = 0\in W$ となり (S1) が自動的に満たされるため、
+          実は (S1) を (S2) と (S3) から<em>分離して示す</em>のは「$W$ が空でないこと」を保証するためである
+          （空集合 $\emptyset$ は (S2)(S3) を満たすが部分空間ではない）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 具体例 =================== -->
+  <div class="section" id="examples">
+    <div class="sec-header">
+      <div class="sec-tag">Examples</div>
+      <h2>部分空間の具体例</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3>例 A — 原点を通る直線（$\mathbb{R}^2$ の部分空間）</h3>
+      <div class="ex">
+        <span class="box-label">例 A</span>
+        $W_1 = \left\{\begin{pmatrix}x\\y\end{pmatrix}\in\mathbb{R}^2\ \middle|\ y = 2x\right\}$
+        （$y = 2x$ 上の点全体）は $\mathbb{R}^2$ の部分空間である。
+        <div class="sol">
+          <span class="box-label">確認</span>
+          <strong>(S1)</strong>：$x=0$ とすると $y=2\cdot 0=0$。よって $\begin{pmatrix}0\\0\end{pmatrix}\in W_1$。✓<br><br>
+          <strong>(S2)</strong>：$\begin{pmatrix}x_1\\2x_1\end{pmatrix},\begin{pmatrix}x_2\\2x_2\end{pmatrix}\in W_1$ とすると
+          $$\begin{pmatrix}x_1\\2x_1\end{pmatrix}+\begin{pmatrix}x_2\\2x_2\end{pmatrix} = \begin{pmatrix}x_1+x_2\\2x_1+2x_2\end{pmatrix} = \begin{pmatrix}x_1+x_2\\2(x_1+x_2)\end{pmatrix}\in W_1$$
+          第 2 成分が第 1 成分の 2 倍になっているので $W_1$ の条件を満たす。✓<br><br>
+          <strong>(S3)</strong>：$\begin{pmatrix}x\\2x\end{pmatrix}\in W_1$, $a\in\mathbb{R}$ とすると
+          $$a\begin{pmatrix}x\\2x\end{pmatrix} = \begin{pmatrix}ax\\2ax\end{pmatrix}\in W_1$$
+          第 2 成分が第 1 成分の 2 倍。✓<br><br>
+          よって $W_1$ は $\mathbb{R}^2$ の部分空間。
+          <em>幾何的には原点を通る傾き 2 の直線</em>。
+        </div>
+      </div>
+
+      <h3>例 B — 原点を通る平面（$\mathbb{R}^3$ の部分空間）</h3>
+      <div class="ex">
+        <span class="box-label">例 B</span>
+        $W_2 = \left\{\begin{pmatrix}x\\y\\z\end{pmatrix}\in\mathbb{R}^3\ \middle|\ x+y+z=0\right\}$
+        は $\mathbb{R}^3$ の部分空間である。
+        <div class="sol">
+          <span class="box-label">確認</span>
+          <strong>(S1)</strong>：$0+0+0=0$ なので $\begin{pmatrix}0\\0\\0\end{pmatrix}\in W_2$。✓<br><br>
+          <strong>(S2)</strong>：$x_1+y_1+z_1=0$ かつ $x_2+y_2+z_2=0$ とすると、
+          $(x_1+x_2)+(y_1+y_2)+(z_1+z_2) = (x_1+y_1+z_1)+(x_2+y_2+z_2) = 0+0 = 0$。✓<br><br>
+          <strong>(S3)</strong>：$x+y+z=0$ かつ $a\in\mathbb{R}$ とすると、$ax+ay+az = a(x+y+z) = a\cdot 0 = 0$。✓<br><br>
+          幾何的には $\mathbb{R}^3$ の中の原点を通る平面（法線ベクトル $(1,1,1)^T$）。
+        </div>
+      </div>
+
+      <h3>例 C — 連立一次方程式の解空間</h3>
+      <div class="ex">
+        <span class="box-label">例 C — 斉次連立方程式の解全体は部分空間</span>
+        <p>$A\in M_{m,n}(\mathbb{K})$ とする。斉次連立一次方程式の解全体</p>
+        $$W = \{x\in\mathbb{K}^n \mid Ax = 0\}$$
+        <p>は $\mathbb{K}^n$ の部分空間である。</p>
+        <div class="sol">
+          <span class="box-label">確認</span>
+          <strong>(S1)</strong>：$A\cdot 0 = 0$ なので $0\in W$。✓<br><br>
+          <strong>(S2)</strong>：$Ax=0$ かつ $Ay=0$ とすると $A(x+y)=Ax+Ay=0+0=0$。✓<br><br>
+          <strong>(S3)</strong>：$Ax=0$ かつ $a\in\mathbb{K}$ とすると $A(ax)=a(Ax)=a\cdot 0=0$。✓
+        </div>
+        <p style="margin-top:.5rem">
+          この $W$ は §3 で学ぶ $\operatorname{Ker}(T_A)$（$T_A(v)=Av$ の核）に他ならない。
+          <strong>「斉次方程式の解空間は部分空間」</strong>という事実はこれで証明される。
+        </p>
+        <h4>具体例：$A = \begin{pmatrix}1&2&3\\0&1&2\end{pmatrix}$</h4>
+        <p>$Ax=0$、すなわち
+        $\begin{cases}x_1+2x_2+3x_3=0\\x_2+2x_3=0\end{cases}$
+        を解くと：$x_2=-2x_3$, $x_1=-2x_2-3x_3=4x_3-3x_3=x_3$。
+        自由変数 $x_3=t$ とおくと解は</p>
+        $$W = \left\{t\begin{pmatrix}1\\-2\\1\end{pmatrix}\ \middle|\ t\in\mathbb{R}\right\}$$
+        <p>これは $\mathbb{R}^3$ の中の原点を通る直線（1次元の部分空間）である。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 部分空間でない例 =================== -->
+  <div class="section" id="nonex">
+    <div class="sec-header">
+      <div class="sec-tag">Non-examples</div>
+      <h2>部分空間でない例</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="warn">
+        <span class="box-label">注意 — (S1) が破れる例</span>
+        <p>$W_3 = \left\{\begin{pmatrix}x\\y\end{pmatrix}\in\mathbb{R}^2\ \middle|\ y = 2x+1\right\}$（$y = 2x+1$ 上の点全体）は部分空間でない。</p>
+        <p><strong>理由</strong>：(S1) 違反。$\begin{pmatrix}0\\0\end{pmatrix}$ が $W_3$ に属するには $0 = 2\cdot 0 + 1 = 1$ が必要だが、これは偽。
+        つまり $0\notin W_3$。</p>
+        <p><em>幾何的には</em>：原点を通らない直線は部分空間にならない。</p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">注意 — (S2) が破れる例</span>
+        <p>$W_4 = \left\{\begin{pmatrix}x\\y\end{pmatrix}\in\mathbb{R}^2\ \middle|\ xy\ge 0\right\}$（第 1・3 象限＋座標軸の点全体）は部分空間でない。</p>
+        <p><strong>理由</strong>：(S2) 違反。$\begin{pmatrix}1\\0\end{pmatrix},\begin{pmatrix}0\\-1\end{pmatrix}\in W_4$（それぞれ $xy=0\ge 0$）だが、
+        $\begin{pmatrix}1\\0\end{pmatrix}+\begin{pmatrix}0\\-1\end{pmatrix}=\begin{pmatrix}1\\-1\end{pmatrix}$ の $xy=-1<0$ なので $\notin W_4$。</p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">注意 — (S3) が破れる例</span>
+        <p>$W_5 = \left\{\begin{pmatrix}x\\y\end{pmatrix}\in\mathbb{R}^2\ \middle|\ x,y\in\mathbb{Z}\right\}$（整数格子点全体）は $\mathbb{R}$-ベクトル空間 $\mathbb{R}^2$ の部分空間でない。</p>
+        <p><strong>理由</strong>：(S3) 違反。$\begin{pmatrix}1\\0\end{pmatrix}\in W_5$ だが $\frac{1}{2}\begin{pmatrix}1\\0\end{pmatrix}=\begin{pmatrix}1/2\\0\end{pmatrix}\notin W_5$。</p>
+        <p>（(S1)(S2) は満たすが (S3) が満たされない。）</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">まとめ — 部分空間のイメージ</span>
+        <p>$\mathbb{R}^2$ の部分空間は以下の 3 種類しかない：</p>
+        <ul>
+          <li>$\{0\}$（原点だけ）</li>
+          <li>原点を通る直線（1次元）</li>
+          <li>$\mathbb{R}^2$ 全体（2次元）</li>
+        </ul>
+        <p>$\mathbb{R}^3$ の部分空間：$\{0\}$, 原点を通る直線, 原点を通る平面, $\mathbb{R}^3$ 全体。</p>
+        <p><strong>キーワード</strong>：「原点を通る」かつ「線形演算に閉じている」ものが部分空間。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定義2.2 =================== -->
+  <div class="section" id="def2-2">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 2.2</div>
+      <h2>生成される部分空間（span）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 2.2 — 生成される部分空間</span>
+        $V$: $\mathbb{K}$-ベクトル空間，$v_1,\ldots,v_k\in V$ とする。
+        $$\langle v_1,\ldots,v_k\rangle_{\mathbb{K}} \overset{\text{def}}{=} \mathbb{K}v_1+\cdots+\mathbb{K}v_k = \{a_1 v_1+\cdots+a_k v_k \mid a_1,\ldots,a_k\in\mathbb{K}\}$$
+        とおくと、これは $V$ の部分空間になる。このことを「$v_1,\ldots,v_k$ が<strong>生成する（generate / span）</strong>部分空間」または
+        「a subspace <em>generated by</em> $v_1,\ldots,v_k$」という。
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — span の意味</span>
+        <ul>
+          <li>$\langle v_1,\ldots,v_k\rangle_{\mathbb{K}}$ とは「$v_1,\ldots,v_k$ の一次結合全体の集合」。</li>
+          <li>$v_1,\ldots,v_k$ を含む<em>最小の</em>部分空間が span である（$v_1,\ldots,v_k$ を含む部分空間の共通部分に一致する）。</li>
+          <li>英語では $\operatorname{span}\{v_1,\ldots,v_k\}$ とも書く。</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 記法 $\mathbb{K}v_1$ の意味</span>
+        <p>
+          定義に現れる $\mathbb{K}v_1$ とは、$v_1$ のスカラー倍全体の集合のこと：
+          $$\mathbb{K}v_1 = \{av_1 \mid a\in\mathbb{K}\}$$
+          同様に $\mathbb{K}v_2 = \{av_2\mid a\in\mathbb{K}\}$ など。
+          したがって $\mathbb{K}v_1+\mathbb{K}v_2+\cdots+\mathbb{K}v_k$ は
+          「$v_1$ のスカラー倍」＋「$v_2$ のスカラー倍」＋ … の和の集合、
+          すなわち $\{a_1v_1+a_2v_2+\cdots+a_kv_k\mid a_1,\ldots,a_k\in\mathbb{K}\}$ に等しい。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — span が「最小の部分空間」である理由</span>
+        <p>
+          $v_1,\ldots,v_k\in V$ を含む部分空間 $U$（すなわち $v_1,\ldots,v_k\in U$）は、
+          (S2)(S3) より必ず $v_1,\ldots,v_k$ の一次結合をすべて含む。
+          なぜなら：
+        </p>
+        <ul>
+          <li>$v_i\in U$ かつ $a_i\in\mathbb{K}$ ならば (S3) より $a_iv_i\in U$</li>
+          <li>$a_1v_1,\ldots,a_kv_k\in U$ ならば (S2) を繰り返して $a_1v_1+\cdots+a_kv_k\in U$</li>
+        </ul>
+        <p>
+          つまり $\langle v_1,\ldots,v_k\rangle_{\mathbb{K}} \subseteq U$。
+          一方 $\langle v_1,\ldots,v_k\rangle_{\mathbb{K}}$ 自身は $v_1,\ldots,v_k$ を含む部分空間（上の証明より）。
+        </p>
+        <p>
+          よって $\langle v_1,\ldots,v_k\rangle_{\mathbb{K}}$ は「$v_1,\ldots,v_k$ を含む部分空間の中で最も小さいもの（他の部分空間に含まれるもの）」となる。
+          これが「span は最小の部分空間」という言葉の意味である。
+        </p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>$\langle v_1,\ldots,v_k\rangle_{\mathbb{K}}$ が部分空間であることの証明（クリックで展開）</summary>
+        <div class="proof-body">
+          <strong>(S1)</strong>：$0 = 0\cdot v_1+\cdots+0\cdot v_k \in \langle v_1,\ldots,v_k\rangle_{\mathbb{K}}$。<br><br>
+          <strong>(S2)</strong>：$(a_1 v_1+\cdots+a_k v_k) + (b_1 v_1+\cdots+b_k v_k) = (a_1+b_1)v_1+\cdots+(a_k+b_k)v_k \in \langle v_1,\ldots,v_k\rangle_{\mathbb{K}}$。<br><br>
+          <strong>(S3)</strong>：$\lambda(a_1 v_1+\cdots+a_k v_k) = (\lambda a_1)v_1+\cdots+(\lambda a_k)v_k \in \langle v_1,\ldots,v_k\rangle_{\mathbb{K}}$。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <h3 id="span-ex">span の具体例</h3>
+
+      <div class="ex">
+        <span class="box-label">例 D — $\mathbb{R}^2$ の span</span>
+        <ul>
+          <li>
+            $\left\langle\begin{pmatrix}1\\2\end{pmatrix}\right\rangle_{\mathbb{R}} = \left\{t\begin{pmatrix}1\\2\end{pmatrix}\ \middle|\ t\in\mathbb{R}\right\} = \left\{\begin{pmatrix}t\\2t\end{pmatrix}\ \middle|\ t\in\mathbb{R}\right\}$
+            は $\mathbb{R}^2$ の部分空間（原点を通る傾き 2 の直線）。
+          </li>
+          <li>
+            $\left\langle\begin{pmatrix}1\\0\end{pmatrix},\begin{pmatrix}0\\1\end{pmatrix}\right\rangle_{\mathbb{R}}
+            = \left\{a\begin{pmatrix}1\\0\end{pmatrix}+b\begin{pmatrix}0\\1\end{pmatrix}\ \middle|\ a,b\in\mathbb{R}\right\}
+            = \left\{\begin{pmatrix}a\\b\end{pmatrix}\ \middle|\ a,b\in\mathbb{R}\right\} = \mathbb{R}^2$
+            （全空間を生成する）。
+          </li>
+          <li>
+            $\left\langle\begin{pmatrix}1\\2\end{pmatrix},\begin{pmatrix}2\\4\end{pmatrix}\right\rangle_{\mathbb{R}}$：
+            $\begin{pmatrix}2\\4\end{pmatrix} = 2\begin{pmatrix}1\\2\end{pmatrix}$ なので、これは単に $\left\langle\begin{pmatrix}1\\2\end{pmatrix}\right\rangle_{\mathbb{R}}$ に等しい（直線）。
+            2 つのベクトルが平行なので span は 1 次元のまま。
+          </li>
+        </ul>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 E — $\mathbb{R}^3$ の span</span>
+        $v_1=\begin{pmatrix}1\\0\\0\end{pmatrix}$, $v_2=\begin{pmatrix}0\\1\\0\end{pmatrix}$, $v_3=\begin{pmatrix}0\\0\\1\end{pmatrix}$ として：
+        <ul>
+          <li>$\langle v_1\rangle = \{(t,0,0)^T\mid t\in\mathbb{R}\}$：$x$ 軸（1 次元）</li>
+          <li>$\langle v_1, v_2\rangle = \{(a,b,0)^T\mid a,b\in\mathbb{R}\}$：$xy$ 平面（2 次元）</li>
+          <li>$\langle v_1, v_2, v_3\rangle = \mathbb{R}^3$（3 次元、全空間）</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — span と線形写像の像</span>
+        <p>
+          線形写像 $T:\mathbb{K}^n\to\mathbb{K}^m$（行列表示 $A$）について：
+        </p>
+        $$\operatorname{Im}(T) = \{Av\mid v\in\mathbb{K}^n\} = \langle T(e_1),\ldots,T(e_n)\rangle_{\mathbb{K}} = \langle A\text{ の列ベクトル全体}\rangle_{\mathbb{K}}$$
+        <p>
+          つまり $\operatorname{Im}(T)$ は $A$ の<em>列空間</em>（column space）に等しい。
+          §3 でさらに詳しく扱う。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

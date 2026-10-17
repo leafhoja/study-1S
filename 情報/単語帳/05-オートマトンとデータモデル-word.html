@@ -1,0 +1,455 @@
+<!DOCTYPE html><!-- 「オートマトンとデータモデル 単語帳｜情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>オートマトンとデータモデル 単語帳｜情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-05-word">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>オートマトンとデータモデル</h1>
+  <p class="subtitle">有限状態機械・グラフ・木構造・機械学習</p>
+</div>
+
+<div class="container">
+
+  <!-- 単語のチェック件数と、一覧の絞り込み・チェック解除の操作をまとめる。 --><div class="word-toolbar">
+    <div class="word-progress">
+      <span class="wp-text">チェック済み 0 / 0</span>
+      <span class="wp-bar"><span class="wp-fill"></span></span>
+    </div>
+    <div class="word-filter-group">
+      <button type="button" class="word-filter-btn active" data-filter="all">すべて</button>
+      <button type="button" class="word-filter-btn" data-filter="unchecked">未チェック</button>
+      <button type="button" class="word-filter-btn" data-filter="checked">チェック済み</button>
+    </div>
+    <button type="button" class="word-reset-btn">リセット</button>
+  </div>
+  <p class="word-hint">チェックはこのブラウザだけに保存されます（他の端末・ブラウザとは同期しません）。</p>
+
+  <h2 class="word-cat-title" id="sub-1">有限状態機械の基本</h2>
+  <div class="word-list">
+    <!-- 用語の説明とチェック欄をひとまとまりにし、単語帳のひとつの項目として表示する。 --><div class="word-item" data-term-id="aut-001">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">有限状態機械（オートマトン）<span class="word-tag">頻出</span></div>
+        <div class="word-def">入力を1文字ずつ読みながら状態を移り変わり、最終的に受理／拒否を判定する機械。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-002">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">状態</div>
+        <div class="word-def">これまでの入力の要約。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-003">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">開始状態／初期状態</div>
+        <div class="word-def">オートマトンが入力を読み始める時点でいる状態。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-004">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">受理状態／終了状態<span class="word-tag">頻出</span></div>
+        <div class="word-def">入力が条件を満たしたと判定される状態。状態遷移図では二重丸で表記する。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-005">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">非受理状態／拒否</div>
+        <div class="word-def">入力が条件を満たさなかったと判定される状態。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-006">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">状態遷移／遷移規則</div>
+        <div class="word-def">入力文字に応じて現在の状態から別の状態へ移ること、およびその規則。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-007">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">状態遷移図<span class="word-tag">頻出</span></div>
+        <div class="word-def">状態と状態遷移を図として表したもの。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-008">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">自己ループ</div>
+        <div class="word-def">ある状態から同じ状態自身へ戻る遷移。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-009">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">else遷移</div>
+        <div class="word-def">個別に書かれた文字以外の他の文字すべてを一括して表す遷移。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-010">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">吸収状態</div>
+        <div class="word-def">一度入ると二度と抜け出せない状態。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-011">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">わな状態／トラップ状態</div>
+        <div class="word-def">一度入ると二度と抜け出せない状態。吸収状態と同じ考え方を指す呼び方。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-012">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">チェック表</div>
+        <div class="word-def">入力文字列と、それを読み終えたときの終了状態の対応をまとめた表。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-2">状態遷移の定石（構成テクニック）</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="aut-013">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">fail関数<span class="word-tag">頻出</span></div>
+        <div class="word-def">失敗関数。文字列の一致が崩れたときに、状態がどこまで戻るかを決める関数。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-014">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">接頭辞（prefix）</div>
+        <div class="word-def">これまで読んだ文字列の先頭からの部分。暗証番号型オートマトンの状態設計の基礎となる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-015">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">KMP法（Knuth–Morris–Pratt法）</div>
+        <div class="word-def">文字列探索アルゴリズム。単一パターンの一致判定オートマトンの構成テクニックに対応する。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-016">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">Aho-Corasick法</div>
+        <div class="word-def">複数パターンを同時にマッチさせるオートマトンの構成法。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-017">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">状態の統合<span class="word-tag">頻出</span></div>
+        <div class="word-def">機能等価な（将来どんな入力列に対しても常に同じ結果を返す）状態同士を1つに統合できる、という状態数削減の考え方。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-018">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">最小状態数</div>
+        <div class="word-def">機能を変えずに状態の統合を尽くした後に残る、最も少ない状態の数。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-019">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">正規化</div>
+        <div class="word-def">下位桁から読む倍数判定で、桁の重みの位相を余りに吸収させることで状態を整理する手法。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-3">有限状態機械の限界</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="aut-020">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">鳩の巣原理<span class="word-tag">頻出</span></div>
+        <div class="word-def">有限状態機械の限界を証明する手法。状態数Nに対しa⁰,…,a^Nの入力を考えれば必ずどこかで同じ状態に落ちる2つの入力が存在し矛盾を導く。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-021">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">正則言語</div>
+        <div class="word-def">有限状態機械（オートマトン）で受理できる言語のクラス。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-022">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ポンピング補題</div>
+        <div class="word-def">正則言語が満たす性質を示す補題。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-023">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">チューリングマシン／テープ</div>
+        <div class="word-def">有限状態機械にテープを追加した、より強力な計算モデル。「1対1で消し込む」手続きで有限状態機械では解けない問題を解ける。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-4">グラフと木構造</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="aut-024">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">データモデル</div>
+        <div class="word-def">データを扱いやすくするため視覚的にモデル化したもの。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-025">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ネットワークモデル<span class="word-tag">頻出</span></div>
+        <div class="word-def">ノードとエッジで表す、閉路を許すグラフによるデータモデル。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-026">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ノード／頂点</div>
+        <div class="word-def">グラフを構成する要素・点。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-027">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">エッジ／有向エッジ（弧）</div>
+        <div class="word-def">ノード同士のつながり。向きを持つエッジは有向エッジ（弧）と呼ぶ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-028">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">グラフ／有向グラフ</div>
+        <div class="word-def">ノードとエッジからなる構造。エッジに向きがあるものを有向グラフと呼ぶ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-029">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">オイラー路</div>
+        <div class="word-def">グラフの全エッジを重複なく通る経路。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-030">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">階層モデル<span class="word-tag">頻出</span></div>
+        <div class="word-def">枝分かれ構造、すなわち木構造によるデータモデル。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-031">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">木構造<span class="word-tag">頻出</span></div>
+        <div class="word-def">根を除く全ノードがただ1つの親しか持てない構造。閉路や多対多の関係は表現できない。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-032">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">根（ルート）</div>
+        <div class="word-def">木構造で最上位に位置するノード。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-033">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">葉</div>
+        <div class="word-def">子を持たない末端のノード。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-034">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">経路</div>
+        <div class="word-def">グラフ・木構造上のノードをたどる道筋。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-035">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">閉路（サイクル、ループ）</div>
+        <div class="word-def">出発したノードに再び戻ってくる経路。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-036">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">一輪車状（unicyclic）のグラフ</div>
+        <div class="word-def">頂点数と辺数が等しく、閉路をちょうど1つ持つグラフ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-037">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">DAG（有向非巡回グラフ）</div>
+        <div class="word-def">閉路を持たない有向グラフ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-038">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">閉包（closure）／到達可能性（reachability）</div>
+        <div class="word-def">あるノードから経路をたどって到達できるかどうか、およびその到達できるノード全体を表す考え方。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-039">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">祖先／共通祖先</div>
+        <div class="word-def">木構造で自分より上位にあるノード、および複数のノードに共通する祖先。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-040">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">入次数</div>
+        <div class="word-def">あるノードに向かって入ってくる有向エッジの数。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-041">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">幅優先探索（BFS）<span class="word-tag">頻出</span></div>
+        <div class="word-def">出発ノードから1回で着くもの、2回で着くもの……と近い順に段階的に到達ノードを広げていく探索法。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-042">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">深さ優先探索（DFS）</div>
+        <div class="word-def">1つの経路を行けるところまで深くたどってから引き返す探索法。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-5">ファイル階層</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="aut-043">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ファイルパス／ディレクトリ／フォルダ</div>
+        <div class="word-def">木構造をなすファイルの階層構造、およびそこでの位置を表す表記。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-044">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">絶対パス／相対パス</div>
+        <div class="word-def">根からの位置で表すパス／現在位置を基準にした位置で表すパス。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-045">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ドメイン名の木構造<span class="word-tag">頻出</span></div>
+        <div class="word-def">ホスト名（ドメイン名）は右から読むと木構造をなす。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-6">機械学習・人工知能</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="aut-046">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">機械学習</div>
+        <div class="word-def">データから学習を行う技術・分野。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-047">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">人工知能</div>
+        <div class="word-def">機械学習などを含む、知的な処理を扱う技術・分野。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-048">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">学習<span class="word-tag">頻出</span></div>
+        <div class="word-def">逆問題を解く作業。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-049">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">推論<span class="word-tag">頻出</span></div>
+        <div class="word-def">順問題を解く作業。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-050">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">順問題／逆問題<span class="word-tag">頻出</span></div>
+        <div class="word-def">順問題＝入力から出力を計算すること、逆問題＝出力から入力または内部パラメータを計算すること。逆問題は順問題より難しい。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-051">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">訓練データ／テストデータ</div>
+        <div class="word-def">モデルの学習に使うデータ／学習後の性能を評価するために使うデータ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="aut-052">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">過学習</div>
+        <div class="word-def">訓練データに適合しすぎて、未知のデータに対する性能が低下する現象。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="index.html">← 単語帳トップ</a>
+    <a href="05-オートマトンとデータモデル-keypoints.html">押さえておきたい事項 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+<script src="checklist.js"></script>
+</body>
+</html>

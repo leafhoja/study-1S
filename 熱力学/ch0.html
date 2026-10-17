@@ -1,0 +1,598 @@
+<!DOCTYPE html><!-- 「第0章 ガイダンス — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>第0章 ガイダンス — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="td.css">
+<style>
+/* ── 階層スケール図 ── */
+.scale-diagram {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 1.5rem 0;
+  overflow-x: auto;
+}
+.scale-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 90px;
+  padding: .4rem .6rem;
+}
+.scale-label {
+  font-size: .78rem;
+  color: var(--muted);
+  font-family: var(--mono);
+  margin-bottom: .2rem;
+}
+.scale-name {
+  font-weight: 600;
+  font-size: .88rem;
+  text-align: center;
+}
+.scale-arrow {
+  font-size: 1.4rem;
+  color: var(--teal);
+  padding: 0 .3rem;
+  flex-shrink: 0;
+  align-self: center;
+}
+.scale-micro { color: var(--red); }
+.scale-macro { color: var(--navy); }
+
+/* ── 物理学体系図 ── */
+.phys-map {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: .8rem 1.2rem;
+  align-items: center;
+  margin: 1.5rem 0;
+  padding: 1.2rem;
+  background: #f4f7fb;
+  border-radius: 8px;
+  border: 1px solid var(--rule);
+}
+.phys-col {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.phys-box {
+  border: 1.5px solid;
+  border-radius: 6px;
+  padding: .45rem .9rem;
+  font-size: .88rem;
+  font-weight: 600;
+  text-align: center;
+}
+.phys-box.micro  { border-color: var(--red);   background: #fef0f0; color: var(--red); }
+.phys-box.meso   { border-color: var(--amber);  background: #fef9ee; color: var(--amber); }
+.phys-box.macro  { border-color: var(--navy);   background: #edf2f8; color: var(--navy); }
+.phys-box.td     { border-color: var(--teal);   background: #e7f4f2; color: var(--teal); border-width: 2.5px; }
+.phys-arrow-col  { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: .8rem; }
+.phys-arrow      { font-size: 1.3rem; color: var(--teal); }
+.phys-label      { font-size: .75rem; color: var(--muted); text-align: center; }
+
+/* ── 概念マップ ── */
+.concept-map {
+  position: relative;
+  padding: 1.5rem;
+  background: #f8f6f0;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+.law-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+}
+.law-badge {
+  flex-shrink: 0;
+  min-width: 5rem;
+  text-align: center;
+  font-size: .8rem;
+  font-weight: 700;
+  padding: .25rem .5rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.law-badge.law0  { background: #e7f4f2; color: var(--teal); border: 1px solid var(--teal); }
+.law-badge.law1  { background: #edf2f8; color: var(--navy); border: 1px solid var(--navy); }
+.law-badge.law2  { background: #fef9ee; color: var(--amber); border: 1px solid var(--amber); }
+.law-badge.law3  { background: #fef0f0; color: var(--red); border: 1px solid var(--red); }
+.law-content     { font-size: .88rem; line-height: 1.8; }
+.law-sublist     { margin-left: 1rem; margin-top: .2rem; }
+.law-sublist li  { list-style: "→ "; color: var(--mid); font-size: .85rem; }
+</style>
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    macros: { pd: ['\\left(\\frac{\\partial #1}{\\partial #2}\\right)_{#3}', 3] }
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body data-nav-page="ch0">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">熱力学ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">ホーム</a>
+      <a href="ch0.html" data-page="ch0" class="active">第0章</a>
+      <a href="ch1.html" data-page="ch1">第1章</a>
+      <a href="ch2.html" data-page="ch2">第2章</a>
+      <a href="ch3.html" data-page="ch3">第3章</a>
+      <a href="ch4.html" data-page="ch4">第4章</a>
+      <a href="ch5.html" data-page="ch5">第5章</a>
+      <a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a>
+      <a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2014.html" data-page="kakomon_2014">2014</a>
+      <a href="kakomon_2012.html" data-page="kakomon_2012">2012</a>
+      <a href="kakomon_2011.html" data-page="kakomon_2011">2011</a>
+      <a href="kakomon_2010.html" data-page="kakomon_2010">2010</a>
+      <a href="kakomon_2009.html" data-page="kakomon_2009">2009</a>
+      <a href="kakomon_2008.html" data-page="kakomon_2008">2008</a>
+      <a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+    </div>
+  </div>
+</nav>
+
+<div class="chapter-layout">
+<!-- 本文の各節へ移動できる目次を、横の領域にまとめる。 --><aside class="sidebar">
+  <div class="sidebar-title">第0章 目次</div>
+  <ul class="sidebar-nav">
+    <li><a href="#s0-1">0.1 自然界の階層</a></li>
+    <li><a href="#s0-2">0.2 物理学の体系</a></li>
+    <li><a href="#s0-3">0.3 ミクロとマクロ</a></li>
+    <li class="sub-item"><a href="#s0-3-q1">Q1: ミクロが分かればマクロが分かるか</a></li>
+    <li class="sub-item"><a href="#s0-3-q2">Q2: ミクロはマクロに影響するか</a></li>
+    <li class="sub-item"><a href="#s0-3-hist">歴史的経緯</a></li>
+    <li><a href="#s0-4">0.4 熱力学の考え方</a></li>
+    <li class="sub-item"><a href="#s0-4-what">熱力学とは何か</a></li>
+    <li class="sub-item"><a href="#s0-4-map">熱力学の全体マップ</a></li>
+  </ul>
+</aside>
+
+<main class="main-content">
+  <div class="chapter-header">
+    <div class="chapter-badge">第 0 章</div>
+    <h1>ガイダンス</h1>
+    <p class="abstract">
+      熱力学の学習を始める前に，なぜ熱力学が必要なのか，
+      物理学全体の中でどのような位置を占めるのかを整理する。
+      ミクロとマクロの関係，そして熱力学という学問が目指すものを明確にする。
+    </p>
+  </div>
+
+  <!-- ═══ 0.1 ═══ -->
+  <h2 id="s0-1">0.1 自然界の階層</h2>
+
+  <p>
+    自然界は様々な<strong>スケール（長さのオーダー）</strong>によって階層構造をもつ。
+    同じ「物質」でも，注目するスケールによって全く異なる見え方をする。
+  </p>
+
+  <div class="scale-diagram">
+    <div class="scale-item scale-micro">
+      <div class="scale-label">$\sim 10^{-15}$ m</div>
+      <div class="scale-name">素粒子<br>クォーク</div>
+    </div>
+    <div class="scale-arrow">→</div>
+    <div class="scale-item scale-micro">
+      <div class="scale-label">$\sim 10^{-10}$ m</div>
+      <div class="scale-name">原子・電子<br>陽子・中性子</div>
+    </div>
+    <div class="scale-arrow">→</div>
+    <div class="scale-item">
+      <div class="scale-label">$\sim 10^{-6}$ m</div>
+      <div class="scale-name">分子・<br>タンパク質</div>
+    </div>
+    <div class="scale-arrow">→</div>
+    <div class="scale-item">
+      <div class="scale-label">$\sim 10^{0}$ m</div>
+      <div class="scale-name">ヒト</div>
+    </div>
+    <div class="scale-arrow">→</div>
+    <div class="scale-item scale-macro">
+      <div class="scale-label">$\sim 10^{7}$ m</div>
+      <div class="scale-name">地球<br>（マクロ）</div>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">核心的問い</span>異なるスケール間でどうつながるか？</div>
+    <div class="box-body">
+      <p>
+        素粒子のレベルで記述される「ミクロの法則」と，
+        温度・圧力・体積で記述される「マクロな現象」は，
+        どのような原理で接続されるのか？
+        この問いが物理学の中心的テーマの一つである。
+        後で見るように，この橋渡しを担うのは<strong>統計力学</strong>であり，
+        熱力学はその橋渡しの「向こう側」――マクロな量だけで閉じた理論体系――
+        にあたる。両者の役割の違いは 0.2 節で詳しく整理する。
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ 0.2 ═══ -->
+  <h2 id="s0-2">0.2 物理学の体系</h2>
+
+  <p>
+    物理学は扱うスケールと目的によって，いくつかの分野に整理できる。
+    下図のように，ミクロな理論からマクロな理論へと並べてみると，
+    熱力学がその中でどのような位置を占めるかが明確になる。
+  </p>
+
+  <div class="phys-map">
+    <!-- 左列：ミクロ -->
+    <div class="phys-col">
+      <div class="phys-box micro">素粒子論</div>
+      <div class="phys-box micro">量子論</div>
+      <div class="phys-box meso">古典力学</div>
+      <div class="phys-box meso">電磁気学</div>
+    </div>
+    <!-- 中央：矢印と統計力学 -->
+    <div class="phys-arrow-col">
+      <div class="phys-label">ミクロ</div>
+      <div class="phys-arrow">↓</div>
+      <div class="phys-box meso">統計力学</div>
+      <div class="phys-arrow">↓</div>
+      <div class="phys-label">マクロ</div>
+    </div>
+    <!-- 右列：マクロ -->
+    <div class="phys-col">
+      <div class="phys-box td">熱力学</div>
+      <div class="phys-box macro">流体力学</div>
+      <div class="phys-box macro">連続体力学</div>
+      <div class="phys-box macro">統計物理</div>
+    </div>
+  </div>
+
+  <p>
+    図の色は理論の性格の違いを表す。<strong>赤（ミクロ）</strong>は物質を構成する
+    最も基本的な要素そのものを記述する理論，<strong>黄（中間）</strong>は
+    個々の質点や場が従う運動法則を与える理論であり，1個の粒子にも
+    $10^{23}$個の粒子から成る系にも同じ形で適用できる。
+    統計力学は，この運動法則を莫大な数の自由度をもつ系に適用し，
+    そこから確率的な手法でマクロな量を導き出す，まさに橋渡し役である。
+    一方<strong>青緑（マクロ）</strong>は，個々の粒子には立ち入らず，
+    多数の粒子が集団として示す現象を，観測可能な量の間の関係として
+    記述する現象論である。熱力学はこのマクロ側に位置する。
+  </p>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">整理</span>熱力学の立ち位置</div>
+    <div class="box-body">
+      <ul>
+        <li><strong>マクロな学問</strong>：温度・圧力・体積などマクロな量の間の関係を扱う</li>
+        <li><strong>ミクロの知識は不要</strong>：分子が何かを知らなくても，熱力学の法則は成立する</li>
+        <li><strong>統計力学との関係</strong>：ミクロ（量子論・古典力学）とマクロ（熱力学）を繋ぐのが統計力学</li>
+        <li><strong>熱力学の法則の普遍性</strong>：量子論が確立されて以降も，熱力学の法則は変わらなかった</li>
+      </ul>
+      <p>
+        「ミクロの知識は不要」というのは，熱力学が用いる温度・圧力・体積などの量が，
+        物質を構成する要素を仮定せずに実験室で直接測定・操作できる量として定義されているからである。
+        だからこそ，気体でも金属でも磁性体でも，中身が何であるかに関わらず同じ熱力学の枠組みがそのまま通用する。
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ 0.3 ═══ -->
+  <h2 id="s0-3">0.3 ミクロとマクロ</h2>
+
+  <h3 id="s0-3-q1">Q1: ミクロの情報が分かればマクロは分かるか？</h3>
+
+  <p>
+    「気体の挙動を理解したい」という問いを，ミクロとマクロの二つのアプローチで考えてみる。
+  </p>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">例</span>気体の運動をミクロに記述する</div>
+    <div class="box-body">
+      <p>
+        1 mol の気体には $N_A \approx 6 \times 10^{23}$ 個の分子が含まれる。
+        古典力学のミクロな立場では，各分子の位置と速度を記述する運動方程式が：
+      </p>
+      $$m\ddot{\boldsymbol{r}}_i = \boldsymbol{F}_i \quad (i = 1, 2, \ldots, N_A)$$
+      <p>
+        すなわち，$6 \times 10^{23}$ 本の方程式を連立で解く必要がある
+        （各 $\boldsymbol{F}_i$ は他のすべての分子の位置に依存するため，方程式は互いに結合している）。
+      </p>
+    </div>
+  </div>
+
+  <p>ここで2つの疑問が生じる：</p>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">Q1'</span>その方程式を実際に解けるか？</div>
+    <div class="box-body">
+      <p><strong>答え：解けない。そして解く必要もない。</strong></p>
+      <p>
+        まず，$10^{23}$ 本もの結合した方程式を数値的に解くことは，
+        どれほど計算機が発達しても実行不可能である。
+        それ以前に，すべての分子の初期位置・初期速度を測定して与えることも
+        原理的に不可能である。
+        しかしより本質的な問題は，たとえ解が得られたとしても，
+        そこから何が分かるかである。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">Q1''</span>解けたとして，何が分かるのか？</div>
+    <div class="box-body">
+      <p>
+        例えば，H₂O 分子 1 個を詳しく調べて，その質量・結合角・電荷分布が分かったとする。
+        では，「なぜ水は柔らかいのか？」という問いに答えられるか？
+      </p>
+      <p>
+        <strong>答えられない。</strong>
+        「柔らかさ」とは $10^{23}$ 個の分子の集団としてのマクロな性質であり，
+        1分子のミクロな情報から直接読み取ることはできない。
+        ミクロな記述は，マクロな性質を引き出すための「翻訳」（統計力学）を必要とする。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s0-3-q2">Q2: ミクロはマクロに影響するか？</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">答え</span>Yes である</div>
+    <div class="box-body">
+      <p>
+        ミクロな構造はマクロな性質を決定する。
+        例えば同じ「固体」でも，原子配列（結晶構造）の違いがダイヤモンドと黒鉛の
+        全く異なる性質（硬さ・電気伝導性・色）を生み出す。
+        実際，ダイヤモンドと黒鉛はどちらも炭素原子のみからなるが，原子どうしの結合の仕方
+        （立体的な網目状か，層状か）が異なるために，硬さや電気伝導性といった
+        全く異なるマクロな性質が現れる。原子の「種類」ではなく「配列」がマクロな性質を決めている点に注意したい。
+      </p>
+      <p>
+        熱力学はマクロな法則を扱うが，その背後には必ずミクロな機構がある。
+        熱力学の値（熱容量，圧縮率など）が具体的に何になるかは
+        統計力学やミクロな理論によって計算される。
+      </p>
+      <p>
+        ここで Q1 の結論（ミクロの情報からマクロの性質を直接「読み取る」ことはできない）
+        と，本問の結論（ミクロな構造がマクロな性質を「決定する」）は矛盾しない。
+        前者は<em>認識論的</em>な問題――人間がミクロの情報を眺めるだけで
+        マクロの性質を見抜けるか――であり，後者は<em>存在論的</em>な事実――
+        マクロな性質はミクロな構造によって一意に定まっている，という事実――である。
+        統計力学は，この「決定している」という事実を出発点として，
+        ミクロの情報からマクロな量を実際に計算するための処方箋を与える。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s0-3-hist">熱力学の法則の歴史的経緯</h3>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">歴史</span>法則の確立と量子論との関係</div>
+    <div class="box-body">
+      <ul>
+        <li>
+          <strong>19世紀</strong>：マクロな世界の熱力学的法則が，<em>ミクロの理論なしに</em>確立された。
+          Carnot（1824年）はまだ熱素説（熱を保存する物質とみなす説）の枠組みの中で，
+          熱機関の効率に上限があることを論理だけから示した（のちの第二法則の原型）。
+          その後 Joule・Mayer ら（1840年代）が実験によって熱と仕事の当量性
+          （エネルギー保存＝第一法則）を確立し，Clausius（1850年）・Kelvin（1851年）が
+          これらを整理・統合して，第一法則・第二法則を現在の形にまとめ上げた。
+          当時は原子・分子の実在そのものが議論の対象であったが，熱力学は分子の存在を仮定せず，
+          測定可能な量（温度・圧力・熱量）だけを用いて理論を組み立てた点で画期的であった。
+        </li>
+        <li>
+          <strong>20世紀</strong>：ミクロの理論（量子論，統計力学）が確立し，
+          熱力学の法則がミクロの視点から「説明」できるようになった。
+        </li>
+        <li>
+          <strong>重要な事実</strong>：量子論が確立されても，熱力学の法則は<strong>1つも変わらなかった</strong>。
+          これが熱力学の「普遍性」の本質である。
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ 0.4 ═══ -->
+  <h2 id="s0-4">0.4 熱力学の考え方</h2>
+
+  <h3 id="s0-4-what">熱力学とは何か</h3>
+
+  <p>熱力学の本質的な目標は2つある：</p>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">熱力学の2つの柱</span></div>
+    <div class="box-body">
+      <p>
+        <strong>① マクロな世界における物理量の間に成立する普遍的な関係式の確立</strong>
+      </p>
+      <p>
+        温度 $T$，圧力 $P$，体積 $V$，内部エネルギー $U$，エントロピー $S$ などの間に，
+        物質の種類によらず成立する数学的関係を求める。
+        これらは「何でできているか」を問わず，<em>観測可能な量</em>の間の関係として表現される。
+      </p>
+      <p style="margin-top: .8em;">
+        <strong>② 熱と仕事の統一的理解</strong>
+      </p>
+      <p>
+        歴史的に「熱」と「仕事」は別種の物理量として扱われてきたが，
+        両者は実は同じ「エネルギー」の異なる伝達形態にすぎないことが明らかになった
+        （第1法則）。これにより，力学におけるエネルギー保存則を，
+        熱が関わる現象にまで拡張することができる。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">具体例</span>熱容量というマクロ量</div>
+    <div class="box-body">
+      <p>
+        熱容量 $C_V$（= 体積一定で温度を 1 K 上げるのに必要な熱量）は，
+        実験で測定できるマクロな量である。
+        熱力学は，$C_V$ が具体的にいくつになるかには答えないが，
+        $C_V \ge 0$（熱容量は負になり得ない）という普遍的な制約を与える。
+      </p>
+      <p>
+        一方，$C_V$ の値そのもの（例えば単原子分子理想気体で $C_V = \tfrac{3}{2}R$ となること）は，
+        分子の運動の自由度にエネルギーが均等に分配される（エネルギー等分配則）という
+        ミクロな仕組みから，統計力学によって導かれる。
+        「熱力学が普遍的な制約を与え，統計力学が具体的な値を説明する」――
+        これが 0.2 節で見た両者の関係の典型例である。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s0-4-map">熱力学の全体マップ</h3>
+
+  <p>
+    この授業で学ぶ内容の全体像を示す。各法則や概念の関係を先に見ておくことで，
+    個々の議論が全体のどこに位置するかが分かりやすくなる。
+    下図の4つの法則は，上から下へ進むにつれて新しい状態量
+    （経験温度 → 内部エネルギー $U$ → エントロピー $S$）を次々に導入していく構成になっており，
+    後の法則は前の法則で導入された量の上に積み上げられている。
+  </p>
+
+  <div class="concept-map">
+    <div class="law-row">
+      <span class="law-badge law0">第0法則</span>
+      <div class="law-content">
+        <strong>熱平衡の存在・経験温度</strong>
+        <ul class="law-sublist">
+          <li>熱平衡の推移律（温度計の存在の論理的根拠）</li>
+          <li>経験温度の定義（基準点を $0^\circ$C，$100^\circ$C に固定して目盛りを作る）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="law-row">
+      <span class="law-badge law1">第1法則</span>
+      <div class="law-content">
+        <strong>熱と仕事の等価性</strong>：$dU = \delta Q + \delta W$
+        <ul class="law-sublist">
+          <li>内部エネルギー $U$（状態量）の導入</li>
+          <li>準静的過程：$\delta W = -P\,dV$</li>
+          <li>熱容量 $C_V$，$C_P$ とその関係（Mayerの式）</li>
+          <li>Carnotの理論（第2法則への橋渡し）</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="law-row">
+      <span class="law-badge law2">第2法則</span>
+      <div class="law-content">
+        <strong>熱と仕事の非等価性・不可逆性</strong>
+        <ul class="law-sublist">
+          <li>Clausiusの原理 / Kelvinの原理（等価）</li>
+          <li>Carnotサイクルの最大効率：$\eta = 1 - T_2/T_1$</li>
+          <li>熱力学温度 $T$（物質に依存しない温度）の定義</li>
+          <li>Clausiusの不等式：$\oint \delta Q/T \le 0$</li>
+          <li><strong>エントロピー</strong> $S$（状態量）の導入：$dS = \delta Q / T$（可逆過程）</li>
+          <li>エントロピー増大則：断熱過程で $\Delta S \ge 0$</li>
+          <li>熱力学関数：Helmholtz自由エネルギー $F = U - TS$，Gibbs自由エネルギー $G$</li>
+          <li>Maxwell関係式（$F$，$G$ などの完全微分条件）</li>
+          <li>最小仕事の原理・自由エネルギーの凸性</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="law-row">
+      <span class="law-badge law3">第3法則</span>
+      <div class="law-content">
+        <strong>Nernstの定理（絶対零度とエントロピー）</strong>
+        <ul class="law-sublist">
+          <li>Nernstの定理：$T \to 0$ でエントロピー $S \to 0$（普遍的）</li>
+          <li>帰結：熱容量 $C \to 0$（$T \to 0$）——第3法則からの帰結</li>
+          <li>（注：$C_V \ge 0$，$C_P \ge C_V$，Gibbs自由エネルギー最小化は第2法則の安定性条件）</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">学習のポイント</span>各法則の導入順序</div>
+    <div class="box-body">
+      <p>
+        各法則は「経験則」として導入されるが，その間には深い論理的関係がある。
+        特に第二法則は複数の等価な表現（Clausius・Kelvin・Ostwald）があり，
+        それらの等価性を確認することが理解の核心となる。
+      </p>
+      <p>
+        エントロピー $S$ は第二法則から定義されるが，一旦定義されると
+        $dU = T\,dS - P\,dV$（基本関係式）を通じて全ての熱力学関数の源となる。
+        この「基本関係式」が熱力学の中心に位置する。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">参考文献</span>推薦図書</div>
+    <div class="box-body">
+      <p>熱力学の教科書として以下が挙げられる（一通り熱力学を学んだ後に読むと良いもの）：</p>
+      <table class="td-table">
+        <thead><tr><th>書名</th><th>著者</th><th>特徴</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Thermodynamics</td>
+            <td>E. Fermi / Dover</td>
+            <td>薄くて明快。古典的名著</td>
+          </tr>
+          <tr>
+            <td>熱学概論</td>
+            <td>原島 鮮</td>
+            <td>日本語の標準的テキスト</td>
+          </tr>
+          <tr>
+            <td>熱力学入門</td>
+            <td>佐々 真一</td>
+            <td>数学的に丁寧</td>
+          </tr>
+          <tr>
+            <td>熱力学</td>
+            <td>田崎 晴明</td>
+            <td>論理が明快（塩見堂）。一通り学んだ後に読むと良い</td>
+          </tr>
+          <tr>
+            <td>熱力学の基礎</td>
+            <td>清水 明</td>
+            <td>東大での標準テキスト</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:.5em;font-size:.85em;color:var(--muted)">
+        ※ 演習書は PDF（学科配布）で教授からもらえる。
+      </p>
+    </div>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="index.html" class="prev">ホームへ</a>
+    <a href="ch1.html" class="next">第1章 基礎概念</a>
+  </nav>
+</main>
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer>
+
+<script src="td.js"></script>
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html><!-- 「2018年度| 情報 共通問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2018年度| 情報 共通問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kyotsu-2018">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>共通問題 2018年度</h1>
+  <p class="subtitle">7月26日（木）4限｜大問3（うち大問3は選択）</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（クライアント・サーバとWeb通信の仕組み／疑似言語プログラムの計算量）</a>
+    <a href="#q2">大問2（購買データのエントロピーとロイヤルユーザ判定／ローマ数字とアラビア数字）</a>
+    <a href="#q3">大問3（選択：インターネットと民主主義／対数計算アルゴリズム）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>クライアント・サーバモデルとWeb通信／疑似言語プログラムの計算量</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>問1-1 — クライアント・サーバモデルとWeb通信の仕組み</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>次の文章の空欄を、以下の語群にある語を用いて埋めよ。ただし、異なる記号の空欄に同じ語を用いてはならない。</p>
+        <p>
+          現代の情報システムはインターネットを介して<span class="blank">A</span>と<span class="blank">B</span>が通信する形で実現されていることが多い。<span class="blank">A</span>の典型例はウェブブラウザである。当初のウェブブラウザは<span class="blank">C</span>で指定されたウェブページをHTTP等の<span class="blank">D</span>に従い<span class="blank">B</span>から取得し表示するだけのものであった。現代では情報システムの普及に従い、これを様々な用途に用いるため、JavaScriptなどのプログラムや、<span class="blank">A</span>の識別等に使われる補助的な符号である<span class="blank">E</span>等もウェブページの内容と同時に送受信している。また、<span class="blank">F</span>を用いて不審な通信を破棄するなどセキュリティ対策も重要である。
+        </p>
+      </div>
+      <div class="note">
+        <span class="box-label">語群</span>
+        <p>URL・クラウド・ALU・クライアント・エリアシング・サーバ・Cookie・エントロピー・防火壁・AR・プロトコル・DNS・カーネル</p>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>ウェブブラウザ（クライアント）がURLで指定された資源を、プロトコル（HTTP等）に従ってサーバから取得する、という基本構造を読み取る。近年はJavaScriptに加え、状態管理のためのCookieも同時にやりとりされ、これを狙った不審な通信を防火壁で遮断する、という流れになっている：</p>
+          <p><span class="blank">A=クライアント</span>／<span class="blank">B=サーバ</span>／<span class="blank">C=URL</span>／<span class="blank">D=プロトコル</span>／<span class="blank">E=Cookie</span>／<span class="blank">F=防火壁</span></p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>A=クライアント、B=サーバ、C=URL、D=プロトコル、E=Cookie、F=防火壁</div>
+        <div class="note">
+          <span class="box-label">語群の全用語</span>
+          <p><strong>URL</strong>：Web上の資源の場所と取得方法を表す文字列。／<strong>クラウド</strong>：ネットワーク経由で利用する計算機資源・サービス群。／<strong>ALU</strong>（Arithmetic Logic Unit）：CPU内で四則演算・論理演算を行う演算装置。／<strong>クライアント</strong>：サーバに要求を送り、サービスの提供を受ける側の主体・機器。／<strong>エリアシング</strong>：標本化の際に高周波成分が低周波の別の信号として現れてしまう現象。／<strong>サーバ</strong>：クライアントからの要求に応じてサービス・データを提供する側の主体・機器。</p>
+          <p><strong>Cookie</strong>：Webサイトがブラウザ側に保存させ、以後のリクエストに添付させる小さな状態情報。ログイン状態の保持や識別に使われる。／<strong>エントロピー</strong>：事象のばらつき・不確かさの大きさを表す平均情報量。／<strong>防火壁</strong>（ファイアウォール）：通信を規則に基づいて許可・遮断する仕組み。／<strong>AR</strong>（Augmented Reality）：現実の映像に情報を重畳表示する拡張現実技術。／<strong>プロトコル</strong>：通信を行う際に従うべき手順・規約。HTTPはその一例。／<strong>DNS</strong>：ホスト名・ドメイン名をIPアドレスに対応づける仕組み。／<strong>カーネル</strong>：OSの中核部分で、ハードウェア資源の管理やプロセス制御を担う。</p>
+        </div>
+      </details>
+
+      <h3>問1-2 — 疑似言語プログラムの計算量のオーダー</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>以下の（ア）〜（エ）はいずれも疑似言語で書かれたプログラムである。それぞれのプログラムについて、変数nに対する計算量のオーダーを、下の選択肢の中から最も適切なものを選べ。</p>
+        <p>（ア）</p>
+        <div class="mathblock">a ← 0
+while (a &lt; n) do
+&nbsp;&nbsp;a ← a + 1
+done</div>
+        <p>（イ）</p>
+        <div class="mathblock">a ← n
+while (a &gt; 2) do
+&nbsp;&nbsp;a ← a / 2
+done</div>
+        <p>（ウ）</p>
+        <div class="mathblock">a ← 0
+b ← 0
+while (a &lt; n) do
+&nbsp;&nbsp;while (b &lt; n + 1000) do
+&nbsp;&nbsp;&nbsp;&nbsp;b ← b + 1
+&nbsp;&nbsp;done
+&nbsp;&nbsp;a ← a + 1
+done</div>
+        <p>（エ）</p>
+        <div class="mathblock">b ← n²
+c ← n³
+while (b &lt; c) do
+&nbsp;&nbsp;d ← 1000
+&nbsp;&nbsp;while (d &gt; 5) do
+&nbsp;&nbsp;&nbsp;&nbsp;d ← d − 2
+&nbsp;&nbsp;done
+&nbsp;&nbsp;b ← b + 1
+done</div>
+      </div>
+      <div class="note">
+        <span class="box-label">選択肢</span>
+        <p>1、1000、$\log(\log n)$、$\log n$、$n$、$n+1000$、$n\log n$、$n^2$、$n^2\log n$、$n^2\log(n^2)$、$n^3$、$n\log(n^3)$、$n^2$（原文ママ・重複表記）、$\log(n^3)$、$n^4$、$n^2\log(n^4)$、$2^n$、$2^n\log n$、$3^n$、$3^n\log n$、$4^n$、$4^n\log n$、この計算は停止しない</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>（ア）</strong> aは0からnまで1ずつしか増えないので、ループはちょうどn回実行される。オーダーは<strong>$n$</strong>。</p>
+          <p><strong>（イ）</strong> aはnから2で割られるたびに半分になっていき、2以下になるまで繰り返す。「2を何回掛ければ元のnに達するか」がループ回数なので、オーダーは<strong>$\log n$</strong>。</p>
+          <p><strong>（ウ）</strong> 見た目は二重ループだが、内側の変数bは外側ループの外で1回だけ初期化され、外側ループの中で改めてリセットされていない点に注意する。したがって内側の<code>while(b&lt;n+1000)</code>が実質的に意味のある回数だけ回るのは、外側ループの1回目だけである。1回目の外側ループの中で内側whileがbを0からn+1000まで増やし切ってしまえば、2回目以降の外側ループでは内側whileの条件<code>b&lt;n+1000</code>が最初から偽になっており、内側whileは1度もループ本体を実行しない。よって内側whileの実行回数の総和はn+1000回（＝Θ(n)）、外側ループ自体もΘ(n)回実行される。二重ループのように見えても計算量はΘ(n)を超えない。オーダーは<strong>$n$</strong>（$n+1000$も同じ増加度合いだが、定数項を無視したオーダー表記としては$n$を選ぶ）。</p>
+          <p><strong>（エ）</strong> 内側の<code>while(d&gt;5)</code>は毎回dを1000から始め、2ずつ減らして5以下になるまで回すだけなので、nの値に関係なく毎回一定回数（約498回）で終わる＝O(1)。外側ループは、bがn²からn³になるまで1ずつ増えるので、実行回数は$n^3-n^2$回であり、これはO($n^3$)である。したがって全体の計算量はO($n^3$)×O(1)で、オーダーは<strong>$n^3$</strong>。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>（ア）$n$　（イ）$\log n$　（ウ）$n$　（エ）$n^3$</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 見た目の二重ループと「ならし」の計算量</span>
+        <p>（ウ）のように、内側ループの変数が外側ループの外側で一度だけ初期化され、外側ループが繰り返されても内側でリセットされない場合、形の上では二重ループでも実際の総実行回数は線形（一重ループ相当）に収まることがある。これは「ならし解析（amortized analysis）」と呼ばれる考え方の初歩的な例で、「1回あたりの最悪ケース」だけでなく「全体を通じた合計コスト」に着目することで、一見悪そうに見える計算量が実はそれほど大きくないと分かる典型パターンである。逆に（エ）のように、内側ループがnに依存せず一定回数で終わる（O(1)）場合は、外側ループの回数がそのまま全体のオーダーを決める。ループの計算量を見積もる際は、常に「内側の変数がどこで初期化され、いつリセットされるか」を確認する習慣をつけるとよい。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>購買データのエントロピーとロイヤルユーザ判定／ローマ数字とアラビア数字</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>問2-1 — 購買データのエントロピーとバラエティシーカの判定</h3>
+      <div class="ex">
+        <span class="box-label">状況設定</span>
+        <p>ある飲料メーカが購入者ごとの購買データを収集した。購入者Xと購入者Yについて、ブランド別の購入本数の集計結果は以下の通りである。特定のブランドを集中的に購入するユーザ（ロイヤルユーザ）か、様々なブランドを購入するユーザ（バラエティシーカ）かを判断したい。</p>
+        <table class="q-table">
+          <tr><th>購入者</th><th>ブランドA</th><th>ブランドB</th><th>ブランドC</th><th>ブランドD</th><th>合計</th></tr>
+          <tr><th>X</th><td>4本</td><td>2本</td><td>1本</td><td>1本</td><td>8本</td></tr>
+          <tr><th>Y</th><td>4本</td><td>4本</td><td>4本</td><td>4本</td><td>16本</td></tr>
+        </table>
+      </div>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(1) 事象A,B,C,Dのいずれかが生起し、それぞれが生起する確率を$P_A,P_B,P_C,P_D$とした時の平均情報量の式を書きなさい。<br>
+        (2) 購入者Xと購入者Yのそれぞれの購入ブランドの平均情報量を具体的に求めなさい。<br>
+        (3) (2)で計算した平均情報量から、購入者Xと購入者Yのどちらをバラエティシーカと見なすのが適当かを、理由を添えて述べなさい。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(1) 平均情報量（エントロピー）は各事象の情報量$-\log_2 P_i$を、その事象が起こる確率$P_i$で重み付けして足し合わせたものである：</p>
+          <div class="mathblock">$$H=-\left(P_A\log_2 P_A+P_B\log_2 P_B+P_C\log_2 P_C+P_D\log_2 P_D\right)$$</div>
+          <p>(2) 購入者Xの確率分布は、合計8本のうちA=4本,B=2本,C=1本,D=1本なので $P_A=\frac48=\frac12,\ P_B=\frac28=\frac14,\ P_C=\frac18,\ P_D=\frac18$。よって</p>
+          <div class="mathblock">$$H_X=-\left(\tfrac12\log_2\tfrac12+\tfrac14\log_2\tfrac14+\tfrac18\log_2\tfrac18+\tfrac18\log_2\tfrac18\right)=\tfrac12\cdot1+\tfrac14\cdot2+\tfrac18\cdot3+\tfrac18\cdot3=0.5+0.5+0.375+0.375=1.75\text{ビット}$$</div>
+          <p>購入者Yは合計16本のうちA=B=C=D=4本で、いずれも $P_A=P_B=P_C=P_D=\frac{4}{16}=\frac14$ と均等である。4つの事象が等確率で生起するときのエントロピーは最大値$\log_2 4=2$ビットになるので、</p>
+          <div class="mathblock">$$H_Y=-4\times\left(\tfrac14\log_2\tfrac14\right)=4\times\left(\tfrac14\times2\right)=2\text{ビット}$$</div>
+          <p>(3) エントロピー（平均情報量）は、確率分布がどれだけ「均等に散らばっているか」を測る指標であり、分布が偏っている（＝予想しやすい）ほど小さく、分布が均等である（＝予想しにくい・多様である）ほど大きくなる。$H_Y=2\text{ビット} > H_X=1.75\text{ビット}$であり、Yの方が4ブランドへの購入がより均等に分散している。したがって<strong>Yをバラエティシーカと見なすのが適当</strong>である。逆にXは全購入の半分がブランドAに集中しており（$P_A=0.5$）、エントロピーが低いことから、特定ブランドへのこだわりが強いロイヤルユーザ的な傾向が読み取れる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) $H=-(P_A\log_2P_A+P_B\log_2P_B+P_C\log_2P_C+P_D\log_2P_D)$　(2) $H_X=1.75$ビット、$H_Y=2$ビット　(3) エントロピーが大きいYの方が購入が均等に分散しているため、Yをバラエティシーカと見なすのが適当。</div>
+      </details>
+
+      <h3>問2-2 — ローマ数字とアラビア数字</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(1) アラビア数字表記法がローマ数字表記法より優れているといえる点を挙げよ。<br>
+        (2) 以下のローマ数字をアラビア数字で表記せよ。（例：DLIV=554、MCCX=1210）<br>
+        ア) L　　イ) MMMLXI　　ウ) DCIV　　エ) MCDXCVI</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(1) アラビア数字は<strong>位取り記数法</strong>であり、各桁の「位置」自体が10の何乗を表すかという意味を持つ。この方式は次のような利点をもたらす。①0を表す記号を持ち、桁の欠落を明示できる。②数がどれだけ大きくなっても、必要な桁数は数の大きさに対して対数的（$\log$）にしか増えず、表記がコンパクトに収まる。③加減乗除の筆算アルゴリズムを「桁ごとの単純な機械的操作の繰り返し」として一般化できる（そろばんや電子計算機の演算もこの構造に基づく）。一方ローマ数字は、記号の組み合わせ方（同じ記号の反復、減算則など）がその都度アドホックに決まっており位取りがなく、大きな数を表すには新しい記号を追加していく必要があり、筆算による算術計算には不向きである。</p>
+          <p>(2) ア) L $=\mathbf{50}$。<br>
+          イ) MMMLXI $=$ MMM(3000) + LX(60) + I(1) $=\mathbf{3061}$。<br>
+          ウ) DCIV $=$ D(500) + C(100) + IV(4) $=\mathbf{604}$。<br>
+          エ) MCDXCVI $=$ M(1000) + CD(400) + XC(90) + VI(6) $=\mathbf{1496}$。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) 位取り記数法により0の表現・コンパクトな桁数・機械的な筆算アルゴリズムが可能になる点。　(2) ア)50　イ)3061　ウ)604　エ)1496</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「符号化のコンパクトさ」という共通テーマ</span>
+        <p>問2-1のエントロピーは「ある確率分布に従う事象を表すのに、平均して何ビット必要か」という情報量の下限を与える概念であり、問2-2のローマ数字とアラビア数字の比較は「同じ数値を表すのに、表記法によって必要な記号数（＝符号の長さ）がどれだけ変わるか」という、いわば符号化効率の問題である。位取り記数法が数の大きさに対して対数的な桁数で済むのは、$N$種類の記号の並びで表現できる情報量が$\log_2 N$に比例するという情報理論の基本的な発想（2021年度共通問題2に出てきた情報源符号化定理も同じ枠組み）と地続きであり、「限られた記号（ビットや数字）で、どれだけ効率よく情報を表せるか」という視点は、大問2全体を貫くテーマになっている。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q3">
+    <div class="sec-header"><div class="sec-tag">大問 3（選択）</div><h2>問題A：インターネットは民主主義を加速するか／問題B：対数計算アルゴリズム</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="note"><span class="box-label">出題形式</span><p>問題A・Bのいずれか一方を選択。ここでは両方を掲載する。</p></div>
+
+      <h3>問題A — 「インターネットは民主主義を加速する」という命題</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p><strong>問A-1</strong> 以下の情報技術の観点から、「インターネットは民主主義を加速する」という命題の「是」の側面を説明せよ。<br>
+        (1) 多対多の通信を可能にする。<br>
+        (2) 情報は力である。<br>
+        (3) 既存の障壁をこわす。</p>
+        <p><strong>問A-2</strong> 以下の現象を参照しながら、この命題の「否」の側面を説明せよ。<br>
+        (1) 電子会議室の荒らし。<br>
+        (2) なりすまし。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>問A-1</strong></p>
+          <p>(1) 従来の新聞・テレビ等のマスメディアは、少数の発信者から不特定多数の受信者へという一対多の通信構造を持ち、一般市民が広く発言する手段を持たなかった。これに対し、SNSやブログ等のインターネット上のメディアは、誰もが発信者にも受信者にもなれる<strong>多対多の通信</strong>を可能にする。これにより、これまで政治的な議論の場に声を届けられなかった人々も、直接多数の人に向けて意見を発信し、政治的議論に参加できるようになった点で、インターネットは民主主義を加速するといえる。</p>
+          <p>(2) 民主的な意思決定や権力の監視には、行政の活動・統計・報道などの情報を市民が把握していることが前提になる。インターネットの普及により、こうした情報へのアクセスコスト（時間・費用・地理的制約）が大幅に下がり、市民が権力を監視・検証するための「力の源泉」である情報を、以前よりもはるかに容易に入手できるようになった。情報を握ることが力になるという意味で、インターネットは市民の側に力を分配し、民主主義を加速する。</p>
+          <p>(3) 従来、出版や放送を通じて自分の意見を広く発信するには、印刷・電波などの設備や資金、あるいは地理的な近接性といった参加への障壁が存在し、これらを持たない人々は議論から排除されがちであった。インターネットはこうした障壁を大きく取り除き、これまで発言力を持ちにくかった立場の人々（少数派・地方在住者・経済的弱者など）も、比較的低いコストで議論に参加できるようにした。</p>
+          <p><strong>問A-2</strong></p>
+          <p>(1) 電子会議室における「荒らし」行為（無関係な投稿の連投、罵倒、議論の妨害など）は、多対多の開放的な通信の場を悪用し、少数の悪意ある参加者が議論の質そのものを支配・破壊してしまう。これは「多対多の通信が誰にでも開かれている」という利点そのものが、悪意ある行為者にも同様に開かれていることの裏返しであり、開放性が必ずしも建設的な民主的熟議を保証しないことを示している。</p>
+          <p>(2) なりすましによって、発言の背後にいる実在の主体が誰であるかが不明確になると、発言に対する責任の所在があいまいになり、虚偽の情報の流布や、信頼できない発言の悪用・拡散を招きやすくなる。「誰が何を発言したか」という説明責任（アカウンタビリティ）が果たせなくなることは、民主的な議論が機能するための前提を損なう。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>（自由記述）問A-1では多対多通信・情報アクセスの民主化・参加障壁の除去という3つの観点から「是」を、問A-2では荒らしによる議論の質の低下・なりすましによる説明責任の欠如という2つの現象から「否」を、それぞれ論理的に説明できていれば正答とみなせる。</div>
+      </details>
+
+      <h3>問題B — \(\log_y x\) を求めるアルゴリズム</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>入力 \(x&gt;1,\ y&gt;2\) に対し、\(\log_y x\) を精度 \(\delta&gt;0\) で求める次のアルゴリズムについて、以下の問いに答えよ。なお、計算量のオーダーについては下の選択肢から選んで答えること。</p>
+        <div class="mathblock">\(a\leftarrow0\)<br>
+          \(b\leftarrow x\) <span class="blank">ア</span><br>
+          while \(b-a&gt;\delta\) do<br>
+          &nbsp;&nbsp;\(c\leftarrow\dfrac{a+b}{2}\) <span class="blank">イ</span><br>
+          &nbsp;&nbsp;if \(y^c&gt;x\) then <span class="blank">A</span> \(\leftarrow c\) else <span class="blank">B</span> \(\leftarrow c\) endif<br>
+          done<br>
+          return \(a\)
+        </div>
+        <p><strong>選択肢：</strong>\(x,\ y,\ x/\delta,\ y/\delta,\ \log x,\ \log y,\ \log(x/\delta),\ \log(y/\delta),\ \sqrt{x},\ \sqrt{y},\ \sqrt{x/\delta},\ \sqrt{y/\delta}\)</p>
+        <ol>
+          <li>空欄 A と B を埋めよ。</li>
+          <li>このアルゴリズムの計算量のオーダーとして適切なものを選択肢から選べ。</li>
+          <li>下線部アを \(b\leftarrow y\) とすると正しいアルゴリズムにならない。計算が失敗するような具体的な \(x,y,\delta\) を示し、計算結果がどのように正しくないかを簡単に説明せよ。</li>
+          <li>下線部イを \(c\leftarrow\dfrac{a+2b}{3}\) に変更した場合の計算量のオーダーとして適切なものを選択肢から選べ。</li>
+          <li>下線部イを \(c\leftarrow b-\delta\) に変更した場合の計算量のオーダーとして適切なものを選択肢から選べ。</li>
+        </ol>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(1) \(y^c&gt;x\)、すなわち \(c&gt;\log_yx\) のときは上端を下げるので \(b\leftarrow c\)。それ以外では下端を上げるので \(a\leftarrow c\)。したがって A=\(b\)、B=\(a\)。</p>
+          <p>(2) 反復ごとに区間幅が半分になる。初期幅は \(x\) だから、反復回数 \(n\) は \(x/2^n\le\delta\) を満たす程度であり、\(\Theta(\log(x/\delta))\)。</p>
+          <p>(3) 例えば \(x=1000,\ y=3,\ \delta=0.01\)。真値は \(\log_3 1000\approx6.29\) だが、初期上端を \(b=3\) とすると探索区間が \([0,3]\) に限定され、真値を含まないため約3を返してしまう。</p>
+          <p>(4) 分割比が \(1:2\) になっても、1回ごとの区間幅は高々 \(2/3\) 倍になるので、オーダーは \(\Theta(\log(x/\delta))\) のまま。</p>
+          <p>(5) \(c=b-\delta\) では最悪の場合に上端を毎回 \(\delta\) ずつしか減らせないため、反復回数は \(\Theta(x/\delta)\)。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) A=\(b\)、B=\(a\)　(2) \(\log(x/\delta)\)　(3) 例：\(x=1000,y=3,\delta=0.01\)　(4) \(\log(x/\delta)\)　(5) \(x/\delta\)</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 二分法と分割比</span>
+        <p>二分法の本質は、解を含む区間を一定の比率で縮め続けることにある。分割点が中央でなくても、毎回区間幅を一定割合以下にできれば反復回数は対数オーダーになる。一方、\(c=b-\delta\) のように一定量だけ縮める方法では線形オーダーになる。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2019.html">← 2019年度へ</a>
+    <a href="kakomon_2017.html">2017年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html><!-- 「線形代数学① 期末試験 予想問題 解説 | 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>線形代数学① 期末試験 予想問題 解説 | 線形代数学①</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    macros: { R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}', Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}', rank: '\\operatorname{rank}' }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body data-nav-page="exam-yosou">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>線形代数学① 期末試験 予想問題</h1>
+  <p class="subtitle">2024年度・2025年度の出題パターンをもとに作成 &nbsp;|&nbsp; 全20問（5問 × 4セット）&nbsp;|&nbsp; 詳細な解答・解説つき</p>
+</div>
+
+<div class="container">
+
+<div class="source-note">この予想問題は，<a href="kakomon_2024.html">2024年度</a>・<a href="kakomon_2025.html">2025年度</a>の実際の期末試験を分析し，共通する5つの出題パターン——①Kernel/Imageの次元，②基底の取り替えと行列表示，③微分作用素の核 or 部分空間への制限と次元定理，④不変部分空間の個数，⑤rankの不等式の証明——を踏襲して数値を作り直したオリジナル問題である。各回は独立した90分の期末試験のつもりで，5問通しで解いてみてほしい。</div>
+
+<h2 class="home-section-title">予想問題</h2>
+<!-- 見出し・説明文・リンクを持つカードを、まとまった一覧として並べる。 --><div class="card-grid">
+  <a class="card" href="予想問題_第1回.html" data-page="過去問/予想問題_第1回" style="border-color:#805ad5;">
+    <div class="card-tag">第1回</div>
+    <h3>予想問題 第1回</h3>
+    <p>本番形式の5問と詳細な解答・解説</p>
+  </a>
+  <a class="card" href="予想問題_第2回.html" data-page="過去問/予想問題_第2回" style="border-color:#805ad5;">
+    <div class="card-tag">第2回</div>
+    <h3>予想問題 第2回</h3>
+    <p>本番形式の5問と詳細な解答・解説</p>
+  </a>
+  <a class="card" href="予想問題_第3回.html" data-page="過去問/予想問題_第3回" style="border-color:#805ad5;">
+    <div class="card-tag">第3回</div>
+    <h3>予想問題 第3回</h3>
+    <p>本番形式の5問と詳細な解答・解説</p>
+  </a>
+  <a class="card" href="予想問題_第4回.html" data-page="過去問/予想問題_第4回" style="border-color:#805ad5;">
+    <div class="card-tag">第4回</div>
+    <h3>予想問題 第4回</h3>
+    <p>本番形式の5問と詳細な解答・解説</p>
+  </a>
+</div>
+
+<!-- チェックリスト -->
+<!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><section class="section">
+  <div class="sec-header">📋 自力確認チェックリスト（全20問）</div>
+  <div class="sec-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>4セット・20問を自力で解けるかセルフチェック（クリックして展開）</summary>
+      <div class="proof-body">
+        <ul class="checklist">
+          <li>第1問（A1・B1・C1・D1）：$\rank A$ 1つで $\dim\Ker,\dim\Im$ が両方決まる（定理4.4・4.7・系4.8）ことを，正方行列は行列式で・非正方や退化した行列は行の一次関係を探して使えるか</li>
+          <li>第2問（A2・B2・C2・D2）：行列表示の各列が「$T(\mathbf{b}_j)$ を新基底で表した係数」であることを理解し，$C^{-1}$ を1回だけ計算して使い回せるか</li>
+          <li>第2問(2)：「ピボット列をそのまま新しい基底に選べば行列表示が自動的に RREF になる」近道を，$T$ が全射（$\rank A=\dim$値域）のときに使えるか</li>
+          <li>第3問（A3・C3）：単項式基底で微分作用素が対角行列になることを見抜き，固有値関数の対称性から多重度（孤立点の有無）を判定できるか</li>
+          <li>第3問（B3・D3）：$T|_V$ に次元定理を適用し，$\dim V,\dim T(V),\dim(\Ker T\cap V)$ のうち2つから残り1つを引き算で求められるか。$V$ が実は全体に一致してしまう可能性も疑えるか</li>
+          <li>第4問（A4）：単一の冪零ジョルダン細胞の不変部分空間が「$n+1$個の鎖」しかないことを，帰納法（不変部分空間の像もまた不変・次元定理）で証明できるか</li>
+          <li>第4問（B4・D4）：異なる固有値を持つブロックへの直和分解から，不変部分空間の個数が「各ブロックの個数の積」になる理由を説明でき，固有値が衝突すると無限個になる仕組みを言えるか</li>
+          <li>第4問（C4）：相異なる固有値を持つ対角化可能な作用素の不変部分空間が厳密に $2^n$ 個であることを，ラグランジュ補間多項式を使って証明できるか</li>
+          <li>第5問（A5・B5）：シルベスターの階数不等式・逆三角不等式を，部分空間への制限や「既知の不等式への代入」というテクニックで証明できるか</li>
+          <li>第5問（C5・D5）：$\rank(A^\top A)=\rank(A)$（核の一致による証明）と，ブロック対角行列の rank 加法性（像の直和分解による証明）を説明できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

@@ -1,0 +1,602 @@
+<!DOCTYPE html><!-- 「2021年度 | 力学A 過去問解説」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>2021年度 | 力学A 過去問解説</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kakomon_2021">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A 講義ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="n1.html" data-page="n1">第1章</a>
+      <a href="n2.html" data-page="n2">第2章</a>
+      <a href="n3.html" data-page="n3">第3章</a>
+      <a href="n4.html" data-page="n4">第4章</a>
+      <a href="n5.html" data-page="n5">第5章</a>
+      <a href="n6.html" data-page="n6">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021" class="active">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>力学A 過去問解説</h1>
+  <p class="subtitle">2021年度期末試験</p>
+  <p class="meta">担当：溝口俊弥｜前期課程 Sセメスター</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">問題1 — 外積の恒等式・湯川ポテンシャル</a>
+    <a href="#q2">問題2 — 粘性流体中の球体の減衰振動</a>
+    <a href="#q3">問題3 — ずれた太陽まわりの惑星運動</a>
+    <a href="#q4">問題4 — 振り子の周期の楕円積分展開</a>
+  </div>
+
+  <div class="note">
+    <span class="box-label">補足 — この年度について</span>
+    2021年度は、参考にしているクラスメイトの手書き解説にこの年度の解答が含まれておらず、公式解答も手元にない。
+    そのため以下の解答はすべて、力学の標準的な手法（運動方程式・エネルギー保存・角運動量保存など）を用いて独自に導出したものである。
+    一部、他年度の類題（2023年度・2025年度）へのリンクを参考として付したが、設問設定が微妙に異なるため、そのまま answer を転用したものではない。
+  </div>
+
+  <!-- =================== 問題1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header">
+      <div class="sec-tag">問題 1</div>
+      <h2>外積の恒等式・湯川ポテンシャル</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3>(1) ベクトル三重積の恒等式</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>次の各問いに答えよ。</p>
+        ３次元空間内の３つのベクトル $\mathbf{a}$, $\mathbf{b}$, $\mathbf{c}$ に対して、$\times$ を外積とするとき
+        $$\mathbf{a}\times(\mathbf{b}\times(\mathbf{c}\times\mathbf{a}))$$
+        で定義されるベクトルは
+        <div class="mathblock">
+        $$\begin{aligned}
+        &\mathrm{a.}\ (\mathbf{a}\cdot\mathbf{b})(\mathbf{c}\times\mathbf{a})\qquad
+        \mathrm{b.}\ (\mathbf{b}\cdot\mathbf{c})(\mathbf{a}\times\mathbf{b})\qquad
+        \mathrm{c.}\ (\mathbf{c}\cdot\mathbf{a})(\mathbf{b}\times\mathbf{c})\\
+        &\mathrm{d.}\ (\mathbf{a}\cdot\mathbf{b})(\mathbf{a}\times\mathbf{c})\qquad
+        \mathrm{e.}\ (\mathbf{b}\cdot\mathbf{c})(\mathbf{b}\times\mathbf{a})\qquad
+        \mathrm{f.}\ (\mathbf{c}\cdot\mathbf{a})(\mathbf{c}\times\mathbf{b})
+        \end{aligned}$$
+        </div>
+        のいずれかに等しい。等しいものの記号を答え、それを証明せよ。
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            ベクトル三重積の公式（BAC&ndash;CAB ルール）
+            $$\mathbf{x}\times(\mathbf{y}\times\mathbf{z}) = \mathbf{y}(\mathbf{x}\cdot\mathbf{z}) - \mathbf{z}(\mathbf{x}\cdot\mathbf{y})$$
+            を２回使う。
+          </p>
+          <p>まず内側の $\mathbf{b}\times(\mathbf{c}\times\mathbf{a})$ に対して $\mathbf{x}=\mathbf{b},\mathbf{y}=\mathbf{c},\mathbf{z}=\mathbf{a}$ として適用すると、</p>
+          <div class="mathblock">
+          $$\mathbf{b}\times(\mathbf{c}\times\mathbf{a}) = \mathbf{c}(\mathbf{b}\cdot\mathbf{a}) - \mathbf{a}(\mathbf{b}\cdot\mathbf{c})$$
+          </div>
+          <p>これを外側の $\mathbf{a}\times(\ \cdot\ )$ に代入すると、外積の線形性より</p>
+          <div class="mathblock">
+          $$\begin{aligned}
+          \mathbf{a}\times(\mathbf{b}\times(\mathbf{c}\times\mathbf{a}))
+          &= \mathbf{a}\times\big[\mathbf{c}(\mathbf{b}\cdot\mathbf{a}) - \mathbf{a}(\mathbf{b}\cdot\mathbf{c})\big]\\[2pt]
+          &= (\mathbf{a}\cdot\mathbf{b})\,(\mathbf{a}\times\mathbf{c}) - (\mathbf{b}\cdot\mathbf{c})\,\underbrace{(\mathbf{a}\times\mathbf{a})}_{=\,\mathbf{0}}\\[2pt]
+          &= (\mathbf{a}\cdot\mathbf{b})(\mathbf{a}\times\mathbf{c})
+          \end{aligned}$$
+          </div>
+          <p>ここで $\mathbf{a}\times\mathbf{a}=\mathbf{0}$（同じベクトル同士の外積は常に $\mathbf{0}$）を用いた。</p>
+          <p>これは選択肢 <strong>d.</strong> の $(\mathbf{a}\cdot\mathbf{b})(\mathbf{a}\times\mathbf{c})$ に一致する。</p>
+          <div class="qed">$\blacksquare$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          答えは <strong>d</strong>：$\mathbf{a}\times(\mathbf{b}\times(\mathbf{c}\times\mathbf{a})) = (\mathbf{a}\cdot\mathbf{b})(\mathbf{a}\times\mathbf{c})$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — なぜ答えが１つに絞り込めるのか</span>
+        <p>
+          実は $\mathbf d\equiv\mathbf c\times\mathbf a$ とおいて BAC&ndash;CAB を外側の積 $\mathbf a\times(\mathbf b\times\mathbf d)$ に直接
+          （$\mathbf x=\mathbf a,\mathbf y=\mathbf b,\mathbf z=\mathbf d$ として）適用すると
+        </p>
+        <div class="mathblock">$$\mathbf a\times(\mathbf b\times\mathbf d) = \mathbf b(\mathbf a\cdot\mathbf d) - \mathbf d(\mathbf a\cdot\mathbf b)$$</div>
+        <p>
+          となる。ここで $\mathbf a\cdot\mathbf d=\mathbf a\cdot(\mathbf c\times\mathbf a)$ はスカラー三重積 $[\mathbf a,\mathbf c,\mathbf a]$ であり、
+          同じベクトル $\mathbf a$ が２回現れる（つぶれた平行六面体の体積）ので、$\mathbf b$ がどんなベクトルであっても自動的にゼロになる。
+          したがって残るのは
+        </p>
+        <div class="mathblock">$$-\mathbf d(\mathbf a\cdot\mathbf b) = -(\mathbf c\times\mathbf a)(\mathbf a\cdot\mathbf b) = (\mathbf a\cdot\mathbf b)(\mathbf a\times\mathbf c)$$</div>
+        <p>
+          だけであり、$\mathbf b$ の情報は $\mathbf a\cdot\mathbf b$ という１つの数だけに圧縮される。問題の式が
+          $\mathbf a\times(\mathbf b\times(\mathbf c\times\mathbf a))$ という、いちばん外側といちばん内側にちょうど同じ $\mathbf a$ が
+          来る形をしているからこそ、選択肢が６つもある中で答えがただ１つに絞り込めるように問題ができている。
+        </p>
+      </div>
+
+      <h3>(2) 湯川ポテンシャルの力</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        ３次元空間内の位置ベクトル $\mathbf{r}$ の点において、ある保存力のポテンシャル $V(\mathbf{r})$ が
+        $$V(\mathbf{r}) = k\,\frac{e^{-\frac{|\mathbf{r}|}{\lambda}}}{|\mathbf{r}|}\tag{1}$$
+        で与えられるとき、これを湯川ポテンシャルという。ただし $k$ と $\lambda$ はそれぞれの次元を持った定数である。直交座標系における $\mathbf{r}$ の座標を $(x,y,z)$ とするとき、そこでの力 $\mathbf{F}(\mathbf{r})$ の各成分を求めよ。
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            以下 $r \equiv |\mathbf{r}| = \sqrt{x^2+y^2+z^2}$ と書く。保存力は $\mathbf{F}=-\nabla V$ で与えられるので、$x$ 成分は
+            $$F_x = -\frac{\partial V}{\partial x} = -\frac{dV}{dr}\cdot\frac{\partial r}{\partial x}$$
+            合成関数の微分の連鎖律を使った。ここで $r^2=x^2+y^2+z^2$ を $x$ で微分すると $2r\dfrac{\partial r}{\partial x}=2x$ より
+            $$\frac{\partial r}{\partial x} = \frac{x}{r}$$
+            （$y,z$ についても同様に $\partial r/\partial y = y/r$、$\partial r/\partial z = z/r$）。
+          </p>
+          <p>次に $V(r) = k\,e^{-r/\lambda}/r$ を $r$ で微分する（商の微分法則）：</p>
+          <div class="mathblock">
+          $$\frac{dV}{dr} = k\cdot\frac{\left(-\frac{1}{\lambda}e^{-r/\lambda}\right)r - e^{-r/\lambda}\cdot 1}{r^2}
+          = -k\,e^{-r/\lambda}\,\frac{\frac{r}{\lambda}+1}{r^2}
+          = -\frac{k(\lambda+r)}{\lambda r^2}\,e^{-r/\lambda}$$
+          </div>
+          <p>したがって</p>
+          <div class="mathblock">
+          $$F_x = -\frac{dV}{dr}\cdot\frac{x}{r} = \frac{k(\lambda+r)}{\lambda r^2}e^{-r/\lambda}\cdot\frac{x}{r} = \frac{k(\lambda+r)}{\lambda r^3}\,e^{-r/\lambda}\,x$$
+          </div>
+          <p>$y,z$ 成分も全く同様の計算になるので、まとめてベクトルで書くと</p>
+          <div class="mathblock">
+          $$\mathbf{F}(\mathbf{r}) = \frac{k(\lambda+r)}{\lambda r^3}\,e^{-r/\lambda}\,(x,y,z)$$
+          </div>
+          <p>これは動径方向 $\hat{\mathbf{r}}=\mathbf{r}/r$ を向く引力（$k>0$ なら引力、湯川が想定した核力のように短距離 $\lambda$ で指数関数的に減衰する）になっている。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$F_x = \frac{k(\lambda+r)}{\lambda r^3}e^{-r/\lambda}\,x,\qquad
+          F_y = \frac{k(\lambda+r)}{\lambda r^3}e^{-r/\lambda}\,y,\qquad
+          F_z = \frac{k(\lambda+r)}{\lambda r^3}e^{-r/\lambda}\,z$$
+          （$r=\sqrt{x^2+y^2+z^2}$）
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足</span>
+        同一の湯川ポテンシャルの問題が2023年度 問題1(2) にも出題されており、上と同じ結果
+        $\mathbf{F}(\mathbf{r}) = \dfrac{k(\lambda+r)}{r^3\lambda}\,e^{-r/\lambda}\,(x,y,z)$ が得られる（そちらは他の受験者の解答でも確認済み）。
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題2 =================== -->
+  <div class="section" id="q2">
+    <div class="sec-header">
+      <div class="sec-tag">問題 2</div>
+      <h2>粘性流体中の球体の減衰振動</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（共通設定）</span>
+        図のように、重力加速度 $g$ の一様重力場中に置かれた容器に密度 $\rho_0$ の粘性流体が入っており、その容器の上端から弾性定数 $k$ の軽いバネがつるされている。このバネの先端につながれた質量 $m$、体積 $V$ の球体が行う鉛直方向の１次元的な運動に関して次の問いに答えよ。ただし、鉛直方向の座標を $z$、時間変数を $t$ とし、また $z$ 座標は鉛直上向きを正にとり、１番左の図のようにバネに球体をつながないときのバネの先端位置を $z=0$ とする。
+      </div>
+
+      <h3>(1) つりあい位置 $z_0$</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        真ん中の図のように、球体をバネの先端につなぎ、重力、浮力、弾性力がつりあう位置で静止させる。このときのつりあい位置 $z_0$ を求めよ。ただし $m>\rho_0 V$（すなわちバネがなければ球体はこの流体中沈む）とする。
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>球体にはたらく鉛直方向の力は次の３つ：</p>
+          <ul>
+            <li>重力：$-mg$（下向き）</li>
+            <li>浮力：$+\rho_0 V g$（アルキメデスの原理。上向きに、排除した流体の重さに等しい）</li>
+            <li>弾性力：バネの自然な先端が $z=0$ にあるので、球体が位置 $z$ にあるときバネの伸びは $z-0=z$。フックの法則よりバネが球体に及ぼす力は $-kz$（$z<0$ なら伸びており上向きの復元力になる）</li>
+          </ul>
+          <p>つりあいの位置 $z=z_0$ では合力がゼロになるので</p>
+          <div class="mathblock">
+          $$-mg + \rho_0 V g - k z_0 = 0$$
+          </div>
+          <p>これを $z_0$ について解くと</p>
+          <div class="mathblock">
+          $$z_0 = \frac{(\rho_0 V - m)g}{k} = -\frac{(m-\rho_0 V)g}{k}$$
+          </div>
+          <p>$m>\rho_0 V$ より $z_0<0$。すなわちつりあい位置はバネの自然な先端位置より下にある。これは図の直感（球体をつるすとバネが伸びて下がる）と一致する。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$z_0 = -\frac{(m-\rho_0 V)g}{k}$$
+        </div>
+      </details>
+
+      <h3>(2) 運動方程式</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        次に、一番右の図のように球体をさらに $z=z_0-\Delta z$ の位置にまで引き下げ（$\Delta z>0$）、そこから初速 $0$ で重力、浮力、弾性力および粘性抵抗力によって運動させる。時刻 $t$ における球体の座標を $z(t)$ とするとき、球体の運動方程式を書き下せ。ただし、粘性抵抗力は $-\kappa\dot z(t)$（$\kappa$ は正の定数）とせよ。
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(1) と同じ力に、粘性抵抗力 $-\kappa\dot z(t)$ を加えて Newton の運動方程式 $m\ddot z = (\text{合力})$ を立てると</p>
+          <div class="mathblock">
+          $$m\ddot z(t) = -mg + \rho_0 V g - k z(t) - \kappa \dot z(t)$$
+          </div>
+          <p>(1) のつりあい条件 $-mg+\rho_0 Vg = kz_0$ を用いて右辺の定数項を消去すると、つりあい位置 $z_0$ からのずれ $\zeta(t) \equiv z(t)-z_0$ を使って見やすい形にできる：</p>
+          <div class="mathblock">
+          $$m\ddot z = kz_0 - kz - \kappa\dot z = -k(z-z_0) - \kappa\dot z
+          \quad\Longleftrightarrow\quad
+          m\ddot\zeta + \kappa\dot\zeta + k\zeta = 0$$
+          </div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$m\ddot z(t) = -mg + \rho_0 V g - k z(t) - \kappa \dot z(t)$$
+          つりあい位置からのずれ $\zeta=z-z_0$ で書けば $\ m\ddot\zeta + \kappa\dot\zeta + k\zeta = 0$。
+        </div>
+      </details>
+
+      <h3>(3) 減衰振動解</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        粘性抵抗力の大きさを決めている定数 $\kappa$ が $\omega_0\equiv\sqrt{k/m}$ として $\omega_0^2>\dfrac{\kappa^2}{4m^2}$ をみたす（すなわち周期的な減衰振動解になる）とき、初期条件 $z(0)=z_0-\Delta z$, $\dot z(0)=0$ をみたす $z(t)$ を求めよ。ただし $\omega_1\equiv\sqrt{\omega_0^2-\dfrac{\kappa^2}{4m^2}}$ を使って表してもよい。
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            (2) で得た $\zeta=z-z_0$ に関する方程式 $\ddot\zeta + \dfrac{\kappa}{m}\dot\zeta + \omega_0^2\zeta = 0$ は標準的な減衰振動の方程式である。特性方程式 $\lambda^2+\dfrac{\kappa}{m}\lambda+\omega_0^2=0$ の根は
+          </p>
+          <div class="mathblock">
+          $$\lambda = -\frac{\kappa}{2m} \pm i\sqrt{\omega_0^2-\frac{\kappa^2}{4m^2}} = -\frac{\kappa}{2m}\pm i\omega_1$$
+          </div>
+          <p>（仮定 $\omega_0^2>\kappa^2/(4m^2)$ より根号の中は正なので、確かに振動する複素共役根になる）。よって一般解は</p>
+          <div class="mathblock">
+          $$\zeta(t) = e^{-\frac{\kappa}{2m}t}\big(A\cos\omega_1 t + B\sin\omega_1 t\big)$$
+          </div>
+          <p>初期条件を課す。$\zeta(0)=z(0)-z_0=(z_0-\Delta z)-z_0=-\Delta z$ より $A=-\Delta z$。次に</p>
+          <div class="mathblock">
+          $$\dot\zeta(t) = e^{-\frac{\kappa}{2m}t}\Big[-\frac{\kappa}{2m}\big(A\cos\omega_1 t+B\sin\omega_1 t\big) + \big(-A\omega_1\sin\omega_1 t + B\omega_1\cos\omega_1 t\big)\Big]$$
+          </div>
+          <p>$t=0$ で $\dot\zeta(0)=0$ を課すと $-\dfrac{\kappa}{2m}A+B\omega_1=0$、すなわち</p>
+          <div class="mathblock">
+          $$B = \frac{\kappa}{2m\omega_1}A = -\frac{\kappa\,\Delta z}{2m\omega_1}$$
+          </div>
+          <p>したがって</p>
+          <div class="mathblock">
+          $$\zeta(t) = -\Delta z\, e^{-\frac{\kappa}{2m}t}\left(\cos\omega_1 t + \frac{\kappa}{2m\omega_1}\sin\omega_1 t\right)$$
+          </div>
+          <p>$z(t)=z_0+\zeta(t)$ に戻して</p>
+          <div class="mathblock">
+          $$z(t) = z_0 - \Delta z\, e^{-\frac{\kappa}{2m}t}\left(\cos\omega_1 t + \frac{\kappa}{2m\omega_1}\sin\omega_1 t\right)$$
+          </div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$z(t) = z_0 - \Delta z\, e^{-\frac{\kappa}{2m}t}\left(\cos\omega_1 t + \frac{\kappa}{2m\omega_1}\sin\omega_1 t\right),
+          \qquad z_0 = -\frac{(m-\rho_0 V)g}{k}$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 振幅・位相の形にまとめる</span>
+        $\cos,\sin$ の合成をすると、$\omega_1^2=\omega_0^2-\kappa^2/(4m^2)$ より $1+\left(\dfrac{\kappa}{2m\omega_1}\right)^2 = \dfrac{\omega_0^2}{\omega_1^2}$ となるので、
+        $$z(t) = z_0 - \Delta z\,\frac{\omega_0}{\omega_1}\,e^{-\frac{\kappa}{2m}t}\cos(\omega_1 t - \delta),\qquad
+        \tan\delta = \frac{\kappa}{2m\omega_1}$$
+        という同値な表現も可能。振幅が $\omega_0/\omega_1$ 倍に増幅されているのは、$t=0$ で速度がゼロ（変位が最大でない位相からスタート）であることの反映である。
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題3 =================== -->
+  <div class="section" id="q3">
+    <div class="sec-header">
+      <div class="sec-tag">問題 3</div>
+      <h2>ずれた太陽まわりの惑星運動</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        図のように、3次元直交座標系において、点 $(x,y,z)=(0,0,z_0)$ にある太陽から万有引力のみを受けて運動する惑星の運動を考える。時間変数を $t$ とし、ある時刻 $t=0$ においてその惑星が $z=z_0$ 平面内にあって、なおかつ $z$ 方向の速度成分ももたないとすると、惑星が受ける万有引力も $z$ 方向成分をもたないため、惑星は未来永劫 $z=z_0$ 平面内にあることになる。したがって $z$ 方向の運動は以後考えない。
+        時刻 $t$ における惑星の座標 $(x(t),y(t))$ を図のように極座標 $(r(t),\varphi(t))$ で表すと
+        $$x(t)=r(t)\cos\varphi(t),\qquad y(t)=r(t)\sin\varphi(t)$$
+        となる。惑星、太陽をそれぞれ質量 $m$、$M$ の質点とするとき、
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — この問題のポイント</span>
+        惑星の位置は $(x,y,z_0)$、太陽の位置は $(0,0,z_0)$ で、両者の $z$ 座標は常に等しい（惑星は $z=z_0$ 平面内に留まる）。したがって惑星から太陽への相対位置ベクトルは
+        $$(0,0,z_0)-(x,y,z_0) = (-x,-y,0) = -r(\cos\varphi,\sin\varphi,0)$$
+        となり、大きさはちょうど $r$、向きは平面内で原点 $(0,0)$ を向く。つまり太陽が $z$ 方向にずれていても、$z=z_0$ 平面内では太陽はあたかも原点 $(x,y)=(0,0)$ にあるかのように振る舞う。よってこの問題は実質的に通常の（原点に太陽がある）平面内ケプラー問題に帰着する。
+      </div>
+
+      <h3>(1) 極座標での運動方程式</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        惑星の運動の運動方程式を極座標を用いて（つまり $r,\dot r,\ddot r,\varphi,\dot\varphi,\ddot\varphi$ などを用いて）書き下せ。ただし、万有引力定数（Newton's constant）を $G$ とせよ。
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>上の補足より、惑星が太陽から受ける万有引力は、大きさ $GMm/r^2$ で、平面内を原点 $(0,0)$ に向く力である。極座標の動径方向単位ベクトル $\hat{\mathbf r}$（原点から惑星への向き）を使えば</p>
+          <div class="mathblock">
+          $$\mathbf{F} = -\frac{GMm}{r^2}\hat{\mathbf r}$$
+          </div>
+          <p>（$z$ 成分は持たない）。一方、極座標での加速度の一般公式は</p>
+          <div class="mathblock">
+          $$\mathbf{a} = (\ddot r - r\dot\varphi^2)\hat{\mathbf r} + (r\ddot\varphi + 2\dot r\dot\varphi)\hat{\boldsymbol\varphi}$$
+          </div>
+          <p>なので、Newton の運動方程式 $m\mathbf a=\mathbf F$ を動径・角度成分に分けて書くと</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$m(\ddot r - r\dot\varphi^2) = -\frac{GMm}{r^2}\qquad(\text{動径方向})$$
+          $$m(r\ddot\varphi + 2\dot r\dot\varphi) = 0\qquad(\text{角度方向})$$
+
+        </div>
+      </details>
+
+      <h3>(2) 角運動量保存</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        質点 $m$ の、$z$ 軸（$(x,y)=(0,0)$）まわりの角運動量 $mr^2\dot\varphi$ が保存することを示せ。
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>角運動量 $L\equiv mr^2\dot\varphi$ を時間微分すると</p>
+          <div class="mathblock">
+          $$\frac{dL}{dt} = m\big(2r\dot r\dot\varphi + r^2\ddot\varphi\big) = mr\big(2\dot r\dot\varphi + r\ddot\varphi\big) = r\cdot\underbrace{m(r\ddot\varphi+2\dot r\dot\varphi)}_{=\,0\ (\text{(1) の角度方向の式})} = 0$$
+          </div>
+          <p>よって $L=mr^2\dot\varphi$ は時間によらず一定、すなわち保存する。</p>
+          <div class="qed">$\blacksquare$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          (1) の角度方向の運動方程式 $m(r\ddot\varphi+2\dot r\dot\varphi)=0$ は $\dfrac{d}{dt}(mr^2\dot\varphi)=0$ と同値なので、$mr^2\dot\varphi$ は保存する。
+        </div>
+      </details>
+
+      <h3>(3) 万有引力のポテンシャル $U(r)$</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        万有引力のポテンシャルを $U(r)$ とするとき、その具体的な表式を書け。ただし（いつものように）無限遠で $U(r)=0$ となるようにポテンシャルの基準をとるものとする。
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>力は $F_r = -GMm/r^2$（動径方向、原点向き）であり、$U(r)$ は $F_r=-dU/dr$ をみたす。$U(r)=-GMm/r$ とすれば</p>
+          <div class="mathblock">
+          $$-\frac{dU}{dr} = -\frac{d}{dr}\left(-\frac{GMm}{r}\right) = -\frac{GMm}{r^2}$$
+          </div>
+          <p>となり一致する。また $r\to\infty$ で $U\to 0$ となっており、基準の取り方も問題文の指定通り。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$U(r) = -\frac{GMm}{r}$$
+        </div>
+      </details>
+
+      <h3>(4) 実効ポテンシャル $V(r)$</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        角運動量が保存するから $\dot\varphi$ は $r$ の関数として表され、したがってこの質点の２次元平面内の運動のエネルギー保存則は、ある１次元ポテンシャル $V(r)$ の中を質量 $m$ の質点が運動するときの１次元的な運動のエネルギー保存則
+        $$\frac12m\dot r^2+V(r)=E\qquad（E\text{ は全エネルギーを表す定数}）$$
+        と同じになる。保存する角運動量の大きさを $mh$ とするとき、この１次元ポテンシャル $V(r)$ を求めよ。
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>２次元平面内の運動エネルギーは極座標では $\frac12 m(\dot r^2+r^2\dot\varphi^2)$ と書ける。角運動量の大きさを $mh$（$mr^2\dot\varphi = mh$、すなわち $\dot\varphi = h/r^2$）とおくと、全エネルギーは</p>
+          <div class="mathblock">
+          $$E = \frac12 m\dot r^2 + \frac12 m r^2\dot\varphi^2 + U(r) = \frac12 m\dot r^2 + \frac{mh^2}{2r^2} - \frac{GMm}{r}$$
+          </div>
+          <p>これを $\frac12 m\dot r^2 + V(r) = E$ の形と比較すれば、$r$ にのみ依存する実効的な１次元ポテンシャルが読み取れる。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$V(r) = \frac{mh^2}{2r^2} - \frac{GMm}{r}$$
+        </div>
+      </details>
+
+      <h3>(5) $V(r)$ の最小値を与える $r_c$ と $V_{\min}$</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        (4) の $V(r)$ を最小とする $r$ の値 $r_c$ と、そのときの $V(r)$ の最小値 $V_{\min}$ を、$G,M,m,h$ を用いてそれぞれ表せ。
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>$V(r)$ を $r$ で微分してゼロとおく：</p>
+          <div class="mathblock">
+          $$V'(r) = -\frac{mh^2}{r^3} + \frac{GMm}{r^2} = 0 \quad\Longrightarrow\quad GMm\,r = mh^2 \quad\Longrightarrow\quad r_c = \frac{h^2}{GM}$$
+          </div>
+          <p>（$V''(r) = \dfrac{3mh^2}{r^4}-\dfrac{2GMm}{r^3}$ に $r=r_c$ を代入すると正になることが確かめられ、これは極小＝最小である。）これを $V(r)$ に代入する：</p>
+          <div class="mathblock">
+          $$V_{\min} = V(r_c) = \frac{mh^2}{2}\cdot\frac{(GM)^2}{h^4} - GMm\cdot\frac{GM}{h^2}
+          = \frac{m(GM)^2}{2h^2} - \frac{m(GM)^2}{h^2} = -\frac{G^2M^2m}{2h^2}$$
+          </div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$r_c = \frac{h^2}{GM},\qquad V_{\min} = -\frac{G^2M^2m}{2h^2}$$
+        </div>
+      </details>
+
+      <h3>(6) $E=V_{\min}$ のときの軌道</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        この質点 $m$ の全エネルギー $E$ が $V_{\min}$ に等しいとき、その質点の運動の軌道の形はどうなるか。その形とそうなる理由を簡潔に答えよ。
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>エネルギー保存式 $\frac12 m\dot r^2 = E - V(r)$ の左辺は常に $0$ 以上なので $V(r)\le E$ でなければならない。一方 $V(r)$ の最小値は $V_{\min}$ なので、常に $V(r)\ge V_{\min}$ が成り立つ。$E=V_{\min}$ の場合、これら２つの不等式を同時にみたすには</p>
+          <div class="mathblock">
+          $$V(r) = V_{\min}\ (=E)\quad\text{がすべての時刻で成立}$$
+          </div>
+          <p>しかなく、$V(r)$ を最小にする $r$ は $r=r_c$ ただ１点なので、$r(t)\equiv r_c$（一定）でなければならない。このとき $\dot r\equiv 0$ であり、動径方向の運動が凍結される。$\dot\varphi = h/r_c^2$（一定）で回転し続けるので、軌道は半径 $r_c=h^2/(GM)$ の<strong>円軌道</strong>になる。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          軌道は半径 $r_c=\dfrac{h^2}{GM}$ の円になる。理由：$E=V_{\min}$ のとき $\frac12 m\dot r^2 = E-V(r) \le 0$ かつ常に $\ge 0$ となるため $\dot r\equiv 0$ しかあり得ず、$r$ が $V(r)$ を最小にする $r_c$ に固定されるから。
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — $E$ を変えると軌道の離心率が決まる</span>
+        <p>
+          (5)(6) の結果は、実は一般の楕円軌道の族を $E$ でパラメータ付けしたときの端点にすぎない。教科書的なケプラー軌道の公式
+          $r(\varphi)=\dfrac{p}{1+e\cos\varphi}$（$p=h^2/(GM)$：半通径、$e$：離心率）と、エネルギーの公式 $E=-\dfrac{GMm}{2a}$、
+          $p=a(1-e^2)$ を組み合わせると
+        </p>
+        <div class="mathblock">$$E = V_{\min}\,(1-e^2)$$</div>
+        <p>
+          という関係が出てくる（半通径 $p$ はちょうど (5) で求めた $r_c$ に一致する）。すなわち $e=\sqrt{1-E/V_{\min}}$ であり、
+          (6) で示した「$E=V_{\min}$ なら円軌道（$e=0$）」という結果は、この一般公式のちょうど一方の端点にあたる。もう一方の端、
+          $E\to0^-$（束縛できる限界）に近づけると $e\to1$ となり、よく知られた放物線軌道（脱出速度ちょうどのケース）に一致する。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足</span>
+        問題3は2023年度 問題3と数学的に同一の設問である。太陽の位置が $(0,0,z_0)$ にずれていても、惑星が $z=z_0$ 平面内に留まる限り、動力学は通常の平面内ケプラー問題と完全に一致する（上記の補足参照）。
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題4 =================== -->
+  <div class="section" id="q4">
+    <div class="sec-header">
+      <div class="sec-tag">問題 4</div>
+      <h2>振り子の周期の楕円積分展開</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        重力加速度 $g$ の一様重力場中における糸の長さ $l$ の振り子の周期 $T$ は、振幅が微小でない場合、最大振れ角を $\varphi_A$、$k=\sin\dfrac{\varphi_A}{2}$ として
+        $$T = 4\sqrt{\frac{l}{g}}\int_0^{\frac\pi2}\frac{d\theta}{\sqrt{1-k^2\sin^2\theta}}$$
+        で与えられる。最大振れ角 $\varphi_A$ が $30^\circ$ のとき、周期 $T$ は微小振動の周期 $T_0=2\pi\sqrt{l/g}$ と比べてどれだけ大きいか。被積分関数 $\dfrac{1}{\sqrt{1-k^2\sin^2\theta}}$ を $k^2=0$ のまわりで $k^2$ について１次までのテイラー展開で近似し、項別に積分して（微小振動の周期との比）$-1$（$=\dfrac{T}{T_0}-1$）を有効数字２けたまで求めよ。
+        <p>（ヒント：$f(x)$ を $x=0$ のまわりで１次までテイラー展開するということは
+        $$f(x)=f(0)+f'(0)x+O(x^2)$$
+        とすることだった。$f(x)=\dfrac{1}{\sqrt{1-x\sin^2\theta}}$ として計算すればよい。）</p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>ヒントに従い $f(x)=(1-x\sin^2\theta)^{-1/2}$ とおいて $x=0$ のまわりで１次までテイラー展開する。</p>
+          <div class="mathblock">
+          $$f(0) = 1,\qquad f'(x) = \frac12(1-x\sin^2\theta)^{-3/2}\sin^2\theta \ \Longrightarrow\ f'(0) = \frac12\sin^2\theta$$
+          </div>
+          <p>よって</p>
+          <div class="mathblock">
+          $$f(x) \approx 1 + \frac{x}{2}\sin^2\theta$$
+          </div>
+          <p>$x=k^2$ を代入して</p>
+          <div class="mathblock">
+          $$\frac{1}{\sqrt{1-k^2\sin^2\theta}} \approx 1 + \frac{k^2}{2}\sin^2\theta$$
+          </div>
+          <p>これを $\theta:0\to\pi/2$ で項別に積分する。$\displaystyle\int_0^{\pi/2}d\theta=\frac\pi2$、$\displaystyle\int_0^{\pi/2}\sin^2\theta\,d\theta=\frac\pi4$ なので</p>
+          <div class="mathblock">
+          $$\int_0^{\pi/2}\frac{d\theta}{\sqrt{1-k^2\sin^2\theta}} \approx \frac\pi2 + \frac{k^2}{2}\cdot\frac\pi4 = \frac\pi2\left(1+\frac{k^2}{4}\right)$$
+          </div>
+          <p>したがって</p>
+          <div class="mathblock">
+          $$T \approx 4\sqrt{\frac lg}\cdot\frac\pi2\left(1+\frac{k^2}{4}\right) = 2\pi\sqrt{\frac lg}\left(1+\frac{k^2}{4}\right) = T_0\left(1+\frac{k^2}{4}\right)$$
+          </div>
+          <p>ゆえに</p>
+          <div class="mathblock">
+          $$\frac{T}{T_0} - 1 = \frac{k^2}{4}$$
+          </div>
+          <p>$\varphi_A=30^\circ$ のとき $k=\sin15^\circ$。半角公式または加法定理より</p>
+          <div class="mathblock">
+          $$\sin15^\circ = \sin(45^\circ-30^\circ) = \frac{\sqrt6-\sqrt2}{4}
+          \quad\Longrightarrow\quad
+          \sin^215^\circ = \frac{2-\sqrt3}{4} \approx \frac{2-1.732}{4} \approx 0.0670$$
+          </div>
+          <p>よって</p>
+          <div class="mathblock">
+          $$\frac{T}{T_0}-1 = \frac{\sin^215^\circ}{4} \approx \frac{0.0670}{4} \approx 0.0167$$
+          </div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$\frac{T}{T_0} - 1 = \frac{k^2}{4} = \frac{\sin^215^\circ}{4} \approx 0.017$$
+          すなわち、最大振れ角 $30^\circ$ の振り子の周期は、微小振動の周期 $T_0$ よりおよそ <strong>1.7 %</strong> 長い。
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 2025年度の類題との違い</span>
+        ほぼ同一の楕円積分の展開計算が2025年度 問題3(4) にもあるが、そちらは比較対象が $T_0=2\pi\sqrt{l/g}$ そのものではない設定になっており、本問とは分母が異なる点に注意（本問では $T_0$ で割った比を聞かれている）。導出過程は共通で、積分値は $\dfrac\pi2\left(1+\dfrac{k^2}{4}\right)$、周期の相対増分は $k^2/4$ となる。
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — この１次近似はどれくらい正確か</span>
+        <p>
+          $T/T_0$ の完全な展開は $k^2$ について
+        </p>
+        <div class="mathblock">$$\frac{T}{T_0} = 1+\frac14k^2+\frac{9}{64}k^4+\frac{25}{256}k^6+\cdots$$</div>
+        <p>
+          と続く（各項の係数は $\left[\dfrac{(2n)!}{2^{2n}(n!)^2}\right]^2$）。$\varphi_A=30^\circ$（$k=\sin15^\circ\approx0.2588$、
+          $k^2\approx0.0670$）を代入すると、本問で求めた１次の項は $k^2/4\approx1.67\%$、次の $k^4$ の項は $\dfrac{9}{64}k^4\approx0.06\%$ に
+          すぎず、それ以降はさらに一桁小さい。全部足しても $T/T_0-1\approx1.74\%$ にしかならず、１次近似で得た「約1.7%」はすでに
+          有効数字２桁まで的中している。最大振れ角 $30^\circ$ 程度では、被積分関数を $k^2$ について線形近似するだけで十分実用的な
+          精度が出ることがよく分かる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2020.html">← 2020年度へ</a>
+    <a href="kakomon_2022.html">2022年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

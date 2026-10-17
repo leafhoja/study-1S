@@ -1,0 +1,443 @@
+<!DOCTYPE html><!-- 「§6 ベクトル空間の基底 — 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>§6 ベクトル空間の基底 — 線形代数学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams',
+        macros: {
+          R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}',
+          Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}',
+          rank: '\\operatorname{rank}'
+        }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="s6">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>§6 ベクトル空間の基底（basis）</h1>
+  <p class="subtitle">講義ノート⑤ をもとに作成</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#def6-1">定義6.1 基底</a>
+    <a href="#cor6-2">系6.2 基底 ⟺ 同型</a>
+    <a href="#cor6-3">系6.3 dim V=n ⟺ n個の基底が存在</a>
+    <a href="#cor6-4">系6.4 1次独立／生成／基底の同値性</a>
+    <a href="#thm6-5">定理6.5 1次独立な個数の上限</a>
+    <a href="#lem6-6">補題6.6 基底への追加条件</a>
+    <a href="#thm6-7">定理6.7 基底への延長</a>
+    <a href="#summary">まとめ</a>
+  </div>
+
+  <!-- =================== 定義6.1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="def6-1">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 6.1</div>
+      <h2>定義 6.1 — 基底（basis / 複数形 bases）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">この節の目標</span>
+        <p>
+          §5 で，$T_{v_1,\ldots,v_n}:\mathbb{K}^n\to V$ の全射性は「$v_1,\ldots,v_n$ が $V$ を生成すること」，単射性は「$v_1,\ldots,v_n$ が1次独立であること」とそれぞれ言い換えられた。
+          この <strong>両方を同時にみたす</strong>とき，$T_{v_1,\ldots,v_n}$ は全単射（同型写像）になる。この特別な場合を <strong>基底</strong> と呼ぶ。
+        </p>
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 6.1</span>
+        $V$：$\mathbb{K}$-ベクトル空間とする。$v_1,\ldots,v_n\in V$ が $V$ の<strong>基底</strong>であるとは，
+        $v_1,\ldots,v_n$ が $V$ を<strong>生成し</strong>，かつ $\mathbb{K}$上<strong>1次独立</strong>であることをいう。
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 — 標準基底</span>
+        <p>
+          $\mathbb{K}^n$ において基本単位ベクトル $e_1,\ldots,e_n$ は $\mathbb{K}^n$ の基底（標準基底）。
+          生成することは明らか（$x=x_1e_1+\cdots+x_ne_n$）。1次独立性も
+          $a_1e_1+\cdots+a_ne_n=(a_1,\ldots,a_n)^\top=0 \implies a_1=\cdots=a_n=0$ から従う。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系6.2 =================== -->
+  <div class="section" id="cor6-2">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 6.2</div>
+      <h2>系 6.2 — 基底 ⟺ $T_{v_1,\ldots,v_n}$ が同型写像</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="cor">
+        <span class="box-label">系 6.2</span>
+        $v_1,\ldots,v_n\in V$ に対して以下は同値：
+        <div class="equiv">
+          (a) $v_1,\ldots,v_n$ は $V$ の基底である
+          <span class="iff">$\iff$</span>
+          (b) $T_{v_1,\ldots,v_n}:\mathbb{K}^n\to V$ は $\mathbb{K}$-ベクトル空間の同型写像である
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="box-label">なぜ同値か（一言で）</span>
+        <p>
+          「生成する $\iff$ 全射」（定理5.2(3)）と「1次独立 $\iff$ 単射」（系5.5）を合わせると，
+          「生成する かつ 1次独立 $\iff$ 全射 かつ 単射 $\iff$ 全単射」。
+          定義6.1 の「基底」はまさに左辺，「同型写像」は右辺（全単射な線形写像）にあたる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系6.3 =================== -->
+  <div class="section" id="cor6-3">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 6.3</div>
+      <h2>系 6.3 — $\dim V=n$ ⟺ $n$ 個の元からなる基底の存在</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="cor">
+        <span class="box-label">系 6.3</span>（$n<+\infty$）
+        $\mathbb{K}$-ベクトル空間 $V$ に対して以下は同値：
+        <div class="equiv">
+          (a) $\dim_{\mathbb{K}}V = n$
+          <span class="iff">$\iff$</span>
+          (b) $n$ 個の元からなる $V$ の基底が存在する
+        </div>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details open>
+        <summary>系 6.3 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          <strong>(a) $\Rightarrow$ (b)：</strong><br>
+          $\dim V=n$ より，ある同型写像 $T:\mathbb{K}^n\xrightarrow{\sim}V$ が存在する（定義4.1）。
+          補題5.1(2) より $T=T_{T(e_1),\ldots,T(e_n)}$ なので，系6.2 より $T(e_1),\ldots,T(e_n)$ は $V$ の基底。
+          これで $n$ 個の元からなる基底が構成できた。<br><br>
+
+          <strong>(b) $\Rightarrow$ (a)：</strong><br>
+          $v_1,\ldots,v_n$ を $V$ の基底とすると，系6.2 より
+          $$T_{v_1,\ldots,v_n}:\mathbb{K}^n\xrightarrow{\sim}V$$
+          は同型写像。よって $\mathbb{K}^n\cong V$ となり，定義4.1（$\dim V$ とは $V\cong\mathbb{K}^n$ となる $n$）より $\dim V=n$。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">標語</span>
+        <p>
+          「$V$ の $n$ 個の元からなる基底を与えること」と「同型写像 $T:\mathbb{K}^n\xrightarrow{\sim}V$ を与えること」は<strong>等価</strong>。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">復習 — 系4.11（<a href="s4.html#cor4-9">§4 へ</a>）</span>
+        <p>
+          $\dim V_1=\dim V_2=n<+\infty$，$T:V_1\to V_2$ を $\mathbb{K}$-線形写像とすると，以下は同値：
+        </p>
+        <div class="equiv">
+          (1) $T$ は単射
+          <span class="iff">$\iff$</span>
+          (2) $T$ は全射
+          <span class="iff">$\iff$</span>
+          (3) $T$ は全単射
+          <span class="iff">$\iff$</span>
+          (4) $\dim\operatorname{Im}T = n$
+        </div>
+        <p style="margin-top:.4rem">
+          これは同じ次元の有限次元空間の間の線形写像に関する一般形（系4.10 の $\mathbb{K}^n\to\mathbb{K}^n$ の場合を一般化したもの）。
+          以下の系6.4・定理6.5 で $T=T_{v_1,\ldots,v_n}:\mathbb{K}^n\to V$（$\dim V=n$）にそのまま適用する。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系6.4 =================== -->
+  <div class="section" id="cor6-4">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 6.4</div>
+      <h2>系 6.4 — 1次独立／生成する／基底 の同値性（$\dim V=n$ かつ $n$ 個のとき）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="cor">
+        <span class="box-label">系 6.4</span>（$0 &lt; n &lt; +\infty$，$\dim V=n$）
+        $v_1,\ldots,v_n\in V$ に対して以下は同値：
+        <div class="equiv">
+          (1) $v_1,\ldots,v_n$ は1次独立
+          <span class="iff">$\iff$</span>
+          (2) $v_1,\ldots,v_n$ は $V$ を生成する
+          <span class="iff">$\iff$</span>
+          (3) $v_1,\ldots,v_n$ は $V$ の基底
+        </div>
+      </div>
+
+      <details>
+        <summary>系 6.4 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $T_{v_1,\ldots,v_n}:\mathbb{K}^n\to V$ を考える。$\dim\mathbb{K}^n=n=\dim V$ なので，系4.11 を $T=T_{v_1,\ldots,v_n}$（$V_1=\mathbb{K}^n$，$V_2=V$）に適用できて，
+          $$T_{v_1,\ldots,v_n}\text{ が単射} \iff T_{v_1,\ldots,v_n}\text{ が全射} \iff T_{v_1,\ldots,v_n}\text{ が全単射}$$
+          ここで系5.5 より「単射 $\iff$ (1)」，定理5.2(3)・定義5.3 より「全射 $\iff$ (2)」，系6.2 より「全単射 $\iff$ (3)」。
+          これらを合わせると (1) $\iff$ (2) $\iff$ (3)。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">意味</span>
+        <p>
+          <strong>個数がちょうど $\dim V$ に一致していれば</strong>，「1次独立」「生成する」「基底」の3条件はすべて同じことを言っている。
+          個数が $\dim V$ と異なる場合はこの限りでない（次の定理6.5 で正確に述べる）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定理6.5 =================== -->
+  <div class="section" id="thm6-5">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem 6.5</div>
+      <h2>定理 6.5 — 1次独立な元の個数の上限</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 6.5</span>（$0 &lt; n &lt; +\infty$）
+        $V$：$n$ 次元 $\mathbb{K}$-ベクトル空間，$v_1,\ldots,v_\ell\in V$ を $\mathbb{K}$上1次独立とする。このとき：
+        <ol>
+          <li>$\ell\le n$</li>
+          <li>$\ell=n$ となるための必要十分条件は，$v_1,\ldots,v_\ell$ が $V$ の基底となることである。</li>
+        </ol>
+      </div>
+
+      <details>
+        <summary>定理 6.5 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $V$ は $n$ 次元なので $\mathbb{K}^n$ と同型（$T_0:\mathbb{K}^n\xrightarrow{\sim}V$ を固定）。1次独立性は同型で保たれる性質なので，$V=\mathbb{K}^n$ だと思ってよい。<br><br>
+
+          <strong>(1)：</strong>
+          $v_1,\ldots,v_\ell\in\mathbb{K}^n$ が1次独立なので，系5.5 より
+          $$T_{v_1,\ldots,v_\ell}:\mathbb{K}^\ell\longrightarrow\mathbb{K}^n$$
+          は単射。もし $\ell &gt; n$（定義域の次元 &gt; 値域の次元）だとすると，系3.5（$m &lt; \ell$ ならば $\mathbb{K}^\ell\to\mathbb{K}^m$ の線形写像は単射になれない，ここで $m=n$）に矛盾する。よって $\ell\le n$。<br><br>
+
+          <strong>(2)：</strong><br>
+          （$\Leftarrow$）$v_1,\ldots,v_\ell$ が $V$ の基底なら，系6.2 より $T_{v_1,\ldots,v_\ell}:\mathbb{K}^\ell\xrightarrow{\sim}V\cong\mathbb{K}^n$ は同型写像，つまり $\mathbb{K}^\ell\cong\mathbb{K}^n$。定理3.6（$\mathbb{K}^m\cong\mathbb{K}^n\Rightarrow m=n$）より $\ell=n$。<br>
+          （$\Rightarrow$）$\ell=n$ なら，$T_{v_1,\ldots,v_\ell}:\mathbb{K}^n\to\mathbb{K}^n$ は単射（(1)の議論より）。系4.10（$\mathbb{K}^n\to\mathbb{K}^n$ では単射 $\iff$ 全単射）より $T_{v_1,\ldots,v_\ell}$ は同型写像。系6.2 より $v_1,\ldots,v_\ell(=v_1,\ldots,v_n)$ は $V$ の基底。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">図でイメージ</span>
+        <p>
+          $n$ 次元空間の中では，1次独立な元は<strong>最大 $n$ 個</strong>までしか取れない。ちょうど $n$ 個まで取れたなら，それは自動的に基底になる
+          （「独立性を保ったまま増やせるだけ増やすと基底に到達する」という後の定理6.7の直感にもつながる）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 補題6.6 =================== -->
+  <div class="section" id="lem6-6">
+    <div class="sec-header">
+      <div class="sec-tag">Lemma 6.6</div>
+      <h2>補題 6.6 — 独立な組に1つ加えても独立であるための条件</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">補題 6.6</span>
+        $V$：$\mathbb{K}$-ベクトル空間，$v_1,\ldots,v_n\in V$ を1次独立とする。このとき $w\in V$ に対して以下は同値：
+        <div class="equiv">
+          (1) $w\in V-\langle v_1,\ldots,v_n\rangle_{\mathbb{K}}$
+          <span class="iff">$\iff$</span>
+          (2) $v_1,\ldots,v_n,w$ は1次独立
+        </div>
+      </div>
+
+      <details>
+        <summary>補題 6.6 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          <strong>(1) $\Rightarrow$ (2)：</strong>対偶を示す。$a_1,\ldots,a_n,b\in\mathbb{K}$ のうち少なくとも1つは $0$ でなく，
+          $$a_1v_1+\cdots+a_nv_n+bw=0 \quad\cdots(*)$$
+          が成り立つとする。もし $b=0$ なら，$(*)$ は $a_1v_1+\cdots+a_nv_n=0$ で $a_1,\ldots,a_n$ のどれかが $0$ でないことになり，$v_1,\ldots,v_n$ の1次独立性に反する。よって $b\neq0$。このとき $(*)$ より
+          $$w = \frac{-a_1}{b}v_1+\cdots+\frac{-a_n}{b}v_n \in \langle v_1,\ldots,v_n\rangle_{\mathbb{K}}$$
+          となり，$w\notin\langle v_1,\ldots,v_n\rangle_{\mathbb{K}}$（＝(1)）の否定が示せた。これで対偶 (2)でない$\Rightarrow$(1)でない が示され，(1)$\Rightarrow$(2) が従う。<br><br>
+
+          <strong>(2) $\Rightarrow$ (1)：</strong>背理法。$w\in\langle v_1,\ldots,v_n\rangle_{\mathbb{K}}$ と仮定すると，ある $a_1,\ldots,a_n\in\mathbb{K}$ があって
+          $$w=a_1v_1+\cdots+a_nv_n$$
+          よって
+          $$a_1v_1+\cdots+a_nv_n+(-1)w=0$$
+          で係数 $-1\neq0$ が存在するので，$v_1,\ldots,v_n,w$ は1次独立でないことになり，(2) に矛盾する。ゆえに $w\notin\langle v_1,\ldots,v_n\rangle_{\mathbb{K}}$，すなわち (1)。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">使い方</span>
+        <p>
+          独立な組 $v_1,\ldots,v_n$ の張る部分空間からはみ出した元 $w$ を1個付け加えても，独立性は壊れない。
+          この補題が，次の定理6.7（基底への延長）で「独立性を保ったまま次元まで増やしていく」操作の根拠になる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定理6.7 =================== -->
+  <div class="section" id="thm6-7">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem 6.7</div>
+      <h2>定理 6.7 — 基底への延長</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 6.7（基底への延長）</span>
+        $V$：$n$ 次元 $\mathbb{K}$-ベクトル空間，$\ell &lt; n$，$v_1,\ldots,v_\ell\in V$ を $\mathbb{K}$上1次独立とする。
+        このとき，ある $v_{\ell+1},\ldots,v_n\in V$ が存在して，$v_1,\ldots,v_n$ は $V$ の基底になる。
+      </div>
+
+      <details open>
+        <summary>定理 6.7 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $n-\ell$ についての帰納法で示す。<br><br>
+
+          <strong>$n-\ell=1$（$\ell=n-1$）のとき：</strong><br>
+          $v_1,\ldots,v_{n-1}$ は個数が $n-1\neq n=\dim V$ なので，定理6.5(2) より $V$ の基底ではない。
+          $v_1,\ldots,v_{n-1}$ は1次独立なので，もし $\langle v_1,\ldots,v_{n-1}\rangle_{\mathbb{K}}=V$ だとすると系6.4 より基底になってしまい矛盾する。よって
+          $$\langle v_1,\ldots,v_{n-1}\rangle_{\mathbb{K}} \subsetneq V$$
+          ゆえ，$v_n\in V-\langle v_1,\ldots,v_{n-1}\rangle_{\mathbb{K}}$ がとれる。補題6.6 より $v_1,\ldots,v_n$ は1次独立。
+          個数が $n=\dim V$ なので，系6.4（(1)$\Rightarrow$(3)）より $v_1,\ldots,v_n$ は $V$ の基底。<br><br>
+
+          <strong>$n-\ell\ge2$ のとき：</strong><br>
+          $\ell &lt; n$ なので，先ほどと同様に $v_1,\ldots,v_\ell$ は $V$ の基底ではなく（個数 $\ell\neq n$，定理6.5(2)），1次独立なので
+          $$\langle v_1,\ldots,v_\ell\rangle_{\mathbb{K}} \subsetneq V$$
+          よって $v_{\ell+1}\in V-\langle v_1,\ldots,v_\ell\rangle_{\mathbb{K}}$ がとれ，補題6.6 より $v_1,\ldots,v_{\ell+1}$ は1次独立。
+          $n-(\ell+1) &lt; n-\ell$ なので帰納法の仮定を $v_1,\ldots,v_{\ell+1}$（$\ell+1 &lt; n$）に適用すると，ある $v_{\ell+2},\ldots,v_n\in V$ が存在して $v_1,\ldots,v_n$ は $V$ の基底になる。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">直感</span>
+        <p>
+          「独立な組は，はみ出した元を1つずつ足していくことで，いつか必ず基底に育てられる」という主張。
+          定理6.5(1)（独立な元は最大 $n$ 個）と補題6.6（はみ出した元を足しても独立性が保たれる）を組み合わせた帰納法。
+          「任意の $\mathbb{K}$-ベクトル空間には基底が存在する」という事実の，有限次元版の構成的な証明にもなっている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== まとめ =================== -->
+  <div class="section" id="summary">
+    <div class="sec-header">
+      <div class="sec-tag">Summary</div>
+      <h2>まとめ — §6 の全体像</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">§6 の核心</span>
+        <table class="axiom-table">
+          <tr><th>結果</th><th>内容</th></tr>
+          <tr>
+            <td>定義6.1</td>
+            <td>基底 = 生成する ＋ 1次独立</td>
+          </tr>
+          <tr>
+            <td>系6.2</td>
+            <td>基底 $\iff$ $T_{v_1,\ldots,v_n}$ が同型写像</td>
+          </tr>
+          <tr>
+            <td>系6.3</td>
+            <td>$\dim V=n$ $\iff$ $n$ 個の元からなる基底が存在</td>
+          </tr>
+          <tr>
+            <td>系6.4</td>
+            <td>個数が $\dim V$ に一致していれば，1次独立／生成する／基底はすべて同値</td>
+          </tr>
+          <tr>
+            <td>定理6.5</td>
+            <td>1次独立な元は最大 $\dim V$ 個。ちょうど $\dim V$ 個なら自動的に基底</td>
+          </tr>
+          <tr>
+            <td>補題6.6</td>
+            <td>独立な組に，張る部分空間からはみ出した元を1つ加えても独立性は保たれる</td>
+          </tr>
+          <tr>
+            <td>定理6.7</td>
+            <td>独立な組はいつでも基底まで延長できる（基底の存在の構成的証明）</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <span class="box-label">§5・§6 の繋がり（論理の流れ）</span>
+        <div style="overflow-x:auto">
+          <pre style="font-family:monospace; line-height:2; font-size:.87rem; color:#333">
+補題5.1（T: K^n → V の決定）
+  └── 定理5.2（Im T = 生成する部分空間）
+       ├── 定義5.3（生成する／span）
+       ├── 定義5.4（1次独立）── 系5.5（単射 ⟺ 1次独立）
+       └── 系5.6（K^m の場合：dim⟨v₁,…,vₙ⟩ = rank）
+            └── 定義6.1（基底 = 生成する ＋ 1次独立）
+                 ├── 系6.2（基底 ⟺ T_{v1,…,vn} が同型）
+                 │    └── 系6.3（dim V=n ⟺ n個の基底が存在）
+                 │         └── 系6.4（個数=dim Vなら 独立/生成/基底 が同値）
+                 │              └── 定理6.5（独立な元は最大dim V個，＝dim Vなら基底）
+                 │                   └── 補題6.6（はみ出した元を足しても独立性は保たれる）
+                 │                        └── 定理6.7（独立な組は基底まで延長できる）
+                 └── （系4.11：dim V₁=dim V₂ の同値条件を再利用）
+          </pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

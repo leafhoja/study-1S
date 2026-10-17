@@ -1,0 +1,313 @@
+/* ==================================================
+   教科トップページ共通スタイル
+   ジェンダー論・現代経済理論を基準に、ヒーロー、紹介欄、
+   セクション見出し、カード群を統一する。科目別CSSの後に読む。
+   ================================================== */
+
+body.subject-home {
+  --home-accent: #2b6cb0;
+  --home-deep: #1a365d;
+  --home-soft: #ebf8ff;
+  --home-bg: var(--bg, #eef2f7);
+  --home-surface: var(--surface, #fff);
+  --home-muted: var(--muted, #718096);
+  background: var(--home-bg);
+  color: var(--text, #2d3748);
+}
+
+/* 科目を表すbodyのクラスに応じて、トップページの配色を切り替える。 */
+body.home-gender { --home-accent:#9d2a6b; --home-deep:#5c1240; --home-soft:#fbe4ef; --home-bg:#f7eef4; }
+body.home-economics { --home-accent:#2b6cb0; --home-deep:#1a365d; --home-soft:#ebf8ff; --home-bg:#eef2f7; }
+body.home-mechanics { --home-accent:#1f4e91; --home-deep:#122f5a; --home-soft:#edf1fa; }
+body.home-calculus { --home-accent:#0e6e4f; --home-deep:#08442d; --home-soft:#e8f5f0; }
+body.home-information { --home-accent:#0f7a8c; --home-deep:#0a4f5c; --home-soft:#e6f4f6; }
+body.home-math-exercises { --home-accent:#805ad5; --home-deep:#553c9a; --home-soft:#faf5ff; }
+body.home-basic-exercises { --home-accent:#3182ce; --home-deep:#1e4799; --home-soft:#ebf4ff; }
+body.home-thermodynamics { --home-accent:#0b6e6e; --home-deep:#1a2b4a; --home-soft:#e7f4f2; --home-surface:var(--paper); }
+body.home-linear { --home-accent:#1f4e91; --home-deep:#122f5a; --home-soft:#edf1fa; }
+body.home-english { --home-accent:#805ad5; --home-deep:#44337a; --home-soft:#faf5ff; }
+
+body.home-algorithms { --home-accent:#0e7490; --home-deep:#164e63; --home-soft:#ecfeff; }
+
+/* ナビとヒーロー */
+body.subject-home .navbar,
+body.subject-home .site-footer { background: var(--home-deep); }
+body.subject-home .hero {
+  position: relative;
+  padding: 44px 24px 40px;
+  background: linear-gradient(150deg, var(--home-deep) 0%, var(--home-deep) 48%, var(--home-accent) 100%);
+  color: #fff;
+  text-align: center;
+}
+body.subject-home .hero::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 22px;
+  background: var(--home-bg);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
+body.subject-home .hero h1 { margin: 0 0 10px; font-size: 1.75rem; font-weight: 800; line-height: 1.3; }
+body.subject-home .hero .subtitle { margin: 0 0 6px; color: #fff; font-size: .97rem; opacity: .85; }
+body.subject-home .hero .meta { margin: 0; color: #fff; font-size: .8rem; opacity: .65; }
+
+/* 本文幅と紹介欄 */
+body.subject-home .container,
+body.subject-home .index-body,
+body.subject-home .eng-body {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+body.subject-home .intro-box,
+body.subject-home .notice,
+body.subject-home .how-to-use {
+  display: block;
+  margin: 0 0 28px;
+  padding: 22px 28px;
+  border: 0;
+  border-left: 4px solid var(--home-accent);
+  border-radius: 12px;
+  background: var(--home-surface);
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  color: var(--home-muted);
+  font: inherit;
+  font-size: .92rem;
+  line-height: 1.75;
+}
+body.subject-home .intro-box strong,
+body.subject-home .intro-box h3,
+body.subject-home .notice strong,
+body.subject-home .how-to-use h3 { color: var(--home-deep); }
+body.subject-home .intro-box p + p { margin-top: .8rem; }
+body.subject-home .intro-box h3,
+body.subject-home .how-to-use h3 { margin: 0 0 .45rem; font-size: .92rem; }
+
+/* セクション見出し。英語の補助ラベルも消さずに残す。 */
+body.subject-home .home-section-title,
+body.subject-home .section-label {
+  margin: 32px 0 16px;
+  padding: 0 0 8px;
+  border: 0;
+  border-bottom: 2px solid var(--home-accent);
+  background: transparent;
+  color: var(--home-deep);
+  font: inherit;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-align: left;
+}
+body.subject-home .section {
+  margin: 0 0 36px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+body.subject-home .sec-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin: 32px 0 16px;
+  padding: 0 0 8px;
+  border: 0;
+  border-bottom: 2px solid var(--home-accent);
+  background: transparent;
+  color: var(--home-deep);
+}
+body.subject-home .sec-header .sec-tag {
+  order: 2;
+  color: var(--home-muted);
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  opacity: 1;
+}
+body.subject-home .sec-header h2 { margin: 0; padding: 0; border: 0; color: var(--home-deep); font-size: 1.1rem; }
+body.subject-home .sec-body { padding: 0; background: transparent; }
+
+/* 共通カード */
+body.subject-home .card,
+body.subject-home .chapter-card,
+body.subject-home a.sec-card,
+body.subject-home .lecture-card,
+body.subject-home .lec-card,
+body.subject-home .year-card {
+  border: 0;
+  border-radius: 12px;
+  background: var(--home-surface);
+  box-shadow: 0 2px 14px rgba(0,0,0,.08);
+  color: inherit;
+  text-decoration: none;
+  transition: transform .18s, box-shadow .18s;
+}
+body.subject-home .card,
+body.subject-home .chapter-card,
+body.subject-home a.sec-card,
+body.subject-home .lecture-card,
+body.subject-home .lec-card {
+  border-top: 4px solid var(--home-accent);
+}
+/* 過去問カードは講義タブ（.lec-tab）と同じく色線を左側に */
+body.subject-home .year-card {
+  border-left: 4px solid var(--home-accent);
+}
+body.subject-home .card:hover,
+body.subject-home .chapter-card:hover,
+body.subject-home a.sec-card:hover,
+body.subject-home .lecture-card:hover,
+body.subject-home .lec-card:hover,
+body.subject-home .year-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.13);
+  text-decoration: none;
+}
+body.subject-home .card-grid,
+body.subject-home .chapter-grid,
+body.subject-home .sec-grid,
+body.subject-home .lecture-grid { gap: 16px; margin: 20px 0 40px; }
+body.subject-home .card { padding: 20px 22px; }
+body.subject-home .card-tag,
+body.subject-home .card-num,
+body.subject-home .sec-num,
+body.subject-home .lc-num { color: var(--home-accent); }
+body.subject-home .card h3,
+body.subject-home .card-title,
+body.subject-home .sec-title,
+body.subject-home .lc-title { color: var(--home-deep); }
+body.subject-home .card p,
+body.subject-home .card-topics,
+body.subject-home .sec-sub,
+body.subject-home .lc-status { color: var(--home-muted); }
+body.subject-home .chapter-card { overflow: hidden; }
+body.subject-home .chapter-card .card-stripe { height: 0; }
+
+/* 現代経済理論型のコンパクトな講義タブ */
+body.subject-home .lec-tab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px;
+  margin: 20px 0 40px;
+}
+body.subject-home .lec-tab {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 10px 12px;
+  border: 0;
+  border-left: 4px solid var(--home-accent);
+  border-radius: 10px;
+  background: var(--home-surface);
+  box-shadow: 0 2px 10px rgba(0,0,0,.06);
+  color: inherit;
+  text-decoration: none;
+  transition: transform .16s, box-shadow .16s;
+}
+body.subject-home .lec-tab:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,.12); text-decoration: none; }
+body.subject-home .ln-badge {
+  display: flex;
+  flex: 0 0 26px;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--home-soft);
+  color: var(--home-accent);
+  font-size: .74rem;
+  font-weight: 800;
+}
+body.subject-home .ln-body { min-width: 0; }
+body.subject-home .ln-title { color: var(--home-deep); font-size: .78rem; font-weight: 700; line-height: 1.4; }
+body.subject-home .ln-detail,
+body.subject-home .ln-lecturer { margin-top: 3px; color: var(--home-muted); font-size: .66rem; line-height: 1.4; }
+
+/* 年度カード（講義タブ＝.lec-tab と同じ幅・サイズ感に統一）。
+   年度を主役にし、必要な場合だけ日付・試験種別などの補足を添える。 */
+body.subject-home .year-grid {
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)) !important;
+  gap: 12px;
+  margin: 20px 0 40px;
+}
+body.subject-home .year-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 10px 12px;
+  text-align: left;
+}
+body.subject-home .year-card .yn {
+  color: var(--home-deep);
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+}
+body.subject-home .year-card .yl {
+  width: 100%;
+  color: var(--home-muted);
+  font-size: .68rem;
+  line-height: 1.35;
+  white-space: normal;
+}
+/* 旧・講義タブ構造互換のラッパー（ジェンダー論の一部ページ）。 */
+body.subject-home .year-card .y-body { display: contents; }
+
+/* 演習科目のカテゴリ枠を、情報を保ったまま共通見出し型にする。 */
+body.subject-home .subject-columns { gap: 28px; }
+body.subject-home .subject-header {
+  margin: 32px 0 16px !important;
+  padding: 0 0 8px !important;
+  border: 0;
+  border-bottom: 2px solid var(--home-accent);
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--home-deep) !important;
+  font: inherit !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+}
+body.subject-home .subject-body { padding: 0; border: 0; background: transparent; box-shadow: none; }
+body.home-basic-exercises .subject-header.calc { border-bottom-color: var(--calc-accent); color: var(--calc-primary) !important; }
+body.home-basic-exercises .subject-header.linear { border-bottom-color: var(--lin-accent); color: var(--lin-primary) !important; }
+body.home-basic-exercises .lecture-card.available { border-top-color: var(--calc-accent); }
+body.home-basic-exercises .lecture-card.lin-available { border-top-color: var(--lin-accent); }
+body.home-information .year-card.individual-exam { border-left-color: #b9660c; }
+body.home-gender .year-card.sample { border-left-color: #a0aec0; }
+body.home-gender .year-card.pending { border-left-color: #cbd5e0; opacity: .5; pointer-events: none; }
+
+/* 公式・定義・記号一覧は全項目を残し、箱と表の見た目だけ合わせる。 */
+body.subject-home .formula-grid { gap: 16px; margin: 20px 0 40px; }
+body.subject-home .formula-group {
+  overflow: hidden;
+  border: 0;
+  border-top: 4px solid var(--home-accent);
+  border-radius: 12px;
+  background: var(--home-surface);
+  box-shadow: 0 2px 14px rgba(0,0,0,.08);
+}
+body.subject-home .formula-group-head { border-radius: 0; background: var(--home-soft); color: var(--home-deep); padding: .65rem .9rem; }
+body.subject-home .axiom-table,
+body.subject-home .formula-table { background: var(--home-surface); }
+
+/* 指定された画面幅などの条件で、文字サイズや配置を切り替える。 */
+@media (max-width: 640px) {
+  body.subject-home .hero { padding: 32px 16px 30px; }
+  body.subject-home .hero h1 { font-size: 1.4rem; }
+  body.subject-home .container,
+  body.subject-home .index-body,
+  body.subject-home .eng-body { padding: 24px 14px 44px; }
+  body.subject-home .intro-box,
+  body.subject-home .notice,
+  body.subject-home .how-to-use { padding: 18px 16px; }
+  body.subject-home .lec-tab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  body.subject-home .subject-columns { grid-template-columns: 1fr; }
+  body.subject-home .year-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 10px; }
+  body.subject-home .sec-header { align-items: flex-start; flex-direction: column; gap: 2px; }
+}

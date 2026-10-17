@@ -1,0 +1,353 @@
+<!DOCTYPE html><!-- 「線形代数 予想問題 第1回 表現行列・核と像 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>線形代数 予想問題 第1回 表現行列・核と像 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="yosou_lin_02.html" data-page="yosou/yosou_lin_02">次のテーマ →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-linear">
+  <h1>線形代数学演習　予想問題　第1回</h1>
+  <p class="subtitle">表現行列・核と像・次元定理（全5問）</p>
+</div>
+
+<div class="container">
+
+<!-- 免責 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#fff5f5; color:#c53030;">⚠️ この問題セットについて</div>
+  <div class="section-card-body">
+    <div class="warn-box">
+      <div class="warn-title">AIが作成した予想問題です（実際の試験問題ではありません）</div>
+      <p>演習第1回（<a href="../linear/lin_01.html">線形写像と行列表現</a>）と昨年度の<a href="../kakomon/kakomon_lin_01.html">小テスト</a>と同程度〜少し発展した難易度で構成した学習用オリジナル問題です。全4テーマ・20問構成の第1回（表現行列・核と像）です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 このテーマの要点</div>
+  <div class="section-card-body">
+    <p>線形写像 $f$ の表現行列 $A$ を求める基本操作，核 $\mathrm{Ker}(f)$・像 $\mathrm{Im}(f)$ の計算，そして次元定理 $\dim V = \dim\mathrm{Ker}(f) + \dim\mathrm{Im}(f)$ の使い方を，色々な角度から練習する。</p>
+    <div class="def-box">
+      <div class="def-title">この5問で使う道具</div>
+      <ul>
+        <li>非標準基底で条件が与えられたとき：$AP=Q \Rightarrow A=QP^{-1}$（$P$ が正則なとき）</li>
+        <li>単射 $\Leftrightarrow$ $\mathrm{Ker}(f)=\{0\}$（有限次元で定義域＝終域なら全射・全単射とも同値）</li>
+        <li>次元定理：$\dim V = \dim\mathrm{Ker}(f)+\dim\mathrm{Im}(f)$</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">1</span> 表現行列と逆写像
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>線形写像 $f\colon \mathbb{R}^2\to\mathbb{R}^2$ は $f\!\left(\begin{pmatrix}1\\2\end{pmatrix}\right)=\begin{pmatrix}3\\1\end{pmatrix}$，$f\!\left(\begin{pmatrix}2\\3\end{pmatrix}\right)=\begin{pmatrix}4\\2\end{pmatrix}$ を満たすとする。</p>
+      <ol>
+        <li>$f=f_A$ となる行列 $A$ を求めよ。</li>
+        <li>$f$ が全単射であることを示し，逆写像 $f^{-1}$ の表現行列 $A^{-1}$ を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$P=\begin{pmatrix}1&2\\2&3\end{pmatrix}$，$Q=\begin{pmatrix}3&4\\1&2\end{pmatrix}$ とすると，条件は $AP=Q$。$\det P = 3-4=-1\ne0$ なので</p>
+      $$A=QP^{-1} = \begin{pmatrix}3&4\\1&2\end{pmatrix}\cdot\frac{1}{-1}\begin{pmatrix}3&-2\\-2&1\end{pmatrix} = \boxed{\begin{pmatrix}-1&2\\1&0\end{pmatrix}}$$
+      <p>検算：$A\binom{1}{2}=\binom{-1+4}{1+0}=\binom{3}{1}$ ✓，$A\binom{2}{3}=\binom{-2+6}{2+0}=\binom{4}{2}$ ✓</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$\det A = (-1)\cdot0-2\cdot1=-2\ne0$ なので，$f=f_A$ は単射かつ全射（$\mathbb{R}^2\to\mathbb{R}^2$ で次元が等しいので単射・全射は同値）。よって全単射。</p>
+      <p>逆写像は $f^{-1}=f_{A^{-1}}$（$f_A\circ f_{A^{-1}}=f_{AA^{-1}}=f_I=\mathrm{id}$ より）。逆行列の公式より</p>
+      $$A^{-1} = \frac{1}{-2}\begin{pmatrix}0&-2\\-1&-1\end{pmatrix} = \boxed{\begin{pmatrix}0&1\\ \tfrac12&\tfrac12\end{pmatrix}}$$
+      <p>検算：$AA^{-1}=\begin{pmatrix}-1&2\\1&0\end{pmatrix}\begin{pmatrix}0&1\\ \tfrac12&\tfrac12\end{pmatrix}=\begin{pmatrix}0+1&-1+1\\0+0&1+0\end{pmatrix}=\begin{pmatrix}1&0\\0&1\end{pmatrix}$ ✓</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>非標準基底で条件が与えられたら，まず「入力を並べた行列 $P$」「対応する出力を並べた行列 $Q$」を作り，$AP=Q$ という1つの行列方程式に翻訳する。あとは $P$ が正則であることを確認して右から $P^{-1}$ を掛けるだけ。<strong>「$f(\text{既知のベクトル})=\text{既知のベクトル}$」が複数個与えられている文章を見たら，反射的に「入力を列に並べた $P$，出力を列に並べた $Q$，$AP=Q$」の翻訳をまず疑う。</strong>これは表現行列を求める問題で最も頻出のパターンなので，本番でも真っ先に試すべき第一手。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $AP=Q$ という式はどこから来るか</div>
+        <p>表現行列の定義は「$f(\mathbf{v})=A\mathbf{v}$」。$P$ の第 $i$ 列を $\mathbf{p}_i$ とすると，行列の積の性質から $AP$ の第 $i$ 列は $A\mathbf{p}_i=f(\mathbf{p}_i)$ に等しい。一方，$f(\mathbf{p}_i)$ は問題文で与えられた出力そのもの，つまり $Q$ の第 $i$ 列。両者を列ごとに見比べれば $AP=Q$ が成り立つ，という理屈。</p>
+        <p>ここで<strong>掛ける順序が本質的に重要</strong>である点に注意。$A$ は「左から」掛かる（$f_A(\mathbf{v})=A\mathbf{v}$）ので，列ごとの対応を保つには $P$ の右側に演算子を作用させる形，つまり $AP$ でなければならない。$PA$ ではこの対応が崩れる。同様に $P^{-1}$ を掛ける方向も「右から」でなければならず，$A=QP^{-1}$ を $A=P^{-1}Q$ と書き間違えるのは非常によくある誤り（行列の積は非可換なので，左右を逆にすると全く違う行列になる）。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①$P,Q$ の列の対応（どの入力にどの出力が対応するか）を取り違える，②$A=QP^{-1}$ を $A=P^{-1}Q$ と誤記する，③$\det P=0$ になったのに気づかず計算を続けてしまう（この場合，与えられた入力ベクトルが1次独立でなく，条件だけでは $A$ が一意に決まらない可能性がある）。</p>
+      <p><strong>別解（連立方程式で直接解く）：</strong>$A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ とおき，$A\binom{1}{2}=\binom{3}{1}$，$A\binom{2}{3}=\binom{4}{2}$ を成分ごとに展開すると $a+2b=3,\ c+2d=1,\ 2a+3b=4,\ 2c+3d=2$ という4元の連立1次方程式になる。これを解いても同じ答えに到達するが，$AP=Q$ の形に翻訳したほうが計算がまとまり，特に3次元以上では圧倒的に速い（問2で実感できる）。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 なぜ $f^{-1}=f_{A^{-1}}$ なのか</div>
+        <p>$f_A\circ f_{A^{-1}} = f_{A\cdot A^{-1}} = f_I = \mathrm{id}$，$f_{A^{-1}}\circ f_A = f_{A^{-1}A} = f_I = \mathrm{id}$（第1回で学んだ「合成 $=$ 行列の積」を使うだけ）。両方向の恒等写像が成立するので，$f_{A^{-1}}$ はまさに逆写像の定義を満たす。「線形写像の逆写像は表現行列の逆行列に対応する」という対応関係は，今後何度も使う基本事項。</p>
+        <p><strong>一般化：</strong>これは「$GL(n,\mathbb{R})$（正則行列全体）と可逆な線形写像全体が，合成と行列の積を通じて対応する」という群としての構造の一部。写像の合成 $\leftrightarrow$ 行列の積，恒等写像 $\leftrightarrow$ 単位行列，逆写像 $\leftrightarrow$ 逆行列，という3段の対応関係をセットで覚えておくと，今後の「$f$ が可逆であることを示せ」系の問題全てに応用できる。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">2</span> 3次元での表現行列と単射性の判定
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>線形写像 $f\colon\mathbb{R}^3\to\mathbb{R}^3$ は</p>
+      $$f\!\left(\begin{pmatrix}1\\1\\0\end{pmatrix}\right)=\begin{pmatrix}3\\1\\1\end{pmatrix},\quad
+        f\!\left(\begin{pmatrix}1\\0\\1\end{pmatrix}\right)=\begin{pmatrix}0\\1\\2\end{pmatrix},\quad
+        f\!\left(\begin{pmatrix}0\\1\\1\end{pmatrix}\right)=\begin{pmatrix}1\\2\\-1\end{pmatrix}$$
+      <p>を満たすとする。$f=f_A$ となる行列 $A$ を求め，$f$ が全単射かどうか判定せよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$P=\begin{pmatrix}1&1&0\\1&0&1\\0&1&1\end{pmatrix}$，$Q=\begin{pmatrix}3&0&1\\1&1&2\\1&2&-1\end{pmatrix}$ とおく。$\det P = 1(0-1)-1(1-0)+0=-2\ne0$ なので $P$ は正則。</p>
+      $$P^{-1} = \frac12\begin{pmatrix}1&1&-1\\1&-1&1\\-1&1&1\end{pmatrix}$$
+      $$A = QP^{-1} = \boxed{\begin{pmatrix}1&2&-1\\0&1&1\\2&-1&0\end{pmatrix}}$$
+      <p>検算：$A\begin{pmatrix}1\\1\\0\end{pmatrix}=\begin{pmatrix}1+2\\0+1\\2-1\end{pmatrix}=\begin{pmatrix}3\\1\\1\end{pmatrix}$ ✓，$A\begin{pmatrix}1\\0\\1\end{pmatrix}=\begin{pmatrix}1-1\\0+1\\2+0\end{pmatrix}=\begin{pmatrix}0\\1\\2\end{pmatrix}$ ✓，$A\begin{pmatrix}0\\1\\1\end{pmatrix}=\begin{pmatrix}2-1\\1+1\\-1+0\end{pmatrix}=\begin{pmatrix}1\\2\\-1\end{pmatrix}$ ✓</p>
+      <p><strong>全単射の判定：</strong></p>
+      $$\det A = 1(0-(-1))-2(0-2)+(-1)(0-2) = 1+4+2=7\ne0$$
+      <p>$\mathbb{R}^3\to\mathbb{R}^3$ で $\det A\ne0$ なので $f$ は単射かつ全射，すなわち<strong>全単射</strong>。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>問1と全く同じ手順を3次元に拡張しただけ。$P,Q$ を作って $A=QP^{-1}$ とする発想はベクトル空間の次元によらず共通。$3\times3$ の逆行列は余因子展開か掃き出し法で求める（$2\times2$ のような万能公式はないので手順を丁寧に）。<strong>「入力ベクトルの個数＝空間の次元」であることが $P$ が正則になりうる必要条件</strong>（$\mathbb{R}^3$ なら3本，$\mathbb{R}^n$ なら $n$ 本）。本問はちょうど3本与えられているので，まず3本が1次独立か（$\det P\ne0$ か）を確認するのが第一歩。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $P^{-1}=\frac12\begin{pmatrix}1&1&-1\\1&-1&1\\-1&1&1\end{pmatrix}$ はどこから来るか</div>
+        <p>$3\times3$ 逆行列の公式は $P^{-1}=\dfrac{1}{\det P}\,\mathrm{adj}(P)$（$\mathrm{adj}(P)$ は余因子行列 $C$ の転置，$(\mathrm{adj}\,P)_{ij}=C_{ji}$）。$\det P=-2$ であることは既に確認済み。余因子 $C_{ij}=(-1)^{i+j}M_{ij}$（$M_{ij}$ は $(i,j)$ 成分を除いた $2\times2$ 小行列式）を9個すべて計算し，転置して $\dfrac{1}{-2}$ 倍すれば $P^{-1}$ が得られる。手計算では余因子を1つ間違えるだけで全体が崩れるので，最低1箇所は $PP^{-1}=E$ を検算する習慣が有効。</p>
+      </div>
+      <p><strong>別解（$P^{-1}$ を経由しない方法）：</strong>$A$ そのものだけが欲しいなら，「$[P\mid Q]$ を拡大係数行列とみて掃き出し法を行い，左側 $P$ を単位行列 $E$ に変形するのと同じ操作を右側 $Q$ にも同時に施す」ことで，$P^{-1}$ を明示的に書き出さずに $A^{\top}$ に相当する情報を直接得ることもできる（実質的には $P^{-1}$ を計算していることと同じだが，途中式の書き方が変わる）。今回のように $P^{-1}$ 自体を後の検算にも使う場合は，素直に逆行列を経由する方が見通しがよい。</p>
+      <p><strong>よくある間違い：</strong>①余因子の符号 $(-1)^{i+j}$ の付け忘れ，②余因子行列を転置せずにそのまま使う（$\mathrm{adj}$ は転置が必要），③$3\times3$ の行列積の計算で成分を1つ飛ばす。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 検算を惜しまない</div>
+        <p>$3\times3$ の行列計算は手計算でミスが起きやすい。求めた $A$ に与えられた3つの入力ベクトルを代入し，指定された出力と一致するか必ず確認する習慣をつけること。1つでもズレたら，$P^{-1}$ の計算から見直す。</p>
+      </div>
+      <p><strong>一般化・本番での対応：</strong>「$n$ 次元空間で $n$ 個の入出力ペアが与えられ，表現行列を求めよ」という問題は全てこの型に帰着する。本番で入出力ペアが $n$ 本より少ない場合は，$A$ が一意に決まらない（対称性など追加の情報が必要）ことを見抜く判断力も重要。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">3</span> パラメータを含む行列の階数分析
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>実数 $a$ をパラメータとし，$A(a)=\begin{pmatrix}2&a\\a&2\end{pmatrix}$，$f=f_{A(a)}\colon\mathbb{R}^2\to\mathbb{R}^2$ とする。</p>
+      <ol>
+        <li>$f$ が単射でないような $a$ の値をすべて求めよ。</li>
+        <li>(1) で求めたそれぞれの $a$ に対し，$\mathrm{Ker}(f)$，$\mathrm{Im}(f)$ の基底を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$f$ が単射でない $\Leftrightarrow$ $\det A(a)=0$。</p>
+      $$\det A(a) = 4-a^2=(2-a)(2+a)=0 \quad\Longrightarrow\quad \boxed{a=2,\ -2}$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p><strong>$a=2$ のとき：</strong>$A(2)=\begin{pmatrix}2&2\\2&2\end{pmatrix}$。$A(2)v=0 \Leftrightarrow x+y=0$。</p>
+      $$\mathrm{Ker}(f)=\mathrm{span}\left\{\begin{pmatrix}1\\-1\end{pmatrix}\right\},\qquad \mathrm{Im}(f)=\mathrm{span}\left\{\begin{pmatrix}2\\2\end{pmatrix}\right\}=\mathrm{span}\left\{\begin{pmatrix}1\\1\end{pmatrix}\right\}$$
+      <p><strong>$a=-2$ のとき：</strong>$A(-2)=\begin{pmatrix}2&-2\\-2&2\end{pmatrix}$。$A(-2)v=0 \Leftrightarrow x-y=0$。</p>
+      $$\mathrm{Ker}(f)=\mathrm{span}\left\{\begin{pmatrix}1\\1\end{pmatrix}\right\},\qquad \mathrm{Im}(f)=\mathrm{span}\left\{\begin{pmatrix}2\\-2\end{pmatrix}\right\}=\mathrm{span}\left\{\begin{pmatrix}1\\-1\end{pmatrix}\right\}$$
+      <p>（次元定理の確認：どちらも $\dim\mathrm{Ker}+\dim\mathrm{Im}=1+1=2$ ✓。$A(a)$ が対称行列であるため，2つのケースで $\mathrm{Ker}$ と $\mathrm{Im}$ がちょうど入れ替わっている点も観察しておこう。）</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p>$\det A(a)$ を計算する前に，$A(a)$ の対称性（$a$ を含む非対角成分が等しい）に気づけると見通しが良くなる。対称行列 $\begin{pmatrix}p&a\\a&p\end{pmatrix}$ の行列式は常に $p^2-a^2$ の形になり，$a=\pm p$ で退化する，というパターンを覚えておくと計算が速い。<strong>「対角成分が等しく，非対角成分がパラメータで対称」な $2\times2$ 行列を見たら，$(1,1)$ 方向と $(1,-1)$ 方向が特別な意味を持つ（後述）ことを疑うとよい。</strong></p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 別解：$A(a)=2I+aJ$ という分解で一気に見通す</div>
+        <p>$J=\begin{pmatrix}0&1\\1&0\end{pmatrix}$（成分を入れ替える行列）とおくと，$A(a)=2I+aJ$ と書ける。$J$ の固有ベクトルは $(1,1)^\top$（固有値 $1$：$J\binom{1}{1}=\binom{1}{1}$）と $(1,-1)^\top$（固有値 $-1$：$J\binom{1}{-1}=\binom{-1}{1}=-\binom{1}{-1}$）。よって</p>
+        $$A(a)\binom{1}{1} = (2+a)\binom{1}{1},\qquad A(a)\binom{1}{-1} = (2-a)\binom{1}{-1}$$
+        <p>すなわち $(1,1)^\top,(1,-1)^\top$ は $a$ の値に関係なく常に $A(a)$ の固有ベクトルで，対応する固有値は $2+a$，$2-a$。行列式＝固有値の積なので $\det A(a)=(2+a)(2-a)=4-a^2$ が一瞬で出るし，退化する条件 $a=\pm2$ は「どちらかの固有値が $0$ になる」ことに直接対応する。<strong>$a=2$ のとき固有値 $2-a=0$ の固有ベクトルが $(1,-1)$ なのでこれが $\mathrm{Ker}$，固有値 $2+a=4\ne0$ の固有ベクトル $(1,1)$ 方向が像</strong>——解答の結果がこの一撃で説明できる。この視点は次回以降で学ぶ固有値・固有ベクトルの練習にもそのままつながる。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 なぜ Ker と Im が入れ替わるのか</div>
+        <p>$A(2)=\begin{pmatrix}2&2\\2&2\end{pmatrix}$ と $A(-2)=\begin{pmatrix}2&-2\\-2&2\end{pmatrix}$ を見比べると，$A(-2)$ は $A(2)$ の第2列（あるいは第2行）の符号を反転したもの。この「符号反転」の対称性のせいで，一方の核の方向がもう一方の像の方向にちょうど一致する，という現象が起きている。パラメータ付きの問題では，このような代数的な対称性に気づけると計算の見通しが良くなるだけでなく，検算にも使える。上の固有値分解で言えば，$a\to-a$ の変換は固有値 $2+a \leftrightarrow 2-a$ を入れ替える（固有ベクトルの役割はそのまま）ことに対応しており，これが Ker/Im 入れ替えの正体。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①$\det A(a)=4-a^2$ を $a^2-4$ と符号を逆にしてしまう，②「単射でない」を「$\mathrm{tr}\,A(a)=0$」のような無関係な条件と混同する，③$\mathrm{Ker}$ の基底を求めるときに $2x+2y=0$ を $x=y$ と書き間違える（正しくは $x=-y$）。</p>
+      <p><strong>本番での対応：</strong>パラメータ入りの正方行列で「単射でない $a$」「退化する $a$」を問われたら，まず $\det=0$ を解く方針は鉄則。行列が対称かつ対角成分が等しい形をしていたら，上のような固有値分解が使えないか一瞬考えてみると，計算も検算も速くなる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">4</span> 核・像が部分空間であることと次元定理の帰結
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$V,W$ を有限次元 $\mathbb{R}$-ベクトル空間，$f\colon V\to W$ を線形写像とする。</p>
+      <ol>
+        <li>$\mathrm{Ker}(f)$ は $V$ の部分空間，$\mathrm{Im}(f)$ は $W$ の部分空間であることを示せ。</li>
+        <li>$\dim V > \dim W$ ならば $f$ は単射でないことを，次元定理を用いて示せ。</li>
+        <li>$f\colon\mathbb{R}^3\to\mathbb{R}^2$ を $f(x,y,z)=(x+2y-z,\ 2x+y+z)$ で定める。$\mathrm{Ker}(f)$，$\mathrm{Im}(f)$ を求め，(2) の主張がこの例でどう現れているか説明せよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p><strong>$\mathrm{Ker}(f)$：</strong>$f(0)=0$ より $0\in\mathrm{Ker}(f)$。$v_1,v_2\in\mathrm{Ker}(f)$，$c,d\in\mathbb{R}$ とすると，$f(cv_1+dv_2)=cf(v_1)+df(v_2)=c\cdot0+d\cdot0=0$ より $cv_1+dv_2\in\mathrm{Ker}(f)$。よって部分空間。</p>
+      <p><strong>$\mathrm{Im}(f)$：</strong>$0=f(0)\in\mathrm{Im}(f)$。$w_1=f(v_1),w_2=f(v_2)\in\mathrm{Im}(f)$，$c,d\in\mathbb{R}$ とすると，$cw_1+dw_2=cf(v_1)+df(v_2)=f(cv_1+dv_2)\in\mathrm{Im}(f)$。よって部分空間。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>次元定理：$\dim V = \dim\mathrm{Ker}(f)+\dim\mathrm{Im}(f)$。$\mathrm{Im}(f)\subset W$ より $\dim\mathrm{Im}(f)\le\dim W$。よって</p>
+      $$\dim\mathrm{Ker}(f) = \dim V - \dim\mathrm{Im}(f) \ge \dim V - \dim W > 0$$
+      <p>$\dim\mathrm{Ker}(f)>0$ なので $\mathrm{Ker}(f)\ne\{0\}$，すなわち $f$ は単射でない。$\blacksquare$（「行き先の空間が狭すぎると，異なる入力を区別しきれない」という直感がそのまま次元の不等式になっている。）</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (3)</div>
+      <p>$f$ の表現行列は $A=\begin{pmatrix}1&2&-1\\2&1&1\end{pmatrix}$。$Av=0$ を解く：$x+2y-z=0$，$2x+y+z=0$。1式を2倍して2式を引く：$3y-3z=0\Rightarrow y=z$。1式に代入：$x=-2y+z=-y$。よって $v=(-y,y,y)=y(-1,1,1)$。</p>
+      $$\mathrm{Ker}(f) = \mathrm{span}\left\{\begin{pmatrix}-1\\1\\1\end{pmatrix}\right\}\quad(1\text{次元})$$
+      <p>$A$ の階数は $2$（2つの行が比例していないので）なので，次元定理より $\dim\mathrm{Im}(f)=3-1=2=\dim\mathbb{R}^2$。よって</p>
+      $$\mathrm{Im}(f) = \mathbb{R}^2\quad(\text{全射})$$
+      <p><strong>(2) との対応：</strong>$\dim V=3>\dim W=2$ なので，(2) より $f$ は単射になり得ない。実際 $\mathrm{Ker}(f)\ne\{0\}$ で単射でないことが確認できた。一方，全射になれるかどうかには (2) のような制約はなく，実際この例では全射になっている。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p><strong>(1) の型：</strong>「零ベクトルを含む」「線形結合で閉じる（$cv_1+dv_2$ の形で1回にまとめて確認）」という2点を確認するのが部分空間証明の定石。$c=d=1$（加法の閉鎖性）と $d=0$（スカラー倍の閉鎖性）を別々に示すのは冗長で，1本の式 $cv_1+dv_2$ で両方を同時に処理するのが答案としても速い。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 次元定理 $\dim V=\dim\mathrm{Ker}(f)+\dim\mathrm{Im}(f)$ 自体はどこから来るか</div>
+        <p>本問では次元定理を「道具」として使っているが，その道具自体がどう証明されるかを押さえておくと応用力が上がる。証明の骨格は次の3ステップ。①$\mathrm{Ker}(f)$ の基底 $u_1,\dots,u_k$ を選ぶ（$k=\dim\mathrm{Ker}(f)$）。②これを $V$ の基底に拡張する：$u_1,\dots,u_k,v_1,\dots,v_m$（$k+m=\dim V$）。③このとき $f(v_1),\dots,f(v_m)$ が $\mathrm{Im}(f)$ の基底になることを示す（生成系であることは任意の $f(v)$ を基底で展開すれば従い，1次独立性は $\sum c_i f(v_i)=0 \Rightarrow \sum c_i v_i\in\mathrm{Ker}(f)$ となるので $u_i$ の1次結合とも書けるはずだが，それは $v_i$ の1次独立性に矛盾する，という背理法で示す）。よって $\dim\mathrm{Im}(f)=m=\dim V-k$，これが次元定理の正体。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 一般的な教訓：次元の大小関係が写像の性質を制限する</div>
+        <p>(2) の対偶を考えると分かりやすい：$f$ が単射 $\Rightarrow$ $\dim\mathrm{Ker}(f)=0$ $\Rightarrow$ $\dim\mathrm{Im}(f)=\dim V$ $\Rightarrow$ $\dim V \le \dim W$（$\mathrm{Im}(f)\subset W$ より）。つまり「単射であるためには，行き先の空間が出発点の空間より狭くてはいけない」。同様に「全射であるためには，出発点の空間が行き先の空間より狭くてはいけない（$\dim V \ge \dim W$）」ことも次元定理から従う。この2つの必要条件は，具体的な写像を作る前に「そもそもこの次元の組み合わせで単射・全射がありえるか」を判定する強力なチェックになる。</p>
+        <p><strong>系（同型の必要条件）：</strong>上の2つの不等式を組み合わせると，$f$ が全単射（同型）であるためには $\dim V=\dim W$ が必要であることが分かる。逆に $\dim V=\dim W$ だけでは全単射は保証されない（$\det A=0$ のような退化した写像も存在しうる）ので，あくまで「必要条件」であって「十分条件」ではない点に注意。本番で「$f$ は同型か」と問われたら，まず次元を比較するのが最初の関所になる。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①部分空間の証明で零ベクトルの確認を忘れる，②次元の不等号の向きを逆にする（正しくは「単射なら $\dim V\le\dim W$」，逆にする誤りが多い），③(3) で階数を求めるときに「行が2本とも比例していないから階数2」という判断を，行を書き出さずに省略してしまい計算ミスに気づけない。</p>
+      <p><strong>(3) の計算の型：</strong>2本の1次方程式から1変数を消去し，残りをパラメータ表示する，という核の計算の標準手順。階数（＝独立な方程式の本数）が像の次元に直結する点を意識する。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 消去の手順を逆算する</div>
+        <p>$x+2y-z=0$（①），$2x+y+z=0$（②）から，解答では①を2倍した $2x+4y-2z=0$ から②を引いて $3y-3z=0$ を得ている。これは①の $z$ の係数を $-2$，②の $z$ の係数を $+1$ に揃えて引くことで $z$ を消す操作。$z=y$ を①に戻して $x=-2y+z=-y$ を得る——このように「どの変数を消すと係数が最も揃えやすいか」を先に見極めるのがコツ（この場合は $z$ の係数の絶対値が最小だった）。</p>
+      </div>
+      <p><strong>一般化・本番での対応：</strong>この問題全体は「次元定理（rank-nullity theorem）」の標準的な応用。抽象的な証明（(1),(2)）と具体的な計算（(3)）がセットで問われる形式は頻出なので，抽象論だけでなく必ず具体例で次元定理の数値を検算する習慣をつけておくこと。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問5 -->
+<section class="section-card" id="problem5">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">5</span> 指定された核をもつ線形写像の構成
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$\mathrm{Ker}(f) = \mathrm{span}\left\{\begin{pmatrix}1\\2\\1\end{pmatrix},\begin{pmatrix}2\\-1\\0\end{pmatrix}\right\}$ となるような線形写像 $f\colon\mathbb{R}^3\to\mathbb{R}$ を1つ構成せよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$f(x,y,z)=ax+by+cz$（$a,b,c\in\mathbb{R}$）の形を仮定する。核の条件より</p>
+      $$f(1,2,1) = a+2b+c = 0,\qquad f(2,-1,0) = 2a-b = 0$$
+      <p>第2式より $b=2a$。第1式に代入：$a+4a+c=0 \Rightarrow c=-5a$。$a=1$ とおくと $b=2,\,c=-5$。</p>
+      $$\boxed{f(x,y,z) = x+2y-5z}$$
+      <p>検算：$f(1,2,1)=1+4-5=0$ ✓，$f(2,-1,0)=2-2-0=0$ ✓。$f\ne0$（例えば $f(1,0,0)=1\ne0$）であり，$\mathrm{rank}(f)=1$ なので次元定理より $\dim\mathrm{Ker}(f)=3-1=2$ となり，与えられた2つのベクトルが1次独立（比例しない）なことから，これらがちょうど $\mathrm{Ker}(f)$ の基底になっている。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p>$\mathbb{R}^3\to\mathbb{R}$ の線形写像は必ず $f(x,y,z)=ax+by+cz$（行ベクトルとの内積）の形に書ける，という事実（第1回：線形写像は基底の行き先で決まる，の帰結）がこの問題の出発点。「核に入れたいベクトル」を代入して $f=0$ という条件式を立てれば，未知数 $a,b,c$ に対する連立方程式になり，自由度1個分だけ残る（$\mathbb{R}^3\to\mathbb{R}$ で核が2次元なら，決めるべき方向は1次元分しかないため）。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 連立方程式 $a+2b+c=0,\ 2a-b=0$ はどこから来るか</div>
+        <p>$f(x,y,z)=ax+by+cz$ を「係数ベクトル $\mathbf{n}=(a,b,c)$ とのベクトルの内積」$f(\mathbf{v})=\mathbf{n}\cdot\mathbf{v}$ と見ると，条件「$\mathrm{Ker}(f)$ に $(1,2,1)$ と $(2,-1,0)$ を含む」は「$\mathbf{n}$ がこの2つのベクトルの両方に直交する」と読み替えられる。これがそれぞれ $\mathbf{n}\cdot(1,2,1)=a+2b+c=0$，$\mathbf{n}\cdot(2,-1,0)=2a-b=0$ という式の正体。つまりこの問題は「2つのベクトルの両方に直交するベクトルを求めよ」という空間ベクトルの幾何の問題そのものに他ならない。</p>
+      </div>
+      <p><strong>別解（外積を使う）：</strong>上の気づきを使えば，$\mathbf{n}$ は外積として即座に計算できる。</p>
+      $$(1,2,1)\times(2,-1,0) = \bigl(2\cdot0-1\cdot(-1),\; 1\cdot2-1\cdot0,\; 1\cdot(-1)-2\cdot2\bigr) = (1,\,2,\,-5)$$
+      <p>これは連立方程式を解いて得た $(a,b,c)=(1,2,-5)$ と完全に一致する。外積は定義からして与えられた2つのベクトルの両方に直交するベクトルを作る演算なので，この問題（$\mathbb{R}^3$ で2次元の核を指定する）に対しては連立方程式を解くよりも速い。ただし外積は $\mathbb{R}^3$ 特有の演算なので，$\mathbb{R}^4$ 以上や核の次元が異なる設定では，連立方程式による解法（または一般論）に戻る必要がある。</p>
+      <p><strong>よくある間違い：</strong>①$f=0$（零写像）を答えにしてしまう（核が全空間 $\mathbb{R}^3$ になり条件を満たさない——問題の要求は核が<em>ちょうど</em>この2次元部分空間になることなので，$f\ne0$ を確認する必要がある），②連立方程式を解いた後，得られた $(a,b,c)$ が本当に与えられた2つのベクトルと直交しているか検算を省略する，③外積の成分の符号・順序を間違える（外積は循環的な順序を守らないと符号が反転する）。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 逆算型の問題への向き合い方</div>
+        <p>「表現行列を求めよ」という順算の問題に対し，この問題は「先に核（答えの一部）が与えられ，それを満たす写像を作れ」という逆算型。逆算型の問題は，まず「一般形」を仮定してから，与えられた条件を代入して未知数を絞り込む，という共通の型で解ける。この型は今後，双対空間や線形汎関数を扱う際にも繰り返し登場する。</p>
+        <p><strong>一般化：</strong>この問題は本質的には「$\mathbb{R}^n$ の中で，与えられた $(n-1)$ 次元部分空間（超平面）を核とする線形汎関数を1つ求めよ」という一般的な問題の $n=3$ の場合。線形代数の言葉で言えば，$\mathrm{Ker}(f)$ の直交補空間 $\mathrm{Ker}(f)^{\perp}$ が1次元であり，その基底（法線ベクトル）を1つ選ぶことが $f$ を決めることと同値，という双対空間の理論（$\mathrm{Hom}(\mathbb{R}^n,\mathbb{R})\cong(\mathbb{R}^n)^{*}$）の具体例になっている。</p>
+        <p><strong>本番での対応：</strong>「核が指定された $\mathbb{R}^3\to\mathbb{R}$ の写像を作れ」という類題が出たら，(i) 一般形 $ax+by+cz$ を仮定して連立方程式を立てる手順と，(ii) 外積で法線ベクトルを直接求める手順の両方を知っておき，時間に応じて使い分けるとよい（外積の公式を覚えていれば(ii)が圧倒的に速い）。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第1回（表現行列・核と像）を自力で解けるかセルフチェック</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>非標準基底の条件から「$AP=Q \Rightarrow A=QP^{-1}$」を立て，$2\times2$・$3\times3$ どちらでも計算できるか</li>
+          <li>$f^{-1}=f_{A^{-1}}$ の理由を，写像の合成 $=$ 行列の積の性質から説明できるか</li>
+          <li>パラメータ付き行列の行列式を計算し，退化する値を求めた上で Ker・Im の基底を求められるか</li>
+          <li>$\mathrm{Ker}(f)$，$\mathrm{Im}(f)$ が部分空間であることを「零元・線形結合で閉じる」の型で証明できるか</li>
+          <li>$\dim V>\dim W$ ならば単射になり得ないことを，次元定理の不等式から導けるか（逆に $\dim V<\dim W$ なら全射になり得ないことも言えるか）</li>
+          <li>指定された核をもつ線形写像を，「一般形を仮定して条件を代入する」逆算で構成できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html><!-- 「予想問題 番外編（計算問題）— 微分積分学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>予想問題 番外編（計算問題）— 微分積分学①</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="exam-keisan">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="yosou_ch1.html" data-page="過去問/yosou_ch1">第1回</a>
+      <a href="yosou_ch2.html" data-page="過去問/yosou_ch2">第2回</a>
+      <a href="yosou_ch3.html" data-page="過去問/yosou_ch3">第3回</a>
+      <a href="yosou_ch4.html" data-page="過去問/yosou_ch4">第4回</a>
+      <a href="yosou_ch5.html" data-page="過去問/yosou_ch5">第5回</a>
+      <a href="yosou_ch6.html" data-page="過去問/yosou_ch6">第6回</a>
+      <a href="yosou_keisan.html" data-page="過去問/yosou_keisan" class="active">番外編</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>予想問題 番外編</h1>
+  <p class="subtitle">計算問題：テイラー展開・級数判定法の「なぜ使えるか」（全4問）</p>
+</div>
+
+<div class="container">
+
+  <div class="note">
+    <span class="box-label">この番外編について</span>
+    <p>
+      この番外編は、第1回〜第6回で構成される本編24問には含まれない<strong>追加のボーナス問題集</strong>であり、
+      第1回〜第6回と同様に<strong>AI生成のオリジナル問題</strong>であって、実際に出題された試験問題ではない。
+      テーマは「計算手法の妥当性の正当化」――答えの数値そのものより、<strong>「なぜその公式・定理がこの場面で使えるのか」という
+      前提条件の確認</strong>を重視する。ch1.html本文で手厚く扱った「ロピタルの定理の誤用パターン」はここでは扱わず、
+      代わりに<strong>テイラーの剰余項（ラグランジュ形・ペアノ形）の使い分け</strong>、
+      <strong>収束半径の内側と外側の違い</strong>、<strong>級数判定法（ライプニッツの定理）の前提の検証</strong>という
+      3つのテーマに絞って4問を用意した。各問題の模範解答には、結果だけでなく「この手法がここで使える理由」を
+      明示的に述べる一文を必ず含めてある。
+    </p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#k-1">計算問題1　分子・分母を同じ次数まで展開する必要性</a>
+    <a href="#k-2">計算問題2　収束半径の外側でべき級数を代入する誤り</a>
+    <a href="#k-3">計算問題3　ラグランジュの剰余項とペアノの剰余項の使い分け</a>
+    <a href="#k-4">計算問題4　ライプニッツの定理の前提「単調減少」の検証</a>
+  </div>
+
+  <!-- =================== 計算問題1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="k-1">
+    <div class="sec-header">
+      <span class="sec-tag">計算問題 1</span>
+      <span class="diff-badge">難易度 ★★☆☆☆</span>
+      <h2>分子・分母を同じ次数まで展開する必要性</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>次の極限を求めよ。</p>
+        $$\lim_{x\to0}\frac{\tan x-x}{x-\sin x}$$
+        <p>その際、分子・分母をそれぞれ何次まで展開する必要があるか、その理由とともに説明せよ。</p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">🧠 方針・出発点</span>
+        <p>
+          $x\to0$ で分子 $\tan x-x\to0$、分母 $x-\sin x\to0$ なので $0/0$ 型の不定形である。
+          このタイプの問題で最初にやるべきことは、ロピタルの定理をやみくもに何度も適用することではなく、
+          <strong>「分子・分母それぞれについて、最初に非零になる項が何次か」を先に確認すること</strong>である。
+          両者の非零となる最低次数が一致して初めて、比を取ったときに意味のある極限が得られる。
+          次数を先に確認せずに手を動かし始めると、片方だけ高次まで展開して他方を低次で止めてしまう、
+          という典型的な失敗につながる。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（1）— $\tan x$ の展開を用意する</span>
+        <p>
+          $\sin x,\cos x$ のマクローリン展開（ch2.htmlの早見表、<a href="../ch2.html#expansion">../ch2.html#expansion</a>）から
+          $\tan x=\sin x/\cos x$ の展開を求める。$\tan x=x+ax^3+bx^5+\cdots$ とおき、$\cos x$ を掛けると $\sin x$ に一致するはずなので、
+        </p>
+        $$(x+ax^3+bx^5+\cdots)\left(1-\frac{x^2}{2}+\frac{x^4}{24}-\cdots\right)=x-\frac{x^3}{6}+\frac{x^5}{120}-\cdots$$
+        <p>
+          左辺を $x^3$ の係数まで展開すると $a-\dfrac12$、これが右辺の $-\dfrac16$ に等しいので $a=\dfrac13$。
+          同様に $x^5$ の係数を比較すると $b=\dfrac{2}{15}$ が得られる（未定係数法）。よって
+        </p>
+        $$\tan x=x+\frac{x^3}{3}+\frac{2x^5}{15}+O(x^7).$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（2）— 分子・分母それぞれの最低次数を確認する</span>
+        <p>
+          $\tan x-x=\dfrac{x^3}{3}+O(x^5)$、一方 $\sin x=x-\dfrac{x^3}{6}+\dfrac{x^5}{120}-\cdots$ より
+          $x-\sin x=\dfrac{x^3}{6}+O(x^5)$。<strong>分子・分母とも、$x^1$ の項（$x-x=0$、$x-x=0$）は消えており、
+          最初に非零になるのはちょうど $x^3$ の項</strong>である。ここまでで「$x^3$ の係数さえ分かれば比の極限が確定する」
+          ことが判明する——これが本問で $x^3$ まで（両方とも同じ次数まで）展開すればよい理由である。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（3）— 比を取って極限を求める</span>
+        $$\frac{\tan x-x}{x-\sin x}=\frac{\dfrac{x^3}{3}+O(x^5)}{\dfrac{x^3}{6}+O(x^5)}=\frac{\dfrac13+O(x^2)}{\dfrac16+O(x^2)}\xrightarrow[x\to0]{}\frac{1/3}{1/6}=2.$$
+        <p>よって $\displaystyle\lim_{x\to0}\frac{\tan x-x}{x-\sin x}=2$。</p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">⚠️ なぜ「同じ次数まで」でなければならないか／よくある間違い</span>
+        <p>
+          分子・分母どちらも「最初に非零になる次数」を確認してから、<strong>両方をその次数まで（同じ次数まで）</strong>
+          展開するのが鉄則である。もし本問で分子だけ $x^3$ まで展開し、分母を（不注意で）$x^1$ の項で止めてしまったら、
+          分母は $x-\sin x\approx x-x=0$ という何の情報も持たない式と比較することになり、比が定まらず誤答してしまう。
+          「次数が揃って初めて、意味のある比較ができる」という点が本問の核心である。
+        </p>
+        <p>
+          <strong>ロピタルの定理で解く場合との比較：</strong>この極限をロピタルの定理だけで解こうとすると、
+          1回微分しても $\dfrac{\sec^2x-1}{1-\cos x}$ は $x=0$ でなお $0/0$ 型のままであり、
+          さらに2回（合計3回）連続で適用する必要がある。しかも<strong>各回ごとに「本当に $0/0$ 型になっているか」を
+          確認する手間</strong>がかかる。テイラー展開による方法は、最初に必要な次数さえ見極めてしまえば
+          一度の計算で済むため、こうした高次の不定形では見通しが良い。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 計算問題2 =================== -->
+  <div class="section" id="k-2">
+    <div class="sec-header">
+      <span class="sec-tag">計算問題 2</span>
+      <span class="diff-badge">難易度 ★★★☆☆</span>
+      <h2>収束半径の外側でべき級数を代入する誤り</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $\log(1+x)$ のマクローリン級数（ch4.html既出、<a href="../ch4.html#log">../ch4.html#log</a>、$|x|<1$ で収束）に
+          形式的に $x=2$ を代入して
+        </p>
+        $$\lim_{x\to2}\frac{\log(1+x)-\log3}{x-2}$$
+        <p>
+          を求めようとするのがなぜ誤りか、収束半径の観点から説明せよ。また、正しい方法でこの極限を求めよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">🧠 方針・出発点</span>
+        <p>
+          本問は本番外編で最も重要な「知識確認」問題である。$\log(1+x)=\displaystyle\sum_{k=1}^\infty\dfrac{(-1)^{k-1}}kx^k$ という
+          等式は、無限級数として成り立つ範囲――収束半径の内側――でしか意味を持たない。$x=2$ がその範囲の外にあるかどうかを
+          まず定理4.2（<a href="../ch4.html#radius">../ch4.html#radius</a>）に基づいて確認することが出発点になる。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（1）— 収束半径を確認する</span>
+        <p>
+          $\log(1+x)=\displaystyle\sum_{k=1}^\infty\dfrac{(-1)^{k-1}}kx^k$ の収束半径は、命題4.3形の比判定法により
+          $R=\displaystyle\lim_{k\to\infty}\left|\dfrac{1/k}{1/(k+1)}\right|=\lim_{k\to\infty}\dfrac{k+1}{k}=1$。
+          定理4.2（<a href="../ch4.html#radius">../ch4.html#radius</a>）よりこの級数は $|x|<1$ でのみ絶対収束し、
+          $|x|>1$ では発散する（境界 $x=1$ では条件収束することは既出の例4.3で確認済み）。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（2）— $x=2$ の代入がなぜ無効か</span>
+        <p>
+          $x=2$ は $|x|=2>1=R$ であり、収束半径の<strong>外側</strong>にある。よってこの無限級数はそもそも $x=2$ において
+          発散しており、和として意味を持たない。<strong>「収束しない無限級数に具体的な数値を代入する」という操作自体が、
+          そもそも数学的に無効</strong>である——これが誤りの本質であり、単に「代入した値が不正確」なのではなく、
+          代入先の式自体が存在しないという点を明確にする必要がある。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（3）— 正しい方法：微分係数の定義／ロピタルの定理</span>
+        <p>
+          この極限は、実は $f(x)=\log(1+x)$ の $x=2$ における微分係数の定義そのものである：
+        </p>
+        $$\lim_{x\to2}\frac{f(x)-f(2)}{x-2}=f'(2).$$
+        <p>
+          $f'(x)=\dfrac1{1+x}$ なので $f'(2)=\dfrac13$。あるいは、これは $\dfrac00$ 型の不定形
+          （分子 $\log3-\log3=0$、分母 $2-2=0$）としてロピタルの定理を直接適用してもよい。
+          <strong>ここでロピタルが使える理由</strong>：$f(x)=\log(1+x)$、$g(x)=x-2$ はともに $x=2$ の近傍で微分可能であり、
+          $g'(x)=1\ne0$（Ch.1・定理1.2の4条件をすべて満たす）。分子・分母をそれぞれ微分すると
+        </p>
+        $$\lim_{x\to2}\frac{\dfrac{1}{1+x}}{1}=\frac{1}{1+2}=\frac13.$$
+        <p>よって極限は $\dfrac13$ である。</p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">⚠️ テイラーの定理とテイラー級数の違い（一般的な教訓）</span>
+        <p>
+          本問で最も強調したいのは、<strong>「テイラーの定理（有限次＋剰余項）」と「テイラー級数（無限和として関数の値そのものと
+          等しいと主張すること）」の違い</strong>である。
+        </p>
+        <ul>
+          <li>
+            <strong>テイラーの定理</strong>（定理2.2・定理2.5、<a href="../ch2.html#taylor-n">../ch2.html#taylor-n</a>／
+            <a href="../ch2.html#peano">../ch2.html#peano</a>）は「関数がその点の近傍で十分滑らかでありさえすれば、
+            評価点がどこであっても」局所的な評価に使ってよい――これは<strong>有限次の多項式＋剰余項</strong>という主張であり、
+            級数の収束・発散とは無関係である。
+          </li>
+          <li>
+            <strong>テイラー級数</strong>（無限級数として関数の値と等しいと主張すること）は、収束半径の<strong>内部でしか
+            正当化されない</strong>。展開の中心（本問では $x=0$）から離れた点での関数の値を知りたいときは、
+            その点を新しい中心として微分係数を直接使う（＝ロピタルや微分の定義に戻る）べきであり、
+            もとの中心のまわりの無限級数に外側の値を放り込んではいけない。
+          </li>
+        </ul>
+        <p>
+          既出の例4.3（<a href="../ch4.html#log">../ch4.html#log</a>、$\log(1+x)$ の $x=1$ での境界挙動）とも対比しておくと理解が深まる。
+          例4.3の $x=1$ は<strong>境界＝収束半径のちょうど際</strong>（ライプニッツの定理により条件収束する）だったのに対し、
+          本問の $x=2$ は<strong>境界のさらに外側</strong>（収束半径の外）であり、級数はそこで発散する。
+          「境界」と「境界の外側」は、扱いがまったく異なることに注意したい。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 計算問題3 =================== -->
+  <div class="section" id="k-3">
+    <div class="sec-header">
+      <span class="sec-tag">計算問題 3</span>
+      <span class="diff-badge">難易度 ★★★★☆</span>
+      <h2>ラグランジュの剰余項とペアノの剰余項の使い分け</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>次の2つの小問に答えよ。</p>
+        <p>(1) $\displaystyle\lim_{x\to0}\frac{e^x-1-x-x^2/2}{x^3}$ を求めよ。</p>
+        <p>(2) $\cos(0.3)$ を2次のマクローリン多項式 $1-\dfrac{x^2}{2}$ で近似したときの誤差の数値的な上界を求めよ。</p>
+        <p>
+          (1)にはペアノの剰余項（定理2.5）、(2)にはラグランジュの剰余項（定理2.2）がそれぞれ適している理由を説明せよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">🧠 方針・出発点</span>
+        <p>
+          ch2.html本文（<a href="../ch2.html#peano">../ch2.html#peano</a>）で述べたとおり、ラグランジュの剰余項は
+          「$\xi$ の位置さえ分かれば誤差の<strong>具体的な数値評価</strong>ができる」強い仮定（区間全体での高階微分可能性）を要求し、
+          ペアノの剰余項は「剰余項が $(x-a)^n$ よりどれだけ速く $0$ に近づくか」という<strong>漸近的な事実</strong>だけで済む
+          弱い仮定（1点での高階微分可能性）で成立する。<strong>「目的が極限の値なのか、数値誤差の上界なのか」</strong>で
+          選ぶべき定理が変わる、という実践的な判断基準をこの2つの小問で確認する。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（1）— 小問(1)：ペアノの剰余項で十分</span>
+        <p>
+          $e^x=1+x+\dfrac{x^2}{2}+\dfrac{x^3}{6}+\cdots$（ch2.htmlの早見表、<a href="../ch2.html#expansion">../ch2.html#expansion</a>）より、
+          定理2.5（ペアノの剰余項、<a href="../ch2.html#peano">../ch2.html#peano</a>）の主張どおり
+        </p>
+        $$e^x-1-x-\frac{x^2}{2}=\frac{x^3}{6}+o(x^3)\quad(x\to0).$$
+        <p>
+          <strong>ここでペアノの剰余項が使える理由</strong>：本問の目的は「$x\to0$ の極限の値」だけであり、
+          剰余項が $x^3$ で割ると消えるという漸近的な事実（$o(x^3)$）さえ分かれば十分だからである。
+          $x^3$ で割ると
+        </p>
+        $$\frac{e^x-1-x-x^2/2}{x^3}=\frac16+\frac{o(x^3)}{x^3}\xrightarrow[x\to0]{}\frac16.$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（2）— 小問(2)：ラグランジュの剰余項でなければならない</span>
+        <p>
+          $f(x)=\cos x$ は偶関数なので3次の項の係数は $0$（次に非零になるのは4次）。よって2次の多項式 $1-x^2/2$ による
+          近似の誤差評価には、4次のラグランジュの剰余項（定理2.2、<a href="../ch2.html#taylor-n">../ch2.html#taylor-n</a>）
+        </p>
+        $$R_4(x)=\frac{f^{(4)}(\xi)}{4!}x^4\qquad(\xi\text{ は }0\text{ と }x\text{ の間})$$
+        <p>
+          を使う。<strong>ここでラグランジュの剰余項が使える理由</strong>：本問の目的は「$x=0.3$ という具体的な点での
+          数値誤差の上界」であり、これには $\xi$ の動く範囲全体で導関数の絶対値を一様に評価できる強い仮定
+          （区間全体での4階微分可能性）が必要だからである。$f^{(4)}(x)=\cos x$ なので $|f^{(4)}(\xi)|\le1$（すべての $\xi$ で）。よって
+        </p>
+        $$|R_4(0.3)|\le\frac{(0.3)^4}{4!}=\frac{0.0081}{24}=0.0003375.$$
+        <p>したがって誤差の上界は $0.0003375$ である。</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">📝 使い分けのまとめ</span>
+        <p>
+          小問(1)は「極限の値」が目的なのでペアノの剰余項（弱い仮定・漸近挙動のみ）で十分、
+          小問(2)は「数値誤差の上界」が目的なのでラグランジュの剰余項（強い仮定・具体的な数値評価が可能）が必要——
+          この対応関係が、ch2.html本文で述べた「誤差の大きさを知りたいときと収束の速さだけ知りたいときの違い」
+          （<a href="../ch2.html#peano">../ch2.html#peano</a>）の最も実践的な現れ方である。
+        </p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">⚠️ よくある間違い</span>
+        <p>
+          小問(1)のような極限問題に対して、律儀にラグランジュの剰余項を持ち出し $\xi$ の存在を主張してしまう受験者がいるが、
+          これは誤りではないものの<strong>遠回り</strong>である（$\xi$ の位置を特定する必要が本来ないのに、
+          わざわざ強い仮定のもとで議論を複雑にしてしまっている）。
+          逆に小問(2)のような数値誤差評価に対してペアノの剰余項（$o(x^4)$）だけを使うと、
+          「$x^4$ で割ると $0$ に収束する」ことしか分からず、<strong>定数不明の「小さい」としか言えず、
+          具体的な数値上界が出せない</strong>——これは単なる遠回りではなく、そもそも問題の要求に答えられていない誤りになる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 計算問題4 =================== -->
+  <div class="section" id="k-4">
+    <div class="sec-header">
+      <span class="sec-tag">計算問題 4</span>
+      <span class="diff-badge">難易度 ★★★★★</span>
+      <h2>ライプニッツの定理の前提「単調減少」の検証</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $\displaystyle\sum_{n=1}^\infty(-1)^n\frac{n}{n^2+1}$ にライプニッツの定理（定理3.10、
+          <a href="../ch3.html#alternating">../ch3.html#alternating</a>）を適用したい。数列
+          $a_n=\dfrac{n}{n^2+1}$ が単調減少であることを検証せよ。その際、連続変数 $x$ に対する関数
+          $\varphi(x)=\dfrac{x}{x^2+1}$ の増減と、整数点 $n=1,2,3,\dots$ における数列としての増減が
+          食い違わないかを確認すること。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">🧠 方針・出発点</span>
+        <p>
+          ライプニッツの定理（定理3.10）を使うには「$\{a_n\}$ が単調減少かつ $a_n\to0$」を確認する必要がある。
+          この確認を「$\varphi(x)=a_n$ を与える連続関数とみなして $\varphi'(x)$ の符号を調べる」という方法で
+          済ませたくなるが、<strong>連続関数としての増減と、整数点だけをサンプリングした数列としての増減は
+          一般には一致しない</strong>。この落とし穴を実際に確認するのが本問の目的である。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（1）— 連続関数として微分する</span>
+        <p>$\varphi(x)=\dfrac{x}{x^2+1}$ とおくと、商の微分公式より</p>
+        $$\varphi'(x)=\frac{(x^2+1)-x\cdot2x}{(x^2+1)^2}=\frac{1-x^2}{(x^2+1)^2}.$$
+        <p>
+          $\varphi'(x)>0$（増加）は $0<x<1$ のとき、$\varphi'(x)<0$（減少）は $x>1$ のとき、$\varphi'(1)=0$
+          （$x=1$ が最大点）。つまり<strong>連続関数として見ると $\varphi$ は $(0,1)$ で増加し $(1,\infty)$ で減少する
+          ――単調減少ではない</strong>。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（2）— 整数点だけを直接比較する</span>
+        <p>
+          しかし数列 $a_n=\varphi(n)$ を考える際に必要なのは<strong>整数点 $n=1,2,3,\dots$ での値のみ</strong>であり、
+          その定義域はちょうど $\varphi$ の最大点 $x=1$ 以降（$n\ge1$）にある。実際に値を計算すると
+        </p>
+        $$a_1=\varphi(1)=\frac12=0.5,\quad a_2=\varphi(2)=\frac25=0.4,\quad a_3=\varphi(3)=\frac3{10}=0.3,\quad a_4=\varphi(4)=\frac4{17}\approx0.235,$$
+        <p>
+          と確かに単調に減少している。<strong>ここでライプニッツの定理が使える理由</strong>：
+          $\varphi$ の最大点がちょうど $x=1$（整数）にあり、それ以降（$x\ge1$）で $\varphi$ が単調減少になるため、
+          $n\ge1$ の整数点をサンプリングする数列 $\{a_n\}_{n\ge1}$ はすべて「最大点以降」の値だけを拾っており、
+          結果として単調減少数列になっている——これは連続関数の増減表を丁寧に確認した上で、
+          数列の開始点がその最大点以降にあることまで検証して初めて言える事実である。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（3）— 結論</span>
+        <p>
+          以上より $a_n=\dfrac{n}{n^2+1}$ は単調減少かつ $a_n=\dfrac{n}{n^2+1}\to0$（$n\to\infty$、分子は1次・分母は2次なので）。
+          よって定理3.10（ライプニッツの定理）の前提をすべて満たすので、級数 $\displaystyle\sum_{n=1}^\infty(-1)^n\dfrac{n}{n^2+1}$ は収束する。
+        </p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">⚠️ 一般的な教訓とよくある間違い</span>
+        <p>
+          「連続関数としての増減」と「整数点だけを拾った数列としての増減」は<strong>一般には一致しない</strong>。
+          連続関数が途中で増加してから減少する場合、整数点のサンプリングのタイミング次第で数列としては
+          単調に見えたり見えなかったりする。本問ではたまたま最大点 $x=1$ がちょうど整数であり、
+          かつ数列の開始点 $n=1$ がその最大点以降だったため、数列としては単調減少になった。
+          <strong>もし最大点が例えば $x=1.5$ のような非整数だったら</strong>、$n=1$ の値と $n=2$ の値の大小関係を
+          別途丁寧に比較する必要がある。
+        </p>
+        <p>
+          よくある間違いは次の2つの、どちらも早合点による誤りである：
+        </p>
+        <ul>
+          <li>
+            連続関数 $\varphi(x)$ が $(0,1)$ で増加することだけを見て、「ライプニッツの定理は使えない」と
+            誤って結論してしまう（実際には整数点だけを見れば単調減少になっている）。
+          </li>
+          <li>
+            逆に「増加区間があるから危ない」と決めつけて、実際には単調減少になっている数列への適用を
+            諦めてしまうのも同様の誤りである。
+          </li>
+        </ul>
+        <p>
+          どちらの場合も、<strong>数列として定義域の整数点だけを直接比較評価するのが確実な方法</strong>である
+          ことを強調したい。連続関数の増減表はあくまで見当をつけるための補助であり、最終的な検証は
+          整数点での値の比較に戻って行う必要がある。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+    <summary>番外編を自力で解けるかセルフチェック</summary>
+    <ul class="checklist">
+      <li>分子・分母を含む $0/0$ 型の極限で、両者の「最初に非零になる次数」を先に確認し、同じ次数まで展開してから比を取れるか。</li>
+      <li>べき級数の収束半径の内側と外側の違いを理解し、収束半径の外側の点を級数に代入する操作がなぜ無効か説明できるか（テイラーの定理とテイラー級数の違いを含めて）。</li>
+      <li>「目的が極限の値なのか、数値誤差の上界なのか」に応じて、ペアノの剰余項とラグランジュの剰余項を使い分けられるか。</li>
+      <li>級数判定法（ライプニッツの定理など）を適用する前に、その前提条件（単調減少など）を、連続関数の増減表だけに頼らず整数点で直接検証できるか。</li>
+    </ul>
+  </details>
+
+  <!-- ナビゲーション -->
+  <div style="display:flex; justify-content:space-between; margin-top:2rem; padding:0 .5rem;">
+    <a href="yosou_ch6.html" style="color:var(--accent); text-decoration:none; font-weight:700;">← 予想問題 第6回</a>
+    <span></span>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

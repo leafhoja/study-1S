@@ -1,0 +1,216 @@
+<!DOCTYPE html><!-- 「05 インターネット通信 | 神シケプリ | 情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>05 インターネット通信 | 神シケプリ | 情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kami-05">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">神シケプリ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>神シケプリ 05 — インターネット通信</h1>
+  <p class="subtitle">DNS・IPアドレス・パケットとTCP/IP階層モデル</p>
+  <p class="meta">教科書対応箇所 pp.79-82　pp.86-91</p>
+</div>
+
+<div class="container">
+
+  <div class="def">
+    <span class="box-label">定義 — DNSサーバとIPアドレス</span>
+    <p>
+      IPアドレスは32ビットの数値で、コンピュータの住所にあたる。URLに含まれるホスト名
+      （例：www.u-tokyo.ac.jp）は人間が扱いやすいように付けられた名前であり、そのままでは
+      通信に使えない。ホスト名からIPアドレスを取得するには、<strong>DNS（Domain Name System）</strong>
+      サーバに問い合わせる必要がある。一度取得したIPアドレスは（毎回問い合わせる手間を省くため）
+      一定期間、手元にキャッシュされる。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — パケットとプロトコル</span>
+    <p>
+      送りたいデータは、そのまま一度に送られるのではなく、<strong>パケット</strong>という一定の
+      大きさの塊に分割され、それぞれに宛先などの制御情報を付けて送り出される。このような通信の
+      約束事を<strong>プロトコル</strong>という。代表的なプロトコルには次のようなものがある。
+    </p>
+    <ul style="margin:.4rem 0 .8rem 1.2rem;">
+      <li><strong>HTTP</strong>：WEBブラウザとWEBサーバの間で、ページの要求・応答をやり取りするためのプロトコル。</li>
+      <li><strong>TCP</strong>：送信元・宛先のアプリケーションをポート番号で識別し、シーケンス番号でパケットの順序を管理し、確認応答によって届いたかどうかを確かめる、確実な通信を実現するプロトコル。似た役割の<strong>UDP</strong>は、確認応答や再送要求を行わない（その分オーバーヘッドが小さい）版にあたる。</li>
+      <li><strong>IP</strong>：パケットを実際にネットワーク上で送り届ける、データの送信方法そのものを定めるプロトコル。</li>
+    </ul>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — TCP/IP階層モデル</span>
+    <p>
+      インターネットの通信は、次のような階層構造を持つプロトコル群によって実現されている。
+      上位の層は、その1つ下の層が提供する機能を使って実現される。
+    </p>
+    <div class="mathblock">
+      アプリケーション層（HTTP など）<br>
+      ↓<br>
+      トランスポート層（TCP，UDP）<br>
+      ↓<br>
+      インターネット層（IP）<br>
+      ↓<br>
+      ネットワークインターフェース層（Ethernet など）
+    </div>
+    <p>
+      たとえばWEB閲覧はHTTPで行われるが、その通信はTCPによって（接続の確立・パケットへの分割・
+      順序の管理を通じて）実現され、TCPによる通信はさらにIPによって（宛先までパケットを実際に
+      届けることで）実現され、IPによる通信は下位のネットワーク媒体（イーサネットなど）上での
+      通信によって実現される、という入れ子構造になっている。
+    </p>
+  </div>
+
+  <div class="note">
+    <span class="box-label">出題対策のポイント</span>
+    <p>用語をある程度理解してしまえばそこまで難しくない分野。頑張って言葉を覚えることが大切。</p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">第1問（2011年度共通問題1-1[抜粋]）</a>
+    <a href="#q2">第2問（2014年度共通問題1-1）</a>
+  </div>
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">第1問</div><h2>2011年度共通問題1-1[抜粋] — 誤りの指摘と用語を用いた説明</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          以下の各小問に解答せよ．まず，与えられている例文に含まれる誤りの箇所を簡潔に指摘せよ．次に，用語から二つ以上用いて，主題に関して説明する文章を作成せよ．説明の文章の量は50〜150字を目安とする．
+        </p>
+        <p>
+          (1) [主題] インターネットを通じて電子メールが届く仕組み<br>
+          　　[例文] 送信者が電子メールを書く時に用いたコンピュータと受信者がメールを読む時に用いたコンピュータが，通信ケーブルで直接に結ばれている必要がある．<br>
+          　　[用語] DNS，パケット，ルータ
+        </p>
+        <p>
+          (3) [主題] インターネットと通信の所要時間<br>
+          　　[例文] 自宅のインターネット設備を整えた記念に，1メガバイトのファイルをインターネットからダウンロードした際には $a$ 秒かかった．従って今後10メガバイトのファイルをダウンロードする際には $a\times10$ 秒より長くかかることはないと結論づけられる．<br>
+          　　[用語] サーバ，DNS，パケット，ルータ
+        </p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            <strong>(1) 誤りの指摘</strong>：「通信ケーブルで直接に結ばれている必要がある」の部分。
+          </p>
+          <p>
+            <strong>誤りの理由</strong>：インターネットでは、送信側と受信側のコンピュータが直接接続されていなくても、中継機器を経由して通信できる。
+          </p>
+          <p>
+            <strong>説明文</strong>（DNS・パケット・ルータを使用、約100字）：
+            「送信側のメールサーバは、DNSを使って宛先のメールサーバを調べる。メールのデータはパケットに分割され、複数のルータを経由して宛先のメールサーバへ届き、受信者のコンピュータはそこからメールを受け取る。」
+          </p>
+          <p>
+            <strong>(3) 誤りの指摘</strong>：「$a\times10$ 秒より長くかかることはないと結論づけられる」の部分。
+          </p>
+          <p>
+            <strong>誤りの理由</strong>：通信速度は一定ではなく、回線の混雑などによって変化するため、ファイルの大きさだけから所要時間の上限を決めることはできない。
+          </p>
+          <p>
+            <strong>説明文</strong>（サーバ・パケット・ルータを使用、約110字）：
+            「ファイルはサーバからパケットに分割して送られ、複数のルータを経由して利用者に届く。サーバの負荷、回線の混雑、パケットが通る経路などは通信のたびに変わり、伝送速度も一定ではないため、データ量と所要時間は単純には比例しない。」
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) 「通信ケーブルで直接に結ばれている必要がある」の部分が誤り。　(3) 「$a\times10$ 秒より長くかかることはないと結論づけられる」の部分が誤り。</div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">第2問</div><h2>2014年度共通問題1-1 — 階層構造の穴埋め</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>次の文章を読んで，<span class="blank">ア</span>〜<span class="blank">コ</span>に当てはまる言葉を選択肢から選べ．</p>
+        <p>
+          　インターネットは小規模なネットワークが互いに接続した集合体である．ネットワーク同士を接続する中継機器を<span class="blank">ア</span>と呼ぶ．インターネットの通信では，相手先のコンピュータを特定するために32ビットの数値である<span class="blank">イ</span>を用い，そのコンピュータ内のアプリケーションを識別するために<span class="blank">ウ</span>という16ビットの数値を用いる．<span class="blank">イ</span>はただの数値であり人間には扱いにくいため，ユーザが目にする部分では，たとえばwww.u-tokyo.ac.jpのような<span class="blank">エ</span>を代わりに用いる．このような<span class="blank">イ</span>と<span class="blank">エ</span>を関連づける仕組みは<span class="blank">オ</span>と呼ばれる．
+        </p>
+        <p>
+          　インターネット内の通信は階層構造を持つプロトコルに則って行われる．たとえば，ウェブを閲覧する場合には，<span class="blank">カ</span>というプロトコルを用いてアプリケーション同士が通信する．この通信は1つ下の階層のプロトコルである<span class="blank">キ</span>によって実現される．<span class="blank">キ</span>は，送信元と受信先の間の接続を確立し，データを分割して送信する．分割されたデータは<span class="blank">ク</span>と呼ばれる．<span class="blank">ク</span>を宛先まで届ける部分は，その下の層のプロトコルである<span class="blank">ケ</span>が行なう．<span class="blank">ケ</span>は，ネットワーク間の通信を担当し，次にどの<span class="blank">ア</span>にデータを送るかを決定する．ネットワーク内の通信は媒体によって異なるが，たとえばイーサネットでは，各コンピュータを識別するアドレスとして<span class="blank">コ</span>と呼ばれる48ビットの数値を用いた通信を行なう．受信先が全ての<span class="blank">ク</span>を受け取ったら，<span class="blank">キ</span>によって元データに復元される．
+        </p>
+      </div>
+      <div class="note">
+        <span class="box-label">選択肢</span>
+        <p>サーバ，ルータ，ICANN，HTTP，HTML，DNS，SMTP，IP，TCP，IPアドレス，MACアドレス，ホスト名，シーケンス番号，ポート番号，パケット，トレーラ，PKI，アカウント</p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>
+            ネットワーク同士をつなぐ中継機器は<span class="blank">ア=ルータ</span>。相手先のコンピュータを特定する32ビットの数値なので<span class="blank">イ=IPアドレス</span>（IPv4は32ビット）。同じコンピュータ内のアプリケーションを識別する16ビットの数値は<span class="blank">ウ=ポート番号</span>。
+          </p>
+          <p>
+            人間向けの、www.u-tokyo.ac.jpのような表記は<span class="blank">エ=ホスト名</span>。IPアドレスとホスト名を関連づける仕組みは<span class="blank">オ=DNS</span>。
+          </p>
+          <p>
+            ウェブ閲覧のアプリケーション層プロトコルは<span class="blank">カ=HTTP</span>。その1つ下の層で接続の確立・分割送信を担うのは<span class="blank">キ=TCP</span>。分割されたデータの単位は<span class="blank">ク=パケット</span>。パケットを宛先まで届けるさらに下の層のプロトコルは<span class="blank">ケ=IP</span>。イーサネットで各コンピュータを識別する48ビットの数値は<span class="blank">コ=MACアドレス</span>。
+          </p>
+          <p>
+            全体として、階層の並びは「HTTP（アプリケーション層）→TCP（トランスポート層）→IP（インターネット層）→イーサネット（ネットワークインターフェース層）」という定義3の階層モデルそのままになっている。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>ア=ルータ　イ=IPアドレス　ウ=ポート番号　エ=ホスト名　オ=DNS　カ=HTTP　キ=TCP　ク=パケット　ケ=IP　コ=MACアドレス</div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="box-label">背景知識 — 出題形式は違っても問われているモデルは同じ</span>
+    <p>
+      第1問と第2問は出題形式こそ対照的だが（誤りの指摘・自由記述 vs. 構造化された穴埋め）、
+      問われている内容の骨格は共通している。すなわち、①ホスト名とIPアドレスをDNSが結びつけること、
+      ②データはパケットに分割されルータを経由してバケツリレー式に届くこと、③その通信全体が
+      HTTP・TCP・IPという階層構造を持つプロトコル群によって実現されていること、の3点である。
+      第1問はこのモデルを踏まえて「なぜ直接ケーブルで結ばれている必要がないのか」「なぜ通信時間が
+      単純比例しないのか」を説明させる応用問題であり、第2問はモデルそのものの用語・階層順序を
+      正確に再現できるかを問う基礎問題である。どちらも結局は同じ1枚の図（DNS問い合わせ→
+      パケットのルータ経由転送→TCP/IP階層モデル）を頭に描ければ解ける。
+    </p>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="04-ネットワーク.html">← 04 ネットワーク</a>
+    <a href="06-安全な通信.html">06 安全な通信へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

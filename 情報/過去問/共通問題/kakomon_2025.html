@@ -1,0 +1,600 @@
+<!DOCTYPE html><!-- 「2025年度 | 情報 共通問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2025年度 | 情報 共通問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kyotsu-2025">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>共通問題 2025年度</h1>
+  <p class="subtitle">7月29日（火）3限・60分｜大問3（うち大問3は選択）</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（GUI・コンピュータ構成・DRM）</a>
+    <a href="#q2">大問2（親子関係の有向グラフ）</a>
+    <a href="#q3">大問3（選択：ネット選挙 / 符号化とオートマトン）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header">
+      <div class="sec-tag">大問 1</div>
+      <h2>GUIのデザイン論・コンピュータの構成・DRM</h2>
+    </div>
+    <div class="sec-body">
+
+
+
+      <h3>問1 — ピクトグラムとGUIデザイン論</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          現代のコンピュータのユーザインタフェースでは<span class="blank">A</span>が採用されており、ピクトグラムによる情報表現をいたる所で見いだすことができる。たとえば図1は、ファイル削除に使われるアイコンであり、「ファイルを削除する」という操作を「ごみを捨てる」という行為で表現しているため<span class="blank">B</span>を用いた表現であるといえる。道路標識も多くのピクトグラムが採用されており、パターン表現的側面と、記号表現的側面を効果的に使い分けているといえる。図2の標識は「動物が飛び出すおそれあり」を示すものであり、自然言語を解さなくても現実世界との対応づけができれば意味を理解できるため、パターン表現の側面が強い。また、動物一般を鹿のピクトグラムで表現していることから<span class="blank">C</span>と呼ばれる表現技法を含んでいるといえる。一方、記号表現の側面が強いピクトグラムを用いて情報を伝達する場合には、記号の恣意性に注意しながらデザインする必要がある。
+        </p>
+        <p>(1) 上の文章の空欄を、語群から最も適切な語を選んで埋めよ。但し、同じ記号の空欄には同じ語が入るものとし、同じ語を二度使ってはならない。（語群：明喩・隠喩・提喩・グラフィカルモデル・デスクトップメタファ・アフォーダンス理論）</p>
+        <div class="diagram">
+          <img src="img/2025/fig1-trash.png" alt="図1：ファイル削除アイコン（ごみ箱のピクトグラム）" style="max-width:220px;width:100%;height:auto;">
+          <img src="img/2025/fig2-deer-sign.png" alt="図2：「動物が飛び出すおそれあり」の道路標識（鹿のピクトグラム）" style="max-width:220px;width:100%;height:auto;">
+          <div class="diagram-cap">図1：ファイル削除アイコン／図2：「動物が飛び出すおそれあり」の道路標識（原本PDFより切り出し）</div>
+        </div>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>語群は「明喩・隠喩・提喩・グラフィカルモデル・デスクトップメタファ・アフォーダンス理論」の6語で、実際に使うのは3語だけ（残り3語はダミー）。</p>
+          <p><span class="blank">A = デスクトップメタファ</span>　ファイルやフォルダ、ごみ箱といった、机の上の物理的な整理整頓の比喩でコンピュータのUI全体を組み立てる考え方。</p>
+          <p><span class="blank">B = 隠喩（メタファー）</span>　「削除」という抽象的な操作を、「ごみを捨てる」という具体的な別の行為になぞらえて表現している。「〜のようだ」という形を明示しない、暗黙の比喩。</p>
+          <p><span class="blank">C = 提喩（シネクドキ）</span>　「動物一般」という広いカテゴリを、「鹿」という一つの具体例（種）で代表させて表現する技法。逆に、部分で全体を指す（またはその逆）のが提喩の特徴。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          A=デスクトップメタファ、B=隠喩、C=提喩
+        </div>
+        <div class="note">
+          <span class="box-label">語群の全用語</span>
+          <p><strong>明喩</strong>：「〜のようだ」など、たとえることを明示する比喩。／<strong>隠喩</strong>：たとえの標識を使わず、あるものを別のものとして表す比喩。／<strong>提喩</strong>：種で類を、部分で全体を表すなど、包含関係を利用する表現。／<strong>グラフィカルモデル</strong>：対象間の関係や確率的依存関係をグラフで表すモデル。／<strong>デスクトップメタファ</strong>：ファイル・フォルダ・ごみ箱など、机上の仕事になぞらえてGUIを構成する考え方。／<strong>アフォーダンス理論</strong>：環境や物の性質が行為者にどのような行為の可能性を与えるかを捉える理論。</p>
+        </div>
+      </details>
+
+      <h4>(2) より記号的／よりパターン的な表現例</h4>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>「動物が飛び出すおそれあり」を表現するための、より記号表現的側面が強い表現、あるいはよりパターン表現的側面が強い表現を、具体例を挙げてどちらか一つ説明せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            <strong>より記号表現的な例：</strong>文字だけで「動物注意」あるいは「!」の警告マークのみを表示する標識。動物の見た目を一切模しておらず、意味の対応づけは完全に社会的な取り決め（言語・記号への慣れ）に依存する。
+          </p>
+          <p>
+            <strong>より パターン表現的な例：</strong>実際の鹿の写真、あるいは鹿が道路に飛び出す瞬間を写実的に描いたイラストを掲げる。現実の見た目そのものに近いほどパターン表現（似せる表現）としての度合いが強くなる。図2のピクトグラムは、この2つの中間（写実ではないが動物のシルエットという形で現実に似せている）に位置する。
+          </p>
+        </div>
+      </details>
+
+      <h4>(3) 記号の恣意性</h4>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>記号の恣意性とはどういうことか、記号の恣意性に起因して情報の伝達に混乱が生じうる例を示しながら説明せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            記号の恣意性とは、記号の形（見た目・音・文字列など）と、それが指し示す意味との間に、必然的・論理的なつながりがなく、単に社会的な取り決め（コンベンション）によって結びついているにすぎない、という性質のことである。
+          </p>
+          <p>
+            <strong>混乱の例：</strong>非常口を示す緑色のピクトグラム（走る人のマーク）は日本発祥の国際規格として広く普及しているが、これを知らない文化圏の人にとっては色や図形だけから「非常口」という意味を論理的に導き出すことはできない。同様に、ゴミ箱アイコンが「削除」を意味することも、その取り決めを知らなければ「保存」や「移動」だと誤解されうる。記号の対応関係を知らない・異なる文化的背景を持つ受け手には、意図した意味が正しく伝わらず誤解が生じる。
+          </p>
+        </div>
+      </details>
+
+      <h3>問2 — コンピュータの構成</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          プログラム内蔵方式のコンピュータは<span class="blank">A</span>型コンピュータとも呼ばれ、プログラムとデータの両方を<span class="blank">B</span>に格納することに特徴がある。<span class="blank">B</span>に格納されたプログラムに従って計算を進める装置は<span class="blank">C</span>と呼ばれ、この装置は、実際に計算を行う<span class="blank">D</span>と、<span class="blank">D</span>の駆動や<span class="blank">B</span>への読み書きを担う<span class="blank">E</span>から構成される。<span class="blank">D</span>は基本的に、<span class="blank">F</span>に保持されたデータを読み込んで計算を行い、計算結果も<span class="blank">F</span>に書き込む。<span class="blank">F</span>に書き込まれた情報は必要に応じて<span class="blank">B</span>に書き写されるが、その際、書き込み先は<span class="blank">G</span>と呼ばれる数値によって選択される。
+        </p>
+        <p>語群から最も適切な語を選んで埋めよ。同じ記号の空欄には同じ語が入るものとし、同じ語を二度使ってはならない。（語群：Cookie・DAG・DHCP・XOR・アセンブリ・アドレス・インタプリタ・カーネル・シャノン・チューリング・ビット・フォン・ノイマン・マルチタスク・万能機械・中央処理装置・主記憶装置・仮想記憶・出力装置・制御装置・演算レジスタ・演算装置）</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p><span class="blank">A = フォン・ノイマン</span>（プログラム内蔵方式＝フォン・ノイマン型）</p>
+          <p><span class="blank">B = 主記憶装置</span>（プログラムとデータを同じメモリ空間に置く）</p>
+          <p><span class="blank">C = 中央処理装置</span>（CPU。主記憶のプログラムを実行する装置）</p>
+          <p><span class="blank">D = 演算装置</span>（ALU。実際の計算を担当）／<span class="blank">E = 制御装置</span>（演算装置の駆動と主記憶への読み書きを指揮）</p>
+          <p><span class="blank">F = 演算レジスタ</span>（演算装置が直接読み書きする高速な記憶場所）</p>
+          <p><span class="blank">G = アドレス</span>（主記憶上の書き込み先を指定する番地）</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          A=フォン・ノイマン, B=主記憶装置, C=中央処理装置, D=演算装置, E=制御装置, F=演算レジスタ, G=アドレス
+        </div>
+        <div class="note">
+          <span class="box-label">語群の全用語</span>
+          <p><strong>Cookie</strong>：Webサイトがブラウザ側へ保存させる小さな状態情報。／<strong>DAG</strong>：閉路を持たない有向グラフ（有向非巡回グラフ）。／<strong>DHCP</strong>：端末へIPアドレスなどの設定を自動配布するプロトコル。／<strong>XOR</strong>：2入力が異なるときだけ1になる排他的論理和。／<strong>アセンブリ</strong>：機械語命令を人が扱いやすい記号で表す低水準言語、またはその記述。／<strong>アドレス</strong>：主記憶などの格納位置を指定する番地。</p>
+          <p><strong>インタプリタ</strong>：プログラムを逐次解釈しながら実行する処理系。／<strong>カーネル</strong>：資源管理やプロセス制御を担うOSの中核。／<strong>シャノン</strong>：情報理論を体系化したクロード・シャノンを指す人名。／<strong>チューリング</strong>：計算可能性を形式化したアラン・チューリングを指す人名。／<strong>ビット</strong>：0か1の二値で表す情報量・データの基本単位。／<strong>フォン</strong>・<strong>ノイマン</strong>：合わせて「フォン・ノイマン」。プログラム内蔵方式の計算機構成に名を残す人名。</p>
+          <p><strong>マルチタスク</strong>：複数の処理を切り替えながら並行して進めるOSの機能。／<strong>万能機械</strong>：記述された任意のチューリング機械の動作を模倣できる抽象機械。／<strong>中央処理装置</strong>：命令を読み出して解釈・実行するCPU。／<strong>主記憶装置</strong>：実行中のプログラムとデータを保持しCPUが直接アクセスする記憶装置。／<strong>仮想記憶</strong>：主記憶と補助記憶を用いて、実メモリより広い連続的な記憶空間を見せる仕組み。／<strong>出力装置</strong>：計算結果を画面・紙・音などとして外部へ提示する装置。</p>
+          <p><strong>制御装置</strong>：命令を解釈し、演算や記憶装置とのデータ移動を指揮するCPUの部分。／<strong>演算レジスタ</strong>：演算対象や結果を一時保持するCPU内部の高速記憶。／<strong>演算装置</strong>：算術演算・論理演算を実行するALU。</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — フォン・ノイマン型アーキテクチャ</span>
+        <p>
+          CPU（中央処理装置）は演算装置（ALU: Arithmetic Logic Unit）と制御装置（Control Unit）からなり、
+          演算装置が実際の四則演算・論理演算を行い、制御装置が「次に何の命令を読み、演算装置に何をさせるか」を
+          指揮する。演算装置が直接読み書きするのは（低容量・高速な）演算レジスタであり、主記憶装置（メモリ）
+          との間でデータをやり取りする際にはアドレス（番地）を指定する。プログラムとデータを区別なく同じ
+          主記憶に置く、というのがプログラム内蔵方式（フォン・ノイマン型）の最大の特徴で、これにより
+          プログラム自体をデータとして書き換える（自己書き換え・ロード）ことが可能になる。
+        </p>
+      </div>
+
+      <h3>問3 — デジタルコンテンツの著作権管理（DRM）</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          デジタルコンテンツの著作権を適切に管理するための技術・仕組みは<span class="blank">A</span>と呼ばれる。<span class="blank">B</span>方式に基づくWinnyなどが多くの著作権侵害をもたらしたこともあり、現代の<span class="blank">A</span>は注意深く設計されている。デジタルコンテンツのデータをコンテンツ提供者の<span class="blank">C</span>とコンテンツ閲覧ソフトの間の通信で提供する。閲覧ソフトは前もって<span class="blank">D</span>と<span class="blank">E</span>の組を作成し、<span class="blank">D</span>を<span class="blank">C</span>に登録する。各デジタルコンテンツの利用に際しては、<span class="blank">C</span>は新しく生成した鍵Kでコンテンツを暗号化し、鍵Kを含むライセンスファイルとともに閲覧ソフトに送る。ライセンスファイルは閲覧ソフトの<span class="blank">D</span>で暗号化されている。閲覧ソフトは、ライセンスファイルを<span class="blank">E</span>で復号することで、鍵Kを入手し、コンテンツを復号する。この時、ライセンスファイルに付加されている<span class="blank">F</span>を確認することで、ライセンスファイルが適切な<span class="blank">C</span>によって作られ改ざんされていないことも確かめる。<span class="blank">F</span>を確認するためには<span class="blank">C</span>の<span class="blank">G</span>を入手する必要がある。認証局を通じて信頼性の高い<span class="blank">G</span>を得る仕組みを<span class="blank">H</span>と呼ぶ。
+        </p>
+        <p>語群から最も適切な語を選んで埋めよ。同じ記号の空欄には同じ語が入るが、同じ語を複数回用いてもよい。（語群：DHCP・DRM・P2P・PGP・PKI・SaaS・SSH・Tor・TLS・一方向ハッシュ関数・共通鍵・クライアント・公開鍵・サーバ・ディジタル署名・電子指紋・秘密鍵・防火壁・レイテンシ）</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p><span class="blank">A = DRM</span>（Digital Rights Management）／<span class="blank">B = P2P</span></p>
+          <p><span class="blank">C = サーバ</span>（コンテンツ提供者側）</p>
+          <p>
+            閲覧ソフトは自分の<span class="blank">D = 公開鍵</span>と<span class="blank">E = 秘密鍵</span>の組を作り、公開鍵Dをサーバに登録する。
+            サーバは新しい鍵Kでコンテンツを暗号化し、ライセンスファイル（鍵Kを含む）を閲覧ソフトの公開鍵Dで暗号化して送る＝
+            「Dで暗号化」できるのは公開鍵暗号方式の性質上、対応する秘密鍵Eを持つその閲覧ソフトだけが復号できる、という設計。
+            閲覧ソフトはEでライセンスファイルを復号して鍵Kを入手する。
+          </p>
+          <p>
+            <span class="blank">F = ディジタル署名</span>　サーバがライセンスファイルに付けた署名。これを検証することで、
+            改ざんされていないこと・本当にそのサーバが発行したものであることを確認できる。検証にはサーバの
+            <span class="blank">G = 公開鍵</span>が必要（ここでは「公開鍵」の語を2度使ってよい設問）。
+          </p>
+          <p><span class="blank">H = PKI</span>（公開鍵基盤）　認証局（CA）を介して、なりすましでない正しい公開鍵であることを保証する仕組み。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          A=DRM, B=P2P, C=サーバ, D=公開鍵, E=秘密鍵, F=ディジタル署名, G=公開鍵, H=PKI
+        </div>
+        <div class="note">
+          <span class="box-label">語群の全用語</span>
+          <p><strong>DHCP</strong>：端末へIPアドレスなどのネットワーク設定を自動配布するプロトコル。／<strong>DRM</strong>：デジタル著作物の利用・複製条件を技術的に管理する仕組み。／<strong>P2P</strong>：端末同士が対等に直接データや資源を交換する構成。／<strong>PGP</strong>：暗号化と署名により主に電子メールやファイルを保護する仕組み。／<strong>PKI</strong>：認証局と電子証明書により公開鍵の正当性を保証する公開鍵基盤。</p>
+          <p><strong>SaaS</strong>：ソフトウェアをネットワーク越しのサービスとして利用する提供形態。／<strong>SSH</strong>：遠隔ログインやコマンド実行を暗号化するプロトコル。／<strong>Tor</strong>：通信を複数の中継点で多層暗号化して匿名性を高めるネットワーク。／<strong>TLS</strong>：通信相手の認証、暗号化、改ざん検知を提供するプロトコル。／<strong>一方向ハッシュ関数</strong>：入力から固定長の値を計算できる一方、その値から元入力を求めることが困難な関数。</p>
+          <p><strong>共通鍵</strong>：暗号化と復号に同じ秘密の鍵を使う方式、またはその鍵。／<strong>クライアント</strong>：サーバへ処理や資源を要求する側。／<strong>公開鍵</strong>：鍵ペアのうち公開し、暗号化や署名検証に用いる鍵。／<strong>サーバ</strong>：クライアントの要求に応じてコンテンツや処理を提供する側。／<strong>ディジタル署名</strong>：秘密鍵で生成し公開鍵で検証することで、作成者と改ざんの有無を確認する仕組み。</p>
+          <p><strong>電子指紋</strong>：データをハッシュして得られる、その内容を識別する短い値。／<strong>秘密鍵</strong>：所有者だけが保持し、復号や署名生成に用いる鍵。／<strong>防火壁</strong>：規則に基づきネットワーク通信を許可・遮断するファイアウォール。／<strong>レイテンシ</strong>：要求から応答までなど、通信・処理に生じる遅延時間。</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 公開鍵暗号を使った「暗号化＋認証」の型</span>
+        <p>
+          この問題の設計は非常に典型的なパターンである：①受信者（閲覧ソフト）が公開鍵・秘密鍵の組を作り、
+          公開鍵だけを送信者（サーバ）に渡しておく。②送信者は「相手の公開鍵」でデータを暗号化して送る
+          →相手（対応する秘密鍵を持つ人）にしか復号できない（機密性の確保）。③さらに送信者は自分の
+          秘密鍵で署名し、受信者は送信者の公開鍵で検証する→なりすまし・改ざんを検知できる（真正性・完全性の確保）。
+          「公開鍵で暗号化 → 秘密鍵で復号」（機密性）と「秘密鍵で署名 → 公開鍵で検証」（認証）は逆向きの
+          使い方である点に注意。PKIは、この「本当にその人（サーバ）の公開鍵か」を認証局が保証する仕組み。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問2 ============ -->
+  <div class="section" id="q2">
+    <div class="sec-header">
+      <div class="sec-tag">大問 2</div>
+      <h2>親子関係の有向グラフとアルゴリズム</h2>
+    </div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>2個体が親となり子を作る生物の親子関係を、親から子へ向かう有向エッジで表現する。図3は「aとbの子がc,d,e、fとgの子がh,i、cとhの子がj、eとhの子がk,l」という例である。</p>
+        <div class="diagram">
+          <img src="img/2025/fig3-family-tree.png" alt="図3：a,bの子がc,d,e／f,gの子がh,i／c,hの子がj／e,hの子がk,l を表す有向グラフ" style="max-width:520px;width:100%;height:auto;">
+          <div class="diagram-cap">図3：a,bの子がc,d,e／f,gの子がh,i／c,hの子がj／e,hの子がk,l（原本PDFより切り出し）</div>
+        </div>
+      </div>
+
+      <div class="note"><span class="box-label">語群（問2〜4共通）</span><p>P1・P2・S0・S1・S2・Sn・Sn+1・n・X・Y・から出る・から出ない・へ向かう・へ向かわない・と接続する・と接続しない・和集合・差集合・積集合・含まれる・含まれない・一致する・一致しない　（同じ記号の空欄には同じ語が入るものとし、同じ語を二度使ってはならない）</p></div>
+
+      <h3>問1 — 「親がたかだか2個体」の表れ方</h3>
+      <div class="ex"><span class="box-label">問題</span><p>各個体の親はたかだか2個体である。このことはグラフ上のどのような点に表れるか。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>このグラフのエッジは親から子へ向き、子に当たる個体Xについて<strong>Xへ向かうエッジの他端がXの親</strong>になる。したがって、あるノードへ入るエッジ1本が親1個体に対応する。「親が高々2個体」は、すべてのノードの入次数（そのノードへ向かうエッジ数）が0・1・2のいずれかで、3以上にはならないこととして表れる。</p></div>
+        <div class="sol"><span class="box-label">解</span>各ノードの入次数（へ向かうエッジの本数）が高々2である。</div>
+      </details>
+
+      <h3>問2 — 「親親」（祖父母）を求めるアルゴリズム</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          1. 入力：ある個体に対応するノードX<br>
+          2. Xへ向かうエッジの他端のノードをP1およびP2とする。<br>
+          3. P1<span class="blank">A</span>エッジの他端のノードの集合をS1とする。<br>
+          4. P2<span class="blank">A</span>エッジの他端のノードの集合をS2とする。<br>
+          5. S1とS2の<span class="blank">B</span>を出力して停止する。
+        </p>
+        <p>入力XがkのときS1,S2はそれぞれ何か。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p><span class="blank">A = へ向かう</span>（P1・P2それぞれの親を求めるので、手順2と同じ「へ向かうエッジ」を使う）</p>
+          <p><span class="blank">B = 和集合</span>（P1の親とP2の親を合わせたものが「祖父母」全員になる）</p>
+          <p>X=kの親はe,hなので、P1=e, P2=hとしてよい。S1 = eの親 = {a, b}、S2 = hの親 = {f, g}。祖父母 = S1∪S2 = {a, b, f, g}。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>A=へ向かう、B=和集合。S1={a,b}、S2={f,g}。</div>
+      </details>
+
+      <h3>問3 — 「きょうだい」を求めるアルゴリズム</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          1. 入力：ある個体に対応するノードX<br>
+          2. Xへ向かうエッジの他端のノードをP1およびP2とする。<br>
+          3. P1<span class="blank">C</span>エッジの他端のノードの集合をS1とする。<br>
+          4. P2<span class="blank">C</span>エッジの他端のノードの集合をS2とする。<br>
+          5. S1とS2の<span class="blank">D</span>から<span class="blank">E</span>を除いたものを出力して停止する。
+        </p>
+        <p>入力XがkのときS1,S2はそれぞれ何か。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p><span class="blank">C = から出る</span>（P1・P2それぞれの「子」を求めるので、今度は出るエッジをたどる）</p>
+          <p><span class="blank">D = 積集合</span>（P1の子でもありP2の子でもある個体＝両親が共通の個体の集合）</p>
+          <p><span class="blank">E = X</span>（自分自身は積集合に含まれてしまうので、それを除く）</p>
+          <p>X=kの親はe,h。P1=eとするとS1 = eの子 = {k, l}。P2=hとするとS2 = hの子 = {j, k, l}。積集合 S1∩S2 = {k, l}。ここからX=kを除くと {l}。（lはkと親e,hを共通に持つ「きょうだい」。jはhの子だがeの子ではないので半分だけ親を共有する関係にとどまり、除外される。）</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>C=から出る、D=積集合、E=X。S1={k,l}、S2={j,k,l}（きょうだいは {l}）。</div>
+      </details>
+
+      <h3>問4 — 「親等」を求めるアルゴリズム</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          1. 入力：2個体に対応するノードXとY<br>
+          2. S0={X}、n=0とする。<br>
+          3. <span class="blank">F</span>が<span class="blank">G</span>に<span class="blank">H</span>限り、以下を繰り返す：Snのいずれかのノード<span class="blank">I</span>エッジの他端のノードの集合をSn+1とし、nの値を1増やす。<br>
+          4. nを出力して停止する。
+        </p>
+        <p>入力Xがk、Yがcのとき、S1,S2,S3はそれぞれ何か。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>
+            <span class="blank">F = Y</span>、<span class="blank">G = Sn</span>、<span class="blank">H = 含まれない</span>
+            （「YがSnに含まれない限り繰り返す」＝Yがまだ到達済み集合に入っていない間はループを続ける）
+          </p>
+          <p>
+            <span class="blank">I = と接続する</span>　親等は「親子関係でつながる」回数であり、親→子・子→親のどちらの
+            向きに数えても1回でよいので、エッジの向きを問わない「と接続する」を使う（へ向かう／から出る、のような
+            向き限定の語では、親等の計算として不十分になる）。
+          </p>
+          <p>
+            X=k, Y=c として追跡する（各ステップでSnと接続する全ノードの和集合をSn+1とする）。<br>
+            S0 = {k}。kと接続 = 親e,h → S1 = {e, h}。<br>
+            e,hのそれぞれと接続するノードの和集合：eの接続先={a,b,k,l}、hの接続先={f,g,j,k,l} → S2 = {a,b,f,g,j,k,l}。<br>
+            S2の各ノードと接続するノードの和集合：a→{c,d,e}、b→{c,d,e}、f→{h,i}、g→{h,i}、j→{c,h}、k→{e,h}、l→{e,h}
+            を合わせて S3 = {c, d, e, h, i}。<br>
+            ここでY=c が S3 に含まれるのでループが止まり、n=3 を出力する（k–h–j–c、または k–e–a–c のように
+            3本のエッジで結ばれる最短経路が存在する）。
+          </p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          F=Y、G=Sn、H=含まれない、I=と接続する。<br>
+          S1={e,h}、S2={a,b,f,g,j,k,l}、S3={c,d,e,h,i}（親等 n=3）。
+        </div>
+        <div class="note">
+          <span class="box-label">語群（問2〜4共通）の全用語</span>
+          <p><strong>P1・P2</strong>：入力Xの2個体の親を一時的に表す変数。／<strong>S0</strong>：探索開始時の集合で、この問題では{X}。／<strong>S1・S2</strong>：文脈により、P1・P2から得た集合、または探索の第1層・第2層を表す。／<strong>Sn</strong>：探索のn段階目に得られるノード集合。／<strong>Sn+1</strong>：Snから1本のエッジをたどって次に得る集合。／<strong>n</strong>：探索段階、すなわち始点からたどったエッジ数。／<strong>X・Y</strong>：入力として与える個体（始点と目標）を表す変数。</p>
+          <p><strong>から出る</strong>：そのノードを始点とする有向エッジを選ぶ。／<strong>から出ない</strong>：そのノードを始点としないエッジを表す。／<strong>へ向かう</strong>：そのノードを終点とする有向エッジを選ぶ。／<strong>へ向かわない</strong>：そのノードを終点としないエッジを表す。／<strong>と接続する</strong>：向きを問わず、そのノードと辺を共有する。／<strong>と接続しない</strong>：そのノードと辺で直接結ばれていない。</p>
+          <p><strong>和集合</strong>：どちらか一方以上の集合に属する要素を集めた集合。／<strong>差集合</strong>：一方の集合から他方に含まれる要素を除いた集合。／<strong>積集合</strong>：両方の集合に共通して属する要素の集合。／<strong>含まれる</strong>：対象要素が集合の要素である。／<strong>含まれない</strong>：対象要素が集合の要素ではない。／<strong>一致する</strong>：二つの値・集合が等しい。／<strong>一致しない</strong>：二つの値・集合が等しくない。</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — グラフ上の幅優先探索（BFS）</span>
+        <p>
+          問4のアルゴリズムは、グラフ理論における<strong>幅優先探索（BFS）</strong>そのもの——始点Xから
+          「1エッジで到達できるノード」「2エッジで到達できるノード」…と層ごとに広げていき、目的のノードYが
+          初めて現れた層の番号が、2ノード間の最短距離（ここでは「親等」）になる。有向グラフであっても、
+          親子関係のような対称的な「つながり」を数えたいときは、エッジの向きを無視した無向グラフとして
+          扱う（「と接続する」がその処理にあたる）のがポイント。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問3 ============ -->
+  <div class="section" id="q3">
+    <div class="sec-header">
+      <div class="sec-tag">大問 3（選択）</div>
+      <h2>問題A：ネット選挙／問題B：符号化とオートマトン</h2>
+    </div>
+    <div class="sec-body">
+
+
+
+      <div class="note"><span class="box-label">出題形式</span><p>問題A・Bのいずれか一方を選択（担当教員の指示があればそれに従う）。ここでは両方を掲載する。</p></div>
+
+      <h3>問題A（1） — インターネット選挙のメリット</h3>
+      <div class="ex"><span class="box-label">問題</span><p>インターネットを活用した選挙活動について、情報の流通の観点からみた候補者・有権者それぞれのメリットを2つずつ挙げよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>候補者にとってのメリット：</strong>①新聞・テレビ等の既存メディアの報道量に依存せず、低コストで大量の有権者に直接・即時に情報発信できる。②SNS上の反応（シェア・コメント数など）を即座に把握し、双方向のやり取りを通じて訴求内容を調整できる。</p>
+          <p><strong>有権者にとってのメリット：</strong>①候補者が発信する一次情報に、メディアによる要約・編集を介さず直接アクセスできる。②SNS上で他の有権者と政策について意見交換ができ、多様な視点から候補者を比較検討しやすくなる。</p>
+        </div>
+      </details>
+
+      <h3>問題A（2） — インターネット選挙で生じる問題</h3>
+      <div class="ex"><span class="box-label">問題</span><p>インターネットを活用した選挙活動で生じうる、情報の流通または内容に関する問題を2つ挙げよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>代表例は二つある。第一に、投稿・転載の速さが検証の速さを上回り、デマや切り取られた情報が訂正より先に広く届く問題である。候補者への誤った評価が形成されると、後の訂正だけでは影響を取り消しにくい。第二に、推薦アルゴリズムや人間の選択によって似た意見ばかりに触れるフィルターバブル／エコーチェンバーが生じ、反対意見や共通の事実認識に接する機会が減る問題である。その結果、判断材料の偏り、社会の分断、特定集団を狙う扇動や世論操作につながりうる。</p></div>
+      </details>
+
+      <h3>問題A（3） — メディアの新たな責任</h3>
+      <div class="ex"><span class="box-label">問題</span><p>ソーシャルメディアでの情報流通では、メディアの運営組織に新たにどのような責任が生じるか、中立性の担保に着目して論ぜよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>新聞・テレビ・ラジオは編集者による取材・校閲・放送法上の政治的公平性の確保などを経て情報を発信しており、発信者と受け手の間に「編集責任を負う主体」が明確に存在した。一方ソーシャルメディアでは、候補者の発信が編集を経ずに直接有権者に届き、プラットフォーム側は「編集者」ではなくレコメンドアルゴリズムによって情報の見え方（誰に何がどれだけ表示されるか）を左右する。したがって、プラットフォーム運営組織には、①アルゴリズムによる情報表示が特定の候補・立場に偏らないようにする責任、②誤情報・扇動的内容に対するファクトチェックや注意喚起表示、③候補者間の広告・露出機会の公平性を確保する責任が新たに生じる。</p></div>
+      </details>
+
+      <h3>問題A（4） — サイバーカスケード現象</h3>
+      <div class="ex"><span class="box-label">問題</span><p>サイバーカスケード現象とは何か。この現象が選挙において問題となりうる理由も述べよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p><strong>説明：</strong>インターネット上で人々が自分の意見に近い情報・コミュニティばかりを選択的に閲覧するようになった結果、同じ立場の人同士の議論が繰り返され、集団としての意見がより極端な方向へと雪崩のように増幅されていく現象。</p><p><strong>選挙での問題点：</strong>支持者どうしの内輪の議論が過激化することで、対立候補への攻撃や陰謀論的な言説が検証されないまま強化されやすく、有権者間の分断が深まり、穏健な熟議に基づく投票判断を妨げるおそれがある。</p></div>
+      </details>
+
+      <h3>問題A（5） — インターネット投票の便益とリスク</h3>
+      <div class="ex"><span class="box-label">問題</span><p>インターネット投票実施の情報面での便益を2つ挙げよ。また機密性・完全性・可用性が担保されない場合に生じるリスクをそれぞれ述べよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>便益：</strong>①開票・集計を即時かつ自動的に行え、迅速に結果を得られる。②投票所に行くのが困難な有権者（海外在住者、身体的な制約がある人など）の投票参加を促し、より多くの民意を集約できる。</p>
+          <p><strong>リスク：</strong>機密性が損なわれると、誰がどの候補に投票したかという投票の秘密が漏れ、買収・強要のおそれが高まる。完全性が損なわれると、投票データが改ざんされ、実際の民意と異なる結果が公表されるおそれがある。可用性が損なわれると、システム障害やサイバー攻撃によって投票そのものができなくなり、投票の機会が奪われる。</p>
+        </div>
+      </details>
+
+      <h3>問題B（1） — 固定長符号と有限状態機械（図4）</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>優=aaa、良=bbb、可=abb、不可=baa、未受験=babという符号（表1）でn人分（n&gt;0）の成績を連結した文字列を考える。例えば"優良可良"（n=4）という成績の列であれば <code>aaabbbabbbbb</code> となる。n人の成績列を符号化した文字列を、図4の有限状態機械（状態q0が始状態、q3が受理状態）に与えて受理状態になったとすると、元の成績について何が言えるか。</p>
+        <div class="diagram">
+          <img src="img/2025/fig4-automaton.png" alt="図4：状態q0(始状態)～q4(a,bともに自己ループする非受理のわな状態)からなる有限状態機械" style="max-width:560px;width:100%;height:auto;">
+          <div class="diagram-cap">図4：q0が始状態、q3（二重丸）が受理状態、q4はa,bどちらを読んでも自分自身に戻る「わな」状態（原本PDFより切り出し）</div>
+        </div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            表1の各符号を、区切り位置（＝q0またはq3、この2状態は遷移先が完全に同じ「同値」な状態）から図4に与えて追跡すると：
+          </p>
+          <ul>
+            <li>優=aaa：q0→(a)→q1→(a)→<strong>q4（わなに落ちる）</strong>。q1のa遷移はq4なので、2文字目で確定的に脱落する。</li>
+            <li>良=bbb：q0→(b)→<strong>q4（わなに落ちる）</strong>。q0のb遷移が直接q4なので、1文字目で即座に脱落する。</li>
+            <li>可=abb：q0→(a)→q1→(b)→q2→(b)→<strong>q3（受理状態に帰着）</strong>。</li>
+            <li>不可=baa：q0→(b)→<strong>q4</strong>（良と同様、1文字目で脱落）。</li>
+            <li>未受験=bab：q0→(b)→<strong>q4</strong>（同様に1文字目で脱落）。</li>
+          </ul>
+          <p>
+            q4は a, b のどちらを読んでも自分自身に戻る非受理の「わな」状態であり、一度q4に入ると二度と抜け出せない。したがって、5種類の符号のうち区切り位置（q0/q3）から読んでq3に戻れるのは<strong>「可」（abb）だけ</strong>であり、それ以外の符号（優・良・不可・未受験）が1人分でも含まれていれば、その時点で永久にわなに落ち、文字列全体が最終的に受理されることはない。
+          </p>
+          <p>
+            よって、n人分の文字列が図4で受理されたということは、<strong>n人全員の成績が「可」であった</strong>ということが分かる。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>n人全員の成績が「可」（abb）であったことが分かる（可以外の符号が1つでも混じっていれば、わな状態q4に落ちて受理されない）。</div>
+      </details>
+
+      <h3>問題B（2） — 平均符号長を縮める符号化</h3>
+      <div class="ex"><span class="box-label">問題</span><p>各成績が独立に等確率で現れるとして、平均符号長を3より小さくする、まぎれのない（瞬時に復号できる）符号化方法を一つ答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>5種類は等確率（各1/5）なので、ハフマン符号化の考え方に従い、長さ2の符号を3つ、長さ3の符号を2つ配分すればよい。例えば：</p>
+          <div class="mathblock">優 = aa　良 = ab　可 = ba　不可 = bba　未受験 = bbb</div>
+          <p>aa, ab, ba はどれも「不可(bba)」「未受験(bbb)」の接頭辞になっておらず（bとaの並びが異なる）、瞬時符号（接頭符号）として復号にまぎれが生じない。平均符号長は $(2+2+2+3+3)/5 = 12/5 = 2.4$ 文字で、3より小さい。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>優=aa,良=ab,可=ba,不可=bba,未受験=bbb（平均符号長2.4文字）など。</div>
+      </details>
+
+      <h3>問題B（3） — 確率が偏った場合の最適符号（ハフマン符号）</h3>
+      <div class="ex"><span class="box-label">問題</span><p>優,良,可,不可,未受験の確率が$\frac14,\frac12,\frac18,\frac1{16},\frac1{16}$のとき、平均符号長を最小にする符号化方法と、そのときの平均符号長を答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>ハフマン符号化：確率の小さい2つずつを繰り返し併合していく。</p>
+          <div class="mathblock">不可(1/16) + 未受験(1/16) → 1/8
+可(1/8) + [上の 1/8] → 1/4
+優(1/4) + [上の 1/4] → 1/2
+良(1/2) + [上の 1/2] → 1（根）</div>
+          <p>この併合木から符号長を読み取ると、良=1文字、優=2文字、可=3文字、不可・未受験=4文字。例えば：</p>
+          <div class="mathblock">良 = a　優 = ba　可 = bba　不可 = bbba　未受験 = bbbb</div>
+          <p>平均符号長は、これがちょうどエントロピー（各確率が2の負整数乗のため、ハフマン符号は下限を過不足なく達成する）に一致する：</p>
+          <div class="mathblock">$$\bar{L} = \tfrac12(1) + \tfrac14(2) + \tfrac18(3) + \tfrac1{16}(4) + \tfrac1{16}(4) = 1.875\text{ 文字}$$</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>良=a,優=ba,可=bba,不可=bbba,未受験=bbbb。平均符号長 $=1.875=\frac{15}{8}$ 文字。</div>
+      </details>
+
+      <h3>問題B（4） — 情報源符号化定理</h3>
+      <div class="ex"><span class="box-label">問題</span><p>確率が一般に $p_1,\ldots,p_5$ であるとき、符号化の工夫により平均符号長をどこまで短くできるか。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>情報源符号化定理（シャノン）により、平均符号長はその情報源のエントロピー $H=-\sum_i p_i\log_2 p_i$ を下回ることはできないが、符号化方法（ハフマン符号など）を工夫することでエントロピーに限りなく近づけることができる。特に各確率がちょうど2の負整数乗であるとき（問題B(3)のように）、ハフマン符号はこの下限＝エントロピーを過不足なく達成できる。</p></div>
+        <div class="sol"><span class="box-label">解</span>平均符号長の下限はエントロピー $H=-\sum p_i\log_2 p_i$ であり、工夫次第でこれに限りなく近づけられる。</div>
+      </details>
+
+      <h3>問題B（5） — 問(3)の符号を受理する有限状態機械</h3>
+      <div class="ex"><span class="box-label">問題</span><p>問題B(3)で答えた符号化方法についてn人分（n&gt;0）を連結した文字列（かつそれらのみ）を受理する有限状態機械を図示せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            符号（良=a, 優=ba, 可=bba, 不可=bbba, 未受験=bbbb）は接頭符号なので、「今どの符号の途中まで
+            読んだか」だけを状態として持てばよい。開始専用の状態 $S_{\text{start}}$（非受理）と、
+            「ちょうど1つ以上の符号を読み終えた直後」を表す受理状態 $S_0$、さらに「bが連続して何個続いたか」
+            を表す $S_1,S_2,S_3$ を用意する。
+          </p>
+          <div class="diagram">
+            <svg viewBox="0 0 460 150" width="460">
+              <defs><marker id="arS" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#0f7a8c"/></marker></defs>
+              <g font-size="13" text-anchor="middle" fill="#0a4f5c">
+                <circle cx="40" cy="75" r="20" fill="#fff" stroke="#0f7a8c"/><text x="40" y="80">start</text>
+                <circle cx="140" cy="75" r="20" fill="#eefcf9" stroke="#0f8c72" stroke-width="2.4"/><circle cx="140" cy="75" r="24" fill="none" stroke="#0f8c72"/><text x="140" y="80">S0</text>
+                <circle cx="240" cy="30" r="18" fill="#fff" stroke="#0f7a8c"/><text x="240" y="35">S1</text>
+                <circle cx="330" cy="30" r="18" fill="#fff" stroke="#0f7a8c"/><text x="330" y="35">S2</text>
+                <circle cx="420" cy="30" r="18" fill="#fff" stroke="#0f7a8c"/><text x="420" y="35">S3</text>
+              </g>
+              <g stroke="#0f7a8c" fill="none" marker-end="url(#arS)">
+                <line x1="60" y1="70" x2="120" y2="70"/>
+                <line x1="60" y1="80" x2="122" y2="90" stroke-dasharray="0"/>
+                <path d="M155 60 Q195 20 222 27"/>
+                <path d="M160 88 Q160 108 140 96" fill="none"/>
+                <path d="M255 25 Q290 15 312 25"/>
+                <path d="M235 45 Q190 70 148 68"/>
+                <path d="M345 25 Q380 15 402 25"/>
+                <path d="M325 45 Q260 90 150 74"/>
+                <path d="M405 42 Q360 90 150 78"/>
+                <path d="M415 45 Q300 100 150 80"/>
+              </g>
+              <g font-size="11" fill="#333">
+                <text x="90" y="62">a</text>
+                <text x="95" y="100">b</text>
+                <text x="200" y="20">a</text>
+                <text x="190" y="90">b</text>
+                <text x="290" y="15">a</text>
+                <text x="280" y="90">b</text>
+                <text x="380" y="15">a</text>
+                <text x="370" y="95">b（bbbb完成）</text>
+              </g>
+            </svg>
+            <div class="diagram-cap">S0が唯一の受理状態（二重丸）。start→S0 は「a」、start→S1は「b」。各状態から「a」は必ずS0（符号完成）へ、「b」は次の段（S1→S2→S3）へ進み、S3から「b」を読むとbbbb（未受験）が完成してS0へ戻る。</div>
+          </div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>上図の5状態オートマトン（S0のみが受理状態）。</div>
+      </details>
+
+      <h3>問題B（6） — 「未受験がちょうど1人」を受理する機械（図5を拡張）</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>表1の符号化方法を考える。与えられたa,bから成る文字列が、1人以上の成績簿に対応する文字列であり、さらに未受験が全体でちょうど1人であることを表す文字列であるかを知りたい。その時かつその時のみ受理する有限状態機械を図示せよ。但し、図5の有限状態機械に辺や頂点を加えて作成すること。</p>
+        <div class="diagram">
+          <img src="img/2025/fig5-automaton.png" alt="図5：q0からq3までの4状態と、a・bでラベル付けされた6本の遷移を持つ有限状態機械。q0が始状態、q3が受理状態" style="max-width:420px;width:100%;height:auto;">
+          <div class="diagram-cap">図5：設問で辺・頂点を追加する有限状態機械（原本PDFより切り出し）</div>
+        </div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            図5は「不可(baa)を0回以上繰り返した直後に未受験(bab)がちょうど1回現れる」という特殊ケースしか扱えない
+            （優・良・可は読めず、未受験の2回目を検出する仕組みもない）。これを一般化するには、
+            <strong>q0,q1,q2,q3の4状態と6本の辺はそのまま残し</strong>、以下を書き加える：
+          </p>
+          <ul>
+            <li><strong>優(aaa)・可(abb)を読めるようにする：</strong>q0に新しい辺 q0→(a)→qA を追加し、qAから
+              qA→(a)→qAA→(a)→q0（優=aaaの3文字目まで）、qA→(b)→qAB→(b)→q0（可=abbの3文字目まで）を追加する。</li>
+            <li><strong>良(bbb)を読めるようにする：</strong>q1に新しい辺 q1→(b)→qBB を追加し、qBB→(b)→q0
+              （良=bbbの3文字目まで）を追加する。既存のq1→(a)→q2（不可/未受験へ向かう辺）はそのまま。</li>
+            <li><strong>未受験を1回検出したあと（q3から先）も同じ仕組みを複製する：</strong>q3から
+              q3→(a)→qA′→(a)→qAA′→(a)→q3、q3→(a)→qA′→(b)→qAB′→(b)→q3（優・可）、
+              q3→(b)→q1′→(b)→qBB′→(b)→q3（良）、q3→(b)→q1′→(a)→q2′→(a)→q3（不可）を追加する
+              （q3もq0と同じ「区切り」状態なので、q0側の4状態qA,qAA,qAB,qBBの構造をq3側にqA′,qAA′,qAB′,qBB′,q1′,q2′として複製するイメージ）。</li>
+            <li><strong>未受験の2回目が来たら拒否する：</strong>複製したq2′からのb遷移（本来なら2つ目のbabの完成）だけは
+              q3に戻さず、新しい非受理のわな状態qXへ：q2′→(b)→qX。qXは a,b いずれを読んでも自分自身に戻る
+              （qX→(a,b)→qX）、抜け出せない拒否状態とする。</li>
+          </ul>
+          <p>
+            こうして出来上がる機械は、元の図5の4状態・6辺に、qA,qAA,qAB,qBB（q0側の優・良・可用）、
+            q1′,q2′,qA′,qAA′,qAB′,qBB′（q3側の複製）、qX（拒否わな）の合計11状態を書き加えた
+            <strong>15状態</strong>のオートマトンになる。受理状態はq3のみ（変更なし）。
+            q0を起点に読んでいる間（未受験がまだ0回）はq0/q1/q2/qA/qAA/qAB/qBBの間を巡り、
+            未受験をちょうど1回読んだ瞬間にq3へ移って以降はq3/q1′/q2′/qA′/qAA′/qAB′/qBB′の間を巡る、
+            2つ目の未受験を読もうとした瞬間だけqXに落ちて二度と受理されなくなる、という構造になっている。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>図5のq0,q1,q2,q3と6本の辺をそのまま残し、優・良・可を読むための状態（qA,qAA,qAB,qBB）をq0側に、その複製（qA′,qAA′,qAB′,qBB′,q1′,q2′）をq3側に追加し、2つ目の未受験を検出したときだけ移る非受理のわな状態qXを追加した15状態の機械（受理状態はq3のみ）。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 接頭符号（瞬時符号）とハフマン符号</span>
+        <p>
+          ある符号語がどれも他の符号語の接頭辞になっていない符号を接頭符号（瞬時符号）と呼び、区切り記号なしで
+          先頭から一意に復号できる。ハフマン符号は、出現確率の低い記号ほど長い符号を、高い記号ほど短い符号を
+          割り当てることで平均符号長を最小化する手続き（確率の小さい2つを繰り返し併合して二分木を作る）で、
+          各確率が2の負整数乗のときに限り、シャノンの情報源符号化定理が定める下限（エントロピー）を
+          過不足なく達成する。また「複数の判定条件を同時に満たすか」を1つの有限状態機械でチェックしたいときは、
+          各条件をそれぞれ状態遷移で表す機械を作り、状態の組（直積）を新しい1つの状態とする<strong>直積構成法</strong>
+          が定石。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <span></span>
+    <a href="kakomon_2024.html">2024年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

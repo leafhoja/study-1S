@@ -1,0 +1,220 @@
+<!DOCTYPE html><!-- 「2018年度 | 情報 個別問題（田中哲郎クラス）」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2018年度 | 情報 個別問題（田中哲郎クラス）</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2018">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2018年度</h1>
+  <p class="subtitle">田中哲郎クラス｜7月26日 4限｜大問2</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（多数決回路）</a>
+    <a href="#q2">大問2（チューリングマシン・オートマトン）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>多数決回路の設計</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>基本素子 AND、OR、NOT、NAND をMIL記法で表現したものと、それぞれの真理値表が与えられている。以下の問いに答えなさい。</p>
+        <table class="q-table">
+          <tr><th>\(x\)</th><th>\(y\)</th><th>AND\((x,y)\)</th><th>OR\((x,y)\)</th><th>NAND\((x,y)\)</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+        </table>
+        <p>また、NOT\((0)=1\)、NOT\((1)=0\) である。</p>
+        <p>\(a,b,c\) の3人の投票者がいて、それぞれが0、1の2人の候補者のいずれかに投票したとき、多数決の当選者を求める組合せ回路をつくる。それぞれの投票者の投票先（0または1）を入力 \(a,b,c\) に対応させる。例えば、\(a\) が候補者0に投票するとき入力 \(a=0\)、候補者1に投票するとき入力 \(a=1\) とする。3人の多数決の当選者を出力 \(d\) に対応させ、候補者0が当選するとき \(d=0\)、候補者1が当選するとき \(d=1\) とする。\(d\) は \(a,b,c\) を入力とする3入力の論理関数であり、組合せ回路で実現できる。</p>
+      </div>
+
+      <h3>(1) 真理値表</h3>
+      <div class="ex"><span class="box-label">問題</span><p>a,b,cを入力、dを出力とする論理関数の真理値表を書け。</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>1を候補者Aへの票、0を候補者Bへの票と読む。3人なので同数にはならず、Aへの票が2票以上、すなわち入力中の1が2個または3個なら$d=1$となる。したがって011・101・110・111の4行だけが1で、残る4行は0になる。これは3入力の<strong>多数決関数</strong>である。</p></div>
+        <table class="q-table">
+          <tr><th>a</th><th>b</th><th>c</th><th>d</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+        </table>
+      </details>
+
+      <h3>(2) AND・OR・NOTで14個以下</h3>
+      <div class="ex"><span class="box-label">問題</span><p>AND,OR,NOTの3種類だけを使って、14個以下の素子数（ゲート数）で実現しMIL記法で書け。（なお、14はこの回路を実現する最小の素子数ではない）</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>$d=1$の4行から主加法標準形を作ると、$\bar a bc+a\bar b c+ab\bar c+abc$。ブール代数では同じ項を重ねても値は変わらないため、$abc$を3組に用いて、$\bar a bc+abc=bc$、$a\bar b c+abc=ac$、$ab\bar c+abc=ab$ とまとめられる。ゆえに「少なくとも2入力が1」を表す3つの積項だけで足りる：</p></div>
+        <div class="sol"><span class="box-label">解</span>$$d = ab + bc + ca$$
+          <p>AND 3個（$ab,bc,ca$）＋ OR 2個（3項をまとめる）の<strong>合計5個</strong>で実現できる（14個よりずっと少ない）。</p>
+        </div>
+      </details>
+
+      <h3>(3) NANDのみで25個以下</h3>
+      <div class="ex"><span class="box-label">問題</span><p>NANDだけを25個以下使って実現し、MIL記法で書け。（なお、25はこの回路を実現する最小の素子数ではない）</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>$d=ab+bc+ca$をNANDだけで組む。$N_1=\text{NAND}(a,b)=\overline{ab}$、$N_2=\text{NAND}(b,c)=\overline{bc}$、$N_3=\text{NAND}(c,a)=\overline{ca}$とおくと、$d=\overline{N_1N_2N_3}=\overline{N_1N_2}+\overline{N_3}$（ド・モルガン）であり、$\overline{N_1N_2}=\text{NAND}(N_1,N_2)$、あとは2つの項のORをNANDで組めばよい：</p>
+          <div class="mathblock">N1 = NAND(a,b)
+N2 = NAND(b,c)
+N3 = NAND(c,a)
+P  = NAND(N1,N2)　　（= N1N2の否定）
+Q  = NAND(P,P)　　　（= Pの否定＝N1N2そのもの）
+d  = NAND(Q,N3)　　　（= ￢(N1N2・N3) = d）</div>
+          <p>検算（$a=1,b=1,c=0$、多数決で$d=1$のはず）：$N_1=\overline{1}=0,N_2=\overline0=1,N_3=\overline0=1$。$P=\text{NAND}(0,1)=1$。$Q=\text{NAND}(1,1)=0$。$d=\text{NAND}(0,1)=1$ ✓。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>N1=NAND(a,b), N2=NAND(b,c), N3=NAND(c,a), P=NAND(N1,N2), Q=NAND(P,P), d=NAND(Q,N3)。<strong>NAND6個</strong>で実現できる（25個よりずっと少ない）。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 多数決関数は全加算器の桁上げと同じ</span>
+        <p>この「多数決関数」$ab+bc+ca$は、個別問題2025大問2で登場する1ビット全加算器の桁上げ出力$C_{out}$と全く同じ式である。投票の多数決も、2進数の足し算の繰り上がり判定（3つの数のうち2つ以上が1なら繰り上がる）も、数学的には「3つのうち2つ以上が真」という同じ構造を持っている——異なる文脈の問題が同じ論理関数に帰着する好例。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>チューリングマシンと有限状態機械</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>(1) チューリングマシンのチェック表</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          左図はあるチューリングマシンを表す。遷移規則は矢印のラベルで「&lt;読んだ文字の集合&gt;:&lt;書き換える文字&gt;,&lt;移動方向&gt;」の形（書き換える文字が読んだ文字と同じ時はコンマとともに省略、空白は「_」、右移動「&gt;」、左移動「&lt;」）。
+        </p>
+        <div class="diagram">
+          <img src="img/2018/turing-machine.png" alt="6状態(q0〜q5)のチューリングマシン。q0でb,cを読み飛ばしaをcに書換えてq1へ、q1で右端まで進みq2へ、q2でa,cを読み飛ばしbをcに書換えてq3へ、q3で左端まで戻りq0へ。q2で左端の空白に達するとq4へ、q4でcを読み飛ばし空白に達すればq5(受理)へ。" style="max-width:600px;width:100%;height:auto;">
+          <div class="diagram-cap">6状態のチューリングマシン（原本PDFより切り出し）。q5（2重丸）が受理状態。</div>
+        </div>
+        <p>
+          あるチューリングマシンの動作（チェック表）：a→受理、b→拒否、ba→拒否、aa→拒否、aab→受理、bba→拒否、bbb→(a)、abab→(b)、baaa→(c)、ababa→(d)、aaaba→(e)。(f)〜(h)も埋めよ：「文字列に含まれるaとbの数を比較してaの数がbの数(f)時に受理する。入力aaを与えたとき、停止時の状態は(g)、テープに残る文字列は(h)になる。」
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            図の遷移を実際にたどって動作を読み解く。q0は先頭から右へb,cを読み飛ばし、最初に見つけた未処理の'a'を'c'に書き換えてq1へ（＝「未処理のaを1つ見つけて印をつける」）。q1は右へ進んで入力の右端（空白）まで行きq2へ。q2は右端から左へa,cを読み飛ばし、見つけた'b'を'c'に書き換えてq3へ（＝「未処理のbを右から探して印をつける」）。q3は左端（空白）まで戻ってq0へ——これで「a1個とb1個をペアにして消し込む」1ラウンドが完了し、次のラウンドが始まる。もしq2が'b'を見つける前に左端の空白に達したら（＝ペアにできるbがもう残っていない）q4へ移り、右へ'c'（消し込み済み）を読み飛ばして次の空白に達すればq5（受理）に達する——ただしq4が'c'以外（未処理のaかb）を読むと遷移が存在せず停止（拒否）する。
+          </p>
+          <p>
+            したがって、この機械は「未処理のaを1つ・未処理のbを1つ、ペアにして消し込む」ことをラウンドごとに繰り返し、<strong>bがちょうど尽きた直後のラウンドで消し込むべきaが存在し、かつその時点で他に未処理の文字が残っていない</strong>場合にのみ受理する——これはちょうど「aの個数がbの個数よりちょうど1個だけ多い」場合に一致する（与えられた6例：a(1,0)受理、b(0,1)拒否、ba(1,1)拒否、aa(2,0)拒否、aab(2,1)受理、bba(1,2)拒否、いずれも整合）。
+          </p>
+          <ul>
+            <li>bbb：a=0,b=3、差$-3\ne1$ → <strong>拒否</strong>(a)</li>
+            <li>abab：a=2,b=2、差$0\ne1$ → <strong>拒否</strong>(b)</li>
+            <li>baaa：a=3,b=1、差$2\ne1$ → <strong>拒否</strong>(c)</li>
+            <li>ababa：a=3,b=2、差$1=1$ → <strong>受理</strong>(d)</li>
+            <li>aaaba：a=4,b=1、差$3\ne1$ → <strong>拒否</strong>(e)</li>
+          </ul>
+          <p>(f) aの個数がbの個数より<strong>ちょうど1つだけ多い</strong>とき。</p>
+          <p>
+            (g)(h) 入力aaを実際にたどる：q0が1文字目の'a'を'c'に書き換えq1へ（テープ：c,a）→q1が右へ進み空白に達してq2へ→q2は2文字目の'a'（未処理）をa,c自己ループで読み飛ばし、1文字目の'c'も読み飛ばし、入力の左端の空白に達してq4へ→q4は右へ進み1文字目'c'を読み飛ばすが、2文字目は未処理の'a'であり、q4には'a'に対する遷移が定義されていないためここで停止する。よって停止時の状態は<strong>q4</strong>、テープに残る文字列は<strong>ca</strong>（2文字目'a'の位置で停止）。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a)拒否 (b)拒否 (c)拒否 (d)受理 (e)拒否　(f) aの個数がbの個数よりちょうど1つ多いとき　(g) q4　(h) ca</div>
+      </details>
+
+      <h3>(2) 暗証番号オートマトン（aba または bac）</h3>
+      <div class="ex"><span class="box-label">問題</span><p>「aba」または「bac」のどちらが押されても解錠するような電子錠に対応するオートマトンを作成して図にしなさい。途中間違った暗証番号を押しても、後から正しい暗証番号を入力すれば解錠するものとする。入力は「a」「b」「c」の3文字だけと仮定してよい。一度解錠されたら、どんな文字が来ても解錠されたままだとする。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>個別問題2019(2)と同じ考え方で、「aba」「bac」それぞれの部分一致状況を状態とする。$S_0$（無一致）、$S_a$（"a"）、$S_b$（"b"）、$S_{ab}$（"ab"）、$S_{ba}$（"ba"）、解錠（吸収状態）の6状態。</p></div>
+        <table class="q-table">
+          <tr><th>状態</th><th>a</th><th>b</th><th>c</th></tr>
+          <tr><td>$S_0$（開始）</td><td>$S_a$</td><td>$S_b$</td><td>$S_0$</td></tr>
+          <tr><td>$S_a$</td><td>$S_a$</td><td>$S_{ab}$</td><td>$S_0$</td></tr>
+          <tr><td>$S_b$</td><td>$S_{ba}$</td><td>$S_b$</td><td>$S_0$</td></tr>
+          <tr><td>$S_{ab}$</td><td>解錠</td><td>$S_b$</td><td>$S_0$</td></tr>
+          <tr><td>$S_{ba}$</td><td>$S_a$</td><td>$S_{ab}$</td><td>解錠</td></tr>
+          <tr><td>解錠</td><td>解錠</td><td>解錠</td><td>解錠</td></tr>
+        </table>
+        <div class="proof-body">
+          <p>$S_{ab}$（"ab"まで一致）で"a"を読めば"aba"が完成して即解錠。$S_{ba}$（"ba"まで一致）で"c"を読めば"bac"が完成して即解錠。それ以外は、読んだ文字を末尾に加えた文字列の「一致している最長の接尾辞」がどちらのパターンの先頭と一致するかで遷移先を決める。</p>
+          <p>検算：入力「xbac」の"bac"部分で：$S_0\xrightarrow{b}S_b\xrightarrow{a}S_{ba}\xrightarrow{c}$解錠 ✓。入力「aba」：$S_0\xrightarrow{a}S_a\xrightarrow{b}S_{ab}\xrightarrow{a}$解錠 ✓。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>上表の6状態オートマトン。解錠状態のみ受理、一度入ると出られない。</div>
+      </details>
+
+      <h3>(3) 4の倍数判定オートマトン</h3>
+      <div class="ex"><span class="box-label">問題</span><p>「0」「1」からなる2進数を上位の桁から入力して、入力された数が4の倍数のときに終了状態になるオートマトンを作成して図にしなさい。何も入力がない場合は0と等しいので4の倍数だとする。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>状態は「これまでの値を4で割った余り」（0〜3）。新しい桁$d$を読むと新しい余り$=(2r+d)\bmod4$。余り0が受理（開始状態でもある）。</p></div>
+        <table class="q-table">
+          <tr><th>状態（余り）</th><th>0を読む</th><th>1を読む</th></tr>
+          <tr><td>0（受理・開始）</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>2</td><td>3</td></tr>
+          <tr><td>2</td><td>0</td><td>1</td></tr>
+          <tr><td>3</td><td>2</td><td>3</td></tr>
+        </table>
+        <div class="proof-body"><p>検算：入力「100」（10進4、4の倍数）：余り0→(1を読む)→余り1→(0を読む)→余り2→(0を読む)→余り0。最終余り0で受理 ✓。4状態が必要かつ十分。</p></div>
+        <div class="sol"><span class="box-label">解</span>「余りmod4」を状態とする4状態オートマトン。余り0のみ受理。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「1対1で消し込む」チューリングマシンの型</span>
+        <p>
+          「aの個数がbの個数よりちょうど1多い」という判定は、有限状態機械では原理的に解けない（個別問題2025大問1(C)の証明と同じ理由——差の大きさに上限がない）。チューリングマシンでは「見つけたaとbを1組ずつ印をつけて消し込み、最後に印のついていないaがちょうど1個だけ残るか」を確認する、という手続きで解ける。この「1対1対応の消し込み」は、2つの集合の要素数を直接数えずに比較する（同じか、どちらが多いか）ための、計算理論における基本的なテクニックである。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2019.html">← 2019年度へ</a>
+    <a href="kakomon_2015.html">2015年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

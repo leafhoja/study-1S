@@ -1,0 +1,478 @@
+<!DOCTYPE html><!-- 「予想問題 第6回（Ch.6）— 微分積分学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>予想問題 第6回（Ch.6）— 微分積分学①</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="exam-ch6">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="yosou_ch1.html" data-page="過去問/yosou_ch1">予想問題1</a>
+      <a href="yosou_ch2.html" data-page="過去問/yosou_ch2">予想問題2</a>
+      <a href="yosou_ch3.html" data-page="過去問/yosou_ch3">予想問題3</a>
+      <a href="yosou_ch4.html" data-page="過去問/yosou_ch4">予想問題4</a>
+      <a href="yosou_ch5.html" data-page="過去問/yosou_ch5">予想問題5</a>
+      <a href="yosou_ch6.html" data-page="過去問/yosou_ch6" class="active">予想問題6</a>
+      <a href="yosou_keisan.html" data-page="過去問/yosou_keisan">計算問題集</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>予想問題 第6回</h1>
+  <p class="subtitle">Ch.6 二変数のテーラーの定理と極値問題（全4問）</p>
+</div>
+
+<div class="container">
+
+  <div class="note">
+    <span class="box-label">この問題集の方針</span>
+    <p>
+      以下の4問はすべて<strong>AIが生成したオリジナルの予想問題</strong>であり、過去に実際に出題された試験問題そのものではない。
+      Ch.1〜Ch.6の講義ノート（<a href="../ch1.html">ch1</a>〜<a href="../ch6.html">ch6</a>）で扱った定義・定理・例を土台に、
+      「この範囲ならこう問われそうだ」という想定のもとで作成している。
+    </p>
+    <p>
+      中間試験や過去のレポート課題の傾向は参考程度にとどめ、本番の期末試験がこの通りに出るとは限らない点に注意してほしい。
+      あくまで<strong>Ch.6の内容を自分の手で使いこなせるかを確認するための練習材料</strong>として使うこと。
+      各問題には難易度（★の数、5段階）を付けてあるので、時間配分の目安にしてほしい。
+    </p>
+    <p>
+      2026-07-21の更新でCh.6本文（<a href="../ch6.html#extrema">../ch6.html#extrema</a>）に、判別式 $pr-q^2$ による判定表の
+      根拠となる<strong>補題6.11（2次形式の符号判定・平方完成による証明）</strong>と、それを用いた
+      <strong>定理6.12（極値の2次判定法の厳密な証明）</strong>、さらに臨界点が9個ある例6.3
+      （$f(x,y)=xy(x^2+y^2-1)$）が追加された。これに合わせて、以下の問題6.1・6.3中の判定表への参照は
+      定理6.10（テーラー展開そのもの）ではなく<strong>定理6.12</strong>（判定表の厳密な形）を指すように更新している。
+    </p>
+    <p>
+      なお本回（第6回）をもって、Ch.1〜Ch.6にそれぞれ対応する<strong>本編24問（6回×4問）</strong>の予想問題シリーズは完結する。
+      このあとに続く「計算問題編（番外）」（<a href="yosou_keisan.html">yosou_keisan.html</a>）は、本編とは別枠で
+      計算力そのものを鍛えるための補助教材という位置づけになる。
+    </p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#p6-1">問題6.1</a>
+    <a href="#p6-2">問題6.2</a>
+    <a href="#p6-3">問題6.3</a>
+    <a href="#p6-4">問題6.4</a>
+  </div>
+
+  <!-- 問題6.1 -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="p6-1">
+    <div class="sec-header">
+      <span class="sec-tag">問題 6.1</span>
+      <span class="diff-badge">難易度 ★★☆☆☆</span>
+      <h2>判別式による臨界点の分類</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $f(x,y)=x^3+y^3-3xy$ の全ての臨界点を求め、判別式 $pr-q^2$（定理6.12、<a href="../ch6.html#extrema">../ch6.html#extrema</a>）を用いて
+          各点の種類（極大・極小・鞍点・判定不能）を判定せよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">この問題の位置づけ — 例6.1・例6.2との違い</span>
+        <p>
+          Ch.6本文の例6.1（$f=x^2+y^2$、<a href="../ch6.html#extrema">../ch6.html#extrema</a>）と例6.2（$f=x^2-y^2$）は、いずれも
+          原点<strong>ただ1点</strong>だけが臨界点になる、判別式の使い方を確認するための最も単純な例だった。
+          本問で扱う $f(x,y)=x^3+y^3-3xy$ はそれよりも一段実践的な、教科書でも定番の例（いわゆる「デカルトの正葉線」に
+          対応する曲面）で、臨界点が<strong>複数存在し</strong>、しかもそれぞれの点で判別式の符号が異なるという構造を持つ。
+        </p>
+        <p>
+          この問題のもう一つの学びどころは、<strong>臨界点を求める連立方程式そのものの解き方</strong>にある。
+          $f_x=0,\,f_y=0$ を素朴に連立させると $y=x^2$ と $x=y^2$ という2つの放物線の交点を求める問題になり、
+          このままでは手が止まりやすい。片方をもう片方に<strong>代入して1変数の方程式に帰着させる</strong>という
+          テクニックが必要になる——定理6.12の判定法を当てはめる前段階の「臨界点を確実に全部見つける」計算力も、
+          本問では合わせて問われている。臨界点が複数あり、かつ点ごとに判定結果が分かれるという構造は、
+          Ch.6本文の例6.3（$f=xy(x^2+y^2-1)$、9個の臨界点、<a href="../ch6.html#extrema">../ch6.html#extrema</a>）でも
+          同じ考え方で確認できるので、本問の後に見比べてみるとよい。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">模範解答</span>
+        <p><strong>臨界点を求める：</strong></p>
+        $$f_x = 3x^2-3y = 0 \ \Rightarrow\ y=x^2, \qquad f_y = 3y^2-3x = 0 \ \Rightarrow\ x=y^2.$$
+        <p>$y=x^2$ を $x=y^2$ に代入すると</p>
+        $$x = (x^2)^2 = x^4 \ \Rightarrow\ x^4-x=0 \ \Rightarrow\ x(x^3-1)=0 \ \Rightarrow\ x=0 \text{ または } x=1.$$
+        <p>
+          $x=0$ のとき $y=x^2=0$ より臨界点 $(0,0)$。$x=1$ のとき $y=x^2=1$ より臨界点 $(1,1)$。
+          （$x^3-1=0$ の実数解は $x=1$ のみであることに注意——複素数解は実平面上の臨界点には対応しない。）
+          よって臨界点は $(0,0)$ と $(1,1)$ の2点である。
+        </p>
+
+        <p><strong>2階偏導関数と判別式：</strong></p>
+        $$f_{xx}=6x=p, \qquad f_{xy}=-3=q, \qquad f_{yy}=6y=r.$$
+
+        <p><strong>$(0,0)$ での判定：</strong> $p=6\cdot0=0$, $q=-3$, $r=6\cdot0=0$。</p>
+        $$pr-q^2 = 0\cdot0-(-3)^2 = -9 < 0.$$
+        <p>定理6.12の判定法（<a href="../ch6.html#extrema">../ch6.html#extrema</a>）より、$\det H<0$ なので $(0,0)$ は<strong>鞍点</strong>である。</p>
+
+        <p><strong>$(1,1)$ での判定：</strong> $p=6\cdot1=6$, $q=-3$, $r=6\cdot1=6$。</p>
+        $$pr-q^2 = 6\cdot6-(-3)^2 = 36-9 = 27 > 0.$$
+        <p>
+          $pr-q^2>0$ かつ $p=6>0$ なので、定理6.12の判定法より $(1,1)$ は<strong>極小</strong>である。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 臨界点が複数あることの意味</span>
+        <p>
+          例6.1・例6.2では臨界点が原点1つだけだったため、判別式の判定は「その1点が極大か極小か鞍点か」という
+          単純な二択（三択）の問題だった。本問のように臨界点が複数ある一般の関数では、判別式の計算を
+          <strong>各臨界点ごとに独立に</strong>行う必要がある——$(0,0)$ と $(1,1)$ とで $p,q,r$ の値も判別式の符号も
+          全く異なる結果になったことからも分かる通り、「1つの臨界点での判定結果を他の臨界点にも当てはめる」ことは
+          できない。試験で複数の臨界点が出てきたときは、面倒でも1点ずつ丁寧に $p,q,r$ を評価し直すこと。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 問題6.2 -->
+  <div class="section" id="p6-2">
+    <div class="sec-header">
+      <span class="sec-tag">問題 6.2</span>
+      <span class="diff-badge">難易度 ★★★☆☆</span>
+      <h2>2変数テーラー展開の直接計算と近似値の比較</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $f(x,y)=e^x\cos y$ の原点まわりの2次のテーラー展開（定理6.6、<a href="../ch6.html#taylor2">../ch6.html#taylor2</a>）を求め、
+          それを用いて $f(0.1,0.1)$ の近似値を計算し、真の値と比較せよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">この問題の位置づけ — 「臨界点での」展開から「一般の点での」近似計算へ</span>
+        <p>
+          Ch.6本文で定理6.6・定理6.10が実際に使われる場面は、例6.1・例6.2のようにいずれも<strong>臨界点における</strong>
+          テーラー展開（1次の項 $f_x,f_y$ が消える場合）で、目的も「極大・極小・鞍点のどれか」を判定することに限られていた。
+          本問はそれとは異なり、<strong>原点が臨界点であるとは限らない一般の点</strong>における2次のテーラー展開を計算し、
+          それを実際の<strong>数値近似</strong>として使うという、より総合的な応用問題になっている
+          （実際 $f_x(0,0)=1\ne0$ なので原点は臨界点ではない）。
+        </p>
+        <p>
+          これはCh.2で学んだ1変数のテーラーの定理を、Ch.5の全微分・接平面（定理6.2）の延長線上で2変数へ拡張したものが
+          定理6.6であり、「テーラー展開は極値判定だけでなく、そもそも関数の近似計算そのものに使える」という
+          本来の役割を再確認する問題として位置づけられる。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">模範解答</span>
+        <p><strong>0階〜2階の偏導関数を原点で評価する：</strong></p>
+        $$f(0,0) = e^0\cos0 = 1.$$
+        $$f_x = e^x\cos y, \quad f_x(0,0)=1.$$
+        $$f_y = -e^x\sin y, \quad f_y(0,0)=0.$$
+        $$f_{xx} = e^x\cos y, \quad f_{xx}(0,0)=1=p.$$
+        $$f_{xy} = -e^x\sin y, \quad f_{xy}(0,0)=0=q.$$
+        $$f_{yy} = -e^x\cos y, \quad f_{yy}(0,0)=-1=r.$$
+
+        <p>定理6.6（<a href="../ch6.html#taylor2">../ch6.html#taylor2</a>）より、2次までの近似は</p>
+        $$f(x,y) \approx f(0,0)+f_x(0,0)x+f_y(0,0)y+\frac12\bigl(px^2+2qxy+ry^2\bigr) = 1+x+\frac12(x^2-y^2).$$
+
+        <p><strong>$(x,y)=(0.1,0.1)$ を代入する：</strong></p>
+        $$f(0.1,0.1) \approx 1+0.1+\frac12\bigl(0.01-0.01\bigr) = 1+0.1+0 = 1.1.$$
+
+        <p><strong>真の値との比較：</strong></p>
+        $$e^{0.1}\cos(0.1) \approx 1.10517\times0.99500 \approx 1.10007.$$
+        <p>
+          2次近似による値 $1.1$ と真の値 $\approx1.10007$ は非常に近く、その差はおよそ $0.00007$（$7\times10^{-5}$程度）にすぎない。
+          $(x,y)=(0.1,0.1)$ は原点から十分近い点であり、2次のテーラー展開だけでもきわめて高い精度で $f$ を近似できることが
+          具体的な数値で確認できる。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — なぜ $x^2$ と $y^2$ の項がちょうど打ち消し合ったのか</span>
+        <p>
+          今回たまたま $x=y=0.1$ だったため、2次の項 $\dfrac12(x^2-y^2)$ が $\dfrac12(0.01-0.01)=0$ となり、近似値の計算上は
+          1次近似（$1+x=1.1$）と2次近似が同じ値 $1.1$ になった。これは $p=1,r=-1$ で符号が逆（かつ $q=0$）という
+          $f$ の原点における2階微分係数の特徴（$e^x\cos y$ の $\cos$ 成分が $y$ 方向に「鞍型」の寄与をする）による偶然であり、
+          一般の $(x,y)$（例えば $x\ne y$）ではこの打ち消し合いは起こらず、2次の項が近似の精度向上に寄与する。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 問題6.3 -->
+  <div class="section" id="p6-3">
+    <div class="sec-header">
+      <span class="sec-tag">問題 6.3</span>
+      <span class="diff-badge">難易度 ★★★★☆</span>
+      <h2>判別式が0のとき——2次近似だけでは判定できない例</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $f(x,y)=x^4+y^4$ と $g(x,y)=x^4-y^4$ について、それぞれ原点における $p,q,r$（定理6.12、<a href="../ch6.html#extrema">../ch6.html#extrema</a>
+          の記法）と判別式 $pr-q^2$ を求めよ。両者とも判別式が同じ値になることを確認した上で、$f$ の原点は大域的最小、
+          $g$ の原点は鞍点であることを直接（4次の項を見て）判定し、判別式 $pr-q^2=0$ のときは2次近似だけでは
+          極値の種類を判定できないことを説明せよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">この問題の位置づけ — 定理6.12の判定法の「空欄」を埋める</span>
+        <p>
+          定理6.12の判定法（<a href="../ch6.html#extrema">../ch6.html#extrema</a>）には $pr-q^2>0$（極大・極小）と $pr-q^2<0$（鞍点）の
+          2つの確定的なケースが並んでいるが、Ch.6本文の例6.1・例6.2・例6.3はいずれもこの確定的なケースだけを扱っており、
+          「$pr-q^2=0$：この判定では決まらない」（定理6.12の証明中でも、連続性の議論が $\det H(a,b)\ne0$ を
+          前提にしていたことに対応する）が実際にどういう状況なのかは具体例で確認されていなかった。
+        </p>
+        <p>
+          本問はまさにこの空欄を埋める問題である。$f=x^4+y^4$ と $g=x^4-y^4$ という、係数のうち符号を1つ変えただけの
+          きわめてよく似た2つの関数を用意し、<strong>両者の判別式が全く同じ値（$0$）になるにもかかわらず、
+          実際の極値の種類は正反対（大域的最小 vs 鞍点）である</strong>ことを示す。これは判別式が2次の項だけの情報しか
+          見ていないために起こる限界であり、「判別式が $0$ になったら、2次近似より高次の情報（本問では4次の項）を
+          直接調べる必要がある」という一般的な教訓を、本問を通じて身につけることが目的である。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">模範解答</span>
+        <p><strong>$f(x,y)=x^4+y^4$ の場合：</strong></p>
+        $$f_x=4x^3, \quad f_y=4y^3.$$
+        <p>原点で $f_x(0,0)=f_y(0,0)=0$ なので原点は臨界点。</p>
+        $$f_{xx}=12x^2, \quad f_{xy}=0, \quad f_{yy}=12y^2.$$
+        <p>原点で $p=0,\ q=0,\ r=0$ なので</p>
+        $$pr-q^2 = 0\cdot0-0^2 = 0.$$
+
+        <p><strong>$g(x,y)=x^4-y^4$ の場合：</strong> 同様に</p>
+        $$g_x=4x^3, \quad g_y=-4y^3$$
+        <p>より原点は臨界点で、</p>
+        $$g_{xx}=12x^2, \quad g_{xy}=0, \quad g_{yy}=-12y^2$$
+        <p>より原点で $p=0,\ q=0,\ r=0$、よって</p>
+        $$pr-q^2 = 0\cdot0-0^2 = 0.$$
+
+        <p>
+          <strong>$f$ と $g$ の原点における $p,q,r$ の値、そして判別式 $pr-q^2$ の値は完全に一致する（すべて $0$）。</strong>
+          定理6.12の判定法に従うなら、どちらも「この判定では決まらない」としか言えず、2次近似だけからは
+          $f$ と $g$ の原点での振る舞いの違いを区別できない。
+        </p>
+
+        <p><strong>直接（4次の項を見て）判定する：</strong></p>
+        <p>
+          $f(x,y)=x^4+y^4\ge0$ は任意の $(x,y)$ で成り立ち（4乗はすべて非負）、等号は $(x,y)=(0,0)$ のときに限る。
+          $f(0,0)=0$ なので、
+        </p>
+        $$f(x,y) \ge 0 = f(0,0) \quad (\text{任意の }(x,y)\text{ で}), \qquad f(x,y)>f(0,0)\ ((x,y)\ne(0,0)).$$
+        <p>したがって原点は $f$ の（局所的どころか大域的な）<strong>極小</strong>点である。</p>
+
+        <p>一方 $g$ については、$y=0$ に制限すると</p>
+        $$g(x,0) = x^4 > 0 = g(0,0) \quad (x\ne0),$$
+        <p>$x=0$ に制限すると</p>
+        $$g(0,y) = -y^4 < 0 = g(0,0) \quad (y\ne0)$$
+        <p>
+          となる。つまり原点のどんなに小さい近傍を取っても、$g$ はその中で $g(0,0)$ より大きい値も小さい値も
+          両方とる（$x$軸方向に進めば増加、$y$軸方向に進めば減少）。よって原点は $g$ の極大でも極小でもなく、
+          <strong>鞍点</strong>である（定義6.8・定理6.9、<a href="../ch6.html#extrema">../ch6.html#extrema</a>）。
+        </p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">教訓 — 判別式 $pr-q^2=0$ は「情報不足」を意味する</span>
+        <p>
+          $f=x^4+y^4$ と $g=x^4-y^4$ は原点において $p,q,r$（すなわち2次の項の係数）がすべて等しい（すべて $0$）にもかかわらず、
+          実際の極値の種類は<strong>大域的最小</strong>と<strong>鞍点</strong> という正反対の結果になった。これは2次形式
+          $\frac12(ph^2+2qhk+rk^2)$ 自体が恒等的に $0$ になってしまい、定理6.12（および補題6.11の2次形式の分類）が
+          本来頼っている「2次の項の符号がおおむね関数の増減を支配する」という仕組みそのものが機能しなくなっている
+          ためである。判別式が $0$ になったときは、2次近似だけで結論を出そうとせず、本問のように<strong>次の次数
+          （4次など）の項を直接調べる</strong>か、あるいは制限した直線・曲線に沿って関数の挙動を具体的に追う、
+          という追加の議論が必須になる。この教訓は、Ch.6本文の $\det H(a,b)=0$ に関する注記
+          （<a href="../ch6.html#extrema">../ch6.html#extrema</a>）でも同じ言葉で述べられている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 問題6.4 -->
+  <div class="section" id="p6-4">
+    <div class="sec-header">
+      <span class="sec-tag">問題 6.4</span>
+      <span class="diff-badge">難易度 ★★★★★</span>
+      <h2>3次までの2変数テーラー展開（演算子公式の応用）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $f(x,y)=\sin(x+y^2)$ の原点まわりの3次までの2変数テーラー展開を、命題6.5（<a href="../ch6.html#taylor2">../ch6.html#taylor2</a>）の
+          演算子公式 $(h\partial_x+k\partial_y)^nf(a,b)$ を用いて求めよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">この問題の位置づけ — 演算子公式を3次まで実際に走らせる</span>
+        <p>
+          Ch.6本文は命題6.5で演算子 $h\partial_x+k\partial_y$ による一般論（定理6.7の一般形の背後にある枠組み）を提示するが、
+          具体的な数値計算として確認しているのは定理6.6の $n=2$ の場合までにとどまっている。本問はその先、
+          <strong>3次の項まで</strong>を実際に計算することで、命題6.5・定理6.7の一般形が単なる形式的な表記ではなく、
+          手を動かして最後まで計算しきれる道具であることを確認する発展問題である。
+        </p>
+        <p>
+          さらに本問では、演算子公式による力技の計算に加えて、<strong>$u=x+y^2$ とおいて1変数のテーラー展開
+          $\sin u = u-\dfrac{u^3}{6}+\cdots$ に帰着させる</strong>という近道の別解も用意する。2通りの独立な方法で
+          計算し、結果が一致することを確認する——この「別解で検算する」という姿勢は、本予想問題集（第1回〜第6回）を
+          通じて繰り返し推奨してきた検算習慣であり、全24問シリーズの最終問題である本問はその総仕上げでもある。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">模範解答（演算子公式による計算）</span>
+        <p><strong>原点における偏導関数を次数ごとに計算する。</strong></p>
+
+        <p>0次・1次：</p>
+        $$f=\sin(x+y^2), \qquad f(0,0)=\sin0=0.$$
+        $$f_x=\cos(x+y^2), \quad f_x(0,0)=\cos0=1.$$
+        $$f_y=2y\cos(x+y^2), \quad f_y(0,0)=0.$$
+
+        <p>2次：</p>
+        $$f_{xx}=-\sin(x+y^2), \quad f_{xx}(0,0)=0.$$
+        $$f_{xy}=-2y\sin(x+y^2), \quad f_{xy}(0,0)=0.$$
+        $$f_{yy}=2\cos(x+y^2)-4y^2\sin(x+y^2), \quad f_{yy}(0,0)=2\cos0-0=2.$$
+
+        <p>3次：</p>
+        $$f_{xxx}=-\cos(x+y^2), \quad f_{xxx}(0,0)=-1.$$
+        $$f_{xxy}=-2y\cos(x+y^2), \quad f_{xxy}(0,0)=0.$$
+        $$f_{xyy}=-2\sin(x+y^2)-4y^2\cos(x+y^2), \quad f_{xyy}(0,0)=0.$$
+        <p>
+          $f_{yyy}$ を計算すると、$f_{yy}=2\cos(x+y^2)-4y^2\sin(x+y^2)$ を $y$ でさらに微分した結果は、
+          どの項も $y$ または $y^3$ を因子として持つ（$\partial_y\cos(x+y^2)=-2y\sin(x+y^2)$、
+          $\partial_y\bigl[4y^2\sin(x+y^2)\bigr]=8y\sin(x+y^2)+8y^3\cos(x+y^2)$、いずれも $y$ の因子を含む）ため、
+        </p>
+        $$f_{yyy}(0,0) = 0.$$
+
+        <p>
+          命題6.5の演算子公式は、$n$次の項を $\dfrac1{n!}\displaystyle\sum_{p=0}^n\binom{n}{p}f_{x^py^{n-p}}(0,0)\,x^py^{n-p}$
+          という形にまとめる。これを次数ごとに適用する。
+        </p>
+
+        <p><strong>1次の項：</strong></p>
+        $$f_x(0,0)x+f_y(0,0)y = 1\cdot x+0\cdot y = x.$$
+
+        <p><strong>2次の項：</strong></p>
+        $$\frac1{2!}\bigl(f_{xx}x^2+2f_{xy}xy+f_{yy}y^2\bigr)\Big|_{(0,0)} = \frac12\bigl(0\cdot x^2+2\cdot0\cdot xy+2\cdot y^2\bigr) = \frac12(2y^2) = y^2.$$
+
+        <p><strong>3次の項：</strong></p>
+        $$\frac1{3!}\bigl(f_{xxx}x^3+3f_{xxy}x^2y+3f_{xyy}xy^2+f_{yyy}y^3\bigr)\Big|_{(0,0)} = \frac16\bigl(-1\cdot x^3+0+0+0\bigr) = -\frac{x^3}{6}.$$
+
+        <p>以上をまとめると、3次までの2変数テーラー展開は</p>
+        $$f(x,y) \approx x+y^2-\frac{x^3}{6}.$$
+      </div>
+
+      <div class="note">
+        <span class="box-label">検算（別解） — $u=x+y^2$ に置き換えて1変数展開に帰着させる</span>
+        <p>
+          $u=x+y^2$ とおくと $f(x,y)=\sin u$ である。原点近傍では $x,y$ がともに小さいので $u=x+y^2$ も小さく、
+          1変数のマクローリン展開（Ch.2）</p>
+        $$\sin u = u-\frac{u^3}{6}+\cdots$$
+        <p>
+          がそのまま使える。ここで次数の数え方に注意が必要——$u=x+y^2$ の中で $x$ は1次、$y^2$ は2次の量なので、
+          $u$ 自体は「1次と2次が混ざった量」である。3次までを求めたいので、$u$ と $u^3$ をそれぞれ3次まで展開すればよい。
+        </p>
+        <p>$u=x+y^2$ 自身はすでに3次以下（$x$: 1次、$y^2$: 2次）なのでそのまま使える。次に $u^3$ を展開すると</p>
+        $$u^3 = (x+y^2)^3 = x^3+3x^2y^2+3xy^4+y^6.$$
+        <p>
+          このうち3次以下の項は $x^3$ だけであり、$3x^2y^2$（4次）・$3xy^4$（5次）・$y^6$（6次）はいずれも4次以上なので、
+          3次までの展開では無視できる。よって
+        </p>
+        $$u^3 \approx x^3 \quad(\text{3次まで}).$$
+        <p>したがって</p>
+        $$\sin u \approx u-\frac{u^3}{6} \approx (x+y^2)-\frac{x^3}{6} = x+y^2-\frac{x^3}{6} \quad(\text{3次まで}).$$
+        <p>
+          これは演算子公式による計算結果 $x+y^2-\dfrac{x^3}{6}$ と<strong>完全に一致する</strong>。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">2つの解法の意味——力技と近道、そして検算という習慣</span>
+        <p>
+          演算子公式（命題6.5）による解法は、$f_x,f_y,f_{xx},f_{xy},f_{yy},f_{xxx},f_{xxy},f_{xyy},f_{yyy}$ という
+          9個もの偏導関数を原点で丁寧に評価する必要があり手間がかかるが、<strong>どんな2変数関数にも機械的に適用できる</strong>
+          という汎用性がある。一方 $u=x+y^2$ に置き換える別解は、$f$ が「$\sin$」と「$x+y^2$」の合成関数であるという
+          $f$ 固有の構造を見抜いた上での近道であり、計算量は大幅に減るが、どんな関数にも使えるわけではない
+          （合成関数の内側をうまく1つの変数にまとめられる場合に限られる）。
+        </p>
+        <p>
+          全6回・24問にわたる本予想問題集では、繰り返し「2通りの独立な方法で解いて答えを照合する」という検算の
+          習慣を推奨してきた。本問はその最後を飾るにふさわしく、力技（演算子公式）と近道（変数変換）という
+          対照的な2つのアプローチが同じ結論 $x+y^2-\dfrac{x^3}{6}$ に到達することを確認できた——
+          これは単なる偶然の一致ではなく、命題6.5・定理6.7がテーラー展開の理論として無矛盾であることの
+          具体的な現れでもある。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <span class="sec-tag">Self-Check</span>
+      <h2>自力確認チェックリスト</h2>
+    </div>
+    <div class="sec-body">
+      <p style="margin-bottom:1rem; color:var(--muted); font-size:.9rem;">
+        本回（第6回）は全6回・24問からなる本編予想問題シリーズの最終回である。以下の4項目は、Ch.6だけでなく
+        Ch.1〜Ch.6全体を通じて身につけてほしい2変数の微分積分の総仕上げの視点でもある。
+      </p>
+      <ul class="checklist">
+        <li>臨界点を求める連立方程式（$f_x=0,f_y=0$）を、代入によって1変数の方程式に帰着させて確実に全て求め、判別式 $pr-q^2$（定理6.12）を各臨界点ごとに独立に評価して極大・極小・鞍点を判定できる（問題6.1）。</li>
+        <li>臨界点であるかどうかによらず、任意の点のまわりで2変数のテーラーの定理（定理6.6）の2次近似を計算し、それを具体的な数値近似として使い、真の値との誤差を評価できる（問題6.2）。</li>
+        <li>判別式 $pr-q^2=0$ のときは2次近似だけでは極値の種類が判定できないことを理解し、そのような場合に4次以上の高次の項や制限した直線に沿った直接評価によって結論を出せる（問題6.3）。</li>
+        <li>命題6.5の演算子公式 $(h\partial_x+k\partial_y)^n$ を3次以上の高次まで実際に運用でき、必要に応じて変数変換による近道の別解と照合して検算する習慣を持てる（問題6.4）。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; margin-top:2rem; padding:0 .5rem;">
+    <a href="yosou_ch5.html" style="color:var(--accent); text-decoration:none; font-weight:700;">← 予想問題 第5回</a>
+    <a href="yosou_keisan.html" style="color:var(--accent); text-decoration:none; font-weight:700;">計算問題編（番外）→</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

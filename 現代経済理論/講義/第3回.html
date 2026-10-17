@@ -1,0 +1,645 @@
+<!DOCTYPE html><!-- 「第3回 実証ミクロ経済学：構造推定アプローチ｜現代経済理論」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第3回 実証ミクロ経済学：構造推定アプローチ｜現代経済理論</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="lec-3">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">現代経済理論</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">HOME</a>
+      <a href="index.html" class="active">講義</a>
+      <a href="../kakomon_2025.html">過去問</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <div class="hero-badge">第3回</div>
+  <h1>実証ミクロ経済学：構造推定アプローチ</h1>
+  <p class="subtitle">渡辺安虎｜東京大学大学院経済学研究科</p>
+  <p class="meta">モデルをデータに当てはめる — 離散選択・ゲーム理論と反実仮想｜2026年度 Sターム</p>
+</div>
+
+<div class="container">
+
+  <div class="section-card">
+    <h2><span class="h2-icon">👤</span>講師プロフィール</h2>
+    <div class="teacher-profile">
+      <div class="teacher-icon">🎯</div>
+      <div class="teacher-info">
+        <h3>渡辺安虎</h3>
+        <div class="affil">
+          東京大学大学院経済学研究科 教授（本講義コーディネーター）<br>
+          1998年 東大経済卒 → JICA（約2年半） → 2005年 ペンシルベニア大学 PhD → ノースウェスタン大学ケロッグ経営大学院 助教授 → 香港科技大学ビジネススクール 准教授 → 2017年 アマゾンジャパン シニアエコノミスト（2019年 経済学部門長） → 2019年7月から東大 → 2020年8月から東京大学エコノミックコンサルティング（UTEcon）取締役兼任
+        </div>
+        <div class="specialty">
+          専門：産業組織論・政治経済学・法と経済学・計量マーケティング<br>
+          消費者・患者・医師・地方銀行・投票者・政治家など、様々な行動主体のミクロデータを用いた実証研究
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📖</span>講義概要</h2>
+    <div class="summary-text">
+      <p>
+        第1回では、<strong>すでに起きた</strong>政策や自然実験の効果を測る「因果推論」の手法（RDD・DID）を学んだ。本講義ではもう一つの流れ、<strong>構造推定</strong>アプローチを扱う。
+        構造推定は、個人や企業の意思決定を経済学のモデル（効用最大化やゲーム理論）として明示的に定式化し、そのモデルをデータに当てはめて推定する手法である。
+        モデルさえ推定できれば、<strong>まだ実施していない政策</strong>の結果を予測する「反実仮想」分析が可能になる——これが構造推定の最大の強みである。
+      </p>
+      <p>
+        講師の渡辺安虎は、大学からアマゾンジャパンの経済学部門長を経て東大に戻ったという異色の経歴を持つ。経済学の理論とデータ分析が実務の現場でどう使われているかを、実際の企業・行政の分析例を通じて学ぶ。
+        扱うトピックは、①離散選択モデル（需要推定・自販機のレコメンド効果・投票行動）と②ゲーム理論の推定（参入ゲーム・戦略的投票）の2本柱である。
+      </p>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📋</span>主なトピック</h2>
+    <ul class="topic-list">
+
+      <li>
+        <div class="tn-col"><span class="tn">1</span></div>
+        <div class="topic-content">
+          <span class="topic-title">実証ミクロ経済学と2つのアプローチ</span>
+          <div class="topic-desc">
+            <p>
+              実証ミクロ経済学とは、ミクロ経済学（個人や組織の意思決定を分析する分野）をデータで実証する分野であり、労働経済学・産業組織論・金融経済学・国際経済学・医療経済学など、経済的な側面のあるあらゆる意思決定が分析対象になる。
+            </p>
+            <p>
+              経済学では歴史的に実験を行うという発想があまりなく、多くの重要な政策問題（死刑の抑止効果、最低賃金が雇用に与える影響など）ではランダム化比較試験（RCT）ができない。このため、セレクションバイアスの大きい観察データを分析する手法が発達してきた。その流れは大きく2つある。</p>
+            <ul>
+              <li><strong>流れ①（第1回）</strong>：回帰不連続デザインや差の差、傾向スコアマッチングといった因果推論の道具を使い、<em>すでに起きた</em>政策のTreatment（処置）の効果を推定する。</li>
+              <li><strong>流れ②（本講義）</strong>：個人や企業の行動を最適化問題として明示的にモデル化し、そのモデルを推定する<strong>構造推定</strong>。推定したモデルを使えば、<em>まだ実施していない</em>政策の結果もシミュレーションできる。</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">2</span></div>
+        <div class="topic-content">
+          <span class="topic-title">ルーカス批判 — なぜ構造推定が必要なのか</span>
+          <div class="topic-desc">
+            <p>
+              多くのデータ分析は、YとXのデータから関係 Y = F(X) を推定し、その F(・) を使って予測や政策評価を行う。しかし、この F(・) は<strong>現在の政策環境を所与とした</strong>ときにしか意味を持たない。
+            </p>
+            <div class="def-box">
+              <strong>ルーカス批判（Lucas Critique）</strong>：政策を変更するとゲームのルールが変わり、経済主体の意思決定自体が変化するため、過去のデータから推定したF(・)を用いた政策効果の予測は無意味になりうる。
+            </div>
+            <p>
+              例えば、大学進学補助金がない状態のデータで「大学教育のリターン（進学の結果得られる収入増）」を推計し、それをもとに補助金導入後の進学率を予測すると外れる可能性が高い。
+              補助金の導入は進学の費用構造そのものを変え、誰が進学するか（限界的な進学者の顔ぶれ）も変化させてしまうからだ。
+            </p>
+            <p>
+              この批判への応答が構造推定である。F(・) をブラックボックス（単なる回帰分析やランダムフォレスト）にせず、その中に<strong>経済主体の行動最適化モデル</strong>を組み込んで推定する。こうして推定したモデルを使えば、反実仮想（未実施の政策のシミュレーション）が可能になる。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">3</span></div>
+        <div class="topic-content">
+          <span class="topic-title">離散選択モデルの基本</span>
+          <div class="topic-desc">
+            <p>
+              個人や企業の意思決定には、預金額や労働時間のような連続変数を決める場合もあれば、いくつかの選択肢から1つを選ぶ意思決定も多い（帝王切開か自然分娩か、どの車を買うか、就職するか大学院に進学するか）。
+              それぞれの選択肢に応じた満足度（効用）を考え、最も効用が高い選択肢が選ばれる最適化問題として定式化するのが<strong>離散選択モデル</strong>である。
+            </p>
+            <div class="def-box">
+              <strong>経済主体iの離散選択問題</strong>：max<sub>j∈J</sub> U<sub>ij</sub>，ただし U<sub>ij</sub> = V<sub>ij</sub> + ε<sub>ij</sub><br>
+              J：選択肢の集合、V<sub>ij</sub>：効用のうちランダムでない部分、ε<sub>ij</sub>：ランダムショック（観察できない個人間の異質性を捉える）
+            </div>
+            <p><strong>式の読み方</strong>：iは人、j・kは選択肢である。人iは各選択肢の効用を比べ、最大のjを1つ選ぶ。Vは価格や品質など研究者が説明する部分、εは好み・気分などデータから見えない部分であり、εがあるため同じ属性の人でも選択が分かれる。</p>
+            <p>選択確率は次のように書ける。</p>
+            <div class="def-box">
+              Pr(jを選ぶ) = Pr(U<sub>ij</sub> ≥ U<sub>ik</sub>, ∀k∈J) = Pr(ε<sub>ij</sub> − ε<sub>ik</sub> ≥ V<sub>ik</sub> − V<sub>ij</sub>, ∀k∈J)
+            </div>
+            <p>
+              この選択確率は V の差だけで計算できる。推定は、実際のデータにおける選択の頻度と、モデルが予測する選択確率が一番近くなるように、V に含まれるパラメータを選ぶという原理で行われる。
+            </p>
+            <div class="insight">本当に脳内に「効用」なるものがあるわけでは（多分）ないが、意思決定のインセンティブ構造を捉えるための道具として非常に有用である。</div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">4</span></div>
+        <div class="topic-content">
+          <span class="topic-title">例1：需要推定 — ロジットモデル</span>
+          <div class="topic-desc">
+            <p>自動車の車種ごとの需要推定を例に考える。Jを市場で売っている車、買わない選択肢を V<sub>i0</sub> = 0（外側オプション）として、次のように定式化する。</p>
+            <div class="def-box">
+              V<sub>ij</sub> = −αp<sub>j</sub> + Σ<sub>k</sub>β<sub>k</sub>X<sub>jk</sub> + ζ<sub>j</sub><br>
+              p<sub>j</sub>：車種jの価格、X<sub>jk</sub>：車種jが持つ属性k（4ドア、2000ccなど。自動車を属性の集まりとみなす）、ζ<sub>j</sub>：観察できない品質
+            </div>
+            <p>
+              εが Type-I 極値分布に従うと仮定すると<strong>ロジットモデル</strong>と呼ばれ、選択確率は次のように書ける。
+            </p>
+            <div class="def-box">
+              Pr(jを選ぶ) = exp(V<sub>ij</sub>) / (1 + Σ<sub>k</sub>exp(V<sub>ik</sub>))<br>
+              消費者がM人いれば、車種jへの需要 = M × exp(V<sub>ij</sub>) / (1 + Σ<sub>k</sub>exp(V<sub>ik</sub>))
+            </div>
+            <p>分母の「1」は買わない選択肢（V<sub>i0</sub>=0なのでexp(0)=1）に対応する。ある車jの価格が上がると−αp<sub>j</sub>が下がり、分子が小さくなるため需要も下がる。β<sub>k</sub>は属性kが選ばれやすさをどちら向きに、どの程度変えるかを表す。</p>
+            <p>推定は、この需要がデータを最もよく説明できるようなα・β<sub>k</sub>・ζ<sub>j</sub>を選ぶことで行う。このモデルが推定できると、次のような反実仮想が可能になる。</p>
+            <ul>
+              <li>ある財jが市場から退出したとき、その需要がどの財にどれだけ流れるかがわかる</li>
+              <li>新商品の価格付けや、税・補助金が売上や利益に及ぼす影響がわかる</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">5</span></div>
+        <div class="topic-content">
+          <span class="topic-title">例2：自販機のオススメとタイムプレッシャー</span>
+          <div class="topic-desc">
+            <p>
+              Kawaguchi, Uetake and Watanabe (2019, <em>Marketing Science</em>)。JR駅ホームのデジタルサイネージ付き自販機を使ったフィールド実験。「オススメ」表示は消費者の選択にどう影響するか、また「次の電車までの時間」（タイムプレッシャー）はオススメの効果にどう影響するかを調べた。
+            </p>
+            <p>実験では、時間帯・日付ごとにランダムに選んだ商品をオススメ表示する条件（T）と、オススメなしの条件（C）を割り付けた。効用関数には価格に加え、オススメの有無・同じ自販機内の他商品のオススメ状況・タイムプレッシャー・気温などの文脈変数を組み込む。</p>
+            <p><strong>結果</strong>：①オススメは効く ②タイムプレッシャー（次の電車が近い）はオススメの効果を弱める ③オススメされていない商品にも売上が波及する。</p>
+            <div class="def-box">
+              <strong>③のパズルへの応答：考慮集合（consideration set）</strong><br>
+              オススメが「効用そのもの」ではなく「注意」に影響しているのではないかと考え、効用最大化の前にもう1ステップを加える。ある財jが選択肢集合Jに入るかどうかは"注意水準" W<sub>ij</sub> で決まり、{W<sub>ij</sub> &gt; 0} ならJに入る（W はオススメの有無・オススメ数・タイムプレッシャーなどの関数）。メニュー上の全商品のうち、実際に意思決定者が注意を向けた部分集合だけが選択の対象になる、という2段階モデルである。
+            </div>
+            <p>反実仮想：タイムプレッシャーに応じた最適なオススメ（contextual）をしていたら売上はさらに<strong>+3.7%</strong>上がっていたはずで、これは<strong>5%の値下げの効果より大きい</strong>。</p>
+            <div class="insight"><strong>比較の意味</strong>：+3.7%は実際の売上に対し、推定済みモデルの中で各時点の電車到着までの時間に合わせて推薦商品を変えた場合の増加率である。観察された実験結果そのものではなく、実験で識別した「推薦・注意・時間圧力」のパラメータを使った政策シミュレーションである。</div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">6</span></div>
+        <div class="topic-content">
+          <span class="topic-title">例3：Voter Turnout — 投票率と選好の集計</span>
+          <div class="topic-desc">
+            <p>
+              Kawai, Toyama, and Watanabe (2021, <em>American Economic Journal: Microeconomics</em>)。民主主義では有権者の選好を選挙で集計するが、自由投票の場合、選挙は<strong>投票した人</strong>の選好のみを集計する。
+              投票コストと政治的選好が相関している程度に応じて、選挙結果は有権者全体の選好とは異なる集計結果になりうる。では、この両者はどの程度相関しているのか？
+            </p>
+            <div class="def-box">
+              <strong>投票の計算（calculus of voting, Riker and Ordeshook, 1969）</strong>：有権者は {R, D, 棄権} から選択する。<br>
+              U<sub>R</sub> = pB(X<sub>i</sub>) − C(X<sub>i</sub>) + ε<sub>i</sub>，U<sub>D</sub> = −pB(X<sub>i</sub>) − C(X<sub>i</sub>) + ε<sub>i</sub>，U<sub>0</sub> = 0<br>
+              p：自分の一票が結果に影響を与える確率、B：RとDどちらが当選するかによる効用差、C：投票コスト、X<sub>i</sub>：有権者iの属性
+            </div>
+            <p>County（郡）レベルの投票率・得票率のデータと、人口・社会経済属性の分布データからp・B(・)・C(・)を推定する。</p>
+            <p>
+              <strong>結果</strong>：政治的選好と投票コストには高い相関があった（年齢・学歴・所得が高いほど投票コストが低く、党派的な選好とも相関）。
+              反実仮想「もし投票コストがゼロだったら」をシミュレーションすると、<strong>選挙結果が逆転</strong>する（実際の得票率48.2%対51.8%が、反実仮想では51.9%対48.1%になり、投票率も100%になる）。
+            </p>
+            <div class="insight"><strong>48.2%対51.8%の読み方</strong>：これは実際に投票した人の票の配分である。投票コストを0にした反実仮想では棄権者も投票し、彼らの選好が現在の投票者と異なるため51.9%対48.1%へ逆転する。「棄権者を既存票と同じ比率で足した」計算ではなく、属性ごとの選好と投票コストを推定したモデルによる予測である。</div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">7</span></div>
+        <div class="topic-content">
+          <span class="topic-title">ゲーム理論 — 複数人の戦略的な意思決定</span>
+          <div class="topic-desc">
+            <p>
+              ここまでは1人の意思決定（効用最大化問題）を扱ってきた。では、複数人が戦略的な関係にある場合の意思決定はどう考えればよいか——その理論的な枠組みがゲーム理論である。
+            </p>
+            <p>ゲームは①プレイヤー、②行動、③利得の3要素からなる。有名な囚人のジレンマの利得表は次の通り（数字は左：Aさんの利得、右：Bさんの利得）。</p>
+            <div style="overflow-x:auto;">
+            <table class="q-table" style="width:100%;">
+              <tr><th></th><th>Bさん：黙秘</th><th>Bさん：自白</th></tr>
+              <tr><td>Aさん：黙秘</td><td>−1, −1</td><td>−5, 0</td></tr>
+              <tr><td>Aさん：自白</td><td>0, −5</td><td>−4, −4</td></tr>
+            </table>
+            </div>
+            <p><strong>利得表の読み方</strong>：行がA、列がBの選択で、各マスの左の数がA、右がBの利得である。Bが黙秘ならAは自白で−1から0へ改善し、Bが自白でもAは自白で−5から−4へ改善する。Bにも同じ論理が成り立つので（自白, 自白）が均衡になる。</p>
+            <div class="def-box">
+              <strong>ナッシュ均衡</strong>：お互いの戦略が、相手の戦略に対するベストレスポンス（最適反応）になっている状態。「相手の戦略を固定したとき、自分だけ戦略を変えても得をしない」ことがすべてのプレイヤーについて成り立つ組み合わせ。
+            </div>
+            <p>
+              囚人のジレンマの唯一のナッシュ均衡は（自白, 自白）である。（黙秘, 黙秘）の方が両者にとって望ましい結果（パレート優位）だが、これはナッシュ均衡ではない——<strong>パレート劣位な結果であっても、それがナッシュ均衡でないとは限らない</strong>点に注意が必要である（過去問で繰り返し問われる論点）。
+              「ゲーム理論は結局お話にすぎないのでは」という疑問に対し、本講義では大真面目にゲーム理論モデルをデータに当てはめて推定する。企業や個人の戦略的行動の本質を捉えたモデルであれば、データにもきちんと当てはまるはずである。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">8</span></div>
+        <div class="topic-content">
+          <span class="topic-title">複数均衡と参入ゲーム</span>
+          <div class="topic-desc">
+            <p>
+              通常、経済学に限らず「モデル」は1つの結果を予測するが、ゲーム理論モデルはしばしば<strong>複数の均衡（予測）</strong>を持つ。最初の離散選択モデルの例では効用最大化のもとで一意の予測が得られたが、ここでは必ずしもそうならない。
+            </p>
+            <p><strong>参入ゲーム</strong>：1社のみ参入すれば利益が出るが、2社参入すると利益が出ないような、あまり大きくない市場を考える。</p>
+            <div style="overflow-x:auto;">
+            <table class="q-table" style="width:100%;">
+              <tr><th></th><th>企業2：参入する</th><th>企業2：参入しない</th></tr>
+              <tr><td>企業1：参入する</td><td>−2億円, −3億円</td><td>1億円, 0円</td></tr>
+              <tr><td>企業1：参入しない</td><td>0円, 1.2億円</td><td>0円, 0円</td></tr>
+            </table>
+            </div>
+            <p><strong>表の確認方法</strong>：企業2が参入する列では企業1は「参入しない」（0&gt;−2）、参入しない列では「参入する」（1&gt;0）が最適である。企業2についても同様に各行で比較し、両社の最適反応が重なる右上と左下の2マスが均衡になる。</p>
+            <p>
+              ナッシュ均衡を確認すると、（参入する, 参入しない）と（参入しない, 参入する）の<strong>2つ</strong>が均衡になる。（参入する, 参入する）は両者とも一方的に撤退したくなるため均衡でなく、（参入しない, 参入しない）は一方が参入すれば得をするため均衡でない。
+              どちらの均衡が実現するかは、モデルだけからは決まらない。
+            </p>
+            <p>複数均衡モデルを推定する方針は主に2つある。</p>
+            <ul>
+              <li>①どの均衡が選ばれやすいのかも含めてモデルの一部として推定する</li>
+              <li>②どの均衡が選ばれても矛盾が生じない範囲でモデルを推定する（<strong>部分識別アプローチ</strong>）</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">9</span></div>
+        <div class="topic-content">
+          <span class="topic-title">例4：参入ゲームの推定 — 部分識別</span>
+          <div class="topic-desc">
+            <p>2社の参入ゲームの利益を、企業の属性 x<sub>i</sub> と競争が利益に与える負の効果 Δ<sub>i</sub> を使って次のように定式化する。</p>
+            <div class="def-box">
+              企業i が単独で参入したときの利益：x<sub>i</sub>β<sub>i</sub> + ε<sub>i</sub><br>
+              両社が参入したときの利益：x<sub>i</sub>β<sub>i</sub> + Δ<sub>i</sub> + ε<sub>i</sub>（Δ<sub>i</sub> &lt; 0）
+            </div>
+            <p><strong>記号の区別</strong>：x<sub>i</sub>は市場規模や企業の費用条件など観察できる特徴、β<sub>i</sub>はその特徴を利益に換算する係数、x<sub>i</sub>β<sub>i</sub>はその内積（複数の特徴別効果の合計）である。ε<sub>i</sub>は研究者から見えない利益ショック、Δ<sub>i</sub>は相手も参入したときに追加される競争効果である。ここのβ<sub>i</sub>は入札額bでも、第4回の入札戦略β<sub>i</sub>(·)でもない。</p>
+            <p>
+              各結果がベストレスポンスになっている条件から確率を書き下すと、（参入する,参入しない）と（参入しない,参入する）の両方が同時に均衡になりうる領域（ε<sub>1</sub>–ε<sub>2</sub>平面の中央部分）が生じるため、4通りの結果の確率をすべて足し合わせると<strong>1を超えてしまう</strong>——これは複数均衡の帰結である。
+            </p>
+            <div class="insight"><strong>ε平面の図の読み方</strong>：横軸ε<sub>1</sub>、縦軸ε<sub>2</sub>は各社に固有の観察不能な参入利益ショックで、右・上ほど参入しやすい。境界線は「単独なら参入」「競争相手がいれば退出」が切り替わる損益ゼロ線である。中央領域では二つの非対称な結果がどちらも合理的なので、その領域を両方の結果確率に丸ごと数えると二重計上になる。</div>
+            <div class="def-box">
+              <strong>部分識別の考え方</strong>：一意に結果が定まる領域の確率をPr(D)、複数均衡になる領域の確率をPr(C)とすると、<br>
+              Pr(D) ≤ Pr(参入する,参入しない|x) ≤ Pr(D) + Pr(C)<br>
+              この不等式を満たすパラメータの<strong>集合</strong>を探す（点推定ではなく集合推定になる）。
+            </div>
+            <p>実際の研究では、Ciliberto and Tamer (2009, <em>Econometrica</em>) がこの手法を用いて米国の航空市場のデータを分析している。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">10</span></div>
+        <div class="topic-content">
+          <span class="topic-title">例5：戦略的投票</span>
+          <div class="topic-desc">
+            <p>
+              Kawai and Watanabe (2013, <em>American Economic Review</em>)。政治は戦略的な状況が多く、ゲーム理論が分析に幅広く使われる分野である。
+            </p>
+            <div class="def-box">
+              <strong>戦略的投票者</strong>：3人以上の候補がいる選挙で、「死票にしたくないので、一番好きな候補という訳ではないが、勝てる可能性があるなかではマシな候補に投票する」という考え方をする投票者。
+            </div>
+            <p>これはコーディネーションゲームの一種で、複数均衡を持つ。次のような単純な例で考えると、他の人が何をしそうかによって自分の行動が決まる（バッハとストラビンスキーの好みが一致する2人の例）。</p>
+            <div style="overflow-x:auto;">
+            <table class="q-table" style="width:100%;">
+              <tr><th></th><th>Bach</th><th>Stravinsky</th></tr>
+              <tr><td>Bach</td><td>3, 2</td><td>0, 0</td></tr>
+              <tr><td>Stravinsky</td><td>0, 0</td><td>2, 3</td></tr>
+            </table>
+            </div>
+            <div class="insight"><strong>この図（利得表）が投票とどうつながるか</strong>：行の人はBachをより好み（同調時3）、列の人はStravinskyをより好む（同調時3）が、別々の公演へ行く利得は双方0である。したがって相手がBachへ行くと信じればBach、Stravinskyへ行くと信じればStravinskyが最適で、（Bach, Bach）と（Stravinsky, Stravinsky）の二つが均衡になる。選挙でも「誰が本命か」という共通予想が投票先を変え、その投票が本命を実現させるという自己実現的な循環が起きる。</div>
+            <p>
+              同様に、「勝てる可能性があるなかではマシな候補」を考えるには、他の投票者がだれを「勝てる可能性がある」と考えているかに依存する。候補者A・B・Cに対して、AとBの対決になると主観的に信じる確率をT<sub>AB</sub>とおく。
+            </p>
+            <p>T<sub>AB</sub>は「最終的にAまたはBが勝つ確率」そのものではなく、AとBが接戦となり自分の一票が両者の勝敗を左右する局面への主観的な重みである。T<sub>AB</sub>が大きい人は、第一希望がCでも、AとBのうち好む方へ票を移す誘因が強くなる。</p>
+            <p>
+              市区町村ごとの選好分布・投票コストの分布データを使い、あるパラメータのもとでTを所与にしたときの各属性の投票者の投票行動をシミュレートし、実際の投票データを合理化できる（矛盾を生まない）パラメータの範囲を探す——ここでも部分識別の考え方が使われる。データは2005年の衆議院議員選挙。
+            </p>
+            <div class="def-box">
+              <strong>結果とルーカス批判への応用</strong>：
+              <ol style="margin:6px 0 0 18px; padding:0;">
+                <li>これまでの研究は「一番好きな候補に投票しなかった人の割合」を戦略的投票者の比率としてきた</li>
+                <li>しかし一番好きな候補に投票するかどうかは、その選挙のT次第である</li>
+                <li>推定結果では戦略的投票者は<strong>60〜85%</strong>と多いが、彼らの多くは結果的に一番好きな候補に投票している</li>
+                <li>推定値に基づいて計算すると、実際に一番好きな候補以外に投票した人は<strong>5%弱</strong>で、従来の研究が「戦略的投票」と呼んでいた割合とほぼ一致する</li>
+                <li>戦略的投票者の比率が分からない限り、選挙制度変更などのあらゆる反実仮想は間違った結論を導く</li>
+              </ol>
+            </div>
+            <p>反実仮想「全員が一番好きな候補に投票していたら」を2005年衆院選のデータで計算すると、次のように議席配分が大きく変わりうることが推定された（数値は集合推定のため範囲で示される）。</p>
+            <div style="overflow-x:auto;">
+            <table class="q-table" style="width:100%;">
+              <tr><th></th><th>共産党</th><th>民主党</th><th>自民党</th><th>郵政造反</th></tr>
+              <tr><td>実際の得票率</td><td>7.6%</td><td>38.6%</td><td>49.7%</td><td>34.9%</td></tr>
+              <tr><td>実際の議席数</td><td>0</td><td>33</td><td>118</td><td>8</td></tr>
+              <tr><td>反実仮想の得票率</td><td>[9.1, 14.0]%</td><td>[33.4, 40.0]%</td><td>[42.7, 51.1]%</td><td>[35.4, 49.3]%</td></tr>
+              <tr><td>反実仮想の議席数</td><td>[1, 9]</td><td>[43, 61]</td><td>[79, 101]</td><td>[8, 15]</td></tr>
+            </table>
+            </div>
+            <div class="def-box"><strong>表を読む前提</strong>：分析対象は2005年衆院選の小選挙区で、政党欄は候補の類型である。「郵政造反」は郵政民営化法案に反対して自民党公認を得られず出馬した候補を指す。各列の得票率は、その類型の候補が出た選挙区での票の比率として読むため、列同士を足して100%にする表ではない。</div>
+            <div class="insight"><strong>反実仮想区間の意味</strong>：たとえば共産党の[9.1, 14.0]%は、「全員が勝敗可能性を考えず第一希望へ投票したなら、モデルとデータに矛盾しない得票率は9.1〜14.0%」という集合推定の範囲であり、標準的な95%信頼区間でも、実際の得票率が毎回この範囲で変動するという意味でもない。複数均衡などのためデータだけでは一つの値に絞れず、許容される各パラメータで反実仮想を計算した最小値と最大値を示す。共産党は実際の7.6%より全範囲で高いので、戦略投票で票を失っていたと読める。一方、自民党の実際49.7%は[42.7, 51.1]%内なので、第一希望投票への変更で必ず増減するとは断定できない。</div>
+            <p><strong>議席への変換</strong>：得票率の小さな変化でも、小選挙区では各区の最多得票者だけが当選するため、接戦区が一斉に反転すると議席数は大きく動く。したがって民主党は得票率が実際より低くなりうる範囲を含むのに、議席は33から43〜61へ増えうる。全国的な得票率と、票がどの選挙区に分布するかは別だからである。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">11</span></div>
+        <div class="topic-content">
+          <span class="topic-title">発展：動学的な意思決定と結び</span>
+          <div class="topic-desc">
+            <p>
+              ここまでは1時点の意思決定を扱ってきたが、時間を通じた動学的な意思決定問題も多い（毎期転職するか今の勤務先で続けるかを選ぶキャリア選択、割引セールでの買いだめが起きる程度を分析する動学的需要推定など）。
+              動学ゲームの応用例としては、議会制民主主義国の組閣交渉（憲法の規定がどう影響するか）、医療過誤訴訟の交渉過程（弁護士費用の負担が和解にどう影響するか）、需要縮小市場での消耗戦（相手が退出すれば黒字になると考えて赤字覚悟で営業を続ける）などがある（発展トピックとして概観のみ）。
+            </p>
+            <div class="insight">
+              経済学は想像以上に幅広いトピックを扱う学問であり、人間が関わるほぼすべての意思決定が分析対象になりうる。データさえあれば、実証ミクロ経済学はこうした分析を進める強力な道具になる。文系2類以外からの進学者も多く、大学院から経済学に移る学生もたくさんいる。
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">🏷️</span>重要キーワード</h2>
+    <div class="concept-tags">
+      <span class="concept-tag t-blue">実証ミクロ経済学</span>
+      <span class="concept-tag t-blue">構造推定</span>
+      <span class="concept-tag t-blue">ルーカス批判</span>
+      <span class="concept-tag t-blue">反実仮想分析</span>
+      <span class="concept-tag t-orange">離散選択モデル</span>
+      <span class="concept-tag t-orange">ランダム効用</span>
+      <span class="concept-tag t-orange">ロジットモデル</span>
+      <span class="concept-tag t-orange">外側オプション</span>
+      <span class="concept-tag t-orange">考慮集合</span>
+      <span class="concept-tag">投票の計算</span>
+      <span class="concept-tag t-purple">ナッシュ均衡</span>
+      <span class="concept-tag t-purple">ベストレスポンス</span>
+      <span class="concept-tag t-purple">複数均衡</span>
+      <span class="concept-tag t-purple">部分識別（集合推定）</span>
+      <span class="concept-tag t-gray">戦略的投票</span>
+    </div>
+
+    <div class="kw-detail-list">
+      <p class="kw-detail-label">各キーワードの解説（クリックで展開）</p>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details class="kw-item">
+        <summary class="kw-summary">実証ミクロ経済学</summary>
+        <div class="kw-body">ミクロ経済学（個人や組織の意思決定を分析する分野）をデータで実証する分野。労働経済学・産業組織論・金融経済学・国際経済学・医療経済学など幅広い応用分野を持つ。経済的な側面のあるあらゆる意思決定が分析対象になる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">構造推定</summary>
+        <div class="kw-body">経済主体の行動最適化モデル（効用最大化やゲーム理論）を明示的に組み込んでデータに当てはめる推定手法。誘導形（縮約形）の回帰分析と異なり、モデルさえ推定できれば未実施の政策の効果もシミュレーション（反実仮想）できる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">ルーカス批判</summary>
+        <div class="kw-body">政策を変更すると経済主体の行動自体が変化するため、過去のデータから推定した誘導形モデルF(・)を使った政策効果の予測は無意味になりうるという批判。構造推定はこの批判への応答として、経済主体の最適化行動を明示的にモデル化する。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">反実仮想分析</summary>
+        <div class="kw-body">推定したモデルを使って、実際には起きなかった状況（未実施の政策、異なる意思決定）の結果をシミュレーションする分析。自販機の最適レコメンド、投票コストがゼロだった場合の選挙結果、全員が正直投票した場合の議席配分などがその例。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">離散選択モデル</summary>
+        <div class="kw-body">有限の選択肢から1つを選ぶ意思決定を、効用最大化問題として定式化するモデル。連続変数（貯蓄額・労働時間など）の意思決定には別の手法（回帰分析など）が使われ、離散選択モデルは適用できない。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">ランダム効用</summary>
+        <div class="kw-body">効用 U<sub>ij</sub>=V<sub>ij</sub>+ε<sub>ij</sub> のうち、観察できない個人間の異質性を捉えるランダムな部分ε<sub>ij</sub>を含むモデルの総称。εの分布の仮定（正規分布・極値分布など）によって、プロビットモデルやロジットモデルが導かれる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">ロジットモデル</summary>
+        <div class="kw-body">εがType-I極値分布に従うと仮定したときの離散選択モデル。選択確率が exp(V<sub>ij</sub>)/(1+Σ<sub>k</sub>exp(V<sub>ik</sub>)) という閉じた式で書ける。自動車の需要推定や自販機のレコメンド効果の推定に用いられた。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">外側オプション</summary>
+        <div class="kw-body">「何も選ばない（買わない）」という選択肢。需要推定では効用をV<sub>i0</sub>=0と基準化することが多い。市場に存在する財の集合Jに、この外側オプションを加えて選択確率を計算する。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">考慮集合</summary>
+        <div class="kw-body">意思決定者が実際に検討の対象とする選択肢の部分集合。自販機のレコメンド実験で、オススメされていない商品にも売上が波及した現象を説明するために導入された概念。効用最大化の前に「注意水準」で選択肢集合が絞られる、という2段階モデルで定式化される。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">投票の計算</summary>
+        <div class="kw-body">Riker and Ordeshook (1969) による標準的な投票行動モデル。自分の一票が結果に影響する確率p、当選政党による効用差B、投票コストCから、投票するかどうか・どちらに投票するかを効用最大化として定式化する。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">ナッシュ均衡</summary>
+        <div class="kw-body">お互いの戦略が相手の戦略へのベストレスポンス（最適反応）になっている状態。一方的に戦略を変えても得をしないことが全員について成り立つ。パレート劣位な結果でもナッシュ均衡になりうる点（囚人のジレンマなど）は頻出の注意点。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">ベストレスポンス</summary>
+        <div class="kw-body">相手の戦略を所与としたときの自分にとっての最適な戦略。ナッシュ均衡は、全プレイヤーの戦略が互いにベストレスポンスになっている状態として定義される。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">複数均衡</summary>
+        <div class="kw-body">ゲーム理論モデルがしばしば持つ性質で、1つのパラメータの組に対して複数のナッシュ均衡（予測）が存在すること。参入ゲームやコーディネーションゲーム（戦略的投票など）で典型的に生じる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">部分識別（集合推定）</summary>
+        <div class="kw-body">複数均衡があるとき、どの均衡が選ばれても矛盾が生じない範囲でパラメータを推定する手法。点推定ではなく、パラメータが取りうる範囲（集合）を推定する。Ciliberto and Tamer (2009) の航空市場の参入分析、Kawai and Watanabe (2013) の戦略的投票の分析で用いられた。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">戦略的投票</summary>
+        <div class="kw-body">3人以上の候補がいる選挙で、死票を避けるために一番好きな候補ではなく「勝てる可能性があるなかでマシな候補」に投票する行動。推定では戦略的投票者は60〜85%と多いものの、実際に一番好きな候補以外に投票した人は5%弱にとどまる。</div>
+      </details>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📝</span>過去問との対応</h2>
+    <div class="exam-ref-box">
+
+      <!-- 2025 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2025年度 期末試験</span>
+          <a href="../kakomon_2025.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q25</span><span class="eq-topic">ナッシュ均衡（コーディネーションゲーム）</span></div>
+<div class="exam-qa-q">以下のゲームについて：<br/>
+        (i) {バッハ, バッハ}は{ストラビンスキー, ストラビンスキー}に対してパレート劣位のため逸脱インセンティブがありナッシュ均衡ではない。<br/>
+        (ii) 複数のナッシュ均衡が存在する。</div><table class="q-table">
+<tr><th></th><th>バッハ</th><th>ストラビンスキー</th></tr>
+<tr><td>バッハ</td><td>1, 10</td><td>0, 0</td></tr>
+<tr><td>ストラビンスキー</td><td>0, 0</td><td>5, 12</td></tr>
+</table>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>(i),(ii)とも正しい</li>
+<li class="opt"><span class="opt-label">(b)</span>(i)のみ正しい</li>
+<li class="opt correct"><span class="opt-label">(c)</span>(ii)のみ正しい<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>(i),(ii)とも正しくない</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>NE候補の確認：</p>
+<p><strong>{バッハ, バッハ}(1,10)：</strong>P1: バッハ→1。ストラビンスキーに変えると→0。1&gt;0、逸脱しない。P2: バッハ→10。ストラビンスキーに変えると→0。10&gt;0、逸脱しない。→ <em>NE ✓</em></p>
+<p><strong>{ストラビンスキー, ストラビンスキー}(5,12)：</strong>P1: スト→5。バッハに変えると→0。5&gt;0、逸脱しない。P2: スト→12。バッハに変えると→0。12&gt;0、逸脱しない。→ <em>NE ✓</em></p>
+<p>NEは2つ → <strong>(ii)正しい。</strong></p>
+<p><strong>(i) 誤り。</strong>{バッハ,バッハ}は確かに{スト,スト}よりパレート劣位（1&lt;5かつ10&lt;12）だが、<strong>NE定義は「一方的逸脱」</strong>に関するもの。{バッハ,バッハ}から一方的に逸脱してもP1は0→1から0（改善なし）、P2も10から0（悪化）なので誰も一方的には逸脱しない → NEである。パレート劣位であってもNEになりうる（囚人のジレンマの典型）。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q26</span><span class="eq-topic">離散選択モデルの説明</span></div>
+<div class="exam-qa-q">離散選択モデルの説明として正しいものを選べ。<br/>
+        (i) 有限の選択肢から最も高い効用水準を与える選択肢を選ぶという形で意思決定者の選択をモデル化するのが離散選択モデル。ただし、全ての選択肢を意思決定者が認識しているわけではないため、その場合はモデルの推定値はバイアスを持つ。<br/>
+        (ii) 離散選択モデルは貯蓄額や労働時間といった連続的な変数に関する意思決定をモデルするのに適している。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>(i),(ii)とも正しい</li>
+<li class="opt correct"><span class="opt-label">(b)</span>(i)のみ正しい<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(c)</span>(ii)のみ正しい</li>
+<li class="opt"><span class="opt-label">(d)</span>(i),(ii)とも正しくない</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><strong>(i) 正しい。</strong>離散選択モデル（ロジット・プロビットなど）の基本：意思決定者が有限の選択肢（例：交通手段の選択、商品の選択、就職先の選択）の中から最も効用が高いものを選ぶ、という効用最大化の枠組み。もし消費者が全ての選択肢を考慮に入れていない（考慮集合が限定的）のにモデルが全選択肢を考慮していると仮定すると、推定値にバイアスが生じる。</p>
+<p><strong>(ii) 誤り。</strong>離散選択モデルは<em>離散的な（カテゴリカルな）選択</em>のために設計されている。貯蓄額や労働時間のような「いくら」「何時間」という連続変数の意思決定には、通常の回帰分析（OLS）やトービットモデルなどが適用される。連続変数には離散選択モデルは<em>不適切</em>。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2024年度 期末試験</span>
+          <a href="../kakomon_2024.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q7</span><span class="eq-topic">ルーカス批判</span></div>
+<div class="exam-qa-q">(i) Y=F(X)を推定してもF(·)の形状が政策変更で変化するため正しい予測ができないという批判がルーカス批判。<br/>
+        (ii) 構造モデルを推定しても将来政策の不確実性があり因果推論を取り入れる必要があるという批判がルーカス批判。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>(i),(ii)とも正しい</li>
+<li class="opt correct"><span class="opt-label">(b)</span>(i)のみ正しい<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(c)</span>(ii)のみ正しい</li>
+<li class="opt"><span class="opt-label">(d)</span>(i),(ii)とも正しくない</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><strong>(i) 正しい。</strong>ルーカス批判（1976）の本質：経済主体は合理的期待のもと行動しており、政策が変わると行動パターン（F(·)）も変化する。そのため過去データから推定した縮約形モデルを政策評価に使えない。</p>
+<p><strong>(ii) 誤り。</strong>ルーカス批判への応答は「個々の主体の最適化行動を明示的に組み込んだ構造モデル（DSGEモデル）を使え」ということ。「因果推論を取り入れよ」という主張はルーカス批判とは別の方法論的議論（構造計量経済学vs.縮約形因果推論の議論）。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q8</span><span class="eq-topic">ナッシュ均衡の判定</span></div>
+<div class="exam-qa-q">以下のゲームについて：<br/>
+        (i) {協力しない, 協力しない}はパレート劣位のため逸脱インセンティブがありナッシュ均衡ではない。<br/>
+        (ii) 複数のナッシュ均衡が存在する。</div><table class="q-table">
+<tr><th></th><th>協力する</th><th>協力しない</th></tr>
+<tr><td>協力する</td><td>5, 6</td><td>-2, 5</td></tr>
+<tr><td>協力しない</td><td>4, -3</td><td>0, 1</td></tr>
+</table>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>(i),(ii)とも正しい</li>
+<li class="opt"><span class="opt-label">(b)</span>(i)のみ正しい</li>
+<li class="opt correct"><span class="opt-label">(c)</span>(ii)のみ正しい<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>(i),(ii)とも正しくない</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>全NE候補を確認：</p>
+<p><strong>{協力する, 協力する}(5,6)：</strong>P1: 5 vs 協力しないで4。5&gt;4、逸脱しない。P2: 6 vs 協力しないで5。6&gt;5、逸脱しない。→ <em>NE ✓</em></p>
+<p><strong>{協力する, 協力しない}(-2,5)：</strong>P1: -2 vs 協力しないで0。-2&lt;0、逸脱。→ NEでない。</p>
+<p><strong>{協力しない, 協力する}(4,-3)：</strong>P1: 4 vs 協力するで5。4&lt;5、逸脱。→ NEでない。</p>
+<p><strong>{協力しない, 協力しない}(0,1)：</strong>P1: 0 vs 協力するで-2。0&gt;-2、逸脱しない。P2: 1 vs 協力するで-3。1&gt;-3、逸脱しない。→ <em>NE ✓</em></p>
+<p>NE は {協力する,協力する} と {協力しない,協力しない} の2つ → <strong>(ii)正しい。</strong></p>
+<p><strong>(i) 誤り。</strong>{協力しない,協力しない}はパレート劣位（{協力する,協力する}より両者とも悪い）だが、NE定義は「一方的逸脱で改善しないこと」。パレート劣位であってもNEでありうる（囚人のジレンマと類似）。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2023年度 期末試験</span>
+          <a href="../kakomon_2023.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q25</span><span class="eq-topic">ルーカス批判</span></div>
+<div class="exam-qa-q">ルーカス批判の説明として正しい組み合わせを選べ。<br/>
+        (i) データからY=F(X)を推定しても、政策変更によりF(·)の形状が変化するため正しい政策効果予測ができない。<br/>
+        (ii) 構造モデルを推定しても将来政策の不確実性のためにモデルに因果推論を取り入れる必要があるという批判。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>(i),(ii)とも正しい</li>
+<li class="opt correct"><span class="opt-label">(b)</span>(i)のみ正しい<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(c)</span>(ii)のみ正しい</li>
+<li class="opt"><span class="opt-label">(d)</span>(i),(ii)とも正しくない</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><strong>(i)：正しい。</strong>これがルーカス批判（Lucas Critique, 1976）の核心。過去のデータから推定した計量モデルF(·)は、<em>その政策が実施された環境下での人々の行動パターン</em>を反映している。政策が変わると、経済主体の期待・行動が変わり、F(·)自体の形が変わってしまう。だから過去のモデルを使って新政策の効果を予測しても信頼できない。</p>
+<p><strong>(ii)：誤り。</strong>これはルーカス批判の内容ではない。ルーカス批判への<strong>応答</strong>として「個々の主体の最適化行動（インセンティブ構造）を明示的にモデル化した構造モデル（DSGE等）を使え」という処方箋は存在するが、そこに「因果推論を取り入れよ」という主張はルーカス批判ではなく別の方法論的議論。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q26</span><span class="eq-topic">参入ゲームのナッシュ均衡</span></div>
+<div class="exam-qa-q">以下のゲームのナッシュ均衡の説明として正しい組み合わせを選べ。<br/>
+        (i) {参入する、参入しない}はナッシュ均衡である。<br/>
+        (ii) {参入する、参入する}はナッシュ均衡ではない。</div><table class="q-table">
+<tr><th></th><th>参入する</th><th>参入しない</th></tr>
+<tr><td>参入する</td><td>-5, -5</td><td>4, 0</td></tr>
+<tr><td>参入しない</td><td>0, 4</td><td>0, 0</td></tr>
+</table>
+<ul class="options">
+<li class="opt correct"><span class="opt-label">(a)</span>(i),(ii)とも正しい<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(b)</span>(i)のみ正しい</li>
+<li class="opt"><span class="opt-label">(c)</span>(ii)のみ正しい</li>
+<li class="opt"><span class="opt-label">(d)</span>(i),(ii)とも正しくない</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>ナッシュ均衡とは「相手の戦略を所与としたとき、自分が一方的に戦略を変えても利得が改善しない状態」。</p>
+<p><strong>(i) {参入する, 参入しない}：</strong><br/>
+    P1（行）：参入する → 利得4。参入しないに変えると利得0。4&gt;0なので逸脱しない。<br/>
+    P2（列）：参入しない → 利得0。参入するに変えると利得-5。0&gt;-5なので逸脱しない。<br/>
+    → <em>ナッシュ均衡</em>。(i)は正しい。</p>
+<p><strong>(ii) {参入する, 参入する}：</strong><br/>
+    P1：参入する → 利得-5。参入しないに変えると利得0。0&gt;-5なので<strong>逸脱したい</strong>。<br/>
+    → ナッシュ均衡の定義を満たさない。よって「ナッシュ均衡ではない」という (ii) の命題は正しい。</p>
+<p>（参考）このゲームのナッシュ均衡は {参入する, 参入しない} と {参入しない, 参入する} の2つ。{参入しない, 参入しない} は P1 が参入すると利得 $0 \to 4$ と改善するため NE でない。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="lecture-nav">
+    <a href="第2回.html">← 第2回</a>
+    <a href="index.html" class="center">講義一覧</a>
+    <a href="第4回.html">第4回 →</a>
+  </div>
+
+</div>
+
+<script>
+// 押されたボタンに対応する解説欄の表示を切り替える。
+function toggleExp(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const opt = e.target.closest('.opt');
+  if (!opt) return;
+  const options = opt.closest('.options');
+  if (!options || options.classList.contains('revealed')) return;
+  options.classList.add('revealed');
+  opt.classList.add('selected');
+});
+</script>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">現代経済理論（渡辺安虎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+</body>
+</html>

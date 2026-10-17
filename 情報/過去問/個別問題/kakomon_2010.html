@@ -1,0 +1,234 @@
+<!DOCTYPE html><!-- 「2010年度 | 情報 個別問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2010年度 | 情報 個別問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2010">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2010年度</h1>
+  <p class="subtitle">田中哲朗クラス（理科一類7,23,25組）｜7月27日（火）2限</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">個別問題1（ED21機械語シミュレータ）</a>
+    <a href="#q2">個別問題2（ブール代数・標準形）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">個別問題 1</div><h2>ED21機械語シミュレータのプログラム解読</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>プログラムシミュレータED21の機械語の命令集合の一部は次の通り。<code>LOAD n</code>：n番地の内容をアキュムレータにコピーする。<code>ADD n</code>：n番地の値をアキュムレータの値に加える。<code>STORE n</code>：アキュムレータの値をn番地に格納する。<code>STOP n</code>：プログラムを終了する。<code>MUL n</code>：アキュムレータの値にn番地の値を掛ける。<code>SUB n</code>：アキュムレータの値からn番地の値を引く。<code>J n</code>：無条件でn番地にジャンプする。<code>JM n</code>：アキュムレータの値が負のときにn番地にジャンプする。<code>JZ n</code>：アキュムレータの値がゼロのときにn番地にジャンプする。</p>
+        <p>たとえば、以下のプログラムを0番地から実行すると、停止時にはアキュムレータに1からnまでの和が得られ、その実行ステップ数は$8n+1$になる（最後のSTOP命令も実行ステップに数える）。</p>
+        <div class="mathblock">0: LOAD 10
+1: ADD 11
+2: STORE 10
+3: LOAD 11
+4: SUB 12
+5: STORE 11
+6: JZ 8
+7: J 0
+8: LOAD 10
+9: STOP 0
+
+10: 0
+11: n (1≤n≤50)
+12: 1</div>
+        <p>以下のプログラム(1),(2)について、(a) 何をするプログラムか、(b) n,mの内容を変更したときの実行ステップ数はいくつか、を例と同様に答えなさい。</p>
+      </div>
+
+      <h3>(1) プログラム(1)</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <div class="mathblock">0: LOAD 8
+1: STORE 10
+2: SUB 9
+3: JM 6
+4: LOAD 9
+5: STORE 10
+6: LOAD 10
+7: STOP 0
+
+8: m (0≤m≤100)
+9: n (0≤n≤100)
+10: 0</div>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>1ステップずつ実際にたどる。0:<code>LOAD 8</code>でACC$=m$。1:<code>STORE 10</code>で10番地に$m$を書き込む（この時点で10番地$=m$）。2:<code>SUB 9</code>でACC$=m-n$。3:<code>JM 6</code>はACCが負のとき、すなわち$m\lt n$のときだけ6番地へジャンプする。</p>
+          <ul>
+            <li><strong>$m\ge n$の場合（ジャンプしない）</strong>：続けて4:<code>LOAD 9</code>でACC$=n$、5:<code>STORE 10</code>で10番地を$n$に書き換える、6:<code>LOAD 10</code>でACC$=n$、7:<code>STOP</code>。最終結果は$n$。</li>
+            <li><strong>$m\lt n$の場合（6番地へジャンプ）</strong>：4,5番地は実行されず、10番地は1番地で書き込んだ$m$のまま変更されていない。6:<code>LOAD 10</code>でACC$=m$、7:<code>STOP</code>。最終結果は$m$。</li>
+          </ul>
+          <p>どちらの場合も出力は「$m$と$n$のうち小さい方」に一致している。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <p>(a) <strong>$m$と$n$のうち小さい方（$\min(m,n)$）を求めるプログラム</strong>である。</p>
+          <p>(b) 実行ステップ数：
+          </p>
+          <ul>
+            <li>$m\ge n$のとき：0,1,2,3（JMは分岐せず継続）の4ステップ＋4,5,6,7の4ステップ＝<strong>8ステップ</strong>。</li>
+            <li>$m\lt n$のとき：0,1,2,3（JMが分岐）の4ステップ＋（6番地へジャンプして）6,7の2ステップ＝<strong>6ステップ</strong>。</li>
+          </ul>
+        </div>
+      </details>
+
+      <h3>(2) プログラム(2)</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <div class="mathblock">0: LOAD 11
+1: SUB 12
+2: STORE 11
+3: JZ 8
+4: LOAD 13
+5: MUL 14
+6: STORE 13
+7: J 0
+8: LOAD 13
+9: SUB 15
+10: STOP 0
+
+11: 5
+12: 1
+13: 1
+14: n (1≤n≤5)
+15: m (1≤m≤10)</div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>11番地$=5$をカウンタ$K$、12番地$=1$を定数、13番地$=1$を累積変数$P$（初期値1）、14番地$=n$、15番地$=m$とする。0〜7番地がループ本体であり、1回実行するごとに次を行う：0:<code>LOAD 11</code>でACC$=K$、1:<code>SUB 12</code>でACC$=K-1$、2:<code>STORE 11</code>で$K$を$K-1$に更新、3:<code>JZ 8</code>はここでACC（$=K-1$）が0のときだけ8番地へジャンプしてループを抜け、そうでなければ続けて4:<code>LOAD 13</code>でACC$=P$、5:<code>MUL 14</code>でACC$=P\times n$、6:<code>STORE 13</code>で$P$を$P\times n$に更新、7:<code>J 0</code>で0番地に戻る。</p>
+          <p>$K$は$5,4,3,2,1,0$と1ずつ減っていき、「$K-1=0$」すなわち$K$が$1$から$0$になる<strong>5回目の反復</strong>でJZが発動してループを抜ける。JZが発動したその回（5回目）はステップ4〜7（$P$の更新）を実行しないまま8番地に飛ぶ。したがって$P$が更新されるのは1回目から4回目の反復のみであり、$P=1\times n\times n\times n\times n=n^4$（初期値1に$n$を4回掛ける）となる。ループを抜けた後：8:<code>LOAD 13</code>でACC$=n^4$、9:<code>SUB 15</code>でACC$=n^4-m$、10:<code>STOP</code>。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <p>(a) <strong>$n^4-m$を計算するプログラム</strong>である。</p>
+          <p>(b) 実行ステップ数：1〜4回目の反復はそれぞれステップ0,1,2,3,4,5,6,7の8ステップを実行する（合計$4\times8=32$ステップ）。5回目の反復はステップ0,1,2,3のみを実行し（JZが発動して8番地へ飛ぶ、4ステップ）、その後8,9,10の3ステップを実行する。合計$=32+4+3=$<strong>39ステップ</strong>。</p>
+          <p>この39という回数は11番地の初期値（5）によって決まる固定のループ回数のみに依存しており、<strong>n,mの具体的な値を変更しても実行ステップ数は変わらない（常に39ステップ）</strong>。これはプログラム(1)（$m,n$の大小関係によってステップ数が8か6かに変わる）とは対照的な点であり、プログラム(2)では制御フロー（ループの回数）が$n,m$の値そのものには依存せず、11番地に格納された固定のカウンタ値だけで決まるためである。</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 実行時間は入力の値に依存するか</span>
+        <p>プログラム(1)と(2)を並べると、「実行ステップ数が入力の値によって変わるかどうか」という対比が浮かび上がる。プログラム(1)は$m,n$の大小関係によって分岐先が変わり、ステップ数も8ステップと6ステップの間で変化する——これは条件分岐（<code>JM</code>）の結果が入力の値そのものに依存するためである。一方プログラム(2)は、ループを制御している11番地の値が固定の定数（5）であるため、$n,m$の値をどう変えても反復回数自体は変わらず、実行ステップ数は常に39で一定になる。この違いは、アルゴリズムの計算量を分析する際に基本となる視点——「実行時間が入力サイズ・入力値に依存するか、それとも一定（定数時間的な制御構造）か」——の具体例になっている。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">個別問題 2</div><h2>ブール代数：真理値表・MIL記法・標準形の変換</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>ブール代数の演算規則（交換則・結合則・分配則・ド・モルガン則等）が既知として与えられている。次の2つの論理式について、(1) 真理値表を書き、(2) AND,OR,NOTの3種類の論理回路だけを使って実現しMIL記法で書き、(3) ブール代数の演算規則を使って標準形を相互に変換しなさい。</p>
+        <p>(a) $x_1\cdot\overline{x_2}+\overline{x_1}\cdot x_2$</p>
+        <p>(b) $(x_1+\overline{x_2})\cdot(\overline{x_1}+x_2)$</p>
+      </div>
+
+      <h3>(1) 真理値表</h3>
+      <div class="ex"><span class="box-label">問題</span><p>(a),(b)式に対応する真理値表を書きなさい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>$x_1,x_2$の4通り（$(0,0),(0,1),(1,0),(1,1)$の順）について値を求める。</p>
+          <p>(a) $x_1\overline{x_2}+\overline{x_1}x_2$：$(0,0):0\cdot1+1\cdot0=0$。$(0,1):0\cdot0+1\cdot1=1$。$(1,0):1\cdot1+0\cdot0=1$。$(1,1):1\cdot0+0\cdot1=0$。</p>
+          <p>(b) $(x_1+\overline{x_2})(\overline{x_1}+x_2)$：$(0,0):(0+1)(1+0)=1\times1=1$。$(0,1):(0+0)(1+1)=0\times1=0$。$(1,0):(1+1)(0+0)=1\times0=0$。$(1,1):(1+0)(0+1)=1\times1=1$。</p>
+        </div>
+        <table class="q-table">
+          <tr><th>$x_1$</th><th>$x_2$</th><th>(a)</th><th>(b)</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+        </table>
+        <div class="sol"><span class="box-label">解</span>(a)の真理値表は $0,1,1,0$（これはちょうど$\mathrm{XOR}(x_1,x_2)$である）。(b)の真理値表は $1,0,0,1$（これはちょうど$\mathrm{EQ}(x_1,x_2)$、すなわちXNORである——(a)のXORとちょうど逆の真理値表になっている）。</div>
+      </details>
+
+      <h3>(2) AND・OR・NOTによるMIL記法</h3>
+      <div class="ex"><span class="box-label">問題</span><p>(a),(b)式に対応する論理回路をAND,OR,NOTの3種類の論理回路だけを使って実現し、MIL記法で書きなさい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(a) $x_1\overline{x_2}+\overline{x_1}x_2$は与えられた式のままAND・OR・NOTに素直に対応させればよい：NOTで$\overline{x_2}$を作り、ANDで$x_1\cdot\overline{x_2}$（項1）を作る。NOTで$\overline{x_1}$を作り、ANDで$\overline{x_1}\cdot x_2$（項2）を作る。最後にORで項1と項2を合成する。</p>
+          <p>(b) $(x_1+\overline{x_2})(\overline{x_1}+x_2)$も同様に、AND/ORの役割を入れ替えて対応させる：NOTで$\overline{x_2}$を作り、ORで$x_1+\overline{x_2}$（項1）を作る。NOTで$\overline{x_1}$を作り、ORで$\overline{x_1}+x_2$（項2）を作る。最後にANDで項1と項2を合成する。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <p>(a) NOT($x_2$)→$\overline{x_2}$、AND($x_1,\overline{x_2}$)→項1、NOT($x_1$)→$\overline{x_1}$、AND($\overline{x_1},x_2$)→項2、OR(項1,項2)→$d$。<strong>NOT2個＋AND2個＋OR1個の合計5個</strong>で実現できる。</p>
+          <p>(b) NOT($x_2$)→$\overline{x_2}$、OR($x_1,\overline{x_2}$)→項1、NOT($x_1$)→$\overline{x_1}$、OR($\overline{x_1},x_2$)→項2、AND(項1,項2)→$d$。<strong>NOT2個＋OR2個＋AND1個の合計5個</strong>で実現できる。</p>
+        </div>
+      </details>
+
+      <h3>(3) 加算標準形と乗算標準形の相互変換</h3>
+      <div class="ex"><span class="box-label">問題</span><p>ブール代数の演算規則を使って、加算標準形（積和標準形、リテラルの論理積の論理和で表現）で表された(a)式を乗算標準形（和積標準形、リテラルの論理和の論理積で表現）に直しなさい。また、乗算標準形で表された(b)式を加算標準形に直しなさい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(a)は既に加算標準形（SOP）として与えられているので、これを乗算標準形（POS）に変換する。真理値表で出力が0になる行を探すと$(0,0)$と$(1,1)$である。各行からマクスターム（各変数について、値が0ならその変数、値が1ならその否定を使って作るリテラルの論理和）を作る：$(0,0)\to(x_1+x_2)$、$(1,1)\to(\overline{x_1}+\overline{x_2})$。これらの論理積が乗算標準形になる。</p>
+          <p>(b)は乗算標準形（POS）として与えられているので、これを加算標準形（SOP）に変換する。真理値表で出力が1になる行を探すと$(0,0)$と$(1,1)$である。各行からミンターム（各変数について、値が0ならその否定を、値が1ならその変数を使って作るリテラルの論理積）を作る：$(0,0)\to\overline{x_1}\,\overline{x_2}$、$(1,1)\to x_1x_2$。これらの論理和が加算標準形になる。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <p>(a)の乗算標準形：$$(x_1+x_2)\cdot(\overline{x_1}+\overline{x_2})$$</p>
+          <p>(b)の加算標準形：$$\overline{x_1}\,\overline{x_2}+x_1x_2$$</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — XORとEQ(XNOR)は互いに真理値表を反転した関係</span>
+        <p>(1)で見たように、(a)はXOR、(b)はEQ（XNOR）であり、両者は互いに真理値表の0と1を反転した関係にある（$\overline{\mathrm{XOR}(x_1,x_2)}=\mathrm{EQ}(x_1,x_2)$）。これはまさに(3)で行った変換操作——加算標準形は真理値表の「1になる行」から、乗算標準形は真理値表の「0になる行」から作る——という手続きそのものに対応している。個別問題1のED21プログラムの読解とは扱う対象は異なるが、両問題とも「与えられた仕組みが何を計算しているかを、手順を1つずつ丁寧に追って理解する」という情報科学の基本的な読解力を問う問題である点は共通している。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2011.html">← 2011年度へ</a>
+    <a href="kakomon_2009.html">2009年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲朗）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

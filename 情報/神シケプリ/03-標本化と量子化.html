@@ -1,0 +1,287 @@
+<!DOCTYPE html><!-- 「03 標本化・量子化 | 神シケプリ | 情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>03 標本化・量子化 | 神シケプリ | 情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kami-03">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">神シケプリ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>神シケプリ 03 — 標本化・量子化</h1>
+  <p class="subtitle">アナログ量をディジタル量に変換する2つのステップと、標本化定理</p>
+  <p class="meta">教科書対応箇所 pp.52-56</p>
+</div>
+
+<div class="container">
+
+  <div class="def">
+    <span class="box-label">定義 — 標本化（サンプリング）</span>
+    <p>
+      音量などの連続的に変化する量（アナログ量）を、一定の時間間隔で測定することを<strong>標本化
+      （サンプリング）</strong>という。1秒あたりに測定する回数を<strong>サンプリング周波数</strong>
+      といい、音楽CDでは <strong>44.1kHz</strong>（1秒間に44,100回）のサンプリング周波数が
+      用いられている。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — 量子化</span>
+    <p>
+      標本化によって得られた各時刻の値を、離散的な整数値で近似することを<strong>量子化</strong>
+      という。何段階の整数値で近似するかを表すビット数を<strong>量子化ビット数</strong>といい、
+      音楽CDでは <strong>16ビット</strong>（$2^{16}=65536$ 段階）の量子化が行われている。
+      標本化・量子化の2ステップを経ることで、はじめてアナログ量をディジタル量（0と1の並び）
+      として記録できるようになる。
+    </p>
+  </div>
+
+  <div class="prop">
+    <span class="box-label">性質 — 標本化定理（ナイキストの定理）</span>
+    <p>
+      ある周波数の音を標本化によって正しく記録するためには、サンプリング周波数がその音の周波数の
+      <strong>2倍以上</strong>でなければならない（<strong>標本化定理</strong>、あるいは
+      <strong>ナイキストの定理</strong>と呼ばれる）。言い換えると、サンプリング周波数の半分
+      （<strong>ナイキスト周波数</strong>）を超える周波数の音は正しく記録できず、
+      <strong>エイリアシング</strong>と呼ばれる現象によって再生時に波形が歪んでしまう。
+    </p>
+    <p>
+      音楽CDのサンプリング周波数は44.1kHzなので、ナイキスト周波数は $44.1/2=22.05$ kHz。
+      つまり音楽CDが正しく記録できるのは22.05kHz以下の音に限られる。人間の可聴域はおよそ
+      20Hzから20,000Hz（20kHz）程度とされているため、22.05kHzという上限は可聴域全体を
+      カバーするのに十分な値になっている。
+    </p>
+  </div>
+
+  <div class="note">
+    <span class="box-label">出題対策のポイント</span>
+    <p>
+      共通問題第1問では、標本化・量子化がしばしば出題される。音声の例（音楽CD）だけを
+      覚えるのではなく、画像（ピクセル・明るさ）の場合の標本化・量子化についても一度自分で
+      解いておき、「連続量を離散的な単位（時間の間隔／空間の画素）に分ける作業」と
+      「各単位の値を離散的な数値で近似する作業」という2ステップの構造がどの題材でも
+      共通していることを理解しておくとよい。
+    </p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">第1問（2009年度共通問題1-1）</a>
+    <a href="#q2">第2問（2013年度共通問題1）</a>
+    <a href="#q3">第3問（2006年度共通問題1）</a>
+  </div>
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">第1問</div><h2>2009年度共通問題1-1 — 音楽CDのデータ量計算</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          音楽CD（コンパクトディスク）は，2ch（ステレオ）で約74分の音を記録することができる．
+          これに関して以下の各問にすべて答えなさい．
+        </p>
+        <p>
+          (1) 音楽CDにおける量子化と標本化について以下の用語・数値を必ず1回以上用いて2〜3行程度で
+          記述しなさい．（用いた用語・数値の部分に下線を引くこと．）
+        </p>
+        <p style="margin-left:1.2rem;">量子化，標本化，44.1kHz，16ビット</p>
+        <p>
+          (2) （1）で答えた量子化・標本化の方法で，2ch（ステレオ）で1秒分の音を記録すると
+          何ビット必要になるか答えなさい．（計算式も記述すること．）
+        </p>
+        <p>
+          (3) （1）で答えた量子化・標本化の方法で，74分の音を記録するためのデータ量は
+          何バイト必要か答えなさい．（計算式も記述すること．）
+        </p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            (1) 例：音楽CDでは、音を一定の時間間隔で測定する<u>標本化</u>を<u>44.1kHz</u>の周波数
+            （1秒間に44100回）で行い、得られた各時刻の音量を、離散的な整数値で近似する
+            <u>量子化</u>によって<u>16ビット</u>（$2^{16}=65536$ 段階）の値として記録している。
+            （下線部が指定された用語・数値。）
+          </p>
+          <p>
+            (2) 1chあたりの1秒間のビット数は、サンプリング周波数×量子化ビット数で
+          </p>
+          <div class="mathblock">$$44100\ (\text{回/秒}) \times 16\ (\text{ビット}) = 705{,}600\ \text{ビット/秒}$$</div>
+          <p>
+            2ch（ステレオ）なのでこれを2倍して
+          </p>
+          <div class="mathblock">$$44100 \times 16 \times 2 = \mathbf{1{,}411{,}200}\ \text{ビット/秒}$$</div>
+          <p>
+            (3) 74分を秒に直すと $74\times60=4440$ 秒。(2)の1秒あたりのビット数に秒数を掛けると
+            総ビット数は
+          </p>
+          <div class="mathblock">$$1{,}411{,}200 \times 4440 = 6{,}265{,}728{,}000\ \text{ビット}$$</div>
+          <p>
+            8ビット＝1バイトなのでバイトに直すと
+          </p>
+          <div class="mathblock">$$1{,}411{,}200 \times 4440 \div 8 = \mathbf{783{,}216{,}000}\ \text{バイト}\ (\text{約}783.2\text{MB})$$</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(2) 1,411,200ビット/秒　(3) 783,216,000バイト（約783MB）</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 単位の掛け算の順番を崩さない</span>
+        <p>
+          この手のデータ量計算は「サンプリング周波数 × 量子化ビット数 × チャンネル数 × 時間（秒）」を
+          この順に掛けていくだけで求まるが、時間の単位（分→秒）とビット・バイトの単位変換
+          （$\div 8$）のどちらかを一つ忘れるだけで答えがまるごと不正解になる。計算式を省略せず
+          書くよう指示されているのも、単位の変換過程を採点者に見せるためだと考えるとよい。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">第2問</div><h2>2013年度共通問題1（抜粋） — 画像の標本化・量子化と穴埋め</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>以下のアからコの空欄にもっともよくあてはまる言葉を答えよ．</p>
+        <p>
+          ある情報を連続量として表すことを<span class="blank">ア</span>表現と呼ぶ．これに対して，
+          ある情報を離散的に表すことを<span class="blank">イ</span>表現と呼ぶ．ここで，プリントされた
+          白黒写真をスキャンしてコンピュータに取り込む例を考える．プリントされた白黒写真は
+          <span class="blank">ア</span>画像なので，コンピュータで扱うためには<span class="blank">イ</span>
+          画像に変換する必要がある．そこで，空間的に連続である画像を画素（ピクセル）に分ける
+          <span class="blank">ウ</span>の作業と各画素の明るさを離散的に表現する<span class="blank">エ</span>
+          の作業が必要になる．例えば，横×縦を$128\times128$画素で<span class="blank">ウ</span>し，
+          それぞれの画素の明るさを12ビットで<span class="blank">エ</span>すると，この画像全体の情報は
+          <span class="blank">オ</span>ビットで表現される．
+        </p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>
+            音の場合と同じく、画像でも「連続量→離散量」への変換は<strong>空間的な分割（標本化）</strong>と
+            <strong>値の近似（量子化）</strong>の2段階に分かれる：
+          </p>
+          <p>
+            <span class="blank">ア=アナログ</span>／<span class="blank">イ=ディジタル</span>／
+            <span class="blank">ウ=標本化</span>（画像を画素に分割する作業）／
+            <span class="blank">エ=量子化</span>（各画素の明るさを離散的な数値で近似する作業）
+          </p>
+          <p>
+            オ：画素数は $128\times128=16{,}384$ 個、各画素12ビットなので、画像全体の情報量は
+          </p>
+          <div class="mathblock">$$128\times128\times12 = 16{,}384\times12 = \mathbf{196{,}608}\ \text{ビット}$$</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>ア=アナログ　イ=ディジタル　ウ=標本化　エ=量子化　オ=196,608ビット</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 音と画像で対応する概念</span>
+        <p>
+          音の標本化・量子化と画像の標本化・量子化は完全に対応している：音では「時間を一定間隔で
+          区切る」ことが標本化、画像では「空間（縦横）を画素に区切る」ことが標本化にあたる。
+          同様に「音量を整数値で近似する」ことと「明るさ（あるいは色）を整数値で近似する」ことが
+          どちらも量子化にあたる。CDのビットレート計算（第1問）と画像の情報量計算（本問オ）が
+          どちらも「標本化の細かさ×量子化ビット数（×次元数）」という同じ形の掛け算になっている
+          点に注目すると覚えやすい。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q3">
+    <div class="sec-header"><div class="sec-tag">第3問</div><h2>2006年度共通問題1（抜粋） — 誤りの指摘：標本化定理と量子化ビット数</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>以下の文章にはそれぞれ誤りがある．その誤りを指摘し，誤りと判断する主な理由を簡潔に述べよ．</p>
+        <p>
+          (a) 音楽CDはサンプリング周波数が44100Hzであり，理論上周波数が44100Hzの音まで再現できる．
+        </p>
+        <p>
+          (b) 音楽CDが量子化のために16ビットを用いている理由は，人間の可聴域（音を音として
+          感じられる周波数帯域）が20Hzから20000Hz程度であるためである．
+        </p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            (a) 誤り。標本化定理（ナイキストの定理）により、サンプリングによって正しく再現できる
+            音の周波数は、サンプリング周波数の<strong>半分</strong>（ナイキスト周波数）以下に
+            限られる。44100Hzでサンプリングした場合、理論上再現できるのは
+            $44100\div2=\mathbf{22050}$Hz以下の音までであり、44100Hzの音までそのまま
+            再現できるわけではない（44100Hzの音を44100Hzでサンプリングすると、1周期あたり
+            1点しか測定できず波形の情報が失われ、エイリアシングが生じる）。
+          </p>
+          <p>
+            (b) 誤り。量子化ビット数（16ビット）が関係するのは、音量（振幅）をどれだけ細かい
+            段階に分けて表現できるか、というダイナミックレンジ・音量の分解能の問題であり、
+            記録できる<strong>周波数</strong>の範囲とは無関係である。可聴域が20Hz〜20000Hz程度
+            であることが関係するのは、むしろ<strong>サンプリング周波数</strong>の側であり
+            （44.1kHzという値は、標本化定理よりこの可聴域の上限20kHzの2倍以上になるよう
+            選ばれている）、量子化ビット数を16ビットにしている理由の説明としては誤り
+            （「周波数の話」と「音量の話」という2つの異なる概念を取り違えている）。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a) 再現できるのは半分の22050Hz以下（標本化定理）　(b) 16ビットは音量の分解能の話で、可聴域（周波数）とは無関係</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 標本化・量子化のセットで問われるのは「なぜその数値なのか」</span>
+        <p>
+          この3問を通して問われているのは、44.1kHz・16ビットという数値を暗記しているかどうか
+          ではなく、<strong>その数値がなぜその値になっているのかを自分の言葉と式で説明できるか</strong>
+          である。第1問は標本化・量子化の数値からデータ量を式で導出する力を、第2問は音の話を
+          画像という別の題材に一般化して同じ構造を見抜く力を、第3問は標本化定理（周波数の話）と
+          量子化ビット数（音量の話）という2つの独立した概念を混同していないかを、それぞれ
+          別の角度から確認している。数値そのものを覚えるだけでなく、標本化定理から
+          ナイキスト周波数を導く計算、量子化ビット数から段階数・データ量を導く計算を、
+          その都度自分で再現できるようにしておきたい。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="02-符号化.html">← 02 符号化</a>
+    <a href="04-ネットワーク.html">04 ネットワークへ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#164e63">
+<title>第2回 数値表現と計算誤差 | アルゴリズム入門</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+<script>
+MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams'}, options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body class="algorithm-page" data-nav-page="lecture2">
+<nav class="navbar">
+<div class="navbar-inner"><a class="navbar-brand" href="index.html">アルゴリズム入門</a>
+<div class="navbar-links"><a href="../index.html" class="nav-back">← 学習ノート</a><a href="index.html">トップ</a><a href="lecture1.html" data-page="lecture1">第1回</a><a href="lecture2.html" data-page="lecture2" class="active">第2回</a><a href="index.html#exams">過去問</a>
+</div>
+</div></nav>
+<div class="hero">
+<h1>第2回 数値表現と計算誤差</h1>
+<p class="subtitle">整数・二の補数・浮動小数点と、誤差を避ける式変形</p>
+<p class="meta">地引昌弘 · 1A · 2026年10月15日</p>
+</div>
+<main class="container">
+<div class="intro-box">第2回の講義資料に基づく解説。数値の表現と演算の精度を区別し、演習で理由を確かめる。</div>
+<nav class="toc" aria-label="ページ内目次"><a href="#review">1. 前回演習：タプル・剰余・インデント</a><a href="#binary">2. 位取りと小数の二進表現</a><a href="#integer">3. 符号なし整数と二の補数</a><a href="#float">4. 浮動小数点と整数除算</a><a href="#errors">5. 丸め誤差・情報落ち・桁落ち</a><a href="#exercises">6. 演習2-1〜2-4の解答</a><a href="#reference">7. 復習と参考</a></nav>
+<section class="section" id="review">
+<div class="sec-header">
+<h2>1. 前回演習：タプル・剰余・インデント</h2>
+</div>
+<div class="sec-body">
+<p>Pythonではインデントがブロックの範囲そのものを決める。<code>return</code> の字下げを変えれば、繰り返しの途中で関数が終了することもある。</p><pre><code class="language-python">def plus_minus(x, y):
+    return x + y, x - y
+
+def multiply(x, y):
+    return x * y
+
+a, b = plus_minus(5, 3)
+multiply(a, b)                 # 16
+multiply(*plus_minus(5, 3))    # 16</code></pre><p>タプルを1個の引数として渡す <code>multiply(plus_minus(5,3))</code> では、引数が2個必要な関数に1個しか渡らない。<code>*</code> は関数呼び出しで要素を展開する記法。複数代入による展開も使える。</p>
+<div class="def"><span class="box-label">負数の剰余と整数商</span>整数商は $q=\lfloor x/y\rfloor$、剰余は $r=x-qy$。例えば $-8=(-2)	imes5+2$ なので <code>-8 % 5 == 2</code>。<code>int(-1.6)</code> は0方向への切り捨てで <code>-1</code>、<code>-8 // 5</code> は床で <code>-2</code>。</div>
+</div>
+</section>
+<section class="section" id="binary">
+<div class="sec-header">
+<h2>2. 位取りと小数の二進表現</h2>
+</div>
+<div class="sec-body">
+<p>基数$b$の位取りでは、各桁に $b^i$ の重みがある。$1011_2=8+2+1=11$、$0.101_2=1/2+1/8=0.625$。</p>
+<p>整数部分は2で割った余りを逆順に、小数部分は2倍した結果の整数部分を順に読む。0.625なら $0.625\times2=1.25$、$0.25\times2=0.5$、$0.5\times2=1.0$ より、小数部分は101となる。</p>
+<div class="thm"><span class="box-label">有限小数になる条件</span>既約分数 $p/q$ が有限の二進小数となるのは、分母$q$が2のべきの場合。$1/8=0.001_2$ は有限だが、$1/10$ は分母に5を含み、$0.000110011\ldots_2$ と循環する。</div>
+</div>
+</section>
+<section class="section" id="integer">
+<div class="sec-header">
+<h2>3. 符号なし整数と二の補数</h2>
+</div>
+<div class="sec-body">
+<p>$b$ビットの符号なし整数の範囲は $0\leq x\leq2^b-1$。二の補数では最上位ビットの重みを $-2^{b-1}$ とし、範囲は $-2^{b-1}\leq x\leq2^{b-1}-1$。</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>3ビット</th><th>符号なし</th><th>二の補数</th></tr></thead>
+<tbody>
+<tr><td>000</td><td>0</td><td>0</td></tr>
+<tr><td>001</td><td>1</td><td>1</td></tr>
+<tr><td>010</td><td>2</td><td>2</td></tr>
+<tr><td>011</td><td>3</td><td>3</td></tr>
+<tr><td>100</td><td>4</td><td>−4</td></tr>
+<tr><td>101</td><td>5</td><td>−3</td></tr>
+<tr><td>110</td><td>6</td><td>−2</td></tr>
+<tr><td>111</td><td>7</td><td>−1</td></tr></tbody></table>
+</div>
+<p>3の表現011を反転して100、1を足すと101で−3になる。加算は下位$b$ビットを残せばよいが、数学上の答えが表現範囲から外れる場合にはオーバーフローする。</p>
+<div class="warn"><span class="box-label">固定幅整数とPythonのintを区別する</span>3ビットの <code>011 + 001 = 100</code> は、二の補数では $3+1=-4$ になってしまう。最小値−4の符号反転も100に戻り、+4は表せない。Pythonの <code>int</code> は必要に応じて桁を増やすので、この固定幅の折り返しは起きない。ただし時間とメモリは必要になる。</div>
+</div>
+</section>
+<section class="section" id="float">
+<div class="sec-header">
+<h2>4. 浮動小数点と整数除算</h2>
+</div>
+<div class="sec-body">
+<p>固定小数点では小数点の位置を固定する。浮動小数点では符号・仮数・指数に分け、広い範囲を表す。通常のPython処理系の <code>float</code> はIEEE 754のbinary64を使う。</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>形式</th><th>符号</th><th>指数</th><th>格納する小数部</th><th>正規数の有効精度</th></tr></thead>
+<tbody>
+<tr><td>単精度 binary32</td><td>1ビット</td><td>8ビット</td><td>23ビット</td><td>先頭の1を含め24ビット</td></tr>
+<tr><td>倍精度 binary64</td><td>1ビット</td><td>11ビット</td><td>52ビット</td><td>先頭の1を含め53ビット</td></tr></tbody></table>
+</div>
+<p>正規化されたbinary64の有限値は $(-1)^s(1.f)_2\,2^{E-1023}$。この式は指数部が特殊値用となるゼロ・非正規数・無限大・NaNにはそのまま適用しない。単精度の指数バイアスは127。</p>
+<p>例：$43.75=101011.11_2=1.0101111_2\times2^5$。単精度では符号0、指数132（10000100）、小数部0101111の後ろを0で埋める。</p><pre><code class="language-python">10 / 2       # 5.0：割り切れても float
+10 // 3      # 3
+-10 // 3     # -4：負の無限大方向
+int(-10 / 3) # -3：0方向
+2 ** 53 + 1  # 9007199254740993：intでは正確
+float(2 ** 53) + 1.0 == float(2 ** 53)  # True</code></pre><p>Python 3の <code>/</code> は、商が整数かどうかにかかわらず浮動小数点の除算。大きな整数の商が欲しい場合、いったん <code>/</code> でfloatにしてから <code>int</code> に戻す方法は精度を失うことがある。</p>
+</div>
+</section>
+<section class="section" id="errors">
+<div class="sec-header">
+<h2>5. 丸め誤差・情報落ち・桁落ち</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>種類</th><th>何が起きるか</th><th>例</th></tr></thead>
+<tbody>
+<tr><td>丸め誤差</td><td>表せる値への近似に伴う誤差</td><td>0.1を有限の二進小数へ変換する</td></tr>
+<tr><td>情報落ち</td><td>大きな値に対して小さな増分が保持されない</td><td><code>1e16 + 1.0 == 1e16</code></td></tr>
+<tr><td>桁落ち</td><td>近い値の差で有効桁が消え、元の近似誤差が相対的に目立つ</td><td><code>sqrt(1+x)-1</code>、xが0に近いとき</td></tr></tbody></table>
+</div>
+<p>桁落ちは「引き算の操作が必ず新しい大きな絶対誤差を作る」という意味ではない。入力に含まれた誤差に対して答えが小さくなり、相対誤差が拡大する点が重要である。</p>
+<h3>有理化で桁落ちを避ける</h3>
+<div class="mathblock">$$\sqrt{1+x}-1=\frac{x}{\sqrt{1+x}+1}$$</div><pre><code class="language-python">import math
+
+def naive(x):
+    return math.sqrt(1 + x) - 1
+
+def stable(x):
+    return x / (math.sqrt(1 + x) + 1)
+
+# x=1e-16 では naive は0.0、stable は約5e-17</code></pre><p>実数範囲では $x\geq-1$。$x$が十分小さければ値は約$x/2$。表示桁数を増やすだけでは、この式変形の代わりにはならない。</p>
+</div>
+</section>
+<section class="section" id="exercises">
+<div class="sec-header">
+<h2>6. 演習2-1〜2-4の解答</h2>
+</div>
+<div class="sec-body">
+<h3>2-1：整数と浮動小数点の加算</h3>
+<p><code>2**53 + 1</code> は正確な整数だが、<code>float(2**53) + 1.0</code> は2**53と同じ値に丸められる。この大きさでは隣接するfloatの間隔が2となり、増分1を保持できない。</p>
+<h3>2-2：割り算と逆数の掛け算</h3>
+<p>例えば <code>7.0 / 8.0</code> と <code>7.0 * 0.125</code> は同じ0.875。逆数1/8は有限の二進小数なので、2のべきによる指数の調整で計算できる。通常の有限値で、オーバーフローやアンダーフローなどを除いた範囲の話である。「どんな値・どんな極端な範囲でも保証」と読み広げない。</p>
+<h3>2-3：誤差の分類</h3><ol type="a"><li><code>7/10</code> と <code>7.0*0.1</code>：0.1の表現誤差と演算時の丸め。途中に近似された0.1を掛けるかどうかが違う。</li><li><code>(1e8+1)**2</code> と展開式：大きな二乗の値に比べて末尾の+1が小さく、保持されない情報落ち。実行環境の通常のbinary64では、どちらも同じ値になる場合がある。設問の「等しくならなかった」を無条件の実行結果として覚えず、実際の値と評価順を確認する。</li><li><code>1234567890.12345-1234567890.0</code>：大きく近い数の差で有効桁が減り、最初の小数の表現誤差が残る桁落ち。</li></ol>
+<h3>2-4：複素数の絶対値</h3><pre><code class="language-python">import math
+
+def complex_add(a1, b1, a2, b2):
+    return a1 + a2, b1 + b2
+
+def complex_abs(a, b):
+    return math.sqrt(a * a + b * b)
+
+complex_abs(*complex_add(1e8, 0, 1, 0))  # 100000001.0
+complex_abs(*complex_add(1e8, 0, 0, 1))  # 100000000.0</code></pre><p>$|10^8+1|$では1が実部に直接加わり、$10^8+1$自体は正確に表せる。一方、$|10^8+i|=\sqrt{10^{16}+1}$ では、二乗和の+1が情報落ちする。また数学的な絶対値の増分自体も約 $5\times10^{-9}$ であり、$10^8$付近のfloatの間隔より小さい。</p>
+</div>
+</section>
+<section class="section" id="reference">
+<div class="sec-header">
+<h2>7. 復習と参考</h2>
+</div>
+<div class="sec-body">
+<p>「どの演算で、どの量が、どの量に比べて小さいのか」を明示すれば、誤差の説明は具体的になる。単に「コンピュータだから誤差が出る」では十分でない。</p>
+<p>Pythonの仕様の補足：<a href="https://docs.python.org/ja/3/tutorial/floatingpoint.html">公式チュートリアル：浮動小数点演算、その問題と制限</a>、<a href="https://docs.python.org/ja/3/library/stdtypes.html#numeric-types-int-float-complex">公式リファレンス：数値型</a>。</p>
+<p><a href="lecture1.html" data-page="lecture1">← 第1回を復習する</a></p>
+</div>
+</section>
+<div class="page-nav"><a href="index.html">← 科目トップ</a><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">ページ上部へ ↑</a>
+</div></main>
+<footer class="site-footer">アルゴリズム入門 · 1A · 学習ノート</footer>
+<script src="../common.js"></script>
+<script src="nav.js"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html><!-- 「線形代数 予想問題 第3回 固有値・対角化 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>線形代数 予想問題 第3回 固有値・対角化 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="yosou_lin_02.html" data-page="yosou/yosou_lin_02">← 前のテーマ</a>
+      <a href="yosou_lin_04.html" data-page="yosou/yosou_lin_04">次のテーマ →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-linear">
+  <h1>線形代数学演習　予想問題　第3回</h1>
+  <p class="subtitle">行列式・固有値・対角化・行列のべき乗（全5問）</p>
+</div>
+
+<div class="container">
+
+<!-- 免責 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#fff5f5; color:#c53030;">⚠️ この問題セットについて</div>
+  <div class="section-card-body">
+    <div class="warn-box">
+      <div class="warn-title">AIが作成した予想問題です（実際の試験問題ではありません）</div>
+      <p>演習第3回（<a href="../linear/lin_03.html">行列式・逆行列・固有値・対角化</a>）と同程度〜少し発展した難易度で構成した学習用オリジナル問題です。全4テーマ・20問構成の第3回です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 このテーマの要点</div>
+  <div class="section-card-body">
+    <div class="def-box">
+      <div class="def-title">この5問で使う道具</div>
+      <ul>
+        <li>固有値：$\det(A-\lambda E)=0$。$2\times2$ では $\lambda^2-(\mathrm{tr}\,A)\lambda+\det A=0$（Vieta で速解き）</li>
+        <li>対角化：$P=(v_1,\ldots,v_n)$（固有ベクトルを列に）で $P^{-1}AP=\mathrm{diag}(\lambda_1,\ldots,\lambda_n)$，$A^n=PA^nP^{-1}$</li>
+        <li>Cayley-Hamilton：$A^2-(\mathrm{tr}\,A)A+(\det A)E=O$（$2\times2$）</li>
+        <li>対角化可能性の判定：すべての固有値で代数的重複度 $=$ 幾何的重複度</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">1</span> 固有値・固有ベクトル・対角化・$A^n$（基本）
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$A=\begin{pmatrix}3&2\\1&4\end{pmatrix}$ に対し，固有値・固有ベクトルを求め，対角化して $A^n$（$n$：自然数）を求めよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$\mathrm{tr}\,A=7$，$\det A=12-2=10$。特性方程式 $\lambda^2-7\lambda+10=(\lambda-2)(\lambda-5)=0$ より $\lambda=2,5$。</p>
+      <p><strong>$\lambda=2$：</strong>$(A-2E)v=0 \Leftrightarrow x+2y=0$。$v_1=\begin{pmatrix}-2\\1\end{pmatrix}$。</p>
+      <p><strong>$\lambda=5$：</strong>$(A-5E)v=0 \Leftrightarrow -2x+2y=0 \Leftrightarrow x=y$。$v_2=\begin{pmatrix}1\\1\end{pmatrix}$。</p>
+      <p>$P=\begin{pmatrix}-2&1\\1&1\end{pmatrix}$，$\det P=-3$，$P^{-1}=\dfrac{1}{-3}\begin{pmatrix}1&-1\\-1&-2\end{pmatrix}=\begin{pmatrix}-\tfrac13&\tfrac13\\\tfrac13&\tfrac23\end{pmatrix}$。</p>
+      $$A^n = P\begin{pmatrix}2^n&0\\0&5^n\end{pmatrix}P^{-1} = \boxed{\frac13\begin{pmatrix}2\cdot2^n+5^n & -2\cdot2^n+2\cdot5^n\\ -2^n+5^n & 2^n+2\cdot5^n\end{pmatrix}}$$
+      <p>検算（$n=1$）：$(1,1)$成分 $\frac13(4+5)=3$ ✓，$(1,2)$成分 $\frac13(-4+10)=2$ ✓，$(2,1)$成分 $\frac13(-2+5)=1$ ✓，$(2,2)$成分 $\frac13(2+10)=4$ ✓</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>「固有方程式 → 固有値 → 固有ベクトル → $P$ → $A=PA P^{-1}$ → $A^n=PA^nP^{-1}$」という一連の流れを機械的に実行するだけの，対角化の基本問題。$\mathrm{tr},\det$ から Vieta の公式で固有値の見当をつけると計算が速い（この場合「和が7，積が10」の2数として $2,5$ がすぐ分かる）。</p>
+      <p><strong>この形を見たら対角化を疑う：</strong>「$A^n$（$n$ は自然数・変数）を求めよ」という問い方は，対角化を使え，というほぼ確実な合図である。$A$ を $n$ 回掛け合わせるのを愚直に計算するのは非現実的なので，$A=PA P^{-1}$ の形に分解して $A^n=PA^nP^{-1}$（対角行列の $n$ 乗は対角成分をそれぞれ $n$ 乗するだけ）に帰着させる，という発想がすべての出発点になる。固有値が整数などきれいな数のときはこの方法が最速だが，固有値が汚い数（無理数・複素数）になる場合は Cayley-Hamilton による漸化式（問3参照）の方が有利になることもある，という使い分けも意識しておきたい。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $(A-\lambda E)v=0$ という式はどこから来るか</div>
+        <p>固有ベクトルの定義は $Av=\lambda v$（$v\ne0$）。右辺を左辺に移項すると $Av-\lambda v=0$，すなわち $(A-\lambda E)v=0$。$v\ne0$ の解が存在するには $A-\lambda E$ が正則であってはならない（正則なら両辺に左から $(A-\lambda E)^{-1}$ を掛けて $v=0$ しか出てこない）。つまり「$\det(A-\lambda E)=0$」という特性方程式は，まさに「$v\ne0$ の解をもつための条件」として逆算的に出てくる式であり，これが固有値の定義そのものの由来になっている。この見方をしておくと，特性方程式を解いた後に $(A-\lambda E)v=0$ を解く際，$2\times2$ なら2本の式が必ず比例することが最初から分かる（$A-\lambda E$ の行列式が $0$ になるよう $\lambda$ を選んだのだから）。よって1本の式だけを使えばよく，計算の見通しが立つ。</p>
+      </div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $P^{-1}$ の作り方（$2\times2$ 逆行列の公式＝アジュゲート）</div>
+        <p>$2\times2$ 行列 $M=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ の逆行列は $M^{-1}=\dfrac{1}{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$（対角成分を入れ替え，非対角成分の符号を反転してから $\det M=ad-bc$ で割る）という公式を暗記しておくと毎回一瞬で計算できる。今回 $P=\begin{pmatrix}-2&1\\1&1\end{pmatrix}$ なら $a=-2,b=1,c=1,d=1$，$\det P=-2\cdot1-1\cdot1=-3$。公式に代入すると $P^{-1}=\dfrac{1}{-3}\begin{pmatrix}1&-1\\-1&-2\end{pmatrix}$ となり，模範解答の値と一致する。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>固有ベクトルはスカラー倍の自由度があるので $(-2,1)$ でも $(2,-1)$ でも $(-4,2)$ でもよいが，$P$ を組んだ後は必ず $Av_i=\lambda_iv_i$ を代入して検算する習慣をつけること。また，$P$ の列の順番（$\lambda=2$ の固有ベクトルを1列目に置くか2列目に置くか）は自由だが，対応する $A=\mathrm{diag}(\lambda_1,\lambda_2)$ の対角成分の並び順もそれと完全に揃えなければならない——ここがズレると全く違う（間違った）答えになる，非常に典型的な失点パターンである。</p>
+      <p><strong>一般化：</strong>この手順は「対角化可能な行列の $n$ 乗（さらには $e^{At}$ のような行列の関数）を求める」という一般的なテクニックの最も基本的な具体例。行列の指数関数を使う連立微分方程式（$\dot{\mathbf{x}}=A\mathbf{x}$）の解法など，後続の応用分野でもこの「対角化 → 対角成分だけ処理 → 元に戻す」という発想がそのまま使われる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">2</span> $3\times3$ 行列の対角化と $A^n$
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$A=\begin{pmatrix}4&-2&-1\\1&1&-1\\2&-2&1\end{pmatrix}$ に対し，固有値がすべて異なる実数であることを確認し，対角化して $A^n$ を求めよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$\mathrm{tr}\,A=4+1+1=6$，$\det A=6$（余因子展開で計算，各自確認）。特性多項式を計算すると</p>
+      $$\det(A-\lambda E) = -(\lambda-1)(\lambda-2)(\lambda-3)$$
+      <p>（検算：定数項 $=-(-1)(-2)(-3)=6=\det A$ ✓，$\lambda^2$ の係数 $=1+2+3=6=\mathrm{tr}\,A$ ✓）よって固有値は $\lambda=1,2,3$（すべて異なるので自動的に対角化可能）。</p>
+      <p>固有ベクトルを求める：</p>
+      <ul>
+        <li>$\lambda=1$：$(A-E)v=0$。第1式 $3x-2y-z=0$，第2式 $x-z=0$（$x=z$）。代入して $3x-2y-x=0\Rightarrow y=x$。$v_1=(1,1,1)^{\top}$。</li>
+        <li>$\lambda=2$：$(A-2E)v=0$。第2式 $x-y-z=0$，第3式 $2x-2y-z=0$。2式引くと $x=0$。第2式より $y=-z$。$z=-1$ とおくと $v_2=(0,1,-1)^{\top}$… ではなく整合を確認すると $v_2=(1,1,0)^{\top}$ が実際の固有ベクトル（下記検算参照）。</li>
+        <li>$\lambda=3$：同様に計算すると $v_3=(1,0,1)^{\top}$ が得られる。</li>
+      </ul>
+      <p>（検算：$Av_1=\begin{pmatrix}4-2-1\\1+1-1\\2-2+1\end{pmatrix}=\begin{pmatrix}1\\1\\1\end{pmatrix}=1\cdot v_1$ ✓，$Av_2=\begin{pmatrix}4-2\\1+1\\2-2\end{pmatrix}=\begin{pmatrix}2\\2\\0\end{pmatrix}=2v_2$ ✓，$Av_3=\begin{pmatrix}4-1\\1-1\\2+1\end{pmatrix}=\begin{pmatrix}3\\0\\3\end{pmatrix}=3v_3$ ✓）</p>
+      <p>$P=\begin{pmatrix}1&1&1\\1&1&0\\1&0&1\end{pmatrix}$，$\det P=-1$，$P^{-1}=\begin{pmatrix}-1&1&1\\1&0&-1\\1&-1&0\end{pmatrix}$。よって</p>
+      $$A^n = P\,\mathrm{diag}(1^n,2^n,3^n)\,P^{-1} = \boxed{\begin{pmatrix}2^n+3^n-1 & 1-3^n & 1-2^n\\ 2^n-1 & 1 & 1-2^n\\ 3^n-1 & 1-3^n & 1\end{pmatrix}}$$
+      <p>検算（$n=1$）：各成分に $n=1$ を代入すると $\begin{pmatrix}2+3-1&1-3&1-2\\2-1&1&1-2\\3-1&1-3&1\end{pmatrix}=\begin{pmatrix}4&-2&-1\\1&1&-1\\2&-2&1\end{pmatrix}=A$ ✓</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>$3\times3$ でも手順は $2\times2$ と全く同じ（固有値 → 固有ベクトル → $P$ → $A^n=PA^nP^{-1}$）。唯一の違いは特性多項式が3次式になる点と，固有ベクトルを求める連立方程式が3変数になる点。<strong>固有値がすべて異なれば，証明なしで自動的に対角化可能</strong>という事実（異なる固有値の固有ベクトルは必ず1次独立になる）を使えるので，(問3-5)のように重複固有値の場合分けが不要で計算に専念できる。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 特性多項式の因数 $-(\lambda-1)(\lambda-2)(\lambda-3)$ はどこから来るか</div>
+        <p>$3\times3$ の特性方程式は3次式なので，因数分解できるかどうかは自明ではない。実務的な手順は「整数解の候補を絞って代入してみる」こと。$\det(A-\lambda E)$ は $\lambda^3$ の係数が $-1$，定数項が $\det A=6$ になる（一般に $n\times n$ 行列で，特性多項式の定数項は $\det A$，最高次係数は $(-1)^n$）。整数の固有値をもつなら，それは定数項 $6$ の約数 $\pm1,\pm2,\pm3,\pm6$ のどれかである可能性が高い（有理根定理の考え方）。実際に $\lambda=1$ を代入すると $\det(A-E)=0$ となることが確認でき，$(\lambda-1)$ が因数だと分かる。同様に $\lambda=2,3$ も根であることを確認すれば，3次式の根は多くとも3個なのでこれで終了。$\mathrm{tr}\,A=1+2+3=6$，$\det A=1\cdot2\cdot3=6$ が両方一致することも，因数分解の正しさを裏付ける検算になる。</p>
+      </div>
+      <p><strong>よくある間違い（この解答自身にある落とし穴）：</strong>$\lambda=2$ の固有ベクトルの計算は符号ミスが起きやすい典型例。$A-2E=\begin{pmatrix}2&-2&-1\\1&-1&-1\\2&-2&-1\end{pmatrix}$ を計算すると，第1式と第3式は同一の式（$2x-2y-z=0$）で，独立な式は第2式 $x-y-z=0$ とこの $2x-2y-z=0$ の2本だけ。この2本を正しく引くと $(2x-2y-z)-(x-y-z)=x-y=0$，つまり<strong>$x=y$</strong>（「$x=0$」ではない！ここが符号・項の見落としで最も間違えやすい箇所）。$x=y$ を第2式 $x-y-z=0$ に代入すると $0-z=0$ より $z=0$。よって $v_2=(1,1,0)^{\top}$ となり，模範解答が最終的に採用している値と一致する（検算 $Av_2=(4-2,\,1+1,\,2-2)=(2,2,0)=2v_2$ も成立）。<strong>3変数の連立方程式で「2本の式を引く」ときは，どの2本を選んだか，各項の符号を毎回丁寧に書き出して確認する</strong>のが，$3\times3$以上の対角化問題で最も失点しやすい部分への対策になる。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 検算の技法：$\mathrm{tr}$ と $\det$ を2度使う</div>
+        <p>特性多項式の定数項は $(-1)^n\det A$，$\lambda^{n-1}$ の係数は $(-1)^{n-1}\mathrm{tr}\,A$ になる（一般の $n\times n$ 行列でも成立）。$3\times3$ でも特性多項式を展開する前に $\mathrm{tr}\,A,\det A$ を計算しておき，得られた特性多項式の対応する係数と照合すれば計算ミスをその場で発見できる。</p>
+      </div>
+      <p><strong>一般化（なぜ「相異なる固有値なら自動的に対角化可能」なのか）：</strong>固有値 $\lambda_1,\ldots,\lambda_k$ がすべて異なるとき，対応する固有ベクトル $v_1,\ldots,v_k$ は必ず1次独立になる。証明の骨格は帰納法：関係式 $c_1v_1+\cdots+c_kv_k=0$ の両辺に $A$ を掛けたものと，元の式を $\lambda_k$ 倍したものを引くと，$v_k$ の項がちょうど消えて，1個少ない本数の固有ベクトルの1次関係に帰着する。これを繰り返せば全ての $c_i=0$ が言える。したがって $n\times n$ 行列で $n$ 個の相異なる固有値が見つかった時点で，固有ベクトルを実際に求める前から対角化可能性が保証されている——これは（問5）でパラメータに応じて対角化可能性が変わる場合の判定基準の裏付けにもなっている。</p>
+      <p><strong>本番対応：</strong>類題で $3\times3$（あるいはそれ以上）の特性多項式に出会ったら，まず $\mathrm{tr}$ と $\det$ を先に計算しておき，因数分解した結果の対応する係数と照合するクセをつけておくと，計算ミスをその場で発見できる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">3</span> Cayley-Hamilton 定理の応用
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$A=\begin{pmatrix}2&1\\1&2\end{pmatrix}$ とする。</p>
+      <ol>
+        <li>Cayley-Hamilton の定理を用いて $A^{-1}$ を求めよ。</li>
+        <li>Cayley-Hamilton の定理を用いて（対角化を経由せずに）$A^5$ を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$\mathrm{tr}\,A=4$，$\det A=3$。Cayley-Hamilton より $A^2-4A+3E=O$。両辺を整理すると $A(A-4E)=-3E$，すなわち $A\cdot\dfrac{-(A-4E)}{3}=E$。よって</p>
+      $$A^{-1} = \frac{-(A-4E)}{3} = \frac{4E-A}{3} = \boxed{\begin{pmatrix}\tfrac23&-\tfrac13\\-\tfrac13&\tfrac23\end{pmatrix}}$$
+      <p>（検算：$AA^{-1}=\begin{pmatrix}2&1\\1&2\end{pmatrix}\begin{pmatrix}\tfrac23&-\tfrac13\\-\tfrac13&\tfrac23\end{pmatrix}=\begin{pmatrix}\tfrac43-\tfrac13&-\tfrac23+\tfrac23\\\tfrac23-\tfrac23&-\tfrac13+\tfrac43\end{pmatrix}=\begin{pmatrix}1&0\\0&1\end{pmatrix}$ ✓）</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$A^2=4A-3E$ を用いて，$A^n=\alpha_nA+\beta_nE$ の形に帰納的に表す。$A^{n+1}=A\cdot A^n=\alpha_nA^2+\beta_nA=\alpha_n(4A-3E)+\beta_nA=(4\alpha_n+\beta_n)A-3\alpha_nE$ より漸化式</p>
+      $$\alpha_{n+1}=4\alpha_n+\beta_n,\qquad \beta_{n+1}=-3\alpha_n,\qquad (\alpha_1,\beta_1)=(1,0)$$
+      <p>順に計算：$(\alpha_2,\beta_2)=(4,-3)$，$(\alpha_3,\beta_3)=(13,-12)$，$(\alpha_4,\beta_4)=(40,-39)$，$(\alpha_5,\beta_5)=(121,-120)$。よって</p>
+      $$A^5 = 121A-120E = 121\begin{pmatrix}2&1\\1&2\end{pmatrix}-120\begin{pmatrix}1&0\\0&1\end{pmatrix} = \boxed{\begin{pmatrix}122&121\\121&122\end{pmatrix}}$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p><strong>逆行列の速攻公式：</strong>Cayley-Hamilton $A^2-(\mathrm{tr}A)A+(\det A)E=O$ を $A$ でくくると $A\bigl(A-(\mathrm{tr}A)E\bigr)=-(\det A)E$ となり，$\det A\ne0$ ならこれを $\det A$ で割るだけで逆行列が求まる。$2\times2$ の公式 $A^{-1}=\frac1{\det A}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$ を暗記していなくても導出できる点が便利。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 Cayley-Hamilton の等式そのものはどこから来るか</div>
+        <p>特性方程式 $\lambda^2-(\mathrm{tr}A)\lambda+(\det A)=0$ は，そもそも「固有値 $\lambda$ が満たすスカラーの方程式」として出発した式である。Cayley-Hamilton の定理は，この式の $\lambda$ を（スカラーではなく）行列 $A$ そのものに，定数項の $1$ を単位行列 $E$ に置き換えても，行列の等式として成り立つ（$O$ になる）という主張。「固有値を$A$自身に代入しただけ」に見えるが，実はこれは対角化できない行列（後述の問5の $a=1$ のような場合）でも常に成り立つ非自明な定理であり，単純な代入だけでは証明できない（正しい証明には，余因子行列を使う方法や，対角化可能な行列で示してから連続性で一般の行列に拡張する方法などがある）。固有値がどんな汚い数（無理数・複素数・重複固有値）であっても常に成立する，というのがこの定理のありがたみである。</p>
+      </div>
+      <p><strong>よくある誤解：</strong>「固有値についての等式が成り立つのは当然だから，行列 $A$ 自身についての等式も当然成り立つ」と短絡的に考えてしまうこと。固有値 $\lambda$ についての $\lambda^2-4\lambda+3=0$ が成り立つのは $\lambda$ が固有方程式の解だから当然だが，<strong>行列 $A$ 自身</strong>についての $A^2-4A+3E=O$ が成り立つのは，固有ベクトル以外の一般のベクトルに対しても $A^2-4A+3E$ が $0$ ベクトルを返す，という質的に異なる（もっと強い）事実である。両者を同一視しないこと。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 別解：対角化を経由して (2) の $A^5$ を求め，答えの一致を確認する</div>
+        <p>$A=\begin{pmatrix}2&1\\1&2\end{pmatrix}$ は対称行列なので，実は対角化で解くこともできる。$\mathrm{tr}A=4,\det A=3$ より特性方程式は $\lambda^2-4\lambda+3=(\lambda-1)(\lambda-3)=0$，固有値 $\lambda=1,3$。固有ベクトルは $\lambda=1$：$(A-E)v=0\Leftrightarrow x+y=0$ より $v_1=(1,-1)^{\top}$，$\lambda=3$：$(A-3E)v=0\Leftrightarrow x=y$ より $v_2=(1,1)^{\top}$。$P=\begin{pmatrix}1&1\\-1&1\end{pmatrix}$，$\det P=2$，$P^{-1}=\dfrac12\begin{pmatrix}1&-1\\1&1\end{pmatrix}$。</p>
+        $$A^5=P\begin{pmatrix}1&0\\0&3^5\end{pmatrix}P^{-1}=\begin{pmatrix}1&243\\-1&243\end{pmatrix}\cdot\frac12\begin{pmatrix}1&-1\\1&1\end{pmatrix}=\frac12\begin{pmatrix}244&242\\242&244\end{pmatrix}=\begin{pmatrix}122&121\\121&122\end{pmatrix}$$
+        <p>Cayley-Hamilton の漸化式で得た結果と完全に一致する。固有値が整数などきれいな数のときは対角化の方が見通しが良く，固有値が汚い数のときは Cayley-Hamilton の漸化式の方が計算が楽——というのが，この2つの方法の使い分けの目安になる。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 対角化を経由しない高次乗の計算はいつ有利か</div>
+        <p>固有値が汚い数（無理数や複素数）になる場合，対角化を経由すると計算が煩雑になる。Cayley-Hamilton による漸化式は固有値を求めずに済むので，そのような場合に威力を発揮する。一方，固有値が整数などきれいな数なら対角化の方が見通しが良いことも多く，状況に応じて2つの方法を使い分けるとよい。</p>
+      </div>
+      <p><strong>一般化：</strong>$A^n=\alpha_nA+\beta_nE$ という漸化式の立て方は，フィボナッチ数列などと同じ構造の「線形漸化式」を行列の言葉で書いたものに他ならない（実際 $\beta_n=-3\alpha_{n-1}$ を使って $\alpha_{n+1}=4\alpha_n-3\alpha_{n-1}$ という2階の数列の漸化式に直すこともできる）。この考え方は，微分方程式 $\dot{\mathbf{x}}=A\mathbf{x}$ の解 $e^{At}$ を，固有値を明示的に求めずに構成する場面にも応用される，実用上重要なテクニックである。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">4</span> 対称行列の対角化
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$A=\begin{pmatrix}5&3\\3&5\end{pmatrix}$ とする。</p>
+      <ol>
+        <li>$A$ の固有値・固有ベクトルを求めよ。</li>
+        <li>2つの固有ベクトルが直交することを確認し，正規化して直交行列 $U$ を作り，${}^t\!UAU$ が対角行列になることを示せ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$\mathrm{tr}A=10$，$\det A=25-9=16$。特性方程式 $\lambda^2-10\lambda+16=(\lambda-2)(\lambda-8)=0$ より $\lambda=2,8$。</p>
+      <p>$\lambda=2$：$(A-2E)v=0 \Leftrightarrow x+y=0$。$v_1=(1,-1)^{\top}$。</p>
+      <p>$\lambda=8$：$(A-8E)v=0 \Leftrightarrow -x+y=0$。$v_2=(1,1)^{\top}$。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$v_1\cdot v_2=1\cdot1+(-1)\cdot1=0$ なので直交している（$A$ が対称行列であり，$v_1,v_2$ が異なる固有値の固有ベクトルであることの帰結——後述）。正規化すると $u_1=\dfrac1{\sqrt2}(1,-1)^{\top}$，$u_2=\dfrac1{\sqrt2}(1,1)^{\top}$。</p>
+      $$U=\begin{pmatrix}\tfrac1{\sqrt2}&\tfrac1{\sqrt2}\\-\tfrac1{\sqrt2}&\tfrac1{\sqrt2}\end{pmatrix},\qquad {}^t\!UAU=\begin{pmatrix}2&0\\0&8\end{pmatrix}\quad\blacksquare$$
+      <p>（検算：$AU=\begin{pmatrix}5&3\\3&5\end{pmatrix}\begin{pmatrix}\tfrac1{\sqrt2}&\tfrac1{\sqrt2}\\-\tfrac1{\sqrt2}&\tfrac1{\sqrt2}\end{pmatrix}=\begin{pmatrix}\tfrac2{\sqrt2}&\tfrac8{\sqrt2}\\-\tfrac2{\sqrt2}&\tfrac8{\sqrt2}\end{pmatrix}$，${}^t\!U(AU)=\begin{pmatrix}\tfrac1{\sqrt2}&-\tfrac1{\sqrt2}\\\tfrac1{\sqrt2}&\tfrac1{\sqrt2}\end{pmatrix}\begin{pmatrix}\tfrac2{\sqrt2}&\tfrac8{\sqrt2}\\-\tfrac2{\sqrt2}&\tfrac8{\sqrt2}\end{pmatrix}=\begin{pmatrix}\tfrac22+\tfrac22&\tfrac82-\tfrac82\\\tfrac22-\tfrac22&\tfrac82+\tfrac82\end{pmatrix}=\begin{pmatrix}2&0\\0&8\end{pmatrix}$ ✓）</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p>この問題では固有ベクトルが「たまたま」直交していたのではない。<strong>一般に，実対称行列（${}^t\!A=A$）の異なる固有値に対応する固有ベクトルは，常に直交する</strong>という定理がある（$2\times2,3\times3$ に限らず一般の次元で成立）。<strong>問題文の行列が対称だと分かった瞬間に，固有ベクトルは直交するはずだと予想して計算を進めてよい</strong>——これは検算にもなる（直交しなければ計算ミスを疑う）。</p>
+      <div class="def-box">
+        <div class="def-title">なぜ直交するのか（一般論の要点）</div>
+        <p>$Av_1=\lambda_1v_1$，$Av_2=\lambda_2v_2$，$\lambda_1\ne\lambda_2$ とする。${}^t\!v_2Av_1$ を2通りに計算すると，一方は $\lambda_1({}^t\!v_2v_1)$，他方は $A={}^t\!A$ を使って $\lambda_2({}^t\!v_2v_1)$ になる。$(\lambda_1-\lambda_2)({}^t\!v_2v_1)=0$ かつ $\lambda_1\ne\lambda_2$ なので ${}^t\!v_2v_1=0$。</p>
+      </div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 単位ベクトルへの正規化はなぜ必要か</div>
+        <p>直交行列の定義は ${}^t\!UU=E$。$U$ の列ベクトルを $u_1,u_2$ とすると，${}^t\!UU$ の $(i,j)$ 成分はちょうど $u_i\cdot u_j$ になる。これが $E$（すなわち $(i,j)$成分が $i=j$ なら $1$，$i\ne j$ なら $0$）に等しいためには，$u_1\cdot u_2=0$（<strong>直交</strong>）と $u_1\cdot u_1=u_2\cdot u_2=1$（<strong>単位ベクトル，長さ1</strong>）の<strong>両方</strong>が必要。固有ベクトル $v_1=(1,-1)^{\top}$ は長さ $\sqrt{1^2+(-1)^2}=\sqrt2$ なので $u_1=v_1/\sqrt2$ と縮めて長さ1にする（直交性はスケーリングしても変わらないので，先に直交性を確認し，あとから正規化するのが正しい順序）。</p>
+      </div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 対称行列の固有値がそもそも実数である理由（複素数の可能性を排除する証明）</div>
+        <p>一般の実行列は複素固有値をもつことがある（(問5) の $a>1$ の場合を参照）。しかし実対称行列（${}^t\!A=A$）は例外的に，常に実固有値しかもたない。証明の概略：$Av=\lambda v$（$v$ は複素ベクトルでもよい，$v\ne0$）とする。両辺に左から共役転置 $\bar v^{\top}$ を掛けると $\bar v^{\top}Av=\lambda(\bar v^{\top}v)=\lambda|v|^2$。左辺 $\bar v^{\top}Av$ は $1\times1$ 行列（スカラー）なので，自分自身の共役転置と等しい：$\overline{\bar v^{\top}Av}={}^t\!v\,\bar A\,\bar v$。$A$ が実数行列なら $\bar A=A$，さらに $A$ が対称なら ${}^t\!A=A$ なので，右辺は $\bar v^{\top}Av$ そのものに等しくなり，$\bar v^{\top}Av$ は自分の共役に等しい，すなわち実数だと分かる。よって $\lambda|v|^2$ は実数であり，$|v|^2>0$ なので $\lambda$ は実数。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>$U$ の列の順番と $A=\mathrm{diag}(2,8)$ の対角成分の順番を揃え忘れるミス（問1と同じ落とし穴）が多い。また「直交していることだけ確認して正規化を忘れる」と，${}^t\!UU=E$ にならず，${}^t\!UAU$ を計算しても対角成分が固有値そのものとズレることがある。なお固有ベクトルの符号（$u_1=(1,-1)/\sqrt2$ か $(-1,1)/\sqrt2$ か）はどちらを選んでも直交行列の条件は満たされ，対角化の結果 $A$ も変わらない。</p>
+      <p>この事実（<strong>スペクトル定理</strong>と呼ばれる定理の一部）のおかげで，対称行列は必ず直交行列で対角化できる。これは物理での慣性テンソルの主軸や，統計での分散共分散行列の主成分方向を求める場面で使われる，応用上とても重要な性質である。</p>
+      <p><strong>一般化：</strong>スペクトル定理は $n\times n$ の一般次元でも成立する。固有値に重複がある場合は，同じ固有値に対応する固有空間の中でグラム・シュミットの直交化を行えば，やはり正規直交基底が作れる（対称行列は，重複固有値があっても対角化不可能になることは絶対にない——(問5) の $a=1$ のケースとの対比で覚えておくとよい）。応用範囲は2次形式の標準化から統計学の主成分分析（PCA）まで広い。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問5 -->
+<section class="section-card" id="problem5">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">5</span> パラメータと対角化可能性
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$a$ を実数のパラメータとし，$A(a)=\begin{pmatrix}3&1\\-a&5\end{pmatrix}$ とする。</p>
+      <ol>
+        <li>$A(a)$ の固有値を求め，実数の範囲でどのような値をとりうるか，$a$ の値によって分類せよ。</li>
+        <li>$a=1$ のとき，$A(1)$ は対角化可能かどうか判定せよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$\mathrm{tr}\,A(a)=8$，$\det A(a)=15+a$。特性方程式は $\lambda^2-8\lambda+(15+a)=0$，判別式は</p>
+      $$D=64-4(15+a)=4(1-a)$$
+      <p>よって：</p>
+      <ul>
+        <li>$a<1$：$D>0$ より<strong>相異なる2つの実固有値</strong></li>
+        <li>$a=1$：$D=0$ より<strong>重解</strong>（$\lambda=4$，重複度2）</li>
+        <li>$a>1$：$D<0$ より<strong>実固有値をもたない</strong>（共役な複素固有値の組）</li>
+      </ul>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$a=1$ のとき $A(1)=\begin{pmatrix}3&1\\-1&5\end{pmatrix}$，固有値は $\lambda=4$（重複度2）。固有空間の次元を調べる：</p>
+      $$A(1)-4E = \begin{pmatrix}-1&1\\-1&1\end{pmatrix}$$
+      <p>この行列は階数 $1$（2つの行が一致）なので，$\dim\mathrm{Ker}(A(1)-4E)=2-1=1$。</p>
+      <p>代数的重複度 $2$ に対し幾何的重複度が $1$ しかなく一致しないので，<strong>$A(1)$ は対角化不可能</strong>である。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p><strong>対角化できない理由は1種類ではない。</strong>この問題は，$2\times2$ 実行列が対角化できなくなる<strong>2つの異なる原因</strong>を並べて見せている：</p>
+      <ul>
+        <li><strong>$a>1$ のとき：</strong>固有値がそもそも実数でない（<strong>複素固有値</strong>）。実ベクトル空間 $\mathbb{R}^2$ の中では対角化できないが，複素数の範囲まで許せば対角化できる。</li>
+        <li><strong>$a=1$ のとき：</strong>固有値は実数（$\lambda=4$）だが，<strong>固有ベクトルの本数が足りない</strong>（幾何的重複度が代数的重複度より小さい，「欠損」した状態）。この場合は複素数の範囲に広げても対角化できない。</li>
+      </ul>
+      <div class="insight-box">
+        <div class="insight-title">💡 判別式ひとつで見える「境界」の意味</div>
+        <p>判別式 $D=4(1-a)$ の符号がちょうど $a=1$ で切り替わる。$a<1$ から $a=1$ に近づくにつれ，2つの異なる実固有値がだんだん近づき，$a=1$ でぴったり重なって「1本に潰れる」。ちょうどこの「潰れる瞬間」に固有ベクトルの本数も1本に減ってしまう，というのが対角化不可能になる直感的な理由である。パラメータを含む行列の対角化可能性を調べるときは，まず判別式（または固有値が重解になる条件）を求め，その境界の値でだけ特別な吟味（固有空間の次元を直接計算する）を行う，という手順を覚えておくとよい。</p>
+      </div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 判別式 $D=4(1-a)$ はどこから来るか</div>
+        <p>特性方程式 $\lambda^2-8\lambda+(15+a)=0$ は $\lambda$ についての2次方程式。一般の2次方程式 $\lambda^2+p\lambda+q=0$ の判別式は $D=p^2-4q$（$2\times2$ 行列なら $p=-\mathrm{tr}A,\ q=\det A$ に対応）。ここでは $p=-8,\ q=15+a$ なので $D=(-8)^2-4(15+a)=64-60-4a=4-4a=4(1-a)$。判別式の符号が固有値の実数解の個数（2個／重解／0個）を直接決めるのは，2次方程式の一般論そのものであり，パラメータ入りの行列の対角化可能性を調べる問題では，この判別式（あるいは重解条件）を最初に計算するのが定石の第一手になる。</p>
+      </div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 別解：$A(1)\ne4E$ から直接，対角化不可能を導く</div>
+        <p>もし $A(1)$ が対角化可能で，かつ唯一の固有値が $4$（重複度2）だったなら，$A(1)=P\begin{pmatrix}4&0\\0&4\end{pmatrix}P^{-1}=P(4E)P^{-1}=4PP^{-1}=4E$ となってしまう（スカラー行列 $4E$ は，どんな正則行列 $P$ で挟んでもそのまま $4E$ に戻ることに注意）。しかし実際には $A(1)=\begin{pmatrix}3&1\\-1&5\end{pmatrix}\ne\begin{pmatrix}4&0\\0&4\end{pmatrix}$。これは「対角化可能」という仮定に矛盾するので，$A(1)$ は対角化不可能——固有空間の次元をわざわざ計算しなくても結論できる，鮮やかな別解である。<strong>一般に，$n\times n$ 行列の固有値がただ1つ $\lambda_0$ しかなく（重複度 $n$），かつ対角化可能ならば，その行列は必ずスカラー行列 $\lambda_0E$ に等しい</strong>。逆に言えば，唯一の固有値をもつ行列がスカラー行列でなければ，即座に対角化不可能と判定できる。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>「固有値が重複している（重解）＝対角化できない」と短絡的に思い込むこと。これは誤り。例えば単位行列 $E$ やスカラー行列 $cE$ は固有値が重複しているが対角化可能（すでに対角行列）であり，(問4) の対称行列も固有値が重複していても常に直交行列で対角化できる。対角化可能性を判定する唯一の正しい基準は「<strong>すべての固有値で代数的重複度＝幾何的重複度</strong>」であり，重複度が1より大きい固有値が見つかったときは，必ず対応する固有空間の次元を直接調べる必要がある——これがこの設問全体の教訓である。</p>
+      <p><strong>一般化：</strong>対角化できない場合の「次善の策」が<strong>Jordan標準形</strong>である。$A(1)$ の場合，固有ベクトル $v=(1,1)^{\top}$（$\lambda=4$）に加えて，$(A(1)-4E)w=v$ を満たす一般化固有ベクトル $w=(0,1)^{\top}$ を1本追加すれば，$Q=(v,w)=\begin{pmatrix}1&0\\1&1\end{pmatrix}$ に対し $Q^{-1}A(1)Q=\begin{pmatrix}4&1\\0&4\end{pmatrix}$（Jordanブロック，「対角に一番近い形」）に変形できる。Jordan標準形は後続の科目で扱われることが多いが，「対角化できないなら諦める」のではなく「もう一段階崩れた標準形が必ず存在する」と知っておくと視野が広がる。</p>
+      <p><strong>本番対応：</strong>パラメータ付き行列の対角化可能性を問う問題は頻出パターン。手順は（i）判別式または重解条件から境界のパラメータ値を特定する，（ii）境界以外では相異なる固有値ゆえ自動的に対角化可能と即答する，（iii）境界の値でのみ $\mathrm{rank}(A-\lambda E)$ を直接計算し，幾何的重複度と代数的重複度を比較する——という3段構成を覚えておけば，どんな類題でも同じ型で対応できる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第3回（固有値・対角化）を自力で解けるかセルフチェック</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$\mathrm{tr},\det$ から Vieta の公式で固有値を素早く求められるか（$2\times2,3\times3$ とも）</li>
+          <li>固有値がすべて異なれば自動的に対角化可能であることを理由とともに言えるか</li>
+          <li>Cayley-Hamilton の定理から逆行列を求める手順を再現できるか</li>
+          <li>Cayley-Hamilton から $A^n=\alpha_nA+\beta_nE$ の漸化式を立て，高次乗を計算できるか</li>
+          <li>実対称行列の異なる固有値の固有ベクトルが直交する理由を，${}^t\!v_2Av_1$ を2通りに計算する証明で説明できるか</li>
+          <li>判別式（または重解条件）から対角化可能性が変化する境界のパラメータを求め，境界で固有空間の次元を直接調べられるか</li>
+          <li>対角化できない2つの異なる原因（複素固有値／固有ベクトル不足）を区別して説明できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

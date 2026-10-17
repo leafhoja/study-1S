@@ -1,0 +1,295 @@
+<!DOCTYPE html><!-- 「2009年度 | 情報 共通問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2009年度 | 情報 共通問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kyotsu-2009">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>共通問題 2009年度</h1>
+  <p class="subtitle">7月28日（火）2限｜大問3（うち大問3は選択）</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（音楽CDの符号化・チケット予約システムの動作）</a>
+    <a href="#q2">大問2（ボーリングの点数計算アルゴリズム）</a>
+    <a href="#q3">大問3（選択：電子書籍と著作権／論理演算とNAND回路）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>音楽CDの符号化とチケット予約システムの動作</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>問1-1 — 音楽CDの標本化と量子化</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>音楽CDは、アナログの音声信号をディジタルデータに変換して記録している。次の問いに答えよ。</p>
+        <p>(1) 用語「量子化」「標本化」「44.1kHz」「16ビット」を必ず1回以上用いて、音楽CDにおけるアナログ音声のディジタル化の仕組みを2〜3行で説明せよ。<br>
+        (2) 2ch（ステレオ）で1秒分の音を記録すると何ビット必要か。計算式も示せ。<br>
+        (3) 74分の音を記録するのに必要なデータ量は何バイトか。計算式も示せ。</p>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(1) 音楽CDは、連続的なアナログ音声信号を1秒間に<strong>44.1kHz</strong>（44,100回）の頻度で切り出す<strong>標本化</strong>と、切り出した各標本の値を<strong>16ビット</strong>の段階数で近似する<strong>量子化</strong>という2段階の処理によって、デジタルデータに変換して記録している。</p>
+          <p>(2) 1チャンネルあたり1秒間に必要なビット数は
+          $$44{,}100\ \text{回}\times16\ \text{ビット}=705{,}600\ \text{ビット}$$
+          ステレオ（2ch）なので、この2倍が必要になる。
+          $$705{,}600\times2=\mathbf{1{,}411{,}200}\ \text{ビット}$$</p>
+          <p>(3) まず74分を秒に直すと
+          $$74\times60=4{,}440\ \text{秒}$$
+          (2)より1秒あたり1,411,200ビット必要なので、総ビット数は
+          $$1{,}411{,}200\ \text{ビット/秒}\times4{,}440\ \text{秒}=6{,}265{,}728{,}000\ \text{ビット}$$
+          これをバイトに変換する（8ビット＝1バイトなので8で割る）。
+          $$6{,}265{,}728{,}000\div8=\mathbf{783{,}216{,}000}\ \text{バイト}$$</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) 44.1kHzで標本化し16ビットで量子化してディジタル化する。　(2) 1,411,200ビット　(3) 783,216,000バイト</div>
+      </details>
+
+      <h3>問1-2 — チケット予約システムの動作</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>あるチケット予約システムの動作を、次の文章で説明する。空欄A1〜A4、B1〜B4を、下のA群・B群からそれぞれ選んで埋めよ。</p>
+        <p>利用者がWebクライアントを使ってチケット情報ページのURLを入力する。<span class="blank">A1</span>が<span class="blank">B1</span>する。<span class="blank">A2</span>が<span class="blank">B2</span>する。公演情報参照プログラムが公演情報データベースにデータを要求する。<span class="blank">A3</span>が<span class="blank">B3</span>する。<span class="blank">A4</span>が<span class="blank">B4</span>する。Webクライアントがジャンル別、地域別の購入可能な公演の情報ページを表示する。</p>
+        <p><strong>A群</strong>：(a) 公演情報データベース　(b) Webサーバ　(c) Webクライアント　(d) 公演情報参照プログラム</p>
+        <p><strong>B群</strong>：(あ) 公演情報参照プログラムを実行　(い) 公演情報ページを作成しWebサーバを介してWebクライアントに提供　(う) Webサーバにサービスを要求　(え) 公演情報参照プログラムに公演情報データを提供</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>文章全体を、利用者の操作から始まり最終的にページが表示されるまでの一連のやり取りとして順に追っていくとよい。</p>
+          <p>まず、URLを入力した主体である<span class="blank">A1=(c)Webクライアント</span>が<span class="blank">B1=(う)Webサーバにサービスを要求</span>する（クライアントが自らサーバに要求を送るところから始まる）。</p>
+          <p>要求を受け取った<span class="blank">A2=(b)Webサーバ</span>が<span class="blank">B2=(あ)公演情報参照プログラムを実行</span>する。これを受けて、直後の文で明記されている「公演情報参照プログラムが公演情報データベースにデータを要求する」という動作につながる。</p>
+          <p>データを要求された<span class="blank">A3=(a)公演情報データベース</span>が<span class="blank">B3=(え)公演情報参照プログラムに公演情報データを提供</span>する（データベースがプログラムにデータを返す）。</p>
+          <p>データを受け取った<span class="blank">A4=(d)公演情報参照プログラム</span>が<span class="blank">B4=(い)公演情報ページを作成しWebサーバを介してWebクライアントに提供</span>する（プログラムがページを作成し、サーバを経由してクライアントに返す）。最後にWebクライアントがそのページを表示して一連の流れが完結する。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>A1=(c)，B1=(う)　A2=(b)，B2=(あ)　A3=(a)，B3=(え)　A4=(d)，B4=(い)</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 3層アーキテクチャの典型例</span>
+        <p>問1-2で描かれている一連の流れは、Webシステムでよく用いられる3層アーキテクチャの典型的な実例になっている。すなわち、利用者が直接操作する<strong>プレゼンテーション層</strong>（Webクライアント）、要求を受けて処理を実行する<strong>アプリケーション層</strong>（Webサーバと公演情報参照プログラム）、そしてデータを保持する<strong>データ層</strong>（公演情報データベース）の3つに役割が分離されている。この分離により、たとえば公演情報データベースの実装を変更しても、Webクライアント側の表示処理には手を加える必要がない、といった保守性の向上が得られる。問1-1のCDの符号化がアナログ信号を「標本化・量子化」という2段階に分解して扱うのと同様に、複雑なシステムを役割ごとの層に分解して考えることは、情報システム設計における基本的な発想である。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>ボーリングの点数計算アルゴリズム</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>問2 — ストライク・スペアを含む得点計算</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>ボーリングは10フレームからなり、1フレームは1投（ストライク）または2投で構成される。各フレームの点数は次のように決まる。</p>
+        <p>・<strong>ストライク</strong>（1投目で全ピン倒す）：10＋次の2投の合計<br>
+        ・<strong>スペア</strong>（2投で全ピン倒す）：10＋次の1投<br>
+        ・<strong>オープン</strong>（2投とも全ピン倒せない）：2投の合計</p>
+        <p>次の変数を用いて、得点の累積を計算する手順を考える。</p>
+        <p>$P$：入力されたピンの数<br>
+        $T$：点数の合計（初期値0）<br>
+        $S$：直前フレームの状態（0＝オープン、1＝スペア、2＝単独ストライク、3＝ダブルストライク。初期値0）<br>
+        $R$：2投目の際に、1投目で残ったピンの数<br>
+        $I$：1投目か2投目かを表す（1または2。初期値1）</p>
+        <p>全体の計算手順は次のとおりである。</p>
+        <div class="mathblock">if I=1 then
+    if P=10 then
+        A: それに応じてT,S,Iを変更する
+    else（0≤P&lt;10なら）
+        B: それに応じてT,R,Iを変更する
+    endif
+else（I=2なら）
+    C: それに応じてT,S,Iを変更する
+endif</div>
+        <p>このうちAの計算手順はすでに次のように与えられている。</p>
+        <div class="mathblock">if S=0 then T←T+P、S←2
+else if S=1 then T←T+2P、S←2
+else if S=2 then T←T+2P、S←3
+else（S=3なら）T←T+3P、S←3
+endif
+I←1</div>
+        <p>たとえば入力列$P=[7,3,8,0,10,10,6,4,7,1]$に対して、この手順全体を実行すると、累積点数は$T=[7,10,26,26,36,56,74,82,96,97]$と計算される。</p>
+        <p>(1) Bの計算手順を書け。<br>
+        (2) Cの計算手順を書け。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>Bは「1投目でストライクではなかった（$0\leq P&lt;10$）」場合の処理であり、Cは「フレームの2投目」の処理である。この時点ではまだそのフレームがスペアになるかオープンになるか確定していないので、Bでは状態$S$は変更せず、代わりに残りピン数$R$と$I\leftarrow2$をセットして次の投球（同じフレームの2投目）に備える。</p>
+          <p><strong>(1) Bの計算手順</strong></p>
+          <div class="mathblock">if S=0 then T←T+P
+else if S=1 then T←T+2P
+else if S=2 then T←T+2P
+else（S=3なら）T←T+3P
+endif
+R ← 10−P
+I ← 2</div>
+          <p>Tの更新式はAと全く同じ乗数の考え方（$S=0$なら等倍、$S=1,2$なら2倍、$S=3$なら3倍）を用いる。これは、直前フレームがストライクだった場合、今回の投球のピン数$P$がそのストライクのボーナスとして加算される必要があるためであり、その加算のされ方（何倍で加算されるか）は、今回の投球が1投目か2投目かに関わらず、あくまで「直前フレームの状態$S$が何であったか」だけで決まる。$S$自体は、このフレームがスペアかオープンかが確定する2投目まで更新を保留する。</p>
+
+          <p><strong>(2) Cの計算手順</strong></p>
+          <div class="mathblock">if S=0 then T←T+P
+else if S=1 then T←T+P
+else if S=2 then T←T+2P
+else（S=3なら）T←T+2P
+endif
+if P=R then S←1（スペア成立） else S←0（オープン） endif
+I ← 1</div>
+          <p>Cでの乗数のパターンは、AやBとは異なる点に注意が必要である。$S=0,1$のときは乗数1、$S=2,3$のときは乗数2になる。これは、Bの時点（同フレームの1投目）ですでにストライクのボーナスの一部を消化しているため、2投目に残っているボーナスの「対象となるストライクの数」が1つ減っているからである。とくにダブル（$S=3$）の場合、1投目でより古い方のストライクのボーナスがちょうど解消され、2投目には新しい方のストライク1つ分のボーナス（乗数2扱い）だけが残る。$S$の更新は、今回のフレームの2投の合計が10になったか（$P=R$、すなわち残りピンをすべて倒せた＝スペア）どうかで、スペア（$S\leftarrow1$）かオープン（$S\leftarrow0$）かを確定させる。</p>
+
+          <p><strong>検証</strong>：与えられた入力$P=[7,3,8,0,10,10,6,4,7,1]$に対して、上記のB・Cを用いて全10投を実際にトレースすると、次のようになる。</p>
+          <div class="table-wrap" style="overflow-x:auto;">
+            <table class="q-table">
+              <thead><tr><th>投球</th><th>P</th><th>処理</th><th>S（処理前）</th><th>T（処理後）</th><th>R更新</th><th>S（処理後）</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>7</td><td>B</td><td>0</td><td>7</td><td>R=3</td><td>（不変）</td></tr>
+                <tr><td>2</td><td>3</td><td>C</td><td>0</td><td>10</td><td>―</td><td>P=R（3=3）→S=1</td></tr>
+                <tr><td>3</td><td>8</td><td>B</td><td>1</td><td>26</td><td>R=2</td><td>（不変）</td></tr>
+                <tr><td>4</td><td>0</td><td>C</td><td>1</td><td>26</td><td>―</td><td>P≠R（0≠2）→S=0</td></tr>
+                <tr><td>5</td><td>10</td><td>A</td><td>0</td><td>36</td><td>―</td><td>S=2</td></tr>
+                <tr><td>6</td><td>10</td><td>A</td><td>2</td><td>56</td><td>―</td><td>S=3</td></tr>
+                <tr><td>7</td><td>6</td><td>B</td><td>3</td><td>74</td><td>R=4</td><td>（不変）</td></tr>
+                <tr><td>8</td><td>4</td><td>C</td><td>3</td><td>82</td><td>―</td><td>P=R（4=4）→S=1</td></tr>
+                <tr><td>9</td><td>7</td><td>B</td><td>1</td><td>96</td><td>R=3</td><td>（不変）</td></tr>
+                <tr><td>10</td><td>1</td><td>C</td><td>1</td><td>97</td><td>―</td><td>P≠R（1≠3）→S=0</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>各投球後の$T$の値をまとめると$T=[7,10,26,26,36,56,74,82,96,97]$となり、問題文で与えられた累積点数と完全に一致する。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) B：$S$に応じて$T\leftarrow T+P,\ T+2P,\ T+2P,\ T+3P$（$S=0,1,2,3$）、$R\leftarrow10-P$、$I\leftarrow2$　(2) C：$S$に応じて$T\leftarrow T+P,\ T+P,\ T+2P,\ T+2P$（$S=0,1,2,3$）、$P=R$なら$S\leftarrow1$、そうでなければ$S\leftarrow0$、$I\leftarrow1$</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「乗数」がフレームの1投目と2投目で異なる理由</span>
+        <p>この問題で最も見落としやすいポイントは、Tを更新するときの乗数（何倍で$P$を加算するか）が、同じ状態$S$であっても、B（1投目）とC（2投目）とで異なるという点である。これは実際のボーリングのストライク・ダブルのボーナス計算の仕組みそのものを反映している。1回の投球（ピンを倒す動作）は、複数の過去フレームのボーナス計算に重複して寄与しうる。たとえばダブルストライク（$S=3$）の直後に投じられる1投目は、2つ前のフレームのボーナス（3倍分の一部）と1つ前のフレームのボーナス（2倍分の一部）の両方に関与するため、Bでは3倍で加算される。しかし同じフレームの2投目に進んだ時点では、より古い方のストライクのボーナスはすでに使い切られており、残っているのは新しい方のストライク1つ分だけなので、Cでは2倍になる。このように、単純に見えるボーリングの得点計算も、複数のボーナスが時間的に重なり合う様子を状態変数$S$だけで正確に追跡する必要があり、注意深いシミュレーションが要求される好例になっている。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q3">
+    <div class="sec-header"><div class="sec-tag">大問 3（選択）</div><h2>問題A：電子書籍と著作権を巡る議論／問題B：論理演算とNANDによる回路構成</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="note"><span class="box-label">出題形式</span><p>問題A・Bのいずれか一方を選択。ここでは両方を掲載する。</p></div>
+
+      <h3>問題A — 電子書籍と著作権を巡る議論</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>Googleブック検索などの電子書籍サービスを題材に、次の(1)〜(5)の概念それぞれについて、①概念の意味と②その概念から見たときにどのような議論があり得るかを、2〜3行で述べよ。</p>
+        <p>(1) 著作権　(2) 制約からの解放　(3) 社会の権威構造　(4) 無形性（無体性）　(5) 複製可能性</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>(1) 著作権</strong>：創作者に対し、著作物の利用（複製・公衆送信等）を独占的にコントロールする権利を認める制度である。議論：書籍を無断でデジタル化・公開することは著作権者の権利を侵害しないか、それとも公共の利益（知識へのアクセス向上）のために一定の制限（フェアユース的な扱い）を認めるべきか、という対立がある。</p>
+          <p><strong>(2) 制約からの解放</strong>：従来は図書館に行く・書店で購入するといった時間・場所・コストの制約があったが、デジタル化によりそれらの制約から解放され、誰でもどこからでも書籍にアクセスできるようになる。議論：この解放は知識の民主化として歓迎すべきか、それとも著作権者の経済的利益を損なう副作用を伴うため無条件には歓迎できないか。</p>
+          <p><strong>(3) 社会の権威構造</strong>：従来、出版社や書店といった既存の仲介者が「何を世に広めるか」を実質的に決定する権威を持っていたが、デジタル配信はこの権威構造を揺るがしうる。議論：巨大IT企業（Google等）が新たな権威・ゲートキーパーとして情報流通を支配することへの懸念。</p>
+          <p><strong>(4) 無形性（無体性）</strong>：デジタル化された書籍は物理的な実体を持たない情報であり、紙の本のような排他的な「所有」の概念がそのまま当てはまらない。議論：無形の情報に対して、有体物と同じような所有権・独占権の概念を適用することの妥当性。</p>
+          <p><strong>(5) 複製可能性</strong>：デジタル情報は劣化なくほぼコストゼロで複製できる。議論：この複製の容易さが知識の普及に貢献する一方、著作権者の経済的利益を損なう海賊版の氾濫を招く恐れがあり、両者のバランスをどう取るかが論点となる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) 著作物利用の独占的コントロール権と公共利益との対立　(2) 時間・場所・コストの制約からの解放と経済的利益侵害の副作用　(3) 既存仲介者の権威の揺らぎと新たなゲートキーパーへの懸念　(4) 無形情報への所有権概念適用の妥当性　(5) 普及への貢献と海賊版氾濫のリスクのバランス</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識A — 5つの概念の相互関係</span>
+        <p>この問題で挙げられている5つの概念は、互いに独立ではなく因果的につながっている。情報が<strong>無形性（4）</strong>を持ち、かつ劣化なくコピーできる<strong>複製可能性（5）</strong>を持つからこそ、時間・場所・コストの<strong>制約からの解放（2）</strong>が可能になる。しかしこの解放は、従来<strong>著作権（1）</strong>や出版・流通という<strong>社会の権威構造（3）</strong>によって保たれてきたバランス（創作者への対価還元、情報流通の管理された経路）を揺るがす。すなわち、技術的な性質（4)(5)）が社会的な構造（1)(3)）と衝突し、その調整点として「制約からの解放」をどこまで許容するか（2)）が論点になる、という構造で整理すると理解しやすい。この構図は、大問1のディジタル表現がもつ「複製時の劣化のなさ」という性質が、大問2以降で扱われるような情報システムの設計や、さらには炎上・著作権といった社会的な問題にまで波及していく、情報学における典型的な議論の展開である。</p>
+      </div>
+
+      <h3>問題B — 論理演算とNANDによる回路構成</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>2つの入力$x_0,x_1$（それぞれ0または1）に対する論理演算NOT，AND，OR，NAND，XORの真理値表を次に示す。ただしNAND$(x_0,x_1)=$NOT(AND$(x_0,x_1)$)である。</p>
+        <div class="table-wrap" style="overflow-x:auto;">
+          <table class="q-table">
+            <thead><tr><th>$x_0$</th><th>$x_1$</th><th>NOT($x_0$)</th><th>AND($x_0,x_1$)</th><th>OR($x_0,x_1$)</th><th>NAND($x_0,x_1$)</th><th>XOR($x_0,x_1$)</th></tr></thead>
+            <tbody>
+              <tr><td>0</td><td>0</td><td>1</td><td>0</td><td><span class="blank">A</span></td><td><span class="blank">E</span></td><td>0</td></tr>
+              <tr><td>0</td><td>1</td><td>1</td><td>0</td><td><span class="blank">B</span></td><td><span class="blank">F</span></td><td>1</td></tr>
+              <tr><td>1</td><td>0</td><td>0</td><td>0</td><td><span class="blank">C</span></td><td><span class="blank">G</span></td><td>1</td></tr>
+              <tr><td>1</td><td>1</td><td>0</td><td>1</td><td><span class="blank">D</span></td><td><span class="blank">H</span></td><td>0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>(1) 空欄A〜Hを埋めよ。<br>
+        (2) NOT$(x_0)=$NAND$(x_0,x_0)$であることを用いて、ANDを2つのNANDで表現せよ。<br>
+        (3) ORを3つのNANDで表現せよ。<br>
+        (4) XORをなるべく少ないNAND（最少4つ）で表現せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p><strong>(1)</strong> OR$(x_0,x_1)$は少なくとも一方が1なら1になるので、$(x_0,x_1)=(0,0),(0,1),(1,0),(1,1)$の順に$0,1,1,1$である。よって<span class="blank">A=0</span>，<span class="blank">B=1</span>，<span class="blank">C=1</span>，<span class="blank">D=1</span>。NAND$=$NOT(AND)であり、AND列は$(0,0,0,1)$なので、これを反転したNAND列は$(1,1,1,0)$になる。よって<span class="blank">E=1</span>，<span class="blank">F=1</span>，<span class="blank">G=1</span>，<span class="blank">H=0</span>。</p>
+
+          <p><strong>(2)</strong> AND$(x,y)=$NOT(NAND$(x,y)$)であり、NOT$(z)=$NAND$(z,z)$（自己NANDトリック）を用いると、NOT(NAND$(x,y)$)$=$NAND(NAND$(x,y)$, NAND$(x,y)$)と書ける。すなわち中間変数$n_1=$NAND$(x,y)$を1つ作り、AND$(x,y)=$NAND$(n_1,n_1)$とすればよい。使用するNANDは<strong>2個</strong>。</p>
+
+          <p><strong>(3)</strong> ド・モルガンの法則$x+y=\overline{\bar x\cdot\bar y}=$NAND$(\bar x,\bar y)$を利用する。まず$n_1=$NAND$(x,x)=\bar x$、$n_2=$NAND$(y,y)=\bar y$の2つを自己NANDトリックで作り、最後にOR$(x,y)=$NAND$(n_1,n_2)$とすればよい。使用するNANDは<strong>3個</strong>。</p>
+
+          <p><strong>(4)</strong> 次の4個のNANDでXORが構成できる。</p>
+          <div class="mathblock">n1 ← NAND(x, y)
+n2 ← NAND(x, n1)
+n3 ← NAND(y, n1)
+XOR(x,y) ← NAND(n2, n3)</div>
+          <p>真理値表ですべてのパターンを検証する。</p>
+          <p>$(x,y)=(0,0)$：$n_1=$NAND$(0,0)=1$，$n_2=$NAND$(0,1)=1$，$n_3=$NAND$(0,1)=1$，結果$=$NAND$(1,1)=0=$XOR$(0,0)$ ✓</p>
+          <p>$(x,y)=(0,1)$：$n_1=$NAND$(0,1)=1$，$n_2=$NAND$(0,1)=1$，$n_3=$NAND$(1,1)=0$，結果$=$NAND$(1,0)=1=$XOR$(0,1)$ ✓</p>
+          <p>$(x,y)=(1,0)$：$n_1=$NAND$(1,0)=1$，$n_2=$NAND$(1,1)=0$，$n_3=$NAND$(0,1)=1$，結果$=$NAND$(0,1)=1=$XOR$(1,0)$ ✓</p>
+          <p>$(x,y)=(1,1)$：$n_1=$NAND$(1,1)=0$，$n_2=$NAND$(1,0)=1$，$n_3=$NAND$(1,0)=1$，結果$=$NAND$(1,1)=0=$XOR$(1,1)$ ✓</p>
+          <p>全4パターンが与えられたXORの真理値表と一致するので、この構成は正しい。使用するNANDは<strong>4個</strong>。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) A=0,B=1,C=1,D=1,E=1,F=1,G=1,H=0　(2) $n_1=$NAND$(x,y)$，AND$=$NAND$(n_1,n_1)$（2個）　(3) $n_1=$NAND$(x,x)$，$n_2=$NAND$(y,y)$，OR$=$NAND$(n_1,n_2)$（3個）　(4) $n_1=$NAND$(x,y)$，$n_2=$NAND$(x,n_1)$，$n_3=$NAND$(y,n_1)$，XOR$=$NAND$(n_2,n_3)$（4個）</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識B — NANDの完備性（universal gate）</span>
+        <p>この問題で示されているように、NOT・AND・ORのすべてがNANDだけを組み合わせて構成できる。これはNANDが論理関数の「完備性（universal gate）」を持つことを意味し、原理的にはNANDゲート1種類だけを何個も組み合わせれば、任意の論理回路（どんなに複雑なブール関数）を構成できるということを示している（同様の性質はNORにも成り立つ）。この性質は理論上の興味にとどまらず、実際のLSI（集積回路）設計においても重要な実用上の利点につながっている。単一の素子種類（NANDゲート）だけを大量に規格化して製造すればよいため、製造プロセスの単純化・歩留まりの向上・設計の標準化が図れる。問題A・Bはいずれも「複数の要素が組み合わさって、より高次の機能や議論を構成する」という点で共通しており、Bでは単純なNANDの組み合わせから複雑な論理関数が、Aでは著作権・技術的性質・社会構造という複数の概念の組み合わせから電子書籍を巡る複雑な議論が、それぞれ立ち上がってくる構造になっている。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2010.html">← 2010年度へ</a>
+    <a href="kakomon_2008.html">2008年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

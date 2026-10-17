@@ -1,0 +1,803 @@
+<!DOCTYPE html><!-- 「2023年度 期末試験 | 現代経済理論」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>2023年度 期末試験 | 現代経済理論</title>
+  <link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-nav-page="exam-2023">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">現代経済理論 過去問</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">HOME</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023" class="active">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>2023年度 期末試験</h1>
+  <p class="subtitle">7月21日 2限｜試験時間 90分｜全26問</p>
+  <p class="meta">担当：渡辺安虎（経済学研究科）</p>
+</div>
+
+<div class="container">
+
+<!-- Q1 -->
+<!-- ひとつの問題の問題文・解答・解説を、同じカードにまとめる。 --><div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">1</div>
+      <div class="q-head">
+        <span class="q-topic">計量経済学・因果推論</span><a href="講義/第1回.html" class="lec-ref-link">→ 第1回</a>
+        <p class="q-text">猫を飼っていることと独身女性であることの間に強い相関関係があると調査結果が示している場合、このデータから何が言えますか。正しいものを一つ選びなさい。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>独身であることが女性に猫を飼う原因となる。</li>
+    <li class="opt"><span class="opt-label">(b)</span>猫を飼うことが女性が独身になる原因となる。</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>独身の女性は、そうでない女性と比べて猫を飼っている割合が高い。<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>全ての独身女性が猫を飼っている。</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p><em>相関関係は因果関係を意味しない。</em>データから言えるのは「統計的な関連性」のみ。「独身→猫」「猫→独身」のどちらの因果もデータ単独では証明できない。「ライフスタイル」や「性格」など第三の変数（交絡因子）が両者に同時に影響している可能性がある。</p>
+    <p>(a)(b)は因果関係を読み取っており誤り。(d)は「全員」という強すぎる主張で誤り。(c)は「割合が高い」という相関の記述にとどまっており正しい。</p>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">2</div>
+      <div class="q-head">
+        <span class="q-topic">計量経済学・RCT</span><a href="講義/第1回.html" class="lec-ref-link">→ 第1回</a>
+        <p class="q-text">ランダム化比較試験（RCT）では参加者がランダムに治療群または対照群に割り当てられる理由は何ですか？</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt correct"><span class="opt-label">(a)</span>グループ間の差が介入によるものであることを確認するため。<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(b)</span>研究倫理上の問題を生じにくくするため。</li>
+    <li class="opt"><span class="opt-label">(c)</span>研究のコストと期間を短縮させるため。</li>
+    <li class="opt"><span class="opt-label">(d)</span>研究者がどのグループに誰がいるかを知るため。</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p><em>ランダム化の目的は「選択バイアスの排除」。</em>参加者をランダムに割り当てることで、治療群と対照群の属性（年齢・健康状態・生活習慣など）が平均的に等しくなる。その結果、グループ間に生じた差は介入（治療）以外の要因によるものではないと言え、介入の因果効果を測定できる。</p>
+    <p>(b)倫理問題の軽減はRCTの副産物に過ぎない。(c)コスト削減・期間短縮が目的ではない。(d)研究者の利便性ではない。</p>
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">3</div>
+      <div class="q-head">
+        <span class="q-topic">マクロ経済学・GDP</span>
+        <p class="q-text">三面等価の原則によれば、『A』・『B』・『C』のいずれからみても国内総生産（GDP）は同じ値となる。『A』・『B』・『C』に当てはまるものを選びなさい。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>『家計』『企業』『政府』</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>『生産』『分配』『支出』<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>『労働市場』『財・サービス市場』『金融市場』</li>
+    <li class="opt"><span class="opt-label">(d)</span>『ミクロ』『マクロ』『海外市場』</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>GDPの<em>三面等価</em>とは、経済活動を3つの側面から計測しても同じ値が得られるという原則。</p>
+    <p>・<strong>生産面</strong>：各産業の付加価値の合計。<br>
+    ・<strong>分配面</strong>（所得面）：労働者への賃金、企業の利潤、政府の税収の合計。<br>
+    ・<strong>支出面</strong>：消費（C）＋投資（I）＋政府支出（G）＋純輸出（NX）の合計。</p>
+    <p>生産された付加価値は必ず誰かの所得になり、その所得は必ず何かに支出されるため、3つの側面は恒等的に等しい。</p>
+    <p>(a)「家計・企業・政府」は経済活動の<em>主体（部門）</em>の分類であり、GDPの測定面ではない。(c)「労働市場・財サービス市場・金融市場」は市場の<em>種類（機能別分類）</em>であり、三面等価とは別概念。(d)「ミクロ・マクロ・海外市場」はそもそも統一した概念カテゴリをなさず、GDPの計測面に該当しない。</p>
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">4</div>
+      <div class="q-head">
+        <span class="q-topic">労働経済学・ジェンダー</span>
+        <p class="q-text">日本における『ジェンダーギャップ』の特徴について正しいものはどれか。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>女性の労働参加率は、OECD諸国に比べて著しく低い。</li>
+    <li class="opt"><span class="opt-label">(b)</span>教育水準における男女格差は、OECD諸国に比べて著しく大きい。</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>労働者一人当たりの平均収入における男女格差は、OECD諸国に比べて著しく大きい。<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>近年、結婚や出産期にあたる年齢層において労働参加率が低下し、育児が落ち着く時期に上昇するという『M字カーブ』の傾向が強まっている。</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>日本のジェンダーギャップで最も顕著なのは<em>賃金・収入格差</em>（ジェンダー賃金ギャップ）。男性の賃金を100としたとき女性は約75〜80程度（OECD平均より格差が大きい）。</p>
+    <p>(a) 女性の労働参加率は近年上昇しており、OECD平均並みになっている。著しく低いとは言えない。<br>
+    (b) 教育格差は大学進学率などでOECD比で特段大きくはない。<br>
+    (d) M字カーブは近年むしろ<strong>改善傾向</strong>（育児休業制度の普及等で谷が浅くなっている）。</p>
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">5</div>
+      <div class="q-head">
+        <span class="q-topic">マッチング理論</span><a href="講義/第4回.html" class="lec-ref-link">→ 第4回</a>
+        <p class="q-text">学生と企業がマッチする「安定マッチング問題」において、マッチング（μ）の安定性の定義として最も適切なものを選んでください。ただし全ての企業の定員は１とします。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>個人合理性を満たし、さらにブロッキングペアが「少なくとも1組存在する」マッチング。</li>
+    <li class="opt"><span class="opt-label">(b)</span>μと異なるマッチングで全員が今より良くなるものが存在しない（パレート最適）。</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>個人合理性（全員がアンマッチより相手を好む）を満たし、かつブロッキングペア（互いにμの相手より好む未マッチペア）が存在しない。<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>アンマッチよりは望ましい相手とマッチしている（個人合理性のみ）。</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>安定マッチングの定義は2つの条件の<em>両立</em>：</p>
+    <p><strong>①個人合理性：</strong>どの参加者も「アンマッチ（誰ともマッチしない）よりは現在の相手の方を好む」。アンマッチより悪い相手とマッチしているなら、その人はそもそもマッチを拒否するはず。</p>
+    <p><strong>②ブロッキングペアなし：</strong>マッチしていない学生iと企業fのペアで「iにとってfは今の相手より好き、かつfにとってiは今の相手より好き」という組み合わせが存在しない。こういうペアがあると「抜け駆け」が起きて不安定になる。</p>
+    <p>(a)はブロッキングペアが「存在する」不安定な状態。(b)はパレート最適の定義。(d)は個人合理性のみ。</p>
+  </div>
+</div>
+
+<!-- Q6 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">6</div>
+      <div class="q-head">
+        <span class="q-topic">マッチング理論</span><a href="講義/第4回.html" class="lec-ref-link">→ 第4回</a>
+        <p class="q-text">学生1・2、企業A・B（定員各1）のマッチング問題。学生1:A>B>アンマッチ、学生2:B>A>アンマッチ、企業A:2>1>アンマッチ、企業B:1>2>アンマッチ。この問題について最も適切なものを選んでください。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>安定マッチングが一つだけ存在する。それは「1とAがマッチし、2とBがマッチする」もの。</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>安定マッチングが２つ存在する。「1-A, 2-B」と「1-B, 2-A」の二つ。<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>安定マッチングが存在しない。</li>
+    <li class="opt"><span class="opt-label">(d)</span>安定マッチングが一つだけ存在する。それは「1とBがマッチし、2とAがマッチする」もの。</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>両方のマッチングを検証する。</p>
+    <p><strong>マッチング①「1-A, 2-B」：</strong><br>
+    ・{1,B}ペア：学生1はBよりAを好む（Aが第1希望）→ 学生1はBと組みたくない → ブロッキングペアにならない。<br>
+    ・{2,A}ペア：学生2はAよりBを好む（Bが第1希望）→ 学生2はAと組みたくない → ブロッキングペアにならない。<br>
+    → <em>安定</em></p>
+    <p><strong>マッチング②「1-B, 2-A」：</strong><br>
+    ・{1,A}ペア：学生1はAを好む✓。企業AはA:2>1であり、現在の相手（学生2）の方を学生1より好む → 企業Aは学生1と組みたくない → ブロッキングペアにならない。<br>
+    ・{2,B}ペア：学生2はBを好む✓。企業BはB:1>2であり、現在の相手（学生1）の方を学生2より好む → 企業Bは学生2と組みたくない → ブロッキングペアにならない。<br>
+    → <em>安定</em></p>
+    <p>よって安定マッチングは2つ存在する。</p>
+  </div>
+</div>
+
+<!-- Q7 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">7</div>
+      <div class="q-head">
+        <span class="q-topic">国際貿易・グラビティーモデル</span>
+        <p class="q-text">中国からEUへの輸出に関する貿易費用だけが低下したとする。この時、日本からアメリカへの輸出はどう影響を受けるか？Multilateral Resistance（多角的貿易抵抗指数）を考慮したグラビティー・モデルに沿って考えよ。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt correct"><span class="opt-label">(a)</span>日本は輸出国として以前より高い多角的貿易抵抗指数に、アメリカは輸入国として以前より高い多角的貿易抵抗指数にそれぞれ直面するため、日本からアメリカへの輸出は増える。<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(b)</span>日本・アメリカとも高い多角的貿易抵抗指数に直面するため、日本からアメリカへの輸出は減る。</li>
+    <li class="opt"><span class="opt-label">(c)</span>日本・アメリカとも低い多角的貿易抵抗指数に直面するため、日本からアメリカへの輸出は増える。</li>
+    <li class="opt"><span class="opt-label">(d)</span>日本・アメリカとも低い多角的貿易抵抗指数に直面するため、日本からアメリカへの輸出は減る。</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>グラビティー方程式：X<sub>ij</sub> ∝ Y<sub>i</sub>·Y<sub>j</sub>·(t<sub>ij</sub>/Π<sub>i</sub>·P<sub>j</sub>)<sup>1-σ</sup>　（σ&gt;1）</p>
+    <p>中国→EU貿易費用が低下すると：</p>
+    <p>・EUは中国からの輸入を増やし、日本など他国からの輸入を<strong>相対的に</strong>減らす → 日本にとってEUへの輸出機会が失われる。<br>
+    ・日本の輸出国としての多角的貿易抵抗指数（Π<sub>Japan</sub>）は<em>上昇</em>する（EUという大きな市場へのアクセスが相対的に悪化）。<br>
+    ・アメリカも同様に、輸入国MR（P<sub>USA</sub>）が<em>上昇</em>する。</p>
+    <p>重力方程式の分母にMR項があり、Π↑·P↑ → 分母の(Π·P)<sup>1-σ</sup>が（σ>1なので）減少 → X<sub>Japan→USA</sub>が<em>増加</em>する。</p>
+    <p>直感：中国がEUに集中した結果、日米はお互いへの依存を相対的に強め、貿易が増える。</p>
+    <p>(b)「日米ともMRが高いので輸出が<em>減る</em>」：MRの方向は正しい（高くなる）が結論が逆。MR↑は方程式の分母が減ることを意味し、輸出は<em>増加</em>する。(c)「日米ともMRが<em>低い</em>ので輸出が増える」：中国→EU自由化で日米がEU市場を相対的に失いMRは<em>高く</em>なるのが正しい方向であり、「低い」は誤り。(d)「MRが低いので輸出が<em>減る</em>」：MRの方向も結論もどちらも誤り。</p>
+  </div>
+</div>
+
+<!-- Q8 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">8</div>
+      <div class="q-head">
+        <span class="q-topic">国際貿易・リカード</span>
+        <p class="q-text">下表は自国と外国の第1財・第2財の労働投入係数を示す。第2財の世界生産量を変化させないよう、第2財に比較優位にある国の生産を増やし、比較劣位にある国の生産を減らしたとき、第1財の世界生産量が3単位増えた。第2財に比較優位を持つ国は第2財を何単位増やしたか？</p>
+        <table class="q-table">
+          <tr><th></th><th>第1財</th><th>第2財</th></tr>
+          <tr><td>自国</td><td>1</td><td>3</td></tr>
+          <tr><td>外国</td><td>4</td><td>8</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>1</li>
+    <li class="opt"><span class="opt-label">(b)</span>2</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>3<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>4</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p><strong>比較優位の確認：</strong><br>
+    自国の第2財機会費用 = a<sub>2</sub>/a<sub>1</sub> = 3/1 = 3（第2財1単位≒第1財3単位）<br>
+    外国の第2財機会費用 = 8/4 = 2（第2財1単位≒第1財2単位）<br>
+    外国の方が機会費用が低い → <em>外国が第2財に比較優位</em></p>
+    <p><strong>計算：</strong><br>
+    外国が第2財をx単位増産 → 8x労働が必要 → 第1財が 8x/4 = <strong>2x</strong>単位減産。<br>
+    自国が第2財をx単位減産 → 3x労働が空く → 第1財が 3x/1 = <strong>3x</strong>単位増産。</p>
+    <div class="formula">第2財世界生産変化 = -x + x = 0 ✓（条件を満たす）
+第1財世界生産変化 = 3x - 2x = x = 3 → x = 3</div>
+    <p>よって外国（第2財比較優位国）は第2財を<em>3単位</em>増産した。</p>
+    <p>(a)1・(b)2・(d)4は全てx≠3の値。x=1なら第1財は1単位しか増えず、x=2なら2単位、x=4なら4単位の変化となり、「3単位増加」の条件を満たさない。典型的な誤りは「第1財の増加 = 自国の増産分のみ（3x）」とし外国の減産（2x）を引き忘れてx=1とするケース、または比較優位の確認を間違えること。</p>
+  </div>
+</div>
+
+<!-- Q9 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">9</div>
+      <div class="q-head">
+        <span class="q-topic">会計・財務</span><a href="講義/第5回.html" class="lec-ref-link">→ 第5回</a>
+        <p class="q-text">極端な利益圧縮型の利益調整行動を何というか。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt correct"><span class="opt-label">(a)</span>ビッグ・バス<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(b)</span>アノマリー</li>
+    <li class="opt"><span class="opt-label">(c)</span>アクティブ戦略</li>
+    <li class="opt"><span class="opt-label">(d)</span>アクルーアル・リバース</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p><em>ビッグ・バス（Big Bath）</em>とは、経営者が業績の悪い年や経営者交代の際に、将来の損失を一気に前倒し計上して利益を極端に圧縮する利益調整行動。「今期を徹底的に悪くしておくことで、次期以降の業績を相対的に良く見せる」戦略的な会計処理。新CEOが就任初年度に実施することが多い（前任者に責任転嫁できる）。</p>
+    <p>(b)<em>アノマリー</em>：市場の「異常現象」であり、例えば会計発生高アノマリー（アクルーアルが高い株のリターンが低い傾向）など。利益調整行動の名称ではない。(c)<em>アクティブ戦略</em>：市場平均（ベンチマーク）を上回る運用を目指す投資戦略のこと。会計の利益調整とは無関係。(d)<em>アクルーアル・リバース</em>：発生主義会計で計上した引当・見越しが翌期以降に逆転して利益・損失に影響する現象。特定の利益調整行動の名称ではない。</p>
+  </div>
+</div>
+
+<!-- Q10 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">10</div>
+      <div class="q-head">
+        <span class="q-topic">ファイナンス・効率的市場</span><a href="講義/第5回.html" class="lec-ref-link">→ 第5回</a>
+        <p class="q-text">効率的市場仮説において強度の効率性について説明しているものを選択しなさい。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt correct"><span class="opt-label">(a)</span>一般に公開されない内部情報について市場が効率的<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(b)</span>過去の株価系列の情報に対して市場が効率的</li>
+    <li class="opt"><span class="opt-label">(c)</span>新聞記事や財務諸表などの公開された情報に対して市場が効率的</li>
+    <li class="opt"><span class="opt-label">(d)</span>まだ発生してない将来事象について市場が効率的</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>効率的市場仮説（EMH）の3段階：</p>
+    <p>・<strong>弱形態</strong>：<em>過去の株価系列</em>（チャート）情報に対して効率的。テクニカル分析では超過収益を得られない。<br>
+    ・<strong>半強形態</strong>：<em>公開情報</em>（決算発表・新聞等）に対して効率的。ファンダメンタル分析では超過収益を得られない。<br>
+    ・<strong>強形態（強度）</strong>：<em>非公開の内部情報（インサイダー情報）</em>も含む全ての情報に対して効率的。インサイダー取引でも超過収益を得られないとする（最も強い仮定）。</p>
+    <p>(b)「過去の株価系列」は<em>弱形態</em>の説明。(c)「新聞記事や財務諸表などの公開情報」は<em>半強形態</em>の説明。(d)「まだ発生していない将来事象」はEMHの3分類のいずれにも該当せず、そのような「強度」は定義されていない（株価は現時点で入手可能な情報を織り込むのであって、まだ存在しない情報までは対象外）。</p>
+  </div>
+</div>
+
+<!-- Q11 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">11</div>
+      <div class="q-head">
+        <span class="q-topic">金融政策・数理モデル</span><a href="講義/第11回.html" class="lec-ref-link">→ 第11回</a>
+        <p class="q-text">中央銀行では数理モデル分析が以下の目的で活用されている。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>定量的</li>
+    <li class="opt"><span class="opt-label">(b)</span>定性的</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>（a）と（b）の両方。<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>上記のどれも当てはまらない。</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>中央銀行（日本銀行など）における数理モデルの活用は<em>定量的・定性的の両面</em>。</p>
+    <p>・<strong>定量的</strong>：政策金利変化がGDP・物価に与える影響の数値推計、経済見通しの数値予測など。<br>
+    ・<strong>定性的</strong>：モデルを使ったシナリオ分析、リスク要因の方向性評価、政策の方針を論じる際の理論的根拠の提供など。</p>
+    <p>数理モデルは「数値を出す」だけでなく、経済メカニズムを理解・説明するためにも使われる。</p>
+    <p>(a)「定量的のみ」は不完全。モデルは数値予測だけでなく「金利を上げるべきか下げるべきか」という<em>方向性（定性的）</em>の判断にも使われる。(b)「定性的のみ」も不完全。中央銀行が数値目標（インフレ率・GDP成長率）を設定・追跡する以上、定量分析は不可欠。(d)「どれも当てはまらない」は誤り。</p>
+  </div>
+</div>
+
+<!-- Q12 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">12</div>
+      <div class="q-head">
+        <span class="q-topic">疫学マクロモデル・コロナ</span><a href="講義/第11回.html" class="lec-ref-link">→ 第11回</a>
+        <p class="q-text">疫学マクロモデルを使って分析をすると、2021年1月から始まった第2回緊急事態宣言の解除基準に関しては以下の事が言える。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>短期的には累計コロナ死者数抑制と経済活動促進はトレードオフの関係にある。</li>
+    <li class="opt"><span class="opt-label">(b)</span>中長期的には累計コロナ死者数抑制と経済活動促進はトレードオフの関係にある。</li>
+    <li class="opt"><span class="opt-label">(c)</span>（a）と（b）の両方。</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>上記のどれも当てはまらない。<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>疫学マクロモデルの分析によれば、コロナ死者数の抑制と経済活動の促進は、<em>短期・中長期ともにトレードオフ関係にない</em>という結果が得られた。</p>
+    <p>直感：緊急事態宣言を早期に解除して経済活動を再開させると、感染が再拡大し第3波・第4波を招く。死者数が増えるだけでなく、再び経済活動を制限せざるを得なくなり、中長期的には経済にとってもマイナスになる。「適切な感染抑制 → 感染収束 → 経済正常化」という経路があるため、命と経済は必ずしもトレードオフではない。</p>
+    <p>(a)「短期のみトレードオフ」：人流抑制が経済を即時に落とす点では短期的にマイナスに見えるが、モデルの分析では解除基準の観点から短期でもトレードオフにはならないと示された。(b)「中長期のみトレードオフ」：中長期的にも感染抑制と経済促進は対立しない（むしろ同じ方向に向かう）。(c)「短期・中長期ともトレードオフ」：短期も中長期も誤りなので(c)も誤り。</p>
+  </div>
+</div>
+
+<!-- Q13 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">13</div>
+      <div class="q-head">
+        <span class="q-topic">都市経済学・地域経済</span><a href="講義/第8回.html" class="lec-ref-link">→ 第8回</a>
+        <p class="q-text">東京都、大阪府、愛知県の三都府県を合わせたシェアが最も大きいものはどれか。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>人口</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>県内総生産<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>可住地面積</li>
+    <li class="opt"><span class="opt-label">(d)</span>すべて同じ</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>三大都市圏（東京・大阪・愛知）の集積の経済が機能しており、<em>経済規模（GRP）のシェアが人口シェアを上回る</em>。</p>
+    <p>・<strong>県内総生産シェア</strong>：東京約35%、大阪約8%、愛知約8% → 合計約50%以上と突出。<br>
+    ・<strong>人口シェア</strong>：東京約11%、大阪約7%、愛知約6% → 合計約24%程度。<br>
+    ・<strong>可住地面積シェア</strong>：三大都市は狭い → 合計数%程度に過ぎない。</p>
+    <p>生産性の高い産業・企業が大都市に集中することで、人口シェア以上の経済規模を持つ。これが集積の経済の表れ。</p>
+  </div>
+</div>
+
+<!-- Q14 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">14</div>
+      <div class="q-head">
+        <span class="q-topic">都市経済学・集積の経済</span><a href="講義/第8回.html" class="lec-ref-link">→ 第8回</a>
+        <p class="q-text">集積の経済の説明として最も適切なものを以下から一つ選びなさい。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>人口集中がもたらす影響全体のこと</li>
+    <li class="opt"><span class="opt-label">(b)</span>ゴミ集積場を効率的に運用すること</li>
+    <li class="opt"><span class="opt-label">(c)</span>人口集中が引き起こす問題の総称</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>人口集中が引き起こす外部経済（意図せず他者へ与える良い影響）の総称<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p><em>集積の経済（Agglomeration Economies）</em>とは、人口・企業・産業が一か所に集まることで生まれる<strong>正の外部経済効果（良い影響）</strong>の総称。</p>
+    <p>主な源泉：<br>
+    ・厚い労働市場（多様な人材・スキルが集まる）<br>
+    ・サプライヤー・顧客との近接（取引コスト低下）<br>
+    ・情報・知識のスピルオーバー（アイデアの伝播）<br>
+    ・消費の多様性（多様なサービス・文化施設）</p>
+    <p>逆に渋滞・地価高騰・環境悪化などのマイナス面は「集積の不経済」。(a)影響「全体」は不経済を含み不正確。(c)は不経済の説明。(b)は無関係。</p>
+  </div>
+</div>
+
+<!-- Q15 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">15</div>
+      <div class="q-head">
+        <span class="q-topic">開発経済学・貧困</span><a href="講義/第6回.html" class="lec-ref-link">→ 第6回</a>
+        <p class="q-text">CCTやBRACのTUPについて紹介した第8回講義に関して、<strong>間違っているものを一つ選べ。</strong></p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt correct"><span class="opt-label">(a)</span>貧困は結局のところ能力や努力の不足によるものだと判明した。<span class="correct-mark">正解（＝誤りの選択肢）</span></li>
+    <li class="opt"><span class="opt-label">(b)</span>心理的な経路で「貧困の罠」が起こりうることが分かった。</li>
+    <li class="opt"><span class="opt-label">(c)</span>TUPが「貧困の罠」からの脱却に有効であることが分かった。</li>
+    <li class="opt"><span class="opt-label">(d)</span>貧困は機会の不平等で起こることが分かった。</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>「間違っているもの」を選ぶ問題。(a)が誤り。</p>
+    <p>研究（Bandiera et al.等）が明らかにしたのは、貧困は<em>個人の能力・努力不足ではなく、機会の不平等や心理的・制度的制約</em>によって引き起こされるということ。</p>
+    <p>・<strong>TUP（Targeting the Ultra-Poor）</strong>：BRACが実施した極貧層向け資産給付プログラム。家畜等の資産を提供することで「貧困の罠」から脱出できることが示された。<br>
+    ・<strong>心理的貧困の罠</strong>：貧困状態が自己効力感・将来への期待を低下させ、行動変容を妨げる。<br>
+    ・<strong>機会の不平等</strong>：初期資産・信用へのアクセス・ネットワーク格差が貧困を固定化する。</p>
+  </div>
+</div>
+
+<!-- Q16 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">16</div>
+      <div class="q-head">
+        <span class="q-topic">開発経済学・教育</span><a href="講義/第6回.html" class="lec-ref-link">→ 第6回</a>
+        <p class="q-text">「教育分野での開発の問題」に関する議論のうち、<strong>誤っているものを一つ選べ。</strong></p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>MDGsを通じ、途上国での進学率が高まったものの、「学習の危機」が判明した。</li>
+    <li class="opt"><span class="opt-label">(b)</span>異なる教育政策の効果比較において、ランダム化比較試験（RCT）が広く用いられるようになった。</li>
+    <li class="opt"><span class="opt-label">(c)</span>寄生虫駆除が安価で有効な教育政策のツールであることが分かった。</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>条件付き生活保護金支給（CCT）が安価で有効な教育政策のツールであることが分かった。<span class="correct-mark">正解（＝誤りの選択肢）</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>(d)が誤り。CCTは教育政策として<em>有効性は示されたが、「安価」ではない</em>。CCT（条件付き現金給付）は家庭への現金移転と、子どもの就学・予防接種などの条件を組み合わせたプログラムで、大規模な資金・管理コストが必要。</p>
+    <p>(a)「学習の危機（Learning Crisis）」：進学率は上がったが学習成果（読み書き・算数の習得）が伴わないことが判明。<br>
+    (b) RCTは教育政策の比較評価で広く使われるようになった（Banerjee & Duflo等）。<br>
+    (c) 寄生虫駆除（Deworming）はMichael Kremerらの研究で安価・有効とされた（後に再検証で議論あり）が、講義内では有効と紹介されている。</p>
+  </div>
+</div>
+
+<!-- Q17 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">17</div>
+      <div class="q-head">
+        <span class="q-topic">デジタル経済・ネットワーク効果</span><a href="講義/第7回.html" class="lec-ref-link">→ 第7回</a>
+        <p class="q-text">A〜Cのネットワーク効果の説明について、正しいものの組み合わせを選びなさい。<br>
+        A. ネットワーク効果が強く働く産業では、大半の市場シェアを競争事業者に占められると、それを取り返すことは難しい。<br>
+        B. ネットワーク効果が働く財は需要関数が右上がりになる。<br>
+        C. 水素自動車が普及するほど水素ステーションの数が増え、更に水素自動車の普及が促される。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>AとBのみ正しい</li>
+    <li class="opt"><span class="opt-label">(b)</span>BとCのみ正しい</li>
+    <li class="opt"><span class="opt-label">(c)</span>Bのみ正しい</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>A〜C全て正しい<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>全て正しい。</p>
+    <p><strong>A</strong>：ネットワーク効果が強い産業（SNS・決済システム等）では一度市場シェアが確立すると、ユーザーは他サービスへの乗り換えコスト（ロックイン）が高く、シェアの逆転が困難。<em>正しい</em></p>
+    <p><strong>B</strong>：通常の財は価格↑→需要↓（右下がり需要曲線）。しかしネットワーク効果がある財は「ユーザーが増えるほど価値が高まる」ため、普及初期には価格が下がっても価値が低く（ユーザー少ない）需要が少なく、普及後は価値が高まり（ユーザー多い）需要が増える。ある価格帯で右上がりになりうる。<em>正しい</em></p>
+    <p><strong>C</strong>：水素自動車と水素ステーションは<strong>間接的ネットワーク効果</strong>（two-sided network externality）の典型例。車が増える→ステーション収益性向上→ステーション増加→車のユーザー利便性向上→車がさらに普及、という正のフィードバックループ。<em>正しい</em></p>
+  </div>
+</div>
+
+<!-- Q18 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">18</div>
+      <div class="q-head">
+        <span class="q-topic">デジタル経済・ロックイン</span><a href="講義/第7回.html" class="lec-ref-link">→ 第7回</a>
+        <p class="q-text">A〜Cのロックイン効果の説明について、正しいものの組み合わせを選びなさい。<br>
+        A. ロックイン効果ではスイッチングコストに影響を与えない。<br>
+        B. 消費者の期待を歪めることで、ロックイン効果を人為的に高めることができる。<br>
+        C. ロックイン効果が強く働くことが予想されると、デ・ファクトの標準化競争は起こらない。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>Aのみ正しい</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>Bのみ正しい<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>Cのみ正しい</li>
+    <li class="opt"><span class="opt-label">(d)</span>BとCのみ正しい</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p><strong>A</strong>：<span class="warn">誤り。</span>ロックイン効果の本質はスイッチングコスト（他社へ乗り換える際の費用・摩擦）の高さ。ロックイン効果が大きいほどスイッチングコストが高く、消費者は乗り換えにくくなる。</p>
+    <p><strong>B</strong>：<em>正しい。</em>例えば「このサービスは将来も多くの人が使い続ける」という期待を消費者に持たせることで、乗り換えをためらわせ、人為的にロックイン効果を強められる。過去のゲーム機・動画フォーマット戦争でも見られた。</p>
+    <p><strong>C</strong>：<span class="warn">誤り。</span>ロックイン効果が強いことが予想されると、「一度市場シェアを獲得すれば長期的な利益が見込める」ため、デ・ファクト（事実上）の業界標準をめぐる競争がむしろ<strong>激化</strong>する（VHS対ベータ、iOS対Android等）。</p>
+  </div>
+</div>
+
+<!-- Q19 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">19</div>
+      <div class="q-head">
+        <span class="q-topic">金融政策・マクロ経済</span><a href="講義/第2回.html" class="lec-ref-link">→ 第2回</a>
+        <p class="q-text">以下から正しい文章を選びなさい。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>中央銀行が短期利子率を下げると消費や投資が減少して物価が下落する。</li>
+    <li class="opt"><span class="opt-label">(b)</span>中央銀行が短期利子率を下げると消費や投資が増加して物価が下落する。</li>
+    <li class="opt"><span class="opt-label">(c)</span>中央銀行が短期利子率を下げると消費や投資が減少して物価が上昇する。</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>中央銀行が短期利子率を下げると消費や投資が増加して物価が上昇する。<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>金融政策の波及メカニズム（IS-LMフレームワーク）：</p>
+    <div class="formula">短期利子率↓ → 借入コスト低下 → 消費↑・投資↑ → 総需要↑ → 物価↑</div>
+    <p>中央銀行が政策金利（短期利子率）を引き下げると：<br>
+    ①家計の住宅ローンや消費者ローンのコストが下がり、消費が増える。<br>
+    ②企業の資金調達コストが下がり、設備投資が増える。<br>
+    ③総需要が増加し、経済が活性化されてインフレ（物価上昇）が生じる。</p>
+    <p>これが金融緩和（expansionary monetary policy）の基本メカニズム。</p>
+    <p>(a)「消費・投資が<em>減少</em>して物価が<em>下落</em>」：利子率を下げると借入コストが低下し、消費・投資は<em>増加</em>する（逆）。物価も需要増を受けて上昇する。(b)「消費・投資が<em>増加</em>して物価が<em>下落</em>」：消費・投資の方向は正しいが、総需要増加→物価は<em>上昇</em>（逆）。(c)「消費・投資が<em>減少</em>して物価が<em>上昇</em>」：消費・投資の方向が逆。利子率引き下げは緩和政策であり需要を刺激する。</p>
+  </div>
+</div>
+
+<!-- Q20 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">20</div>
+      <div class="q-head">
+        <span class="q-topic">金融政策・デフレの罠</span><a href="講義/第2回.html" class="lec-ref-link">→ 第2回</a>
+        <p class="q-text">デフレの罠均衡はなぜ存在するか？</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>中央銀行が金融政策の政策変数として名目利子率を採用しているから</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>通貨の名目利子率がゼロだから<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>中央銀行のインフレ目標値がゼロだから</li>
+    <li class="opt"><span class="opt-label">(d)</span>貨幣数量説が成り立っていないから</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>デフレの罠（流動性の罠）均衡が存在する根本理由は、<em>名目利子率のゼロ下限（ZLB: Zero Lower Bound）</em>。</p>
+    <p>現金（紙幣・硬貨）の名目リターンはゼロ。預金・債券の名目利子率がマイナスになると、合理的な主体は全て現金を保有するため、名目利子率は原則としてゼロ以下にはならない。</p>
+    <div class="formula">フィッシャー方程式: 実質利子率 = 名目利子率 - 期待インフレ率
+デフレ均衡: 名目利子率 = 0, 期待インフレ率 < 0
+→ 実質利子率 > 0 （高止まり）
+→ 消費・投資抑制 → さらなるデフレ → 悪循環</div>
+    <p>ZLBがあるためデフレ期待が強い状態で金融政策が効かなくなり、デフレ均衡が「罠」として安定的に存在しうる。</p>
+    <p>(a)「名目利子率を採用しているから」：名目利子率を政策変数に使うこと自体はデフレの罠の<em>原因</em>ではなく、どの中央銀行も普通に使う手段。問題はその名目利子率がゼロの<em>下限に達した</em>ことにある。(c)「インフレ目標がゼロだから」：インフレ目標は中央銀行が設定する<em>目標値</em>であり、デフレの罠はZLBという<em>物理的・市場的制約</em>によって生まれる。目標がゼロかどうかとは別問題。(d)「貨幣数量説が成り立っていないから」：貨幣数量説の成否は関係ない。ZLBに達した状態では量的緩和など他の手段を使うが、デフレの罠の根本はあくまでZLB。</p>
+  </div>
+</div>
+
+<!-- Q21 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">21</div>
+      <div class="q-head">
+        <span class="q-topic">ファイナンス・CAPM</span>
+        <p class="q-text">【Q21-22共通設定】安全資産リターン0.01、A株：期待リターン0.03・リスク0.3、B株：期待リターン0.05・リスク0.4、A・Bの相関係数0、市場ポートフォリオ期待リターン0.05。ポートフォリオPはA株とB株に0.5ずつ投資する。<br><br>
+        Q21: ポートフォリオPのリスク（リターンの標準偏差）はいくつか。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>0.2</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>0.25<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>0.3</li>
+    <li class="opt"><span class="opt-label">(d)</span>0.35</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>相関係数ρ=0のとき、ポートフォリオ分散：</p>
+    <div class="formula">σP² = wA²·σA² + wB²·σB² + 2·wA·wB·ρ·σA·σB
+   = (0.5)²×(0.3)² + (0.5)²×(0.4)² + 0
+   = 0.25×0.09 + 0.25×0.16
+   = 0.0225 + 0.04
+   = 0.0625
+
+σP = √0.0625 = 0.25</div>
+    <p>(a)0.2の誤り：wB·σB = 0.5×0.4 = 0.2 のようにA株を無視した場合や、誤った計算式を使った場合に生じる。(c)0.3の誤り：A株のσA = 0.3 のみを使ってしまうか、「リスクの小さい方の株のリスクを代表値にする」という誤解による。(d)0.35の誤り：σPを<em>標準偏差の加重平均</em>（wA·σA + wB·σB = 0.5×0.3 + 0.5×0.4 = 0.35）と誤解したケース。正しくは<em>分散</em>の加重平均を取ってから平方根を取る必要がある。</p>
+  </div>
+</div>
+
+<!-- Q22 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">22</div>
+      <div class="q-head">
+        <span class="q-topic">ファイナンス・CAPM</span>
+        <p class="q-text">Q22: ポートフォリオPのベータはいくつか。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>0.5</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>0.75<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>0.8</li>
+    <li class="opt"><span class="opt-label">(d)</span>1.25</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>CAPMの式：E[r<sub>P</sub>] = r<sub>f</sub> + β<sub>P</sub>·(E[r<sub>M</sub>] - r<sub>f</sub>)</p>
+    <div class="formula">E[rP] = 0.5×0.03 + 0.5×0.05 = 0.04
+rf = 0.01,  E[rM] = 0.05
+
+0.04 = 0.01 + βP × (0.05 - 0.01)
+0.03 = βP × 0.04
+βP = 0.03 / 0.04 = 0.75</div>
+    <p>(a)0.5の誤り：個別株のβを先に計算すると βA = (0.03-0.01)/(0.05-0.01) = 0.5、βB = (0.05-0.01)/(0.05-0.01) = 1.0。βP = 0.5×0.5 + 0.5×1.0 = 0.75 となるのでβAだけを答えた場合。(c)0.8の誤り：E[rP]/E[rM] = 0.04/0.05 = 0.8 のようにリスクプレミアム構造を無視してリターン比で計算した場合。(d)1.25の誤り：E[rM]-rf ではなくE[rM]全体で割った場合など（0.03/0.04×1/0.6≈1.25のような計算間違い）。</p>
+  </div>
+</div>
+
+<!-- Q23 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">23</div>
+      <div class="q-head">
+        <span class="q-topic">感染症・パンデミック史（現在の講義に直接対応なし）</span>
+        <p class="q-text">Covid-19による死亡者数は2023年3月時点で約688万人。過去のパンデミックでその5倍以上の死亡者数を記録したものを選びなさい。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>1647-1657年 ペスト</li>
+    <li class="opt"><span class="opt-label">(b)</span>1852-1860年 コレラ</li>
+    <li class="opt"><span class="opt-label">(c)</span>1855-1896年 ペスト</li>
+    <li class="opt correct"><span class="opt-label">(d)</span>1918-1920年 インフルエンザ<span class="correct-mark">正解</span></li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>688万×5 = 3,440万人以上が条件。</p>
+    <p><em>1918〜1920年のスペイン風邪（H1N1インフルエンザ）</em>は推計5,000万〜1億人以上が死亡したとされ、5倍以上の条件を満たす唯一の選択肢。第一次世界大戦の終戦直後に世界的に流行し、当時の人口約18億人のうち5億人近くが感染したとされる。</p>
+    <p>(a)1647-1657年ペスト：同時代にアジアで大規模なペストが発生したが、死者数の確かな推計は3,440万人に届かない。(b)1852-1860年コレラ（第3次コレラ大流行）：各回の大流行で数十万〜百万人規模の死者を出したが、累計でも3,440万人には至らない。(c)1855-1896年ペスト（第3次ペスト大流行）：主にインド・中国を中心に死者1,000〜1,200万人程度の推計が多く、3,440万人の条件を満たさない。</p>
+  </div>
+</div>
+
+<!-- Q24 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">24</div>
+      <div class="q-head">
+        <span class="q-topic">経済史・大気汚染と感染症（現在の講義に直接対応なし）</span>
+        <p class="q-text">Clay et al. (2018)の研究。1918年インフルエンザ流行が乳児死亡率に与えた影響を都市別パネルデータで推定。この結果に基づき、1918年における乳児死亡率の増加を石炭火力発電能力別の都市間で比較した正しいものを選べ。（推定係数：発電能力「大」× 1918年ダミー = 0.0827、「中」× 1918年ダミー = 0.0649）</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>中程度 ＞ 大きい ＞ 小さい</li>
+    <li class="opt"><span class="opt-label">(b)</span>大きい ＞ 小さい ＞ 中程度</li>
+    <li class="opt correct"><span class="opt-label">(c)</span>大きい ＞ 中程度 ＞ 小さい<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(d)</span>小さい ＞ 中程度 ＞ 大きい</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>回帰係数の読み方：referenceカテゴリは「石炭火力発電能力が小さい都市」（係数=0）。</p>
+    <div class="formula">1918年の乳児死亡率増加（ln）：
+  発電能力「大」= 0.0827（基準より高い）
+  発電能力「中」= 0.0649（基準より高い）
+  発電能力「小」= 0.0000（基準）
+→ 大 > 中 > 小</div>
+    <p>解釈：石炭火力発電が多い都市ほど大気汚染（PM2.5・亜硫酸ガス等）が深刻であり、肺の機能が低下した乳児がインフルエンザに感染した際の死亡リスクが高まった。大気汚染が感染症の被害を増大させるという実証的エビデンス。</p>
+    <p>(a)「中程度 &gt; 大きい &gt; 小さい」：係数は大（0.0827）&gt; 中（0.0649）であり、中が大を上回るのは誤り。(b)「大きい &gt; 小さい &gt; 中程度」：小さい（0.000）が中程度（0.0649）より大きいことはなく、順序が誤り。(d)「小さい &gt; 中程度 &gt; 大きい」：全く逆の順序。石炭発電量が多いほど大気汚染が深刻なのに、発電が少ない都市の死亡率増加が最大という誤った記述。</p>
+  </div>
+</div>
+
+<!-- Q25 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">25</div>
+      <div class="q-head">
+        <span class="q-topic">計量経済学・ルーカス批判</span><a href="講義/第3回.html" class="lec-ref-link">→ 第3回</a>
+        <p class="q-text">ルーカス批判の説明として正しい組み合わせを選べ。<br>
+        (i) データからY=F(X)を推定しても、政策変更によりF(·)の形状が変化するため正しい政策効果予測ができない。<br>
+        (ii) 構造モデルを推定しても将来政策の不確実性のためにモデルに因果推論を取り入れる必要があるという批判。</p>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt"><span class="opt-label">(a)</span>(i),(ii)とも正しい</li>
+    <li class="opt correct"><span class="opt-label">(b)</span>(i)のみ正しい<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(c)</span>(ii)のみ正しい</li>
+    <li class="opt"><span class="opt-label">(d)</span>(i),(ii)とも正しくない</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p><strong>(i)：正しい。</strong>これがルーカス批判（Lucas Critique, 1976）の核心。過去のデータから推定した計量モデルF(·)は、<em>その政策が実施された環境下での人々の行動パターン</em>を反映している。政策が変わると、経済主体の期待・行動が変わり、F(·)自体の形が変わってしまう。だから過去のモデルを使って新政策の効果を予測しても信頼できない。</p>
+    <p><strong>(ii)：誤り。</strong>これはルーカス批判の内容ではない。ルーカス批判への<strong>応答</strong>として「個々の主体の最適化行動（インセンティブ構造）を明示的にモデル化した構造モデル（DSGE等）を使え」という処方箋は存在するが、そこに「因果推論を取り入れよ」という主張はルーカス批判ではなく別の方法論的議論。</p>
+  </div>
+</div>
+
+<!-- Q26 -->
+<div class="qcard">
+  <div class="qcard-body">
+    <div class="q-top">
+      <div class="q-num-badge">26</div>
+      <div class="q-head">
+        <span class="q-topic">ゲーム理論・ナッシュ均衡</span><a href="講義/第3回.html" class="lec-ref-link">→ 第3回</a>
+        <p class="q-text">以下のゲームのナッシュ均衡の説明として正しい組み合わせを選べ。<br>
+        (i) {参入する、参入しない}はナッシュ均衡である。<br>
+        (ii) {参入する、参入する}はナッシュ均衡ではない。</p>
+        <table class="q-table">
+          <tr><th></th><th>参入する</th><th>参入しない</th></tr>
+          <tr><td>参入する</td><td>-5, -5</td><td>4, 0</td></tr>
+          <tr><td>参入しない</td><td>0, 4</td><td>0, 0</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <ul class="options">
+    <li class="opt correct"><span class="opt-label">(a)</span>(i),(ii)とも正しい<span class="correct-mark">正解</span></li>
+    <li class="opt"><span class="opt-label">(b)</span>(i)のみ正しい</li>
+    <li class="opt"><span class="opt-label">(c)</span>(ii)のみ正しい</li>
+    <li class="opt"><span class="opt-label">(d)</span>(i),(ii)とも正しくない</li>
+  </ul>
+  <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+  <div class="exp-body">
+    <p>ナッシュ均衡とは「相手の戦略を所与としたとき、自分が一方的に戦略を変えても利得が改善しない状態」。</p>
+    <p><strong>(i) {参入する, 参入しない}：</strong><br>
+    P1（行）：参入する → 利得4。参入しないに変えると利得0。4&gt;0なので逸脱しない。<br>
+    P2（列）：参入しない → 利得0。参入するに変えると利得-5。0&gt;-5なので逸脱しない。<br>
+    → <em>ナッシュ均衡</em>。(i)は正しい。</p>
+    <p><strong>(ii) {参入する, 参入する}：</strong><br>
+    P1：参入する → 利得-5。参入しないに変えると利得0。0&gt;-5なので<strong>逸脱したい</strong>。<br>
+    → ナッシュ均衡の定義を満たさない。よって「ナッシュ均衡ではない」という (ii) の命題は正しい。</p>
+    <p>（参考）このゲームのナッシュ均衡は {参入する, 参入しない} と {参入しない, 参入する} の2つ。{参入しない, 参入しない} は P1 が参入すると利得 $0 \to 4$ と改善するため NE でない。</p>
+  </div>
+</div>
+
+<!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+  <a href="index.html">← ホームへ</a>
+  <a href="kakomon_2024.html">2024年度へ →</a>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// 押されたボタンに対応する解説欄の表示を切り替える。
+function toggleExp(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const opt = e.target.closest('.opt');
+  if (!opt) return;
+  const options = opt.closest('.options');
+  if (!options || options.classList.contains('revealed')) return;
+  options.classList.add('revealed');
+  opt.classList.add('selected');
+});
+</script>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">現代経済理論（渡辺安虎）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

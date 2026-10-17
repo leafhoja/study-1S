@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="theme-color" content="#0a4f5c"><title>第8章　コンピュータの仕組み | 情報 講義ノート</title><link rel="stylesheet" href="../../common.css"><link rel="stylesheet" href="../style.css"><script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],tags:'ams'},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script></head><body data-nav-page="lecture-第8章"><nav class="navbar"><div class="navbar-inner"><a class="navbar-brand" href="../index.html">情報</a><div class="navbar-links"><a href="../../index.html" class="nav-back">← 学習ノート</a><a href="../index.html">トップ</a><a href="index.html" class="active">講義ノート</a></div></div></nav><div class="hero"><h1>第8章　コンピュータの仕組み</h1><p class="subtitle">情報｜田中哲郎クラス講義ノート</p><p class="meta">機械語・論理回路・CPU・OS</p></div><div class="container"><div class="mot"><span class="box-label">概要</span><p>このページは講義スライドの流れを節単位に組み直し、用語の関係と学習上の要点を説明する。機械語・論理回路・CPU・OSを中心に、定義だけでなく、なぜ必要か、どのように使うかまで確認する。</p></div><div class="page-toc"><strong>章内目次</strong><ol>
+<li><a href="#ch8-stored">1. プログラム内蔵方式とコンピュータの基本構成</a></li>
+<li><a href="#ch8-machine">2. 機械語プログラムを一命令ずつ追う</a></li>
+<li><a href="#ch8-lang">3. アセンブリ言語と言語処理系</a></li>
+<li><a href="#ch8-logic">4. 論理関数とブール代数</a></li>
+<li><a href="#ch8-adder">5. 演算回路 — 加算器・減算器・ALU</a></li>
+<li><a href="#ch8-flipflop">6. 順序回路とフリップフロップ</a></li>
+<li><a href="#ch8-cpu">7. CPUの実現とフォン・ノイマンボトルネック</a></li>
+<li><a href="#ch8-hardware">8. 周辺装置とハードウェア構成</a></li>
+<li><a href="#ch8-os">9. オペレーティングシステムの役割</a></li>
+</ol></div>
+<div class="section" id="ch8-stored"><div class="sec-header"><div class="sec-tag">Stored Program</div><h2>配線をやり直さずにコンピュータの仕事を変えるには、何が必要か</h2></div><div class="sec-body">
+<p>初期のコンピュータ（ENIACなど）は、実行する処理そのものを配線として組み込んでいた。そのため<strong>処理（プログラム）を変更することは、コンピュータを作り直すことにほぼ等しかった</strong>。今日のコンピュータが「同じ機械で表計算もゲームも動画編集も動かせる」という意味で汎用であるのは、配線を変えずに済む仕組みを獲得したからである。</p>
+<div class="def"><span class="box-label">定義　プログラム内蔵方式（フォン・ノイマン型コンピュータ）</span><p><strong>プログラムとデータをともに主記憶（メモリ）上に保持する</strong>方式をプログラム内蔵方式という。データ（＝計算処理の対象となる情報）だけでなく、プログラム（＝計算処理の手順を表す情報）自体も主記憶上の書き換え可能な情報として扱われるため、配線を変更しなくても、主記憶に書き込む内容を変えるだけで別の処理を実行できる。この構成を提案者にちなんでフォン・ノイマン型コンピュータと呼ぶ。</p></div>
+<h3>コンピュータの基本構成 — 中央処理装置と主記憶装置</h3>
+<p>プログラム内蔵方式のコンピュータは、大きく<strong>中央処理装置（CPU）</strong>と<strong>主記憶装置</strong>の2つに分けられる。CPUはさらに、命令の解釈・制御を担う<strong>制御装置</strong>と、実際の計算を担う<strong>演算装置</strong>からなる。制御装置は主記憶との間で「プログラム」（命令）をやり取りし、演算装置は「データ」を主記憶との間でやり取りする。演算装置の内部には、計算途中の値を保持する<strong>演算レジスタ</strong>がある。</p>
+<div class="diagram"><img src="img/第8章/computer-architecture.png" alt="中央処理装置（制御装置・演算装置・演算レジスタ）と主記憶装置の間のプログラム・データのやり取り" style="max-width:640px;width:100%;height:auto;"><div class="diagram-cap">図：中央処理装置（制御装置・演算装置）と主記憶装置の基本構成（講義スライドより）</div></div>
+<h3>中央処理装置の内部にある4つの部品</h3>
+<div class="def"><span class="box-label">CPUを構成する部品</span><ul>
+<li><strong>プログラムカウンタ：</strong>次に読み込むべき命令が置かれている、主記憶上のアドレスを保持する。</li>
+<li><strong>命令レジスタ：</strong>主記憶から読み込んだ命令を保持し、その内容を解析する対象となる。</li>
+<li><strong>演算レジスタ：</strong>計算対象・計算結果のデータを保持し、主記憶からの読込み・主記憶への書出しを行う。</li>
+<li><strong>ALU（算術・論理演算器）：</strong>演算レジスタ上のデータに対して、実際の処理（算術演算・論理演算）を行う。</li>
+</ul></div>
+<p>この4つの部品の役割分担を押さえておくと、次節で追う機械語プログラムの動作や、後述するCPUの命令実行サイクル（フェッチ・デコード・実行・書出し）の説明が、単なる暗記ではなく一つのつながった仕組みとして理解できる。</p>
+</div></div>
+<div class="section" id="ch8-machine"><div class="sec-header"><div class="sec-tag">Machine Code</div><h2>「load 2001」は何をする命令か — 機械語プログラムを1行ずつ読む</h2></div><div class="sec-body">
+<p>機械語の命令は、<strong>命令コード</strong>（命令の種類。load・add・store・分岐など）と<strong>オペランド</strong>（命令の対象となるアドレス）の組で構成される。たとえば命令 <code>load 2001</code> は、命令コード「load」（読込め）と、オペランド「2001」（読み込む先のアドレス）からなる。読み込んだ値は<strong>AC（アキュムレータ、演算レジスタのこと）</strong>に保持される。</p>
+<div class="ex"><span class="box-label">具体例　命令アドレス1000〜1011のプログラム</span><p>命令部分をアドレス1000〜1011に、データ部分をアドレス2001〜2003に配置したプログラムを考える。データ部分は2001番地＝変数<code>sum</code>（初期値0）、2002番地＝変数<code>i</code>（初期値10）、2003番地＝定数<code>one</code>（値1）である。命令部分（1000番地から1つずつ実行され、1011番地で停止する）は次のとおりである。</p>
+<table class="axiom-table"><thead><tr><th>アドレス</th><th>命令</th><th>動作</th></tr></thead><tbody>
+<tr><td>1001</td><td>load 2001</td><td>sum（2001番地）の値をACに読み込む</td></tr>
+<tr><td>1002</td><td>add 2002</td><td>ACにi（2002番地）の値を加える</td></tr>
+<tr><td>1003</td><td>store 2001</td><td>ACの値をsum（2001番地）に書き出す（ここまでで sum ← sum + i）</td></tr>
+<tr><td>1004</td><td>load 2002</td><td>i（2002番地）の値をACに読み込む</td></tr>
+<tr><td>1005</td><td>sub 2003</td><td>ACからone（2003番地、値1）を引く</td></tr>
+<tr><td>1006</td><td>store 2002</td><td>ACの値をi（2002番地）に書き出す（ここまでで i ← i − 1）</td></tr>
+<tr><td>1007</td><td>分岐（0なら1009へ）</td><td>ACの値（直前の1006の操作からiと同じ）が0であれば、実行を1009に移す</td></tr>
+<tr><td>1008</td><td>分岐（無条件で1001へ）</td><td>（1007で1009に移らなければ）常に実行を1001に移す</td></tr>
+<tr><td>1009</td><td>load 2001</td><td>sum（2001番地）の値をACに読み込む</td></tr>
+<tr><td>1010</td><td>output</td><td>ACの値を出力する</td></tr>
+<tr><td>1011</td><td>halt</td><td>プログラムの実行を停止する</td></tr>
+</tbody></table>
+<p>全体として、このプログラムは「<code>sum</code> に <code>i</code> を加えて <code>sum</code> を更新し、<code>i</code> を1減らす」という処理を、<code>i</code> が0になるまで（1001〜1008を）繰り返し、最後に <code>sum</code> を出力して停止する、という<strong>ループ</strong>を機械語だけで表現したものである。</p></div>
+<details><summary>解答を見る（このプログラムを実行すると、最終的に何が出力されるか）</summary><div class="proof-body"><p>sum=0, i=10から始めて、「sum += i; i -= 1」をiが0になるまで繰り返すと、sumにはi=10,9,8,…,1が順に加算される。したがって最終的にsum = 10+9+8+…+1 = 55が出力され、プログラムは停止する。1つ1つの命令は単純な読み書きにすぎないが、分岐命令（1007・1008）によって同じ命令列を繰り返し実行できる点が、機械語でループを組む仕組みの核心である。</p></div></details>
+<div class="note"><span class="box-label">補足　実際の機械語とアセンブリ言語</span><p>ここでは<code>load</code>や<code>add</code>のような名前で命令を書いたが、実際のコンピュータの内部では、命令コードもオペランドもすべて数値であり、さらにその数値は2進符号で表現される。人間には読みにくいこの生の数値表現を<strong>バイナリプログラム</strong>と呼ぶ。命令コードやレジスタに人間が読みやすい名前（load, add, ACなど）を与えたものが<strong>アセンブリ言語</strong>である。</p></div>
+<div class="note"><span class="box-label">発展　命令セットの最小性（Little Man ComputerとOISC）</span><p>関連演習として登場するLittle Man Computer（LMC）は、1ワードが10進3桁、メインメモリが100ワードで、乗除算命令を持たない単純な命令セットである。これは最初期のプログラム内蔵方式コンピュータであるEDSAC、およびその影響を受けて1958年に東京大学理学部で作られたパラメトロン計算機PC-1の命令セットに近いが、さらに命令数が少ない。現在多くのPCで使われるIntel社のx86-64の遠い祖先である1971年の4004も、乗除算命令がない点は共通するが、複数のレジスタ（特にインデックスレジスタ）が使えるなど、命令セットとしてはかなり複雑である。命令の種類を極限まで減らせば、命令をたった1種類だけ持つ汎用コンピュータ（OISC, One-instruction set computer）も理論上は実現できる。プログラミングはパズルのような面白さがあるが、実用性はほぼない（分子コンピューティングや量子計算では意味があると考える研究者もいる）。</p></div>
+<p>命令列を1つずつ追って主記憶やレジスタの変化を答える出題は、<a href="../過去問/共通問題/kakomon_2023.html">2023年共通問題 大問3A</a>や、LMCの実行追跡を扱う<a href="../過去問/個別問題/kakomon_2022.html">2022年個別問題 大問1</a>で実際に出されている。</p>
+</div></div>
+<div class="section" id="ch8-lang"><div class="sec-header"><div class="sec-tag">Toolchain</div><h2>アセンブリ言語を書いても、CPUはそれを直接実行できない</h2></div><div class="sec-body">
+<div class="def"><span class="box-label">定義　アセンブラと言語処理系</span><p><strong>アセンブラ</strong>は、アセンブリ言語で書かれたプログラムを、CPUが直接実行できる形式（バイナリプログラム）へと変換するプログラムである。より広く、ある言語で書かれたプログラムを別の言語へ変換・翻訳するプログラムを<strong>言語処理系</strong>と呼ぶ。言語処理系の中には、変換だけでなく実行まで行うものもある（コンパイラ・インタプリタなど）。</p></div>
+<p>私たちが日常的に書く高水準言語のプログラムも、最終的にはこの節で見た機械語の命令列（読込み・演算・書出し・分岐の組合せ）に変換されて初めてCPU上で実行される。プログラムを書いてから実行結果を得るまでの間には、必ずこうした変換の工程が挟まっていることを意識しておくと、「同じソースコードなのになぜ実行できる形式が複数あるのか（実行ファイル・バイトコードなど）」といった疑問にも見通しがつく。</p>
+</div></div>
+<div class="section" id="ch8-logic"><div class="sec-header"><div class="sec-tag">Boolean Logic</div><h2>0と1の対応表（真理値表）から、回路の設計図（論理式）へ</h2></div><div class="sec-body">
+<div class="def"><span class="box-label">定義　真理値表</span><p>nビットの入力パターンのそれぞれに対して、mビットの出力がどう決まるかを一覧にした表を<strong>真理値表</strong>という。入力の組合せは有限（2ⁿ通り）なので、真理値表を書き切れば、その論理関数の動作はすべて記述したことになる。</p></div>
+<h3>XORとXNOR — 同じ入力から異なる出力を作る2つの関数</h3>
+<p>2つの1ビット入力 $x_1, x_2$ に対する代表的な論理演算として、<strong>排他的論理和（XOR, $x_1 \oplus x_2$）</strong>と、その否定である<strong>排他的論理和の否定（XNOR, $x_1 \odot x_2$）</strong>がある。</p>
+<table class="axiom-table"><thead><tr><th>$x_1$</th><th>$x_2$</th><th>$x_1\oplus x_2$（XOR）</th><th>$x_1\odot x_2$（XNOR）</th></tr></thead><tbody>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+</tbody></table>
+<p>XORは「2つの入力が異なるとき1」、XNORは「2つの入力が一致するとき1」を返す。3入力に拡張したXOR（$x_1\oplus x_2\oplus x_3$）は「1の個数が奇数のとき1」を返す。</p>
+<table class="axiom-table"><thead><tr><th>$x_1$</th><th>$x_2$</th><th>$x_3$</th><th>$x_1\oplus x_2\oplus x_3$</th></tr></thead><tbody>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+</tbody></table>
+<h3>ブール代数 — 同じ回路を複数の式で表す</h3>
+<p>論理演算は0と1だけを値にとる代数（<strong>ブール代数</strong>）の演算規則にしたがう。重要なのは、<strong>同じ入出力の対応関係（同じ真理値表）を持つ論理演算でも、複数の異なる論理式・回路構成で表現できる</strong>ということである。式を等価な別の形に変形できれば、使用するゲート数を減らして回路を簡略化できるため、真理値表という「仕様」と、それを実現する論理式・回路という「実装」は、常に一対多の関係にある。</p>
+<div class="def"><span class="box-label">定義　主加法標準形と主乗法標準形</span><ul>
+<li><strong>主加法標準形（積和標準形）：</strong>n個のリテラル（変数またはその否定）の論理積（AND）の項を、論理和（OR）で結び合わせた形。真理値表で<strong>1を返す</strong>n変数のパターンそれぞれに対応する積の項を作り、それらすべてを足し合わせる。</li>
+<li><strong>主乗法標準形（和積標準形）：</strong>n個のリテラルの論理和（OR）の項を、論理積（AND）で結び合わせた形。真理値表で<strong>0を返す</strong>n変数のパターンそれぞれに対応する和の項を作り、それらすべてを掛け合わせる。</li>
+</ul></div>
+<p>これらは、真理値表さえあれば機械的に論理式を組み立てられるという点で重要である。任意のn入力1出力の論理関数は、主加法標準形・主乗法標準形のどちらでも（形は異なるが）一意に表現できる。</p>
+<div class="ex"><span class="box-label">具体例　XORの主加法標準形</span><p>2入力XORの真理値表で出力が1になるのは、$(x_1,x_2)=(1,0)$ と $(0,1)$ の2パターンである。したがって主加法標準形は、この2パターンにそれぞれ対応する積の項を作り、論理和で結んで $x_1\oplus x_2 = (x_1\cdot\overline{x_2}) + (\overline{x_1}\cdot x_2)$ と書ける。真理値表の「1の行」を機械的に拾うだけで論理式が組み立てられることを確認しておこう。</p></div>
+<h3>MIL記法 — 論理式を回路図として描く</h3>
+<div class="def"><span class="box-label">定義　MIL記法</span><p>AND・OR・NOTなどの<strong>基本素子</strong>（基本演算に相当する部品）を線で結ぶことで論理回路を表現する記法を<strong>MIL記法</strong>という。次節の半加算器・全加算器の回路図はMIL記法で描かれた代表例であり、XORゲートの記号もそこに登場する。</p></div>
+</div></div>
+<div class="section" id="ch8-adder"><div class="sec-header"><div class="sec-tag">Arithmetic Circuits</div><h2>2進数の足し算を、ANDとXORだけで組み立てる</h2></div><div class="sec-body">
+<p>2進符号で表現された数値に対する演算回路には、加算器・乗算器・減算器などの個別の回路と、それらを1つにまとめた加減算器・ALU（算術・論理演算器）のような汎用の演算回路がある。ここでは基本となる加算器の構成を、実際に真理値表を追いながら確認する。</p>
+<div class="diagram"><img src="img/第8章/adder.png" alt="半加算器・全加算器の回路図と真理値表" style="max-width:640px;width:100%;height:auto;"><div class="diagram-cap">図：半加算器（XOR・ANDの2ゲート）と全加算器（半加算器2つ＋ORゲート）の構成・真理値表（講義スライドより）</div></div>
+<h3>半加算器 — 桁上がりを考えない2ビットの足し算</h3>
+<div class="def"><span class="box-label">定義　半加算器</span><p>2つの1ビット $x, y$ を加算し、和 $s$ と桁上がり $c_{\text{out}}$ を出力する回路を<strong>半加算器</strong>という。$s = x \oplus y = \mathrm{XOR}(x,y)$、$c_{\text{out}} = x \cdot y = \mathrm{AND}(x,y)$ で表され、XORゲート1個とANDゲート1個だけで構成できる。</p></div>
+<table class="axiom-table"><thead><tr><th>$x$</th><th>$y$</th><th>$s$</th><th>$c_{\text{out}}$</th></tr></thead><tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+</tbody></table>
+<p>半加算器という名前が示すとおり、この回路には弱点がある。下位の桁からの桁上がりを受け取る入力がないため、複数桁の足し算をそのままつなげることができない。</p>
+<h3>全加算器 — 下位桁からの桁上がりも受け取る</h3>
+<div class="def"><span class="box-label">定義　全加算器</span><p>2つの1ビット $x, y$ に加えて、下位桁からの桁上げ $c_{\text{in}}$ も入力として受け取り、和 $s$ と桁上がり $c_{\text{out}}$ を出力する回路を<strong>全加算器</strong>という。半加算器を2つ直列に並べ（1つ目で $x,y$ を加算し、2つ目でその和と $c_{\text{in}}$ を加算する）、2つの半加算器がそれぞれ出す桁上がりをORゲートでまとめることで構成できる。</p></div>
+<table class="axiom-table"><thead><tr><th>$x$</th><th>$y$</th><th>$c_{\text{in}}$</th><th>$s$</th><th>$c_{\text{out}}$</th></tr></thead><tbody>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+</tbody></table>
+<p>全加算器の桁上がり出力 $c_{\text{out}}$ を、1つ上の桁の全加算器の桁上げ入力 $c_{\text{in}}$ につなぐと、全加算器を横に並べるだけで、任意ビット数の2進数どうしの足し算（<strong>桁上げ伝播加算器</strong>）を組み立てられる。</p>
+<details><summary>解答を見る（全加算器を鎖状につなぐと何ビットの足し算ができるか）</summary><div class="proof-body"><p>全加算器をnビット分横に並べ、下位桁の $c_{\text{out}}$ を上位桁の $c_{\text{in}}$ に順に接続すれば、最下位桁だけ $c_{\text{in}}=0$（桁上がりなし）とすることで、nビットの2進数どうしの足し算を1回で実行できる。たとえば4桁の0011（10進で3）と0101（10進で5）を最下位桁から順に加算すると、s=1000（10進で8）が得られ、最上位からの桁上がりは0になる。加算器の個数を増やすだけでビット幅を拡張できる点が、この回路の再利用性の高さである。</p></div></details>
+<h3>減算器とALU — 加算器を土台にした汎用回路</h3>
+<div class="note"><span class="box-label">補足　減算器</span><p>一般に2進数の引き算は、引く数の2の補数（各ビットを反転して1を加えたもの）を作り、その補数を加算器に入力することで、足し算に変換して実現できる。この方法をとれば、足し算専用の回路と引き算専用の回路を別々に用意しなくても、同じ加算器の回路（<strong>加減算器</strong>）で両方を処理できる。</p></div>
+<div class="def"><span class="box-label">定義　ALU（算術・論理演算器）</span><p>加算・減算に加えて、AND・OR・XORなどの論理演算も制御信号によって切り替えて実行できる、汎用の演算回路を<strong>ALU</strong>という。8.1.1節でCPUの演算装置の内部部品として登場したALUは、まさにこの回路のことであり、演算レジスタ上のデータに対して処理を行う。</p></div>
+<p>真理値表・主加法標準形・全加算器の関係を横断的に問う出題として、<a href="../過去問/個別問題/kakomon_2025.html">2025年個別問題 大問2</a>がある。</p>
+</div></div>
+<div class="section" id="ch8-flipflop"><div class="sec-header"><div class="sec-tag">Sequential Logic</div><h2>組合せ回路だけでは足りない — 記憶を持つ回路（順序回路）</h2></div><div class="sec-body">
+<p>組合せ回路には<strong>完備性</strong>がある。つまり、任意のnビット入力・mビット出力の論理関数は、AND・OR・NOTなどの組合せ回路として実現できる。しかし組合せ回路は、入力の個数・出力の個数があらかじめ固定されているという制約を持つ。時々刻々と入力が与えられ続けるような処理（＝任意個数の入力列に対応する処理）には、組合せ回路だけでは対応できない。</p>
+<div class="def"><span class="box-label">定義　順序回路</span><p>組合せ回路の出力を記憶素子（メモリ）に保持し、その記憶内容を次の入力の一部として再び組合せ回路に与える回路を<strong>順序回路</strong>という。メモリによって、任意個数の入力列に対応できるようになる。CPUの演算装置（ALU）自体は組合せ回路だが、演算結果を演算レジスタや主記憶に保持し、次の計算の入力として再利用することで、CPU全体としては状態（過去の計算結果）を持つ順序回路として振る舞う。</p></div>
+<h3>フリップフロップ — 1ビットを記憶する最小の回路</h3>
+<div class="def"><span class="box-label">定義　双安定ループ回路</span><p>2個（偶数個）の反転素子（NOTゲート）をループ状に直列接続すると、出力として0を出し続ける状態と、1を出し続ける状態という<strong>2種類の安定状態</strong>が存在する回路ができる。これが1ビットの記憶素子の土台になる。</p></div>
+<div class="diagram"><img src="img/第8章/flipflop.png" alt="2個の反転素子をループ状に結合した双安定ループ回路（出力0の状態と出力1の状態）" style="max-width:520px;width:100%;height:auto;"><div class="diagram-cap">図：双安定ループ回路の2つの安定状態（講義スライドより）</div></div>
+<h3>RS（リセット・セット）フリップフロップ — 外部から状態を書き換える</h3>
+<p>双安定ループ回路だけでは、外から状態を指定する手段がない。そこで<strong>s（set、値を1にする）</strong>と<strong>r（reset、値を0にする）</strong>という2つの制御入力を加えたものが<strong>非同期式RSフリップフロップ</strong>である。素子の極性（信号がどちらの向きで有効になるか）によって、次の2通りの特性表が得られる。</p>
+<table class="axiom-table"><thead><tr><th>$s$</th><th>$r$</th><th>次の状態</th><th>動作</th></tr></thead><tbody>
+<tr><td>0</td><td>0</td><td>変化なし</td><td>状態保存</td></tr>
+<tr><td>0</td><td>1</td><td>0</td><td>リセット</td></tr>
+<tr><td>1</td><td>0</td><td>1</td><td>セット</td></tr>
+<tr><td>1</td><td>1</td><td>—</td><td>禁止</td></tr>
+</tbody></table>
+<table class="axiom-table"><thead><tr><th>$\overline{s}$</th><th>$\overline{r}$</th><th>次の状態</th><th>動作</th></tr></thead><tbody>
+<tr><td>0</td><td>0</td><td>—</td><td>禁止</td></tr>
+<tr><td>0</td><td>1</td><td>1</td><td>セット</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>リセット</td></tr>
+<tr><td>1</td><td>1</td><td>変化なし</td><td>状態保存</td></tr>
+</tbody></table>
+<div class="warn"><span class="box-label">注意　禁止状態</span><p>$s=1, r=1$（あるいは $\overline{s}=0,\overline{r}=0$）のように、setとresetを同時に有効にする入力は<strong>禁止</strong>されている。両方の指示が同時に来ると、回路の出力が定まらない、あるいは不安定になるためである。真理値表に「禁止」の行があるのは、単に無意味な組合せというより、<strong>そのような入力を作ってはいけないという設計上の制約</strong>だと理解するとよい。</p></div>
+<h3>同期式RSフリップフロップとMS（マスタースレーブ型）フリップフロップ</h3>
+<p>デジタル回路の処理は高速だが、それでもわずかな時間がかかる。記憶内容を一定時間確実に保持するため、<strong>クロック信号</strong>を使って回路全体の動作タイミングを同期させたものが同期式RSフリップフロップである。回路全体の処理速度が速いほど、クロック周波数を高く設定できる。</p>
+<p>順序回路では、メモリの内容（出力）が組合せ回路で処理され、その結果が再びメモリへ記憶（入力）される。しかし、同期式RSフリップフロップの出力と入力をそのままループさせると、反転素子が奇数個並ぶ形になり、発振してしまう可能性がある。そこで、内部にマスターとスレーブという2段のRSフリップフロップを持ち、クロック信号のon/offによって<strong>常にどちらか一方だけが動作する</strong>ように制御した<strong>MS（マスタースレーブ型）フリップフロップ</strong>が使われる。MS型でも状態保存・リセット・セット・禁止という基本的な4パターンの振る舞いは変わらないが、状態が確定するタイミングがクロックの切替わりに同期している点が非同期式との違いである。</p>
+<h3>nビットレジスタ</h3>
+<p>ここまでのRS型フリップフロップを土台に、禁止状態を持たない実用的な<strong>Dフリップフロップ</strong>（1つのデータ入力Dだけで動作するフリップフロップ）を<strong>n個並べる</strong>ことで、nビットの値をまとめて記憶できる<strong>nビットレジスタ</strong>が構成できる。8.1.1節で登場したプログラムカウンタ・命令レジスタ・演算レジスタは、いずれもこのnビットレジスタの応用である。</p>
+<div class="note"><span class="box-label">補足　回路記号の規格</span><p>本節・前節で用いたMIL記号は、長らく国際規格ISOおよび日本産業規格JISで採用されてきたが、現在ではISO 60617・JIS C 0617で定義された新しい回路記号を用いることが推奨されている。教科書や過去の資料ではMIL記号、最新の規格文書では新記号、という違いがあることを知っておくとよい。</p></div>
+</div></div>
+<div class="section" id="ch8-cpu"><div class="sec-header"><div class="sec-tag">CPU Cycle</div><h2>CPUは何を4段階に分けて繰り返しているか</h2></div><div class="sec-body">
+<div class="def"><span class="box-label">定義　中央処理装置の動作順序（フェッチ・デコード・実行・書出し）</span><ol>
+<li><strong>命令読込み（フェッチ）：</strong>プログラムカウンタにあるアドレスから命令を読み込み、命令レジスタに保存する。</li>
+<li><strong>命令解析（デコード）：</strong>命令レジスタ上の命令を解析し、演算装置とメモリへ制御信号を送る。</li>
+<li><strong>命令実行：</strong>演算レジスタとメモリの間でデータを転送し、演算レジスタやメモリのデータを用いてALUで算術・論理演算を行う。</li>
+<li><strong>書出し：</strong>演算レジスタに実行結果を、プログラムカウンタに次の実行アドレスを書き込む。</li>
+</ol></div>
+<div class="diagram"><img src="img/第8章/cpu-cycle.png" alt="中央処理装置の動作順序（命令読込み→命令解析→命令実行→書出し）と主記憶（命令メモリ・データメモリ）の関係" style="max-width:640px;width:100%;height:auto;"><div class="diagram-cap">図：CPUの命令実行サイクル①〜④と主記憶（命令メモリ・データメモリ）の関係（講義スライドより）</div></div>
+<p>2節で1命令ずつ追跡した<code>load</code>・<code>add</code>・<code>store</code>・分岐命令は、実際にはこの4段階を経て実行される。たとえば<code>load 2001</code>命令であれば、①プログラムカウンタの指すアドレスから命令自体を読み込み、②それが「loadでオペランドは2001」という命令であると解析し、③データメモリの2001番地から値を読み出して演算レジスタへ転送し、④演算レジスタに結果（読み出した値そのもの）を保持しつつプログラムカウンタを次のアドレスへ進める、という流れになる。この4段階を1命令ごとに繰り返すのがCPUの基本動作である。</p>
+<h3>フォン・ノイマンボトルネックとキャッシュメモリ</h3>
+<div class="warn"><span class="box-label">フォン・ノイマンボトルネック</span><p>主記憶装置（メインメモリ）の動作速度はCPUに比べて遅いため、CPUと主記憶の間のデータ転送そのものが処理全体の速度のボトルネックになりやすい。プログラム内蔵方式の必然的な弱点として、この問題は<strong>フォン・ノイマンボトルネック</strong>と呼ばれる。</p></div>
+<div class="def"><span class="box-label">定義　キャッシュメモリ</span><p>制御装置への命令の読込みや、演算装置との間のデータの読み書き用に配置された、<strong>高速だが小容量</strong>のメモリを<strong>キャッシュメモリ</strong>という。キャッシュが主記憶装置と同じ情報を保持している状態を<strong>ヒット</strong>、保持していない状態を<strong>ミス</strong>と呼ぶ。ヒットの場合は高速に処理できるが、ミスの場合は主記憶まで読みに行く必要があり、処理速度が大幅に低下する。</p></div>
+<h3>GPGPUとNPU — 汎用CPU以外の演算装置</h3>
+<div class="note"><span class="box-label">GPGPUとNPU</span><ul>
+<li><strong>GPGPU（General Purpose GPU、汎用GPU）：</strong>グラフィックス処理以外の用途にGPUを利用すること。有限要素法などの科学技術計算やニューラルネットワークの計算も、大量のデータに同じ演算を繰り返し施す点でグラフィックス処理と共通するため、GPUによって高速化できる。スーパーコンピュータやデータセンターでの大規模計算利用は、ほとんどがGPGPUである。</li>
+<li><strong>NPU（Neural Processing Unit）：</strong>ニューラルネットワークの推論（評価）のために、低ビット数のデータを高速に処理する専用回路。PCやタブレットなどに搭載される。</li>
+</ul></div>
+</div></div>
+<div class="section" id="ch8-hardware"><div class="sec-header"><div class="sec-tag">Hardware</div><h2>CPUと主記憶だけでは、外の世界とやり取りできない</h2></div><div class="sec-body">
+<p>CPUと主記憶装置だけでは、コンピュータは外部とやり取りできない。処理を実行するにはプログラムやデータを入力する必要があり、実行結果を出力しなければ意味がない。この役割を担うのが<strong>周辺装置</strong>である。</p>
+<div class="def"><span class="box-label">定義　周辺装置の分類</span><ul>
+<li><strong>補助記憶装置：</strong>SSD、ハードディスクドライブ、DVDドライブなど。</li>
+<li><strong>入力装置：</strong>マウス、キーボード、マイクなど。</li>
+<li><strong>出力装置：</strong>モニタ、プリンタ、スピーカなど。</li>
+<li><strong>通信装置：</strong>WiFiアダプタ、Bluetoothアダプタなど。</li>
+</ul></div>
+<div class="diagram"><img src="img/第8章/hardware.png" alt="中央処理装置・主記憶装置とバスで接続された入出力コントローラ、および入力装置・出力装置・補助記憶装置・通信装置" style="max-width:640px;width:100%;height:auto;"><div class="diagram-cap">図：CPU・主記憶装置とバス接続された周辺装置（入出力コントローラ配下）（講義スライドより）</div></div>
+<h3>バス接続</h3>
+<div class="def"><span class="box-label">定義　バス接続</span><p>複数の装置が信号線を共有する接続方法を<strong>バス接続</strong>という。バスにつながる複数の装置はクロック信号によって同期している。CPU内部の構成要素（制御装置・演算装置など）の間をつなぐバスを<strong>内部バス</strong>、CPU・主記憶・周辺装置の間をつなぐバスを<strong>外部バス</strong>という。</p></div>
+<h3>割込処理</h3>
+<div class="def"><span class="box-label">定義　割込処理</span><p>キーボード入力のような非常に遅い入力や、通信のような予測不能なタイミングで発生するイベントに対して、CPUをそのつど待たせて効率を落とすのではなく、CPUは他の処理を動作させ続けておき、<strong>実際に処理が必要になった時点で割込（interrupt）が発生し、CPUがその処理に切り替わる</strong>仕組みを<strong>割込処理</strong>という。</p></div>
+<p>周辺装置とバス・割込処理を合わせて理解すると、「CPUは主記憶とだけ会話していればよい」という単純化されたモデル（1節）に対して、実際のコンピュータでは周辺装置との入出力が絶えず発生し、それを効率よくさばく仕組みが不可欠であることが分かる。</p>
+</div></div>
+<div class="section" id="ch8-os"><div class="sec-header"><div class="sec-tag">Operating System</div><h2>有限な資源を取り合う複数のプログラムを、誰が管理するのか</h2></div><div class="sec-body">
+<div class="def"><span class="box-label">定義　オペレーティングシステム（OS）</span><p>複数のプログラムを主記憶上に載せて実行し、複数のプログラムによる主記憶の利用を調整し、周辺装置との通信を統括する、といった機能を実現するプログラムを<strong>オペレーティングシステム（OS）</strong>という。「基本ソフトウェア」とも呼ばれる。有限なコンピュータ資源を複数のプログラム・複数の利用者で効率よく使うための環境管理が、OSの主要な役割である。</p></div>
+<h3>プロセス管理とメモリ管理</h3>
+<div class="def"><span class="box-label">定義</span><ul>
+<li><strong>プロセス：</strong>CPU上でのプログラムの実行単位。<strong>プロセス管理</strong>は、プロセスの起動、実行環境の整備、終了後の後処理などを行う。<strong>マルチプロセス管理</strong>は、実行するプロセスを高速に切り替える<strong>タイムスライシング</strong>によって、複数のプロセスを（仮想的に）並列実行する。</li>
+<li><strong>メモリ管理：</strong>複数プロセスのメモリが競合しないよう、メモリ割当てとメモリ保護を行う。<strong>仮想記憶方式</strong>では、各プロセスはOSが提供する仮想的な記憶空間の中で作業するため、実際の物理メモリのアドレスを意識しなくてよい。補助記憶装置を併用することで、実際の主記憶より大きな記憶領域を各プロセスに提供できる。</li>
+</ul></div>
+<h3>ファイル管理とユーザ管理</h3>
+<div class="def"><span class="box-label">定義</span><ul>
+<li><strong>ファイル：</strong>補助記憶装置上で管理される情報の単位。<strong>ファイル管理</strong>は、ファイルの作成・保護・消去などを行う。<strong>ファイルシステム</strong>は、木構造のディレクトリ（フォルダ）によってファイルをまとめて管理する仕組みである。</li>
+<li><strong>マルチユーザ：</strong>複数の人間が同じコンピュータを利用すること。<strong>ユーザ管理</strong>は、各ユーザが持つ資源（ファイルやプロセス）を管理する。ユーザには選択的に権限が付与され、すべての権限を持つ管理者は<strong>スーパーユーザ（アドミニストレータ）</strong>と呼ばれる。</li>
+</ul></div>
+<h3>API（応用プログラミングインタフェース）とユーザインタフェース</h3>
+<div class="def"><span class="box-label">定義　API</span><p>個別の応用プログラムとOSとのインタフェースを<strong>API（応用プログラミングインタフェース）</strong>という。OS上で動く応用プログラムがメモリ割当てやファイルの入出力を行う際は、OSの機能を呼び出す<strong>システムコール</strong>（OS APIやネイティブAPIとも呼ばれる）を経由する。これに対し、ネットワーク上で動くプログラムに対するサービスの要求・提供のためのインタフェースは<strong>ネットワークAPI（リモートAPI）</strong>と呼ばれ、こちらも単に「API」と呼ばれることが多いので注意が必要である。</p></div>
+<div class="note"><span class="box-label">ユーザインタフェース</span><p>OSに対して応用プログラムの起動・終了などをユーザが指示するためのインタフェースを<strong>ユーザインタフェース</strong>という。GUI（グラフィカルユーザインタフェース）が中心だが、プログラミング可能なCUI（コマンドラインインタフェース）も広く使われる。ユーザインタフェースの設計原則そのものは、<a href="第9章.html">第9章　ユーザインタフェース</a>で詳しく扱う。</p></div>
+</div></div>
+
+<div class="warn exam-focus"><span class="box-label">過去問との接続 — 試験で何が問われるか</span><ul><li><a href="../過去問/共通問題/kakomon_2023.html"><strong>2023共通 大問3A</strong></a>：機械語命令を一命令ずつ追い、レジスタと主記憶の変化を答える。</li><li><a href="../過去問/共通問題/kakomon_2025.html"><strong>2025共通 問2</strong></a>：フォン・ノイマン型のCPU・主記憶・命令実行が問われた。</li><li><a href="../過去問/個別問題/kakomon_2022.html"><strong>2022個別 大問1・3</strong></a>：LMCの実行追跡とNAND回路設計は田中クラスの典型。</li><li><a href="../過去問/個別問題/kakomon_2025.html"><strong>2025個別 大問2</strong></a>：真理値表、主加法標準形、全加算器の関係を問う。</li></ul><p>用語を単独で暗記するのでなく、題材のどこにその概念が現れ、どの条件を根拠に判断するかを説明できるようにする。</p></div><div class="note"><span class="box-label">この章のまとめ</span><p>プログラム内蔵方式、機械語の命令とループ、論理関数とブール代数、加算器、フリップフロップと順序回路、CPUのフェッチ・デコード・実行サイクル、周辺装置とOSは、ばらばらの知識ではなく「主記憶上の0と1の並びを、ゲートの組合せでどう処理し、どう繰り返し、どう外部とやり取りするか」という一本の筋でつながっている。各節の太字語・真理値表・図を、自分の言葉で説明できるか確認しよう。</p></div><div class="page-nav"><a href="第7章.html">← 前へ</a><a href="第9章.html">次へ →</a></div></div><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer><script src="../nav.js"></script><script src="../../common.js?v=20260718-texcopy"></script><script src="../../access-ui.js"></script></body></html>

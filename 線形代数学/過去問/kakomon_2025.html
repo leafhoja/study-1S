@@ -1,0 +1,348 @@
+<!DOCTYPE html><!-- 「線形代数学① 期末試験 2025年度 S2ターム 解説 | 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>線形代数学① 期末試験 2025年度 S2ターム 解説 | 線形代数学①</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    macros: { R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}', Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}', rank: '\\operatorname{rank}' }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body data-nav-page="exam-2025">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>線形代数学① 期末試験</h1>
+  <p class="subtitle">2025年度 S2ターム &nbsp;|&nbsp; 7月31日4限（90分）&nbsp;|&nbsp; 1年 理一(15-17) 松本久義</p>
+</div>
+
+<div class="container">
+
+<div class="source-note">この解説は原本の答案用紙（画像・書き込みあり）から問題文を書き起こして作成した。2024年度と出題形式が共通しているので，あわせて <a href="kakomon_2024.html">2024年度の解説</a> も参照するとよい。</div>
+
+<!-- 第1問 -->
+<!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><section class="section" id="problem1">
+  <div class="sec-header"><span class="problem-num">1</span> &nbsp;Kernel と Image の次元</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>以下の (a)–(d) を行列表示に持つ複素縦ベクトル空間の間の $\C$-線形写像それぞれについて kernel と image の次元を求めよ。</p>
+      $$\text{(a)}\begin{pmatrix}1&0&0\\1&2&0\\0&2&1\\0&0&0\end{pmatrix},\quad
+      \text{(b)}\begin{pmatrix}1&2&3\\1&-2&-3\\3&2&3\end{pmatrix},\quad
+      \text{(c)}\begin{pmatrix}2&-1&1\\0&1&0\\5&-3&3\end{pmatrix},\quad
+      \text{(d)}\begin{pmatrix}1&1&3&1\\1&2&5&3\\1&1&3&2\\2&2&6&3\end{pmatrix}$$
+      <p style="font-size:.85rem;color:var(--muted)">※ (d) は2024年度の第1問(d)と同一の行列。</p>
+    </div>
+
+    <div class="read-box">
+      <div class="read-title">🔍 問題文の読み方</div>
+      <p>2024年度第1問と全く同じ形式の設問（<a href="kakomon_2024.html#problem1">2024年度の読み方</a>参照）。「行列表示に持つ$\C$-線形写像」は標準基底での掛け算 $T_A(\mathbf{x})=A\mathbf{x}$ を指し，まず行列のサイズから定義域・値域を確認する——(a)〜(d)はすべて正方行列だが，サイズが違えば話が変わるので毎回確認する癖をつける。$\Ker,\Im$の次元は $\rank A$ を1つ求めれば定理4.4・4.7で両方決まる。(d)は2024年度第1問(d)と全く同じ行列なので，計算をそのまま再利用できる（問題文の注記の通り）。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：定理4.4・定理4.7・系4.8（2024年度と同じ道具）</div>
+      <p>$\dim\Ker(T_A)=n-\rank A$，$\dim\Im(T_A)=\rank A$。行基本変形で $\rank A$ を求めれば両方の次元が同時に決まる。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (a)</div>
+      <p>行 $R_1=(1,0,0),\ R_2=(1,2,0),\ R_3=(0,2,1)$。$R_2-R_1=(0,2,0)$ は $R_3=(0,2,1)$ と第3成分だけ異なるので独立。$R_1,(0,2,0),R_3$ は独立 $\Rightarrow\rank A=3$。</p>
+      <p>$$\dim\Ker=\boxed{0},\qquad \dim\Im=\boxed{3}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (b)</div>
+      $$\det\begin{pmatrix}1&2&3\\1&-2&-3\\3&2&3\end{pmatrix}=1(-6+6)-2(3+9)+3(2+6)=0-24+24=0$$
+      <p>退化。第3行 $=2R_1+R_2$（実際 $2(1,2,3)+(1,-2,-3)=(3,2,3)$ ✓）で，$R_1,R_2$ は独立。$\rank A=2$。</p>
+      <p>$$\dim\Ker=3-2=\boxed{1},\qquad \dim\Im=\boxed{2}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (c)</div>
+      $$\det\begin{pmatrix}2&-1&1\\0&1&0\\5&-3&3\end{pmatrix}=2(3-0)-(-1)(0-0)+1(0-5)=6+0-5=1\neq0$$
+      <p>正則。$\rank A=3$。$$\dim\Ker=\boxed{0},\qquad \dim\Im=\boxed{3}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (d)</div>
+      <p>行 $R_1=(1,1,3,1),\ R_2=(1,2,5,3),\ R_3=(1,1,3,2),\ R_4=(2,2,6,3)$。まず一目で $R_4=R_1+R_3$（実際 $(1,1,3,1)+(1,1,3,2)=(2,2,6,3)$ ✓）なので $R_4$ は従属。残る $R_1,\ R_2-R_1=(0,1,2,2),\ R_3-R_1=(0,0,0,1)$ は非零成分の位置が列1・列2・列4とずれた階段状なので独立。$\rank A=3$。</p>
+      <p style="font-size:.85rem;color:var(--muted)">※ 2024年度第1問(d)と同一の行列（<a href="kakomon_2024.html#problem1">そちらの解答</a>ではやや異なる基本変形の道筋——$R_4-2R_1$ と $R_3-R_1$ が一致する，という経路——で同じ結論に達している。行の組み合わせ方は一通りではないことが分かる）。</p>
+      <p>$$\dim\Ker=\boxed{1},\qquad \dim\Im=\boxed{3}$$</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 (a)〜(d) の4通りのrank判定法：見比べて使い分ける</div>
+      <p>(a)は行ベクトルの独立性を直接観察，(b)(c)は $3\times3$ 正方行列なので行列式（$\det\neq0$ なら即座に正則＝フルランク，$\det=0$ なら退化のみ確定），(d)は行の間の明示的な線形関係 $R_4=R_1+R_3$ を見つけて従属を示す方法だった。</p>
+      <p><strong>使い分けの目安：</strong>正方行列で「フルランクかどうか」だけを知りたいなら行列式が最速（成分を代入して符号を見るだけ）。ただし $\det=0$ と分かった後に<em>正確な</em> rank（$n-1$ か $n-2$ か……）を出すには結局どこかで行の従属関係を具体的に一つ見つける必要がある——(b)(c)のように行列式のあとに「どの行が他の行の一次結合か」を確認しているのはこのため。非正方行列（(d)のように行数・列数が違う場合や，そもそも行列式が定義できない場合）では最初から行の間の関係を探すしかない。<strong>まず成分を眺めて明らかな一次関係がないか一撃で探す</strong>（(d)のように $R_4=R_1+R_3$ が暗算で見えることは多い）と，フルの行基本変形をせずに済むことが多い。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 第2問 -->
+<section class="section" id="problem2">
+  <div class="sec-header"><span class="problem-num">2</span> &nbsp;基底の取り替えと行列表示</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$T:\R^4\to\R^3$ を行列 $A=\begin{pmatrix}2&2&0&2\\1&1&2&5\\1&2&2&6\end{pmatrix}$ により定まる $\R$-線形写像とする。</p>
+      <ol>
+        <li>$\R^4$ の基底 $\mathbf{b}_1=(1,1,0,0)^\top,\mathbf{b}_2=(0,1,0,0)^\top,\mathbf{b}_3=(0,0,0,-1)^\top,\mathbf{b}_4=(0,0,1,0)^\top$ および $\R^3$ の基底 $\mathbf{c}_1=(3,0,-5)^\top,\mathbf{c}_2=(0,1,1)^\top,\mathbf{c}_3=(-1,0,2)^\top$ による $T$ の行列表示を求めよ。</li>
+        <li>$\R^3$ の基底であって，$\R^4$ の標準基底と組み合わせたときの $T$ の行列表示が $A$ と行同値な行標準形になるようなものを1つ与えよ。</li>
+      </ol>
+    </div>
+
+    <div class="read-box">
+      <div class="read-title">🔍 問題文の読み方</div>
+      <p>2024年度第2問と全く同じ出題形式（<a href="kakomon_2024.html#problem2">2024年度の読み方</a>参照）。$T$自体は標準基底に関する行列$A$で決まっているが，問題文中の$\mathbf{b}_1,\ldots,\mathbf{b}_4$，$\mathbf{c}_1,\mathbf{c}_2,\mathbf{c}_3$はいずれも標準基底ではない別の基底——(1)ではこの2組の基底に関する行列表示（各列が$T(\mathbf{b}_j)$を$\{\mathbf{c}_i\}$の一次結合で表した係数）を求める。</p>
+      <p>(2)は与えられた基底とは無関係に，「$\R^3$側の基底をうまく選べば行列表示が行標準形になる」ような基底を<em>自分で構成して</em>1つ挙げる問題（この基底は一意ではなく，条件を満たすものが1つ書ければよい）。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：行列表示の第$j$列 $=$ 「$T(\mathbf{b}_j)$ を新基底 $\{\mathbf{c}_i\}$ で表した座標」</div>
+      <p>$T(\mathbf{b}_j)$ 自体は標準基底のもとでの行列 $A$ でそのまま計算できる（$T(\mathbf{b}_j)=A\mathbf{b}_j$）。問題はそれを目標側の基底 $\{\mathbf{c}_1,\mathbf{c}_2,\mathbf{c}_3\}$ の一次結合として表し直すこと——これは「$C\mathbf{x}=T(\mathbf{b}_j)$ を $\mathbf{x}$ について解け」という連立方程式に他ならない（$C=(\mathbf{c}_1\ \mathbf{c}_2\ \mathbf{c}_3)$）。$T(\mathbf{b}_1),\ldots,T(\mathbf{b}_4)$ の4本すべてについて連立方程式を毎回解き直すのは非効率なので，先に $C^{-1}$ を1回だけ求めてしまえば，あとは $\mathbf{x}=C^{-1}\cdot(\text{各} T(\mathbf{b}_j))$ という行列の掛け算だけで済む——「同じ変換を繰り返し使うなら逆行列を1回計算して使い回す」という定石。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>まず $\mathbf{c}_1,\mathbf{c}_2,\mathbf{c}_3$ を列に並べた行列 $C=\begin{pmatrix}3&0&-1\\0&1&0\\-5&1&2\end{pmatrix}$ の逆行列を求める（$\det C=1$）：</p>
+      $$C^{-1}=\begin{pmatrix}2&-1&1\\0&1&0\\5&-3&3\end{pmatrix}$$
+      <p>つまり，任意の目標ベクトル $(X,Y,Z)^\top$ の $\{\mathbf{c}_i\}$ 座標は $(x,y,z)^\top=C^{-1}(X,Y,Z)^\top$，すなわち $x=2X-Y+Z,\ y=Y,\ z=5X-3Y+3Z$。</p>
+      <p>$A$ の列を $\mathbf{a}_1=(2,1,1)^\top,\mathbf{a}_2=(2,1,2)^\top,\mathbf{a}_3=(0,2,2)^\top,\mathbf{a}_4=(2,5,6)^\top$ とすると</p>
+      <p>$T(\mathbf{b}_1)=\mathbf{a}_1+\mathbf{a}_2=(4,2,3)^\top$ → 座標 $(9,2,23)$</p>
+      <p>$T(\mathbf{b}_2)=\mathbf{a}_2=(2,1,2)^\top$ → 座標 $(5,1,13)$</p>
+      <p>$T(\mathbf{b}_3)=-\mathbf{a}_4=(-2,-5,-6)^\top$ → 座標 $(-5,-5,-13)$</p>
+      <p>$T(\mathbf{b}_4)=\mathbf{a}_3=(0,2,2)^\top$ → 座標 $(0,2,0)$</p>
+      $$[T]_{\gamma,\beta}=\begin{pmatrix}9&5&-5&0\\2&1&-5&2\\23&13&-13&0\end{pmatrix}$$
+      <p style="font-size:.85rem;color:var(--muted)">検算：$T(\mathbf{b}_1+\mathbf{b}_2)$ を直接計算すると $(6,3,5)^\top$ で座標 $(14,3,36)$。表の列1＋列2 $=(14,3,36)$ と一致 ✓</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 気づき：$C^{-1}$ は第1問(c)の行列そのもの</div>
+      <p>計算した $C^{-1}=\begin{pmatrix}2&-1&1\\0&1&0\\5&-3&3\end{pmatrix}$ は，第1問(c)で登場した行列と完全に一致する（偶然ではなく，出題者が使い回した可能性が高い）。同じ試験内で似た行列が繰り返し現れたら，計算を再利用できないか疑ってみる価値がある。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$A$ を行簡約する：$R_1/2=(1,1,0,1)$，$R_2-R_1/2=(0,0,2,4)$，$R_3-R_1/2=(0,1,2,5)$。並べ替えて消去すると</p>
+      $$\mathrm{RREF}(A)=\begin{pmatrix}1&0&0&0\\0&1&0&1\\0&0&1&2\end{pmatrix}$$
+      <p>ピボット列は第1〜3列。2024年度と同じ原理で，$A$ の第1〜3列 $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ をそのまま新しい基底に選べばよい（実際 $\mathbf{a}_4=(2,5,6)^\top=0\cdot\mathbf{a}_1+1\cdot\mathbf{a}_2+2\cdot\mathbf{a}_3$，$\mathrm{RREF}$ の第4列 $(0,1,2)$ と一致 ✓）。</p>
+      <p>$$\boxed{\R^3\text{ の新しい基底}=\{(2,1,1)^\top,\ (2,1,2)^\top,\ (0,2,2)^\top\}}$$</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 「ピボット列 $=$ 新しい基底」が使える条件</div>
+      <p>この近道（2024年度第2問(2)でも使った手法）が成立するのは，$\rank A=\dim(\text{値域})$，つまり $T$ が全射のとき<strong>に限る</strong>。今回は $\rank A=3=\dim\R^3$ なのでちょうど値域を張り切っており，ピボット列 $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ をそのまま $\R^3$ の基底に採用できた。もし $\rank A<\dim(\text{値域})$（$T$ が全射でない）なら，ピボット列だけでは $\R^3$ を張り切れず，$\Im(T)$ の外から追加のベクトルを補って基底を完成させる必要がある——その場合，補ったベクトル方向の行は行標準形の中で自動的にゼロ行として現れる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 第3問 -->
+<section class="section" id="problem3">
+  <div class="sec-header"><span class="problem-num">3</span> &nbsp;部分空間の像と次元定理（応用）</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$T:\R^4\to\R^5$ を行列 $\begin{pmatrix}1&1&3&1\\1&2&4&3\\0&2&2&4\\2&3&7&4\\0&0&0&0\end{pmatrix}$ により定まる $\R$-線型写像とする。また $V$ を以下の4つのベクトルによって生成される $\R^4$ の部分空間とする。</p>
+      $$\mathbf{v}_1=\begin{pmatrix}0\\-2\\1\\1\end{pmatrix},\ \mathbf{v}_2=\begin{pmatrix}0\\-3\\1\\1\end{pmatrix},\ \mathbf{v}_3=\begin{pmatrix}-1\\-2\\1\\1\end{pmatrix},\ \mathbf{v}_4=\begin{pmatrix}-1\\-3\\0\\0\end{pmatrix}$$
+      <ol>
+        <li>$V$ の次元を求めよ。</li>
+        <li>$T(V)$ の次元を求めよ。</li>
+        <li>$\Ker(T)\cap V$ の次元を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="read-box">
+      <div class="read-title">🔍 問題文の読み方</div>
+      <p>$V$は「$T$の定義域$\R^4$の中で，$\mathbf{v}_1,\ldots,\mathbf{v}_4$が張る部分空間」——$T$そのものとはひとまず無関係に，$\R^4$の中に部分空間$V$がまず1つ指定されている，という状況を最初に押さえる。設問は3つ：①$V$自身の次元（$\mathbf{v}_1,\ldots,\mathbf{v}_4$のうち何本が独立か，という$V$だけの話），②$V$を$T$で写した先 $T(V)=\{T\mathbf{v}\mid\mathbf{v}\in V\}$ の次元，③$V$のうち$T$によって$\mathbf{0}$に潰されてしまう部分 $\Ker(T)\cap V$ の次元。</p>
+      <p>3つとも別々に力任せで計算できてしまいそうに見えるが，出題の並び順（①②③の順）自体が「①②を求めれば③は自動的に決まる」という筋道を示す誘導になっている——詳しくは下の🧠を参照。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：この3問は独立ではなく，(3)は(1)(2)から一撃で出る</div>
+      <p>$T$ を $V$ に制限した写像 $T|_V:V\to\R^5$ を考えると，$\Ker(T|_V)=\Ker(T)\cap V$，$\Im(T|_V)=T(V)$。<strong>系4.8</strong>（次元定理）をこの制限写像にそのまま適用すれば</p>
+      $$\dim V=\dim(\Ker(T)\cap V)+\dim T(V)$$
+      <p>が成り立つ。つまり (1)(2) さえ求まれば (3) は引き算だけで求まる——出題の3段構成はこの流れを踏ませるための誘導になっている。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1) — $\dim V$</div>
+      <p>$c_1\mathbf{v}_1+c_2\mathbf{v}_2+c_3\mathbf{v}_3+c_4\mathbf{v}_4=\mathbf{0}$ を成分ごとに解く：</p>
+      <ul>
+        <li>第1成分：$-c_3-c_4=0\Rightarrow c_3=-c_4$</li>
+        <li>第3・4成分：$c_1+c_2+c_3=0$</li>
+        <li>第2成分：$-2c_1-3c_2-2c_3-3c_4=0$</li>
+      </ul>
+      <p>$c_4=t$ とおくと $c_3=-t$。$c_1+c_2=t$，$2c_1+3c_2=-t$ を解いて $c_2=-3t,\ c_1=4t$。よって唯一の関係式（比例倍を除く）</p>
+      $$4\mathbf{v}_1-3\mathbf{v}_2-\mathbf{v}_3+\mathbf{v}_4=\mathbf{0}\quad(\text{検算済み，全成分で }0\text{ になる})$$
+      <p>この関係の4つの係数がすべて非零なので，$\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3,\mathbf{v}_4$ のうちどの3本を選んでも独立（例えば $\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3$）。よって</p>
+      <p>$$\dim V=\boxed{3},\qquad V=\langle\mathbf{v}_1,\mathbf{v}_2,\mathbf{v}_3\rangle,\quad \mathbf{v}_4=-4\mathbf{v}_1+3\mathbf{v}_2+\mathbf{v}_3$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2) — $\dim T(V)$</div>
+      <p>$T(V)=\langle T\mathbf{v}_1,T\mathbf{v}_2,T\mathbf{v}_3\rangle$（$T\mathbf{v}_4$ は同じ関係式から自動的に従属）。行列の列を $\mathbf{m}_1,\ldots,\mathbf{m}_4$ として計算：</p>
+      <p>$T\mathbf{v}_1=-2\mathbf{m}_2+\mathbf{m}_3+\mathbf{m}_4=(2,3,2,5,0)^\top$</p>
+      <p>$T\mathbf{v}_2=-3\mathbf{m}_2+\mathbf{m}_3+\mathbf{m}_4=(1,1,0,2,0)^\top$</p>
+      <p>$T\mathbf{v}_3=-\mathbf{m}_1-2\mathbf{m}_2+\mathbf{m}_3+\mathbf{m}_4=(1,2,2,3,0)^\top$</p>
+      <p>ここで $T\mathbf{v}_2+T\mathbf{v}_3=(1,1,0,2,0)+(1,2,2,3,0)=(2,3,2,5,0)=T\mathbf{v}_1$ ——つまり $T\mathbf{v}_1$ も従属。$T\mathbf{v}_2,T\mathbf{v}_3$ は比例しないので独立。</p>
+      <p>$$\dim T(V)=\boxed{2}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (3) — $\dim(\Ker(T)\cap V)$</div>
+      <p>次元定理（制限写像版）より</p>
+      $$\dim(\Ker(T)\cap V)=\dim V-\dim T(V)=3-2=\boxed{1}$$
+      <p>検算：$T\mathbf{v}_1-T\mathbf{v}_2-T\mathbf{v}_3=\mathbf{0}$ だったので $\mathbf{v}_1-\mathbf{v}_2-\mathbf{v}_3=(1,3,-1,-1)^\top\in\Ker(T)\cap V$。実際 $T(1,3,-1,-1)^\top=\mathbf{m}_1+3\mathbf{m}_2-\mathbf{m}_3-\mathbf{m}_4=\mathbf{0}$（成分ごとに検算可能）。$\dim=1$ なのでこれが基底：$\Ker(T)\cap V=\langle(1,3,-1,-1)^\top\rangle$。</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 一般化：「$V$ に制限した次元定理」はいつでも使える保険</div>
+      <p>$T:X\to Y$ が任意の線形写像で $V\subseteq X$ が任意の部分空間であるとき，$T|_V:V\to Y$ にも次元定理がそのまま適用でき $\dim V=\dim(\Ker(T)\cap V)+\dim T(V)$ が常に成り立つ。つまり「$V$」「$T(V)$」「$\Ker(T)\cap V$」の3つのうち<strong>どれか2つが計算できれば，残り1つは引き算だけで求まる</strong>。この問題では $\dim V$（生成元の従属関係を見る）と $\dim T(V)$（生成元の像を計算する）がどちらも直接手を動かせば求まったので，$\dim(\Ker(T)\cap V)$ は労力ゼロで手に入った。逆に，もし $\Ker(T)\cap V$ の方が直接計算しやすい状況（例えば $T$ の核が具体的に分かっていて $V$ との交わりを直接解ける場合）なら，$\dim T(V)$ の方を引き算で求めることもできる——「3つのうちどれが一番計算しやすいかを見極めて，残りを引き算で済ませる」のがこの技の本質。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 第4問 -->
+<section class="section" id="problem4">
+  <div class="sec-header"><span class="problem-num">4</span> &nbsp;パラメータ付き不変部分空間の個数</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$a\in\R$ とし $T_a:\R^3\to\R^3$ を行列 $A=\begin{pmatrix}a&0&0\\0&1&1\\0&0&1\end{pmatrix}$ により定まる $\R$-線形写像とする。$\R^3$ の部分空間 $V$ であって $T_a(V)\subseteq V$ を満たすものを $T_a$ の不変部分空間という。不変部分空間が有限個しか存在しないような $a\in\R$ を全て求め，そのような $a$ に対して $T_a$ の不変部分空間 $V$ の個数を求めよ。</p>
+    </div>
+
+    <div class="read-box">
+      <div class="read-title">🔍 問題文の読み方</div>
+      <p>$T_a$ は $a$ という実数パラメータで動く「行列の家族」——$a$の値を1つ決めるごとに1つの写像$T_a$が決まる。「不変部分空間」の定義自体は2024年度第4問（<a href="kakomon_2024.html#problem4">読み方</a>参照）と同じ，$T_a(V)\subseteq V$を満たす部分空間$V$のこと。</p>
+      <p>問われているのは2段階：①「不変部分空間が有限個しかない」ような特別な$a$の値を（実数全体の中から）すべて特定する，②そのような$a$それぞれについて，不変部分空間の個数を実際に数える（暗に，特定できなかった残りの$a$では不変部分空間が無限個存在する，ということも言外に示す必要がある）。</p>
+      <p>行列$A$をよく見ると，$1$行$1$列目の$a$の部分と，右下$2\times2$の$\begin{pmatrix}1&1\\0&1\end{pmatrix}$の部分は互いに影響を与えないブロック対角的な構造になっている。「$\mathbf{e}_1$方向」と「$\mathbf{e}_2,\mathbf{e}_3$方向」という2つの独立した部品に分けて考えられることに気づけるかどうかが，この問題の急所。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：$A$ はブロック分解できる — 2024年度第4問の一般化</div>
+      <p>$A$ は $1\times1$ ブロック（固有値 $a$，$\mathbf{e}_1$ 方向）と $2\times2$ ブロック $\begin{pmatrix}1&1\\0&1\end{pmatrix}$（固有値 $1$ の単一ジョルダン細胞，$\mathbf{e}_2,\mathbf{e}_3$ 方向）に自然に分かれる。<strong>異なる固有値を持つブロックに直和分解できるとき，不変部分空間は「各ブロック内の不変部分空間の直和」としてすべて尽くされる</strong>（固有値が等しいと固有空間が合体してしまい，この分解が壊れる）。これが $a\neq1$ か $a=1$ かで場合分けする理由。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 — $a\neq1$ のとき（有限個）</div>
+      <p><strong>1次元ブロック（固有値 $a$）：</strong>不変部分空間は $\{0\}$ と $\langle\mathbf{e}_1\rangle$ の2通り。</p>
+      <p><strong>2次元ブロック（固有値 $1$，ジョルダン細胞）：</strong>2024年度第4問と全く同じ構造（$\mathbf{e}_3\to\mathbf{e}_2\to\mathbf{0}$ の鎖，固有値をずらしただけ）。不変部分空間は $\{0\},\ \langle\mathbf{e}_2\rangle,\ \langle\mathbf{e}_2,\mathbf{e}_3\rangle$ の3通り。</p>
+      <p>$a\neq1$ のとき固有値 $a$（$\mathbf{e}_1$ 方向）と固有値 $1$（$\mathbf{e}_2,\mathbf{e}_3$ 方向）の固有空間が交わらないので，全体の不変部分空間はこの2つのブロックの不変部分空間の直和で尽くされる：$2\times3=6$ 通り。</p>
+      <table class="axiom-table">
+        <tr><th>次元</th><th>不変部分空間</th></tr>
+        <tr><td>0</td><td>$\{0\}$</td></tr>
+        <tr><td>1</td><td>$\langle\mathbf{e}_1\rangle$，$\langle\mathbf{e}_2\rangle$（2個）</td></tr>
+        <tr><td>2</td><td>$\langle\mathbf{e}_1,\mathbf{e}_2\rangle$，$\langle\mathbf{e}_2,\mathbf{e}_3\rangle$（2個）</td></tr>
+        <tr><td>3</td><td>$\R^3$</td></tr>
+      </table>
+      <p>（次元1・2の不変部分空間が「これで全部」であることは，$A$ の転置 $A^\top=\begin{pmatrix}a&0&0\\0&1&0\\0&1&1\end{pmatrix}$ の固有ベクトルが超平面型の不変部分空間と1対1に対応することからも確認できる：$A^\top$ も固有値 $a,1$ がそれぞれ1次元の固有空間しか持たないため，超平面型の不変部分空間もちょうど2個。）</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 — $a=1$ のとき（無限個）</div>
+      <p>$A=\begin{pmatrix}1&0&0\\0&1&1\\0&0&1\end{pmatrix}$。固有値 $1$ の固有空間を求めると $(A-E)\mathbf{v}=(0,v_3,0)^\top=\mathbf{0}\iff v_3=0$，つまり固有空間 $=\langle\mathbf{e}_1,\mathbf{e}_2\rangle$ が<strong>2次元</strong>に潰れる。2次元固有空間の中の任意の直線は自動的に固有ベクトルの張る不変部分空間になるので，1次元不変部分空間だけで無限個存在する。</p>
+      <p>$$\boxed{a=1\text{ のときは不変部分空間が無限個}}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 結論</div>
+      <p>不変部分空間が有限個であるための条件は $$\boxed{a\neq1\ (\text{すなわち }a\in\R\setminus\{1\})}$$ であり，そのとき個数は $$\boxed{6\text{ 個}}$$</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 「$2\times3=6$」という掛け算の意味</div>
+      <p>直和分解 $\R^3=\langle\mathbf{e}_1\rangle\oplus\langle\mathbf{e}_2,\mathbf{e}_3\rangle$ が $T_a$-不変な形で存在するとき，任意の不変部分空間 $V$ は $V=(V\cap\langle\mathbf{e}_1\rangle)\oplus(V\cap\langle\mathbf{e}_2,\mathbf{e}_3\rangle)$ という形に一意に分解する。左因子の選び方が2通り（$\{0\}$ or $\langle\mathbf{e}_1\rangle$），右因子の選び方が3通り（第4問2024年度で確認済みの鎖）なので，独立に選べて $2\times3=6$。固有値が一致する $a=1$ ではこの直和分解が「合体」してしまい，このような単純な掛け算のロジックが破綻する（固有空間の次元が上がり，連続的な自由度が生まれる）——これが有限・無限を分ける本質。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 第5問 -->
+<section class="section" id="problem5">
+  <div class="sec-header"><span class="problem-num">5</span> &nbsp;$\rank(A+B)\le\rank A+\rank B$</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$m,n$ を正整数とし $A,B$ をともに実 $m\times n$ 行列とする。このとき $\rank(A+B)\le\rank(A)+\rank(B)$ を示せ。</p>
+    </div>
+
+    <div class="read-box">
+      <div class="read-title">🔍 問題文の読み方</div>
+      <p>2024年度第5問（$\rank(AB)\le\min\{\rank A,\rank B\}$，<a href="kakomon_2024.html#problem5">読み方</a>参照）と対を成す出題だが，今回は「行列の積」ではなく「行列の<strong>和</strong>」についての不等式。$A,B$は同じサイズ（$m\times n$）の行列で，$A+B$も同じサイズになる（積のときのようなサイズの整合性の議論は不要）。示すべきは「2つの写像を足し合わせても，rank（＝像の次元）は元の2つのrankの合計を超えない」という直感の厳密な証明——これも数値例の確認ではなく，一般の$A,B$について成り立つ論証を書く問題。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答</div>
+      <p>任意の $\mathbf{x}\in\R^n$ に対し $(A+B)\mathbf{x}=A\mathbf{x}+B\mathbf{x}\in\Im(A)+\Im(B)$（<strong>定義2.2</strong> の意味での和空間）。よって</p>
+      $$\Im(A+B)\subseteq\Im(A)+\Im(B)$$
+      <p>部分空間の和の次元公式 $\dim(U+W)=\dim U+\dim W-\dim(U\cap W)\le\dim U+\dim W$ より</p>
+      $$\rank(A+B)=\dim\Im(A+B)\le\dim\bigl(\Im(A)+\Im(B)\bigr)\le\dim\Im(A)+\dim\Im(B)=\rank(A)+\rank(B)\qquad\blacksquare$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：$\rank(AB)$ の証明との違い</div>
+      <p>第5問2024年度の $\rank(AB)\le\min\{\rank A,\rank B\}$ は「像の包含」と「核の包含＋次元定理」の合わせ技だったが，こちらは和空間の次元公式 $\dim(U+W)\le\dim U+\dim W$ だけで一発で片付く——「行列の積」と「行列の和」では，rank に対する制約の証明の道具立てが異なることに注意（積は合成写像の像・核の挙動，和は像空間同士の和空間の次元評価）。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- チェックリスト -->
+<section class="section">
+  <div class="sec-header">📋 自力確認チェックリスト</div>
+  <div class="sec-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>この期末試験を自力で解けるかセルフチェック（クリックして展開）</summary>
+      <div class="proof-body">
+        <ul class="checklist">
+          <li>第1問：階数を求めて次元定理で $\dim\Ker,\dim\Im$ を即座に出せるか</li>
+          <li>第2問(1)：基底変換行列 $C$ の逆行列を経由して座標変換できるか</li>
+          <li>第2問(2)：ピボット列をそのまま新しい基底に採用する近道を使えるか</li>
+          <li>第3問：$T|_V$ に次元定理を適用して (3) を (1)(2) から導く発想ができるか（自力で $\Ker(T)\cap V$ を計算して検算もできるとなお良い）</li>
+          <li>第4問：固有値が異なる2つのブロックへの直和分解から，不変部分空間の個数が「掛け算」で決まる理由を説明できるか</li>
+          <li>第4問：$a=1$ で固有空間が2次元に潰れると不変部分空間が無限個になる理由を説明できるか</li>
+          <li>第5問：$\Im(A+B)\subseteq\Im(A)+\Im(B)$ と和空間の次元公式だけで証明を完結できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

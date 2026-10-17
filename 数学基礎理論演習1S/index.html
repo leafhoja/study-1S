@@ -1,0 +1,252 @@
+<!DOCTYPE html><!-- 「数理科学基礎演習 解説集」の一覧ページ。掲載されたページへ移動する入口をまとめる。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>数理科学基礎演習 解説集</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../subject-home.css">
+</head>
+<body class="subject-home home-basic-exercises">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html" class="active">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>数理科学基礎演習　解説集</h1>
+  <p class="subtitle">微分積分学・線形代数学の演習解説と過去問・予想問題</p>
+  <p class="meta">榎園誠｜2026年 S1ターム</p>
+</div>
+
+<!-- この科目のノートを探す入力欄と検索結果欄。検索の動作は共通のsearch.jsが担当する。 --><div class="search-box" data-search>
+  <div class="search-input-row">
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input type="search" class="search-input" placeholder="数理科学基礎演習 内を検索（用語・キーワード）…" autocomplete="off" aria-label="数理科学基礎演習 内を検索">
+  </div>
+  <div class="search-results" hidden></div>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <h3>📖 この解説集の使い方</h3>
+    各回の解説ページでは、<strong>（1）なぜその方針を取るのか、（2）εやδはなぜその値なのか、（3）計算の詳細、（4）思考の出所、（5）必要な知識、（6）自力で解くための練習法、（7）別解</strong>を網羅しています。答えを読む前に、まず自分で考えてみることを強く勧めます。<br>
+    <span style="color:#92400e">★ 解説付きのページは色付きの枠で示されています。現在は微分積分第5回・線形代数第4回までの資料に基づき解説を作成しています。</span>
+  </div>
+
+  <div class="subject-columns">
+
+    <!-- 微分積分学 -->
+    <div class="subject-section">
+      <div class="subject-header calc">📐 微分積分学演習</div>
+      <div class="subject-body">
+        <!-- 講義や小テストのページへ移動するカードを一覧にする。 --><div class="lecture-grid">
+          <div class="lecture-card available" data-page="calculus/calc_01">
+            <a href="calculus/calc_01.html">
+              <div class="lc-num">第1回</div>
+              <div class="lc-title">ε-N論法と数列の収束</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card available" data-page="calculus/calc_02">
+            <a href="calculus/calc_02.html">
+              <div class="lc-num">第2回</div>
+              <div class="lc-title">上界・下限とWeierstrass定理</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card available" data-page="calculus/calc_03">
+            <a href="calculus/calc_03.html">
+              <div class="lc-num">第3回</div>
+              <div class="lc-title">微分の定義とCauchy方程式</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card available" data-page="calculus/calc_04">
+            <a href="calculus/calc_04.html">
+              <div class="lc-num">第4回</div>
+              <div class="lc-title">常微分方程式</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card available" data-page="calculus/calc_05">
+            <a href="calculus/calc_05.html">
+              <div class="lc-num">第5回</div>
+              <div class="lc-title">凸関数・縮小写像・方程式の根</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div><!-- /calculus -->
+
+    <!-- 線形代数学 -->
+    <div class="subject-section">
+      <div class="subject-header linear">🔷 線形代数学演習</div>
+      <div class="subject-body">
+        <div class="lecture-grid">
+          <div class="lecture-card lin-available" data-page="linear/lin_01">
+            <a href="linear/lin_01.html">
+              <div class="lc-num">第1回</div>
+              <div class="lc-title">線形写像と行列表現</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card lin-available" data-page="linear/lin_02">
+            <a href="linear/lin_02.html">
+              <div class="lc-num">第2回</div>
+              <div class="lc-title">回転・鏡映・直交行列</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card lin-available" data-page="linear/lin_03">
+            <a href="linear/lin_03.html">
+              <div class="lc-num">第3回</div>
+              <div class="lc-title">行列式・逆行列・固有値・対角化</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+          <div class="lecture-card lin-available" data-page="linear/lin_04">
+            <a href="linear/lin_04.html">
+              <div class="lc-num">第4回</div>
+              <div class="lc-title">核と像・双対空間・内積</div>
+              <div class="lc-status">✓ 解説あり</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div><!-- /linear -->
+
+  </div><!-- /subject-columns -->
+
+  <!-- 過去問 -->
+  <div style="margin-top:2.5rem;">
+    <div class="subject-header">
+      📝 過去問
+    </div>
+    <div class="subject-body">
+      <div class="lecture-grid">
+        <div class="lecture-card" style="border-color:#805ad5;" data-page="kakomon/kakomon_calc_01">
+          <a href="kakomon/kakomon_calc_01.html">
+            <div class="lc-num">微分積分 小テスト</div>
+            <div class="lc-title">ε-N・Cesàro・高階微分・gₙ(x)</div>
+            <div class="lc-status" style="color:#805ad5;">✓ 解説あり &nbsp;2025.06.17</div>
+          </a>
+        </div>
+        <div class="lecture-card" style="border-color:#805ad5;" data-page="kakomon/kakomon_lin_01">
+          <a href="kakomon/kakomon_lin_01.html">
+            <div class="lc-num">線形代数 小テスト</div>
+            <div class="lc-title">固有値・直交行列・Hom空間</div>
+            <div class="lc-status" style="color:#805ad5;">✓ 解説あり &nbsp;2025.07.08</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 予想問題 -->
+  <div style="margin-top:2.5rem;">
+    <div class="subject-header">
+      🔮 予想問題（AI生成・全9回40問）
+    </div>
+    <div class="subject-body">
+      <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:1rem;">微分積分学（全5回・各4問）と線形代数学（全4回・各5問）。</p>
+      <div class="lecture-grid">
+        <div class="lecture-card" style="border-color:#b45309;" data-page="yosou/yosou_calc_01">
+          <a href="yosou/yosou_calc_01.html">
+            <div class="lc-num">予想 第1回（微積）</div>
+            <div class="lc-title">ε-N論法と数列の収束</div>
+            <div class="lc-status" style="color:#b45309;">✓ 解説あり &nbsp;全4問</div>
+          </a>
+        </div>
+        <div class="lecture-card" style="border-color:#b45309;" data-page="yosou/yosou_calc_02">
+          <a href="yosou/yosou_calc_02.html">
+            <div class="lc-num">予想 第2回（微積）</div>
+            <div class="lc-title">上界・下限とWeierstrass定理</div>
+            <div class="lc-status" style="color:#b45309;">✓ 解説あり &nbsp;全4問</div>
+          </a>
+        </div>
+        <div class="lecture-card" style="border-color:#b45309;" data-page="yosou/yosou_calc_03">
+          <a href="yosou/yosou_calc_03.html">
+            <div class="lc-num">予想 第3回（微積）</div>
+            <div class="lc-title">微分の定義・Taylor展開とCauchy方程式</div>
+            <div class="lc-status" style="color:#b45309;">✓ 解説あり &nbsp;全4問</div>
+          </a>
+        </div>
+        <div class="lecture-card" style="border-color:#b45309;" data-page="yosou/yosou_calc_04">
+          <a href="yosou/yosou_calc_04.html">
+            <div class="lc-num">予想 第4回（微積）</div>
+            <div class="lc-title">常微分方程式</div>
+            <div class="lc-status" style="color:#b45309;">✓ 解説あり &nbsp;全4問</div>
+          </a>
+        </div>
+        <div class="lecture-card" style="border-color:#b45309;" data-page="yosou/yosou_calc_05">
+          <a href="yosou/yosou_calc_05.html">
+            <div class="lc-num">予想 第5回（微積）</div>
+            <div class="lc-title">凸関数・縮小写像・方程式の根</div>
+            <div class="lc-status" style="color:#b45309;">✓ 解説あり &nbsp;全4問</div>
+          </a>
+        </div>
+        <div class="lecture-card" style="border-color:#b45309;" data-page="yosou/yosou_lin_01">
+          <a href="yosou/yosou_lin_01.html">
+            <div class="lc-num">予想 第1回（線形）</div>
+            <div class="lc-title">表現行列・核と像</div>
+            <div class="lc-status" style="color:#b45309;">✓ 解説あり &nbsp;全5問</div>
+          </a>
+        </div>
+        <div class="lecture-card" style="border-color:#b45309;" data-page="yosou/yosou_lin_02">
+          <a href="yosou/yosou_lin_02.html">
+            <div class="lc-num">予想 第2回（線形）</div>
+            <div class="lc-title">回転・鏡映・直交行列</div>
+            <div class="lc-status" style="color:#b45309;">✓ 解説あり &nbsp;全5問</div>
+          </a>
+        </div>
+        <div class="lecture-card" style="border-color:#b45309;" data-page="yosou/yosou_lin_03">
+          <a href="yosou/yosou_lin_03.html">
+            <div class="lc-num">予想 第3回（線形）</div>
+            <div class="lc-title">固有値・対角化</div>
+            <div class="lc-status" style="color:#b45309;">✓ 解説あり &nbsp;全5問</div>
+          </a>
+        </div>
+        <div class="lecture-card" style="border-color:#b45309;" data-page="yosou/yosou_lin_04">
+          <a href="yosou/yosou_lin_04.html">
+            <div class="lc-num">予想 第4回（線形）</div>
+            <div class="lc-title">核と像の一般論・双対空間</div>
+            <div class="lc-status" style="color:#b45309;">✓ 解説あり &nbsp;全5問</div>
+          </a>
+        </div>
+      </div>
+      <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin:1.5rem 0 0.75rem;">番外編（上記40問には含まれない追加のボーナス問題集）：</p>
+      <div class="lecture-grid">
+        <div class="lecture-card" style="border-color:#7c3aed;" data-page="yosou/yosou_calc_keisan">
+          <a href="yosou/yosou_calc_keisan.html">
+            <div class="lc-num">番外編（微積）</div>
+            <div class="lc-title">極限計算とその正当化</div>
+            <div class="lc-status" style="color:#7c3aed;">✓ 解説あり &nbsp;全4問</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js"></script>
+<script src="../access-ui.js"></script>
+<script src="../search.js"></script>
+</body>
+</html>

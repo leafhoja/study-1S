@@ -1,0 +1,584 @@
+<!DOCTYPE html><!-- 「2025年度 | 力学A 過去問解説」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>2025年度 | 力学A 過去問解説</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kakomon_2025">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A 講義ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="n1.html" data-page="n1">第1章</a>
+      <a href="n2.html" data-page="n2">第2章</a>
+      <a href="n3.html" data-page="n3">第3章</a>
+      <a href="n4.html" data-page="n4">第4章</a>
+      <a href="n5.html" data-page="n5">第5章</a>
+      <a href="n6.html" data-page="n6">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025" class="active">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>力学A 過去問解説</h1>
+  <p class="subtitle">2025年度期末試験</p>
+  <p class="meta">担当：溝口俊弥｜前期課程 Sセメスター｜クラスメイトの手書き解答をもとに独自に検証</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">問題1（過減衰の運動と到達条件）</a>
+    <a href="#q2">問題2（保存力の判定とポテンシャル）</a>
+    <a href="#q3">問題3（振り子・張力・糸の分離）</a>
+    <a href="#q4">問題4（中空球殻の慣性モーメントと転がり）</a>
+  </div>
+
+  <!-- =================== 問題1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header">
+      <div class="sec-tag">問題 1</div>
+      <h2>粘性流体中でばねにつながれた質点の運動（過減衰）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          図のように容器に粘性流体が入っており、その容器の側壁に弾性定数 $k$ のばねの一方の端が固定され、そのもう一方の端につながれた質量 $m$ の質点が行う、
+          水平で滑らかな容器の底における１次元的な運動を考える。時間変数を $t$、運動方向の座標を $x$、質点の座標を $x(t)$ とし、
+          質点は弾性力 $-kx(t)$ および粘性抵抗力 $-\kappa\dot{x}(t)$ のみを受けて運動するものとする。ただし $\kappa$ は正の定数である。
+        </p>
+        <p>(1) 質点の $x$ 座標 $x(t)$ に関する運動方程式を書き下せ。</p>
+        <p>
+          (2) $\omega_0 \equiv \sqrt{\dfrac{k}{m}}$ が $\omega_0^2 < \dfrac{\kappa^2}{4m^2}$ をみたすとする。質点の $t=0$ における位置 $x(0)$ を
+          $x_0\,(>0)$ とするとき、ある有限時間経過後に質点が原点 $x=0$ に到達するための初速 $v_0\equiv\dot{x}(0)$ の条件を求めよ。
+        </p>
+      </div>
+
+      <h3 id="q1-1">(1) 運動方程式</h3>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>質点に働く力は弾性力 $-kx$ と粘性抵抗力 $-\kappa\dot x$ のみなので、ニュートンの運動方程式は</p>
+          <div class="mathblock">$$m\ddot{x} = -kx - \kappa\dot{x}$$</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$$m\ddot{x} = -kx - \kappa\dot{x}$$</div>
+      </details>
+
+      <h3 id="q1-2">(2) 原点に到達するための初速の条件</h3>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>運動方程式を $m$ で割って整理すると</p>
+          <div class="mathblock">$$\ddot{x} + \frac{\kappa}{m}\dot{x} + \frac{k}{m}x = 0$$</div>
+          <p>
+            ここで $\gamma \equiv \dfrac{\kappa}{2m}$、$\omega_0 \equiv \sqrt{\dfrac{k}{m}}$ とおくと、見慣れた形
+          </p>
+          <div class="mathblock">$$\ddot{x} + 2\gamma\dot{x} + \omega_0^2 x = 0$$</div>
+          <p>
+            になる。$x = e^{\lambda t}$ を代入すると特性方程式
+          </p>
+          <div class="mathblock">$$\lambda^2 + 2\gamma\lambda + \omega_0^2 = 0$$</div>
+          <p>が得られ、解は</p>
+          <div class="mathblock">$$\lambda_\pm = -\gamma \pm \sqrt{\gamma^2 - \omega_0^2}$$</div>
+          <p>
+            与えられた条件 $\omega_0^2 < \dfrac{\kappa^2}{4m^2} = \gamma^2$ はちょうど $\gamma^2-\omega_0^2>0$ を意味するので、$\lambda_+,\lambda_-$ はともに
+            実数であり、しかも $\sqrt{\gamma^2-\omega_0^2} < \gamma$（$\because\,\omega_0^2>0$）なので $\lambda_+ < 0$、$\lambda_- < 0$ もいえる
+            （<strong>過減衰</strong>：振動せず単調に減衰する場合）。一般解は
+          </p>
+          <div class="mathblock">$$x(t) = C_1 e^{\lambda_+ t} + C_2 e^{\lambda_- t}\qquad(\lambda_+ > \lambda_-,\ \text{ともに負})$$</div>
+          <p>初期条件 $x(0)=x_0$、$\dot x(0) = \lambda_+ C_1+\lambda_- C_2 = v_0$ を課すと</p>
+          <div class="mathblock">$$C_1 = \frac{v_0-\lambda_- x_0}{\lambda_+-\lambda_-},\qquad C_2 = \frac{\lambda_+ x_0 - v_0}{\lambda_+-\lambda_-}$$</div>
+          <p>
+            さて、ある $t>0$ で $x(t)=0$ となる条件を考える。$x(t)=0$ は
+            $C_1 e^{\lambda_+ t} = -C_2 e^{\lambda_- t}$、すなわち（$\lambda_+-\lambda_->0$ に注意して）
+          </p>
+          <div class="mathblock">$$e^{(\lambda_+-\lambda_-)t} = -\frac{C_2}{C_1} = \frac{v_0-\lambda_+ x_0}{v_0-\lambda_- x_0}$$</div>
+          <p>
+            を意味する。左辺は $t>0$ で単調増加かつ $t\to0^+$ で $1$ に近づく関数だから、これを満たす $t>0$ が存在するための必要十分条件は
+            右辺が $1$ より大きいこと：
+          </p>
+          <div class="mathblock">$$\frac{v_0-\lambda_+ x_0}{v_0-\lambda_- x_0} > 1$$</div>
+          <p>
+            分母 $v_0-\lambda_- x_0$ の符号で場合分けする。
+          </p>
+          <ul>
+            <li>
+              分母が正のとき：両辺に分母を掛けても不等号の向きは変わらず、$v_0-\lambda_+x_0 > v_0-\lambda_-x_0$、すなわち
+              $\lambda_- x_0 > \lambda_+ x_0$。$x_0>0$ かつ $\lambda_+>\lambda_-$ よりこれは成立しえない（矛盾）。
+            </li>
+            <li>
+              分母が負のとき：不等号の向きが反転し、$v_0-\lambda_+x_0 < v_0-\lambda_-x_0$、すなわち $\lambda_-x_0 < \lambda_+x_0$ となるが、
+              これは $x_0>0,\ \lambda_+>\lambda_-$ から常に成立する。したがって、この場合は分母が負であること自体が条件のすべてになる。
+            </li>
+          </ul>
+          <p>
+            よって求める条件は「分母が負」、すなわち
+          </p>
+          <div class="mathblock">$$v_0 - \lambda_- x_0 < 0 \quad\Longleftrightarrow\quad v_0 < \lambda_- x_0$$</div>
+          <p>
+            （等号 $v_0=\lambda_-x_0$ のときは $C_1=0$ となり $x(t)=C_2e^{\lambda_-t}$ は $t\to\infty$ で漸近的に $0$ に近づくのみで、
+            有限時間では原点に到達しない。だから不等号は真に成立する必要がある。）
+          </p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$v_0 < \lambda_- x_0 = \left(-\frac{\kappa}{2m} - \sqrt{\frac{\kappa^2}{4m^2}-\omega_0^2}\right)x_0$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 条件の意味</span>
+        <p>
+          $\lambda_-<0$ なので、この条件は「質点は最初から十分大きな負の初速（原点方向への速さ）を持っていなければならない」ことを表す。
+          過減衰の系ではばねの復元力は振動を起こすほど強くなく、粘性抵抗が効きすぎて質点はゆっくり原点に近づいていくだけになりやすい。
+          そのため、有限時間で本当に原点まで到達するには、外から十分な勢いをつけて押し込んでやる必要がある、という直感と整合する。
+        </p>
+        <p>
+          興味深いことに、この条件 $v_0<\lambda_-x_0$ はちょうど $C_1<0$ と同値である。過減衰系の２つの減衰モード $e^{\lambda_+t}$、$e^{\lambda_-t}$
+          のうち、$\lambda_+>\lambda_-$（より0に近い）ぶん $e^{\lambda_+t}$ のほうが減衰が遅く、時間が経つほどこちらが支配的になる。
+          したがってその係数 $C_1$ が負であれば、$x(t)$ はいずれ符号を反転させ、必ずどこかの有限時刻で原点を通過する。
+          逆に $C_1\ge0$ なら、支配的な項は常に非負のまま原点へゆっくり近づくだけで、到達しないままになる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題2 =================== -->
+  <div class="section" id="q2">
+    <div class="sec-header">
+      <div class="sec-tag">問題 2</div>
+      <h2>力のベクトル場の保存力判定とポテンシャル</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>$xy$ 平面上において、４つの力のベクトル場 $\mathbf{F}(x,y)$ が次のように与えられている。</p>
+        <div class="mathblock">$$\begin{aligned}
+        (\mathrm{a})\quad \mathbf{F}(x,y) &= (x-y,\ x-y) &\qquad (\mathrm{b})\quad \mathbf{F}(x,y) &= (x+y,\ y-x)\\
+        (\mathrm{c})\quad \mathbf{F}(x,y) &= (x+y,\ x-y) &\qquad (\mathrm{d})\quad \mathbf{F}(x,y) &= (-y,\ x)
+        \end{aligned}$$</div>
+        <p>
+          (1) $\mathbf{F}(x,y)=(F_x,F_y)$ とするとき、力 $\mathbf{F}(x,y)$ が保存力ならば $\dfrac{\partial F_y}{\partial x} = \dfrac{\partial F_x}{\partial y}$
+          となっていなければならない。それはなぜか。その理由を簡単に述べよ。ただし $\mathbf{F}(x,y)$ は十分滑らかであるとする。
+        </p>
+        <p>
+          (2) 上の (a) から (d) までのうち、保存力であるもののポテンシャルをすべて求めよ。ただし、ポテンシャルの基準点は原点 $(x,y)=(0,0)$ に設定せよ。
+        </p>
+      </div>
+
+      <h3 id="q2-1">(1) 条件の理由</h3>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            $\mathbf{F}$ が保存力であるとは、あるポテンシャル $U(x,y)$ が存在して $\mathbf{F} = -\nabla U$、すなわち
+            $F_x = -\dfrac{\partial U}{\partial x}$、$F_y = -\dfrac{\partial U}{\partial y}$ と書けることをいう。
+            $U$ は十分滑らかなので、偏微分の順序を交換してよく（シュワルツの定理）、
+          </p>
+          <div class="mathblock">$$\frac{\partial F_y}{\partial x} = -\frac{\partial^2 U}{\partial x\,\partial y} = -\frac{\partial^2 U}{\partial y\,\partial x} = \frac{\partial F_x}{\partial y}$$</div>
+          <p>
+            が恒等的に成り立つ。つまり $\dfrac{\partial F_y}{\partial x}=\dfrac{\partial F_x}{\partial y}$ は、$\mathbf{F}$ がポテンシャルを持つ（保存力である）ための
+            必要条件になっている（$xy$ 平面内の場では、これは回転 $\nabla\times\mathbf{F}$ の $z$ 成分が恒等的に $0$ になる、という条件と同じである）。
+          </p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $\mathbf{F}=-\nabla U$ ならば偏微分の順序交換（$\partial_x\partial_y U=\partial_y\partial_x U$）により $\partial_x F_y = -\partial_x\partial_y U = -\partial_y\partial_x U = \partial_y F_x$ が恒等的に成り立つから。
+        </div>
+      </details>
+
+      <h3 id="q2-2">(2) 保存力の判定とポテンシャル</h3>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>各場について $\dfrac{\partial F_y}{\partial x}$ と $\dfrac{\partial F_x}{\partial y}$ を比較する。</p>
+          <ul>
+            <li>(a) $F_x=x-y,\ F_y=x-y$：$\partial_xF_y=1$、$\partial_yF_x=-1$。一致しない → 保存力でない。</li>
+            <li>(b) $F_x=x+y,\ F_y=y-x$：$\partial_xF_y=-1$、$\partial_yF_x=1$。一致しない → 保存力でない。</li>
+            <li>(c) $F_x=x+y,\ F_y=x-y$：$\partial_xF_y=1$、$\partial_yF_x=1$。一致する → 保存力。</li>
+            <li>(d) $F_x=-y,\ F_y=x$：$\partial_xF_y=1$、$\partial_yF_x=-1$。一致しない → 保存力でない。</li>
+          </ul>
+          <p>したがって保存力は (c) のみ。そのポテンシャルを求める。$F_x=-\dfrac{\partial U}{\partial x}=x+y$ より</p>
+          <div class="mathblock">$$U = -\frac{1}{2}x^2 - xy + f(y)$$</div>
+          <p>一方 $F_y=-\dfrac{\partial U}{\partial y}=x-y$ より</p>
+          <div class="mathblock">$$U = \frac{1}{2}y^2 - xy + g(x)$$</div>
+          <p>両者を比較すると $f(y)=\dfrac12y^2+C$、$g(x)=-\dfrac12x^2+C$（$C$ は定数）でなければならない。基準点 $U(0,0)=0$ より $C=0$。よって</p>
+          <div class="mathblock">$$U(x,y) = \frac{1}{2}(y^2-x^2) - xy$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          保存力であるのは (c) のみで、そのポテンシャルは $U(x,y) = \dfrac{1}{2}(y^2-x^2) - xy$（基準点 $(0,0)$）。
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 保存力性の背後にある構造</span>
+        <p>
+          (a)〜(d) の $\mathbf F(x,y)$ はいずれも $x,y$ の１次式（線形写像 $\mathbf F=A\binom{x}{y}$、$A$ は $2\times2$ 行列）になっている。
+          このとき $\partial_xF_y-\partial_yF_x = A_{21}-A_{12}$ であり、これは $A$ の反対称部分 $\frac12(A-A^{\mathsf T})$ にちょうど対応する。
+          つまり「保存力である」とは一般に「$A$ が対称行列である」ことと同値であり、(a)(b)(d) の非保存性はいずれも $A$ の非対称成分（回転成分）に
+          由来する（実際 (a) と (d) は反対称部分の大きさが等しく、curl もともに $+2$ になっている）。
+        </p>
+        <p>
+          特に (d) $\mathbf F=(-y,x)$ は対称部分を持たない純粋な回転場（$A$ が完全反対称）である。グリーンの定理により、任意の閉曲線 $C$ に沿った
+          仕事は
+        </p>
+        <div class="mathblock">$$\oint_C \mathbf F\cdot d\mathbf r = \oint_C(-y\,dx+x\,dy) = 2\times(\text{$C$ が囲む面積})$$</div>
+        <p>
+          に等しくなる——これは、多角形の面積を頂点座標だけから求める「靴ひも公式（shoelace formula）」の土台になっている関係式そのものである。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題3 =================== -->
+  <div class="section" id="q3">
+    <div class="sec-header">
+      <div class="sec-tag">問題 3</div>
+      <h2>振り子の極座標運動方程式・張力・糸の分離</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>
+          重力加速度 $g$ の一様重力中において、長さ $\ell$ の軽い糸とその先につけられた質量 $m$ の質点からなる振り子の運動を考える。
+          振り子の糸の一方の端は、水平な地面から高さ $2\ell$ の位置で固定されている。質点には重力および糸からの張力のみが働き、
+          それ以外の力（抵抗力や摩擦力など）は働かないものとして、次の問いに答えよ。
+        </p>
+      </div>
+
+      <h3 id="q3-1">(1) 極座標での運動方程式</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          振り子の糸が固定されている点を原点とする極座標 $(r,\varphi)$ を用いて、この系の運動方程式を書き下せ。ただし、時間変数を $t$、
+          糸の張力の大きさを $T$ とし、鉛直下向き方向を $\varphi=0$ とせよ。また、ここでは動径座標 $r$ が糸の長さ $\ell$ と等しく一定になることを
+          使わず、$r$ の時間微分を含む項も残した形で（つまり授業でやったような、極座標による一般的な加速度の表式を用いて）運動方程式を表せ。
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            動径方向の単位ベクトル $\mathbf{e}_r$、それと直交する方向の単位ベクトル $\mathbf{e}_\varphi$ を用いると、位置ベクトルは
+            $\mathbf{r} = r\,\mathbf{e}_r$ であり、$\dot{\mathbf{e}}_r=\dot\varphi\,\mathbf{e}_\varphi$、$\dot{\mathbf{e}}_\varphi=-\dot\varphi\,\mathbf{e}_r$
+            （基本ベクトルの時間変化）を用いて速度・加速度を計算すると
+          </p>
+          <div class="mathblock">$$\mathbf{v} = \dot{\mathbf r} = \dot r\,\mathbf{e}_r + r\dot\varphi\,\mathbf{e}_\varphi$$</div>
+          <div class="mathblock">$$\mathbf{a} = \ddot{\mathbf r} = (\ddot r - r\dot\varphi^2)\,\mathbf{e}_r + (2\dot r\dot\varphi + r\ddot\varphi)\,\mathbf{e}_\varphi$$</div>
+          <p>
+            質点に働く力は重力 $mg$（鉛直下向き）と張力 $T$（原点方向、すなわち $-\mathbf{e}_r$ 方向）である。
+            鉛直下向きが $\varphi=0$ なので、重力の動径成分は $mg\cos\varphi$（$\mathbf e_r$ 方向）、接線成分は $-mg\sin\varphi$（$\mathbf e_\varphi$ 方向）になる。
+            したがって、動径・角度それぞれの方向のニュートンの運動方程式は
+          </p>
+          <div class="mathblock">$$mg\cos\varphi - T = m(\ddot r - r\dot\varphi^2)\qquad\text{（動径方向）}$$</div>
+          <div class="mathblock">$$-mg\sin\varphi = m(2\dot r\dot\varphi + r\ddot\varphi)\qquad\text{（角度方向）}$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$mg\cos\varphi - T = m(\ddot r - r\dot\varphi^2),\qquad -mg\sin\varphi = m(2\dot r\dot\varphi + r\ddot\varphi)$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — この一般形が表す系</span>
+        <p>
+          ここではあえて $r=\ell$（糸の長さ一定）を使わず、$\dot r,\ddot r$ を残した一般形のまま運動方程式を立てた。実はこの形（動径方向にも自由に
+          伸縮できる振り子）は、糸の代わりに<strong>ばね</strong>で質点をつるした「弾性振り子（elastic / spring pendulum）」の運動方程式そのものである。
+          この系は、ばねの伸縮の固有振動数を振れの固有振動数のちょうど２倍（$1{:}2$ 共鳴）に調整すると、伸縮運動と振れ運動のエネルギーが周期的に
+          行き来する非線形共鳴（"swinging spring" として知られる有名な問題）を起こすことが知られている。本問では最終的に $r=\ell$ の拘束を課すため
+          この現象自体は現れないが、(1) の一般形はまさにこの興味深い現象を調べるための出発点になっている。
+        </p>
+      </div>
+
+      <h3 id="q3-2">(2) 張力 $T(\varphi)$</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          この振り子の質点を振れ角 $\varphi_A$ で糸がピンと張った状態で静止させ、その後 (1) の運動方程式に従って運動させる。
+          糸の張力の大きさ $T$ を、質点の角度座標 $\varphi$（$0\le|\varphi|\le|\varphi_A|$）の関数として求めよ。
+          ただし $0\le\varphi_A\le90^\circ$ とし、糸はたるんだり伸びたりしないものとする。
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            糸がたるまず伸びないので $r=\ell$（一定）、よって $\dot r=\ddot r=0$。これを (1) の動径方向の式に代入して $r=\ell$ とおくと
+          </p>
+          <div class="mathblock">$$T = mg\cos\varphi + m\ell\dot\varphi^2\qquad\cdots①$$</div>
+          <p>
+            $\dot\varphi^2$ はエネルギー保存則から求める。振れ角 $\varphi_A$ で静止した状態を基準にすると、角度 $\varphi$ での力学的エネルギー保存は
+          </p>
+          <div class="mathblock">$$\frac{1}{2}m(\ell\dot\varphi)^2 = mg\ell(\cos\varphi - \cos\varphi_A)\quad\Longrightarrow\quad \ell\dot\varphi^2 = 2g(\cos\varphi-\cos\varphi_A)$$</div>
+          <p>これを①に代入すると</p>
+          <div class="mathblock">$$T = mg\cos\varphi + 2mg(\cos\varphi - \cos\varphi_A) = mg\left(3\cos\varphi - 2\cos\varphi_A\right)$$</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$$T(\varphi) = mg\left(3\cos\varphi - 2\cos\varphi_A\right)$$</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — なぜ $\varphi_A\le90^\circ$ なのか</span>
+        <p>
+          振れの範囲 $0\le|\varphi|\le|\varphi_A|$ の中で、$T(\varphi)=mg(3\cos\varphi-2\cos\varphi_A)$ は $\cos\varphi$ の単調性から
+          ちょうど $\varphi=\varphi_A$（放した瞬間）で最小値 $T(\varphi_A)=mg\cos\varphi_A$ をとる。$\varphi_A\le90^\circ$ ならこの最小値は
+          $0$ 以上であり、糸の張力は運動全体を通じて常に非負——つまり糸は常にピンと張ったままでいられる。もし $\varphi_A>90^\circ$ まで許すと、
+          $\cos\varphi_A<0$ となり、放した瞬間から張力が負（＝糸が押す）という物理的にありえない状況になってしまう。つまりその場合、
+          振り子は放たれた瞬間から糸がたるんでしまい、そもそも「糸に沿った円運動」という前提そのものが成り立たない。$0\le\varphi_A\le90^\circ$
+          という制約は、まさにこの破綻を避けるために置かれている。
+        </p>
+      </div>
+
+      <h3 id="q3-3">(3) 糸が外れる位置と落下点</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          振れ角 $\varphi_A=60^\circ$ からこの振り子の質点を (2) のように運動させ、張力の大きさ $T$ が $2mg$ に等しくなった瞬間、
+          糸は荷重に耐えられなくなって固定点からはずれ、その後質点は一様重力中自由落下するとする。そのとき質点が地面に落ちる位置を求めよ。
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            $\varphi_A=60^\circ$ のとき $\cos\varphi_A=\dfrac12$ なので、(2) の結果は $T=mg(3\cos\varphi-1)$ となる。
+            出発点 $\varphi=\varphi_A=60^\circ$ から最下点 $\varphi=0$ に向かって質点が動くにつれ、$\cos\varphi$ は $\dfrac12$ から $1$ まで単調に増加するから、
+            $T=mg(3\cos\varphi-1)$ もその区間で単調増加する（$\varphi_A$ での値 $T=\dfrac12mg$ から最下点での値 $T=2mg$ まで）。
+            したがって $T=2mg$ となるのは、区間内でちょうど一度だけ、しかも最下点 $\varphi=0$ に到達したまさにその瞬間である
+            （$3\cos\varphi-1=2 \iff \cos\varphi=1 \iff \varphi=0$）。
+          </p>
+          <p>この最下点（地面からの高さ $2\ell-\ell=\ell$ の位置、以下「点B」と呼ぶ）での速さをエネルギー保存則から求める。</p>
+          <div class="mathblock">$$mg\cdot\ell(1-\cos\varphi_A) = \frac{1}{2}mv^2 \quad\Longrightarrow\quad v = \sqrt{2g\ell(1-\cos60^\circ)} = \sqrt{2g\ell\cdot\tfrac12} = \sqrt{g\ell}$$</div>
+          <p>
+            （検算：$\dot\varphi=v/\ell=\sqrt{g/\ell}$ をもとの $T=mg\cos0+m\ell\dot\varphi^2=mg+m\ell\cdot\dfrac{g}{\ell}=2mg$ に代入すると、確かに条件と一致する。）
+          </p>
+          <p>
+            点Bでは質点の速度は水平方向を向いている（最下点では動径方向＝鉛直方向なので、速度（接線方向）は水平になる）。
+            糸が外れた後は、水平方向の初速 $v_0=\sqrt{g\ell}$、鉛直方向の初速 $0$ の水平投射になる。地面までの高さは $\ell$ なので、
+            落下時間 $t$ は
+          </p>
+          <div class="mathblock">$$\frac{1}{2}gt^2 = \ell \quad\Longrightarrow\quad t = \sqrt{\frac{2\ell}{g}}$$</div>
+          <p>この間の水平移動距離は</p>
+          <div class="mathblock">$$v_0 t = \sqrt{g\ell}\cdot\sqrt{\frac{2\ell}{g}} = \sqrt{2}\,\ell$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          質点は、振り子の最下点（固定点の真下）の真下にあたる地面の点から、水平に $\sqrt{2}\,\ell$ だけ離れた位置に落ちる。
+        </div>
+      </details>
+
+      <h3 id="q3-4">(4) $\dfrac{\tau}{\sqrt{l/g}}-1$ の値</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          一般に、振り子の振動の周期 $\tau_{周期}$ は最大振れ角を $\varphi_A$ として $k=\sin\dfrac{\varphi_A}{2}$ とする完全楕円積分
+        </p>
+        <div class="mathblock">$$\tau_{周期} = 4\sqrt{\frac{l}{g}}\int_0^{\frac{\pi}{2}}\frac{d\theta}{\sqrt{1-k^2\sin^2\theta}}$$</div>
+        <p>
+          で与えられることを授業で説明した。(3) で振り子が $\varphi_A=60^\circ$ で静止した状態から運動を始めて糸が外れるまでの時間を $\tau$ とするとき、
+          $\dfrac{\tau}{\sqrt{l/g}}-1$ の値を有効数字１桁まで、$\dfrac{1}{\sqrt{1-k^2\sin^2\theta}}$ を $k^2=0$ のまわりで $k^2$ について１次までテイラー展開し
+          項別に積分して求めよ。
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+
+          <p><strong>① $\tau$ が周期の何分の1にあたるか</strong></p>
+          <p>
+            (3) で見たように、$\varphi_A=60^\circ$ から出発した質点は最下点 $\varphi=0$ に達したちょうどその瞬間に糸が外れる。
+            つまり $\tau$ とは、静止状態の最大振れ角 $\varphi_A$ から最下点（振動の中心 $\varphi=0$）まで動くのにかかる時間である。
+          </p>
+          <p>
+            一方、振動の１周期とは、$+\varphi_A$（静止）から出発し、$-\varphi_A$ まで振れて再び $+\varphi_A$ に戻ってくるまでの時間である。
+            振り子の運動は時間反転対称性と左右対称性（$\varphi\to-\varphi$ で運動方程式・エネルギーとも不変）を持つため、
+            １周期は次の４つの等しい時間の区間に分割できる：
+          </p>
+          <div class="mathblock">$$+\varphi_A \to 0 \quad\to\quad 0 \to -\varphi_A \quad\to\quad -\varphi_A \to 0 \quad\to\quad 0 \to +\varphi_A$$</div>
+          <p>
+            これら４区間はいずれも「最大振れ角から中心まで」または「中心から最大振れ角まで」の往復であり、対称性からすべて同じ所要時間を持つ。
+            したがって、$\tau$（$+\varphi_A$ から $0$ までの時間）はちょうど周期の $\dfrac14$ に等しい：
+          </p>
+          <div class="mathblock">$$\tau = \frac{\tau_{周期}}{4} = \sqrt{\frac{l}{g}}\int_0^{\frac{\pi}{2}}\frac{d\theta}{\sqrt{1-k^2\sin^2\theta}}$$</div>
+          <p>
+            すなわち $\dfrac{\tau}{\sqrt{l/g}} = I$ とおくと、$I \equiv \displaystyle\int_0^{\frac{\pi}{2}}\dfrac{d\theta}{\sqrt{1-k^2\sin^2\theta}}$ である。
+          </p>
+
+          <p style="margin-top:1rem"><strong>② $I$ の近似計算</strong></p>
+          <p>
+            $f(k^2) \equiv (1-k^2\sin^2\theta)^{-\frac12}$ を $k^2$ の関数とみて $k^2=0$ のまわりで１次までテイラー展開する。
+          </p>
+          <div class="mathblock">$$f'(k^2) = \frac{\sin^2\theta}{2}(1-k^2\sin^2\theta)^{-\frac32},\qquad f(0)=1,\ \ f'(0) = \frac{\sin^2\theta}{2}$$</div>
+          <div class="mathblock">$$\therefore\ (1-k^2\sin^2\theta)^{-\frac12} \simeq 1 + \frac{k^2}{2}\sin^2\theta$$</div>
+          <p>これを項別に積分する（$\displaystyle\int_0^{\pi/2}\sin^2\theta\,d\theta = \frac{\pi}{4}$ を用いる）。</p>
+          <div class="mathblock">$$I \simeq \int_0^{\frac{\pi}{2}}\left(1+\frac{k^2}{2}\sin^2\theta\right)d\theta = \frac{\pi}{2} + \frac{k^2}{2}\cdot\frac{\pi}{4} = \frac{\pi}{2}\left(1+\frac{k^2}{4}\right)$$</div>
+
+          <p style="margin-top:1rem"><strong>③ 数値の代入</strong></p>
+          <p>$\varphi_A=60^\circ$ なので $k=\sin\dfrac{\varphi_A}{2}=\sin30^\circ=\dfrac12$、すなわち $k^2=\dfrac14$。よって</p>
+          <div class="mathblock">$$I \simeq \frac{\pi}{2}\left(1+\frac{1}{16}\right) = \frac{17\pi}{32} \approx 1.67$$</div>
+          <p>したがって</p>
+          <div class="mathblock">$$\frac{\tau}{\sqrt{l/g}} - 1 = I - 1 \approx 0.67 \approx 0.7$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$\frac{\tau}{\sqrt{l/g}} - 1 \approx \frac{\pi}{2}\left(1+\frac{1}{16}\right) - 1 \approx 0.7\ \text{（有効数字１桁）}$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — この比が持つ意味</span>
+        <p>
+          一般に $\dfrac{\tau_{\text{実際}}}{\tau_{\text{小振幅近似}}} - 1$ という形の式は、「振り子の運動が小振幅近似（単振動近似）からどれだけずれているか」を表す
+          <strong>相対誤差</strong>として物理的な意味を持つ。典型的な例として、振り子を鉛直下向きから測って $90^\circ$（水平）の位置から静かに放すと、
+          最下点に到達するまでの実際の時間は、小振幅近似での４分の１周期 $\dfrac{\pi}{2}\sqrt{l/g}$ よりも約18%長くなることが知られている
+          （大振幅では復元力の非線形性のため、単振動よりゆっくり動く）。すなわち
+        </p>
+        <div class="mathblock">$$\frac{\tau}{\frac{\pi}{2}\sqrt{l/g}} - 1 \approx 0.18$$</div>
+        <p>
+          興味深いことに、もし本問が（文字通りの $\sqrt{l/g}$ ではなく）この小振幅近似の４分の１周期 $\dfrac{\pi}{2}\sqrt{l/g}$ で割る形だったなら、
+          $\varphi_A=60^\circ$（$k^2=\frac14$）に対する相対誤差は
+        </p>
+        <div class="mathblock">$$\frac{\tau}{\frac{\pi}{2}\sqrt{l/g}}-1 = \frac{k^2}{4} = \frac{1}{16}\approx0.06$$</div>
+        <p>
+          となり、$90^\circ$ の場合よりずっと小さい約6%にとどまる（最大振れ角が小さいぶん非線形性の効果も小さいため、直感的にも自然な結果）。
+          ただし本問の分母に $\pi/2$ は付いていないので混同しないこと。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題4 =================== -->
+  <div class="section" id="q4">
+    <div class="sec-header">
+      <div class="sec-tag">問題 4</div>
+      <h2>中空球殻の慣性モーメントと斜面を転がる時間</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          (1) 半径 $a$、質量 $M$ の中空の球の、中心を通る直線のまわりの慣性モーメントを求めよ。
+          （注意：一様な球ではありません！ピンポンの球のように、薄い球殻表面にのみ質量が分布しているものを考えます。）
+        </p>
+        <p>
+          (2) 水平方向と角度 $\theta$ をなす斜面を、(1) の球が滑らずに初速 $0$ で転がるとき、斜面方向長さ $x$ だけ転がるまでの時間を求めよ。
+          ただし重力加速度を $g$ とする。
+        </p>
+      </div>
+
+      <h3 id="q4-1">(1) 中空球殻の慣性モーメント</h3>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            質量が半径 $a$ の薄い球殻表面のみに一様に分布しているので、面密度は
+          </p>
+          <div class="mathblock">$$\sigma = \frac{M}{4\pi a^2}$$</div>
+          <p>
+            回転軸からの垂直距離を $r_\perp$、面積素片を $dA$ とすると、慣性モーメントは $I=\displaystyle\int \sigma\, r_\perp^2\,dA$ で与えられる。
+            球面上の点を、回転軸方向から測った極角 $\varphi$（$0\le\varphi\le\pi$）と、軸のまわりの方位角 $\alpha$（$0\le\alpha\le2\pi$）でパラメータ化すると、
+            軸からの距離は $r_\perp=a\sin\varphi$、面積素片は $dA=a^2\sin\varphi\,d\varphi\,d\alpha$ になる。したがって
+          </p>
+          <div class="mathblock">$$I = \int_0^{2\pi}\!\!d\alpha\int_0^{\pi}\sigma\,(a\sin\varphi)^2\cdot a^2\sin\varphi\,d\varphi = 2\pi\sigma a^4\int_0^{\pi}\sin^3\varphi\,d\varphi$$</div>
+          <p>
+            積分 $\displaystyle\int_0^\pi\sin^3\varphi\,d\varphi$ は、$\sin^3\varphi=\sin\varphi(1-\cos^2\varphi)$ と書いて $u=\cos\varphi$ に置換すると
+          </p>
+          <div class="mathblock">$$\int_0^\pi\sin\varphi(1-\cos^2\varphi)\,d\varphi = \left[-\cos\varphi+\frac{1}{3}\cos^3\varphi\right]_0^\pi = \left(1-\frac13\right)-\left(-1+\frac13\right) = \frac{4}{3}$$</div>
+          <p>したがって</p>
+          <div class="mathblock">$$I = 2\pi\sigma a^4\cdot\frac{4}{3} = \frac{8}{3}\pi\sigma a^4 = \frac{8}{3}\pi a^4\cdot\frac{M}{4\pi a^2} = \frac{2}{3}Ma^2$$</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$$I = \frac{2}{3}Ma^2$$</div>
+      </details>
+
+      <h3 id="q4-2">(2) 斜面を転がる時間</h3>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            斜面方向の座標を $x$（球の重心の移動距離）、球の回転角を $\psi$（$\theta$ は斜面の傾き角として問題で使われているため、
+            回転角には別の記号 $\psi$ を用いる）、斜面に沿う摩擦力の大きさを $F$ とすると、並進・回転それぞれの運動方程式は
+          </p>
+          <div class="mathblock">$$M\ddot{x} = Mg\sin\theta - F\qquad\text{（並進）}$$</div>
+          <div class="mathblock">$$I\ddot{\psi} = Fa\qquad\text{（回転、}F\text{ が接触点で及ぼすトルク）}$$</div>
+          <p>
+            すべらずに転がる条件（束縛条件）は $x=a\psi$、両辺を２回時間微分して $\ddot x = a\ddot\psi$ である。
+            回転の式から $F = \dfrac{I\ddot\psi}{a} = \dfrac{I\ddot x}{a^2}$ とし、これを並進の式に代入すると
+          </p>
+          <div class="mathblock">$$M\ddot x = Mg\sin\theta - \frac{I}{a^2}\ddot x \quad\Longrightarrow\quad \left(M+\frac{I}{a^2}\right)\ddot x = Mg\sin\theta$$</div>
+          <p>(1) の結果 $I=\dfrac23 Ma^2$ を用いると $\dfrac{I}{a^2}=\dfrac23 M$ なので</p>
+          <div class="mathblock">$$\ddot x = \frac{Mg\sin\theta}{M+\frac23M} = \frac{g\sin\theta}{1+\frac23} = \frac{3}{5}g\sin\theta \equiv \alpha\quad\text{（一定）}$$</div>
+          <p>
+            初速 $0$ の等加速度運動なので、時刻 $t$ までに進む距離は $\dfrac12\alpha t^2$。これが $x$ に等しくなる時刻を求めると
+          </p>
+          <div class="mathblock">$$\frac{1}{2}\alpha t^2 = x \quad\Longrightarrow\quad t = \sqrt{\frac{2x}{\alpha}} = \sqrt{\frac{2x}{\frac35g\sin\theta}} = \sqrt{\frac{10x}{3g\sin\theta}}$$</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$$t = \sqrt{\frac{10x}{3g\sin\theta}}$$</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 形状で決まる「転がりやすさ」</span>
+        <p>
+          慣性モーメントを $I=cMa^2$（$c$ は形状だけで決まる無次元係数）と書くと、一様な球は $c=\frac25$、円柱・円板は $c=\frac12$、
+          この中空球殻は $c=\frac23$、輪（フープ）は $c=1$ になる。(2) で求めた加速度は一般に
+        </p>
+        <div class="mathblock">$$\ddot x = \frac{g\sin\theta}{1+c}$$</div>
+        <p>
+          という形をしていて、質量 $M$ にも半径 $a$ にもよらず、この $c$ だけで決まる。したがって同じ斜面で同時に転がし始めると、
+          一様な球（$\frac57g\sin\theta$）が最も速く、続いて円柱・円板（$\frac23g\sin\theta$）、この中空球殻（$\frac35g\sin\theta$）、
+          輪（$\frac12g\sin\theta$）の順に遅くなる——質量が回転軸からより遠くに分布しているものほど回転にエネルギーを取られて
+          並進が遅くなる、というよく知られた「斜面を転がるレース」の結果と一致する。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2024.html">← 2024年度へ</a>
+    <a href="index.html">トップへ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

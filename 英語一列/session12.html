@@ -1,0 +1,136 @@
+<!DOCTYPE html><!-- 「Session 12 — The Man Who Tried to Redeem the World with Logic (2) | 英語一列①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>Session 12 — The Man Who Tried to Redeem the World with Logic (2) | 英語一列①</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="eng.css">
+</head>
+<body data-nav-page="session12">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">英語一列①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">ホーム</a>
+      <a href="session9.html" data-page="session9">Session 9</a>
+      <a href="session10.html" data-page="session10">Session 10</a>
+      <a href="session11.html" data-page="session11">Session 11</a>
+      <a href="session12.html" data-page="session12" class="active">Session 12</a>
+      <a href="session13.html" data-page="session13">Session 13</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>Session 12</h1>
+  <p class="subtitle">The Man Who Tried to Redeem the World with Logic — Part II（McCulloch と Wiener）</p>
+</div>
+
+<div class="eng-body">
+
+  <p class="notice">
+    <span class="notice-vocab">紫色は語彙</span>、<span class="notice-entity">青緑色は人物・事件などの文脈注</span>です。タップすると補足が表示され、ページ末尾に別々の一覧があります。
+    段落単位の対訳ではなく<strong>1文ずつ</strong>英文と直訳を対応させたい場合は
+    <a href="session12-taiyaku.html">→ 一文対訳・構文解説ページ</a>へ。
+  </p>
+
+  <div class="exam-link-box">
+    この Session の冒頭は 2024年度過去問 Section B（Q6〜Q10）と一致する。
+    <a href="過去問/session12.html">→ 過去問（2024年度）を見る</a>
+  </div>
+
+  <!-- 英文と日本語の説明を対応させて、本文を読み進められるようにする。 --><div class="passage">
+
+    <div class="para-pair">
+      <div><div class="para-label">Text</div><div class="para-en">Before Pitts' arrival, McCulloch had <span class="vw" data-w="hit a wall">hit a wall</span>: There was nothing stopping chains of neurons from twisting themselves into <span class="vw" data-w="loop">loops</span>, so that the output of the last neuron in a chain became the input of the first—a neural network <span class="vw" data-w="chasing its tail">chasing its tail</span>. McCulloch had no idea how to model that mathematically. From the point of view of logic, a loop smells a lot like <span class="vw" data-w="paradox">paradox</span>: the <span class="vw" data-w="consequent">consequent</span> becomes the <span class="vw" data-w="antecedent">antecedent</span>, the effect becomes the cause. McCulloch had been <span class="vw" data-w="label">labeling</span> each link in the chain with a time stamp, so that if the first neuron <span class="vw" data-w="fire">fired</span> at time t, the next one fired at t+1, and so on. But when the chains <span class="vw" data-w="circle back">circled back</span>, t+1 suddenly came before t.</div></div>
+      <div><div class="para-label">和訳</div><div class="para-ja">ピッツがやってくる前、マカロックは壁に突き当たっていた。ニューロンの鎖がひとつの輪になることを妨げるものはなにもない。したがって、最後のニューロンの出力が最初のニューロンの入力となる。いわば、みずからの尻尾を追い回す神経回路網である。マカロックはそれを数学的にモデル化することができないでいた。論理の観点から考えると、ニューロンの輪はパラドックスの様相を呈している。結果が原因に先行してしまうためである。マカロックは、ニューロンの繋がっている部分それぞれが発火した時刻を記録していた。つまり、最初のニューロンがある時刻tに発火したなら、その次のニューロンが発火した時刻はt+1とする、という具合である。しかしその場合、ニューロンの鎖が輪になっていたとすると、時刻t+1がtの前に来ることになってしまう。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">Pitts knew how to <span class="vw" data-w="tackle">tackle</span> the problem. He used special mathematics, which <span class="vw" data-w="deal with">deals with</span> numbers that circle back around on themselves like the hours of a clock. He showed McCulloch that the paradox of time t+1 coming before time t wasn't a paradox at all, because in his calculations "before" and "after" lost their meaning. Time was removed from the <span class="vw" data-w="equation">equation</span> altogether. If one were to see a lightning bolt <span class="vw" data-w="flash">flash</span> on the sky, the eyes would send a signal to the brain, <span class="vw" data-w="shuffle">shuffling</span> it through a chain of neurons. Starting with any given neuron in the chain, you could <span class="vw" data-w="retrace">retrace</span> the signal's steps and figure out just how long ago lightning struck. Unless, that is, the chain is a loop. In that case, the information encoding the lightning bolt just <span class="vw" data-w="spin">spins</span> in circles, endlessly. It <span class="vw" data-w="bear no connection">bears no connection</span> to the time at which the lightning actually <span class="vw" data-w="occur">occurred</span>. It becomes, as McCulloch put it, "an idea <span class="vw" data-w="wrench A out of B">wrenched</span> out of time." In other words, a memory.</div></div>
+      <div><div class="para-ja">ピッツはその壁を乗り越える策を知っていた。それは、時計の時刻のように、1周して元に戻るような数を扱うための特別な数学的処理であった。ピッツはマカロックに、時刻t+1がtの前に来てしまうパラドックスは、実際のところパラドックスでも何でもないことを示してみせた。なぜなら、ピッツの用いた処理においては、ある時刻より「前」とか「後」という概念が存在しないからだ。時間というものを全く考慮する必要がなくなったのである。たとえば空に稲妻が光るのがある人の目に映ったら、目は脳へとシグナルを送り、そのシグナルはニューロンの鎖を駆け巡る。それが鎖の中のどのニューロンで開始されようと、そのシグナルの足跡を辿ることで、いつ稲妻が発生したのかを知ることができる。ただしそれは、ニューロンの鎖が輪になっていないならば、の話である。もし輪になっているならば、稲妻の情報は輪を回り続けることとなる。その情報は、稲妻が実際に発生した時刻とは無関係の、マカロックの言葉を借りれば「時間から脱け出した知覚」となるのである。すなわち、記憶である。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">By the time Pitts finished calculating, he and McCulloch <span class="vw" data-w="have on one's hands">had on their hands</span> a <span class="vw" data-w="mechanistic">mechanistic</span> model of the mind, the first <span class="vw" data-w="application">application</span> of computation to the brain, and the first <span class="vw" data-w="argument">argument</span> that the brain, <span class="vw" data-w="at bottom">at bottom</span>, is an information processor. By <span class="vw" data-w="string">stringing</span> simple <span class="vw" data-w="binary">binary</span> neurons into chains and loops, they had shown that the brain could <span class="vw" data-w="implement">implement</span> every possible logical operation and <span class="vw" data-w="compute">compute</span> anything that could be computed by one of <span class="vw" data-w="Turing's hypothetical machines">Turing's hypothetical machines</span>. Thanks to those <span class="vw" data-w="ouroboric">ouroboric</span> loops, they had also found a way for the brain to <span class="vw" data-w="abstract">abstract</span> a piece of information, <span class="vw" data-w="hang on to">hang on to</span> it, and abstract it yet again, creating rich, <span class="vw" data-w="elaborate">elaborate</span> <span class="vw" data-w="hierarchy">hierarchies</span> of <span class="vw" data-w="lingering">lingering</span> ideas in a process we call "thinking."</div></div>
+      <div><div class="para-ja">ピッツが説明を終えるころには、2人はすでに頭脳の機械的モデルを見出していた。それは、脳に計算的手法を適用した最初の例であるとともに、脳が根本的には情報処理装置であるとした最初のものでもあった。単純なバイナリーニューロンを輪のように構成することにより、彼らは、脳が、原理的に可能であればいかなる論理操作であっても実行でき、チューリングマシンによって計算することのできるものなら何でも計算できることを示した。そうしたウロボロス的な（始めと終わりがつながっている）輪のモデルを用いることによって、彼らはまた、わたしたちが「思考」と呼ぶプロセスにおいて、脳が情報を抽象化し、それを保持し、そしてさらに抽象化して、ついにはそのようにして蓄積された観念の豊かで精緻な階層を作り上げる、その方法を見出した。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">McCulloch and Pitts <span class="vw" data-w="write up">wrote up</span> their <span class="vw" data-w="finding">findings</span> in a now-<span class="vw" data-w="seminal">seminal</span> paper, "A Logical <span class="vw" data-w="calculus">Calculus</span> of Ideas <span class="vw" data-w="immanent">Immanent</span> in Nervous Activity," <span class="vw" data-w="publish">published</span> in the Bulletin of Mathematical Biophysics. Their model was <span class="vw" data-w="vastly">vastly</span> <span class="vw" data-w="oversimplified">oversimplified</span> for a biological brain, but it succeeded at showing a <span class="vw" data-w="proof of principle">proof of principle</span>. Thought, they said, need not be <span class="vw" data-w="shroud">shrouded</span> in Freudian <span class="vw" data-w="mysticism">mysticism</span> or engaged in <span class="vw" data-w="struggle">struggles</span> between <span class="vw" data-w="ego and id">ego and id</span>. "For the first time in the history of science," McCulloch <span class="vw" data-w="announce">announced</span> to a group of philosophy students, "we know how we know."</div></div>
+      <div><div class="para-ja">マカロックとピッツの発見は、現在では有名な論文「神経活動に内在する観念の論理計算」として、『数理的生物物理学』誌で発表された。彼らのモデルは実際の脳を過度に単純化していたものの、脳の原理をうまく示すことができていた。彼らに言わせれば、思考はもはや、フロイト的な神秘主義によってエゴやイドといった観念で弄ばれることはないのである。マカロックは哲学を専攻する学生たちに言った。「科学の歴史上初めて、わたしたちは自分がどのようにしてものごとを知るのかを知ったのである」。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">Pitts had found in McCulloch everything he had needed—<span class="vw" data-w="acceptance">acceptance</span>, friendship, his intellectual <span class="vw" data-w="one's other half">other half</span>, the father he never had. Although he had only lived in Hinsdale for a short time, the <span class="vw" data-w="runaway">runaway</span> would refer to McCulloch's house as home for the rest of his life. <span class="vw" data-w="for his part">For his part</span>, McCulloch was just as <span class="vw" data-w="enamored">enamored</span>. In Pitts he had found a <span class="vw" data-w="kindred spirit">kindred spirit</span>, his "<span class="vw" data-w="bootlegged">bootlegged</span> <span class="vw" data-w="collaborator">collaborator</span>," and a mind with the technical <span class="vw" data-w="prowess">prowess</span> to bring McCulloch's <span class="vw" data-w="half-formed">half-formed</span> <span class="vw" data-w="notion">notions</span> to life. As he put it in a <span class="vw" data-w="letter of reference">letter of reference</span> about Pitts, "Would I had him with me always."</div></div>
+      <div><div class="para-ja">ピッツはマカロックのうちに、自分が必要としていたことのすべてを見出していた。ピッツにとってマカロックは、自分を受け入れてくれる親友であり、真理探究に取り組む伴侶であり、そして初めて得た「父」であった。ピッツがヒンズデールに住んでいたのは少しの間だけであったが、家出したピッツにとって、マカロックの家はその後の人生において我が家と呼べる場所となった。そしてマカロックもまた、ピッツに魅了されていた。マカロックにとってピッツは、同志であり、秘密の共同研究者であり、自分の着想に息を吹き込んでくれる天才的頭脳であった。彼は後年、ある手紙の中で、ピッツについて次のように述べた。「彼がいつも俺の隣にいてくれたら、どんなによかったことか」。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">Pitts was soon to make a similar <span class="vw" data-w="impression">impression</span> on one of the <span class="vw" data-w="towering">towering</span> intellectual <span class="vw" data-w="figure">figures</span> of the 20th century, the mathematician, philosopher, and founder of <span class="vw" data-w="cybernetic">cybernetics</span>, Norbert Wiener. In 1943, Lettvin brought Pitts into Wiener's office at the Massachusetts Institute of Technology (MIT). Wiener didn't introduce himself or <span class="vw" data-w="make small talk">make small talk</span>. He simply walked Pitts over to a blackboard where he was <span class="vw" data-w="work out">working out</span> a mathematical proof. As Wiener worked, Pitts <span class="vw" data-w="chime in">chimed in</span> with questions and suggestions. According to Lettvin, by the time they reached the second blackboard, it was clear that Wiener had found his new <span class="vw" data-w="right-hand">right-hand</span> man. Wiener would later write that Pitts was "<span class="vw" data-w="without question">without question</span> the strongest young scientist whom I have ever met . . . I should be extremely <span class="vw" data-w="astonished">astonished</span> if he does not prove to be one of the two or three most important scientists of his generation, not <span class="vw" data-w="merely">merely</span> in America but in the world <span class="vw" data-w="at large">at large</span>."</div></div>
+      <div><div class="para-ja">ほどなくしてピッツは同じような印象を、ある20世紀を代表する知識人に対して抱くようになる。それは、数学者であり、哲学者であり、そしてサイバネティクスの創始者であるノーバート・ウィーナーであった。1943年、レトヴィンはピッツをMITにあるウィーナーの研究室に連れていった。ウィーナーは、自己紹介や軽い世間話などをすることなく、いきなりピッツを黒板の前へと連れてゆき、彼がそのとき取り組んでいた数学の証明を見せた。ウィーナーが再びそれに取り掛かると、ピッツはたびたび疑問や示唆を差し挟んだ。レトヴィンによると、2人が2枚目の黒板に差しかかる頃には、ウィーナーはピッツを新たな右腕だと確信したという。ウィーナーはのちにピッツについて次のように書いている。「間違いなく、彼は私が出会ったなかで最も優秀な若い科学者であった。彼はアメリカのみならず全世界で、同世代の最も重要な科学者の一人になるに違いない」。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">So impressed was Wiener that he promised Pitts a Ph.D. in mathematics at MIT, despite the fact that he had never <span class="vw" data-w="graduate">graduated</span> from high school—something that the <span class="vw" data-w="strict">strict</span> rules at the University of Chicago <span class="vw" data-w="prohibited">prohibited</span>. It was an offer Pitts <span class="vw" data-w="couldn't refuse">couldn't refuse</span>. By the fall of 1943, Pitts had moved into a Cambridge apartment, was <span class="vw" data-w="enroll">enrolled</span> as a special student at MIT, and was studying under one of the most <span class="vw" data-w="influential">influential</span> scientists in the world. It was quite a long way from <span class="vw" data-w="blue-collar">blue-collar</span> Detroit.</div></div>
+      <div><div class="para-ja">ピッツの才能に驚嘆したウィーナーは、ピッツにMITの数学の博士号を取得させると約束した。高校すら卒業していないピッツが博士号を取るなどということは、シカゴ大学では厳格な規則により禁じられていた。ピッツにその申し出を断ることなどできるはずもなかった。1943年の秋にケンブリッジのアパートに引っ越したピッツは、特別研究員としてMITに迎え入れられ、世界で最も影響力のある科学者の1人であったウィーナーのもとで研究を行なった。デトロイトの劣悪な環境からここまで長い道のりであった。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">Wiener wanted Pitts to make his model of the brain more <span class="vw" data-w="realistic">realistic</span>. Despite the <span class="vw" data-w="leap">leaps</span> Pitts and McCulloch had made, their work had made barely a <span class="vw" data-w="ripple">ripple</span> among brain scientists—in part because the symbolic logic they'd <span class="vw" data-w="employed">employed</span> was hard to <span class="vw" data-w="decipher">decipher</span>, but also because their <span class="vw" data-w="stark">stark</span> and oversimplified model didn't <span class="vw" data-w="capture">capture</span> the full <span class="vw" data-w="messiness">messiness</span> of the biological brain. Wiener, however, understood the <span class="vw" data-w="implications">implications</span> of what they'd done, and knew that a more realistic model would be <span class="vw" data-w="game-changing">game-changing</span>. He also realized that it ought to be possible for Pitts' neural networks to be implemented in manmade machines, <span class="vw" data-w="usher in">ushering in</span> his dream of a cybernetic revolution. Wiener figured that if Pitts was going to make a realistic model of the brain's 100 billion <span class="vw" data-w="interconnected">interconnected</span> neurons, he was going to need statistics <span class="vw" data-w="on one's side">on his side</span>. And statistics and probability theory were Wiener's area of <span class="vw" data-w="expertise">expertise</span>. After all, it had been Wiener who discovered a <span class="vw" data-w="precise">precise</span> mathematical definition of information: The higher the probability, the higher the <span class="vw" data-w="entropy">entropy</span> and the lower the information content.</div></div>
+      <div><div class="para-ja">ウィーナーはピッツが脳のモデルをもっと現実に近いものとすることを要求した。ピッツとマカロックはたしかに大きな功績を挙げたが、その脳科学者への影響はきわめて限定的であった。それは、たしかに彼らの用いた記号論理が非常に難解であったためでもあったが、しかしやはり彼らの単純化され殺伐としたモデルが、複雑きわまりない実際の脳を捉えきれていないことも大きかった。それでも、彼らの成し遂げたことの与え得る影響の大きさを理解したウィーナーは、より現実に近いモデルを構築すれば革命を起こせるだろうと考えた。また、ピッツの神経回路網モデルを応用した機械が、ウィーナーの夢であったサイバネティック・レボリューションの嚆矢となり得るに違いないと気づいた。さらに、脳では1000億個ものニューロンが結びついているため、ピッツが脳の現実的なモデルを構築する際には統計学が必要だと考えた。そして、統計学や確率論はまさにウィーナーの専門領域だった。そもそも「情報」の明確な数学的定義を見出したのはウィーナーであったのだから。なおその定義とは、「確率が高くなるほど、エントロピーが増大し、情報量は少なくなる」というものであった。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">As Pitts began his work at MIT, he realized that although <span class="vw" data-w="genetics">genetics</span> must <span class="vw" data-w="encode">encode</span> for <span class="vw" data-w="gross">gross</span> neural features, there was no way our genes could <span class="vw" data-w="predetermine">predetermine</span> the trillions of <span class="vw" data-w="synaptic">synaptic</span> connections in the brain—the amount of information it would require was <span class="vw" data-w="untenable">untenable</span>. It must be the case, he figured, that we all start out with essentially random neural networks—highly probable states containing <span class="vw" data-w="negligible">negligible</span> information (a <span class="vw" data-w="thesis">thesis</span> that continues to be <span class="vw" data-w="debate">debated</span> to the present day). He <span class="vw" data-w="suspect">suspected</span> that by <span class="vw" data-w="alter">altering</span> the <span class="vw" data-w="threshold">thresholds</span> of neurons over time, randomness could <span class="vw" data-w="give way to">give way to</span> order and information could <span class="vw" data-w="emerge">emerge</span>. He <span class="vw" data-w="set out to">set out to</span> model the process using statistical mechanics. Wiener excitedly <span class="vw" data-w="cheer on">cheered</span> him on, because he knew if such a model were <span class="vw" data-w="embody">embodied</span> in a machine, that machine could learn.</div></div>
+      <div><div class="para-ja">ピッツは、MITで研究を始めるとすぐに、次のことに気づいた。すなわち、たしかにニューロンのおおまかな特性が遺伝によって定まることは間違いないが、しかし脳のなかのシナプス結合は数兆にも及ぶため、それらをすべて遺伝子が事前に決定するのは、必要な情報量が多すぎて不可能である、と。したがって、私たちはみな、生まれたときは、実質的にランダムな神経回路網、つまり情報がほとんどない状態であるはずなのだ（この彼の説は、現在まで議論が続いている）。そして、ニューロンの閾値を変えてゆくなかで、ランダムであったものが秩序を持つようになり、情報が発生するのである。そのように考えたピッツは、統計力学を用いることにより、そのプロセスをモデル化しようとした。ウィーナーは興奮交じりにピッツの試みを応援した。なぜなら、もしそのようなモデルを機械に取り込むことができれば、機械は「学習」が可能になるからである。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">"I now understand <span class="vw" data-w="at once">at once</span> some seven-eighths of what Wiener says, which I am told is something of an <span class="vw" data-w="achievement">achievement</span>," Pitts wrote in a letter to McCulloch in December of 1943, some three months after he'd arrived. His work with Wiener was "to <span class="vw" data-w="constitute">constitute</span> the first <span class="vw" data-w="adequate">adequate</span> discussion of statistical mechanics, understood in the most general possible sense, so that it includes for example the problem of <span class="vw" data-w="derive">deriving</span> the psychological, or statistical, laws of behavior from the <span class="vw" data-w="microscopic">microscopic</span> laws of <span class="vw" data-w="neurophysiology">neurophysiology</span> . . . Doesn't it sound fine?"</div></div>
+      <div><div class="para-ja">「僕は今ではウィーナーの言うことの9割くらいは一度で理解できている。それはちょっとした偉業らしいんだけどね」。1943年の12月、つまりMITに来て3か月ほど経ったころ、ピッツはマカロックに手紙を書いた。ウィーナーとの研究は「ごく一般的な意味での統計力学の最初のちゃんとした議論を構成するものになる。だから、たとえば神経生理学のミクロな法則から、心理学的、あるいは統計学的な法則を導き出すみたいなこともやるんだ。面白そうじゃない？」</div></div>
+    </div>
+
+  </div><!-- /passage -->
+
+  <div class="wordbank-head">
+    <h2>単語帳 — Session 12</h2>
+    <p class="wordbank-hint">単語をタップすると語源・背景解説が表示されます。</p>
+  </div>
+  <!-- 単語の一覧を置く領域。読み込んだJavaScriptが項目を追加する。 --><div class="wordlist" id="wordbank"></div>
+
+</div><!-- /eng-body -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">英語一列①ー2026前期課程Sセメスター</footer>
+
+<script src="vocab12.js"></script>
+<script>const VOCAB = session12;</script>
+<script src="entities.js"></script>
+<script src="eng.js"></script>
+<script>// このセッションの語彙データから、単語・品詞・日本語の意味を一行ずつ作り、単語帳に追加する。
+
+  (function() {
+    const grid = document.getElementById('wordbank');
+    Object.keys(session12).forEach(key => {
+      const d = session12[key];
+      const row = document.createElement('div');
+      row.className = 'wl-row';
+      row.innerHTML = `
+        <span class="vw wl-word" data-w="${key}">${key}</span>
+        <span class="wl-pos">${d.pos}</span>
+        <span class="wl-meaning">${d.meaning}</span>`;
+      grid.appendChild(row);
+    });
+  })();
+</script>
+<script src="nav.js"></script>
+<script src="../common.js"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

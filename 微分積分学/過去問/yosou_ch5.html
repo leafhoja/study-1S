@@ -1,0 +1,467 @@
+<!DOCTYPE html><!-- 「予想問題 第5回（Ch.5）— 微分積分学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>予想問題 第5回（Ch.5）— 微分積分学①</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="exam-ch5">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="yosou_ch1.html" data-page="過去問/yosou_ch1">予想問題1</a>
+      <a href="yosou_ch2.html" data-page="過去問/yosou_ch2">予想問題2</a>
+      <a href="yosou_ch3.html" data-page="過去問/yosou_ch3">予想問題3</a>
+      <a href="yosou_ch4.html" data-page="過去問/yosou_ch4">予想問題4</a>
+      <a href="yosou_ch5.html" data-page="過去問/yosou_ch5" class="active">予想問題5</a>
+      <a href="yosou_ch6.html" data-page="過去問/yosou_ch6">予想問題6</a>
+      <a href="yosou_keisan.html" data-page="過去問/yosou_keisan">計算問題集</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>予想問題 第5回</h1>
+  <p class="subtitle">Ch.5 偏微分と全微分（全4問）</p>
+</div>
+
+<div class="container">
+
+  <div class="note">
+    <span class="box-label">この問題集の方針</span>
+    <p>
+      以下の4問はすべて<strong>AIが生成したオリジナルの予想問題</strong>であり、過去に実際に出題された試験問題そのものではない。
+      Ch.1〜Ch.6の講義ノート（<a href="../ch1.html">ch1</a>〜<a href="../ch6.html">ch6</a>）で扱った定義・定理・例を土台に、
+      「この範囲ならこう問われそうだ」という想定のもとで作成している。
+    </p>
+    <p>
+      Ch.5は「偏微分可能」「全微分可能」「連続」という3つの性質の間の微妙な力関係（定理5.6の階層）が最大のヤマ場であり、
+      期末試験でも反例の構成や具体的な判定計算が問われやすい。本問題集では、シュワルツの定理の直接計算確認（問題5.1）、
+      直線経路だけでは見抜けない極限の非存在（問題5.2）、勾配・方向微分・最急上昇方向、および勾配ベクトルと
+      等高線の関係の一連の計算（問題5.3）、そして極座標以外のヤコビ行列の計算練習（問題5.4）という4つの角度から
+      Ch.5を総ざらいする構成にした。
+      中間試験や過去のレポート課題の傾向は参考程度にとどめ、本番の期末試験がこの通りに出るとは限らない点に注意してほしい。
+      あくまで<strong>Ch.5の内容を自分の手で使いこなせるかを確認するための練習材料</strong>として使うこと。
+      各問題には難易度（★の数、5段階）を付けてあるので、時間配分の目安にしてほしい。
+    </p>
+    <p>
+      2026-07-21の更新でCh.5本文（<a href="../ch5.html#chain">../ch5.html#chain</a>）に、勾配ベクトルが等高線と直交すること
+      （系5.12）・$C$ が増加する方向を指すこと（系5.13）、$f=1/r$ の勾配ベクトル場（例5.9）と万有引力への応用が
+      追加された。これに合わせて、問題5.3に系5.12・系5.13を使う小問(4)を追加している。
+    </p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#p5-1">問題5.1</a>
+    <a href="#p5-2">問題5.2</a>
+    <a href="#p5-3">問題5.3</a>
+    <a href="#p5-4">問題5.4</a>
+  </div>
+
+  <!-- 問題5.1 -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="p5-1">
+    <div class="sec-header">
+      <span class="sec-tag">問題 5.1</span>
+      <span class="diff-badge">難易度 ★★☆☆☆</span>
+      <h2>シュワルツの定理の直接確認</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $f(x,y)=x^3y^2+e^{xy}$ について、$f_{xy}$ と $f_{yx}$ を直接計算し、定理5.4'（シュワルツの定理、
+          <a href="../ch5.html#partial">../ch5.html#partial</a>）の主張 $f_{xy}=f_{yx}$ を確認せよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">なぜ「わざわざ確認する」のか</span>
+        <p>
+          定理5.4'（シュワルツの定理、<a href="../ch5.html#partial">../ch5.html#partial</a>）はCh.5本文で一般論として証明済みであり、
+          「2階の偏導関数がともに連続なら $f_{xy}=f_{yx}$ が成り立つ」ことは理論的にはすでに保証されている。
+          本問はその一般論を鵜呑みにするのではなく、<strong>具体的な関数で自分の手を動かして本当に一致することを体感する</strong>練習だ。
+        </p>
+        <p>
+          $f=x^3y^2+e^{xy}$ は多項式部分 $x^3y^2$ と指数部分 $e^{xy}$ が混在しており、指数部分の偏微分では
+          合成関数の微分（$\dfrac{\partial}{\partial x}e^{xy}=ye^{xy}$、$y$ は $x$ に関して定数扱い）を、
+          さらに2階の偏微分では<strong>積の微分法則</strong>（$ye^{xy}$ を $y$ で微分するときも $xye^{xy}$ を $x$ で微分するときも、
+          2つの関数の積として扱う必要がある）を正しく適用できるかが問われる。
+          計算の道筋が異なる2通りの偏微分（先に $x$、次に $y$／先に $y$、次に $x$）の結果がぴったり一致するのを確認することで、
+          シュワルツの定理の主張を「暗記した公式」から「実感を伴った事実」に変える狙いがある。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">模範解答</span>
+        <p><strong>$f_{xy}$（先に $x$、次に $y$）：</strong></p>
+        <p>まず $x$ で偏微分する（$y$ を定数扱い）。$\dfrac{\partial}{\partial x}(x^3y^2)=3x^2y^2$、
+        $\dfrac{\partial}{\partial x}e^{xy}=ye^{xy}$（合成関数の微分、$\dfrac{\partial}{\partial x}(xy)=y$）なので</p>
+        $$f_x = 3x^2y^2+ye^{xy}.$$
+        <p>これを $y$ で偏微分する（$x$ を定数扱い）。$\dfrac{\partial}{\partial y}(3x^2y^2)=6x^2y$。
+        $\dfrac{\partial}{\partial y}(ye^{xy})$ は積の微分法則で
+        $\dfrac{\partial y}{\partial y}\cdot e^{xy}+y\cdot\dfrac{\partial}{\partial y}e^{xy}=e^{xy}+y\cdot xe^{xy}=e^{xy}+xye^{xy}$ なので</p>
+        $$f_{xy} = \frac{\partial}{\partial y}\bigl(3x^2y^2+ye^{xy}\bigr) = 6x^2y+e^{xy}+xye^{xy}.$$
+        <p><strong>$f_{yx}$（先に $y$、次に $x$）：</strong></p>
+        <p>まず $y$ で偏微分する（$x$ を定数扱い）。$\dfrac{\partial}{\partial y}(x^3y^2)=2x^3y$、
+        $\dfrac{\partial}{\partial y}e^{xy}=xe^{xy}$（合成関数の微分、$\dfrac{\partial}{\partial y}(xy)=x$）なので</p>
+        $$f_y = 2x^3y+xe^{xy}.$$
+        <p>これを $x$ で偏微分する（$y$ を定数扱い）。$\dfrac{\partial}{\partial x}(2x^3y)=6x^2y$。
+        $\dfrac{\partial}{\partial x}(xe^{xy})$ は積の微分法則で
+        $\dfrac{\partial x}{\partial x}\cdot e^{xy}+x\cdot\dfrac{\partial}{\partial x}e^{xy}=e^{xy}+x\cdot ye^{xy}=e^{xy}+xye^{xy}$ なので</p>
+        $$f_{yx} = \frac{\partial}{\partial x}\bigl(2x^3y+xe^{xy}\bigr) = 6x^2y+e^{xy}+xye^{xy}.$$
+        <p><strong>結論：</strong></p>
+        $$f_{xy} = f_{yx} = 6x^2y+e^{xy}+xye^{xy}.$$
+        <p>
+          先に $x$、次に $y$ という順序で計算した場合と、先に $y$、次に $x$ という順序で計算した場合とで、
+          全く同じ式 $6x^2y+e^{xy}+xye^{xy}$ に到達した。これは定理5.4'（シュワルツの定理）の主張どおりであり、
+          $f$ が多項式と指数関数の積を含む $C^2$ 級関数（あらゆる階数の偏導関数が存在し連続）であるため、
+          この定理の仮定を満たしていることによる。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 積の微分法則を忘れやすいポイント</span>
+        <p>
+          $f_{xy}$ の計算では $ye^{xy}$ を $y$ で微分する際、$y$ という因子自身も $y$ に依存する（微分すると $1$ になる）ことを忘れて
+          $y\cdot(xe^{xy})=xye^{xy}$ だけを答えにしてしまう間違いが多い。正しくは
+          $\dfrac{\partial}{\partial y}(y\cdot e^{xy})=1\cdot e^{xy}+y\cdot xe^{xy}=e^{xy}+xye^{xy}$ のように、積の微分法則の2つの項をどちらも書き出す必要がある。
+          $f_{yx}$ の計算で $xe^{xy}$ を $x$ で微分するときも全く同じ構造の注意が必要で、この対称性ゆえに両者が一致することが見て取れる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 問題5.2 -->
+  <div class="section" id="p5-2">
+    <div class="sec-header">
+      <span class="sec-tag">問題 5.2</span>
+      <span class="diff-badge">難易度 ★★★☆☆</span>
+      <h2>曲線経路による極限の非存在</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $f(x,y)=\dfrac{x^2y}{x^4+y^2}$（$(x,y)\ne(0,0)$）について、次の各問いに答えよ。
+        </p>
+        <ol>
+          <li>任意の直線 $y=mx$（$m$ は定数）に沿って原点に近づくとき、$f\to0$ となることを示せ。</li>
+          <li>放物線 $x=t,\ y=t^2$ に沿って原点に近づくとき、$f$ の極限を求めよ。</li>
+          <li>(1)(2)から、原点で $\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)$ が存在しないことを結論せよ。</li>
+        </ol>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">例5.1よりも一段巧妙な反例</span>
+        <p>
+          Ch.5本文の例5.1（<a href="../ch5.html#counterexample">../ch5.html#counterexample</a>）で扱った $\dfrac{xy}{x^2+y^2}$ は、
+          <strong>直線経路 $y=mx$ どうしを比べただけで既に</strong>極限の値が $m$ によって変わってしまう（$m=0$ なら $0$、$m=1$ なら $\frac12$）、
+          という分かりやすい反例だった。
+        </p>
+        <p>
+          本問の $f(x,y)=\dfrac{x^2y}{x^4+y^2}$ はそれよりも一段階巧妙な構造をしている。小問(1)で確認するように、
+          <strong>どの直線経路 $y=mx$ に沿っても、極限は同じ値（$0$）に収束する。</strong>にもかかわらず、
+          小問(2)のように $y=x^2$（放物線、$x^4$ と $y^2=x^4$ の次数がちょうど釣り合う経路）に沿って近づくと、
+          極限は $0$ とは異なる値 $\frac12$ になる。
+        </p>
+        <p>
+          この事実が示す教訓は重要だ。<strong>「あらゆる直線に沿った極限がすべて一致する」ことは、
+          真の意味での2変数関数の極限が存在することを保証しない。</strong>
+          分母の次数（$x^4+y^2$）と分子の次数（$x^2y$）の釣り合いを考えると、直線 $y=mx$ に沿っては分母の$y^2=m^2x^2$ の項が
+          $x^4$ の項より次数が低く支配的になるため極限は自動的に $0$ に潰れてしまうが、
+          $y$ が $x^2$ のオーダーで動く経路（放物線）に沿うと分母の2つの項が同じ次数で釣り合い、比が消えずに残る。
+          <strong>よくある間違い：</strong>直線経路だけを確認して「経路によらず極限が同じだから連続だ」と早合点してしまうことだ。
+          多変数関数の極限の存在を確認する際は、直線だけでなく放物線などの曲線経路も含めて考える必要がある、という点を本問は強く印象づける。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">模範解答</span>
+        <p><strong>(1)</strong> $y=mx$ 上で</p>
+        $$f(x,mx) = \frac{x^2\cdot mx}{x^4+m^2x^2} = \frac{mx^3}{x^2(x^2+m^2)} = \frac{mx}{x^2+m^2}.$$
+        <p>
+          $m\ne0$ のとき、$x\to0$ で分母 $x^2+m^2\to m^2\ne0$ なので $\dfrac{mx}{x^2+m^2}\to\dfrac{0}{m^2}=0$。
+          $m=0$（$x$軸）のときは $f(x,0)=0$（分子が恒等的に $0$）なので、この場合も自明に極限は $0$。
+        </p>
+        <p>したがって、どの直線 $y=mx$ に沿って原点に近づいても、$f\to0$。</p>
+        <p><strong>(2)</strong> $x=t,\ y=t^2$ 上で（$t\ne0$）</p>
+        $$f(t,t^2) = \frac{t^2\cdot t^2}{t^4+(t^2)^2} = \frac{t^4}{t^4+t^4} = \frac{t^4}{2t^4} = \frac12.$$
+        <p>
+          この値は $t\ne0$ である限り常に $\dfrac12$ で、$t\to0$ としてもこの値自体は変化しない
+          （$t$ に依存しない定数関数として $\dfrac12$ が現れている）。よって放物線経路に沿った極限は
+        </p>
+        $$\lim_{t\to0}f(t,t^2) = \frac12.$$
+        <p><strong>(3)</strong>
+          (1)より、原点を通るすべての直線経路に沿った極限は $0$ で一致する。しかし(2)より、放物線 $y=x^2$ に沿った極限は
+          $\dfrac12$（$\ne0$）である。定義5.1（<a href="../ch5.html#continuity">../ch5.html#continuity</a>）の意味での極限
+          $\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)$ が存在するためには、<strong>どんな経路で近づいても同じ値に収束する</strong>ことが必要だが、
+          直線経路（極限 $0$）と放物線経路（極限 $\frac12$）とで異なる値に収束してしまっている。
+          したがって、原点で $\displaystyle\lim_{(x,y)\to(0,0)}f(x,y)$ は存在しない。
+        </p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">注意 — 「全ての直線で一致」は「極限が存在する」の十分条件にならない</span>
+        <p>
+          $f(x,mx)\to0$ が任意の $m$ について成り立つことを確認しても、それは無限にある近づき方のうち
+          「直線」という特別な形のものだけを調べたに過ぎない。$(x,y)\to(0,0)$ の近づき方には放物線・双曲線・らせん状の経路など
+          無数のバリエーションがあり、極限が存在すると言うためには<strong>そのすべてで同じ値になる</strong>ことを保証しなければならない。
+          本問はその「直線だけでは不十分」という事実を最も端的に示す標準的な反例の一つである。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 問題5.3 -->
+  <div class="section" id="p5-3">
+    <div class="sec-header">
+      <span class="sec-tag">問題 5.3</span>
+      <span class="diff-badge">難易度 ★★★★☆</span>
+      <h2>勾配・方向微分・最急上昇方向・等高線との関係の総合問題</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $f(x,y)=x^2+3xy-y^2$、点 $P=(1,2)$、単位ベクトル $\vec u=\left(\dfrac1{\sqrt2},\dfrac1{\sqrt2}\right)$ とする。
+        </p>
+        <ol>
+          <li>$P$ における勾配ベクトル $\nabla f(P)$ を求めよ。</li>
+          <li>系5.10（<a href="../ch5.html#chain">../ch5.html#chain</a>）を用いて方向微分 $D_{\vec u}f(P)$ を求めよ。</li>
+          <li>$P$ における最急上昇方向とその方向の微分係数（最大値）を求めよ。</li>
+          <li>$P$ を通る等高線 $f(x,y)=f(P)$ 上で $y$ を $x$ の陰関数とみて $\dfrac{dy}{dx}\Big|_P$ を求め、
+          その接線方向ベクトル $(1,\,dy/dx|_P)$ が系5.12（<a href="../ch5.html#chain">../ch5.html#chain</a>）により
+          $\nabla f(P)$ と直交することを確認せよ。さらに系5.13（<a href="../ch5.html#chain">../ch5.html#chain</a>）を用いて、
+          $\nabla f(P)$ の方向へ動くと等高線の値 $C=f(P)$ が増加することを説明せよ。</li>
+        </ol>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">系5.10〜系5.13の使い切り演習</span>
+        <p>
+          Ch.5本文の系5.10（<a href="../ch5.html#chain">../ch5.html#chain</a>）とそれに続く「勾配ベクトルの意味」の項
+          （<a href="../ch5.html#chain">../ch5.html#chain</a>）は、方向微分が勾配ベクトルとの内積で計算できること、
+          そして勾配ベクトルの方向が関数値の最も急な増加方向であることを<strong>一般論として</strong>述べていた。
+          しかし、それらを具体的な数値で最初から最後まで計算し切る練習問題はまだ用意されていなかった。本問がその補完に当たる。
+        </p>
+        <p>
+          小問(1)→(2)→(3)の流れは、「まず勾配ベクトルを求める」→「与えられた特定の方向 $\vec u$ への方向微分を計算する」→
+          「勾配ベクトル自身の方向・大きさが最急上昇方向とその方向微分の最大値を与えることを確認する」という、
+          この単元の<strong>定石通りの一連の流れ</strong>を一度自分の手で最後まで完走させることを狙いとしている。
+        </p>
+        <p>
+          小問(4)は2026-07-21にCh.5本文へ追加された系5.12・系5.13（<a href="../ch5.html#chain">../ch5.html#chain</a>）を
+          使う新設の設問だ。(1)〜(3)は「勾配ベクトルの方向・大きさ」そのものの性質（最急上昇方向であること）を
+          問うのに対し、(4)は同じ勾配ベクトル $\nabla f(P)$ を<strong>等高線という別の対象</strong>（$f$ が一定の値を
+          取る曲線）との関係——直交性と、$C$ が増加する側を指すこと——から捉え直す設問になっている。
+          「同じ計算結果 $\nabla f(P)=(8,-1)$ が、最急上昇方向としても、等高線の直交方向としても、同時に意味を持つ」
+          ことを実感できるように、$P=(1,2)$ と $f$ を(1)〜(3)と共通にしてある。
+        </p>
+        <p>
+          <strong>よくある間違い：</strong>方向微分の公式 $D_{\vec u}f=\nabla f\cdot\vec u$ を使う際に、$\vec u$ を
+          <strong>正規化（単位ベクトル化）し忘れる</strong>ことだ。系5.10はあくまで $\vec u$ が単位ベクトル
+          （$u_1^2+u_2^2=1$）であることを前提にしており、正規化されていない方向ベクトルをそのまま代入すると誤った値になる。
+          本問の $\vec u=\left(\frac1{\sqrt2},\frac1{\sqrt2}\right)$ は最初から単位ベクトルとして与えられているが
+          （$\left(\frac1{\sqrt2}\right)^2+\left(\frac1{\sqrt2}\right)^2=1$）、小問(3)で最急上昇方向を答える際には
+          $\nabla f(P)=(8,-1)$ 自身は単位ベクトルではないので、大きさ $|\nabla f(P)|$ で割って正規化する手順を
+          忘れないようにする必要がある。小問(4)では逆に、接線方向ベクトル $(1,dy/dx|_P)$ は<strong>単位ベクトルでなくてよい</strong>
+          （系5.12は直交性、すなわち内積が $0$ になることだけを主張しており、大きさは関係しない）。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">模範解答</span>
+        <p><strong>(1)</strong> $f_x=2x+3y,\ f_y=3x-2y$。$P=(1,2)$ を代入すると</p>
+        $$f_x(P) = 2\cdot1+3\cdot2 = 2+6 = 8, \qquad f_y(P) = 3\cdot1-2\cdot2 = 3-4 = -1.$$
+        <p>したがって</p>
+        $$\nabla f(P) = \bigl(f_x(P),\,f_y(P)\bigr) = (8,\,-1).$$
+        <p><strong>(2)</strong> 系5.10（<a href="../ch5.html#chain">../ch5.html#chain</a>）より、$\vec u=\left(\frac1{\sqrt2},\frac1{\sqrt2}\right)$（単位ベクトル）に対して</p>
+        $$D_{\vec u}f(P) = \nabla f(P)\cdot\vec u = 8\cdot\frac1{\sqrt2}+(-1)\cdot\frac1{\sqrt2} = \frac{8-1}{\sqrt2} = \frac{7}{\sqrt2} = \frac{7\sqrt2}{2}.$$
+        <p><strong>(3)</strong>
+          Ch.5本文（<a href="../ch5.html#chain">../ch5.html#chain</a>）で述べた通り、方向微分 $D_{\vec u}f(P)=\nabla f(P)\cdot\vec u=|\nabla f(P)|\cos\alpha$
+          （$\alpha$ は $\vec u$ と $\nabla f(P)$ のなす角）は $\alpha=0$、すなわち $\vec u$ が $\nabla f(P)$ と同じ向きのときに最大になる。
+          したがって<strong>最急上昇方向は勾配ベクトル $\nabla f(P)=(8,-1)$ の方向そのもの</strong>であり、これを正規化した単位ベクトルは
+        </p>
+        $$|\nabla f(P)| = \sqrt{8^2+(-1)^2} = \sqrt{64+1} = \sqrt{65}, \qquad \text{最急上昇方向} = \frac{1}{\sqrt{65}}(8,\,-1).$$
+        <p>また、その方向の方向微分（最大値）は勾配ベクトルの大きさそのものに等しく、</p>
+        $$\max_{\vec u} D_{\vec u}f(P) = |\nabla f(P)| = \sqrt{65}.$$
+        <p><strong>(4)</strong> まず $f(P)=f(1,2)=1^2+3\cdot1\cdot2-2^2=1+6-4=3$ なので、$P$ を通る等高線は $f(x,y)=3$。
+        この曲線上で $y=y(x)$ とみて、両辺を $x$ で微分すると（陰関数の微分）</p>
+        $$f_x(x,y)+f_y(x,y)\frac{dy}{dx} = 0 \ \Longrightarrow\ \frac{dy}{dx} = -\frac{f_x(x,y)}{f_y(x,y)}.$$
+        <p>$P=(1,2)$ で $f_x(P)=8,\ f_y(P)=-1$（(1)で計算済み）なので</p>
+        $$\frac{dy}{dx}\bigg|_P = -\frac{8}{-1} = 8.$$
+        <p>したがって等高線の $P$ における接線方向ベクトルは $(1,\,8)$。系5.12（<a href="../ch5.html#chain">../ch5.html#chain</a>）の主張
+        $\langle\nabla f(P),V\rangle=0$ を確認すると、</p>
+        $$\nabla f(P)\cdot(1,8) = (8,-1)\cdot(1,8) = 8\cdot1+(-1)\cdot8 = 8-8 = 0,$$
+        <p>となり、確かに $\nabla f(P)=(8,-1)$ は等高線の接線方向 $(1,8)$ と直交している。</p>
+        <p>
+          さらに系5.13（<a href="../ch5.html#chain">../ch5.html#chain</a>）より、$r(0)=P,\ r'(0)=\nabla f(P)$ を満たす曲線 $r(t)$ に沿って
+          $F(t)=f(r(t))$ を考えると $F'(0)=\|\nabla f(P)\|^2=65>0$。つまり $P$ から $\nabla f(P)=(8,-1)$ の方向へわずかに
+          動くと、$f$ の値（＝通過する等高線の $C$ の値）は $f(P)=3$ より必ず大きくなる。系5.12（直交性）と合わせると、
+          $\nabla f(P)$ は等高線 $f=3$ と直交し、かつ $C$ の値が $3$ から増加していく側を向いていることが分かる。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — (2)の値と(3)の最大値の比較</span>
+        <p>
+          (2)で求めた $D_{\vec u}f(P)=\dfrac{7\sqrt2}{2}\approx4.95$ は、$\vec u=\left(\frac1{\sqrt2},\frac1{\sqrt2}\right)$
+          という特定の方向（第1象限の45°方向）への方向微分に過ぎない。一方(3)の $\sqrt{65}\approx8.06$ は、
+          あらゆる単位ベクトル $\vec u$ の中で方向微分を最大にする値であり、当然 $\dfrac{7\sqrt2}{2}<\sqrt{65}$ が成り立っている
+          （$\vec u$ が最急上昇方向 $\frac1{\sqrt{65}}(8,-1)$ とは異なる向きを向いているため、$\cos\alpha<1$ となり方向微分が最大値より小さくなる）。
+          この大小関係が数値的に矛盾なく成り立っていることは、計算結果の妥当性を検算する良い手がかりになる。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 例5.9・物理への応用との関係</span>
+        <p>
+          小問(4)で確認した「勾配ベクトルは等高線と直交し、$C$ が増加する方向を指す」という性質は、
+          Ch.5本文の例5.9（$f=1/r$、<a href="../ch5.html#chain">../ch5.html#chain</a>）でも別の具体的な関数を通じて確認できる
+          ——$f=1/r$ の等高線（$r=$一定の円）と $\nabla f$ が原点向きになることは、まさに直交性＋増加方向の性質の帰結だ。
+          さらにその先には物理への応用（力 $F=-\nabla U$、万有引力ポテンシャル $U=-GM/r$）が続く。
+          「等高線」を「等ポテンシャル面」、「$C$ が増加する方向」を「エネルギーが上がる方向」と読み替えれば、
+          本問(4)の議論がそのまま物理の話に横滑りすることを感じてほしい。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 問題5.4 -->
+  <div class="section" id="p5-4">
+    <div class="sec-header">
+      <span class="sec-tag">問題 5.4</span>
+      <span class="diff-badge">難易度 ★★★★★</span>
+      <h2>複素数の2乗写像のヤコビ行列</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          変数変換 $x=u^2-v^2,\ y=2uv$（これは複素数 $w=u+iv$ を $w^2$ に写す写像の実部・虚部に対応する）について、
+        </p>
+        <ol>
+          <li>定義5.11（<a href="../ch5.html#transform">../ch5.html#transform</a>）に従いヤコビ行列 $\dfrac{\partial(x,y)}{\partial(u,v)}$ を求めよ。</li>
+          <li>ヤコビ行列式を求め、それが $(u,v)=(0,0)$ でのみ $0$ になる（それ以外では退化しない）ことを示せ。</li>
+        </ol>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">極座標変換とは違う変換のヤコビ行列</span>
+        <p>
+          Ch.5本文の例5.8（<a href="../ch5.html#transform">../ch5.html#transform</a>）は極座標変換 $x=r\cos\theta,\ y=r\sin\theta$ の
+          ヤコビ行列を求める問題だった。本問はそれとは全く異なる変換——<strong>複素数の2乗写像</strong>——のヤコビ行列を求める練習であることを、
+          まず明確にしておきたい。$x=u^2-v^2,\ y=2uv$ という式は、複素数 $w=u+iv$ を2乗すると
+        </p>
+        $$w^2 = (u+iv)^2 = u^2-v^2+2uvi$$
+        <p>
+          となることから、実部が $x=u^2-v^2$、虚部が $y=2uv$ に対応する形で自然に現れる。つまり本問の変換は、
+          複素平面上で「2乗する」という操作を、実2変数 $(u,v)\mapsto(x,y)$ の変換として書き下したものにほかならない。
+        </p>
+        <p>
+          この変換は複素解析（複素関数論）への入り口としても重要な意味を持つ。小問(2)で得られるヤコビ行列式
+          $4(u^2+v^2)=4|w|^2$（$w=u+iv$）が原点 $(u,v)=(0,0)$ 以外では常に正であるという事実は、
+          「複素数の2乗写像 $w\mapsto w^2$ は、原点以外では局所的に向きを保った可逆な変換になっている」ということを意味している。
+          これは複素解析での「$w\mapsto w^2$ が原点以外で局所同相である」という性質を、実2変数のヤコビ行列の言葉に置き換えたものだ。
+        </p>
+        <p>
+          発展的な話題として、$w\mapsto w^2$ という写像は原点付近の角度を2倍にする（$w=re^{i\theta}$ なら $w^2=r^2e^{2i\theta}$、
+          すなわち $\arg(w^2)=2\arg(w)$）という著しい性質を持つ。原点でヤコビ行列が退化する（行列式が $0$ になる）ことは、
+          この「角度を2倍にする」という原点特有の非線形な振る舞いと表裏一体の現象であり、原点以外では局所的に線形近似（＝ヤコビ行列による近似）が
+          可逆な形でうまく機能する、というのが退化しないことの意味だ。ただし、本問はあくまで<strong>実2変数のヤコビ行列の計算練習</strong>としての
+          位置づけにとどめ、複素解析の本格的な理論には立ち入らない。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">模範解答</span>
+        <p><strong>(1)</strong> $x=u^2-v^2,\ y=2uv$ の偏微分をそれぞれ計算する。</p>
+        $$x_u = \frac{\partial x}{\partial u} = 2u, \qquad x_v = \frac{\partial x}{\partial v} = -2v,$$
+        $$y_u = \frac{\partial y}{\partial u} = 2v, \qquad y_v = \frac{\partial y}{\partial v} = 2u.$$
+        <p>定義5.11（<a href="../ch5.html#transform">../ch5.html#transform</a>）の記法に従うと、ヤコビ行列は</p>
+        $$\frac{\partial(x,y)}{\partial(u,v)} = \begin{pmatrix} x_u & x_v \\ y_u & y_v \end{pmatrix} = \begin{pmatrix} 2u & -2v \\ 2v & 2u \end{pmatrix}.$$
+        <p><strong>(2)</strong> ヤコビ行列式は</p>
+        $$\det\begin{pmatrix} 2u & -2v \\ 2v & 2u \end{pmatrix} = 2u\cdot2u-(-2v)\cdot2v = 4u^2+4v^2 = 4(u^2+v^2).$$
+        <p>
+          この値が $0$ になるのは $u^2+v^2=0$ のとき、すなわち $u=v=0$（$(u,v)=(0,0)$）のときに限る
+          （実数の平方の和が $0$ になるのは、両方が $0$ のときだけ）。
+        </p>
+        <p>
+          一方 $(u,v)\ne(0,0)$ のときは $u^2+v^2>0$ なので、ヤコビ行列式 $4(u^2+v^2)$ は常に正であり、$0$ にはならない。
+        </p>
+        <p>
+          以上より、ヤコビ行列式 $4(u^2+v^2)$ は $(u,v)=(0,0)$ でのみ $0$ になり、それ以外の $(u,v)\ne(0,0)$ では
+          常に正の値を取る（退化しない）。$\blacksquare$
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — $|w|^2$ としての読み替え</span>
+        <p>
+          ヤコビ行列式 $4(u^2+v^2)$ は、複素数 $w=u+iv$ の絶対値の2乗 $|w|^2=u^2+v^2$ を使うと $4|w|^2$ と書き直せる。
+          「原点から離れるほど（$|w|$ が大きいほど）ヤコビ行列式も大きくなる」という関係が、この式から直接読み取れる。
+          極座標変換（例5.8、<a href="../ch5.html#transform">../ch5.html#transform</a>）のヤコビ行列式が $r$（原点からの距離）であったこととも、
+          「原点からの距離に応じてヤコビ行列式の大きさが変わる」という点で共通の構造を持つ。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <span class="sec-tag">Self-Check</span>
+      <h2>自力確認チェックリスト</h2>
+    </div>
+    <div class="sec-body">
+      <ul class="checklist">
+        <li>多項式と指数関数が混在する関数について、$f_{xy}$ と $f_{yx}$ を積の微分法則・合成関数の微分を正しく使って計算し、シュワルツの定理（定理5.4'）が成り立つことを直接確認できる（問題5.1）。</li>
+        <li>直線経路に沿った極限がすべて一致していても、放物線などの曲線経路を試すと異なる値になり得ることを理解し、2変数関数の極限が存在しないことを正しい論法で結論できる（問題5.2）。</li>
+        <li>勾配ベクトルを求め、系5.10を用いて任意の単位ベクトル方向への方向微分を計算し、さらに最急上昇方向とその方向微分の最大値（勾配ベクトルの大きさ）を求められる。加えて、等高線を陰関数的にみて接線方向を求め、系5.12（直交性）・系5.13（$C$ が増加する方向）を確認できる（問題5.3）。</li>
+        <li>極座標以外の変数変換（複素数の2乗写像など）についてもヤコビ行列とヤコビ行列式を求め、行列式が退化する点・しない点を判定できる（問題5.4）。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; margin-top:2rem; padding:0 .5rem;">
+    <a href="yosou_ch4.html" style="color:var(--accent); text-decoration:none; font-weight:700;">← 予想問題 第4回</a>
+    <a href="yosou_ch6.html" style="color:var(--accent); text-decoration:none; font-weight:700;">予想問題 第6回 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

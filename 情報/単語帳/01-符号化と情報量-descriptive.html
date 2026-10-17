@@ -1,0 +1,190 @@
+<!DOCTYPE html><!-- 「符号化と情報量 — 記述式で狙われる内容｜情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>符号化と情報量 — 記述式で狙われる内容｜情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-01-desc">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>符号化と情報量 — 記述式で狙われる内容</h1>
+  <p class="subtitle">過去問の記述問題と得点ポイント</p>
+</div>
+
+<div class="container">
+
+  <div class="ex" id="desc-2006">
+    <span class="box-label desc-q">2006年度共通問題1(a)(b) <span class="desc-src">標本化とサンプリング周波数の関係</span></span>
+    <p>音楽CDの誤り指摘（サンプリング周波数＝再現可能周波数か／16ビットの理由）。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>(a) 再現できるのは半分のナイキスト周波数まで。(b) 量子化ビット数は振幅の分解能の話で可聴域（周波数）とは無関係。</p>
+  </div>
+
+  <div class="ex" id="desc-2008">
+    <span class="box-label desc-q">2008年度共通問題2(5) <span class="desc-src">情報量の加法性</span></span>
+    <p>(1)(3)(4)の情報量の関係を述べ理由を説明せよ。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>I(1)=I(3)+I(4)。条件付き確率の連鎖律の両辺で-log₂をとると積が和になるため常に成立（加法性）。</p>
+  </div>
+
+  <div class="ex" id="desc-2009">
+    <span class="box-label desc-q">2009年度共通問題1(1) <span class="desc-src">標本化・量子化の説明</span></span>
+    <p>「量子化」「標本化」「44.1kHz」「16ビット」を用いてCDのディジタル化を2〜3行で説明せよ。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>標本化＝一定時間間隔で切り出す、量子化＝各標本を段階数で近似する、の2段階を用語通りに明記する。</p>
+  </div>
+
+  <div class="ex" id="desc-2010">
+    <span class="box-label desc-q">2010年度共通問題2 <span class="desc-src">紛らわしい概念ペアの訂正</span></span>
+    <p>5つの文の誤り指摘（標本化↔標準化、CUI↔GUI、符号化↔暗号化 等）。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>「似ているが意味が異なる概念のペア」をそれぞれ目的の違いから訂正する。</p>
+  </div>
+
+  <div class="ex" id="desc-2011">
+    <span class="box-label desc-q">2011年度共通問題3B(2b) <span class="desc-src">エントロピーと確率分布の偏り</span></span>
+    <p>歪んだサイコロのエントロピーが一様の場合より小さい理由を説明せよ。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>確率分布が均等なほど予測しにくくエントロピーは大きい、偏るほど小さい（一様分布が最大値を与える）。</p>
+  </div>
+
+  <div class="ex" id="desc-2013-b4">
+    <span class="box-label desc-q">2013年度共通問題3B(4) <span class="desc-src">ノイズと平均情報量</span></span>
+    <p>ノイズで反転させた場合、平均情報量は大きい／小さい／同じか理由とともに述べよ。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>Hはp=1/2で最大の上に凸な関数。反転により確率が1/2に近づくため（イェンセンの不等式）平均情報量は増加または同じ。</p>
+  </div>
+
+  <div class="ex" id="desc-2015-c">
+    <span class="box-label desc-q">2015年度共通問題2(c) <span class="desc-src">情報量の加法性（3段階）</span></span>
+    <p>情報量が3段階の絞り込みの和になることを示し説明せよ。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>確率の連鎖律→対数で和になる、という一般的な性質を明示する。</p>
+  </div>
+
+  <div class="ex" id="desc-2015-d">
+    <span class="box-label desc-q">2015年度共通問題2(d) <span class="desc-src">最適配置とハフマン符号の発想</span></span>
+    <p>最適配置の考え方を述べよ。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>確率の高いファイルほど浅い（短い）経路に置くとよい＝ハフマン符号と同じ発想。</p>
+  </div>
+
+  <div class="ex" id="desc-2018">
+    <span class="box-label desc-q">2018年度共通問題2(3) <span class="desc-src">エントロピーによる判定</span></span>
+    <p>エントロピーからバラエティシーカ／ロイヤルユーザをどう判定するか理由とともに述べよ。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>エントロピーは分布が均等かどうかの指標。大きい方が購入が分散＝バラエティシーカ。</p>
+  </div>
+
+  <div class="ex" id="desc-2019">
+    <span class="box-label desc-q">2019年度共通問題2(8) <span class="desc-src">情報源符号化定理の説明</span></span>
+    <p>情報源符号化定理の説明（空欄を埋めつつ定理内容を記す）。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>「一意に復号可能な符号の平均符号長はエントロピーを下回れない」という定理そのものの説明が必要。</p>
+  </div>
+
+  <div class="ex" id="desc-2021">
+    <span class="box-label desc-q">2021年度共通問題3A-2(4) <span class="desc-src">情報源符号化定理と矛盾しないパターン</span></span>
+    <p>(2)の符号化と(3)の平均情報量の関係を情報源符号化定理の観点から論ぜよ。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>一見矛盾（L&lt;H）に見えるが、(2)の符号は接頭符号でない＝一意復号可能性の前提を満たさないため矛盾ではない。</p>
+  </div>
+
+  <div class="ex" id="desc-2022">
+    <span class="box-label desc-q">2022年度共通問題3A(1)(お)(か) <span class="desc-src">情報を得た後のエントロピー変化</span></span>
+    <p>正解数を知った後にエントロピーがどう変化するか、その正誤・理由を述べよ。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>条件を得ると各問の的中確率が更新され不確実性は減少する。エントロピーは情報を得て増加することはない。</p>
+  </div>
+
+  <div class="ex" id="desc-2025">
+    <span class="box-label desc-q">2025年度共通問題3B(4) <span class="desc-src">情報源符号化定理の一般論</span></span>
+    <p>情報源符号化定理の一般的な説明をせよ。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>平均符号長の下限はエントロピー、工夫（ハフマン符号）で下限に近づけられる。</p>
+  </div>
+
+  <div class="ex" id="desc-2013-1">
+    <span class="box-label desc-q">2013年度共通問題1 <span class="desc-src">用語穴埋め＋ビット数計算</span></span>
+    <p>用語穴埋め＋説明（アナログ／ディジタル／標本化／量子化／ビット数計算）。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>ア＝アナログ／イ＝ディジタル／ウ＝標本化／エ＝量子化／オ＝ビット数計算（128×128画素×12ビット）。</p>
+  </div>
+
+  <h2 class="word-cat-title">分野横断で頻出する「対比のペア」（誤解を突く出題が多い）</h2>
+  <div class="note">
+    <span class="box-label">対比のペア</span>
+    <ul>
+      <li>標準化 ⇔ 標本化（2006・2010年度）</li>
+      <li>符号化 ⇔ 暗号化（2010年度、第3章の通信路節）</li>
+      <li>サンプリング周波数（時間軸） ⇔ 量子化ビット数（振幅軸）（2006・2013年度で繰り返し）</li>
+      <li>情報量の大きさ ⇔ 伝達の正確さ（シケプリ01、2013年度）</li>
+      <li>固定長符号 ⇔ 可変長符号、区切り記号あり ⇔ 接頭符号（区切り不要）（第3章、2011・2019・2021・2025年度）</li>
+    </ul>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="01-符号化と情報量-keypoints.html">← 押さえておきたい事項</a>
+    <a href="index.html">単語帳トップ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

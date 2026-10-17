@@ -1,0 +1,433 @@
+<!DOCTYPE html><!-- 「第9回 産業組織：価格設定の経済学｜現代経済理論」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第9回 産業組織：価格設定の経済学｜現代経済理論</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="lec-9">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">現代経済理論</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">HOME</a>
+      <a href="index.html" class="active">講義</a>
+      <a href="../kakomon_2025.html">過去問</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <span class="hero-badge">第9回</span>
+  <h1>産業組織：価格設定の経済学</h1>
+  <p class="subtitle">2026年6月12日｜川合 慶</p>
+  <p class="meta">東京大学 ／ 産業組織論・価格最適化</p>
+</div>
+
+<div class="container">
+
+  <div class="section-card">
+    <h2>講師プロフィール</h2>
+    <div class="teacher-profile">
+      <div class="teacher-icon">💹</div>
+      <div class="teacher-info">
+        <h3>川合 慶</h3>
+        <div class="affil">東京大学</div>
+        <div class="specialty">
+          専門：産業組織論（Industrial Organization）<br>
+          企業の価格設定戦略、オークション・入札、産業の競争構造を実証的に分析。
+          普段は英語での講義が主であり、本講義は日本語で実施。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2>講義概要</h2>
+    <p style="font-size:.92rem;color:#4a5568;line-height:1.85;">
+      企業はなぜ経済学者を雇うのか？最も重要な理由は<strong>適切な価格設定</strong>を任せるためだ。
+      コスト＋20%でも、感覚的な500%でもなく、利益を最大化する価格を計算するには需要関数の推定が必要になる。
+      本講義では、ZipRecruiter.com（求人マッチングプラットフォーム）での価格実験を事例として、
+      需要関数の推定から最適価格の導出、さらに個別価格設定（価格差別）まで、産業組織論の実証的アプローチを学ぶ。
+    </p>
+  </div>
+
+  <div class="section-card">
+    <h2>主なトピック</h2>
+    <ul class="topic-list">
+
+      <li>
+        <div class="tn-col"><span class="tn">1</span></div>
+        <div class="topic-content">
+          <span class="topic-title">産業組織論（I.O.）の守備範囲</span>
+          <p class="topic-desc">
+            産業組織論（Industrial Organization, I.O.）は、企業の意思決定と消費者行動を分析する経済学の一分野。
+            企業サイドでは：価格設定・広告量の決定・市場への参入と退出・設備投資の判断。
+            消費者サイドでは：価格や広告への反応（需要の価格弾力性など）。
+            競争政策・独占禁止法の立案・執行と密接に関係しており、経済学のスキルが実際の政策や企業戦略に直結する分野。
+            マーケティング（個別企業視点）・経営学（企業行動の戦略的分析）と重なる部分が多い。
+          </p>
+          <div class="insight">
+            I.O.は「現実の市場でどう競争が行われているか」を問う実証科学。完全競争モデルでは解けない現実の問いに答えるために、計量経済学・ゲーム理論・実験的手法を組み合わせる。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">2</span></div>
+        <div class="topic-content">
+          <span class="topic-title">企業はなぜ経済学者を雇うか</span>
+          <p class="topic-desc">
+            企業が経済学者を採用する最大の理由は「適切な価格設定」のため。
+            価格は企業にとって最もコントロールしやすい変数であり、かつ最も利益インパクトが大きい意思決定のひとつ。
+            製品開発・工場建設・広告キャンペーンはコストと時間がかかるが、価格変更は即座に実行できる。
+            しかし「いくらに設定すべきか」を正確に判断するには、消費者がどう反応するかを数値で把握する必要がある——これが需要関数の推定。
+          </p>
+          <div class="def-box">
+            <strong>利益最大化の基本式</strong>：π = (P − c) × q(P)<br>
+            P：価格、c：限界費用、q(P)：需要量（価格の関数）<br>
+            最適価格はこれを最大化するP*。需要関数 q(P) を知らなければ計算できない。<br><br>
+            価格変更の利益インパクトは、製品開発や広告投資に比べて費用対効果が圧倒的に高い（数割のオーダーになることも）。
+          </div>
+          <div class="insight"><strong>式の読み方</strong>：1件売るごとの利益が P−c、その価格で売れる件数が q(P)なので、掛け算が総利益になる。値上げは P−c を大きくする一方、通常は q(P) を小さくする。最適価格はこの二つの力がつり合う点である。</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">3</span></div>
+        <div class="topic-content">
+          <span class="topic-title">ZipRecruiter.com の事例：オンライン求人マッチング</span>
+          <p class="topic-desc">
+            ZipRecruiter.com はオンライン求人マッチングプラットフォーム。
+            求職者（無料で利用）と雇用者（手数料を払って求人掲載）を結びつける。
+            延べ300万社以上・1億人以上が利用する大規模プラットフォーム。
+            雇用者向けの月額サブスクリプション価格をいくらに設定するか——これが分析の課題。
+            同様の問いは、あらゆるSaaS・プラットフォーム企業が直面している。
+          </p>
+          <div class="insight">
+            プラットフォームビジネスでは「価格設定が需要の多面性（雇用者と求職者）に影響する」点が特殊。雇用者価格を上げすぎると求人が減り、求職者の魅力も下がる負のスパイラルが生じうる。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">4</span></div>
+        <div class="topic-content">
+          <span class="topic-title">価格実験：ランダム化実験による需要推定</span>
+          <p class="topic-desc">
+            需要関数を推定する最もクリーンな方法は「ランダム化実験（A/Bテスト）」：異なる価格をランダムに提示し、購入率の差を観察する。
+            ZipRecruiterの実験設計：訪問者をランダムに3グループに分け、月19ドル・99ドル・400ドルをそれぞれ提示。
+          </p>
+          <div class="def-box">
+            <strong>実験結果（概数）</strong>：<br>
+            19ドル提示 → 約35%が購入（購入確率 q(19)≈0.35）<br>
+            99ドル提示 → 約25%が購入（q(99)≈0.25）<br>
+            400ドル提示 → 約15%が購入（q(400)≈0.15）<br><br>
+            <strong>期待売上</strong>：19×0.35 = $6.65、99×0.25 = $24.75、400×0.15 = $60.00<br>
+            → 期待売上だけ見ると400ドルが最も高い！しかし限界費用や顧客ライフタイムバリューも考慮が必要。
+          </div>
+          <div class="insight"><strong>数字の読み方</strong>：$6.65、$24.75、$60は「購入者1人の売上」ではなく、ページを訪れた<strong>1人あたりの期待売上</strong>である。例えば400ドル群を1,000人が訪れると、平均150人が購入し、売上は約60,000ドル、1訪問者あたり60ドルと読む。ただし、3つの観測点だけで「400ドルが真の最適値」とは言えず、その間や範囲外の需要を推定する必要がある。</div>
+          <div class="insight">
+            ランダム化実験の威力：価格が違う理由が「純粋にランダム」なので、需要の差が価格だけによるものだと因果的に言える。観察データで「高い価格の商品が売れている」ことを見てもそれは品質の差かもしれず、因果推論が難しい。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">5</span></div>
+        <div class="topic-content">
+          <span class="topic-title">需要関数の推定と最適価格の導出</span>
+          <p class="topic-desc">
+            実験で得た3点（価格・購入確率のペア）から需要関数 q(P) をフィットし、利益を最大化する価格 P* を計算する。
+            コストがゼロなら期待売上 P × q(P) を最大化、コスト c がある場合は期待利益 (P − c) × q(P) を最大化する。
+          </p>
+          <div class="def-box">
+            <strong>一次の最適条件（FOC）</strong>：d/dP [(P − c) × q(P)] = 0<br>
+            q(P*) + (P* − c) × q'(P*) = 0<br>
+            → P* − c = − q(P*) / q'(P*) = P* / ε（ε = −[P*/q(P*)]q'(P*) &gt; 0 は需要の価格弾力性の絶対値）<br><br>
+            <strong>ZipRecruiterの結論</strong>：実験1の分析では99ドルは安すぎた。最終的に月249ドルに引き上げて利益アップを実現。単純なコスト積み上げではなく、需要の価格感応度（弾力性）から逆算して価格を設定することが鍵。
+          </div>
+          <div class="insight"><strong>微分式の意味</strong>：q'(P)&lt;0 は「価格を1ドル上げたときに需要がどれだけ減るか」。FOCの第1項 q(P*) は値上げによる既存購入分の増収、第2項 (P*−c)q'(P*) は買わなくなる顧客分の減益（負）を表す。両者がつり合う点が最適値である。εが大きい（顧客が価格に敏感）ほど利幅 P*−c は小さくすべきだと分かる。</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">6</span></div>
+        <div class="topic-content">
+          <span class="topic-title">個別価格設定：企業特性に基づく価格差別</span>
+          <p class="topic-desc">
+            全顧客に同じ最適価格を設定するより、顧客ごとに異なる価格を設定する方が利益が高い——これが価格差別（Price Discrimination）の論理。
+            ZipRecruiterでは企業の規模・業種・従業員数などの特性（x）に基づいて個別価格を設定する。
+          </p>
+          <div class="def-box">
+            <strong>個別価格設定の計量経済学</strong>：<br>
+            各企業のG(x)（需要曲線の傾き：価格感応度）とF(x)（需要曲線の切片：購買意欲）を特性 x から推定する。<br>
+            → 同じ価格でも大企業と小企業では価格感応度が異なる（大企業は高価格でも購入する）。<br><br>
+            <strong>価格差別が利益を増やす理由</strong>：消費者余剰（支払意思額と実際価格の差）を企業が吸収できるため。ただし、細分化するほどデータ不足が問題になる。
+          </div>
+          <div class="insight"><strong>F(x)とG(x)の読み方</strong>：例えば線形需要を q(P,x)=F(x)−G(x)P と書くと、F(x)は基礎的な購買しやすさ、G(x)&gt;0は値上げに対する需要減の大きさを表す。G(x)が大きい顧客群ほど価格に敏感なので、低い最適価格が選ばれる。これは特性xと支払意思額の関係を推定する話であり、個々人の心の中を直接観測しているわけではない。</div>
+          <div class="insight">
+            経済厚生の観点：価格差別は企業利益を増やす一方、公平性の問題を生じさせる。同じサービスに異なる価格を払うのは「不公平」か？これは社会的・政治的な問いでもある。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">7</span></div>
+        <div class="topic-content">
+          <span class="topic-title">価格設定の多様な形態</span>
+          <p class="topic-desc">
+            単一価格設定は最もシンプルだが、以下のような複雑な価格設定が現実には広く用いられる。
+          </p>
+          <div class="def-box">
+            <strong>段階的価格設定（ブロック料金）</strong>：一定量まで無料・超過分は有料（水道料金モデル）。また「フリーミアム」（基本無料、プレミアム機能は有料）もこの変形。<br><br>
+            <strong>ダイナミックプライシング</strong>：需要に応じてリアルタイムで価格を変動させる。航空・ホテル・Uberなどが典型。需要が高い時間帯に高く、低い時間帯に安くする。<br><br>
+            <strong>サブスクリプション設計</strong>：繰り返し購入する顧客に対して、1回払いよりも割安な月額・年額を設定することで顧客固定を図る。解約率（チャーン）の最小化とLTV（顧客生涯価値）の最大化が目標。<br><br>
+            <strong>バンドル価格</strong>：複数商品を組み合わせて割安に販売。顧客の評価が商品間で相関していれば有利（Officeスイートなど）。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">8</span></div>
+        <div class="topic-content">
+          <span class="topic-title">実証産業組織論の研究フロンティア</span>
+          <p class="topic-desc">
+            実証I.O.（Empirical Industrial Organization）は、価格設定にとどまらず、企業行動のあらゆる側面を計量経済学・実験・ゲーム理論を組み合わせて分析する。
+          </p>
+          <div class="def-box">
+            <strong>入札・調達市場の研究</strong>：公共調達のオークション設計。入札者が談合しているか、落札価格は競争的かを分析。川合教授の主要研究領域。<br><br>
+            <strong>競争政策への応用</strong>：合併・買収が競争に与える影響をシミュレート（競争当局の審査に使われる）。独占力の測定（ラーナー指数）。<br><br>
+            <strong>デジタルプラットフォームの規制</strong>：GAFA等のプラットフォームの価格設定・市場支配力の評価が現代I.O.の最前線。「ゼロ円のビジネスモデル」でも消費者に広告費という隠れたコストがかかる。
+          </div>
+          <div class="insight">
+            I.O.研究者の就職先：学術（大学・研究機関）だけでなく、大企業の経済分析チーム（アマゾン・グーグル・マイクロソフト）、コンサルティング（Charles River Associates）、規制当局（公正取引委員会・FTC）など多様。
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2>重要キーワード</h2>
+    <div class="concept-tags">
+      <span class="concept-tag t-blue">産業組織論（I.O.）</span>
+      <span class="concept-tag t-blue">需要関数</span>
+      <span class="concept-tag t-blue">価格弾力性</span>
+      <span class="concept-tag t-orange">価格実験（A/Bテスト）</span>
+      <span class="concept-tag t-orange">ランダム化実験</span>
+      <span class="concept-tag t-orange">ZipRecruiter</span>
+      <span class="concept-tag t-purple">利益最大化</span>
+      <span class="concept-tag t-purple">価格差別</span>
+      <span class="concept-tag t-red">ダイナミックプライシング</span>
+      <span class="concept-tag t-gray">サブスクリプション</span>
+      <span class="concept-tag t-gray">バンドル価格</span>
+      <span class="concept-tag t-gray">消費者余剰</span>
+      <span class="concept-tag t-gray">競争政策</span>
+    </div>
+  
+  <div class="kw-detail-list">
+    <p class="kw-detail-label">各キーワードの解説（クリックで展開）</p>
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details class="kw-item">
+      <summary class="kw-summary">産業組織論（I.O.）</summary>
+      <div class="kw-body">企業の意思決定と消費者行動を分析する経済学の一分野。第7回（規制・交通）に続き今回は企業の価格設定に焦点。競争政策・独占禁止法の立案・執行と密接に関係し、大企業の経済分析チームへの就職にも直結する。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">需要関数</summary>
+      <div class="kw-body">価格と需要量の関係 q(P)。企業が最適価格を計算するには需要関数を知ることが不可欠。これを推定するためにランダム化実験（A/Bテスト）を使うのが今回の核心的手法。「需要関数なしに最適価格は計算できない」。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">価格弾力性</summary>
+      <div class="kw-body">価格が1%上がると需要が何%下がるかを表す指標（ε）。最適価格の条件式は P*−c = P*/ε——弾力性が高い（価格に敏感）ほど最適価格は限界費用に近づく。需要関数から数値として推定できる。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">価格実験（A/Bテスト）</summary>
+      <div class="kw-body">異なる価格をランダムに提示し購入率の差を観察することで需要関数を因果的に推定する手法。ZipRecruiterは19・99・400ドルの3点でランダム提示を実施。「価格設定に経済学者を雇う最大の理由」。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">ランダム化実験</summary>
+      <div class="kw-body">価格の違いが「純粋にランダム」なので需要の差は価格のみによる因果効果と言える。観察データでは「高価格品が売れている＝品質が高いから」という逆因果が入り込むため因果推論が難しい。開発経済学のRCTと同じ発想。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">ZipRecruiter</summary>
+      <div class="kw-body">オンライン求人マッチングプラットフォーム（雇用者有料・求職者無料）。雇用者向け月額サブスクリプション価格をいくらに設定するかという実問題でランダム化価格実験を実施。結論：99ドルは安すぎた→249ドルへ引き上げ。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">利益最大化</summary>
+      <div class="kw-body">π = (P−c)×q(P) を最大化する P* を求めること。一次条件：q(P*) + (P*−c)q'(P*) = 0。コスト積み上げでも感覚的な値付けでもなく、需要の価格感応度（弾力性）から逆算するのが経済学的アプローチ。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">価格差別</summary>
+      <div class="kw-body">全顧客に同一価格ではなく顧客ごとに異なる価格を設定する戦略。大企業は高価格でも購入する（価格感応度が低い）ため、均一価格より利益が高い。消費者余剰（支払意思額−実際価格）を企業が吸収できる。公平性の問題も。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">ダイナミックプライシング</summary>
+      <div class="kw-body">需要に応じてリアルタイムで価格を変動させる仕組み。航空・ホテル・Uberが典型。第7回のピークロード・プライシングの現代的応用。需要が高い時間帯に高く、低い時間帯に安くすることで収益と需要管理を両立。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">サブスクリプション</summary>
+      <div class="kw-body">繰り返し購入する顧客向けの月額・年額定額サービス。解約率（チャーン）最小化とLTV（顧客生涯価値）最大化が設計の鍵。ZipRecruiterはこのビジネスモデル。SaaS・ストリーミングサービス等で広く採用。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">バンドル価格</summary>
+      <div class="kw-body">複数商品を組み合わせて割安に販売する戦略。顧客の評価が商品間で相関していれば単品販売より利益増。Microsoft Office スイートが典型例。消費者余剰の吸収効率を高める価格設定の変形。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">消費者余剰</summary>
+      <div class="kw-body">「支払意思額（評価額）− 実際の価格」の合計。価格差別はこれを企業が吸収するために行われる。価格差別が完全（第一級価格差別）なら消費者余剰はゼロになる。競争政策では消費者余剰の保護が重要目標。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">競争政策</summary>
+      <div class="kw-body">合併・買収が競争に与える影響の評価、独占力の測定（ラーナー指数）、GAFA等のプラットフォーム規制。I.O.研究が規制当局（公正取引委員会・FTC）の意思決定を支え、川合教授の主要研究領域でもある。</div>
+    </details>
+  </div>
+</div>
+
+  <div class="section-card">
+    <h2>過去問との対応</h2>
+    <div class="exam-ref-box">
+
+      <!-- 2025 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2025年度 期末試験</span>
+          <a href="../kakomon_2025.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q7</span><span class="eq-topic">価格最適化・実験（誤文選択）</span></div>
+<div class="exam-qa-q">Zip recruiterの例：実験期間中は$19/mo〜$399/moの価格がランダムに割り振られた。実験前は$99/mo。次の中から<strong>間違っているもの</strong>を選んでください。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>最適な価格を付けた場合の一社当たりの期待利潤と比べ、実験期間中の利潤は低かった。</li>
+<li class="opt"><span class="opt-label">(b)</span>実験期間中と実験期間後の一社当たりの期待利潤を比べると実験期間後の方が高かった。</li>
+<li class="opt correct"><span class="opt-label">(c)</span>ランダムな価格をつけていた実験期間中の一社当たりの期待利潤は実験前の期待利潤よりも低かった。<span class="correct-mark">正解（＝誤りの選択肢）</span></li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>(c)が誤り。<em>実験期間中の期待利潤が実験前より高かった</em>可能性がある。</p>
+<p>実験前の価格$99は最適価格の試算なく設定されていた価格。Q12（2024年）と同様の分析から、最適価格は$175程度と計算される。$99は最適より低すぎた可能性がある。</p>
+<p>・実験期間中：$19〜$399のランダム → 平均的な価格は$99より高い → 期待利潤は実験前より高かった可能性が高い。<br/>
+    ・(a) 最適価格($175)と比べれば実験期間中の「ランダムな」価格は平均的に最適でないので利潤は低い → 正しい。<br/>
+    ・(b) 実験後は最適価格を学んで設定 → 実験期間中より高い利潤 → 正しい。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q8</span><span class="eq-topic">産業組織・入札と談合</span></div>
+<div class="exam-qa-q">公共工事入札で入札者間の談合があると、どのようなことが一番懸念されますか。</div>
+<ul class="options">
+<li class="opt correct"><span class="opt-label">(a)</span>落札価格が上がる。<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(b)</span>入札者数が増える。</li>
+<li class="opt"><span class="opt-label">(c)</span>落札価格が下がる。</li>
+<li class="opt"><span class="opt-label">(d)</span>入札者数が減る。</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>入札談合（カルテル）の最大の問題は<em>落札価格の引き上げ（競争制限による価格上昇）</em>。</p>
+<p>通常の競争入札では各業者が他者より低い価格で落札しようとするため、価格が競争的な水準に近づく。談合があると業者間で「誰が幾らで落札するか」を事前に決め、競争を制限することで入札価格を高く維持できる。結果として公共工事費が増加し、税金の無駄遣いになる。</p>
+<p>(b)入札者数はむしろ意図的に制限されることもある。(c)(d)は談合の効果の逆。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2024年度 期末試験</span>
+          <a href="../kakomon_2024.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q11</span><span class="eq-topic">需要関数の定義</span></div>
+<div class="exam-qa-q">需要関数とは</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>在庫と販売量の関係をあらわしたもの</li>
+<li class="opt"><span class="opt-label">(b)</span>生産量と販売量の関係をあらわしたもの</li>
+<li class="opt correct"><span class="opt-label">(c)</span>価格と販売量の関係をあらわしたもの<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>消費者の効用と販売量の関係をあらわしたもの</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>需要関数（Demand Function）とは、財・サービスの<em>価格と、消費者が購入したいと思う数量（需要量）との関係</em>を表した関数。</p>
+<p>通常、価格が上がると需要量は下がる（右下がりの需要曲線）。需要関数はこの関係を数式で表す。例: Q<sup>d</sup> = 100 - 2P。</p>
+<p>(a)「在庫と販売量の関係」：在庫は供給側の概念であり、需要量は在庫量とは独立に決まる（消費者の意思決定であるため）。(b)「生産量と販売量の関係」：これは供給サイドの概念（供給関数や費用関数）に近く、需要関数ではない。(d)「消費者の効用と販売量の関係」：効用は需要関数の<em>背景</em>にある概念だが、需要関数が直接表すのは効用ではなく<em>価格と需要量</em>の関係。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q12</span><span class="eq-topic">価格最適化・計算</span></div>
+<div class="exam-qa-q">コンバージョン（顧客が購入に至る割合）と価格の関係が<br/>
+        conversion (%) = 0.35 − 0.001 × price<br/>
+        で与えられたとして、売上が一番大きくなる price を選択しなさい。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>100</li>
+<li class="opt correct"><span class="opt-label">(b)</span>175<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(c)</span>200</li>
+<li class="opt"><span class="opt-label">(d)</span>300</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>売上 = price × conversion = price × (0.35 - 0.001 × price)</p>
+<div class="formula">Revenue(p) = p × (0.35 - 0.001p) = 0.35p - 0.001p²
+
+最大化の1階条件：
+dRevenue/dp = 0.35 - 0.002p = 0
+p* = 0.35 / 0.002 = 175</div>
+<p>確認：Revenue(175) = 175 × (0.35 - 0.175) = 175 × 0.175 = 30.625</p>
+<p>（p=100: 100×0.25=25、p=200: 200×0.15=30、p=300: 300×0.05=15）</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2023年度 期末試験</span>
+          <a href="../kakomon_2023.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-no-data">2023年度は本講義に対応する問題が出題されていない可能性があります（担当教員が異なる年度）。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="lecture-nav">
+    <a href="第8回.html">← 第8回</a>
+    <a href="index.html" class="center">講義一覧</a>
+    <a href="第10回.html">第10回 →</a>
+  </div>
+
+</div>
+
+<script>
+// 押されたボタンに対応する解説欄の表示を切り替える。
+function toggleExp(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const opt = e.target.closest('.opt');
+  if (!opt) return;
+  const options = opt.closest('.options');
+  if (!options || options.classList.contains('revealed')) return;
+  options.classList.add('revealed');
+  opt.classList.add('selected');
+});
+</script>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">現代経済理論（渡辺安虎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+</body>
+</html>

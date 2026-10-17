@@ -1,0 +1,49 @@
+<!DOCTYPE html><!-- 「第1章ナビ 基本概念 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+<script src="../access_control.js"></script><script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>第1章ナビ 基本概念 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="td.css"><link rel="stylesheet" href="guide.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body data-nav-page="ch1">
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar"><div class="navbar-inner"><a class="navbar-brand" href="index.html">熱力学ノート</a><div class="navbar-links">
+<a href="../index.html" class="nav-back">← 学習ノート</a><a href="index.html">ホーム</a><a href="ch0.html" data-page="ch0">第0章</a><a href="ch1.html" data-page="ch1" class="active">第1章</a><a href="ch2.html" data-page="ch2">第2章</a><a href="ch3.html" data-page="ch3">第3章</a><a href="ch4.html" data-page="ch4">第4章</a><a href="ch5.html" data-page="ch5">第5章</a><a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a><a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a><a href="kakomon_2025.html" data-page="kakomon_2025">2025</a><a href="kakomon_2023.html" data-page="kakomon_2023">2023</a><a href="kakomon_2014.html" data-page="kakomon_2014">2014</a><a href="kakomon_2012.html" data-page="kakomon_2012">2012</a><a href="kakomon_2011.html" data-page="kakomon_2011">2011</a><a href="kakomon_2010.html" data-page="kakomon_2010">2010</a><a href="kakomon_2009.html" data-page="kakomon_2009">2009</a><a href="kakomon_2008.html" data-page="kakomon_2008">2008</a><a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+</div></div></nav>
+<main class="guide-main">
+<!-- 学習ガイドの題名と導入文を、冒頭の目立つ領域にまとめる。 --><header class="guide-hero"><p class="guide-kicker">CHAPTER 1 READING GUIDE</p><h1>第1章ナビ｜熱力学の「状態」をどう表すか</h1><p class="guide-lead">一言でいうと、<strong>目に見えない熱的状態を、測定できる少数の量で表し、その微小な変化を計算するための言葉と数学を整える</strong>章です。</p></header>
+<p class="guide-usage">第1章は温度、偏微分、熱平衡、状態方程式が別々に並んでいるように見えます。しかし全体は「平衡状態に座標を与え、その座標同士の関係を実験から読む」という一つの準備です。</p>
+
+<section class="guide-section"><h2>この章が解決したいこと</h2>
+<div class="guide-card"><span class="guide-card-label">中心の問い</span><h3>物体の熱的な「現在地」を、どう数値で指定するのか</h3>
+<p>熱力学は、分子一個ずつの運動を追わずに物体全体を扱います。そのためには、温度・圧力・体積のような少数の量で平衡状態を指定し、それらが少し変わったときの応答を記述できなければなりません。</p>
+<div class="guide-keyline">測定する → 平衡を定める → 状態量を選ぶ → 状態方程式で結ぶ → 微分で応答を読む</div></div>
+</section>
+
+<section class="guide-section"><h2>全体の流れ</h2><!-- 学習の手順を、順番に読む項目と矢印で示す。 --><div class="route">
+<article class="route-step"><span class="route-num">1</span><h3>まず「温度を測る」とは何かを考える</h3><p>温度そのものを直接見ることはできません。液体の体積や電気抵抗など、温度とともに変わる物性を使って目盛りを作ります。</p><p class="route-point">目的：温度を、感覚ではなく再現可能な測定量にする。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">2</span><h3>熱平衡によって温度の意味を確立する</h3><p>AとC、BとCがそれぞれ熱平衡なら、AとBも熱平衡です。この第ゼロ法則により、異なる物体に共通の「同じ温度」を定義できます。</p><p class="route-point">目的：温度計の指示が物体間で比較できる理由を与える。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">3</span><h3>平衡状態を状態量で表す</h3><p>$P,V,T$ のように、平衡状態だけで値が決まる量を状態量と呼びます。大きさに比例する示量変数と、比例しない示強変数の区別も、系を分割・合成するときに必要です。</p><p class="route-point">目的：物体の「現在地」を表す共通の座標を選ぶ。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">4</span><h3>状態方程式で、座標が独立でないことを知る</h3><p>単純な流体では $P,V,T$ の間に $f(P,V,T)=0$ という拘束があります。3つを自由に決めるのではなく、通常は2つを決めれば残りが決まります。</p><p class="route-point">目的：状態を指定するのに本当に必要な変数の数を知る。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">5</span><h3>偏微分で「何を固定した応答か」を区別する</h3><p>同じ温度変化でも、圧力一定か体積一定かで応答は異なります。添字付き偏微分は実験条件を指定し、全微分は小さな状態変化を各方向の変化へ分解します。</p><p class="route-point">目的：状態方程式を、実際の操作に対応する変化率として読む。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">6</span><h3>測定係数を使って、未知の応答を結びつける</h3><p>定圧膨張率 $\beta$、等温圧縮率 $\kappa$、圧力係数 $\alpha_P$ は、状態方程式の局所的な傾きです。偏微分の循環関係により、別々に見える係数同士が結ばれます。</p><p class="route-point">目的：測れる応答から、直接測りにくい変化を予測する。</p></article>
+</div></section>
+
+<section class="guide-section"><h2>この章を読むときの焦点</h2><!-- 学習ガイドの要点や注意をカードの一覧にまとめる。 --><div class="guide-cards">
+<article class="guide-card"><span class="guide-card-label">区別</span><h3>状態と過程を混ぜない</h3><p>この章で整えるのは主に「状態」の記述です。第2章では、同じ始点・終点でも途中で変わる熱や仕事が登場します。状態量という土台があるから、その違いを明確にできます。</p></article>
+<article class="guide-card"><span class="guide-card-label">数学の役割</span><h3>偏微分は公式ではなく操作の翻訳</h3><p>$({\partial V}/{\partial T})_P$ を見たら、「圧力を保ったまま温める」と言葉に直します。$-1$ 関係や全微分は、固定条件を別の条件へ変換するために使います。</p></article>
+<article class="guide-card"><span class="guide-card-label">到達点</span><h3>状態方程式を微分形でも扱えるようになる</h3><p>章末で得たいのは、理想気体の式を暗記することではなく、任意の物質について測定係数から $dP,dV,dT$ の関係を組み立てる見方です。</p></article>
+</div></section>
+
+<section class="guide-section"><h2>本文と併用する</h2><div class="guide-links"><a href="ch1.html#s1-1">温度と測定</a><a href="ch1.html#s1-2">熱平衡と第ゼロ法則</a><a href="ch1.html#s1-3">状態量・状態方程式・偏微分</a><a class="guide-open" href="ch1.html">第1章本文を開く →</a></div></section>
+<section class="guide-section"><div class="guide-card"><span class="guide-card-label">読後チェック</span><h3>ここまで見えれば次章へ進める</h3><ul><li>平衡状態を $P,V,T$ で表す意味が分かる</li><li>状態方程式が自由度を一つ減らすことを説明できる</li><li>偏微分の添字を実験条件として読める</li><li>$\beta,\kappa,\alpha_P$ が物質の応答を表す測定量だと分かる</li></ul></div></section>
+<!-- ガイドを読み終えた後に、前後のページへ移動するリンクを置く。 --><nav class="guide-page-nav"><a href="index.html">← ナビ一覧</a><a href="guide2.html">第2章ナビ →</a></nav>
+</main><!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer>
+<script src="nav.js"></script><script src="../common.js?v=20260718-texcopy"></script><script src="../access-ui.js"></script>
+</body></html>

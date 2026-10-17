@@ -1,0 +1,565 @@
+<!DOCTYPE html><!-- 「第1回 データ分析で社会を変える：実証ミクロ経済学入門｜現代経済理論」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第1回 データ分析で社会を変える：実証ミクロ経済学入門｜現代経済理論</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="lec-1">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">現代経済理論</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">HOME</a>
+      <a href="index.html" class="active">講義</a>
+      <a href="../kakomon_2025.html">過去問</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <div class="hero-badge">第1回</div>
+  <h1>データ分析で社会を変える：実証ミクロ経済学入門</h1>
+  <p class="subtitle">山口 慎太郎｜東京大学大学院経済学研究科</p>
+  <p class="meta">相関と因果を見分ける — 因果推論という考え方｜2026年4月10日</p>
+</div>
+
+<div class="container">
+
+  <div class="section-card">
+    <h2><span class="h2-icon">👤</span>講師プロフィール</h2>
+    <div class="teacher-profile">
+      <div class="teacher-icon">📊</div>
+      <div class="teacher-info">
+        <h3>山口 慎太郎</h3>
+        <div class="affil">
+          東京大学大学院経済学研究科 教授
+        </div>
+        <div class="specialty">
+          専門：労働経済学・実証ミクロ経済学（因果推論・自然実験）<br>
+          担当講義：労働経済1 &amp; 2、実証ミクロ経済学演習（ゼミ）<br>
+          研究テーマ：保育・育休政策と女性就業、男女間賃金格差、教育政策（クラスサイズ・生まれ月・幼児教育）の効果<br>
+          著書：『「家族の幸せ」の経済学』（光文社新書）ほか
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📖</span>講義概要</h2>
+    <div class="summary-text">
+      <p>
+        「東大に行けば収入が上がる」「SNSを長く使う若者ほどメンタルが不調」——こうした<strong>相関関係</strong>を耳にすることは多い。
+        しかし相関があるからといって、一方がもう一方の<strong>原因</strong>だとは限らない。この違いを見誤ると、個人・企業・政府のどのレベルでも間違った意思決定をしてしまう。
+        本講義は、現代経済理論という科目全体の導入として、実証ミクロ経済学の核心である<strong>因果推論</strong>（causal inference）の考え方を学ぶ。
+      </p>
+      <p>
+        現実には、同じ人について「介入を受けた場合」と「受けなかった場合」を同時に観察することはできない（因果推論の根本問題）。
+        この根本問題に対して経済学者が編み出してきた道具立てが、ランダム化比較試験（RCT）と、そのRCTが使えない場面で威力を発揮する<strong>自然実験</strong>——回帰不連続デザイン（RDD）と差の差分析（DID）——である。
+        2021年のノーベル経済学賞は、まさにこの「自然実験による因果推論」に贈られた。本講義では、身近な例と実際の研究を通じてこれらの考え方を体得する。
+      </p>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📋</span>主なトピック</h2>
+    <ul class="topic-list">
+
+      <li>
+        <div class="tn-col"><span class="tn">1</span></div>
+        <div class="topic-content">
+          <span class="topic-title">相関関係 ≠ 因果関係</span>
+          <div class="topic-desc">
+            <p>
+              日経転職版「大卒年収調査2025年度版」によると、出身大学別の平均年収は東京大学1,267万円、一橋大学1,251万円、京都大学1,122万円…と続く。
+              このデータから「東大に行けば収入が上がる」と結論づけたくなるが、それは早計だ。
+            </p>
+            <div class="def-box">
+              <strong>相関関係</strong>：2つのことがらが連動して変化する関係。<br>
+              <strong>因果関係</strong>：一方の変化がもう一方の変化を<em>引き起こす</em>関係。
+            </div>
+            <p>
+              「東大卒は高収入」は相関の事実であっても、「東大に行ったから高収入になった」かどうかは別問題である。
+              なお、このランキングは転職サイトへの登録者（自己申告）に基づくデータであり、母集団の代表性にも注意がいる——データの出どころを疑うことも、因果推論の第一歩だ。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">2</span></div>
+        <div class="topic-content">
+          <span class="topic-title">相関が因果にならない2つの理由</span>
+          <div class="topic-desc">
+            <p><strong>① 第三の要因（交絡因子）</strong>：2つの変数の両方に影響を与える隠れた要因があると、見せかけの相関が生まれる。</p>
+            <ul>
+              <li>「東大に行った人は高収入」→ 裏に「もともとの頭の良さ」があり、それが東大合格と高収入の両方を生んでいるだけかもしれない。</li>
+              <li>「ピアノを習うと東大に入れる？」（東洋経済オンラインの記事で話題になった話）→ 裏に「家庭の社会経済的地位」があり、教育投資の余裕がある家庭ほど習い事もさせるし進学実績も高い、というだけかもしれない。</li>
+            </ul>
+            <p><strong>② 逆因果</strong>：原因と結果を取り違えているケース。</p>
+            <div class="def-box">
+              「警察官の数が多い地域ほど、犯罪件数も多い」という相関について：<br>
+              仮説1：犯罪が多いので警察官を増やした（逆因果）<br>
+              仮説2：警察官が多いので、小さな違反や犯罪も取り締まった<br>
+              — このデータだけでは、どちらが正しいか区別できない。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">3</span></div>
+        <div class="topic-content">
+          <span class="topic-title">身近な3つの例 — 個人・企業・政府</span>
+          <div class="topic-desc">
+            <p>相関と因果の区別は、あらゆる意思決定の主体にとって重要になる。</p>
+            <ul>
+              <li><strong>個人</strong>：「SNS使用時間が長い若者ほど不安・抑うつの傾向が強い」→ ①SNSが比較やいじめを誘発する（因果） ②メンタル不調な人がSNSに依存しやすい（逆因果） ③「孤独」が両方を引き起こす（第三の要因）、という3通りの仮説がありうる。</li>
+              <li><strong>企業</strong>：「従業員満足度が高い企業ほど業績が良い」→ ①満足度が生産性を上げる ②業績が良いから待遇改善で満足度が上がる（逆因果） ③優れた経営が両方を生む（第三の要因）。</li>
+              <li><strong>政府</strong>：「生活保護の給付水準が高い地域ほど就業率が低い」→ ①給付の手厚さが就業意欲を削ぐ ②就業困難な人が多い地域だから給付が手厚い（逆因果） ③地域経済の低迷が両方を引き起こす（第三の要因）。</li>
+            </ul>
+            <div class="insight">
+              因果関係が分かって初めて、「SNS利用を制限すべきか」「従業員満足度への投資は業績を上げるか」「給付を絞れば就業は増えるか」という<strong>意思決定</strong>に答えられる。相関を知るだけでは、望んだ結果は得られない。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">4</span></div>
+        <div class="topic-content">
+          <span class="topic-title">因果推論の根本問題</span>
+          <div class="topic-desc">
+            <p>
+              知りたいのは、「東大に行った場合」と「東大に行かなかった場合」の収入の差、すなわち<strong>介入効果</strong>である。
+              しかし、ある1人の人生は一度きりしか実現しない。あなたが実際に東大へ進学したなら、「進学しなかった場合のあなた」（反実仮想）を観察することは原理的にできない。
+            </p>
+            <div class="def-box">
+              <strong>因果推論の根本問題</strong>：同じ個人について「処置を受けた場合」と「受けなかった場合」の結果を同時に観察することはできない。
+              データ分析の肝は、この観察できない「もしも」（反実仮想）をいかに推定するかにある。
+            </div>
+            <div class="insight">
+              <strong>記号で整理すると</strong>、個人iの進学時の収入をY<sub>i</sub>(1)、非進学時をY<sub>i</sub>(0)と書き、個人の因果効果はY<sub>i</sub>(1)−Y<sub>i</sub>(0)である。観察できるのは必ず片方だけなので、別の人々から「観察できなかった片方」を推定する。その比較相手が適切かどうかが、以下の手法すべての核心になる。
+            </div>
+            <p>
+              この根本問題があるからこそ、「介入群」と「対照群」という<em>別の人・別の集団</em>を比較して介入効果を推定する、という発想が必要になる。次のRCTと自然実験は、いずれもこの発想に基づく。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">5</span></div>
+        <div class="topic-content">
+          <span class="topic-title">ランダム化比較試験（RCT）</span>
+          <div class="topic-desc">
+            <p>
+              <strong>ランダム化比較試験（RCT: Randomized Controlled Trial）</strong>は、対象をくじ引きのようにランダムに介入群と対照群に割り付ける実験手法である。
+            </p>
+            <div class="def-box">
+              <strong>なぜランダム割付で因果が識別できるか</strong>：人数が十分に多ければ、ランダムな割付によって介入群と対照群の属性（年齢・能力・意欲など、観察できるものもできないものも含めて）は平均的に等しくなる。
+              その結果、2群の間に生じた結果の差は、介入以外の要因では説明できず、介入の因果効果とみなせる——これが選択バイアスを排除する仕組みである。
+            </div>
+            <p>実例：米テネシー州の社会実験「Project STAR」は、少人数学級（介入群）と通常学級（対照群）に児童をランダムに割り付け、学力への効果を検証した代表的なRCTである。</p>
+            <p><strong>RCTの限界</strong>：</p>
+            <ul>
+              <li>非倫理的になる場合がある（人を不利な状況に割り当てられない）</li>
+              <li>多額の費用がかかることがある</li>
+              <li>得られた知見が他の文脈にも当てはまるとは限らない（外的妥当性・一般化可能性の問題）</li>
+            </ul>
+            <div class="insight">RCTは「理想的」な手法だが、実行には倫理・費用・一般化可能性という多くの壁がある。</div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">6</span></div>
+        <div class="topic-content">
+          <span class="topic-title">発想の転換 — 自然実験という考え方</span>
+          <div class="topic-desc">
+            <p>
+              RCTが使えない問いは多い。そこで経済学者は、世界そのものを「実験装置」として見るという発想に転換する。
+              研究者が自ら介入群・対照群を割り付けなくても、<strong>自然や政策・制度が偶然に</strong>介入群と対照群を作り出すことがある——その偶然を活用するのが自然実験である。
+            </p>
+            <div class="def-box">
+              <strong>自然実験</strong>：人々を介入群と対照群に分けるような、自然現象・政策・制度上の環境変化。本講義で扱う代表的な2つの手法が、回帰不連続デザイン（RDD）と差の差分析（DID）である。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">7</span></div>
+        <div class="topic-content">
+          <span class="topic-title">回帰不連続デザイン（RDD） — ギリギリで比較する</span>
+          <div class="topic-desc">
+            <p>
+              <strong>回帰不連続デザイン（RDD: Regression Discontinuity Design）</strong>は、制度上のカットオフ（境界値）のすぐ両側にいる、ほとんど同じ人たちを比較する手法である。
+              「ギリギリ合格した人」と「ギリギリ不合格だった人」は、能力や適性がほぼ同じなのに、たった1点の差で人生の分岐が決まる——この分岐を「偶然」とみなせるなら、まさに自然実験が起きていることになる。
+            </p>
+            <p><strong>実例</strong>：Bleemer &amp; Mehta (2022, <em>American Economic Journal: Applied Economics</em>)。カリフォルニア大学サンタクルーズ校では、経済学1・2の成績（GPA）が2.8以上であることが経済学専攻の条件だった。</p>
+            <ul>
+              <li>介入群：成績がギリギリ2.8を超えた学生／対照群：ギリギリ2.8を下回った学生（2.8未満は制度上そもそも経済学専攻を選べない）</li>
+              <li>2.8をギリギリ超えた学生のうち、実際に経済学を専攻したのは36%（残り64%は専攻できる立場になっても専攻を変えなかった）</li>
+              <li>同様に、卒業5〜10年後の年収も$8,000増加する</li>
+            </ul>
+            <div class="def-box">
+              <strong>つまずきやすい点：なぜ割り算するのか</strong><br>
+              年収の増加$8,000は、あくまで<em>成績がギリギリ2.8を超えた学生全体の平均</em>に表れた効果である。ところが、実際に経済学専攻に切り替えたのはそのうち36%の学生だけ。
+              残り64%の学生はカットオフを超えても専攻を変えていないので、彼らには年収への直接効果はない。つまり平均$8,000という数字は、36%の学生にだけ生じた効果が全体に薄まって表れたものだ。
+              薄まりを戻すと、実際に専攻を変えた学生1人あたりの効果は $8,000 ÷ 0.36 ≈ <strong>$22,000</strong> と計算できる。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">8</span></div>
+        <div class="topic-content">
+          <span class="topic-title">差の差分析（DID） — 平行トレンドの仮定</span>
+          <div class="topic-desc">
+            <p>
+              <strong>差の差分析（DID: Difference in Differences）</strong>は、政策のような自然実験が起きた地域（介入群）と起きなかった地域（対照群）について、政策の<em>前後の変化</em>を比較する手法である。
+            </p>
+            <p><strong>実例</strong>：Baker, Gruber &amp; Milligan (2008, <em>Journal of Political Economy</em>)。1997年、カナダのケベック州だけで大規模な保育制度改革が行われた（他州では改革なし）。問い：保育所整備で母親の就業は増えるか？</p>
+            <p>単純な比較ではうまくいかないことを、段階を追って確認する。</p>
+            <ul>
+              <li><strong>地域間の比較だけ</strong>：ケベック州と他州の就業率の水準を比べても、改革の成果とは言えない——女性の就業に対する価値観がもともと地域で異なれば、就業率と保育整備の両方に影響してしまう（第三の要因）。</li>
+              <li><strong>改革前後の比較だけ</strong>：ケベック州内の改革前後を比べても、改革の成果とは言えない——景気変動や他の政策変更の影響かもしれない。</li>
+              <li><strong>差の差</strong>：介入群（ケベック州）の「改革前後の変化」から、対照群（他州）の「同じ期間の変化」を差し引く。</li>
+            </ul>
+            <div class="def-box">
+              <strong>平行トレンドの仮定</strong>：保育改革がなければ、介入群と対照群の母親就業率は<em>同じように</em>（平行に）変化するはずだ、という仮定。
+              景気変動・人々の意識変化・他の政策の影響は、両群に等しく及ぶと考えられる。だから2群の動きの<em>違い</em>だけを取り出せば、それは改革の効果だと言える。
+            </div>
+            <div class="def-box">
+              <strong>介入効果の計算</strong>：A・B を介入群の改革前・改革後、C・D を対照群の改革前・改革後とすると、<br>
+              介入効果 = (B − A) − (D − C)
+            </div>
+            <div class="insight">
+              <strong>式の読み方</strong>：たとえばケベックが60%→70%（+10ポイント）、他州が65%→68%（+3ポイント）なら、DIDは10−3=<strong>7ポイント</strong>である。改革後の70%と68%を直接比べるのでも、ケベックの+10ポイントを丸ごと効果とするのでもない。両地域に共通する時代変化3ポイントを差し引いた7ポイントを改革効果と解釈する。
+            </div>
+            <p>実際のデータでは、ケベック州の母親就業率は改革後、他州対比で上昇した。ただし平行トレンドは<strong>検証不能な仮定</strong>であり、必ずしも正しいとは限らない（ある地域は成長し、別の地域は衰退することもある）。自然実験による因果推論は、仮定なしには成立しない——重要なのは仮定を理解し、可能な範囲で検証することである。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">9</span></div>
+        <div class="topic-content">
+          <span class="topic-title">2つの自然実験のまとめ</span>
+          <div class="topic-desc">
+            <div style="overflow-x:auto;">
+            <table class="q-table" style="width:100%;">
+              <tr><th></th><th>回帰不連続デザイン（RDD）</th><th>差の差分析（DID）</th></tr>
+              <tr><td><strong>問い</strong></td><td>経済学を学ぶと年収は上がるか？</td><td>保育所整備で母親の就業は増えるか？</td></tr>
+              <tr><td><strong>自然実験</strong></td><td>UCサンタクルーズ校の学則：成績2.8以上が経済学専攻の条件</td><td>1997年、ケベック州のみで保育改革を実施</td></tr>
+              <tr><td><strong>介入群</strong></td><td>成績がギリギリ2.8を超えた学生</td><td>ケベック州の母親</td></tr>
+              <tr><td><strong>対照群</strong></td><td>成績がギリギリ2.8を下回った学生</td><td>他の州の母親</td></tr>
+            </table>
+            </div>
+            <p><strong>表の見方</strong>：RDDは「同じ時点の境界直前・直後」、DIDは「2地域それぞれの時間変化」を比較する。どちらも単純な平均の比較ではなく、処置以外は似ていると考えられる比較対象を制度から作る方法である。したがってRDDの結論は主にカットオフ付近の学生に、DIDの結論は平行トレンドが妥当な地域・期間に当てはまる。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">10</span></div>
+        <div class="topic-content">
+          <span class="topic-title">2021年ノーベル経済学賞と最低賃金論争</span>
+          <div class="topic-desc">
+            <p>
+              2021年のノーベル経済学賞は「自然実験による因果推論への貢献」に対して David Card（UC Berkeley）・Joshua Angrist（MIT）・Guido Imbens（Stanford）に贈られた。
+              ランダム化比較試験ができない問いに、現実の偶然を使って答えてきた業績である。
+            </p>
+            <p><strong>最低賃金を上げると雇用は減るか？</strong></p>
+            <ul>
+              <li>教科書の予測：最低賃金UP → 人件費UP → 雇用DOWN。1990年代以前の多くの実証研究もこの通説を支持していた。</li>
+              <li>しかし因果識別に問題があった：景気が悪化する時期には低賃金労働者の賃金が下がり、それが最低賃金引き上げへの政治的圧力を高める。結果として「最賃が上がる時期」と「景気が悪い時期」が重なり、最低賃金の悪影響を<strong>過大に</strong>見積もってしまっていた。</li>
+            </ul>
+            <div class="def-box">
+              <strong>Card &amp; Krueger (1994) の自然実験</strong>：1992年4月、ニュージャージー（NJ）州が最低賃金を$4.25から$5.05に引き上げた一方、隣接する東ペンシルバニア（PA）州は変更しなかった。
+              州境付近では最低賃金以外の経済環境がほぼ同じなので、NJ州のファストフード店（介入群）とPA州のファストフード店（対照群）にDIDを適用できる。
+            </div>
+            <p>結果：NJ州の雇用はPA州と比べて低下しなかった。この結果は通説を覆し、その後30年の研究でも最低賃金引き上げの雇用への悪影響は限定的であることが確認されている。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">11</span></div>
+        <div class="topic-content">
+          <span class="topic-title">なぜ経済学でデータ分析を学ぶのか</span>
+          <div class="topic-desc">
+            <p>AIや機械学習が発達した現在でも、実証ミクロ経済学が独自の強みを持つ理由がある。</p>
+            <ul>
+              <li>AIや機械学習はパターン発見や、介入のない場合の予測には強いが、因果関係の発見は必ずしも得意ではない。</li>
+              <li>自然実験を見つけ、その妥当性（平行トレンドの仮定など）を検証するには、対象分野への深い理解が必要。教育制度に詳しくなければ、教育分野の自然実験は見つけられないし、RDDやDIDが適用できる場面かどうかも判断できない。</li>
+              <li>「概念の操作化」——学力・幸福・格差・職場の雰囲気・差別といった<strong>抽象的な概念を測れる形にすること</strong>には、社会科学的な理解が不可欠。</li>
+            </ul>
+            <p>
+              こうした実証的な訓練は、金融・投資銀行やコンサルティング、テクノロジー企業、中央省庁・日本銀行・財務省、IMF・World Bank・OECDなど幅広い分野で活きる。
+              学部1〜2年で経済学の基礎を固め、大学院進学も視野に入れることが勧められる（文系2類以外からの進学者や、大学院から経済学に移る学生も多い）。
+            </p>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">🏷️</span>重要キーワード</h2>
+    <div class="concept-tags">
+      <span class="concept-tag t-blue">相関関係</span>
+      <span class="concept-tag t-blue">因果関係</span>
+      <span class="concept-tag">第三の要因（交絡因子）</span>
+      <span class="concept-tag">逆因果</span>
+      <span class="concept-tag t-orange">因果推論の根本問題</span>
+      <span class="concept-tag t-orange">反実仮想（counterfactual）</span>
+      <span class="concept-tag t-orange">介入効果</span>
+      <span class="concept-tag t-purple">ランダム化比較試験（RCT）</span>
+      <span class="concept-tag t-purple">選択バイアス</span>
+      <span class="concept-tag t-purple">外的妥当性</span>
+      <span class="concept-tag">自然実験</span>
+      <span class="concept-tag">回帰不連続デザイン（RDD）</span>
+      <span class="concept-tag">差の差分析（DID）</span>
+      <span class="concept-tag">平行トレンドの仮定</span>
+      <span class="concept-tag t-gray">概念の操作化</span>
+    </div>
+
+    <div class="kw-detail-list">
+      <p class="kw-detail-label">各キーワードの解説（クリックで展開）</p>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details class="kw-item">
+        <summary class="kw-summary">相関関係</summary>
+        <div class="kw-body">2つのことがらが連動して変化する関係。「東大卒は高収入」のように、単に一緒に観察される事実の記述にとどまる。因果関係とは区別しなければならない。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">因果関係</summary>
+        <div class="kw-body">一方の変化がもう一方の変化を<em>引き起こす</em>関係。相関があっても因果があるとは限らない——講義全体を貫く最重要の区別。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">第三の要因（交絡因子）</summary>
+        <div class="kw-body">2つの変数の両方に影響を与える隠れた要因。「東大→高収入」の裏の「もともとの頭の良さ」、「ピアノ→東大」の裏の「家庭の社会経済的地位」がその例。交絡因子をコントロールしても相関が残るかどうかが、因果関係を疑う手がかりになる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">逆因果</summary>
+        <div class="kw-body">原因と結果を取り違えているケース。「警察官が多い地域ほど犯罪が多い」を「警察官の増加が犯罪を増やす」と読むのは誤りで、「犯罪が多いから警察官を増やした」という逆方向の因果かもしれない。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">因果推論の根本問題</summary>
+        <div class="kw-body">同じ個人について「処置を受けた場合」と「受けなかった場合」を同時に観察することは原理的に不可能であるという問題。現実は一度きりしか起こらない。この根本問題ゆえに、別の人・別の集団との比較（介入群 vs 対照群）が必要になる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">反実仮想（counterfactual）</summary>
+        <div class="kw-body">「もしも介入がなかったら（あったら）どうなっていたか」という、実際には観察されない仮想的な状態。データ分析の目的は、この反実仮想をいかにもっともらしく推定するかにある。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">介入効果</summary>
+        <div class="kw-body">「介入を受けた場合の結果」と「受けなかった場合の結果」の差。処置効果とも呼ばれる。RDDの例では、経済学専攻という「介入」が年収に与える効果（1人あたり約$22,000）がこれにあたる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">ランダム化比較試験（RCT）</summary>
+        <div class="kw-body">対象をランダムに介入群・対照群に割り付ける実験手法。ランダム割付によって両群の属性が平均的に揃うため、結果の差を介入の因果効果とみなせる。倫理・費用・外的妥当性の面で実行に限界がある。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">選択バイアス</summary>
+        <div class="kw-body">介入群と対照群が、介入の有無以外の点でも体系的に異なってしまうことから生じる偏り。RCTのランダム割付は、この選択バイアスを排除するための仕組み。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">外的妥当性</summary>
+        <div class="kw-body">ある研究で得られた知見が、他の時代・地域・対象にも当てはまるかという性質（一般化可能性）。RCTの結果であっても、外的妥当性は自動的には保証されない。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">自然実験</summary>
+        <div class="kw-body">人々を介入群と対照群に分けるような、自然現象・政策・制度上の環境変化。研究者が意図的に割り付けなくても、偶然が実験のような状況を作り出す場合を活用する。RDDとDIDはその代表的な分析手法。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">回帰不連続デザイン（RDD）</summary>
+        <div class="kw-body">制度上のカットオフ（境界値）のすぐ両側にいる、ほとんど同じ人々を比較する手法。「ギリギリ合格者」と「ギリギリ不合格者」の違いは偶然とみなせるため、因果効果の推定に使える。Bleemer &amp; Mehta (2022) の経済学専攻の例が代表。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">差の差分析（DID）</summary>
+        <div class="kw-body">介入群の政策前後の変化から、対照群の同時期の変化を差し引くことで、政策の効果を推定する手法。平行トレンドの仮定が成り立つことが前提。Baker, Gruber &amp; Milligan (2008) のケベック州保育改革の例、Card &amp; Krueger (1994) の最低賃金の例が代表。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">平行トレンドの仮定</summary>
+        <div class="kw-body">介入がなければ、介入群と対照群は同じように（平行に）変化するはずだという仮定。DIDの核心をなすが、検証不能な仮定であり必ずしも正しいとは限らない——このため自然実験による因果推論は「仮定なしには成立しない」。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">概念の操作化</summary>
+        <div class="kw-body">学力・幸福・格差・差別といった抽象的な概念を、データとして測定できる形に落とし込むこと。社会科学的な理解が必要な作業であり、AIや機械学習だけでは代替できない実証ミクロ経済学の強みのひとつ。</div>
+      </details>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📝</span>過去問との対応</h2>
+    <div class="exam-ref-box">
+
+      <!-- 2025 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2025年度 期末試験</span>
+          <a href="../kakomon_2025.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q1</span><span class="eq-topic">因果関係と相関関係の区別</span></div>
+<div class="exam-qa-q">次のうち、因果関係と相関関係を区別する上で最も重要な点はどれか？</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>データ量の多さ（ビッグデータの活用）</li>
+<li class="opt"><span class="opt-label">(b)</span>変数間の相関係数の大きさ</li>
+<li class="opt correct"><span class="opt-label">(c)</span>交絡要因の有無や時間的順序の確認<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>機械学習手法の利用</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>相関と因果を区別するには2つの確認が不可欠。</p>
+<p><strong>①交絡要因（confounders）の有無：</strong>XとYが両方とも第三の変数Zに影響されているとき、X-Yの相関は見せかけ（spurious）になる。Zをコントロールしても相関が残るかを確認する必要がある。</p>
+<p><strong>②時間的順序：</strong>原因は結果より先に起きる。Xの変化がYの変化より先に生じているかを確認する。</p>
+<p>(a)データ量が多くても交絡があれば因果関係を誤る。(b)相関係数の大きさは因果の有無を示さない。(d)機械学習は因果推論のための手法ではない（パターン認識には優れるが因果識別は別問題）。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q2</span><span class="eq-topic">因果推論の根本問題</span></div>
+<div class="exam-qa-q">次のうち、因果推論の根本問題として最も正しい記述はどれか？</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>データが少ないと因果関係を見誤る</li>
+<li class="opt"><span class="opt-label">(b)</span>人はランダムに生きていない</li>
+<li class="opt correct"><span class="opt-label">(c)</span>介入しなかったケースは観察できない<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>統計的有意性が因果関係を保証する</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><em>因果推論の根本問題（Fundamental Problem of Causal Inference）</em>：同じ個人に対して「処置を受けた場合」と「受けなかった場合」を同時に観察することは不可能。</p>
+<p>潜在的結果（Potential Outcomes）フレームワーク：個人iの処置効果 = Y<sub>i</sub>(1) - Y<sub>i</sub>(0)。しかし実際には Y<sub>i</sub>(1) か Y<sub>i</sub>(0) のどちらか一方しか観察できない（反事実の問題）。</p>
+<p>RCTやその他の手法は、この根本問題を「平均的な処置効果（ATE）」を集団レベルで推定することで克服しようとする工夫。</p>
+<p>(b)は交絡問題の説明。(d)は誤り（統計的有意性は因果関係を保証しない）。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2024年度 期末試験</span>
+          <a href="../kakomon_2024.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q1</span><span class="eq-topic">放課後プログラムの因果立証</span></div>
+<div class="exam-qa-q">ある市が新しい放課後プログラムを実施したところ、参加生徒の成績が前年と比較して向上しました。因果関係を立証するために、どのような追加情報が最も役立ちますか。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>プログラムを実施していない同等の市からの生徒の成績データ</li>
+<li class="opt"><span class="opt-label">(b)</span>プログラムの影響に関する教師からの定性的なフィードバック</li>
+<li class="opt"><span class="opt-label">(c)</span>プログラムの前後における参加生徒の成績の縦断的データ</li>
+<li class="opt correct"><span class="opt-label">(d)</span>AとC<span class="correct-mark">正解</span></li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>因果推論には<em>比較対照（コントロール群）</em>と<em>時系列変化（前後比較）</em>の両方が重要。</p>
+<p><strong>(a) 対照群（非実施の市）</strong>：プログラムが原因で成績が上がったのか、それとも全国的な学力向上など外部要因のせいかを区別できる。差の差（DiD）推定の基礎。</p>
+<p><strong>(c) 縦断データ（前後比較）</strong>：同じ生徒の成績変化を追跡することで、個人固定効果を除去できる。</p>
+<p>AとCを組み合わせると「参加校の前後変化 - 非参加校の前後変化」という差の差推定が可能になり、より強い因果の根拠となる。(b)定性フィードバックや(c)単独では外部要因を排除できない。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q2</span><span class="eq-topic">交絡因子の統制</span></div>
+<div class="exam-qa-q">銃の所有率が高い州ほど銃暴力の発生率が高いことが研究で明らかになりました。因果関係を導き出す能力を最も強化する追加情報は何ですか。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>これらの州では長年にわたって銃の所有率が一貫して高かったことを示すデータ</li>
+<li class="opt correct"><span class="opt-label">(b)</span>貧困や人口密度などの潜在的な要因を制御した後も、関連性が残っているという証拠<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(c)</span>銃の所有と銃暴力を結びつける説得力のある生物学的メカニズム</li>
+<li class="opt"><span class="opt-label">(d)</span>他の国での調査結果の再現</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>因果推論の大きな障壁は<em>交絡因子（confounders）</em>の存在。「銃所有率が高い州は同時に貧困率も高く、貧困が銃暴力の真の原因かもしれない」という可能性を排除できなければ相関にとどまる。</p>
+<p>(b) 貧困・人口密度などをコントロールしても相関が残るなら、交絡因子の影響を排除した上でも関連が見られることを示し、因果関係の証拠として最も強力。</p>
+<p>(a)時系列の一貫性は時間的順序を示すが交絡因子を排除しない。(c)生物学的メカニズムは社会科学では馴染みにくい。(d)他国での再現は外的妥当性であり因果の証拠ではない。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2023年度 期末試験</span>
+          <a href="../kakomon_2023.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q1</span><span class="eq-topic">相関からわかること</span></div>
+<div class="exam-qa-q">猫を飼っていることと独身女性であることの間に強い相関関係があると調査結果が示している場合、このデータから何が言えますか。正しいものを一つ選びなさい。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>独身であることが女性に猫を飼う原因となる。</li>
+<li class="opt"><span class="opt-label">(b)</span>猫を飼うことが女性が独身になる原因となる。</li>
+<li class="opt correct"><span class="opt-label">(c)</span>独身の女性は、そうでない女性と比べて猫を飼っている割合が高い。<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>全ての独身女性が猫を飼っている。</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><em>相関関係は因果関係を意味しない。</em>データから言えるのは「統計的な関連性」のみ。「独身→猫」「猫→独身」のどちらの因果もデータ単独では証明できない。「ライフスタイル」や「性格」など第三の変数（交絡因子）が両者に同時に影響している可能性がある。</p>
+<p>(a)(b)は因果関係を読み取っており誤り。(d)は「全員」という強すぎる主張で誤り。(c)は「割合が高い」という相関の記述にとどまっており正しい。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q2</span><span class="eq-topic">RCTでランダム割付する理由</span></div>
+<div class="exam-qa-q">ランダム化比較試験（RCT）では参加者がランダムに治療群または対照群に割り当てられる理由は何ですか？</div>
+<ul class="options">
+<li class="opt correct"><span class="opt-label">(a)</span>グループ間の差が介入によるものであることを確認するため。<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(b)</span>研究倫理上の問題を生じにくくするため。</li>
+<li class="opt"><span class="opt-label">(c)</span>研究のコストと期間を短縮させるため。</li>
+<li class="opt"><span class="opt-label">(d)</span>研究者がどのグループに誰がいるかを知るため。</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><em>ランダム化の目的は「選択バイアスの排除」。</em>参加者をランダムに割り当てることで、治療群と対照群の属性（年齢・健康状態・生活習慣など）が平均的に等しくなる。その結果、グループ間に生じた差は介入（治療）以外の要因によるものではないと言え、介入の因果効果を測定できる。</p>
+<p>(b)倫理問題の軽減はRCTの副産物に過ぎない。(c)コスト削減・期間短縮が目的ではない。(d)研究者の利便性ではない。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="lecture-nav">
+    <a href="index.html" class="center">講義一覧</a>
+    <a href="第2回.html">第2回 →</a>
+  </div>
+
+</div>
+
+<script>
+// 押されたボタンに対応する解説欄の表示を切り替える。
+function toggleExp(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const opt = e.target.closest('.opt');
+  if (!opt) return;
+  const options = opt.closest('.options');
+  if (!options || options.classList.contains('revealed')) return;
+  options.classList.add('revealed');
+  opt.classList.add('selected');
+});
+</script>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">現代経済理論（渡辺安虎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+</body>
+</html>

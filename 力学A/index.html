@@ -1,0 +1,139 @@
+<!DOCTYPE html><!-- 「力学A 講義ノート・過去問解説」の一覧ページ。掲載されたページへ移動する入口をまとめる。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>力学A 講義ノート・過去問解説</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../subject-home.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body class="subject-home home-mechanics" data-nav-page="note-index">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html" class="active">トップ</a>
+      <a href="n1.html" data-page="n1">第1章</a>
+      <a href="n2.html" data-page="n2">第2章</a>
+      <a href="n3.html" data-page="n3">第3章</a>
+      <a href="n4.html" data-page="n4">第4章</a>
+      <a href="n5.html" data-page="n5">第5章</a>
+      <a href="n6.html" data-page="n6">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>力学A</h1>
+  <p class="subtitle">講義ノートの解説と，2020〜2025年度 期末試験の解答・解説</p>
+  <p class="meta">前期課程 Sセメスター</p>
+</div>
+
+<!-- この科目のノートを探す入力欄と検索結果欄。検索の動作は共通のsearch.jsが担当する。 --><div class="search-box" data-search>
+  <div class="search-input-row">
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input type="search" class="search-input" placeholder="力学A のノート内を検索（用語・キーワード）…" autocomplete="off" aria-label="力学A 内を検索">
+  </div>
+  <div class="search-results" hidden></div>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <strong>このページについて</strong><br>
+    力学Aの講義ノート（手書き）を解説した全6章と，2020〜2025年度の過去問の解答・解説をまとめている。
+    講義ノートは，ノートの内容に忠実に沿いつつ，数式の導出過程や，ノートでは省略・中断されていた箇所を
+    補って解説したもの。過去問解説は，クラスメイトが作成した手書き解説を出発点として参考にしているが，
+    内容はすべて独自に検証し，誤りの修正や不足していた問題の解答の補完を行っている。
+  </div>
+
+  <h2 class="home-section-title">講義ノート（全6章）</h2>
+  <!-- 見出し・説明文・リンクを持つカードを、まとまった一覧として並べる。 --><div class="card-grid">
+    <a class="card" href="n1.html" data-page="n1">
+      <div class="card-tag">第1章</div>
+      <h3>抵抗力と運動方程式</h3>
+      <p>粘性抵抗・慣性抵抗／定数係数線形微分方程式／はちみつ中のビー玉</p>
+    </a>
+    <a class="card" href="n2.html" data-page="n2">
+      <div class="card-tag">第2章</div>
+      <h3>仕事とエネルギー</h3>
+      <p>運動エネルギーと線積分／保存力とポテンシャル／勾配（grad）／中心力</p>
+    </a>
+    <a class="card" href="n3.html" data-page="n3">
+      <div class="card-tag">第3章</div>
+      <h3>振り子の運動</h3>
+      <p>極座標での速度・加速度／振り子の運動方程式／単振動と楕円積分</p>
+    </a>
+    <a class="card" href="n4.html" data-page="n4">
+      <div class="card-tag">第4章</div>
+      <h3>万有引力とケプラーの法則</h3>
+      <p>軌道方程式の導出／円錐曲線の分類／エネルギーによる軌道の分類</p>
+    </a>
+    <a class="card" href="n5.html" data-page="n5">
+      <div class="card-tag">第5章</div>
+      <h3>地球の重力場と回転座標系</h3>
+      <p>地球内部の重力／コリオリ力と遠心力／自由落下の東偏</p>
+    </a>
+    <a class="card" href="n6.html" data-page="n6">
+      <div class="card-tag">第6章</div>
+      <h3>剛体の運動</h3>
+      <p>重心・運動量・角運動量・慣性モーメント／カーリングの衝突</p>
+    </a>
+  </div>
+
+  <h2 class="home-section-title">過去問解説</h2>
+  <!-- 年度などの区分ごとに、過去問ページへのリンクをカードで並べる。 --><div class="year-grid">
+    <a class="year-card" href="kakomon_2020.html" data-page="kakomon_2020">
+      <div class="yn">2020</div>
+    </a>
+    <a class="year-card" href="kakomon_2021.html" data-page="kakomon_2021">
+      <div class="yn">2021</div>
+    </a>
+    <a class="year-card" href="kakomon_2022.html" data-page="kakomon_2022">
+      <div class="yn">2022</div>
+    </a>
+    <a class="year-card" href="kakomon_2023.html" data-page="kakomon_2023">
+      <div class="yn">2023</div>
+    </a>
+    <a class="year-card" href="kakomon_2024.html" data-page="kakomon_2024">
+      <div class="yn">2024</div>
+    </a>
+    <a class="year-card" href="kakomon_2025.html" data-page="kakomon_2025">
+      <div class="yn">2025</div>
+    </a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+<script src="../search.js"></script>
+</body>
+</html>

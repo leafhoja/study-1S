@@ -1,0 +1,294 @@
+<!DOCTYPE html><!-- 「2014年度 | 情報 共通問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2014年度 | 情報 共通問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kyotsu-2014">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>共通問題 2014年度</h1>
+  <p class="subtitle">7月29日（火）5限｜大問3（うち大問3は選択）</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（インターネットの階層プロトコル・暗号方式・数の表記法）</a>
+    <a href="#q2">大問2（除算アルゴリズム：線形探索と二分探索）</a>
+    <a href="#q3">大問3（選択：知的財産権と所有概念／論理演算・MIL記法）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>インターネットの階層プロトコル・暗号方式・数の表記法</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>問1-1 — TCP/IPの階層プロトコル</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>次の文章の空欄ア〜コに当てはまる語を、下の選択肢から選べ。</p>
+        <p>インターネットは小規模なネットワークが互いに接続した集合体である。ネットワーク同士を接続する中継機器を<span class="blank">ア</span>と呼ぶ。インターネットの通信では、相手先のコンピュータを特定するために32ビットの数値である<span class="blank">イ</span>を用い、そのコンピュータ内のアプリケーションを識別するために<span class="blank">ウ</span>という16ビットの数値を用いる。<span class="blank">イ</span>はただの数値であり人間には扱いにくいため、ユーザが目にする部分では、たとえばwww.u-tokyo.ac.jpのような<span class="blank">エ</span>を代わりに用いる。このような<span class="blank">イ</span>と<span class="blank">エ</span>を関連づける仕組みは<span class="blank">オ</span>と呼ばれる。インターネット内の通信は階層構造を持つプロトコルに則って行われる。たとえば、ウェブを閲覧する場合には、<span class="blank">カ</span>というプロトコルを用いてアプリケーション同士が通信する。この通信は1つ下の階層のプロトコルである<span class="blank">キ</span>によって実現される。<span class="blank">キ</span>は、送信元と受信先の間の接続を確立し、データを分割して送信する。分割されたデータは<span class="blank">ク</span>と呼ばれる。<span class="blank">ク</span>を宛先まで届ける部分は、その下の層のプロトコルである<span class="blank">ケ</span>が行なう。<span class="blank">ケ</span>は、ネットワーク間の通信を担当し、次にどの<span class="blank">ア</span>にデータを送るかを決定する。ネットワーク内の通信は媒体によって異なるが、たとえばイーサネットでは、各コンピュータを識別するアドレスとして<span class="blank">コ</span>と呼ばれる48ビットの数値を用いた通信を行なう。受信先が全ての<span class="blank">ク</span>を受け取ったら、<span class="blank">キ</span>によって元データに復元される。</p>
+        <p>選択肢：サーバ、ルータ、ICANN、HTTP、HTML、DNS、SMTP、IP、TCP、IPアドレス、MACアドレス、ホスト名、シーケンス番号、ポート番号、パケット、トレーラ、PKI、アカウント</p>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>この文章は、ウェブ閲覧を例にしたTCP/IPの階層モデル（アプリケーション層のHTTP→トランスポート層のTCP→ネットワーク層のIP→リンク層のMACアドレス）を上から下へなぞる構成になっている。各層の役割を対応づけて整理すると次のようになる。</p>
+          <p><span class="blank">ア=ルータ</span>（ネットワーク同士を中継する機器）</p>
+          <p><span class="blank">イ=IPアドレス</span>（コンピュータを特定する32ビットの数値）</p>
+          <p><span class="blank">ウ=ポート番号</span>（アプリケーションを識別する16ビットの数値）</p>
+          <p><span class="blank">エ=ホスト名</span>（人間が扱いやすいIPアドレスの代わりの表記）</p>
+          <p><span class="blank">オ=DNS</span>（IPアドレスとホスト名を関連づける仕組み）</p>
+          <p><span class="blank">カ=HTTP</span>（ウェブ閲覧のアプリケーション層プロトコル）</p>
+          <p><span class="blank">キ=TCP</span>（接続の確立とデータ分割・復元を担うトランスポート層プロトコル）</p>
+          <p><span class="blank">ク=パケット</span>（分割されたデータの単位）</p>
+          <p><span class="blank">ケ=IP</span>（ネットワーク間の通信・中継先の決定を担うプロトコル）</p>
+          <p><span class="blank">コ=MACアドレス</span>（イーサネットでコンピュータを識別する48ビットのアドレス）</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>ア=ルータ、イ=IPアドレス、ウ=ポート番号、エ=ホスト名、オ=DNS、カ=HTTP、キ=TCP、ク=パケット、ケ=IP、コ=MACアドレス（選択肢18語のうち10語を使用）</div>
+      </details>
+
+      <h3>問1-2 — 暗号方式（共通鍵暗号・公開鍵暗号）</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>次の文章の空欄ア〜キを埋めよ。</p>
+        <p>暗号化において、暗号化する前のメッセージを<span class="blank">ア</span>という。また、暗号化されたメッセージを<span class="blank">ア</span>に戻すことを<span class="blank">イ</span>という。暗号化の方式としては、<span class="blank">ウ</span>暗号方式と<span class="blank">エ</span>暗号方式の2種類に分類できる。例えば、<span class="blank">ウ</span>暗号方式を用いて太郎君が花子さんにメッセージを送ることを考える。太郎君と花子さんは、まず暗号化するための鍵を共有する。そして太郎君は<span class="blank">ア</span>をその鍵を用いて暗号化し、暗号文を花子さんに送る。花子さんは暗号文を受け取り、同じ鍵を用いて<span class="blank">イ</span>する。次に<span class="blank">エ</span>暗号方式を用いる場合を考える。この方式では、まず事前に<span class="blank">オ</span>が<span class="blank">カ</span>と<span class="blank">キ</span>と呼ばれる2つの鍵を作成し、<span class="blank">カ</span>を公開する。そして、太郎君は<span class="blank">カ</span>を用いて暗号化し、花子さんは送られた暗号文を<span class="blank">キ</span>を用いて<span class="blank">イ</span>する。</p>
+        <p>(1) ア〜キに当てはまる語を答えなさい。<br>
+        (2) <span class="blank">ウ</span>暗号方式を用いるときに注意すべきことを1〜2行で述べよ。<br>
+        (3) <span class="blank">エ</span>暗号方式における2種類の鍵が持つべき性質を2,3個述べよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>(1) 前半は共通鍵暗号方式の手順（鍵を事前に共有し、同じ鍵で暗号化・復号する）、後半は公開鍵暗号方式の手順（受信者が鍵ペアを作成し、公開鍵を配布し、公開鍵で暗号化・秘密鍵で復号する）を説明した文章になっている。</p>
+          <p><span class="blank">ア=平文</span>／<span class="blank">イ=復号</span>／<span class="blank">ウ=共通鍵</span>／<span class="blank">エ=公開鍵</span>／<span class="blank">オ=受信者（花子さん）</span>／<span class="blank">カ=公開鍵</span>／<span class="blank">キ=秘密鍵</span></p>
+          <p>(2) 共通鍵暗号方式では、暗号化と復号に同一の鍵を用いるため、その鍵を送信者と受信者の間でどうやって安全に共有するか（鍵配送の問題）に注意する必要がある。鍵が第三者に漏れてしまえば、その鍵を持つ誰でも暗号文を復号できてしまい、暗号の意味がなくなってしまう。</p>
+          <p>(3) 公開鍵暗号方式における公開鍵・秘密鍵の2つの鍵が持つべき性質としては、①公開されている公開鍵から、対応する秘密鍵を（現実的な時間で）計算によって求めることができないこと（一方向性）、②片方の鍵で暗号化した暗号文は、もう片方の鍵でなければ正しく復号できないこと、③公開鍵は誰にでも公開してよい安全性を持つ一方で、秘密鍵は本人だけが厳重に保持し、決して他人に漏らしてはならないこと、が挙げられる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>ア=平文、イ=復号、ウ=共通鍵、エ=公開鍵、オ=受信者、カ=公開鍵、キ=秘密鍵</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 共通鍵暗号と公開鍵暗号の使い分け</span>
+        <p>共通鍵暗号方式は計算が高速である一方、鍵配送の問題（安全に鍵を共有する手段が必要）を抱える。公開鍵暗号方式は鍵配送の問題を解決できるが、計算コストが大きい。実際のインターネット通信（例えばHTTPS）では、まず公開鍵暗号方式を使って共通鍵そのものを安全に交換し、その後の実際のデータ通信は高速な共通鍵暗号方式で行う、というハイブリッドな方式が広く使われている。</p>
+      </div>
+
+      <h3>問1-3 — アラビア数字とローマ数字の表記法の比較</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(1) アラビア数字表記がローマ数字表記より優れている点を1〜2行で述べよ。<br>
+        (2) ローマ数字表記がアラビア数字表記より優れている点を1〜2行で述べよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(1) アラビア数字は0を含む位取り記数法を採用しているため、桁数が数の大きさに対して対数的にコンパクトに表現でき、また加減乗除の筆算アルゴリズムを桁ごとの機械的な手続きとして一般化できる点で優れている。</p>
+          <p>(2) ローマ数字は、I, V, X, L, C, D, M など少数の記号の組み合わせだけで大きな数を直感的・視覚的に表現でき、刻印や碑文のような視覚的な記録媒体に向いている。また記号の並びから量を直感的に把握しやすく、位取りの誤読（0の見落としなど）に強いという面もある。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) 位取り記数法により桁数がコンパクトで、筆算アルゴリズムが機械的に一般化できる　(2) 少数の記号の組み合わせで直感的・視覚的に表現でき、刻印などの記録に向いている</div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>除算アルゴリズム：線形探索と二分探索</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>問2 — 除算アルゴリズムの比較</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>正の整数同士の商$x\div y$を計算する2種類のアルゴリズムを考える。アルゴリズム1は割られる数から割る数を繰り返し引くことで商を求める。アルゴリズム2は二分探索を用いて商を求める。</p>
+        <div class="mathblock">アルゴリズム1.
+z←0
+while <span class="blank">(A)</span> do
+    x←x−y
+    z←z+1
+done
+return z</div>
+        <div class="mathblock">アルゴリズム2.
+l←0
+r←x+1
+while l+1≠r do
+    z←(l+r)≫1
+    if x≥z×y then l←z else <span class="blank">(B)</span> endif
+done
+return l</div>
+        <p>(1) アルゴリズム1が$x\div y$を計算するよう空欄(A)を埋めよ。<br>
+        (2) $x=7,y=2$で実行したとき、2行目のwhileループの条件判定に1〜4回目に到達したときの$x$の値を求めよ。<br>
+        (3) $(l+r)\gg1$は$(l+r)$の2進数表現を右に1ビットずらした数（右シフト、切り捨て除算÷2に相当）である。$(l+r)=9$のとき、$(l+r)\gg1$を求めよ。<br>
+        (4) アルゴリズム2が$x\div y$を計算するよう空欄(B)を埋めよ。<br>
+        (5) $x=7,y=3$で実行したとき、3行目のwhileループの条件判定に1〜4回目に到達したときの$l,r$の値を求めよ。<br>
+        (6) 結果を求めるのに必要な繰り返し回数の観点から、アルゴリズム1と2を比較せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>(1) アルゴリズム1は、$x$から$y$を引けるあいだ引き続け、引けなくなった（$x\lt y$になった）時点で終了し、そのときの$z$（引いた回数）が商になる、という考え方である。よって条件は<span class="blank">(A)=x≥y</span>。</p>
+
+          <p>(2) $x=7,y=2$。「2行目のwhileループの条件判定に到達した時点」のxの値を順に追う。<br>
+          1回目到達：まだ何も引かれていない初期値なので$x=7$。<br>
+          1回目のループ本体で$x\leftarrow x-2=5$。<br>
+          2回目到達：$x=5$。<br>
+          2回目の本体で$x\leftarrow5-2=3$。<br>
+          3回目到達：$x=3$。<br>
+          3回目の本体で$x\leftarrow3-2=1$。<br>
+          4回目到達：$x=1$（ここで$x=1\lt y=2$となり条件が偽になるのでループはここで終了する）。<br>
+          よって<strong>1回目=7、2回目=5、3回目=3、4回目=1</strong>。</p>
+
+          <p>(3) $(l+r)=9$を2進数で表すと$1001_2$である。右に1ビットシフトするとは、右端の1ビットを捨てて全体を1桁右にずらし、空いた左端に0を補うことなので、$1001\to0100$となる。$0100_2=4$。よって<strong>答え=4</strong>（これは$\lfloor9/2\rfloor=4$と一致する）。</p>
+
+          <p>(4) アルゴリズム2は区間$[l,r)$の中に商が含まれるように保ちながら、中点$z=(l+r)\gg1$で判定して区間を半分に絞り込む二分探索である。$x\ge z\times y$が成り立つなら、商は$z$以上なので下限$l$を$z$に更新して範囲$[z,r)$に絞り込み、成り立たなければ商は$z$未満なので上限$r$を$z$に更新して範囲$[l,z)$に絞り込む。よって<span class="blank">(B)=r←z</span>。</p>
+
+          <p>(5) $x=7,y=3$。初期値：$l=0,r=x+1=8$。<br>
+          1回目到達：条件$l+1=1\ne r=8$は成立するので本体を実行。この時点の値は<strong>$l=0,r=8$</strong>。本体：$z=(0+8)\gg1=4$。判定$7\ge4\times3=12$？→NO→$r\leftarrow z=4$。更新後：$l=0,r=4$。<br>
+          2回目到達：条件$l+1=1\ne r=4$は成立。この時点の値は<strong>$l=0,r=4$</strong>。本体：$z=(0+4)\gg1=2$。判定$7\ge2\times3=6$？→YES→$l\leftarrow z=2$。更新後：$l=2,r=4$。<br>
+          3回目到達：条件$l+1=3\ne r=4$は成立。この時点の値は<strong>$l=2,r=4$</strong>。本体：$z=(2+4)\gg1=3$。判定$7\ge3\times3=9$？→NO→$r\leftarrow z=3$。更新後：$l=2,r=3$。<br>
+          4回目到達：条件$l+1=3=r=3$となり条件が不成立になるが、設問は「条件判定に4回目に到達したときの値」を聞いているので、この判定自体には到達している。この時点の値は<strong>$l=2,r=3$</strong>（この判定でループを抜け、return lにより商$=2$が返る。実際$7\div3=2$余り1なので正しい）。<br>
+          まとめ：<strong>1回目：$l=0,r=8$。2回目：$l=0,r=4$。3回目：$l=2,r=4$。4回目：$l=2,r=3$（この時点でループ終了）</strong>。</p>
+
+          <p>(6) アルゴリズム1は、商の値$z$（すなわち元の$x$の大きさ）に比例した回数、すなわち$O(x/y)$回（線形）の繰り返しが必要である。これに対しアルゴリズム2は、二分探索によって候補範囲$[l,r)$を毎回半分に絞り込んでいくので、初期範囲の大きさ$x+1$に対して$O(\log x)$回（対数的）の繰り返しで済む。したがってアルゴリズム2の方が、特に商が大きい場合に圧倒的に少ない繰り返し回数で計算できる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) (A)=$x\ge y$　(2) 1回目=7、2回目=5、3回目=3、4回目=1　(3) 4　(4) (B)=$r\leftarrow z$　(5) 1回目：$l=0,r=8$／2回目：$l=0,r=4$／3回目：$l=2,r=4$／4回目：$l=2,r=3$　(6) アルゴリズム1は$O(x/y)$（線形）、アルゴリズム2は$O(\log x)$（対数）の繰り返し回数で済み、2の方が効率的</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「引き算の繰り返し」から「二分探索」への改善パターン</span>
+        <p>この問題の「引き算の繰り返し（線形探索的な発想）」から「二分探索」への改善パターンは、この科目で繰り返し現れる典型的な計算量改善のモチーフである（例えば、他の年度の共通問題に出てくる平方根を求めるアルゴリズムなどにも同様の対比が見られる）。線形的な手法は繰り返し回数が求める値の大きさに比例して増える（$O(n)$）のに対し、二分探索は候補の範囲を毎回半分にすることで、繰り返し回数が範囲の大きさの対数（$O(\log n)$）に抑えられる。この「探索範囲を半分に絞り込む」という発想は、ソートされた配列からの探索や、大問2でしばしば問われるアルゴリズムの効率化の基本パターンとして広く応用されている。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q3">
+    <div class="sec-header"><div class="sec-tag">大問 3（選択）</div><h2>問題A：知的財産権と所有概念／問題B：論理演算とMIL記法</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="note"><span class="box-label">出題形式</span><p>問題A・Bのいずれか一方を選択。ここでは両方を掲載する。</p></div>
+
+      <h3>問題A-1 — 情報技術にかかわる権利と所有の概念（空欄補充）</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>次の文章の空欄ア〜オに当てはまる語を、下の選択肢から選べ。</p>
+        <p><span class="blank">ア</span>とは、知的な創作活動によって何かを作り出した人に対して、他人に無断で利用されない権利を付与する制度であり、<span class="blank">イ</span>、<span class="blank">ウ</span>などが含まれる。著作権法は、このうち<span class="blank">イ</span>の保護を目的としている。著作物とは、元来、小説、音楽、絵画などを意味していたが、1985年（昭和60年）の改正によって、<span class="blank">エ</span>もこの中に含まれることが明確になった。オペレーティングシステムは<span class="blank">エ</span>の中に含まれるが、規約や解法などは含まれない。さらに、1997年（平成9年）の改正によって、webサーバなどで、公衆からの求めに応じて自動的に著作物を送信できるようにする権利である<span class="blank">オ</span>も<span class="blank">イ</span>に含められた。</p>
+        <p>選択肢：アプリケーションソフト、知的財産権、IPアドレス、独占権、データベース、送信可能化権、工業所有権（産業財産権）、プログラム、webサーバアクセス権、著作権</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>知的財産権は「著作権」と「工業所有権（産業財産権）」の2つを含む、より大きな概念であることを整理させる問題である。</p>
+          <p><span class="blank">ア=知的財産権</span>／<span class="blank">イ,ウ=著作権、工業所有権（産業財産権）</span>（順不同）／<span class="blank">エ=プログラム</span>／<span class="blank">オ=送信可能化権</span></p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>ア=知的財産権、イ・ウ=著作権・工業所有権（産業財産権）（順不同）、エ=プログラム、オ=送信可能化権（選択肢10語のうち5語を使用）</div>
+      </details>
+
+      <h3>問題A-2 — 無形性・複製可能性と所有概念への影響</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>コンピュータと情報技術が所有概念・権利概念に与える影響について、web上の文章と印刷された書籍を比較しながら無形性・複製可能性の概念を説明した上で、これらが従来の所有概念・権利概念に及ぼす影響を5〜10行で説明せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>印刷された書籍は「モノ」として物理的な形（紙・インク）を持ち、1つの実体を排他的に所有・占有できる——誰かがその本を手にしていれば、他の人は同時に同じ実体を持つことはできない。これに対し、web上の文章はデータという無形の情報であり、物理的な実体を伴わないため、「所有する」という概念自体が、書籍のような排他的占有とは性質の異なるものになる。また、印刷書籍の複製にはコスト・時間・劣化が伴うのに対し、webの文章はコピー＆ペーストなどによって瞬時に、コストほぼゼロで、劣化なく無限に複製できる（複製可能性の高さ）。この結果、従来「モノの占有」を前提としてきた所有権や、複製の困難さを前提に成立してきた著作権制度は、デジタル情報については「誰か一人が排他的に持つ」という発想が成り立たず、また複製が容易すぎることで権利者の経済的利益が侵害されやすくなる。そのため、DRM（デジタル権利管理）技術の導入や、問題A-1で見た送信可能化権のような新しい権利概念の創設（1997年改正）など、法制度・技術の両面での対応が必要になっている。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>書籍は物理的実体を持ち排他的に占有できるのに対し、web上の文章は無形で複製が容易・無劣化であるため、従来の「モノの占有」を前提とした所有権や著作権制度が成り立ちにくくなり、DRM技術や送信可能化権のような新しい制度的対応が必要になった。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識A — 無形性・複製可能性から生まれた新しい権利</span>
+        <p>問題A-2で扱われている「無形性」と「複製可能性」は、デジタル情報がもつ性質のうち、従来の所有・権利の概念と最も衝突する2つの側面である。物理的なモノを前提に発達してきた所有権は「誰か一人が排他的に持つ」ことを核とするが、無形のデータには排他的な占有という発想自体がなじまない。また複製困難性を前提に成立してきた著作権制度も、複製が容易なデジタル環境では実効性を失いやすい。1997年改正で導入された送信可能化権（問題A-1のオ）は、まさにこの「複製・送信が容易になった」という技術変化に対応するために新設された権利であり、web上での自動送信という新しい利用形態を、従来の著作権の枠組みの中に取り込む役割を果たしている。</p>
+      </div>
+
+      <h3>問題B — 論理演算・真理値表とMIL記法</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>2つの変数$x,y\in\{0,1\}$に関する論理演算について、下の表1の空欄を埋めよ。ただし、$x\cdot y$はAND(x,y)、$x+y$はOR(x,y)、$\overline{x}$はNOT(x)を表す。$(x,y)$の組は$(0,0),(0,1),(1,0),(1,1)$の順とする。</p>
+        <div class="mathblock">x・y = AND(x,y)      : 0,0,0,1
+x+y = OR(x,y)       : 0,1,1,1
+x（バー）= NOT(x)    : 1,1,0,0
+x・y（バー）= x・NOT(y) : ア（ビット）, カ（論理関数表現）
+x・NOT(y)+NOT(x)・y  : イ（ビット）, キ（論理関数表現）, ス（MIL記法）
+NOT(x)・NOT(y)       : ウ（ビット）, ク（論理関数表現）, セ（MIL記法）
+NOT(x)+y             : エ（ビット）, ケ（論理関数表現）
+NOT(x)+NOT(y)        : オ（ビット）, コ（論理関数表現）, ソ（MIL記法）
+AND(x,y)のMIL記法     : サ
+OR(x,y)のMIL記法      : シ</div>
+        <p>解答群I（論理関数表現）：A: XOR(x,y)　B: NOT(AND(x,y))　C: OR(x,NOT(y))　D: AND(NOT(x),y)　E: NOT(y)　F: NOT(OR(x,y))　G: AND(x,NOT(y))　H: OR(NOT(x),y)</p>
+        <p>解答群II（MIL記法によるゲート図。下の図1に、記号I〜Mに対応する5種類のゲートが左から順に示されている。I：XOR形（2重線の曲線＋曲線）、J：OR形（曲線）、K：AND形（D字型）、L：NAND形（D字型＋出力側に丸）、M：NOR形（曲線＋出力側に丸）である。）</p>
+        <div style="text-align:center;margin:1em 0;">
+          <img src="img/2014/gates-mil.png" alt="図1：MIL記法による5つの論理ゲート。左から順にXOR形（2重線の曲線と曲線を組み合わせた記号）、OR形（曲線の記号）、AND形（D字型の記号）、NAND形（D字型に出力側の丸を付けた記号）、NOR形（曲線に出力側の丸を付けた記号）。" style="max-width:560px;width:100%;height:auto;">
+        </div>
+        <p>(2) 半加算器は、2つの1ビットの入力$a,b$を受け取り、その和を表す出力$s$と、桁上がりを表す出力$c_{out}$を返す回路である。表2（$(a,b)$の組は$(0,0),(0,1),(1,0),(1,1)$の順）の空欄タ〜テを埋めよ。<br>
+        タ：$s$のビットパターン　　チ：$c_{out}$のビットパターン　　ツ：$s$の論理関数表現　　テ：$c_{out}$の論理関数表現<br>
+        (3) 表2の半加算器をMIL記法（ゲート図）で表せ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>各行を$(x,y)=(0,0),(0,1),(1,0),(1,1)$の順に計算していく。</p>
+          <p><strong>$x\cdot\overline{y}$：</strong>$0\cdot1=0,\ 0\cdot0=0,\ 1\cdot1=1,\ 1\cdot0=0$ より<span class="blank">ア=0010</span>。これはAND(x,NOT(y))なので<span class="blank">カ=G</span>。</p>
+          <p><strong>$x\cdot\overline{y}+\overline{x}\cdot y$：</strong>これはXORの定義そのものであり、$0,1,1,0$ より<span class="blank">イ=0110</span>。論理関数表現はXOR(x,y)なので<span class="blank">キ=A</span>。MIL記法はXOR形なので<span class="blank">ス=I</span>。</p>
+          <p><strong>$\overline{x}\cdot\overline{y}$：</strong>$1\cdot1=1,\ 1\cdot0=0,\ 0\cdot1=0,\ 0\cdot0=0$ より<span class="blank">ウ=1000</span>。ド・モルガンの法則より$\overline{x}\cdot\overline{y}=\overline{x+y}=$NOT(OR(x,y))なので<span class="blank">ク=F</span>。これはNOR(x,y)そのものなので、MIL記法はNOR形<span class="blank">セ=M</span>。</p>
+          <p><strong>$\overline{x}+y$：</strong>$1+0=1,\ 1+1=1,\ 0+0=0,\ 0+1=1$ より<span class="blank">エ=1101</span>。論理関数表現はOR(NOT(x),y)なので<span class="blank">ケ=H</span>。</p>
+          <p><strong>$\overline{x}+\overline{y}$：</strong>$1+1=1,\ 1+0=1,\ 0+1=1,\ 0+0=0$ より<span class="blank">オ=1110</span>。ド・モルガンの法則より$\overline{x}+\overline{y}=\overline{xy}=$NOT(AND(x,y))なので<span class="blank">コ=B</span>。これはNAND(x,y)そのものなので、MIL記法はNAND形<span class="blank">ソ=L</span>。</p>
+          <p>AND(x,y)のMIL記法は<span class="blank">サ=K</span>（AND形）。OR(x,y)のMIL記法は<span class="blank">シ=J</span>（OR形）。</p>
+          <p>(2) 半加算器は、和$s=$XOR(a,b)、桁上がり$c_{out}=$AND(a,b)で計算される。$(a,b)=(0,0),(0,1),(1,0),(1,1)$の順に：<br>
+          $s$：$0,1,1,0$ より<span class="blank">タ=0110</span>。<br>
+          $c_{out}$：$0,0,0,1$ より<span class="blank">チ=0001</span>。<br>
+          論理関数表現：<span class="blank">ツ=XOR(a,b)</span>、<span class="blank">テ=AND(a,b)</span>。</p>
+          <p>(3) 入力$a,b$を1個のXORゲートに通して和$s$を得るとともに、同じ入力$a,b$を1個のANDゲートに通して桁上がり$c_{out}$を得る。すなわちXORゲート1個とANDゲート1個から構成される、合計2ゲートの回路になる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>ア=0010・カ=G／イ=0110・キ=A・ス=I／ウ=1000・ク=F・セ=M／エ=1101・ケ=H／オ=1110・コ=B・ソ=L／サ=K／シ=J／タ=0110／チ=0001／ツ=XOR(a,b)／テ=AND(a,b)</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識B — ド・モルガンの法則とゲートの対応、半加算器の位置づけ</span>
+        <p>ド・モルガンの法則$\overline{x\cdot y}=\overline{x}+\overline{y}$、$\overline{x+y}=\overline{x}\cdot\overline{y}$を使うと、「AND/ORの否定」がそれぞれNAND/NORという基本ゲートに対応することがきれいに整理できる。この問題でも、$\overline{x}+\overline{y}=\overline{xy}=$NAND(x,y)、$\overline{x}\cdot\overline{y}=\overline{x+y}=$NOR(x,y)という対応が現れており、MIL記法ではNAND・NORはそれぞれAND形・OR形の出力側に小さな丸（否定の記号）を付けた形で表される。また、この問題の半加算器（XORゲート＋ANDゲートの2ゲート構成）は、この科目で繰り返し登場する基本回路であり、他の年度の個別問題で出題される全加算器（半加算器を2つとORゲートで構成できる）や、それをさらに連結した多ビット加算器の土台になっている。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2015.html">← 2015年度へ</a>
+    <a href="kakomon_2013.html">2013年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

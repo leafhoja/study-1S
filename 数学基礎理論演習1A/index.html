@@ -1,0 +1,85 @@
+<!DOCTYPE html><!-- 「数学基礎理論演習 過去問解説」の一覧ページ。掲載されたページへ移動する入口をまとめる。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>数学基礎理論演習 過去問解説</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../subject-home.css">
+<style>/* このページ内の要素に適用する、色・文字サイズ・配置などの指定。 */
+  .how-to-use { background: #fffbeb; border: 1px solid #fbbf24; border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-bottom: 2rem; font-family: var(--font-sans); font-size: 0.875rem; line-height: 1.7; }
+  .how-to-use h3 { color: #92400e; margin-bottom: 0.5rem; font-size: 0.9rem; }
+</style>
+</head>
+<body class="subject-home home-math-exercises" data-nav-page="note-index">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">数学基礎理論演習</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html" class="active">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>数学基礎理論演習　過去問解説</h1>
+  <p class="subtitle">微分積分学・線形代数学演習の過去問 解答・解説</p>
+  <p class="meta">榎園誠｜2026年 S2ターム</p>
+</div>
+
+<!-- この科目のノートを探す入力欄と検索結果欄。検索の動作は共通のsearch.jsが担当する。 --><div class="search-box" data-search>
+  <div class="search-input-row">
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input type="search" class="search-input" placeholder="数学基礎理論演習 内を検索（用語・キーワード）…" autocomplete="off" aria-label="数学基礎理論演習 内を検索">
+  </div>
+  <div class="search-results" hidden></div>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <h3>📖 この解説集の使い方</h3>
+    各回の解説ページでは，<strong>（1）なぜその方針を取るのか，（2）計算の詳細，（3）思考の出所，（4）必要な知識，（5）自力で解くための練習法</strong>を網羅しています。答えを読む前に，まず自分で考えてみることを強く勧めます。
+  </div>
+
+  <!-- 過去問 -->
+  <div>
+    <div class="subject-header">
+      📝 過去問
+    </div>
+    <div class="subject-body">
+      <!-- 講義や小テストのページへ移動するカードを一覧にする。 --><div class="lecture-grid">
+        <div class="lecture-card" style="border-color:#805ad5;" data-page="kakomon/kakomon_calc_01">
+          <a href="kakomon/kakomon_calc_01.html">
+            <div class="lc-num">微分積分学演習 小テスト</div>
+            <div class="lc-title">一様連続性・リーマン積分・積分方程式・重積分・広義積分</div>
+            <div class="lc-status" style="color:#805ad5;">✓ 解説あり &nbsp;2025.12.16</div>
+          </a>
+        </div>
+        <div class="lecture-card" style="border-color:#805ad5;" data-page="kakomon/kakomon_lin_01">
+          <a href="kakomon/kakomon_lin_01.html">
+            <div class="lc-num">線形代数学演習 小テスト</div>
+            <div class="lc-title">複素内積・行列式の恒等式・二次形式・対角化・固有値</div>
+            <div class="lc-status" style="color:#805ad5;">✓ 解説あり &nbsp;2025.12.23</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数学基礎理論演習（榎園誠）ー2026前期課程S2ターム</footer>
+
+<script src="../common.js"></script>
+<script src="nav.js"></script>
+<script src="../access-ui.js"></script>
+<script src="../search.js"></script>
+</body>
+</html>

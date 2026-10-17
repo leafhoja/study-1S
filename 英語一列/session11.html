@@ -1,0 +1,126 @@
+<!DOCTYPE html><!-- 「Session 11 — The Man Who Tried to Redeem the World with Logic (1) | 英語一列①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>Session 11 — The Man Who Tried to Redeem the World with Logic (1) | 英語一列①</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="eng.css">
+</head>
+<body data-nav-page="session11">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">英語一列①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">ホーム</a>
+      <a href="session9.html" data-page="session9">Session 9</a>
+      <a href="session10.html" data-page="session10">Session 10</a>
+      <a href="session11.html" data-page="session11" class="active">Session 11</a>
+      <a href="session12.html" data-page="session12">Session 12</a>
+      <a href="session13.html" data-page="session13">Session 13</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>Session 11</h1>
+  <p class="subtitle">The Man Who Tried to Redeem the World with Logic — Part I（Walter Pitts と McCulloch）</p>
+</div>
+
+<div class="eng-body">
+
+  <p class="notice">
+    <span class="notice-vocab">紫色は語彙</span>、<span class="notice-entity">青緑色は人物・事件などの文脈注</span>です。タップすると補足が表示され、ページ末尾に別々の一覧があります。
+    段落単位の対訳ではなく<strong>1文ずつ</strong>英文と直訳を対応させたい場合は
+    <a href="session11-taiyaku.html">→ 一文対訳・構文解説ページ</a>へ。
+  </p>
+
+  <div class="exam-link-box">
+    この Session の冒頭は 2024年度過去問 Section A（Q1〜Q5）と一致する。
+    <a href="過去問/session11.html">→ 過去問（2024年度）を見る</a>
+  </div>
+
+  <!-- 英文と日本語の説明を対応させて、本文を読み進められるようにする。 --><div class="passage">
+
+    <div class="para-pair">
+      <div><div class="para-label">Text</div><div class="para-en">Walter Pitts was used to being <span class="vw" data-w="bully">bullied</span>. He'd been born into a tough family in <span class="vw" data-w="Prohibition-era">Prohibition-era</span> Detroit, where his father, a <span class="vw" data-w="boilermaker">boilermaker</span>, had no trouble raising his fists to <span class="vw" data-w="get one's way">get his way</span>. The neighborhood boys weren't much better. One afternoon in 1935, they chased him through the streets until he <span class="vw" data-w="duck into">ducked into</span> the local library to hide. The library was <span class="vw" data-w="familiar ground">familiar ground</span>, where he had <span class="vw" data-w="teach oneself">taught himself</span> Greek, Latin, logic, and mathematics—better than home, where his father <span class="vw" data-w="insist">insisted</span> he <span class="vw" data-w="drop out">drop out</span> of school and go to work. Outside, the world was <span class="vw" data-w="messy">messy</span>. Inside, it all <span class="vw" data-w="make sense">made sense</span>. Not wanting to <span class="vw" data-w="risk">risk</span> another <span class="vw" data-w="run-in">run-in</span> that night, Pitts stayed hidden until the library closed for the evening. Alone, he <span class="vw" data-w="wander">wandered</span> through the <span class="vw" data-w="stack">stacks</span> of books until he came across <em>Principia Mathematica</em>, a three-<span class="vw" data-w="volume">volume</span> <span class="vw" data-w="tome">tome</span> written by Bertrand Russell and Alfred Whitehead between 1910 and 1913, which <span class="vw" data-w="attempt">attempted</span> to <span class="vw" data-w="reduce A to B">reduce</span> all of mathematics to pure logic. Pitts sat down and began to read. For three days he remained in the library until he had read each volume <span class="vw" data-w="cover to cover">cover to cover</span>—nearly 2,000 pages in all—and had <span class="vw" data-w="identify">identified</span> several mistakes. Deciding that Bertrand Russell himself needed to know about these, the boy <span class="vw" data-w="draft">drafted</span> a letter to Russell <span class="vw" data-w="detail">detailing</span> the errors. Not only did Russell write back, he was so <span class="vw" data-w="impress">impressed</span> that he invited Pitts to study with him as a <span class="vw" data-w="graduate student">graduate student</span> at Cambridge University in England. Pitts couldn't <span class="vw" data-w="oblige">oblige</span> him, though—he was only 12 years old. But three years later, when he heard that Russell would be visiting the University of Chicago, the 15-year-old ran away from home and <span class="vw" data-w="head for">headed for</span> Illinois. He never saw his family again.</div></div>
+      <div><div class="para-label">和訳</div><div class="para-ja">ウォルター・ピッツはよくいじめられていた。彼は禁酒法時代のデトロイトの劣悪な家庭に生まれた。金属工場で働く彼の父は、意に満たないことがあるとすぐに手を上げた。近所の男の子たちも彼につらく当たった。1935年のある日の昼下がり、ピッツは彼らに道で追いかけられ、隠れるために図書館に逃げ込んだ。その図書館は彼がよく行き、ギリシア語やラテン語、論理学、数学を勉強した場所だった。家では退学して働けと父が言ってくるので、図書館のほうが勉強しやすかったのだ。ピッツにとって、彼の外の世界は厄介ごとにあふれていたが、内なる世界ではすべてが秩序だっていた。ふたたび揉め事になる危険を冒したくなかったピッツはその夜、閉館までずっと図書館に隠れていた。書庫の間を彼がひとりで歩いていると、『プリンキピア・マテマティカ』が目に飛び込んできた。同書はバートランド・ラッセルとアルフレッド・ホワイトヘッドによって1910年から1913年にかけて書かれた全３巻の大著で、数学のすべてを純粋な論理に落とし込もうとしたものである。ピッツは座ってそれを読み始めた。彼は３日間図書館に入り浸り、合わせてほぼ2000ページあったが、最初から最後まで読み切った。そして彼は読み進めるなかでいくつかの間違いを発見した。ラッセルにそれを知らせなければと考えた彼は、少年ながら誤りを説明する手紙をラッセルに送った。ラッセルは非常に感心し、返事を送るのはもちろん、イングランドのケンブリッジ大学で院生として彼のもとで学ぶようピッツを誘った。しかし、ピッツはそれには応えられなかった。なにせ彼はまだ12歳だったのだ。けれども３年後、ラッセルがシカゴ大学にやってくると聞き、15歳になったピッツは家を飛び出してイリノイへ向かった。それ以来、彼が家族に会うことはなかった。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">In 1923, the year that Walter Pitts was born, a 25-year-old Warren McCulloch was also <span class="vw" data-w="digest">digesting</span> the <em>Principia</em>. But that is where the similarities ended—McCulloch could not have come from a more different world. Born into a <span class="vw" data-w="well-to-do">well-to-do</span> East Coast family of lawyers, doctors, <span class="vw" data-w="theologian">theologians</span>, and engineers, McCulloch attended a private boys academy in New Jersey, then studied mathematics at Haverford College in Pennsylvania, then philosophy and psychology at Yale. In 1923 he was at Columbia, where he was studying "experimental <span class="vw" data-w="aesthetics">aesthetics</span>" and was about to earn his medical degree in <span class="vw" data-w="neurophysiology">neurophysiology</span>. But McCulloch was a philosopher <span class="vw" data-w="at heart">at heart</span>. He wanted to know what it means to know. Freud had just published <em>The Ego and the Id</em>, and <span class="vw" data-w="psychoanalysis">psychoanalysis</span> was all the <span class="vw" data-w="rage">rage</span>. McCulloch didn't <span class="vw" data-w="buy">buy</span> it—he felt certain that somehow the mysterious <span class="vw" data-w="workings">workings</span> and <span class="vw" data-w="failing">failings</span> of the mind were <span class="vw" data-w="rooted in">rooted in</span> the purely mechanical <span class="vw" data-w="firing">firings</span> of neurons in the brain.</div></div>
+      <div><div class="para-ja">ピッツが生まれた1923年、25歳だったウォーレン・マカロックも『プリンキピア』を読み込んでいた。しかし、彼らに共通しているのはそれくらいであった。マカロックとピッツとでは、住む世界がまるで異なっていたのだ。東海岸の、弁護士や医者、神学者、工学者のいる裕福な家に生まれたマカロックは、ニュージャージーにある私立の男子校に通ったあと、ペンシルベニアのハバフォード大学で数学を、そののちイェール大学で哲学と心理学を学んだ。1923年には彼はコロンビア大学で実験美学を学んでおり、神経生理学分野での医学学位を取得する直前だった。しかし、マカロックは根幹のところでは哲学者的であった。彼は「知っている」とはどういうことかを知りたいと思っていた。ちょうどそのころ、フロイトが『自我とエス』を発表し、精神分析が大流行していた。しかしマカロックはそれには興味を示さなかった。彼は、精神の働きや欠陥は何らかのしかたで脳のニューロンの純粋に機械的な発火に由来している、と確信していたのだ。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">Though they started <span class="vw" data-w="at opposite ends of the spectrum">at opposite ends of the <span class="vw" data-w="socioeconomic">socioeconomic</span> spectrum</span>, McCulloch and Pitts were <span class="vw" data-w="destined">destined</span> to live, work, and die together. <span class="vw" data-w="along the way">Along the way</span>, they would create the first <span class="vw" data-w="mechanistic">mechanistic</span> theory of the mind, the first <span class="vw" data-w="computational">computational</span> approach to neuroscience, the logical design of modern computers, and the <span class="vw" data-w="pillar">pillars</span> of <span class="vw" data-w="artificial intelligence">artificial intelligence</span>. But this is more than a story about a <span class="vw" data-w="fruitful">fruitful</span> research <span class="vw" data-w="collaboration">collaboration</span>. It is also about the <span class="vw" data-w="bond">bonds</span> of friendship, the <span class="vw" data-w="fragility">fragility</span> of the mind, and the limits of logic's ability to <span class="vw" data-w="redeem">redeem</span> a messy and <span class="vw" data-w="imperfect">imperfect</span> world.</div></div>
+      <div><div class="para-ja">育った社会経済的環境は正反対だったが、ピッツとマカロックは共に生き、働き、そして死ぬ運命にあった。その過程で彼らは、脳についての最初の機械論的な理論や神経科学への計算論的アプローチ、現代のコンピュータの論理設計、さらにはAIの基となるものをも構築した。しかし、この彼らの物語は、多くの成果を上げた共同研究にとどまるものではない。それはまた、固く結ばれた友情や、精神のもつ脆弱さ、そして複雑で不完全な世界を論理によって救うことの限界の話でもある。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">Standing <span class="vw" data-w="face to face">face to face</span>, they were an <span class="vw" data-w="unlikely pair">unlikely pair</span>. McCulloch, 42 years old when he met Pitts, was a confident, gray-eyed, <span class="vw" data-w="wild-bearded">wild-bearded</span>, <span class="vw" data-w="chain-smoking">chain-smoking</span> <span class="vw" data-w="philosopher-poet">philosopher-poet</span> who <span class="vw" data-w="live on">lived on</span> whiskey and ice cream and never went to bed before 4 a.m. Pitts, 18, was small and shy, with a long forehead that <span class="vw" data-w="prematurely">prematurely</span> aged him, and a <span class="vw" data-w="squat">squat</span>, <span class="vw" data-w="ducklike">ducklike</span>, <span class="vw" data-w="bespectacled">bespectacled</span> face. McCulloch was a <span class="vw" data-w="respected">respected</span> scientist. Pitts was a homeless <span class="vw" data-w="runaway">runaway</span>. He'd been <span class="vw" data-w="hang around">hanging around</span> the University of Chicago, working a <span class="vw" data-w="menial">menial</span> job and <span class="vw" data-w="sneak">sneaking</span> into Russell's lectures, where he met a young medical student named Jerome Lettvin. It was Lettvin who introduced the two men. The moment they spoke, they realized they shared a hero <span class="vw" data-w="in common">in common</span>: Gottfried Leibniz. The 17th-century philosopher had attempted to create an alphabet of human thought, each letter of which <span class="vw" data-w="represent">represented</span> a concept and could be combined and <span class="vw" data-w="manipulate">manipulated</span> according to a set of logical rules to compute all knowledge—a <span class="vw" data-w="vision">vision</span> that promised to <span class="vw" data-w="transform">transform</span> the imperfect outside world into the <span class="vw" data-w="rational">rational</span> <span class="vw" data-w="sanctuary">sanctuary</span> of a library.</div></div>
+      <div><div class="para-ja">差し向かいになると、彼らは全く不釣り合いであった。ピッツと出会ったときマカロックは42歳であったが、彼は自信家で、グレーの目を持ち、髭をたくわえ、いつもタバコを吸っている、哲学者兼詩人とでもいうべき人物であり、ウィスキーとアイスクリームに溺れ、床に就くのはいつも4時を回ってからだった。一方のピッツは当時18歳で、小柄で内気、広い額のせいで年の割に老いて見え、ずんぐりしてアヒルのような顔に眼鏡をかけていた。マカロックは高い評価を受けている科学者であった。ピッツは家を飛び出した宿なしの青年であった。ピッツはシカゴ大学に出入りし、雑用をして暮らし、ラッセルの講義に潜っていた。その講義で出会ったのがジェローム・レトヴィンという若い医学生であった。レトヴィンこそが、ピッツとマカロックを引き合わせた人物である。話し始めた二人はすぐに、彼らがともにある人物を英雄視していることに気づいた。すなわちゴットフリート・ライプニッツ、17世紀の哲学者である。ライプニッツは、人間の思考の記号体系を作り上げようと試みた。それぞれの記号が一つの概念を表し、それらを論理規則に従って組み合わせて用いることで、あらゆる知を演算しようという彼の展望は、実現すれば不完全な外部の世界を理性の支配する知の聖域へと一変させるものであった。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">McCulloch explained to Pitts that he was trying to model the brain with a Leibnizian logical <span class="vw" data-w="calculus">calculus</span>. He had been <span class="vw" data-w="inspire">inspired</span> by the <em>Principia</em>, in which Russell and Whitehead tried to show that all of mathematics could be built <span class="vw" data-w="from the ground up">from the ground up</span> using basic, <span class="vw" data-w="indisputable">indisputable</span> logic. Their <span class="vw" data-w="building block">building block</span> was the <span class="vw" data-w="proposition">proposition</span>—the simplest possible <span class="vw" data-w="statement">statement</span>, either true or false. From there, they <span class="vw" data-w="employ">employed</span> the <span class="vw" data-w="fundamental">fundamental</span> operations of logic, like the <span class="vw" data-w="conjunction">conjunction</span> ("and"), <span class="vw" data-w="disjunction">disjunction</span> ("or"), and <span class="vw" data-w="negation">negation</span> ("not"), to link propositions into increasingly complicated networks. From these simple propositions, they <span class="vw" data-w="derive">derived</span> the full <span class="vw" data-w="complexity">complexity</span> of modern mathematics.</div></div>
+      <div><div class="para-ja">マカロックはピッツに、彼が試みている、ライプニッツの論理演算を用いた脳のモデル化について説明した。それは『プリンキピア』に着想を得たものであった。『プリンキピア』においてラッセルとホワイトヘッドは、数学はすべて基本的で疑い得ない論理を用いて一から構成し得ることを示そうとした。その際に基本単位となるのが命題、すなわち真か偽のいずれかとなる可能な限り単純な主張であった。そして、それをもとにして彼らは、論理積(and)や論理和(or)、論理否定(not)のような基本的な論理演算を利用して複数の命題を結びつけ、非常に複雑な命題のネットワークを作り上げる。つまり、単純な命題から演繹して、複雑な現代数学の全体を導き出したのである。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">Which got McCulloch thinking about neurons. He knew that each of the brain's <span class="vw" data-w="nerve cell">nerve cells</span> only fires after a minimum <span class="vw" data-w="threshold">threshold</span> has been <span class="vw" data-w="reach">reached</span>: Enough of its <span class="vw" data-w="neighboring">neighboring</span> nerve cells must send signals across the neuron's <span class="vw" data-w="synapse">synapses</span> before it will fire off its own electrical <span class="vw" data-w="spike">spike</span>. It <span class="vw" data-w="occur to">occurred to</span> McCulloch that this <span class="vw" data-w="setup">setup</span> was <span class="vw" data-w="binary">binary</span>—either the neuron fires or it doesn't. A neuron's signal, he realized, is a proposition, and neurons seemed to work like <span class="vw" data-w="logic gate">logic gates</span>, taking in multiple inputs and producing a single <span class="vw" data-w="output">output</span>. By <span class="vw" data-w="vary">varying</span> a neuron's firing threshold, it could be made to perform "and," "or," and "not" functions.</div></div>
+      <div><div class="para-ja">この試みがマカロックをニューロンについて考えるよう駆り立てた。脳の神経細胞が発火するのは閾値に達した後である。すなわち神経細胞は、隣接する十分な数の神経細胞からシナプスを通じてシグナルが送られることにより初めて自身もスパイクを生成する。マカロックは、ニューロンが発火するかしないかのいずれかであるその仕組みが2進数的だと考えついた。つまり、ニューロンの発するシグナルは命題であり、ニューロンは複数の入力を受けて一つの出力を生み出すという論理ゲートのような役目を果たしているようだ、と彼は気づいたのである。そして、ニューロンが発火する閾値を変えることにより、ニューロンはandやor, notの機能を果たすようにできる、と。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en"><span class="vw" data-w="fresh from">Fresh from</span> reading a new paper by a British mathematician named Alan Turing which <span class="vw" data-w="prove">proved</span> the <span class="vw" data-w="possibility">possibility</span> of a machine that could compute any function (so long as it was possible to do so in a <span class="vw" data-w="finite">finite</span> number of steps), McCulloch became <span class="vw" data-w="convinced">convinced</span> that the brain was just such a machine—one which uses logic <span class="vw" data-w="encode">encoded</span> in <span class="vw" data-w="neural network">neural networks</span> to compute. Neurons, he thought, could be <span class="vw" data-w="link together">linked together</span> by the rules of logic to build more complex <span class="vw" data-w="chain of thought">chains of thought</span>, <span class="vw" data-w="in the same way that">in the same way that</span> the <em>Principia</em> linked chains of propositions to build complex mathematics.</div></div>
+      <div><div class="para-ja">アラン・チューリングというイギリスの数学者により発表された、有限の回数で計算できるものであれば、いかなる関数をも計算できる機械の可能性を示した論文を読んだばかりであったマカロックは、脳はまさにそのような機械、つまり神経回路網へと符号化された論理を用いて計算を行なう機械であると確信した。『プリンキピア』が命題の鎖を繋ぎ合わせて複雑な数学を作り上げたように、ニューロンも論理規則によって繋ぎ合わされ、それによってより複雑な思考体系を組み立てることができる、と彼は考えるようになった。</div></div>
+    </div>
+
+    <div class="para-pair">
+      <div><div class="para-en">As McCulloch explained his project, Pitts <span class="vw" data-w="understand">understood</span> it <span class="vw" data-w="immediately">immediately</span>, and knew exactly which mathematical tools could be used. McCulloch, <span class="vw" data-w="enchant">enchanted</span>, invited the teen to live with him and his family in Hinsdale, a <span class="vw" data-w="rural suburb">rural suburb</span> on the <span class="vw" data-w="outskirts">outskirts</span> of Chicago. The Hinsdale household was a <span class="vw" data-w="bustling">bustling</span>, <span class="vw" data-w="free-spirited">free-spirited</span> <span class="vw" data-w="bohemia">bohemia</span>. Chicago intellectuals and <span class="vw" data-w="literary">literary</span> types <span class="vw" data-w="constantly">constantly</span> <span class="vw" data-w="drop by">dropped by</span> the house to discuss poetry, psychology, and <span class="vw" data-w="radical">radical</span> politics while Spanish Civil War and union songs <span class="vw" data-w="blare">blared</span> from the <span class="vw" data-w="phonograph">phonograph</span>. But late at night, when McCulloch's wife Rook and the three children went to bed, McCulloch and Pitts alone would <span class="vw" data-w="pour">pour</span> the whiskey, <span class="vw" data-w="hunker down">hunker down</span>, and attempt to build a computational brain from the neuron up.</div></div>
+      <div><div class="para-ja">マカロックが自らの研究の展望を説明すると、ピッツはすぐさまそれを理解し、どのような数学の手法を用いることができるかをちゃんと心得ていた。そのためマカロックは大喜びし、まだ10代であったピッツを、シカゴの外れにある鄙びた郊外・ヒンズデールにある彼の家に住もうと誘った。その家は、活気と自由に満ちた場所だった。シカゴの知識人や文人がひっきりなしに訪ねてきて、詩や心理、急進的な政治などについて語り合った。部屋の蓄音機からはスペイン内戦の歌や労働組合の歌が聞こえてきた。しかし夜が更け、マカロックの妻ルックや3人の子どもたちが床に就いた後は、マカロックとピッツは二人きりになり、ウイスキーを片手に、計算機械としての脳をニューロンをもとにして構築する試みについて、腰をすえて語り合った。</div></div>
+    </div>
+
+  </div><!-- /passage -->
+
+  <div class="wordbank-head">
+    <h2>単語帳 — Session 11</h2>
+    <p class="wordbank-hint">単語をタップすると語源・背景解説が表示されます。</p>
+  </div>
+  <!-- 単語の一覧を置く領域。読み込んだJavaScriptが項目を追加する。 --><div class="wordlist" id="wordbank"></div>
+
+</div><!-- /eng-body -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">英語一列①ー2026前期課程Sセメスター</footer>
+
+<script src="vocab11.js"></script>
+<script>const VOCAB = session11;</script>
+<script src="entities.js"></script>
+<script src="eng.js"></script>
+<script>// このセッションの語彙データから、単語・品詞・日本語の意味を一行ずつ作り、単語帳に追加する。
+
+  (function() {
+    const grid = document.getElementById('wordbank');
+    Object.keys(session11).forEach(key => {
+      const d = session11[key];
+      const row = document.createElement('div');
+      row.className = 'wl-row';
+      row.innerHTML = `
+        <span class="vw wl-word" data-w="${key}">${key}</span>
+        <span class="wl-pos">${d.pos}</span>
+        <span class="wl-meaning">${d.meaning}</span>`;
+      grid.appendChild(row);
+    });
+  })();
+</script>
+<script src="nav.js"></script>
+<script src="../common.js"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

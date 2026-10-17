@@ -1,0 +1,264 @@
+<!DOCTYPE html><!-- 「線形代数学① 期末試験 予想問題 第3回 解説 | 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>線形代数学① 期末試験 予想問題 第3回 解説 | 線形代数学①</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    macros: { R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}', Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}', rank: '\\operatorname{rank}' }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body data-nav-page="exam-yosou-3">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>線形代数学① 期末試験 予想問題 第3回</h1>
+  <p class="subtitle">2024年度・2025年度の出題パターンをもとに作成 &nbsp;|&nbsp; 第3回（全5問）&nbsp;|&nbsp; 詳細な解答・解説つき</p>
+</div>
+
+<div class="container">
+
+<!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+  <a href="予想問題_第1回.html">第1回</a>
+  <a href="予想問題_第2回.html">第2回</a>
+  <a href="予想問題_第3回.html" class="active">第3回</a>
+  <a href="予想問題_第4回.html">第4回</a>
+</div>
+<!-- ================= セット C ================= -->
+<!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="setC">
+  <div class="sec-header"><span class="sec-tag">予想問題 第3回</span><h2>第1問〜第5問</h2></div>
+</div>
+
+<!-- C-1 -->
+<section class="section" id="C1">
+  <div class="sec-header"><span class="problem-num">1</span> &nbsp;Kernel と Image の次元</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>以下の (a)–(d) を行列表示に持つ複素縦ベクトル空間の間の $\C$-線形写像それぞれについて kernel と image の次元を求めよ。</p>
+      $$\text{(a)}\begin{pmatrix}1&0&2\\2&1&3\\0&1&-1\\1&1&1\end{pmatrix},\quad
+      \text{(b)}\begin{pmatrix}1&-2&3\\2&-1&1\\-1&1&2\end{pmatrix},\quad
+      \text{(c)}\begin{pmatrix}1&1&1\\1&2&4\\1&3&9\end{pmatrix},\quad
+      \text{(d)}\begin{pmatrix}1&0&1&2\\0&1&1&1\\1&1&3&4\\2&1&4&6\end{pmatrix}$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：定理4.4・定理4.7・系4.8</div>
+      <p>今回も $\rank A$ が全ての鍵。(b)(c) は正方行列なので行列式，(a) は非正方なので行の一次関係，(d) も行の一次関係で判定する。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (a) — $4\times 3$ 行列，定義域 $\C^3$</div>
+      <p>行を $R_1=(1,0,2),R_2=(2,1,3),R_3=(0,1,-1),R_4=(1,1,1)$ とすると，$R_2-2R_1=(0,1,-1)=R_3$ ✓，$R_2-R_1=(1,1,1)=R_4$ ✓。$R_3,R_4$ はともに $R_1,R_2$ の一次結合。$R_1,R_2$ は比例しないので独立。よって $\rank A=2$。</p>
+      <p>$$\dim\Ker=3-2=\boxed{1},\qquad \dim\Im=\boxed{2}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (b) — $3\times 3$ 正方行列</div>
+      $$\det\begin{pmatrix}1&-2&3\\2&-1&1\\-1&1&2\end{pmatrix}=1(-2-1)-(-2)(4+1)+3(2-1)=-3+10+3=10\neq0$$
+      <p>正則なので $\rank A=3$。$$\dim\Ker=\boxed{0},\qquad \dim\Im=\boxed{3}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (c) — $3\times 3$ 正方行列（ヴァンデルモンド型）</div>
+      $$\det\begin{pmatrix}1&1&1\\1&2&4\\1&3&9\end{pmatrix}=1(18-12)-1(9-4)+1(3-2)=6-5+1=2\neq0$$
+      <p>正則なので $\rank A=3$。$$\dim\Ker=\boxed{0},\qquad \dim\Im=\boxed{3}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (d) — $4\times 4$ 正方行列</div>
+      <p>行を $R_1=(1,0,1,2),R_2=(0,1,1,1),R_3=(1,1,3,4),R_4=(2,1,4,6)$ とすると，一目で $R_4=R_1+R_3$（実際 $(1,0,1,2)+(1,1,3,4)=(2,1,4,6)$ ✓）。残る $R_1,R_2,R_3$ が独立であることは，$R_3-R_1=(0,1,2,2)$ が $R_2=(0,1,1,1)$ と比例しないことから確認できる。よって $\rank A=3$。</p>
+      <p>$$\dim\Ker=4-3=\boxed{1},\qquad \dim\Im=\boxed{3}$$</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 (c) はヴァンデルモンド行列——正則性が事前に予言できる</div>
+      <p>(c) の行列は各行が $(1,k,k^2)$（$k=1,2,3$）の形をしている，いわゆる<strong>ヴァンデルモンド行列</strong>の転置。ヴァンデルモンド行列式は $\prod_{i&lt;j}(x_j-x_i)$ という閉じた公式を持ち，$x_1,x_2,x_3=1,2,3$ がすべて相異なる限り必ず非零になる——つまり成分を計算する前から「正則である」ことが構造的に分かる。これは(a)(d)のような「行の一次関係を目で探す」タイプとは対照的に，行列の<strong>形</strong>そのものから性質を見抜く例であり，多項式の補間（第A3問・第C3問の単項式基底の話）とも根底でつながっている。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- C-2 -->
+<section class="section" id="C2">
+  <div class="sec-header"><span class="problem-num">2</span> &nbsp;基底の取り替えと行列表示</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$T:\R^4\to\R^3$ を行列 $A=\begin{pmatrix}1&2&1&4\\2&3&1&5\\1&1&2&5\end{pmatrix}$ により定まる $\R$-線形写像とする。</p>
+      <ol>
+        <li>$\R^4$ の基底 $\mathbf{b}_1=(1,1,0,0)^\top,\mathbf{b}_2=(0,1,0,0)^\top,\mathbf{b}_3=(0,0,1,1)^\top,\mathbf{b}_4=(0,0,1,0)^\top$ および $\R^3$ の基底 $\mathbf{c}_1=(1,1,1)^\top,\mathbf{c}_2=(1,2,2)^\top,\mathbf{c}_3=(2,3,4)^\top$ による $T$ の行列表示を求めよ。</li>
+        <li>$\R^3$ の基底であって，$\R^4$ の標準基底と組み合わせたときの $T$ の行列表示が $A$ と行同値な行標準形になるようなものを1つ与えよ。</li>
+      </ol>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：目標基底 $\{\mathbf{c}_i\}$ が $A$ の列そのものではない一般的なケース</div>
+      <p>本セット第2問では，本ページ第A2問と同じ $\mathbf{c}_1,\mathbf{c}_2,\mathbf{c}_3$ を使うが，$A$ が異なるので $C^{-1}$ から先に計算し直す必要がある——「同じ形の問題でも数値が変われば計算はやり直し」という当たり前だが見落としがちな注意点の確認でもある。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$A$ の列を $\mathbf{a}_1=(1,2,1)^\top,\mathbf{a}_2=(2,3,1)^\top,\mathbf{a}_3=(1,1,2)^\top,\mathbf{a}_4=(4,5,5)^\top$ とする。$C=\begin{pmatrix}1&1&2\\1&2&3\\1&2&4\end{pmatrix}$，$\det C=1$ より</p>
+      $$C^{-1}=\begin{pmatrix}2&0&-1\\-1&2&-1\\0&-1&1\end{pmatrix}$$
+      <p>$T(\mathbf{b}_1)=\mathbf{a}_1+\mathbf{a}_2=(3,5,2)^\top$。$C^{-1}(3,5,2)^\top=(6-2,\,-3+10-2,\,-5+2)^\top=(4,5,-3)^\top$</p>
+      <p>$T(\mathbf{b}_2)=\mathbf{a}_2=(2,3,1)^\top$。$C^{-1}(2,3,1)^\top=(4-1,\,-2+6-1,\,-3+1)^\top=(3,3,-2)^\top$</p>
+      <p>$T(\mathbf{b}_3)=\mathbf{a}_3+\mathbf{a}_4=(5,6,7)^\top$。$C^{-1}(5,6,7)^\top=(10-7,\,-5+12-7,\,-6+7)^\top=(3,0,1)^\top$</p>
+      <p>$T(\mathbf{b}_4)=\mathbf{a}_3=(1,1,2)^\top$。$C^{-1}(1,1,2)^\top=(2-2,\,-1+2-2,\,-1+2)^\top=(0,-1,1)^\top$</p>
+      $$[T]_{\gamma,\beta}=\begin{pmatrix}4&3&3&0\\5&3&0&-1\\-3&-2&1&1\end{pmatrix}$$
+      <p style="font-size:.85rem;color:var(--muted)">検算：$T(\mathbf{b}_3)-T(\mathbf{b}_4)=T(\mathbf{b}_3-\mathbf{b}_4)$。$\mathbf{b}_3-\mathbf{b}_4=(0,0,0,1)^\top$ で $T(0,0,0,1)^\top=\mathbf{a}_4=(4,5,5)^\top$，座標は $C^{-1}(4,5,5)^\top=(8-5,-4+10-5,-5+5)=(3,1,0)$。表の列3$-$列4 $=(3,0,1)-(0,-1,1)=(3,1,0)$ ✓ 一致。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$A$ を行簡約する：$R_2-2R_1=(0,-1,-1,-3)$，$R_3-R_1=(0,-1,1,1)$。$-1$ 倍して $R_2'=(0,1,1,3)$。$R_3-R_1-R_2'=(0,-1,1,1)-(0,1,1,3)=(0,-2,0,-2)$，$-\tfrac12$ 倍して $(0,1,0,1)$。$R_2'-(0,1,0,1)=(0,0,1,2)$。$R_1-2\times(0,1,0,1)-1\times(0,0,1,2)=(1,0,0,0)$。</p>
+      $$\mathrm{RREF}(A)=\begin{pmatrix}1&0&0&0\\0&1&0&1\\0&0&1&2\end{pmatrix}$$
+      <p>ピボット列は第1・2・3列。$\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ が新しい基底の候補。$\mathbf{a}_4=(4,5,5)^\top$ は RREF 第4列 $(0,1,2)$ の通り $\mathbf{a}_2+2\mathbf{a}_3$（$(2,3,1)+2(1,1,2)=(2,3,1)+(2,2,4)=(4,5,5)$ ✓）。</p>
+      <p>$$\boxed{\R^3\text{ の新しい基底}=\{(1,2,1)^\top,\ (2,3,1)^\top,\ (1,1,2)^\top\}}$$</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 目標基底がたまたま $A$ の列と一致していないと計算量は増える</div>
+      <p>本ページ第A2問・第B2問では目標基底 $\{\mathbf{c}_i\}$ の一部が $A$ の列と偶然一致していたため，座標がそのまま $(0,0,1)$ や $(0,1,0)$ のような単位ベクトルになる場面があった。本問ではそのような偶然が起きず，4本すべてが「本物の」一次結合になっている——これはむしろ一般的な状況であり，試験本番でも毎回都合よく単位ベクトルが出てくるとは限らない。$C^{-1}$ の計算さえ正確にできれば，あとは単なる行列積であることに変わりはない。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- C-3 -->
+<section class="section" id="C3">
+  <div class="sec-header"><span class="problem-num">3</span> &nbsp;微分作用素の kernel（偶数次元版）</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$V$ を次数が高々4であるような複素多項式のなす $\C$-ベクトル空間とする：$\dim V=5$。$\lambda\in\C$ に対して $\C$-線形写像 $D_\lambda:V\to V$ を</p>
+      $$D_\lambda(f(X))=-X^2\frac{d^2f}{dX^2}(X)+3X\frac{df}{dX}(X)-\lambda f(X)$$
+      <p>で定める。$\dim\Ker(D_\lambda)$ を求めよ。さらに $\dim\Ker(D_\lambda)>0$ となる全ての $\lambda\in\C$ に対して $\Ker(D_\lambda)$ の基底を1つ与えよ。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：単項式基底での対角化（本ページ第A3問と同じ手法・偶数次元での挙動の違い）</div>
+      <p>$f=X^k$ に対し $D_\lambda(X^k)=\bigl(-k(k-1)+3k-\lambda\bigr)X^k=\bigl(k(4-k)-\lambda\bigr)X^k$（$k=0,\ldots,4$）。今回は $\dim V=5$（奇数個の基底ベクトル，$k=0,\ldots,4$）なので，対称の中心 $k=2$ がちょうど整数になる点が第A3問（$\dim V=6$，中心が非整数）と異なる。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答</div>
+      <p>$k(4-k)$ の値は $k=0,1,2,3,4$ に対し $0,3,4,3,0$。ペア $(0,4)\to0$，$(1,3)\to3$ は多重度2，中心 $k=2\to4$ だけは相方がおらず多重度1。</p>
+      <table class="axiom-table">
+        <tr><th>$\lambda$</th><th>$\dim\Ker(D_\lambda)$</th><th>基底</th></tr>
+        <tr><td>$0$</td><td>$2$</td><td>$\{1,\ X^4\}$</td></tr>
+        <tr><td>$3$</td><td>$2$</td><td>$\{X,\ X^3\}$</td></tr>
+        <tr><td>$4$</td><td>$1$</td><td>$\{X^2\}$</td></tr>
+        <tr><td>その他</td><td>$0$</td><td>—</td></tr>
+      </table>
+      <p>$$\boxed{\dim\Ker(D_\lambda)=\#\{k\in\{0,\ldots,4\}\mid k(4-k)=\lambda\}}$$</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 中心が整数か否かで「孤立した固有値」が出るかどうかが決まる</div>
+      <p>第A3問（$n=5$，奇数）ではペアがすべて相異なる整数同士で組めたため孤立点が生じなかったのに対し，本問（$n=4$，偶数）では中心 $k=n/2=2$ が整数になり，$k=2$ 自身とペアを組む相手がいない（$k=4-2=2$ で自分自身）ため，$\lambda=4$ だけ多重度1のまま孤立する。一般に，$k=0,\ldots,n$（$n+1$個の基底ベクトル）に対して対称な固有値関数 $\mu(k)=\mu(n-k)$ を考えるとき，<strong>$n$ が偶数なら中心 $k=n/2$ がちょうど1つ孤立し，$n$ が奇数なら孤立点は生まれず全てペアになる</strong>——$n+1$ 個の基底ベクトルを $\lceil(n+1)/2\rceil$ 個の固有値グループに分配する際の偶奇の効果が，この2つの問題の違いの本質である。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- C-4 -->
+<section class="section" id="C4">
+  <div class="sec-header"><span class="problem-num">4</span> &nbsp;相異なる固有値を持つ場合の不変部分空間の総数</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$T:\R^4\to\R^4$ を行列 $A=\mathrm{diag}(1,2,3,4)=\begin{pmatrix}1&0&0&0\\0&2&0&0\\0&0&3&0\\0&0&0&4\end{pmatrix}$ により定まる $\R$-線形写像とする。$T$ の不変部分空間は全部で何個あるか，理由とともに述べよ。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：ジョルダン細胞（本ページ第A4問）とは正反対のケース</div>
+      <p>第A4問の冪零ジョルダン細胞は固有値がただ1つ（$0$）しかなく，不変部分空間はわずか $n+1$ 個の「鎖」に限られた。本問は逆に<strong>4個すべての固有値が相異なる対角行列</strong>——固有ベクトル $\mathbf{e}_1,\mathbf{e}_2,\mathbf{e}_3,\mathbf{e}_4$ がそれぞれ独立な1次元固有空間をなす。この場合，不変部分空間は「$\{\mathbf{e}_1,\mathbf{e}_2,\mathbf{e}_3,\mathbf{e}_4\}$ のどの部分集合を選ぶか」で決まりそうだが，これを厳密に証明するには単なる「予想」では不十分——他に不変部分空間が紛れ込んでいないことを示す必要がある。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 — 一般定理（相異なる固有値 $n$ 個の場合）</div>
+      <p><strong>主張：</strong>$T$ が相異なる固有値 $\lambda_1,\ldots,\lambda_n$ を持つ対角化可能な作用素で，固有ベクトル $\mathbf{e}_1,\ldots,\mathbf{e}_n$（$T\mathbf{e}_i=\lambda_i\mathbf{e}_i$）が基底をなすとき，$T$ の不変部分空間は $$V_S:=\langle\mathbf{e}_i\mid i\in S\rangle\qquad(S\subseteq\{1,\ldots,n\})$$ の形のものに限られ，全部で $2^n$ 個ある。</p>
+      <p><strong>証明：</strong>$(\supseteq)$ 各 $V_S$ が不変であることは明らか（$T\mathbf{e}_i=\lambda_i\mathbf{e}_i\in V_S$）。$\mathbf{e}_i$ が独立なので，異なる $S$ は異なる $V_S$ を与え，$S$ の選び方は $2^n$ 通り。</p>
+      <p>$(\subseteq)$ 任意の不変部分空間 $V$ を取り，$\mathbf{v}=c_1\mathbf{e}_1+\cdots+c_n\mathbf{e}_n\in V$ とする。各 $j$ について，ラグランジュ補間の要領で多項式 $$p_j(t)=\prod_{i\neq j}\frac{t-\lambda_i}{\lambda_j-\lambda_i}$$ を作る（$\lambda_1,\ldots,\lambda_n$ が相異なるから分母は非零）。この多項式は $p_j(\lambda_i)=\delta_{ij}$（$i=j$ なら$1$，それ以外は$0$）を満たす。$V$ は不変なので $T$ を何度施しても $V$ から出ない，したがって $T$ の多項式 $p_j(T)$ を $\mathbf{v}$ に施しても $p_j(T)(\mathbf{v})\in V$。ところが</p>
+      $$p_j(T)(\mathbf{v})=\sum_i c_i\,p_j(T)(\mathbf{e}_i)=\sum_i c_i\,p_j(\lambda_i)\,\mathbf{e}_i=c_j\mathbf{e}_j$$
+      <p>（$p_j(T)\mathbf{e}_i=p_j(\lambda_i)\mathbf{e}_i$ は $T\mathbf{e}_i=\lambda_i\mathbf{e}_i$ を繰り返し使えば従う）。よって $c_j\mathbf{e}_j\in V$：$c_j\neq0$ ならば $\mathbf{e}_j\in V$。これが全ての $j$ について成り立つので，$\mathbf{v}=\sum_{j:c_j\neq0}c_j\mathbf{e}_j$ は「$V$ に属する $\mathbf{e}_j$ たちの一次結合」，すなわち $\mathbf{v}\in V_S$（$S=\{j\mid\mathbf{e}_j\in V\}$）。ゆえに $V\subseteq V_S$，また $S$ の定義から $V_S\subseteq V$ も成り立つので $V=V_S$。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 結論</div>
+      <p>本問では $n=4$（固有値 $1,2,3,4$ が相異なる）なので，不変部分空間は $\{\mathbf{e}_1,\mathbf{e}_2,\mathbf{e}_3,\mathbf{e}_4\}$ の部分集合の張る空間，全部で $$\boxed{2^4=16\text{ 個}}$$</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 $n+1$ 個（ジョルダン細胞）と $2^n$ 個（対角化可能）——なぜこんなに違うのか</div>
+      <p>第A4問の冪零ジョルダン細胞は「固有値が1つしかない」ため，不変部分空間が鎖状に一列にしか並ばず $n+1$ 個しかなかった。本問は真逆に「固有値が全部バラバラ」なので，各固有空間ごとに独立に「入れるか入れないか」を選べる自由度が生まれ $2^n$ 個まで爆発的に増える。この対比は，不変部分空間の個数が固有値の重複度（＝ジョルダン細胞の構造）にどれほど敏感に依存するかを最も鮮明に示している——本ページ第B4問・第D4問の「有限個 vs 無限個」の場合分けも，結局はこの2つの極端な例（一本の鎖 vs 完全にバラバラ）が組み合わさった中間状態にすぎない。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- C-5 -->
+<section class="section" id="C5">
+  <div class="sec-header"><span class="problem-num">5</span> &nbsp;$\rank(A^\top A)=\rank(A)$</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$m,n$ を正整数とし $A$ を実 $m\times n$ 行列とする。このとき $\rank(A^\top A)=\rank(A)$ を示せ（$A^\top A$ は $n\times n$ 行列であることに注意）。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答</div>
+      <p><strong>主張：$\Ker(A^\top A)=\Ker(A)$。</strong></p>
+      <p>$(\supseteq)$ $A\mathbf{x}=\mathbf{0}$ ならば $A^\top A\mathbf{x}=A^\top\mathbf{0}=\mathbf{0}$。よって $\Ker(A)\subseteq\Ker(A^\top A)$。</p>
+      <p>$(\subseteq)$ $A^\top A\mathbf{x}=\mathbf{0}$ とする。両辺に左から $\mathbf{x}^\top$ を掛けると $\mathbf{x}^\top A^\top A\mathbf{x}=0$。ここで $\mathbf{x}^\top A^\top A\mathbf{x}=(A\mathbf{x})^\top(A\mathbf{x})=\|A\mathbf{x}\|^2$（実ベクトルの標準内積で自分自身との内積はノルムの2乗）。よって $\|A\mathbf{x}\|^2=0$，実数の世界ではこれは $A\mathbf{x}=\mathbf{0}$ を意味する。ゆえに $\Ker(A^\top A)\subseteq\Ker(A)$。</p>
+      <p>以上より $\Ker(A^\top A)=\Ker(A)$，特に $\dim\Ker(A^\top A)=\dim\Ker(A)=n-\rank(A)$（定理4.4）。$A^\top A$ は $n\times n$ 行列なので，同じ定理4.4を $A^\top A:\R^n\to\R^n$ に適用すると</p>
+      $$\rank(A^\top A)=n-\dim\Ker(A^\top A)=n-(n-\rank(A))=\rank(A)\qquad\blacksquare$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：像ではなく核で比較する，しかも「内積」という新しい道具を使う</div>
+      <p>これまでの第5問（本ページ第A5問，過去問2024・2025年度第5問）はすべて $\Im$ の包含関係や次元定理を組み合わせる「像側」の議論だったのに対し，本問は<strong>核が完全に一致する</strong>ことを示す，より強い主張から出発する。しかも $\Ker(A^\top A)\subseteq\Ker(A)$ の証明では，行列の性質だけでなく「実ベクトルの内積は自分自身との内積が0なら零ベクトル」という<strong>実数体 $\R$ に特有の正定値性</strong>を使っている——これは複素数体 $\C$ でも標準内積（共役転置を使うエルミート内積）に置き換えれば同様に成り立つが，単なる転置（共役なし）のままでは複素数体では成立しない点に注意。$A^\top A$（あるいは複素の場合の $A^*A$）が正方行列であるにもかかわらず $A$ 自体は正方とは限らない，という非対称な設定でも rank の等式が言えるのがこの問題の面白さである。</p>
+    </div>
+
+  </div>
+</section>
+
+
+<div class="toc" style="justify-content:space-between;"><a href="予想問題_第2回.html">← 第2回</a><a href="予想問題_第4回.html">第4回 →</a></div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

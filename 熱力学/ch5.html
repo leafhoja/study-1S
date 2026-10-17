@@ -1,0 +1,660 @@
+<!DOCTYPE html><!-- 「第5章 応用例 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>第5章 応用例 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="td.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$','$']], displayMath: [['$$','$$']], tags: 'ams',
+    macros: { pd: ['\\left(\\frac{\\partial #1}{\\partial #2}\\right)_{#3}', 3] }
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body data-nav-page="ch5">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">熱力学ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">ホーム</a>
+      <a href="ch1.html" data-page="ch1">第1章</a>
+      <a href="ch2.html" data-page="ch2">第2章</a>
+      <a href="ch3.html" data-page="ch3">第3章</a>
+      <a href="ch4.html" data-page="ch4">第4章</a>
+      <a href="ch5.html" data-page="ch5" class="active">第5章</a>
+      <a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a>
+      <a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2014.html" data-page="kakomon_2014">2014</a>
+      <a href="kakomon_2012.html" data-page="kakomon_2012">2012</a>
+      <a href="kakomon_2011.html" data-page="kakomon_2011">2011</a>
+      <a href="kakomon_2010.html" data-page="kakomon_2010">2010</a>
+      <a href="kakomon_2009.html" data-page="kakomon_2009">2009</a>
+      <a href="kakomon_2008.html" data-page="kakomon_2008">2008</a>
+      <a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+    </div>
+  </div>
+</nav>
+
+<div class="chapter-layout">
+<!-- 本文の各節へ移動できる目次を、横の領域にまとめる。 --><aside class="sidebar">
+  <div class="sidebar-title">第5章 目次</div>
+  <ul class="sidebar-nav">
+    <li><a href="#s5-1">5.1 2相共存系</a></li>
+    <li class="sub-item"><a href="#s5-1-phase">相転移の概観</a></li>
+    <li class="sub-item"><a href="#s5-1-cc">Clausius-Clapeyronの関係式</a></li>
+    <li class="sub-item"><a href="#s5-1-proof">関係式の導出</a></li>
+    <li class="sub-item"><a href="#s5-1-app">応用例</a></li>
+    <li class="sub-item"><a href="#s5-1-approx">近似形と沸点の圧力依存性</a></li>
+    <li class="sub-item"><a href="#s5-1-maxwell">Maxwellの等面積則</a></li>
+    <li class="sub-item"><a href="#s5-1-critical">臨界点の条件</a></li>
+    <li><a href="#s5-2">5.2 ゴムの熱力学</a></li>
+    <li class="sub-item"><a href="#s5-2-setup">問題設定</a></li>
+    <li class="sub-item"><a href="#s5-2-helm">自由エネルギーとMaxwell関係式</a></li>
+    <li class="sub-item"><a href="#s5-2-ene">エネルギー弾性とエントロピー弾性</a></li>
+    <li class="sub-item"><a href="#s5-2-gj">Gough-Joule効果</a></li>
+    <li><a href="#s5-3">5.3 定期試験例題：ゴムの状態方程式</a></li>
+    <li class="sub-item"><a href="#s5-3-u">(1) 内部エネルギーの $l$ 依存性</a></li>
+    <li class="sub-item"><a href="#s5-3-cx">(2) 熱容量の比較</a></li>
+    <li class="sub-item"><a href="#s5-3-heat">(3) 等温過程の熱</a></li>
+    <li class="sub-item"><a href="#s5-3-adi">(5) 断熱曲線</a></li>
+  </ul>
+</aside>
+
+<main class="main-content">
+  <div class="chapter-header">
+    <div class="chapter-badge">第 5 章</div>
+    <h1>応用例</h1>
+    <p class="abstract">
+      前章までに構築した熱力学の理論を具体的な系に適用する。
+      2相共存系では Clausius-Clapeyron の関係式を導き、
+      ゴムの熱力学では気体とは異なる仕事の形 $\delta W = X\,dl$ を扱い、
+      Gough-Joule 効果（温めると縮む）を熱力学的に説明する。
+    </p>
+  </div>
+
+  <!-- ═══ 5.1 ═══ -->
+  <h2 id="s5-1">5.1 2相共存系</h2>
+
+  <h3 id="s5-1-phase">相転移の概観</h3>
+
+  <p>
+    液体と気体が共存するとき、温度 $T$ を固定した P-V 図は次のようになる：
+  </p>
+  <ul>
+    <li>$V < V_0$（液体のみ）：体積を変えても圧力がほぼ変化しない（液体は非圧縮性）</li>
+    <li>$V_0 \le V \le V_1$（液体＋気体の共存）：圧力は<strong>飽和蒸気圧 $P_S(T)$</strong> で一定</li>
+    <li>$V > V_1$（気体のみ）：Boyle–Charles 的な振る舞い</li>
+  </ul>
+  <p>
+    圧力を $P_S$ 以下に下げると（または体積を $V_1$ 以上に増やすと）液体→気体の<strong>相転移</strong>が起きる。
+    固体⇔液体の相転移にも類似した議論が成立する。
+  </p>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">豆知識</span>相図と三重点</div>
+    <div class="box-body">
+      <p>
+        P-T 図（相図）では固体・液体・気体の境界が3本の線として現れ、
+        3相が共存する<strong>三重点</strong>（水では $T = 273.16\,\mathrm{K}$，$P = 611.7\,\mathrm{Pa}$）が存在する。
+        臨界点より高温・高圧では液体と気体の区別がなくなる（超臨界流体）。
+        CO₂ の超臨界流体はカフェインの抽出（デカフェコーヒー）や半導体洗浄に使われる。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s5-1-cc">Clausius-Clapeyronの関係式</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>Clausius-Clapeyronの関係式</div>
+    <div class="box-body">
+      飽和蒸気圧 $P_S(T)$ の温度依存性：
+      $$\begin{aligned}
+        \frac{dP_S}{dT} &= \frac{S(T,V_1) - S(T,V_0)}{V_1 - V_0} \\
+        &= \frac{Q_{0\to1}}{T(V_1 - V_0)}
+      \end{aligned}$$
+      <p>
+        状態0：相0（例：液体），体積 $V_0$，圧力 $P_S$<br>
+        状態1：相1（例：気体），体積 $V_1$，圧力 $P_S$<br>
+        $Q_{0\to1} > 0$：相転移に必要な熱量（気化熱・融解熱など）<br>
+        $V_1 > V_0$（液体→気体）なので $dP_S/dT > 0$（飽和蒸気圧は温度とともに増大）
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">歴史</span>Clapeyron（1799–1864）とClausius</div>
+    <div class="box-body">
+      <p>
+        Émile Clapeyron はフランスの工学者で、1834 年に Carnot の結果をグラフィカルに表現し
+        相平衡の方程式を最初に導いた。
+        Clausius が 1850 年代に熱力学を再定式化する際にこれを厳密化して現在の形になった。
+        この式は「Clausius-Clapeyron の関係式」と両者の名を冠する。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s5-1-proof">Clausius-Clapeyron の導出</h3>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">導出</span>Helmholtz自由エネルギーを使った導出</div>
+    <div class="box-body">
+      <p>
+        等温過程 $(V_0, P_S) \to (V_1, P_S)$（液体→気体）で $dF = -P\,dV$，$P = P_S(T)$（一定）より：
+      </p>
+      $$F(T, V_1) - F(T, V_0) = -P_S(T)(V_1 - V_0) \quad \cdots(*)$$
+      <p>
+        温度を $T \to T + \Delta T$ にずらした同じ相転移を考える：
+      </p>
+      $$F(T+\Delta T, V_1) - F(T+\Delta T, V_0) = -(P_S + \tfrac{dP_S}{dT}\Delta T)(V_1 - V_0)$$
+      <p>
+        （注：厳密には共存する2相の体積 $V_0, V_1$ 自体も温度とともに少しずつ変化するが，
+        左辺の差を取る際にはその変化分同士が打ち消し合う。したがって $V_0, V_1$ を
+        温度 $T$ での値に固定したまま，$T+\Delta T$ での $F$ の値を評価してよい。）
+      </p>
+      <p>
+        左辺を $\left(\frac{\partial F}{\partial T}\right)_V = -S$ を使ってテイラー展開：
+      </p>
+      $$F(T+\Delta T, V_i) \approx F(T, V_i) - S(T, V_i)\Delta T$$
+      <p>代入して $(*)$ を差し引くと：</p>
+      $$-S(T,V_1)\Delta T + S(T,V_0)\Delta T = -\frac{dP_S}{dT}\Delta T(V_1 - V_0)$$
+      $$\therefore\quad \frac{dP_S}{dT} = \frac{S(T,V_1) - S(T,V_0)}{V_1 - V_0}$$
+      <p>等温過程で吸収する熱：$Q_{0\to1} = T[S(T,V_1) - S(T,V_0)]$（可逆等温加熱）より：</p>
+      $$\frac{dP_S}{dT} = \frac{Q_{0\to1}}{T(V_1 - V_0)}$$
+    </div>
+  </div>
+
+  <h3 id="s5-1-app">応用例</h3>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">応用</span>各種相転移への適用</div>
+    <div class="box-body">
+      <table class="td-table">
+        <thead><tr><th>相転移</th><th>$Q_{0\to1}$</th><th>$V_1 - V_0$</th><th>$dP_S/dT$</th><th>意味</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>液体→気体</td>
+            <td>$> 0$（気化熱）</td>
+            <td>$> 0$（気体の方が大きい）</td>
+            <td>$> 0$</td>
+            <td>温度を上げると蒸気圧が上がる<br>（山頂は低圧なので沸点が下がる）</td>
+          </tr>
+          <tr>
+            <td>固体→液体（一般）</td>
+            <td>$> 0$（融解熱）</td>
+            <td>$> 0$（液体の方がやや大きい）</td>
+            <td>$> 0$</td>
+            <td>圧力を上げると融点が上がる</td>
+          </tr>
+          <tr>
+            <td>固体（氷）→液体（水）</td>
+            <td>$> 0$</td>
+            <td>$< 0$（氷の方が体積大）</td>
+            <td>$< 0$</td>
+            <td>圧力を上げると融点が下がる<br>（スケートが滑れる理由の一部；実際の寄与は小さい）</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h3 id="s5-1-approx">Clausius-Clapeyron の近似形と沸点の圧力依存性</h3>
+
+  <p>
+    液体–気体の相転移では気体の体積が液体より遥かに大きい（$V_1 \gg V_0$）。
+    さらに気体を理想気体と近似すると，Clausius-Clapeyron 式を積分できる。
+    以降は1モルあたりの量で考え，$V_0, V_1$ をモル体積，$L \equiv Q_{0\to1}$ を
+    モル気化熱（潜熱）とする（$R$ もモル気体定数）。
+  </p>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>Clausius-Clapeyron の近似積分形</div>
+    <div class="box-body">
+      <p>近似：$V_1 - V_0 \approx V_1 = RT/P_S$（気体を理想気体，$R$ はモル気体定数）を代入：</p>
+      $$\frac{dP_S}{dT} = \frac{L}{T(V_1 - V_0)} \approx \frac{L P_S}{RT^2}$$
+      <p>$\dfrac{d\ln P_S}{dT} = \dfrac{L}{RT^2}$ と書き直して積分（$L$ を定数と近似）：</p>
+      $$\boxed{\begin{aligned}
+        \ln P_S &= -\frac{L}{RT} + \text{const} \\
+        &\implies P_S(T) = P_0\,e^{-L/(RT)}
+      \end{aligned}}$$
+      <p>
+        $L > 0$（気化熱）なので $P_S$ は温度の増加関数。温度が高いほど蒸気圧が指数的に高くなる。
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">応用</span>高地での沸点の計算</div>
+    <div class="box-body">
+      <p>
+        大気圧は標高 $h$ とともに（気体分子が重力による位置エネルギーをもつことのボルツマン因子として）
+        指数関数的に低下する。富士山頂（$h \approx 3776\,\mathrm{m}$）では
+        大気圧はおよそ $P(h) \approx 63\,\mathrm{kPa}$ まで下がる
+        （海面気圧 $P_{\rm atm,0} \approx 101\,\mathrm{kPa}$ の約6割）。
+      </p>
+      <p>
+        沸点 $T_b(h)$ とは，その標高での大気圧と飽和蒸気圧が等しくなる温度
+        $P(h) = P_S(T_b(h))$ のこと。上で得た近似積分形 $P_S(T) = P_0 e^{-L/(RT)}$ を，
+        海面での沸点 $T_{b,0} = 373\,\mathrm{K}$（$1\,\mathrm{atm}$）を基準にして比を取ると：
+      </p>
+      $$\begin{aligned}
+        \ln\frac{P(h)}{P_{\rm atm,0}} &= -\frac{L}{R}\left(\frac{1}{T_b(h)} - \frac{1}{T_{b,0}}\right) \\
+        &\implies \frac{1}{T_b(h)} = \frac{1}{T_{b,0}} - \frac{R}{L}\ln\frac{P(h)}{P_{\rm atm,0}}
+      \end{aligned}$$
+      <p>
+        水のモル気化熱 $L \approx 40.7\,\mathrm{kJ/mol}$，$R = 8.314\,\mathrm{J/(mol\,K)}$，
+        $P(h)/P_{\rm atm,0} \approx 0.62$ を代入すると $T_b(h) \approx 360\,\mathrm{K} \approx 87\,^\circ\mathrm{C}$。
+        標高が上がるほど沸点が下がるため，インスタントラーメンが山頂でうまく調理できないのはこのため。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s5-1-maxwell">Maxwell の等面積則（van der Waals 気体）</h3>
+
+  <p>
+    van der Waals 気体の $P$–$V$ 等温線には，安定性条件 $(\partial P/\partial V)_T < 0$ を破る
+    非物理的な領域が生じる。実際には相転移（液化）が起きてこの領域を避けるが，
+    飽和蒸気圧 $P_S(T)$ の値は<strong>Maxwell の等面積則</strong>で決まる。
+  </p>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>Maxwell の等面積則</div>
+    <div class="box-body">
+      <p>
+        温度 $T$（臨界温度以下）における液体の体積 $V_0$，気体の体積 $V_1$，
+        飽和蒸気圧 $P_S$ は次の<strong>等面積条件</strong>を満たす：
+      </p>
+      $$\int_{V_0}^{V_1} P_{\rm vdW}(T, V)\,dV = P_S(T)\,(V_1 - V_0)$$
+      <p>
+        これは「P-V 図で van der Waals 等温曲線と水平線 $P = P_S$ で囲まれた
+        上側の面積と下側の面積が等しい」という条件で，図的には：
+        $$S_{\rm 上} = S_{\rm 下}$$
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">導出</span>等面積則の熱力学的根拠</div>
+    <div class="box-body">
+      <p>
+        等温・等圧条件での相平衡の条件は，液体と気体の<strong>Gibbs 自由エネルギーが等しい</strong>：
+        $G_{\rm liquid}(T, P_S) = G_{\rm gas}(T, P_S)$。
+      </p>
+      <p>
+        van der Waals 等温曲線は不安定領域を含めて $V$ の関数として滑らかに繋がった
+        1本の解析的な曲線なので，液体側の点 $V_0$ から気体側の点 $V_1$ までこの曲線に沿って
+        連続的に $G$ を積分できる。$(\partial G/\partial P)_T = V$ に連鎖律を使うと：
+      </p>
+      $$\begin{aligned}
+        G(T,V_1) - G(T,V_0) &= \int_{V_0}^{V_1}\left(\frac{\partial G}{\partial V}\right)_T dV \\
+        &= \int_{V_0}^{V_1} V\left(\frac{\partial P}{\partial V}\right)_T dV = \int_{V_0}^{V_1} V\,dP
+      \end{aligned}$$
+      <p>ここで部分積分 $\displaystyle\int_{V_0}^{V_1} V\,dP = \big[PV\big]_{V_0}^{V_1} - \int_{V_0}^{V_1} P_{\rm vdW}(T,V)\,dV$ を使う。
+      始点・終点はともに飽和蒸気圧 $P_S$ にあるので $\big[PV\big]_{V_0}^{V_1} = P_S(V_1-V_0)$，よって：</p>
+      $$G(T,V_1) - G(T,V_0) = P_S(V_1-V_0) - \int_{V_0}^{V_1} P_{\rm vdW}(T,V)\,dV$$
+      <p>相平衡条件 $G_{\rm liquid} = G_{\rm gas}$（左辺 $=0$）を使うと：</p>
+      $$\int_{V_0}^{V_1}\left[P_{\rm vdW}(T,V) - P_S\right]dV = 0$$
+      <p>これが等面積則である。</p>
+    </div>
+  </div>
+
+  <h3 id="s5-1-critical">臨界点の条件と van der Waals 気体の臨界定数</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>臨界点の条件</div>
+    <div class="box-body">
+      <p>臨界点では等温曲線の変曲点が安定性の限界点と一致する：</p>
+      $$\left(\frac{\partial P}{\partial V}\right)_T = 0, \qquad
+        \left(\frac{\partial^2 P}{\partial V^2}\right)_T = 0$$
+      <p>
+        第1式は等温曲線の接線がその点で水平になること（安定性の限界，等温圧縮率
+        $K_T = -\frac{1}{V}(\partial V/\partial P)_T$ が発散する点）を表す。
+        温度を臨界温度 $T_c$ に近づけていくと，等温曲線上にあった局所的な極大・極小の
+        組（水平接線をもつ2点）がちょうど1点に退化する。この退化した点では接線が
+        水平であるだけでなく，曲線の凹凸も反転する直前の<strong>変曲点</strong>になっているため
+        第2式（2階微分もゼロ）が同時に要求される。つまり両条件が同時に成り立つ点こそが
+        臨界点である。
+      </p>
+      <p>（臨界点より高温では液体と気体の区別がなくなる。）</p>
+    </div>
+  </div>
+
+  <div class="box box-ex">
+    <div class="box-head"><span class="box-tag">計算</span>van der Waals 気体の臨界定数</div>
+    <div class="box-body">
+      <p>van der Waals 方程式（1モル）$P = RT/(V-b) - a/V^2$ を使い，臨界点の条件を解く：</p>
+      $$\begin{aligned}
+        \left(\frac{\partial P}{\partial V}\right)_T &= -\frac{RT}{(V-b)^2} + \frac{2a}{V^3} \\
+        &= 0 \quad \cdots(1)
+      \end{aligned}$$
+      $$\begin{aligned}
+        \left(\frac{\partial^2 P}{\partial V^2}\right)_T &= \frac{2RT}{(V-b)^3} - \frac{6a}{V^4} \\
+        &= 0 \quad \cdots(2)
+      \end{aligned}$$
+      <p>$(2)/(1)$ から：$\dfrac{2}{V-b} = \dfrac{3}{V} \implies V_c = 3b$。</p>
+      <p>$(1)$ に代入：$T_c = \dfrac{8a}{27Rb}$，$P_c = \dfrac{a}{27b^2}$。</p>
+      <p>普遍的な比：</p>
+      $$\begin{aligned}
+        \frac{P_c V_c}{RT_c} &= \frac{(a/27b^2)\cdot 3b}{R \cdot 8a/(27Rb)} \\
+        &= \frac{3}{8} = 0.375
+      \end{aligned}$$
+      <p>
+        実在気体ではこの値が $0.2 \sim 0.3$ 程度となり van der Waals の予測とずれるが，
+        気体と液体を統一的に記述する現象論的モデルとして有用。
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══ 5.2 ═══ -->
+  <h2 id="s5-2">5.2 ゴムの熱力学</h2>
+
+  <h3 id="s5-2-setup">問題設定とゴムの特徴</h3>
+
+  <table class="td-table">
+    <thead><tr><th>特徴</th><th>ゴム</th><th>金属ばね（比較）</th></tr></thead>
+    <tbody>
+      <tr><td>弾性率</td><td>非常に小さい（金属の $\sim 10^{-5}$ 倍）</td><td>大きい</td></tr>
+      <tr><td>弾性の温度依存性</td><td>あり（温めると固くなる）</td><td>ほぼなし</td></tr>
+      <tr><td>断熱伸長での温度変化</td><td>温度が上がる（気体を断熱膨張させると温度が下がるのとは逆）</td><td>ほぼなし</td></tr>
+      <tr><td>弾性の起源</td><td>エントロピー弾性が主</td><td>エネルギー弾性が主</td></tr>
+    </tbody>
+  </table>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>ゴムの仕事</div>
+    <div class="box-body">
+      <p>片側を固定したゴムを伸ばす状況を考える（ゴムはほぼ非圧縮性なので $dV = 0$ と近似する）：</p>
+      <ul>
+        <li>張力：$X$（スカラー）</li>
+        <li>自然長からの伸び量：$l$（$l > l_0$）</li>
+      </ul>
+      <p>
+        準静的過程での仕事（気体の $-PdV$ に対応）：気体では体積 $V$ を増やす方向に
+        仕事をされる代わりに $-PdV$ の形になるが，ゴムでは伸び $l$ を増やす方向に
+        仕事をされると $+X\,dl$ の形になる。すなわちゴムの $(X,l)$ は気体の
+        $(-P,V)$ に対応する共役な状態変数の組であり，$X$ が張力（気体の圧力に相当，
+        ただし符号は反対），$l$ が体積に相当する伸びの変数である。
+      </p>
+      $$\delta W = X\,dl$$
+      <p>第一法則・第二法則（$dV = 0$ なので $-PdV = 0$）：</p>
+      $$dU = X\,dl + T\,dS$$
+    </div>
+  </div>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">ミクロな理解</span>なぜエントロピー弾性か</div>
+    <div class="box-body">
+      <p>
+        ゴムはポリマー（長鎖高分子）が絡み合った構造をもつ。
+        自然長では鎖がランダムに曲がりくねって「乱雑」な状態（高エントロピー）。
+        伸ばすと鎖が引き伸ばされ配向し「整列した」状態（低エントロピー）になる。
+        系はエントロピーを増やす方向（縮む方向）に力を及ぼす → これが弾性力の起源。
+      </p>
+      <p>
+        これは気体の圧力（自由膨張によりエントロピーが増大する方向に力）と同じ論理。
+        $PV^\gamma = \text{const}$ の気体断熱曲線に対応するのが
+        ゴムの断熱曲線（後述）。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s5-2-helm">Helmholtz自由エネルギーとMaxwell関係式</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>ゴムのHelmholtz自由エネルギー</div>
+    <div class="box-body">
+      $F(T,l) = U - TS$ の微分：$dF = X\,dl - S\,dT$ より
+      $$X = \left(\frac{\partial F}{\partial l}\right)_T, \quad S = -\left(\frac{\partial F}{\partial T}\right)_l$$
+      <p>Maxwell 関係式（混合偏微分の可換性）：</p>
+      $$\left(\frac{\partial X}{\partial T}\right)_l = -\left(\frac{\partial S}{\partial l}\right)_T$$
+    </div>
+  </div>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">定理</span>ゴムのエネルギー方程式</div>
+    <div name="ene-eq" class="box-body">
+      $$\left(\frac{\partial U}{\partial l}\right)_T = X - T\left(\frac{\partial X}{\partial T}\right)_l$$
+      <p>
+        （気体のエネルギー方程式 $(\partial U/\partial V)_T = T(\partial P/\partial T)_V - P$ と対応している。
+        実際，先述の対応 $l \leftrightarrow V$，$X \leftrightarrow -P$ をこの式の右辺に代入すると
+        $-P - T(\partial(-P)/\partial T)_l = T(\partial P/\partial T)_V - P$ となり，気体の式に正確に一致する。）
+      </p>
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">導出</span>ゴムのエネルギー方程式</div>
+    <div class="box-body">
+      <p>$F = U - TS$ を $l$ で偏微分（$T$ 固定）：</p>
+      $$\begin{aligned}
+        \left(\frac{\partial F}{\partial l}\right)_T &= \left(\frac{\partial U}{\partial l}\right)_T \\
+        &\quad - T\left(\frac{\partial S}{\partial l}\right)_T
+      \end{aligned}$$
+      <p>左辺 $= X$（定義）。Maxwell 関係式 $(\partial S/\partial l)_T = -(\partial X/\partial T)_l$ を代入：</p>
+      $$X = \left(\frac{\partial U}{\partial l}\right)_T + T\left(\frac{\partial X}{\partial T}\right)_l$$
+      $$\therefore\quad \left(\frac{\partial U}{\partial l}\right)_T = X - T\left(\frac{\partial X}{\partial T}\right)_l$$
+    </div>
+  </div>
+
+  <h3 id="s5-2-ene">エネルギー弾性とエントロピー弾性</h3>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">定義</span>張力の2成分への分解</div>
+    <div class="box-body">
+      $$\begin{aligned}
+        X &= \underbrace{\left(\frac{\partial U}{\partial l}\right)_T}_{\text{エネルギー弾性}} \\
+        &\quad + \underbrace{T\left(\frac{\partial X}{\partial T}\right)_l}_{\text{エントロピー弾性}}
+      \end{aligned}$$
+      <ul>
+        <li><strong>エネルギー弾性</strong>：伸ばすと原子間ポテンシャルが増大する成分（金属で支配的）</li>
+        <li><strong>エントロピー弾性</strong>：伸ばすとエントロピーが減少するため元に戻ろうとする成分（ゴムで支配的）</li>
+      </ul>
+      <p>
+        $(\partial X/\partial T)_l > 0$（後の例から確認）なので、
+        温度が上がるほどエントロピー弾性（= 張力）が増す。
+        これが Gough-Joule 効果の熱力学的起源。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s5-2-gj">Gough-Joule効果</h3>
+
+  <div class="box box-note">
+    <div class="box-head"><span class="box-tag">現象</span>Gough-Joule効果</div>
+    <div class="box-body">
+      <ul>
+        <li><strong>観測 1</strong>（Gough，1805年発見）：一定の荷重（張力一定）をかけたゴムを
+        加熱すると縮む（冷やすと伸びる）。金属ばねとは逆。</li>
+        <li><strong>観測 2</strong>（Joule，1850年代）：ゴムを断熱状態で急激に伸ばすと温度が上がる
+        （気体を断熱膨張させると温度が下がるのとは対照的）。</li>
+      </ul>
+      <strong>観測 1 ⟺ 観測 2</strong> は熱力学的に等価であることが示される。
+    </div>
+  </div>
+
+  <div class="box box-prf">
+    <div class="box-head"><span class="box-tag">理論</span>観測 1 ⟺ 観測 2 の証明</div>
+    <div class="box-body">
+      <p>張力一定でのエントロピー $S(T,l)$ の全微分：</p>
+      $$\begin{aligned}
+        dS &= \left(\frac{\partial S}{\partial l}\right)_T dl + \left(\frac{\partial S}{\partial T}\right)_l dT \\
+        &= -\left(\frac{\partial X}{\partial T}\right)_l dl + \frac{C_l}{T}dT
+      \end{aligned}$$
+      <p>ここで $C_l = T(\partial S/\partial T)_l$ は長さ一定の熱容量。</p>
+      <p>断熱過程 $dS = 0$ より：</p>
+      $$\left(\frac{\partial T}{\partial l}\right)_S = \frac{T}{C_l}\left(\frac{\partial X}{\partial T}\right)_l$$
+      <p>$T > 0$，$C_l > 0$ なので：</p>
+      $$\left(\frac{\partial T}{\partial l}\right)_S \gtrless 0 \iff \left(\frac{\partial X}{\partial T}\right)_l \gtrless 0$$
+      <ul>
+        <li>「断熱伸長で温度が上昇」⟺「温度を上げると張力が増大（長さ一定）」</li>
+        <li>ゴムでは $(\partial X/\partial T)_l > 0$（後の例から確認）</li>
+        <li>→ 断熱伸長で温度が上昇（観測 2）</li>
+        <li>→ 一定の張力のもとで温度を上げるとエントロピー弾性が増し，張力を増やそうとする。
+            しかし張力を一定に保つ実験なので，安定性条件 $(\partial X/\partial l)_T > 0$
+            （伸ばすほど張力が増す；気体の安定性条件 $(\partial P/\partial V)_T < 0$ に対応）のもとでは，
+            長さを縮めることでこの増加分を打ち消すしかない → 長さが縮む（観測 1）</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ 5.3 ═══ -->
+  <h2 id="s5-3">5.3 定期試験例題：ゴムの状態方程式</h2>
+
+  <div class="box box-def">
+    <div class="box-head"><span class="box-tag">問題設定</span>ゴムの状態方程式</div>
+    <div class="box-body">
+      以下の2条件を仮定する：
+      <ol>
+        <li><strong>状態方程式</strong>：
+          $$X(T,l) = AT\left(\frac{l}{l_0} - \left(\frac{l_0}{l}\right)^2\right)$$
+          （$A > 0$：正の定数，$l_0$：自然長，$l > l_0$）
+        </li>
+        <li>長さ一定の熱容量 $C_l$ は温度に依存しない</li>
+      </ol>
+      <p>
+        <strong>注</strong>：この状態方程式は $X \propto T$（完全にエントロピー弾性）という仮定。
+        より精密な模型には Gaussian chain model や neo-Hookean model がある。
+        なお，原問題の設問(4)は本ノートでは割愛し，(1)(2)(3)(5)のみを扱う。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s5-3-u">(1) 内部エネルギーの $l$ 依存性（依存しないことを示せ）</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">解答 (1)</span>$(\partial U/\partial l)_T = 0$</div>
+    <div class="box-body">
+      <p>エネルギー方程式を使う。状態方程式から $(\partial X/\partial T)_l$ を計算：</p>
+      $$\begin{aligned}
+        \left(\frac{\partial X}{\partial T}\right)_l &= A\left(\frac{l}{l_0} - \frac{l_0^2}{l^2}\right) \\
+        &= \frac{X}{T}
+      \end{aligned}$$
+      <p>エネルギー方程式に代入：</p>
+      $$\left(\frac{\partial U}{\partial l}\right)_T = X - T\cdot\frac{X}{T} = X - X = 0$$
+      <p>
+        $U$ は $l$ に依存しない（理想気体で $(\partial U/\partial V)_T = 0$ になるのと同じ構造）。
+        状態方程式 $X \propto T$ という「エントロピー弾性のみ」という仮定がこれを保証する。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s5-3-cx">(2) 熱容量の比較 $C_X > C_l$</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">解答 (2)</span>$C_X > C_l$</div>
+    <div class="box-body">
+      <p>
+        (1) より $(\partial U/\partial l)_T = 0$ なので，$U$ の全微分 $dU = (\partial U/\partial T)_l\,dT + (\partial U/\partial l)_T\,dl$
+        の第2項が消え $dU = C_l\,dT$。第一法則 $dU = \delta Q + X\,dl$ に代入すると：
+      </p>
+      $$\delta Q = dU - X\,dl = C_l\,dT - X\,dl$$
+      <p>等張力条件 $dX = 0$（$X$ 一定）での $dT/dl$ を求める。$dX = (\partial X/\partial T)_l dT + (\partial X/\partial l)_T dl = 0$ から：</p>
+      $$\left(\frac{\partial l}{\partial T}\right)_X = -\frac{(\partial X/\partial T)_l}{(\partial X/\partial l)_T}$$
+      <p>
+        $(\partial X/\partial T)_l = X/T > 0$，$(\partial X/\partial l)_T = AT(1/l_0 + 2l_0^2/l^3) > 0$ なので
+        $(\partial l/\partial T)_X < 0$（温めると縮む；Gough-Joule効果の確認）。
+      </p>
+      $$\begin{aligned}
+        C_X &= \left(\frac{\delta Q}{dT}\right)_X = C_l - X\left(\frac{\partial l}{\partial T}\right)_X \\
+        &= C_l + \frac{X(\partial X/\partial T)_l}{(\partial X/\partial l)_T} > C_l
+      \end{aligned}$$
+      <p>（$X > 0$，$(\partial X/\partial T)_l > 0$，$(\partial X/\partial l)_T > 0$ なので第2項が正。
+      直観的には定圧熱容量 $> $ 定積熱容量と同じ論理。）</p>
+    </div>
+  </div>
+
+  <h3 id="s5-3-heat">(3) 等温過程 $l_1 \to l_2$（$l_1 < l_2$）での熱の出入り</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">解答 (3)</span>発熱過程</div>
+    <div class="box-body">
+      <p>等温 $dT = 0$ かつ $(\partial U/\partial l)_T = 0$ なので $dU = 0$，$\delta Q = -X\,dl$：</p>
+      $$\int_{l_1}^{l_2}\delta Q = -\int_{l_1}^{l_2} X\,dl < 0 \quad (\because X > 0,\; l_2 > l_1)$$
+      <p>→ <strong>発熱過程</strong>（ゴムを伸ばすと熱が出る）。</p>
+      <p>
+        エントロピー的に確認：$(\partial S/\partial l)_T = -(\partial X/\partial T)_l = -X/T < 0$ なので
+        等温伸長でエントロピーが減少 → 系から熱が出る（$\delta Q = T\,dS < 0$）。整合。
+      </p>
+    </div>
+  </div>
+
+  <h3 id="s5-3-adi">(5) 断熱曲線の方程式</h3>
+
+  <div class="box box-thm">
+    <div class="box-head"><span class="box-tag">解答 (5)</span>断熱曲線</div>
+    <div class="box-body">
+      <p>断熱 $\delta Q = 0$：$C_l\,dT = X\,dl = AT\left(\frac{l}{l_0} - \frac{l_0^2}{l^2}\right)dl$</p>
+      <p>変数分離：</p>
+      $$\frac{C_l}{T}dT = A\left(\frac{l}{l_0} - \frac{l_0^2}{l^2}\right)dl$$
+      <p>両辺を積分：</p>
+      $$C_l\ln T = A\left(\frac{l^2}{2l_0} + \frac{l_0^2}{l}\right) + \mathrm{const}$$
+      $$T = T_0'\exp\left[\frac{A}{C_l}\left(\frac{l^2}{2l_0} + \frac{l_0^2}{l}\right)\right]$$
+      <p>ここで $T_0'$ は積分定数。状態方程式 $X = AT(\cdots)$ に代入すると断熱曲線の $X$-$l$ 表示が得られる。</p>
+      <p>
+        <strong>注</strong>：この指数関数型の断熱曲線は理想気体の $T V^{\gamma-1} = \mathrm{const}$（べき乗型）とは
+        形が異なる。作業物質によって断熱曲線の形は変わる。
+      </p>
+    </div>
+  </div>
+
+  <hr class="section-sep">
+
+  <h2 id="summary">全章のまとめ</h2>
+
+  <div class="box box-imp">
+    <div class="box-head"><span class="box-tag">総括</span>熱力学の論理的構造</div>
+    <div class="box-body">
+      <ol>
+        <li>
+          <strong>基礎（第1章）</strong>：状態量・状態方程式・偏微分の数学<br>
+          キー：三変数の偏微分値の関係 $(\partial P/\partial V)_T(\partial V/\partial T)_P(\partial T/\partial P)_V = -1$
+        </li>
+        <li>
+          <strong>第一法則（第2章）</strong>：内部エネルギーと熱・仕事の等価性<br>
+          キー：$dU = \delta Q + \delta W$，準静的 $\delta W = -PdV$，Mayer $C_P = C_V + nR$
+        </li>
+        <li>
+          <strong>第二法則（第3章）</strong>：熱と仕事の非等価性→エントロピー<br>
+          キー：$\oint \delta Q/T \le 0$，$dS \ge \delta Q/T$，$dU = TdS - PdV$，$\eta_\mathrm{max} = 1 - T_2/T_1$
+        </li>
+        <li>
+          <strong>熱力学関数（第4章）</strong>：ルジャンドル変換で便利な関数を作る<br>
+          キー：$F = U - TS$，$G = F + PV$，Maxwell関係式，最大仕事の原理，安定条件 $C_V > 0,\; K_T > 0$
+        </li>
+        <li>
+          <strong>応用（第5章）</strong>：2相共存・ゴムの熱力学<br>
+          キー：Clausius-Clapeyron $dP_S/dT = Q/[T(V_1-V_0)]$，エントロピー弾性
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <nav class="chapter-nav">
+    <a href="ch4.html" class="prev">第4章 熱力学関数</a>
+    <a href="index.html" class="next">ホームへ</a>
+  </nav>
+</main>
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer>
+
+<script src="td.js"></script>
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

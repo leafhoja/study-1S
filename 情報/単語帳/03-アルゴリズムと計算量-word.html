@@ -1,0 +1,300 @@
+<!DOCTYPE html><!-- 「アルゴリズムと計算量 単語帳 | 情報」の内容を表示する学習ページ。 --><html lang="ja"><!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head><meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="theme-color" content="#0a4f5c"><title>アルゴリズムと計算量 単語帳 | 情報</title><link rel="stylesheet" href="../../common.css"><link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+  MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-03-word">
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>アルゴリズムと計算量</h1>
+  <p class="subtitle">プログラミングの基礎・アルゴリズム・計算量（オーダー記法）</p>
+</div>
+
+<div class="container">
+
+<!-- 単語のチェック件数と、一覧の絞り込み・チェック解除の操作をまとめる。 --><div class="word-toolbar">
+  <div class="word-progress">
+    <span class="wp-text">チェック済み 0 / 0</span>
+    <span class="wp-bar"><span class="wp-fill"></span></span>
+  </div>
+  <div class="word-filter-group">
+    <button type="button" class="word-filter-btn active" data-filter="all">すべて</button>
+    <button type="button" class="word-filter-btn" data-filter="unchecked">未チェック</button>
+    <button type="button" class="word-filter-btn" data-filter="checked">チェック済み</button>
+  </div>
+  <button type="button" class="word-reset-btn">リセット</button>
+</div>
+<p class="word-hint">チェックはこのブラウザだけに保存されます（他の端末・ブラウザとは同期しません）。</p>
+
+<h2 class="word-cat-title" id="sub-1">プログラミングの基礎</h2>
+<div class="word-list">
+<!-- 用語の説明とチェック欄をひとまとまりにし、単語帳のひとつの項目として表示する。 --><div class="word-item" data-term-id="alg-001">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">プログラム(program)</div>
+    <div class="word-def">計算を記述したもの。コンピュータを使った問題解決における活動の単位であり、人間が直接読み書きできる形をしていない。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-002">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">プログラミング言語(programming language)</div>
+    <div class="word-def">プログラムを人間にも読み書きできる形で記述するために作られた人工の言語。プログラムを記述するための約束事をまとめたもので、人工言語であるがゆえに自然言語と違って曖昧さのない厳密な規則を持つ。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-003">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">構文(syntax)／意味(semantics)</div>
+    <div class="word-def">プログラミング言語の約束事のうち、"内容"の集まりが意味(semantics)、その内容を表す"表記法"の集まりが構文(syntax)。同じ意味内容でも言語によって構文（表記）は異なりうる（例：代入を「←」と書く言語と「=」「:=」と書く言語）。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-004">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">疑似コード(pseudocode)</div>
+    <div class="word-def">特定のプログラミング言語の構文に縛られずに計算を表現するための共通の書き方。代入「←」、条件分岐「if...then...else...end if」、反復「while...do...end while」という形で統一して書く。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-005">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">変数・代入</div>
+    <div class="word-def">変数とは値を覚えておく"もの"（文字の列自体は変数名と呼び、値とは区別する）。代入は「変数名 ← 式」の形で、右辺の式を計算した結果を左辺の変数へ設定すること。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-006">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">逐次処理(sequential processing)</div>
+    <div class="word-def">記述されている手順を書かれている順番で実行し、同時に2つの処理を行わないこと。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-007">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">反復処理(iteration)</div>
+    <div class="word-def">条件が成り立っている間、同じ処理をくり返すこと。疑似コードでは「while 条件 do 処理 end while」の形で書く。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-008">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">配列(array)</div>
+    <div class="word-def">複数の値をひとまとまりにして扱うためのデータの並び。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-009">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">for構文</div>
+    <div class="word-def">決まった回数だけ処理をくり返すための反復の書き方。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-010">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">関数(function)</div>
+    <div class="word-def">一連の処理をひとまとめにして名前を付けたもの。引数を受け取って処理を行い、戻り値(return)を返す。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-011">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">ライブラリ(library)</div>
+    <div class="word-def">あらかじめ用意された関数などをまとめ、他のプログラムから呼び出して利用できるようにしたもの。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-012">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">モジュール化</div>
+    <div class="word-def">プログラムを関数などの部品に分けて組み立てること。見通しをよくし、再利用や修正をしやすくする考え方。</div>
+  </div>
+</div>
+</div>
+
+<h2 class="word-cat-title" id="sub-2">アルゴリズムとは何か・平方根を求める方法</h2>
+<div class="word-list">
+<div class="word-item" data-term-id="alg-013">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">アルゴリズム(algorithm)<span class="word-tag">頻出</span></div>
+    <div class="word-def">問題を解くための手順。①モデル化②アルゴリズムを考える③プログラムを作る④実行、という4段階で問題解決を進める。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-014">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">反復法（平方根計算）</div>
+    <div class="word-def">yを0から少しずつδずつ増やしていき、$y^2$がxを超えたところで止めて平方根の近似値を得る方法。反復回数は約$\sqrt{x}/\delta$。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-015">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">二分法</div>
+    <div class="word-def">解の存在範囲を毎回半分に絞り込んでいく方法。平方根計算では反復回数が約$\log_2(x/\delta)$ですむ。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-016">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">ニュートン・ラフソン法</div>
+    <div class="word-def">$y \leftarrow (y^2+x)/2y$ という更新式でyを更新していき、平方根に近づけていく方法。</div>
+  </div>
+</div>
+</div>
+
+<h2 class="word-cat-title" id="sub-3">再帰・計算量の基礎</h2>
+<div class="word-list">
+<div class="word-item" data-term-id="alg-017">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">フィボナッチ数列</div>
+    <div class="word-def">直前の2つの項の和が次の項になる数列。素朴な再帰で計算すると同じ項の計算を何度もやり直すため、計算量が指数的に増加する。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-018">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">再帰(recursion)</div>
+    <div class="word-def">手続き（関数）が自分自身を呼び出す形で定義・計算されること。フィボナッチ数列の素朴な計算はこの形で書かれる。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-019">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">メモ化(memoization)<span class="word-tag">頻出</span></div>
+    <div class="word-def">一度計算した結果を覚えておき、同じ計算が再び必要になったときは計算し直さず覚えた値を使うこと。フィボナッチ数列の素朴な再帰（指数的な計算量）を$O(n)$に収める。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-020">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">動的計画法(dynamic programming)</div>
+    <div class="word-def">部分問題の答えを覚えながら組み立てていく解き方の型。最短経路長問題とフィボナッチのメモ化は同じ動的計画法の型に属する。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-021">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">計算量</div>
+    <div class="word-def">アルゴリズムを実行するのに必要な計算の回数（手間）。問題の大きさを表す変数を使って見積もる。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-022">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">計算量のオーダー(order)<span class="word-tag">頻出</span></div>
+    <div class="word-def">定数を無視し、各変数について一番変化の激しい項だけを残した、計算量の大まかな表し方。$O(n)$、$O(\log n)$等。</div>
+  </div>
+</div>
+</div>
+
+<h2 class="word-cat-title" id="sub-4">アルゴリズム戦略・探索</h2>
+<div class="word-list">
+<div class="word-item" data-term-id="alg-023">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">アルゴリズム戦略</div>
+    <div class="word-def">表面上は異なって見える問題でも、同じ解き方の"型"に帰着できるという考え方。例：二分探索（辞書検索）と平方根の二分法は、どちらも「解の存在範囲を毎回半分に絞る」という同一の型。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-024">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">二分探索法（一般形）<span class="word-tag">頻出</span></div>
+    <div class="word-def">探索範囲を毎回半分に絞り込みながら目的の値を探す方法。分割点が厳密に中央でなくても、区間幅を毎回一定割合以下に縮められれば反復回数は対数オーダーのまま。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-025">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">分割統治法(divide and conquer)<span class="word-tag">頻出</span></div>
+    <div class="word-def">問題を複数の部分に分割し、それぞれを（同じ方法で）解いてから結果を統合して元の問題の答えを得る解き方。統合過程に工夫の余地がなければオーダーは改善しない。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-026">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">線形探索<span class="word-tag">頻出</span></div>
+    <div class="word-def">先頭から順に1つずつ確認していく探索方法。δを1/10にすると手間はおよそ10倍になる（二分探索は約$\log_2 10 \approx 3.3$回増えるだけ）。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-027">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">幅優先探索(BFS)</div>
+    <div class="word-def">探索の起点に近いものから順に、層（レベル）ごとに調べていく探索の仕方。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-028">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">深さ優先探索(DFS)</div>
+    <div class="word-def">一本の道をたどれるところまで進み、行き止まったら1つ手前に戻って別の道を試す探索の仕方。</div>
+  </div>
+</div>
+</div>
+
+<h2 class="word-cat-title" id="sub-5">発展的な考え方</h2>
+<div class="word-list">
+<div class="word-item" data-term-id="alg-029">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">ならし解析(amortized analysis)</div>
+    <div class="word-def">「見た目の二重ループ」があっても、内側ループの変数がどこで初期化・リセットされるかを確認して評価する考え方。外側の外で1回だけ初期化されるなら、総実行回数は線形になりうる。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-030">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">ダブリング戦略</div>
+    <div class="word-def">調べる範囲や候補の大きさを毎回2倍にしながら絞り込んでいく戦略。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-031">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">情報理論的な下限<span class="word-tag">頻出</span></div>
+    <div class="word-def">どんな方法を使っても必要になる、理論上の最小限の手間。例：n枚から最大1枚を確定するには最低$n-1$回の比較が必要。</div>
+  </div>
+</div>
+<div class="word-item" data-term-id="alg-032">
+  <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+  <div class="word-body">
+    <div class="word-term">繰り返し二乗法的発想</div>
+    <div class="word-def">同じ計算を1回ずつ積み上げるのではなく、途中結果を2乗するなどして倍々に大きくしていくことで回数を減らす考え方。</div>
+  </div>
+</div>
+</div>
+
+<!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+  <a href="index.html">← 単語帳トップ</a>
+  <a href="03-アルゴリズムと計算量-keypoints.html">押さえておきたい事項 →</a>
+</div>
+
+</div>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+<script src="checklist.js"></script>
+</body></html>

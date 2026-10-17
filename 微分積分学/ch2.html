@@ -1,0 +1,463 @@
+<!DOCTYPE html><!-- 「Ch.2 テーラーの定理 — 微分積分学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>Ch.2 テーラーの定理 — 微分積分学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="ch2">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="ch1.html" data-page="ch1">Ch.1</a>
+      <a href="ch2.html" data-page="ch2" class="active">Ch.2</a>
+      <a href="ch3.html" data-page="ch3">Ch.3</a>
+      <a href="ch4.html" data-page="ch4">Ch.4</a>
+      <a href="ch5.html" data-page="ch5">Ch.5</a>
+      <a href="ch6.html" data-page="ch6">Ch.6</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>Ch.2 テーラーの定理</h1>
+  <p class="subtitle">講義日: 6/9・6/16 — 関数の多項式近似と剰余項</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#motivation">動機</a>
+    <a href="#taylor-1">テーラーの定理（1次版）</a>
+    <a href="#taylor-n">テーラーの定理（一般）</a>
+    <a href="#expansion">主要な展開</a>
+    <a href="#approx">e の近似値</a>
+    <a href="#peano">剰余項の2つの形</a>
+    <a href="#series">テーラー展開（無限和）</a>
+  </div>
+
+  <!-- 動機 -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="motivation">
+    <div class="sec-header">
+      <div class="sec-tag">Motivation</div>
+      <h2>なぜ「多項式近似」が重要か</h2>
+    </div>
+    <div class="sec-body">
+      <div class="mot">
+        <span class="box-label">動機</span>
+        <p>
+          $e^x$ や $\sin x$ のような関数は、そのままでは値を計算できない。一方、<strong>多項式なら足し算と掛け算だけ</strong>で値が計算できる。そこで「複雑な関数を多項式で近似する」という発想が生まれる。
+        </p>
+        <p>点 $a$ の近くでの近似には段階がある：</p>
+        <ul>
+          <li><strong>0次近似：</strong>$f(x) \approx f(a)$（水平線）</li>
+          <li><strong>1次近似：</strong>$f(x) \approx f(a)+f'(a)(x-a)$（接線）</li>
+          <li><strong>2次近似：</strong>さらに $\dfrac{f''(a)}{2!}(x-a)^2$ を加える（曲がり具合まで）</li>
+          <li>$\vdots$</li>
+        </ul>
+        <p>
+          微分の情報を増やすほど近似精度は上がる。これを $n-1$ 次まで進め、<strong>誤差を剰余項として厳密に書き下した</strong>のがテーラーの定理だ。剰余項 $R_n$ の形は「もし $n$ 次項まで付け加えるなら $\frac{f^{(n)}(a)}{n!}(x-a)^n$ の形になるはずだが、係数の微分を途中の点 $\xi$ で評価すれば、<strong>近似でなく厳密な等式</strong>になる」ということだ。$n=1$ の場合がまさに平均値の定理で、テーラーの定理はその一般化だ。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- テーラーの定理（1次版） -->
+  <div class="section" id="taylor-1">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>テーラーの定理（1次近似版）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 2.1　テーラーの定理（$n=2$）</span>
+        <p>$f(x)$ は $x=a$ を含む開区間で 2回微分可能とする。このとき</p>
+        $$f(x) = f(a) + f'(a)(x-a) + \frac{f''(\xi)}{2}(x-a)^2$$
+        <p>を満たす $\xi$（$a$ と $x$ の間）が存在する。</p>
+        <p>別の表し方：$f(a+h) = f(a)+f'(a)h+\dfrac{1}{2}f''(a+\theta h)h^2$, $\;0<\theta<1$。</p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details open>
+        <summary>証明を見る（コーシーの定理を2回使う）</summary>
+        <div class="proof-body">
+          <p>補助関数を定義する：</p>
+          $$F(x) = f(x) - \bigl\{f(a)+f'(a)(x-a)\bigr\}, \quad G(x) = (x-a)^2.$$
+          <p>$F(a)=G(a)=0$、$F'(a)=0$、$G'(a)=0$、$F''(x)=f''(x)$、$G''(x)=2$。</p>
+          <p>$F,G$ にコーシーの平均値の定理を適用すると、$a$ と $x$ の間の $y$ が存在して</p>
+          $$\frac{F(x)}{G(x)} = \frac{F'(y)}{G'(y)} = \frac{f'(y)-f'(a)}{2(y-a)}.$$
+          <p>さらに $F',G'$ にコーシーの定理を適用（$F'(a)=G'(a)=0$）すると、$a$ と $y$ の間の $\xi$ が存在して</p>
+          $$\frac{F'(y)}{G'(y)} = \frac{F''(\xi)}{G''(\xi)} = \frac{f''(\xi)}{2}.$$
+          <p>よって $\dfrac{F(x)}{(x-a)^2}=\dfrac{f''(\xi)}{2}$、整理して定理の等式を得る。$\blacksquare$</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">証明の構造</span>
+        <p>
+          証明の骨格は「補助関数 $F, G$ を作る → コーシーの平均値の定理を繰り返し適用する」だ。
+          1次近似の場合はコーシーの定理を2回、$n$ 次近似では $n$ 回繰り返す。
+          各回で「$F^{(k)}(a)=0$, $G^{(k)}(a)=0$ が確認できる → コーシーが使える」という構造が続く。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- テーラーの定理（一般） -->
+  <div class="section" id="taylor-n">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>テーラーの定理（一般・$n$ 次）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 2.2　テーラーの定理（一般形）</span>
+        <p>$f(x)$ は $x=a$ を含む開区間で $n$ 回微分可能とする。このとき</p>
+        $$f(x) = \sum_{k=0}^{n-1}\frac{f^{(k)}(a)}{k!}(x-a)^k + R_n$$
+        $$R_n = \frac{f^{(n)}(\xi)}{n!}(x-a)^n \quad (\xi \text{ は } a \text{ と } x \text{ の間})$$
+        <p>を満たす $\xi$ が存在する。$R_n$ を<strong>剰余項</strong>（$(n+1)$ 次近似の誤差）という。</p>
+        <p>別の表し方：$f(a+h)=f(a)+\displaystyle\sum_{k=1}^{n-1}\dfrac{f^{(k)}(a)}{k!}h^k+\dfrac{f^{(n)}(a+\theta h)}{n!}h^n$, $\;0<\theta<1$。</p>
+      </div>
+
+      <details>
+        <summary>証明の概要（コーシーの定理を $n$ 回繰り返す）</summary>
+        <div class="proof-body">
+          <p>$F(x) = f(x) - \displaystyle\sum_{k=0}^{n-1}\dfrac{f^{(k)}(a)}{k!}(x-a)^k$, $G(x)=(x-a)^n$ とおくと</p>
+          $$F(a) = F'(a) = \cdots = F^{(n-1)}(a) = 0, \quad F^{(n)}(x) = f^{(n)}(x),$$
+          $$G(a) = G'(a) = \cdots = G^{(n-1)}(a) = 0, \quad G^{(n)}(x) = n!.$$
+          <p>$F,G$ にコーシーの定理を繰り返し $n$ 回適用すると</p>
+          $$\frac{F(x)}{G(x)} = \frac{F'(z_1)}{G'(z_1)} = \cdots = \frac{F^{(n)}(z_n)}{G^{(n)}(z_n)} = \frac{f^{(n)}(\xi)}{n!}$$
+          <p>（$x > z_1 > z_2 > \cdots > z_n = \xi > a$）。整理して定理の等式を得る。$\blacksquare$</p>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 2.1　剰余項の評価</span>
+        <p>$f(x)=e^x$, $a=0$, $n=7$ として $e$ の近似値を求め、誤差を評価せよ。</p>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            <p>$f^{(k)}(x)=e^x$ より $f^{(k)}(0)=1$（すべての $k$ で）。</p>
+            $$e^x = 1+x+\frac{x^2}{2!}+\cdots+\frac{x^6}{6!}+R_7, \quad R_7=\frac{e^\xi}{7!}x^7.$$
+            <p>$x=1$ を代入：$e \approx 1+1+\frac{1}{2!}+\frac{1}{3!}+\cdots+\frac{1}{6!} = 2.718055\ldots$</p>
+            <p>誤差：$0<\xi<1$ より $e^\xi < e < 3$ なので
+            $|R_7| < \dfrac{3}{7!} = \dfrac{1}{1680} \approx 0.000595$。</p>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 主要な展開 -->
+  <div class="section" id="expansion">
+    <div class="sec-header">
+      <div class="sec-tag">Expansions</div>
+      <h2>主要なマクローリン展開（$a=0$ のまわり）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="hist">
+        <span class="box-label">歴史的背景 — 「マクローリン展開」なのに発見者はマクローリンではない</span>
+        <p>
+          $a=0$ の場合のテーラー展開を「マクローリン展開」と呼ぶ習慣があるが、これも名前と発見の経緯がずれた例だ。
+          ブルック・テーラーが一般の点 $a$ のまわりの展開を含む定理を発表したのは1715年（『増分の直接法と逆法』）。
+          しかし特殊な場合の級数はテーラーより数十年前、スコットランドの数学者ジェームズ・グレゴリーが1670年代にすでに得ていた（ただし広く出版されず、埋もれていた）。ニュートンやライプニッツ、ヨハン・ベルヌーイらも独立に類似の級数を見出していた。
+          それでも $a=0$ の場合が「マクローリン展開」と呼ばれるのは、コリン・マクローリンが1742年の大著『流率法概論』——実はニュートンの微積分を、哲学者バークリー主教の論理的な批判から擁護する目的で書かれたもの——でこの特殊形を丁寧に解説し、広く知られるようにしたからだ。
+          「最初に発見した人」と「広めて名前が定着した人」は、必ずしも同じではない。
+        </p>
+      </div>
+
+      <h3>$e^x$ の展開</h3>
+      <div class="def">
+        <span class="box-label">手順</span>
+        <p>$f^{(k)}(x)=e^x$ より $f^{(k)}(0)=1$（すべての $k \ge 0$）。</p>
+        $$e^x = 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\cdots+\frac{x^{n-1}}{(n-1)!}+R_n, \quad R_n=\frac{e^{\theta x}}{n!}x^n \quad (0<\theta<1).$$
+      </div>
+
+      <h3>$\sin x$, $\cos x$ の展開</h3>
+      <div class="mot">
+        <span class="box-label">覚え方</span>
+        <p>微分を繰り返すと $\sin \to \cos \to -\sin \to -\cos \to \sin$ と周期 4 で循環する。
+        $x=0$ での値は $0, 1, 0, -1, 0, 1, \ldots$ の繰り返し。</p>
+        <ul>
+          <li>$\sin x$：奇関数なので<strong>奇数乗のみ</strong>、符号は $+,-,+,-,\ldots$</li>
+          <li>$\cos x$：偶関数なので<strong>偶数乗のみ</strong>、定数項は $1$</li>
+        </ul>
+      </div>
+      <div class="def">
+        $$\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots + (-1)^{n-1}\frac{x^{2n-1}}{(2n-1)!} + R_{2n}$$
+        $$\cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots + (-1)^n\frac{x^{2n}}{(2n)!} + R_{2n+1}$$
+      </div>
+
+      <h3>$\dfrac{1}{1-x}$ の展開</h3>
+      <div class="note">
+        <span class="box-label">等比級数との対応</span>
+        <p>$f^{(k)}(x)=\dfrac{k!}{(1-x)^{k+1}}$ より $f^{(k)}(0)=k!$。係数は $\dfrac{k!}{k!}=1$。</p>
+        $$\frac{1}{1-x} = 1+x+x^2+\cdots+x^{n-1}+R_n \quad (|x|<1)$$
+        <p>これは高校で学んだ等比級数そのもので、「テーラー展開は等比級数の壮大な一般化」とも言える。</p>
+      </div>
+
+      <h3>マクローリン展開 早見表</h3>
+      <table class="axiom-table">
+        <tr><th>関数</th><th>展開（無限和）</th><th>収束域</th></tr>
+        <tr>
+          <td>$e^x$</td>
+          <td>$\displaystyle\sum_{n=0}^\infty\dfrac{x^n}{n!}$</td>
+          <td>全 $x$</td>
+        </tr>
+        <tr>
+          <td>$\sin x$</td>
+          <td>$\displaystyle\sum_{n=1}^\infty(-1)^{n-1}\dfrac{x^{2n-1}}{(2n-1)!}$</td>
+          <td>全 $x$</td>
+        </tr>
+        <tr>
+          <td>$\cos x$</td>
+          <td>$\displaystyle\sum_{n=0}^\infty(-1)^n\dfrac{x^{2n}}{(2n)!}$</td>
+          <td>全 $x$</td>
+        </tr>
+        <tr>
+          <td>$\dfrac{1}{1-x}$</td>
+          <td>$\displaystyle\sum_{n=0}^\infty x^n$</td>
+          <td>$|x|<1$</td>
+        </tr>
+        <tr>
+          <td>$\log(1+x)$</td>
+          <td>$\displaystyle\sum_{n=1}^\infty(-1)^{n-1}\dfrac{x^n}{n}$</td>
+          <td>$-1&lt;x\le 1$</td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+
+  <!-- e の近似値 -->
+  <div class="section" id="approx">
+    <div class="sec-header">
+      <div class="sec-tag">Application</div>
+      <h2>$e$ の近似値と $e&lt;3$ の証明</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">例 2.2　$e$ の近似（$n=7$）</span>
+        <p>$e^x$ の展開に $x=1$, $n=7$ を代入：</p>
+        $$1 + 1 + \frac{1}{2!} + \frac{1}{3!} + \frac{1}{4!} + \frac{1}{5!} + \frac{1}{6!} = 2.718055\ldots$$
+        <p>真の値 $e=2.71828\ldots$ と小数第3位まで一致。たった7項でこの精度だ。</p>
+      </div>
+
+      <div class="prop">
+        <span class="box-label">命題 2.3　$e&lt;3$</span>
+        <p>
+          $k \ge 2$ のとき $k! = 1\cdot 2\cdot 3 \cdots k \ge 2^{k-1}$（2以上の因子が $k-1$ 個）なので、
+        </p>
+        $$e = 1+1+\frac{1}{2!}+\frac{1}{3!}+\cdots < 1+1+\frac{1}{2}+\frac{1}{2^2}+\cdots = 1+\frac{1}{1-\frac{1}{2}} = 3.$$
+      </div>
+
+      <div class="mot">
+        <span class="box-label">なぜ収束が速いのか — $n!$ vs $2^n$</span>
+        <p>
+          $2^n$ は毎回「2倍」ずつしか増えないが、$n!$ は掛ける数自体が $1, 2, 3, 4, \ldots$ とどんどん大きくなる。$n$ が大きくなるほど1項ごとの縮み方が加速するため、階乗を分母に持つ級数は非常に速く収束する。
+        </p>
+        <p>
+          一般に、任意の定数 $a>0$ に対して $\lim_{n\to\infty} \dfrac{a^n}{n!}=0$。
+          理由：$n>2a$ となれば、次の項への比 $\dfrac{a}{n+1}<\dfrac{1}{2}$ となり毎回半分以下に縮む。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 2.4　$\cos(0.5)$ の近似値と誤差評価</span>
+        <p>$f(x)=\cos x$ を $a=0$ のまわりで4次のテーラー多項式で近似し、誤差を評価せよ。</p>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            <p>
+              $\cos x = 1-\dfrac{x^2}{2!}+\dfrac{x^4}{4!}+R_5$、$R_5=\dfrac{f^{(5)}(\xi)}{5!}x^5=\dfrac{-\sin\xi}{5!}x^5$（$0<\xi<0.5$）。
+            </p>
+            <p>$x=0.5$ を代入した近似値：</p>
+            $$\cos(0.5) \approx 1-\frac{0.25}{2}+\frac{0.0625}{24} = 1-0.125+0.0026\ldots = 0.87760\ldots$$
+            <p>
+              誤差評価の考え方が $e^x$ の場合（例2.1）とは異なる点に注意：$e^x$ では $e^\xi$ が単調に増加するため
+              $e^\xi&lt;e<3$ という<strong>上から抑える評価</strong>を使った。$\cos x, \sin x$ の場合は $n$ 階導関数が常に
+              $\pm\sin x$ か $\pm\cos x$ のどれかなので、<strong>導関数そのものが有界</strong>（$|f^{(n)}(\xi)|\le 1$）という、
+              より直接的な評価が使える：
+            </p>
+            $$|R_5| = \frac{|\sin\xi|}{5!}|x|^5 \le \frac{1}{120}(0.5)^5 = \frac{1}{120}\cdot\frac{1}{32} \approx 0.00026.$$
+            <p>
+              真の値 $\cos(0.5)=0.87758\ldots$ と比べても、誤差は評価どおり $0.0003$ 未満に収まっている。
+              「指数関数型は $e^\xi$ を定数で抑える」「三角関数型は導関数の有界性を直接使う」という2つの評価パターンを覚えておくとよい。
+            </p>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 剰余項の2つの形 -->
+  <div class="section" id="peano">
+    <div class="sec-header">
+      <div class="sec-tag">Refinement</div>
+      <h2>剰余項の2つの形 — ラグランジュ形とペアノ形</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">動機 — 「誤差の大きさ」を知りたいときと「収束の速さ」だけ知りたいとき</span>
+        <p>
+          これまでの $R_n=\dfrac{f^{(n)}(\xi)}{n!}(x-a)^n$（<strong>ラグランジュの剰余項</strong>）は、$\xi$ の位置さえ分かれば
+          誤差の<strong>具体的な数値評価</strong>ができる（例2.1, 例2.4のように）。しかし $f^{(n)}$ が区間全体で存在し、かつ有界であることを要求するので、
+          やや強い仮定だ。
+        </p>
+        <p>
+          一方、$x=a$ の<strong>近くだけ</strong>で「剰余項が $(x-a)^n$ よりどれだけ速く $0$ に近づくか」だけを知りたいなら、
+          $f^{(n)}(a)$ が1点で存在するだけでよい、もっと弱い仮定で済む形がある。これが<strong>ペアノの剰余項</strong>だ。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 2.5　テーラーの定理（ペアノの剰余項）</span>
+        <p>$f(x)$ は $x=a$ の近傍で $n-1$ 回微分可能、かつ $f^{(n)}(a)$ が存在するとする。このとき</p>
+        $$f(x) = \sum_{k=0}^{n}\frac{f^{(k)}(a)}{k!}(x-a)^k + o\bigl((x-a)^n\bigr) \quad (x\to a).$$
+        <p>
+          小さい $o$ の意味は Ch.5でも登場する：誤差の項を $(x-a)^n$ で割ると $x\to a$ で $0$ に収束するということだ。
+          ラグランジュ形と違い、誤差の<strong>具体的な数値</strong>は分からないが、「$n$ 次近似としてどれだけ良いか」という
+          <strong>漸近的な速さ</strong>だけは保証される。
+        </p>
+      </div>
+
+      <details>
+        <summary>証明の方針を見る（Ch.1のロピタルの定理を使う帰納法）</summary>
+        <div class="proof-body">
+          <p>$P_n(x)=\displaystyle\sum_{k=0}^n \dfrac{f^{(k)}(a)}{k!}(x-a)^k$（$n$ 次のテーラー多項式）とし、$R(x)=f(x)-P_n(x)$ とおく。
+          $R^{(k)}(a)=0$（$k=0,1,\ldots,n$）であることは係数の作り方から直接確認できる。</p>
+          <p>$n=1$ の場合は微分の定義そのもの：$\dfrac{f(x)-f(a)-f'(a)(x-a)}{x-a}\to 0$ は $\dfrac{f(x)-f(a)}{x-a}\to f'(a)$ の言い換えに過ぎない。</p>
+          <p>$n-1$ の場合に定理が成り立つと仮定する（帰納法の仮定）。$R'(x)=f'(x)-P_n'(x)$ に対して、$P_n'(x)$ は $f'$ の $(n-1)$ 次テーラー多項式に等しいので、帰納法の仮定より</p>
+          $$R'(x) = o\bigl((x-a)^{n-1}\bigr) \quad (x\to a).$$
+          <p>$R(a)=0$ であり $(x-a)^n\to 0$ なので、$\dfrac{R(x)}{(x-a)^n}$ は 0/0 型。Ch.1のロピタルの定理（0/0型）を適用すると</p>
+          $$\lim_{x\to a}\frac{R(x)}{(x-a)^n} = \lim_{x\to a}\frac{R'(x)}{n(x-a)^{n-1}} = \lim_{x\to a}\frac{o\bigl((x-a)^{n-1}\bigr)}{n(x-a)^{n-1}} = 0.$$
+          <p>すなわち $R(x)=o((x-a)^n)$。帰納法により、すべての $n$ で成り立つ。$\blacksquare$</p>
+        </div>
+      </details>
+
+      <div class="warn">
+        <span class="box-label">両方の形の使い分け</span>
+        <table class="axiom-table">
+          <tr><th></th><th>ラグランジュ形</th><th>ペアノ形</th></tr>
+          <tr><td>仮定</td><td>区間全体で $f^{(n)}$ が存在</td><td>$f^{(n)}(a)$ が1点で存在（弱い）</td></tr>
+          <tr><td>結論</td><td>誤差の具体的な数値評価が可能</td><td>誤差の漸近的な速さのみ（数値評価不可）</td></tr>
+          <tr><td>向いている場面</td><td>近似値の精度保証（例2.1, 例2.4）</td><td>極限の計算・不定形の解消</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- テーラーの定理 vs テーラー展開 -->
+  <div class="section" id="series">
+    <div class="sec-header">
+      <div class="sec-tag">Key Distinction</div>
+      <h2>テーラーの定理 vs テーラー展開（無限和）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="warn">
+        <span class="box-label">混同しやすい2つの概念</span>
+        <ul>
+          <li>
+            <strong>テーラーの定理</strong>：有限の $n$ に対する主張。「$n-1$ 次多項式 $+$ 剰余項 $R_n$」という形の<strong>厳密な等式</strong>で、$n$ 回微分可能なすべての関数に成り立つ。
+          </li>
+          <li>
+            <strong>テーラー展開</strong>：$n\to\infty$ の極限として得られる無限級数：
+            $f(x)=\displaystyle\sum_{k=0}^\infty \dfrac{f^{(k)}(a)}{k!}(x-a)^k$。
+            これが成り立つのは<strong>$R_n\to 0$ が確認できたときだけ</strong>だ。無限和で書く前に剰余項の確認が必須。
+          </li>
+        </ul>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 2.5　$e^x$ の場合：$R_n \to 0$ の確認</span>
+        <p>$e^x = 1+x+\dfrac{x^2}{2!}+\cdots+\dfrac{x^{n-1}}{(n-1)!}+R_n$（$R_n=\dfrac{e^{\theta x}}{n!}x^n$）において、
+        すべての実数 $x$ で $R_n\to 0$（$n\to\infty$）となることを確認し、$e^x$ が全実数でテーラー展開できることを示せ。</p>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            <p>$|R_n| \le \dfrac{e^{|x|}}{n!}|x|^n$。$e^{|x|}$ は $x$ を固定すれば定数。
+            $\lim_{n\to\infty}\dfrac{a^n}{n!}=0$（任意の $a>0$）より $|R_n|\to 0$。</p>
+            <p>よって任意の $x$ について
+            $e^x = 1+x+\dfrac{x^2}{2!}+\dfrac{x^3}{3!}+\cdots$（全実数で成立）。$\blacksquare$</p>
+            <p><em>$\sin x$, $\cos x$ も$|R_n|\le \frac{|x|^n}{n!}\to 0$ より全実数で成立。
+            一方 $\frac{1}{1-x}$ は $|x|<1$ でしか成立しない（特異点 $x=1$ があるため）。</em></p>
+          </div>
+        </details>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 2.6　$C^\infty$ でもテーラー級数が元の関数に収束しない例</span>
+        <p>
+          $f(x)=e^{-1/x^2}$（$x\ne 0$）、$f(0)=0$ と定義する。この関数は何度でも微分可能（$C^\infty$ 級）だが、
+          $x=0$ でのテーラー級数（マクローリン展開）は元の関数 $f$ には収束しない。
+        </p>
+        <details>
+          <summary>解説を見る</summary>
+          <div class="proof-body">
+            <p>
+              $x\ne 0$ での $f$ の $n$ 次導関数は、いつも「$1/x$ の多項式」×$e^{-1/x^2}$ の形になる。
+              Ch.1で示した増大度の階層（べき関数は指数関数に敗れる：$\lim_{t\to\infty} t^k e^{-t}=0$）を $t=1/x^2$ に適用すると、
+              $x\to 0$ のときこれらはすべて $0$ に収束する。定義から $f^{(n)}(0)=0$ を帰納的に示せる（各段階でロピタルの定理か直接の極限計算を使う）。
+            </p>
+            <p>
+              つまり<strong>すべての $n$ で $f^{(n)}(0)=0$</strong>。よって $x=0$ でのマクローリン展開（テーラー級数）は</p>
+            $$\sum_{k=0}^\infty \frac{f^{(k)}(0)}{k!}x^k = 0+0\cdot x+0\cdot x^2+\cdots = 0 \quad(\text{恒等的に}~0).$$
+            <p>
+              しかし $x\ne 0$ では $f(x)=e^{-1/x^2}>0$ であり、$f(x)\ne 0$。<strong>テーラー級数は収束するが、元の関数 $f$ には収束しない</strong>（収束先が違う）。
+            </p>
+            <p>
+              これは「$f$ が $C^\infty$ 級である」だけでは「テーラー級数が $f$ に収束する」ことを保証しない、という重要な反例だ。
+              上で述べた「$R_n\to 0$ の確認が必須」という注意が、まさにこの関数では破れている
+              （$R_n = f(x)-P_n(x) = f(x)-0 = f(x) \ne 0$ で、$n\to\infty$ でも $0$ に収束しない）。
+            </p>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; margin-top:2rem; padding:0 .5rem;">
+    <a href="ch1.html" style="color:var(--accent); text-decoration:none; font-weight:700;">← Ch.1 コーシーの定理</a>
+    <a href="ch3.html" style="color:var(--accent); text-decoration:none; font-weight:700;">Ch.3 無限級数 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

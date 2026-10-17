@@ -1,0 +1,192 @@
+<!DOCTYPE html><!-- 「第N回 ◯◯◯◯｜現代経済理論」のHTMLひな形。見出し・本文・移動リンクの構成を含む。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第N回 ◯◯◯◯｜現代経済理論</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">現代経済理論</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">HOME</a>
+      <a href="index.html" class="active">講義</a>
+      <a href="../kakomon_2025.html">過去問</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <span class="hero-badge">第N回</span>
+  <h1>講義タイトル</h1>
+  <p class="subtitle">開催日｜講師名</p>
+  <p class="meta">所属・肩書き</p>
+</div>
+
+<div class="container">
+
+  <div class="section-card">
+    <h2>講師プロフィール</h2>
+    <div class="teacher-profile">
+      <div class="teacher-icon">🎓</div>
+      <div class="teacher-info">
+        <h3>講師名</h3>
+        <div class="affil">所属・経歴</div>
+        <div class="specialty">
+          専門：◯◯◯<br>
+          担当講義：◯◯◯
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2>講義概要</h2>
+    <p style="font-size:.92rem;color:#4a5568;line-height:1.85;">
+      講義概要テキスト
+    </p>
+  </div>
+
+  <div class="section-card">
+    <h2>主なトピック</h2>
+    <ul class="topic-list">
+
+      <li>
+        <div class="tn-col"><span class="tn">1</span></div>
+        <div class="topic-content">
+          <span class="topic-title">トピックタイトル</span>
+          <p class="topic-desc">説明テキスト</p>
+          <div class="def-box">
+            <strong>定義・重要概念</strong>：説明
+          </div>
+          <div class="insight">
+            重要な洞察やポイント
+          </div>
+        </div>
+      </li>
+
+      <!-- 必要な数だけ <li> を追加 -->
+
+    </ul>
+  </div>
+
+  <!-- ================================================================
+       過去問との対応セクション
+       ================================================================
+       ルール:
+         - 各年度につき必ず 2問 または 0問
+         - ノートと無関係な年は exam-no-data クラスで空白表示
+         - 問題を追加したら lecture_map.json も更新して update_links.py を実行
+
+       lecture_map.json への追加例（第N回が 2025年度 Q1+Q2 の場合）:
+         "2025": { ..., "1": N, "2": N }
+       ================================================================ -->
+  <div class="section-card">
+    <h2>過去問との対応</h2>
+    <div class="exam-ref-box">
+
+      <!-- 2025 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2025年度 期末試験</span>
+          <a href="../kakomon_2025.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <!-- 対応問題がある場合：選択肢は過去問ページ（例: ../2025kakomon.html）から丸ごとコピーし、
+               正解は class="opt correct" ＋ <span class="correct-mark">正解</span> でマークする。
+               解説は exp-toggle ボタンの下に隠し、クリックするまで見えないようにする。 -->
+          <div class="exam-qa-item">
+            <div class="exam-qa-header"><span class="eq-num">QX</span><span class="eq-topic">トピック</span></div>
+            <div class="exam-qa-q">問題文</div>
+            <ul class="options">
+              <li class="opt"><span class="opt-label">(a)</span>選択肢テキスト</li>
+              <li class="opt"><span class="opt-label">(b)</span>選択肢テキスト</li>
+              <li class="opt correct"><span class="opt-label">(c)</span>正解の選択肢テキスト<span class="correct-mark">正解</span></li>
+              <li class="opt"><span class="opt-label">(d)</span>選択肢テキスト</li>
+            </ul>
+            <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+            <div class="exp-body">
+              <p>解説テキスト</p>
+            </div>
+          </div>
+          <div class="exam-qa-item">
+            <div class="exam-qa-header"><span class="eq-num">QY</span><span class="eq-topic">トピック</span></div>
+            <div class="exam-qa-q">問題文</div>
+            <ul class="options">
+              <li class="opt"><span class="opt-label">(a)</span>選択肢テキスト</li>
+              <li class="opt correct"><span class="opt-label">(b)</span>正解の選択肢テキスト<span class="correct-mark">正解</span></li>
+              <li class="opt"><span class="opt-label">(c)</span>選択肢テキスト</li>
+              <li class="opt"><span class="opt-label">(d)</span>選択肢テキスト</li>
+            </ul>
+            <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+            <div class="exp-body">
+              <p>解説テキスト</p>
+            </div>
+          </div>
+          <!-- 対応問題がない場合は上の2つを削除して以下を使う -->
+          <!-- <div class="exam-no-data">◯◯◯年度は本講義に対応する問題が出題されていません（担当教員が異なる年度）。</div> -->
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2024年度 期末試験</span>
+          <a href="../kakomon_2024.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-no-data">2024年度は本講義に対応する問題が出題されていません（担当教員が異なる年度）。</div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2023年度 期末試験</span>
+          <a href="../kakomon_2023.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-no-data">2023年度は本講義に対応する問題が出題されていません（担当教員が異なる年度）。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="lecture-nav">
+    <a href="第X回.html">← 第X回</a>
+    <a href="index.html" class="center">講義一覧</a>
+    <a href="第Y回.html">第Y回 →</a>
+  </div>
+
+</div>
+
+<script>
+// 押されたボタンに対応する解説欄の表示を切り替える。
+function toggleExp(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const opt = e.target.closest('.opt');
+  if (!opt) return;
+  const options = opt.closest('.options');
+  if (!options || options.classList.contains('revealed')) return;
+  options.classList.add('revealed');
+  opt.classList.add('selected');
+});
+</script>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">現代経済理論（渡辺安虎）ー2026前期課程Sセメスター</footer>
+
+<script src="../../common.js"></script>
+</body>
+</html>

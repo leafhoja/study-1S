@@ -1,0 +1,135 @@
+<!DOCTYPE html><!-- 「情報」の一覧ページ。掲載されたページへ移動する入口をまとめる。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>情報</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../subject-home.css">
+</head>
+<body class="subject-home home-information" data-nav-page="top">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html" class="active">トップ</a>
+      <a href="講義ノート/index.html">講義ノート</a>
+      <a href="過去問/共通問題/index.html">共通問題</a>
+      <a href="過去問/個別問題/index.html">個別問題</a>
+      <a href="神シケプリ/index.html">神シケプリ</a>
+      <a href="単語帳/index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>情報</h1>
+  <p class="subtitle">講義ノートと過去問の解答・解説（共通問題・個別問題・神シケプリ分野別）</p>
+  <p class="meta">前期課程 Sセメスター科目</p>
+</div>
+
+<!-- この科目のノートを探す入力欄と検索結果欄。検索の動作は共通のsearch.jsが担当する。 --><div class="search-box" data-search>
+  <div class="search-input-row">
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input type="search" class="search-input" placeholder="情報のノート内を検索（用語・キーワード）…" autocomplete="off" aria-label="情報内を検索">
+  </div>
+  <div class="search-results" hidden></div>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <p>
+      「情報」の期末試験は、全クラス共通の<strong>共通問題</strong>と、担当教員・クラスごとに内容が異なる<strong>個別問題</strong>の
+      2部構成（合わせて90分）で実施される。共通問題はネットワーク・情報セキュリティ・情報量（エントロピー）・
+      アルゴリズムの基礎・情報社会と法律など、扱う分野は毎年ほぼ共通している。個別問題は教員ごとに出題内容が大きく異なり、
+      ここに収録しているのは<strong>田中哲郎教員</strong>担当クラス（論理回路・オートマトン・計算機構成・計算量など）の過去問である。
+    </p>
+    <p>
+      各年度のページでは、大問ごとに「問題の掲載 → 解答・解説（クリックで表示）」の順に構成し、
+      うっかり解答が目に入らないよう答えは折りたたんである。また、その大問の範囲で押さえておきたい
+      基礎知識や解法のパターンについても、解説と併せてまとめている。
+    </p>
+  </div>
+
+  <h2 class="home-section-title">単語帳</h2>
+
+  <!-- 講義回ごとの番号・題名・説明・リンクを一覧にする。 --><div class="lec-tab-grid">
+    <a class="lec-tab" href="単語帳/index.html" data-page="単語帳/index"><div class="ln-badge">📋</div><div class="ln-body"><div class="ln-title">押さえておきたい単語・重要事項</div><div class="ln-detail">6分野・346語のチェックリスト＋記述対策</div></div></a>
+  </div>
+
+  <h2 class="home-section-title">講義ノート</h2>
+
+  <div class="lec-tab-grid">
+    <a class="lec-tab" href="講義ノート/introduction.html" data-page="講義ノート/introduction"><div class="ln-badge">導</div><div class="ln-body"><div class="ln-title">ガイダンス</div><div class="ln-detail">講義の進め方・教材・評価</div></div></a>
+    <a class="lec-tab" href="講義ノート/第1章.html" data-page="講義ノート/第1章"><div class="ln-badge">1</div><div class="ln-body"><div class="ln-title">情報の学び方</div><div class="ln-detail">表現・計算・社会</div></div></a>
+    <a class="lec-tab" href="講義ノート/第2章.html" data-page="講義ノート/第2章"><div class="ln-badge">2</div><div class="ln-body"><div class="ln-title">情報システム</div><div class="ln-detail">性能・信頼性・認証</div></div></a>
+    <a class="lec-tab" href="講義ノート/第3章.html" data-page="講義ノート/第3章"><div class="ln-badge">3</div><div class="ln-body"><div class="ln-title">情報の表現</div><div class="ln-detail">符号化・標本化・情報量</div></div></a>
+    <a class="lec-tab" href="講義ノート/第4章.html" data-page="講義ノート/第4章"><div class="ln-badge">4</div><div class="ln-body"><div class="ln-title">情報の伝達と通信</div><div class="ln-detail">ネットワーク・暗号</div></div></a>
+    <a class="lec-tab" href="講義ノート/第5章.html" data-page="講義ノート/第5章"><div class="ln-badge">5</div><div class="ln-body"><div class="ln-title">計算の方法</div><div class="ln-detail">アルゴリズム・計算量</div></div></a>
+    <a class="lec-tab" href="講義ノート/第6章.html" data-page="講義ノート/第6章"><div class="ln-badge">6</div><div class="ln-body"><div class="ln-title">問題解決のための情報表現</div><div class="ln-detail">行列・グラフ・木</div></div></a>
+    <a class="lec-tab" href="講義ノート/第7章.html" data-page="講義ノート/第7章"><div class="ln-badge">7</div><div class="ln-body"><div class="ln-title">機械学習と人工知能</div><div class="ln-detail">学習・過学習・評価</div></div></a>
+    <a class="lec-tab" href="講義ノート/第8章.html" data-page="講義ノート/第8章"><div class="ln-badge">8</div><div class="ln-body"><div class="ln-title">コンピュータの仕組み</div><div class="ln-detail">論理回路・CPU・OS</div></div></a>
+    <a class="lec-tab" href="講義ノート/第9章.html" data-page="講義ノート/第9章"><div class="ln-badge">9</div><div class="ln-body"><div class="ln-title">ユーザインタフェース</div><div class="ln-detail">GUI・デザイン・評価</div></div></a>
+    <a class="lec-tab" href="講義ノート/第10章.html" data-page="講義ノート/第10章"><div class="ln-badge">10</div><div class="ln-body"><div class="ln-title">情報技術と社会</div><div class="ln-detail">権利・倫理・民主主義</div></div></a>
+  </div>
+
+  <h2 class="home-section-title">過去問 解答・解説</h2>
+
+  <div class="exam-group-heading">
+    <div><span class="exam-group-label">全クラス共通</span><h3>共通問題</h3></div>
+    <a href="過去問/共通問題/index.html">分野別の傾向を見る →</a>
+  </div>
+  <!-- 年度などの区分ごとに、過去問ページへのリンクをカードで並べる。 --><div class="year-grid">
+    <a class="year-card common-exam" href="過去問/共通問題/kakomon_2025.html" data-page="過去問/共通問題/kakomon_2025"><div class="yn">2025</div></a>
+    <a class="year-card common-exam" href="過去問/共通問題/kakomon_2024.html" data-page="過去問/共通問題/kakomon_2024"><div class="yn">2024</div></a>
+    <a class="year-card common-exam" href="過去問/共通問題/kakomon_2023.html" data-page="過去問/共通問題/kakomon_2023"><div class="yn">2023</div></a>
+    <a class="year-card common-exam" href="過去問/共通問題/kakomon_2022.html" data-page="過去問/共通問題/kakomon_2022"><div class="yn">2022</div></a>
+    <a class="year-card common-exam" href="過去問/共通問題/kakomon_2021.html" data-page="過去問/共通問題/kakomon_2021"><div class="yn">2021</div></a>
+  </div>
+
+  <div class="exam-group-heading individual-heading">
+    <div><span class="exam-group-label">田中哲郎クラス</span><h3>個別問題</h3></div>
+    <a href="過去問/個別問題/index.html">分野別の傾向を見る →</a>
+  </div>
+  <div class="year-grid">
+    <a class="year-card individual-exam" href="過去問/個別問題/kakomon_2025.html" data-page="過去問/個別問題/kakomon_2025"><div class="yn">2025</div></a>
+    <a class="year-card individual-exam" href="過去問/個別問題/kakomon_2024.html" data-page="過去問/個別問題/kakomon_2024"><div class="yn">2024</div></a>
+    <a class="year-card individual-exam" href="過去問/個別問題/kakomon_2022.html" data-page="過去問/個別問題/kakomon_2022"><div class="yn">2022</div></a>
+    <a class="year-card individual-exam" href="過去問/個別問題/kakomon_2019.html" data-page="過去問/個別問題/kakomon_2019"><div class="yn">2019</div></a>
+    <a class="year-card individual-exam" href="過去問/個別問題/kakomon_2018.html" data-page="過去問/個別問題/kakomon_2018"><div class="yn">2018</div></a>
+  </div>
+
+  <div class="exam-group-heading">
+    <div><span class="exam-group-label">分野別まとめ＋過去問</span><h3>神シケプリ</h3></div>
+    <a href="神シケプリ/index.html">10分野をすべて見る →</a>
+  </div>
+  <div class="lec-tab-grid">
+    <a class="lec-tab" href="神シケプリ/01-情報量.html" data-page="神シケプリ/01-情報量"><div class="ln-badge">01</div><div class="ln-body"><div class="ln-title">情報量</div><div class="ln-detail">場合の数・確率・加法性</div></div></a>
+    <a class="lec-tab" href="神シケプリ/02-符号化.html" data-page="神シケプリ/02-符号化"><div class="ln-badge">02</div><div class="ln-body"><div class="ln-title">符号化</div><div class="ln-detail">2進符号・平均符号長</div></div></a>
+    <a class="lec-tab" href="神シケプリ/03-標本化と量子化.html" data-page="神シケプリ/03-標本化と量子化"><div class="ln-badge">03</div><div class="ln-body"><div class="ln-title">標本化・量子化</div><div class="ln-detail">標本化定理・CD音声</div></div></a>
+    <a class="lec-tab" href="神シケプリ/04-ネットワーク.html" data-page="神シケプリ/04-ネットワーク"><div class="ln-badge">04</div><div class="ln-body"><div class="ln-title">ネットワーク</div><div class="ln-detail">クライアント/サーバ</div></div></a>
+    <a class="lec-tab" href="神シケプリ/05-インターネット通信.html" data-page="神シケプリ/05-インターネット通信"><div class="ln-badge">05</div><div class="ln-body"><div class="ln-title">インターネット通信</div><div class="ln-detail">DNS・パケット・TCP/IP</div></div></a>
+    <a class="lec-tab" href="神シケプリ/06-安全な通信.html" data-page="神シケプリ/06-安全な通信"><div class="ln-badge">06</div><div class="ln-body"><div class="ln-title">安全な通信</div><div class="ln-detail">共通鍵・公開鍵・署名</div></div></a>
+    <a class="lec-tab" href="神シケプリ/07-プログラミング.html" data-page="神シケプリ/07-プログラミング"><div class="ln-badge">07</div><div class="ln-body"><div class="ln-title">プログラミング</div><div class="ln-detail">機械語・計算量</div></div></a>
+    <a class="lec-tab" href="神シケプリ/08-論理関数.html" data-page="神シケプリ/08-論理関数"><div class="ln-badge">08</div><div class="ln-body"><div class="ln-title">論理関数</div><div class="ln-detail">AND/OR/NAND・完備性</div></div></a>
+    <a class="lec-tab" href="神シケプリ/09-データモデル.html" data-page="神シケプリ/09-データモデル"><div class="ln-badge">09</div><div class="ln-body"><div class="ln-title">データモデル</div><div class="ln-detail">木構造・ファイルパス</div></div></a>
+    <a class="lec-tab" href="神シケプリ/10-ユーザインターフェース.html" data-page="神シケプリ/10-ユーザインターフェース"><div class="ln-badge">10</div><div class="ln-body"><div class="ln-title">ユーザインターフェース</div><div class="ln-detail">GUI/CUI・アフォーダンス</div></div></a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js"></script>
+<script src="../access-ui.js"></script>
+<script src="../search.js"></script>
+</body>
+</html>

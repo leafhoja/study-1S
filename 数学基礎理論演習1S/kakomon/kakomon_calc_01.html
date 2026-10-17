@@ -1,0 +1,463 @@
+<!DOCTYPE html><!-- 「微分積分 小テスト 2025年6月 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1e3a8a">
+<title>微分積分 小テスト 2025年6月 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>/* このページ内の要素に適用する、色・文字サイズ・配置などの指定。 */
+.case-table { border-collapse: collapse; width: 100%; font-family: var(--font-sans); font-size: 0.88rem; margin: 1rem 0; }
+.case-table th { background: #dbeafe; color: #1e3a8a; padding: 0.5rem 0.75rem; text-align: center; border: 1px solid #93c5fd; }
+.case-table td { padding: 0.5rem 0.75rem; border: 1px solid #bfdbfe; text-align: center; }
+.case-table tr:nth-child(even) td { background: #f0f7ff; }
+</style>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-calc">
+  <h1>微分積分学演習　小テスト</h1>
+  <p class="subtitle">2026年 Sターム &nbsp;|&nbsp; 2025年6月17日（火）実施　担当：榎園誠</p>
+</div>
+
+<div class="container">
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">1</span> ε-N 論法：$e^{a_n} \to e^a$
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>数列 $\{a_n\}_n$ が実数 $a$ に収束するとする。このとき数列 $\{e^{a_n}\}_n$ が実数 $e^a$ に収束することを $\varepsilon$-$N$ 論法を用いて示せ。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 方針を立てる前に</div>
+      <p><strong>何を示すか：</strong>「$e^{a_n} \to e^a$」$= $ 「任意の $\varepsilon > 0$ に対し，ある $N$ が存在して $n > N \Rightarrow |e^{a_n} - e^a| < \varepsilon$」。</p>
+      <p><strong>何を使えるか：</strong>$a_n \to a$（仮定），指数関数の単調性。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 ゴールから逆算する</div>
+        <p>$|e^{a_n} - e^a| < \varepsilon$ を達成したい。$e^x$ は単調増加なので，$|a_n - a| < \delta$ から $e^{a-\delta} < e^{a_n} < e^{a+\delta}$ が得られる。</p>
+        <p>上側の不等式 $e^{a_n} - e^a < e^{a+\delta} - e^a = e^a(e^\delta - 1)$ がちょうど $\varepsilon$ になるように $\delta$ を決めればよい：</p>
+        $$e^a(e^\delta - 1) = \varepsilon \iff \delta = \log\!\left(1 + \frac{\varepsilon}{e^a}\right).$$
+        <p>この $\delta$ を $a_n \to a$ の定義に食わせれば一発で済む。</p>
+      </div>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答</div>
+      <p>$\varepsilon > 0$ を任意に与える。$\varepsilon' := \log\!\left(1 + \dfrac{\varepsilon}{e^a}\right) > 0$ とおく（$\varepsilon > 0$ より $1 + \varepsilon/e^a > 1$ なので正）。</p>
+      <p>$a_n \to a$ の仮定より，ある $N \in \mathbb{N}$ が存在して</p>
+      $$n > N \implies |a_n - a| < \varepsilon'.$$
+      <p>$n > N$ を固定する。$a - \varepsilon' < a_n < a + \varepsilon'$ かつ $e^x$ は単調増加なので</p>
+      $$e^{a - \varepsilon'} < e^{a_n} < e^{a + \varepsilon'}.$$
+      <p><strong>上からの評価：</strong></p>
+      $$e^{a_n} - e^a < e^{a+\varepsilon'} - e^a = e^a(e^{\varepsilon'} - 1) = e^a \cdot \frac{\varepsilon}{e^a} = \varepsilon.$$
+      <p><strong>下からの評価：</strong></p>
+      $$e^{a_n} - e^a > e^{a-\varepsilon'} - e^a = e^a(e^{-\varepsilon'} - 1) = -\frac{\varepsilon}{1 + \varepsilon/e^a} > -\varepsilon.$$
+      <p>よって $|e^{a_n} - e^a| < \varepsilon$。$\varepsilon > 0$ は任意だったから $e^{a_n} \to e^a$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🔑 ポイントまとめ</div>
+      <ul>
+        <li><strong>対数で $\varepsilon$ を逆算：</strong>「$|e^{a_n} - e^a| < \varepsilon$ にしたい」→ $e^x$ の単調性を使って $e^{a+\delta} - e^a = \varepsilon$ から $\delta = \log(1+\varepsilon/e^a)$ を決める，という逆算が核心。</li>
+        <li><strong>$\varepsilon'$ の正値確認：</strong>$\varepsilon > 0 \Rightarrow 1 + \varepsilon/e^a > 1 \Rightarrow \log(\cdots) > 0$ を必ず確認する。$a_n \to a$ の定義に食わせる $\varepsilon'$ が正でないと論法が破綻する。</li>
+        <li><strong>下からの評価：</strong>$e^{-\varepsilon'} - 1 = \dfrac{1}{1+\varepsilon/e^a} - 1 = \dfrac{-\varepsilon/e^a}{1+\varepsilon/e^a}$，これに $e^a$ をかけると $-\varepsilon/(1+\varepsilon/e^a) > -\varepsilon$。符号に注意。</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">2</span> Cesàro 平均
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>数列 $\{a_n\}_n$ に対し，新たな数列 $\{A_n\}_n$ を $A_n := \dfrac{\displaystyle\sum_{k=1}^{n} a_k}{n}$ と定める。</p>
+      <ol>
+        <li>$\displaystyle\lim_{n\to\infty} a_n = \alpha$ ならば $\displaystyle\lim_{n\to\infty} A_n = \alpha$ を証明せよ。</li>
+        <li>$\displaystyle\lim_{n\to\infty} \frac{1 + \sqrt{2} + \sqrt[3]{3} + \cdots + \sqrt[n]{n}}{n}$ を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">Cesàro 平均定理</div>
+      <p>この問題の (1) は <strong>Cesàro（チェザロ）平均定理</strong>として知られる重要な定理。$a_n \to \alpha$ ならば算術平均 $A_n$ も同じ極限に収束する。逆は一般に成立しない（$A_n \to \alpha$ でも $a_n$ が収束するとは限らない）。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 (1) の方針</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 ゴールから逆算する</div>
+        <p>$|A_n - \alpha| < \varepsilon$ を示したい。$A_n - \alpha = \frac{1}{n}\sum_{k=1}^n (a_k - \alpha)$ なので</p>
+        $$|A_n - \alpha| \leq \frac{1}{n}\sum_{k=1}^n |a_k - \alpha|.$$
+        <p>$a_k \to \alpha$ なので，大きい $k$（$k > N$ 以降）については $|a_k - \alpha| < \varepsilon/2$ が使える。小さい $k$（$k \leq N$）の部分は固定された有限和なので，$n$ を大きくすれば $1/n$ で潰せる。</p>
+        <p>→「後半は $\varepsilon/2$ で抑え，前半は $n \to \infty$ で消す」という分割が定石。</p>
+      </div>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$\varepsilon > 0$ を任意に与える。$a_n \to \alpha$ の仮定より，ある $N_0 \in \mathbb{N}$ が存在して</p>
+      $$k > N_0 \implies |a_k - \alpha| < \frac{\varepsilon}{2}.$$
+      <p>$C := \displaystyle\sum_{k=1}^{N_0} |a_k - \alpha|$（固定された有限和）とおく。$n > N_0$ に対して</p>
+      $$|A_n - \alpha| = \left|\frac{1}{n}\sum_{k=1}^n(a_k - \alpha)\right| \leq \frac{1}{n}\sum_{k=1}^{N_0}|a_k - \alpha| + \frac{1}{n}\sum_{k=N_0+1}^{n}|a_k - \alpha|$$
+      $$\leq \frac{C}{n} + \frac{n - N_0}{n} \cdot \frac{\varepsilon}{2} < \frac{C}{n} + \frac{\varepsilon}{2}.$$
+      <p>さらに $\dfrac{C}{n} < \dfrac{\varepsilon}{2}$ となる $N_1 = \left\lceil\dfrac{2C}{\varepsilon}\right\rceil + 1$ をとり，$N := \max(N_0, N_1)$ とおくと</p>
+      $$n \geq N \implies |A_n - \alpha| < \frac{\varepsilon}{2} + \frac{\varepsilon}{2} = \varepsilon.$$
+      <p>以上より $\displaystyle\lim_{n\to\infty} A_n = \alpha$。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$a_k := \sqrt[k]{k} = k^{1/k}$ とおくと，求める極限は $\displaystyle\lim_{n\to\infty} A_n = \lim_{n\to\infty}\frac{1}{n}\sum_{k=1}^n a_k$。</p>
+      <p><strong>$a_k \to 1$ の確認：</strong></p>
+      $$a_k = k^{1/k} = e^{\frac{\ln k}{k}}.$$
+      <p>$\ln t \leq t - 1$（$t > 0$）に $t = \sqrt{k}$ を代入すると $\ln\sqrt{k} \leq \sqrt{k} - 1 < \sqrt{k}$，ゆえに</p>
+      $$0 \leq \frac{\ln k}{k} = \frac{2\ln\sqrt{k}}{k} < \frac{2}{\sqrt{k}} \xrightarrow{k\to\infty} 0.$$
+      <p>はさみうちより $(\ln k)/k \to 0$。指数関数の連続性より $a_k = e^{(\ln k)/k} \to e^0 = 1$。</p>
+      <p><strong>(1) の適用：</strong>$a_k \to 1 = \alpha$ なので，Cesàro 平均定理（(1)）より</p>
+      $$\lim_{n\to\infty} \frac{1 + \sqrt{2} + \sqrt[3]{3} + \cdots + \sqrt[n]{n}}{n} = \lim_{n\to\infty} A_n = \boxed{1}.$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🔑 ポイントまとめ</div>
+      <ul>
+        <li><strong>(1) の核心：</strong>$\sum |a_k - \alpha|$ を「前半（有限個）」と「後半（$\varepsilon/2$ 以下）」に分割するのが定石。前半は $n \to \infty$ で $1/n$ に消え，後半はすでに小さい。</li>
+        <li><strong>(2) の核心：</strong>$k^{1/k} = e^{(\ln k)/k}$ と書いて $(\ln k)/k \to 0$ を使う。この変形は $n^{1/n}$ 型の極限の標準手法。</li>
+        <li><strong>Cesàro の逆は不成立：</strong>$a_n = (-1)^n$ は収束しないが $A_n \to 0$。定理の「仮定は $a_n$ 収束」が必要。</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">3</span> $f(x) = \log(x + \sqrt{x^2+1})$ の高階微分
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$f(x) := \log(x + \sqrt{x^2 + 1})$ とおく。</p>
+      <ol>
+        <li>$(1 + x^2)f''(x) + xf'(x) = 0$ を示せ。</li>
+        <li>任意の正整数 $n > 0$ に対し
+          $$(1+x^2)f^{(n+2)}(x) + (2n+1)xf^{(n+1)}(x) + n^2 f^{(n)}(x) = 0$$
+          を示せ。</li>
+      </ol>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">$f(x) = \log(x+\sqrt{x^2+1})$ の正体</div>
+      <p>$f(x)$ は双曲線逆正弦関数 $\mathrm{arcsinh}(x) = \sinh^{-1}(x)$（$\mathrm{asinh}$ とも書く）に等しい。</p>
+      $$f'(x) = \frac{1}{\sqrt{x^2+1}} = (1+x^2)^{-1/2}.$$
+      <p>これは $(\sin\theta)$ の代わりに $\sinh$ を使った「双曲線版の逆三角関数」。対数で表せる理由は $\sinh^{-1}(x) = \ln(x + \sqrt{x^2+1})$（定義から直接導ける）。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 準備：$f'(x)$ の計算</div>
+      <p>$f(x) = \log(x + \sqrt{x^2+1})$ を微分する（$\log$ は自然対数）。</p>
+      $$f'(x) = \frac{1}{x + \sqrt{x^2+1}} \cdot \left(1 + \frac{x}{\sqrt{x^2+1}}\right) = \frac{1}{x+\sqrt{x^2+1}} \cdot \frac{\sqrt{x^2+1}+x}{\sqrt{x^2+1}} = \frac{1}{\sqrt{x^2+1}}.$$
+      <p>さらに</p>
+      $$f''(x) = \frac{d}{dx}(1+x^2)^{-1/2} = -\frac{1}{2}(1+x^2)^{-3/2}\cdot 2x = \frac{-x}{(1+x^2)^{3/2}}.$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$(1+x^2)f''(x) + xf'(x)$ を計算する。</p>
+      $$(1+x^2) \cdot \frac{-x}{(1+x^2)^{3/2}} + x \cdot \frac{1}{(1+x^2)^{1/2}}$$
+      $$= \frac{-x}{(1+x^2)^{1/2}} + \frac{x}{(1+x^2)^{1/2}} = 0. \quad \blacksquare$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 (2) の方針</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 ゴールから逆算する</div>
+        <p>(2) で示したい等式を $P(n)$ と呼ぶ。$P(n) \Rightarrow P(n+1)$ を示すには「$P(n)$ の両辺を $x$ で微分する」のが自然。なぜなら $f^{(k)}$ を微分すると $f^{(k+1)}$ が出てくるからだ。</p>
+        <p>$P(n)$：$(1+x^2)f^{(n+2)} + (2n+1)xf^{(n+1)} + n^2 f^{(n)} = 0$ を $x$ で微分すると</p>
+        $$2x \cdot f^{(n+2)} + (1+x^2)f^{(n+3)} + (2n+1)f^{(n+1)} + (2n+1)x f^{(n+2)} + n^2 f^{(n+1)} = 0$$
+        $$\Rightarrow\; (1+x^2)f^{(n+3)} + \underbrace{(2+(2n+1))}_{=2n+3}x f^{(n+2)} + \underbrace{(2n+1+n^2)}_{=(n+1)^2}f^{(n+1)} = 0.$$
+        <p>これは $P(n+1)$（$n$ を $n+1$ に置き換えた式）にちょうど一致する！</p>
+      </div>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2) — 数学的帰納法</div>
+      <p><strong>基底（$n = 1$）：</strong>(1) で示した $(1+x^2)f'' + xf' = 0$ の両辺を $x$ で微分する。</p>
+      $$2x f'' + (1+x^2)f''' + f' + x f'' = 0 \;\Longrightarrow\; (1+x^2)f''' + 3xf'' + f' = 0.$$
+      <p>これは $n=1$ の式（$(1+x^2)f^{(3)} + 3xf^{(2)} + 1^2 f^{(1)} = 0$）に一致する。✓</p>
+
+      <p><strong>帰納段階：</strong>$n$ で成立，すなわち</p>
+      $$(1+x^2)f^{(n+2)} + (2n+1)xf^{(n+1)} + n^2 f^{(n)} = 0 \tag{$P(n)$}$$
+      <p>を仮定する。両辺を $x$ について微分すると</p>
+      $$2x f^{(n+2)} + (1+x^2)f^{(n+3)} + (2n+1)f^{(n+1)} + (2n+1)x f^{(n+2)} + n^2 f^{(n+1)} = 0.$$
+      <p>$f^{(n+2)}$ の係数を整理：$2x + (2n+1)x = (2n+3)x$。</p>
+      <p>$f^{(n+1)}$ の係数を整理：$(2n+1) + n^2 = n^2 + 2n + 1 = (n+1)^2$。</p>
+      <p>よって</p>
+      $$(1+x^2)f^{(n+3)} + (2(n+1)+1)\,x f^{(n+2)} + (n+1)^2 f^{(n+1)} = 0.$$
+      <p>これは $n+1$ の場合 $P(n+1)$ に他ならない。帰納法より全ての正整数 $n$ で成立。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🔑 ポイントまとめ</div>
+      <ul>
+        <li><strong>「微分して帰納」パターン：</strong>高階微分に関する等式を帰納で示す際，「$P(n)$ を微分して $P(n+1)$ を得る」のが定石。係数が $n$ に依存する場合でも，積の微分で整理すれば係数の更新規則が見える。</li>
+        <li><strong>係数の更新：</strong>$x$ の係数 $2n+1 \to 2(n+1)+1 = 2n+3$（$+2$），定数係数 $n^2 \to (n+1)^2$（これは $(n+1)^2 = n^2+2n+1$ と分解して考えるとわかりやすい）。</li>
+        <li><strong>この漸化式の意味：</strong>$\mathrm{arcsinh}$ の Taylor 展開の係数に関する漸化式になっており，Legendre 方程式の変形とも関連する。</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">4</span> $f_n(x) = x^n\sin\!\dfrac{1}{x}$ の微分可能性と連続性
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$n$ を正の整数とし，関数</p>
+      $$f_n(x) := \begin{cases} x^n \sin\dfrac{1}{x} & (x \ne 0) \\ 0 & (x = 0) \end{cases}$$
+      <p>を考える。これが $x = 0$ で微分可能かどうかを判定せよ。また微分可能である場合，導関数 $f_n'(x)$ は $x = 0$ で連続かどうか判定せよ。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 方針</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 ゴールから逆算する</div>
+        <p><strong>微分可能性（$x=0$）：</strong>定義通り $f_n'(0) = \displaystyle\lim_{h\to 0} \dfrac{f_n(h) - f_n(0)}{h} = \lim_{h\to 0} h^{n-1}\sin\dfrac{1}{h}$ が存在するかを調べる。</p>
+        <ul>
+          <li>$n = 1$：$\sin(1/h)$ は $h \to 0$ で振動して極限を持たない。</li>
+          <li>$n \geq 2$：$|h^{n-1}\sin(1/h)| \leq |h|^{n-1} \to 0$（はさみうち）。</li>
+        </ul>
+        <p><strong>$f_n'(0)$ の連続性（$n \geq 2$ の場合）：</strong>$x \ne 0$ での $f_n'(x)$ を積の微分で求め，$x \to 0$ の極限と $f_n'(0) = 0$ を比較する。</p>
+      </div>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答：微分可能性</div>
+      <p>$x = 0$ での微分係数を定義から計算する：</p>
+      $$f_n'(0) = \lim_{h \to 0} \frac{f_n(h) - 0}{h} = \lim_{h \to 0} h^{n-1} \sin\frac{1}{h}.$$
+
+      <p><strong>場合 $n = 1$：</strong>　$\displaystyle\lim_{h\to 0} \sin\dfrac{1}{h}$ が存在しないことを，2つの列を構成して示す。</p>
+      <p>$h_k = \dfrac{1}{2\pi k} \to 0$ に対し $\sin\dfrac{1}{h_k} = \sin 2\pi k = 0 \to 0$。</p>
+      <p>$h_k' = \dfrac{1}{2\pi k + \pi/2} \to 0$ に対し $\sin\dfrac{1}{h_k'} = \sin\!\left(2\pi k + \dfrac{\pi}{2}\right) = 1 \to 1$。</p>
+      <p>同じ点 $0$ に収束する2列で値の極限が異なるから，$\displaystyle\lim_{h\to 0}\sin\dfrac{1}{h}$ は存在しない。よって $f_1$ は $x = 0$ で<strong>微分不可能</strong>。</p>
+
+      <p><strong>場合 $n \geq 2$：</strong>　$\left|h^{n-1}\sin\dfrac{1}{h}\right| \leq |h|^{n-1} \to 0$（$h \to 0$）。はさみうちの原理より</p>
+      $$f_n'(0) = 0.$$
+      <p>よって $f_n$ は $x = 0$ で<strong>微分可能</strong>であり，$f_n'(0) = 0$。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答：$f_n'(x)$ の $x=0$ での連続性（$n \geq 2$ の場合）</div>
+      <p>$x \ne 0$ での $f_n'(x)$ を積の微分則で求める：</p>
+      $$f_n'(x) = nx^{n-1}\sin\frac{1}{x} + x^n \cdot \cos\frac{1}{x} \cdot \left(-\frac{1}{x^2}\right) = nx^{n-1}\sin\frac{1}{x} - x^{n-2}\cos\frac{1}{x}.$$
+      <p>$x \to 0$ での各項の挙動：</p>
+      <ul>
+        <li>第1項 $nx^{n-1}\sin(1/x)$：$|nx^{n-1}\sin(1/x)| \leq n|x|^{n-1} \to 0$（$n \geq 2$ で $n-1 \geq 1$）。</li>
+        <li>第2項 $x^{n-2}\cos(1/x)$：$|x^{n-2}\cos(1/x)| \leq |x|^{n-2}$。これが $0 \to 0$ になるには $n - 2 \geq 1$，すなわち $n \geq 3$ が必要。$n = 2$ では $|x^0 \cos(1/x)| = |\cos(1/x)|$ が振動する。</li>
+      </ul>
+
+      <p><strong>場合 $n = 2$：</strong></p>
+      $$f_2'(x) = 2x\sin\frac{1}{x} - \cos\frac{1}{x} \quad (x \ne 0).$$
+      <p>$x \to 0$ のとき第1項 $\to 0$，第2項 $\cos(1/x)$ は振動して極限を持たない。よって $\displaystyle\lim_{x\to 0}f_2'(x)$ が存在せず，$f_2'$ は $x=0$ で<strong>連続でない</strong>。</p>
+
+      <p><strong>場合 $n \geq 3$：</strong></p>
+      <p>両項ともに $x \to 0$ で $0$ に収束するので $\displaystyle\lim_{x\to 0}f_n'(x) = 0 = f_n'(0)$。よって $f_n'$ は $x=0$ で<strong>連続</strong>。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📊 結果まとめ</div>
+      <table class="case-table">
+        <thead>
+          <tr>
+            <th>$n$</th>
+            <th>$x=0$ で微分可能？</th>
+            <th>$f_n'(0)$</th>
+            <th>$f_n'$ は $x=0$ で連続？</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>$1$</td><td>✗ 不可能</td><td>—</td><td>—</td></tr>
+          <tr><td>$2$</td><td>✓ 可能</td><td>$0$</td><td>✗ 不連続</td></tr>
+          <tr><td>$n \geq 3$</td><td>✓ 可能</td><td>$0$</td><td>✓ 連続</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🔑 ポイントまとめ</div>
+      <ul>
+        <li><strong>「定義から計算」：</strong>$x=0$ での微分可能性は必ず極限の定義に戻る。$|h^{n-1}\sin(1/h)| \leq |h|^{n-1}$ のはさみうちが鍵。</li>
+        <li><strong>「連続性の判定」：</strong>$f_n'(0)$ が求まっても $\lim_{x \to 0} f_n'(x) \ne f_n'(0)$ のことがある（$n=2$ の例）。$f'$ の連続性は $f'$ の極限を別途調べる必要がある。</li>
+        <li><strong>「微分可能だが $f'$ が不連続」：</strong>$f_2$ はその例。「微分可能 $\Rightarrow$ $f'$ 連続」は一般に成り立たない（連続微分可能と微分可能は別の概念）。</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問5 -->
+<section class="section-card" id="problem5">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">5</span> 指数関数の部分和 $g_n(x)$
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>関数 $g_n(x) := 1 + x + \dfrac{x^2}{2!} + \cdots + \dfrac{x^n}{n!}$ を考える。</p>
+      <ol>
+        <li>任意の正整数 $n > 0$ に対し，$g_{2n}(x) > 0$（$\forall x$）かつ $g_{2n-1}(x) = 0$ は唯一つの解 $\alpha_n$ を持つことを示せ。</li>
+        <li>$\displaystyle\lim_{n\to\infty} \alpha_n = -\infty$ を示せ。</li>
+      </ol>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">$g_n(x)$ の基本性質</div>
+      <ul>
+        <li>$g_n(x) = \displaystyle\sum_{k=0}^{n} \dfrac{x^k}{k!}$　（$e^x$ の Taylor 展開の $n$ 次部分和）</li>
+        <li>$g_n'(x) = g_{n-1}(x)$　（微分すると一つ次数が下がる）</li>
+        <li>$g_n(x) = g_{n-1}(x) + \dfrac{x^n}{n!}$　（最後の項の追加）</li>
+        <li>固定された $x$ に対し $g_n(x) \to e^x$（$n \to \infty$）</li>
+      </ul>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 (1) の方針</div>
+      <p>「$g_{2n} > 0$」と「$g_{2n-1}$ が唯一根を持つ」は互いに支え合う構造を持つ。<strong>数学的帰納法</strong>で同時に証明するのが自然。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 帰納構造の確認</div>
+        <p><strong>仮定：</strong>$g_{2n-2}(x) > 0$（全実数で正）。</p>
+        <p><strong>ステップ1：</strong>$g_{2n-1}' = g_{2n-2} > 0$ より $g_{2n-1}$ は<strong>狭義単調増加</strong>。</p>
+        <p><strong>ステップ2：</strong>$g_{2n-1}(-\infty) = -\infty$，$g_{2n-1}(+\infty) = +\infty$（奇数次の最高次係数が正），かつ $g_{2n-1}(0) = 1 > 0$。中間値定理と単調性から<strong>唯一の根 $\alpha_n < 0$</strong> が存在。</p>
+        <p><strong>ステップ3：</strong>$g_{2n}(x) = g_{2n-1}(x) + \dfrac{x^{2n}}{(2n)!}$。この最小値を評価する。</p>
+        <p>$g_{2n}' = g_{2n-1}$：$g_{2n-1}$ は単調増加で根 $\alpha_n$ を持つので，$g_{2n}$ は $x = \alpha_n$ で最小値をとる。</p>
+        <p>最小値：$g_{2n}(\alpha_n) = \underbrace{g_{2n-1}(\alpha_n)}_{=0} + \dfrac{\alpha_n^{2n}}{(2n)!} = \dfrac{\alpha_n^{2n}}{(2n)!} > 0$（$\alpha_n \ne 0$ より）。</p>
+        <p>よって $g_{2n}(x) \geq g_{2n}(\alpha_n) > 0$。</p>
+      </div>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1) — 数学的帰納法</div>
+      <p><strong>基底（$n = 1$）：</strong></p>
+      <p>$g_1(x) = 1 + x$：狭義単調増加（$g_1' = 1 > 0$），$g_1(0) = 1 > 0$ なので唯一の根は $\alpha_1 = -1 < 0$。</p>
+      <p>$g_2(x) = 1 + x + x^2/2$：$g_2'(x) = g_1(x) = 1+x$，根 $x = -1$ で最小値 $g_2(-1) = 1 - 1 + \frac{1}{2} = \frac{1}{2} > 0$。最高次係数 $\frac{1}{2} > 0$ なので $x \to \pm\infty$ で $+\infty$。よって $g_2(x) > 0$（$\forall x$）。✓</p>
+
+      <p><strong>帰納段階：</strong>$g_{2n-2}(x) > 0$（$\forall x$）を仮定する。</p>
+      <ol>
+        <li>$g_{2n-1}'(x) = g_{2n-2}(x) > 0$ より $g_{2n-1}$ は $\mathbb{R}$ 上狭義単調増加。</li>
+        <li>$g_{2n-1}(x) \to -\infty$（$x \to -\infty$），$g_{2n-1}(x) \to +\infty$（$x \to +\infty$）かつ単調なので，中間値定理より唯一の根 $\alpha_n$ が存在。</li>
+        <li>$g_{2n-1}(0) = 1 > 0$ かつ $g_{2n-1}$ は増加だから $\alpha_n < 0$，特に $\alpha_n \ne 0$。</li>
+        <li>$g_{2n}'(x) = g_{2n-1}(x)$ は $x < \alpha_n$ で負，$x > \alpha_n$ で正 → $g_{2n}$ は $x = \alpha_n$ で最小値をとる。</li>
+        <li>最小値の評価：
+          $$g_{2n}(\alpha_n) = g_{2n-1}(\alpha_n) + \frac{\alpha_n^{2n}}{(2n)!} = 0 + \frac{\alpha_n^{2n}}{(2n)!} > 0.$$
+        </li>
+        <li>$x \to \pm\infty$ で $g_{2n}(x) \to +\infty$（最高次 $x^{2n}/(2n)!$ が正）かつ最小値 $> 0$ だから $g_{2n}(x) > 0$（$\forall x$）。</li>
+      </ol>
+      <p>以上で $n$ での成立 → $n+1$ での成立が示された（$g_{2n} > 0$ が次の $n$ の「仮定」になる）。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2) — $\alpha_n \to -\infty$</div>
+      <p><strong>方針：</strong>任意の $M > 0$ に対して，十分大きい $n$ では $\alpha_n < -M$ を示す。</p>
+      <div class="backward-think" style="margin: 1rem 0;">
+        <div class="bt-title">🔄 $\alpha_n < -M$ と $g_{2n-1}(-M)$ の関係</div>
+        <p>$g_{2n-1}$ は狭義単調増加で根が $\alpha_n$。したがって</p>
+        $$\alpha_n < -M \iff -M > \alpha_n \iff g_{2n-1}(-M) > g_{2n-1}(\alpha_n) = 0.$$
+        <p>つまり「$\alpha_n < -M$ を示す」$\Leftrightarrow$ 「$g_{2n-1}(-M) > 0$ を示す」。</p>
+      </div>
+      <p>固定された $x = -M$（$M > 0$）に対し，$n \to \infty$ のとき</p>
+      $$g_{2n-1}(-M) = \sum_{k=0}^{2n-1} \frac{(-M)^k}{k!} \to e^{-M} > 0.$$
+      <p>（$e^x$ の Taylor 展開は任意の実数で収束するので，部分和は $e^{-M}$ に収束する。）</p>
+      <p>よって十分大きい $n$（具体的には $g_{2n-1}(-M) > e^{-M}/2 > 0$ となる $n$）に対して $g_{2n-1}(-M) > 0$，すなわち $\alpha_n < -M$。</p>
+      <p>$M > 0$ は任意だったから $\displaystyle\lim_{n\to\infty} \alpha_n = -\infty$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🔑 ポイントまとめ</div>
+      <ul>
+        <li><strong>(1) の核心：帰納法の「連鎖」。</strong>$g_{2n-2} > 0 \Rightarrow g_{2n-1}$ が唯一根 $\alpha_n$ を持つ $\Rightarrow g_{2n}$ の最小値が正 $\Rightarrow g_{2n} > 0$。この3段ループが帰納の骨格。</li>
+        <li><strong>最小値の等式 $g_{2n}(\alpha_n) = \alpha_n^{2n}/(2n)!$：</strong>$g_{2n} = g_{2n-1} + x^{2n}/(2n)!$ という最後の項の分解と，$g_{2n-1}(\alpha_n) = 0$ を組み合わせる。$\alpha_n \ne 0$ だから偶数乗 $\alpha_n^{2n} > 0$。</li>
+        <li><strong>(2) の核心：単調性と Taylor 収束。</strong>$g_{2n-1}$ の単調性から「$\alpha_n < -M$ $\Leftrightarrow$ $g_{2n-1}(-M) > 0$」と同値変換し，後者を Taylor 収束（$g_n(x) \to e^x$）で示す。</li>
+        <li><strong>直感的な理解：</strong>$e^x$ の $2n-1$ 次部分和で $g_{2n-1}(x) = 0$ の根が $\alpha_n$。$e^{-M}$ の部分和は有限次では必ず $e^{-M} > 0$ に近づき，どんなに大きい $M$ でも結局正になる。だから根はどんどん左（$-\infty$）へ逃げていく。</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 小テスト自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>小テストの問題を自力で解けるかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li><strong>問1：</strong>$e^{a_n} - e^a < \varepsilon$ にしたいとき，$e^x$ の単調性から $\varepsilon' = \log(1+\varepsilon/e^a)$ を逆算できるか。$\varepsilon' > 0$ の確認も含めて</li>
+          <li><strong>問1：</strong>下からの評価 $e^{a_n} - e^a > e^a(e^{-\varepsilon'}-1) = -\varepsilon/(1+\varepsilon/e^a) > -\varepsilon$ を自力で導けるか</li>
+          <li><strong>問2(1)：</strong>「前半の有限和を $C/n$ で抑え，後半を $\varepsilon/2$ で抑える」分割を自力で書けるか</li>
+          <li><strong>問2(2)：</strong>$\sqrt[k]{k} = e^{(\ln k)/k} \to 1$ を示したうえで Cesàro 平均定理を適用できるか</li>
+          <li><strong>問3(1)：</strong>$f'(x) = (1+x^2)^{-1/2}$，$f''(x) = -x(1+x^2)^{-3/2}$ を正しく計算して代入できるか</li>
+          <li><strong>問3(2)：</strong>「$P(n)$ を微分 → $P(n+1)$」という帰納の構造を理解しているか。係数 $2n+1 \to 2n+3$，$n^2 \to (n+1)^2$ の更新を自力で導けるか</li>
+          <li><strong>問4：</strong>微分係数の定義から $\lim_{h\to 0} h^{n-1}\sin(1/h)$ を評価し，$n=1$ と $n\geq 2$ で場合分けできるか</li>
+          <li><strong>問4：</strong>$n=2$ で「微分可能だが $f'$ が不連続」を，$\cos(1/x)$ の振動で示せるか。$n\geq 3$ で連続性を確認できるか</li>
+          <li><strong>問5(1)：</strong>帰納の3段ループ（$g_{2n-2}>0 \to$ 唯一根 $\alpha_n \to g_{2n}>0$）を順番に書けるか</li>
+          <li><strong>問5(1)：</strong>$g_{2n}(\alpha_n) = \alpha_n^{2n}/(2n)! > 0$ という等式がなぜ成り立つか説明できるか</li>
+          <li><strong>問5(2)：</strong>「$\alpha_n < -M$ $\Leftrightarrow$ $g_{2n-1}(-M) > 0$」の同値変換（単調性の使い方）を理解しているか</li>
+          <li><strong>問5(2)：</strong>$g_{2n-1}(-M) \to e^{-M} > 0$ という Taylor 収束の論拠を明確に述べられるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

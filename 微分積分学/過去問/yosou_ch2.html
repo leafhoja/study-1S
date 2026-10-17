@@ -1,0 +1,403 @@
+<!DOCTYPE html><!-- 「予想問題 第2回（Ch.2）— 微分積分学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>予想問題 第2回（Ch.2）— 微分積分学①</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="exam-ch2">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="yosou_ch1.html" data-page="過去問/yosou_ch1">予想問題1</a>
+      <a href="yosou_ch2.html" data-page="過去問/yosou_ch2" class="active">予想問題2</a>
+      <a href="yosou_ch3.html" data-page="過去問/yosou_ch3">予想問題3</a>
+      <a href="yosou_ch4.html" data-page="過去問/yosou_ch4">予想問題4</a>
+      <a href="yosou_ch5.html" data-page="過去問/yosou_ch5">予想問題5</a>
+      <a href="yosou_ch6.html" data-page="過去問/yosou_ch6">予想問題6</a>
+      <a href="yosou_keisan.html" data-page="過去問/yosou_keisan">計算問題集</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>予想問題 第2回</h1>
+  <p class="subtitle">Ch.2 テーラーの定理（全4問）</p>
+</div>
+
+<div class="container">
+
+  <div class="note">
+    <span class="box-label">この問題集の方針</span>
+    <p>
+      以下の4問はすべて<strong>AIが生成したオリジナルの予想問題</strong>であり、過去に実際に出題された試験問題そのものではない。
+      Ch.1〜Ch.6の講義ノート（<a href="../ch1.html">ch1</a>〜<a href="../ch6.html">ch6</a>）で扱った定義・定理・例を土台に、
+      「この範囲ならこう問われそうだ」という想定のもとで作成している。
+    </p>
+    <p>
+      中間試験や過去のレポート課題の傾向は参考程度にとどめ、本番の期末試験がこの通りに出るとは限らない点に注意してほしい。
+      あくまで<strong>Ch.2の内容を自分の手で使いこなせるかを確認するための練習材料</strong>として使うこと。
+      各問題には難易度（★の数、5段階）を付けてあるので、時間配分の目安にしてほしい。
+    </p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#p2-1">問題2.1</a>
+    <a href="#p2-2">問題2.2</a>
+    <a href="#p2-3">問題2.3</a>
+    <a href="#p2-4">問題2.4</a>
+  </div>
+
+  <!-- 問題2.1 -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="p2-1">
+    <div class="sec-header">
+      <span class="sec-tag">問題 2.1</span>
+      <span class="diff-badge">難易度 ★★☆☆☆</span>
+      <h2>Lagrangeの剰余項による誤差評価</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $\sin(0.2)$ を3次マクローリン多項式 $x-\dfrac{x^3}{6}$ で近似したときの誤差を、Lagrangeの剰余項（定理2.2（<a href="../ch2.html#taylor-n">../ch2.html#taylor-n</a>）参照）を用いて評価せよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">この問題の位置づけ — 例2.4との対比</span>
+        <p>
+          Ch.2本文の例2.4（<a href="../ch2.html#approx">../ch2.html#approx</a>）は $\cos(0.5)$ を4次テーラー多項式で近似し、
+          剰余項 $R_5$ を評価する問題だった。本問はその「奇関数版」にあたる——$\sin x$ を3次までの多項式 $x-\dfrac{x^3}{6}$ で近似する。
+        </p>
+        <p>
+          ここで注意すべきは<strong>次数の数え方</strong>だ。$\sin x$ は奇関数なので、マクローリン展開には奇数次の項しか現れない：
+          $\sin x = x - \dfrac{x^3}{3!}+\dfrac{x^5}{5!}-\cdots$。つまり3次の項 $-\dfrac{x^3}{6}$ の<strong>次に現れる非零の項</strong>は
+          2次分飛ばした5次の項 $\dfrac{x^5}{120}$ であり、4次の項は最初から存在しない（係数が恒等的に $0$）。
+        </p>
+        <p>
+          しかし、Lagrangeの剰余項の定理2.2をそのまま適用するときは「3次までの多項式を使うなら、剰余は $R_4$」という数え方をする。
+          つまり定理2.2の $n$ に $4$ を代入し、<strong>4階導関数</strong> $f^{(4)}(\xi)=\sin\xi$ を使って評価する。
+          $f^{(4)}(x)=\sin x$ の係数（$f^{(4)}(0)=\sin 0=0$）自体は $0$ なので4次の項は消えるが、
+          剰余項の評価に使う「途中の点 $\xi$ での4階導関数」は $0$ とは限らない（$\xi\ne0$ では $\sin\xi\ne0$ もありうる）——
+          この「展開の係数はゼロでも、剰余項の評価には次の階数の導関数を使う」という区別が、例2.4のcosの場合と全く同じ形で起きている点に注意すること。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">模範解答</span>
+        <p>$f(x)=\sin x$ とおく。微分を繰り返すと $\sin\to\cos\to-\sin\to-\cos\to\sin$ と周期4で循環するので、</p>
+        $$f^{(4)}(x) = \sin x.$$
+        <p>定理2.2（<a href="../ch2.html#taylor-n">../ch2.html#taylor-n</a>）を $n=4$ として適用すると、$0$ と $x$ の間のある $\xi$ が存在して</p>
+        $$R_4(x) = \frac{f^{(4)}(\xi)}{4!}x^4 = \frac{\sin\xi}{24}x^4.$$
+        <p>ここで $|\sin\xi|\le 1$（$\xi$ がどこにあっても成り立つ、$\sin$ の有界性）なので、$x=0.2$ を代入すると</p>
+        $$|R_4(0.2)| \le \frac{1}{24}(0.2)^4 = \frac{0.0016}{24} \approx 6.67\times10^{-5}.$$
+        <p>
+          したがって $\sin(0.2)$ を $x-\dfrac{x^3}{6}$ で近似したときの誤差は、$6.67\times10^{-5}$ 未満であることが保証される。
+          （実際 $\sin(0.2)=0.198669\ldots$、近似値 $0.2-\dfrac{0.008}{6}=0.198667\ldots$ で、誤差は約 $2\times10^{-6}$。評価は安全側に余裕を持った上界になっている。）
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — cos の場合との評価パターンの一致</span>
+        <p>
+          Ch.2本文（<a href="../ch2.html#approx">../ch2.html#approx</a>）で述べられている通り、$\sin x,\cos x$ の $n$ 階導関数は常に $\pm\sin x$ か $\pm\cos x$ のどれかなので、
+          「導関数そのものが有界（$|f^{(n)}(\xi)|\le1$）」という直接的な評価パターンが使える。指数関数型（$e^x$ の場合、例2.1・例2.2）のように
+          $e^\xi$ を上から定数で抑える手続きが不要な分、三角関数の剰余項評価は機械的にできる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 問題2.2 -->
+  <div class="section" id="p2-2">
+    <div class="sec-header">
+      <span class="sec-tag">問題 2.2</span>
+      <span class="diff-badge">難易度 ★★★☆☆</span>
+      <h2>Peanoの剰余項による極限計算</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $$\lim_{x\to0}\frac{\log(1+x)-x+\dfrac{x^2}{2}}{x^3}$$
+          を求めよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">Lagrange形かPeano形か — 目的に応じた使い分け</span>
+        <p>
+          Ch.2本文（<a href="../ch2.html#peano">../ch2.html#peano</a>）で対比されている通り、剰余項には2つの形がある。
+          <strong>Lagrangeの剰余項</strong>（定理2.2）は「区間全体で $f^{(n)}$ が存在する」という強めの仮定の代わりに、
+          $\xi$ の位置さえ分かれば<strong>誤差の具体的な数値</strong>を評価できる（前問2.1や本文の例2.4がそうだった）。
+          一方<strong>Peanoの剰余項</strong>（定理2.5）は「$f^{(n)}(a)$ が1点で存在する」だけという弱い仮定で済むが、
+          得られる情報は「剰余項が $(x-a)^n$ より速く $0$ に近づく」という<strong>漸近的な速さ</strong>だけで、具体的な数値評価はできない。
+        </p>
+        <p>
+          本問は「誤差の大きさを数値で知りたい」わけではなく、「<strong>極限の値さえ分かればよい</strong>」という目的の問題だ。
+          このような場面では、わざわざ強い仮定を要求するLagrangeの剰余項を使う必要はなく、Peanoの剰余項の
+          「$o(x^3)$ として無視できる」という考え方だけで十分に事足りる。
+          <strong>「数値誤差の評価が目的か、極限の値が目的か」で使う定理を選ぶ</strong>——これがCh.2本文の使い分け表
+          （<a href="../ch2.html#peano">../ch2.html#peano</a>）が示す実践的な指針であり、本問はその典型例になっている。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">模範解答</span>
+        <p>マクローリン展開早見表（<a href="../ch2.html#expansion">../ch2.html#expansion</a>）より</p>
+        $$\log(1+x) = x-\frac{x^2}{2}+\frac{x^3}{3}-\cdots.$$
+        <p>
+          定理2.5（Peanoの剰余項、<a href="../ch2.html#peano">../ch2.html#peano</a>）の考え方では、3次までの項で打ち切って近似すれば、
+          残りの誤差は $o(x^3)$（$x\to0$ で $x^3$ より速く $0$ に近づく量）としてまとめられる：
+        </p>
+        $$\log(1+x) = x-\frac{x^2}{2}+\frac{x^3}{3}+o(x^3) \quad(x\to0).$$
+        <p>両辺から $x-\dfrac{x^2}{2}$ を引くと</p>
+        $$\log(1+x)-x+\frac{x^2}{2} = \frac{x^3}{3}+o(x^3).$$
+        <p>これを $x^3$ で割ると</p>
+        $$\frac{\log(1+x)-x+\dfrac{x^2}{2}}{x^3} = \frac13+\frac{o(x^3)}{x^3} = \frac13+o(1).$$
+        <p>$o(x^3)/x^3\to0$（$o(1)$ の定義そのもの）なので、$x\to0$ のとき</p>
+        $$\lim_{x\to0}\frac{\log(1+x)-x+\dfrac{x^2}{2}}{x^3} = \frac13.$$
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — Lagrange形でも解けるが遠回りになる</span>
+        <p>
+          もちろんLagrangeの剰余項（定理2.2）で $R_4(x)=\dfrac{f^{(4)}(\xi)}{4!}x^4$（$f(x)=\log(1+x)$、$f^{(4)}(x)=\dfrac{-6}{(1+x)^4}$）
+          まで具体的に計算して $\xi\to0$ のときの挙動を追うことでも同じ結論には到達できる。
+          しかし本問の目的（極限の値）に対しては、$\xi$ の位置を気にせず「$o(x^3)$ で押し流せる」と直ちに言えるPeano形の方が
+          圧倒的に手早く、かつ見通しがよい。これが冒頭で述べた使い分けの実利的な意味だ。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 問題2.3 -->
+  <div class="section" id="p2-3">
+    <div class="sec-header">
+      <span class="sec-tag">問題 2.3</span>
+      <span class="diff-badge">難易度 ★★★★☆</span>
+      <h2>$e$ の狭い評価</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          命題2.3（$e\lt3$、<a href="../ch2.html#approx">../ch2.html#approx</a>）と定理2.2（Lagrangeの剰余項、<a href="../ch2.html#taylor-n">../ch2.html#taylor-n</a>）を用いて、
+          $$2.7 < e < 2.75$$
+          を示せ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">例2.1/例2.2との違い、そして「既に証明済みの結果」の再利用</span>
+        <p>
+          Ch.2本文の例2.1・例2.2（<a href="../ch2.html#taylor-n">../ch2.html#taylor-n</a>、<a href="../ch2.html#approx">../ch2.html#approx</a>）は $n=7$ 項まで使って
+          $e\approx2.718055\ldots$ という<strong>数値としての近似値</strong>を求める問題だった。本問はそれとは異なり、
+          もっと少ない項数（$n=5$）だけを使って、$e$ を<strong>厳密な不等式で挟み込む</strong>ことが目標になる。
+          「項数を減らした分、誤差の上界は緩くなるが、それでも指定された範囲 $2.7\lt e\lt2.75$ を示すには十分」という
+          バランス感覚が問われている。
+        </p>
+        <p>
+          さらに注目してほしいのは、本問が命題2.3（$e\lt3$）を<strong>剰余項の評価の中の"部品"として再利用する</strong>という構成になっている点だ。
+          本番の試験でも、既に証明済みの結果（前の問題やCh.1〜Ch.2で示した命題・定理）を、新しい評価や証明の中の一部として
+          そのまま組み込んでよい（むしろそれが期待されている）——一から $e^\xi$ の評価をやり直す必要はない。
+        </p>
+        <p>
+          <strong>よくある間違い</strong>：剰余項 $R_5=\dfrac{e^\xi}{5!}$ の上界を求める際、$\xi\in(0,1)$ という範囲があるにもかかわらず、
+          うっかり $\xi=1$ と決め打ちして $e^\xi=e^1=e$ を使ってしまうミスがある。これは循環論法に近い危うさがある
+          （$e$ を評価するために $e$ の値を先取りして使うことになりかねない）。正しくは、$\xi$ がどこにあっても
+          $\xi\lt1$ であることから $e^x$ の単調増加性を使って $e^\xi\lt e^1=e\lt3$（命題2.3で得た $e\lt3$ を使う）と、
+          <strong>$\xi$ の範囲全体で成り立つ上からの評価</strong>にする必要がある。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">模範解答</span>
+        <p>$f(x)=e^x$ のマクローリン展開に定理2.2を $n=5$ として適用する：</p>
+        $$e^x = 1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\frac{x^4}{4!}+R_5, \qquad R_5=\frac{e^\xi}{5!}x^5 \quad(\xi\text{ は }0\text{ と }x\text{ の間}).$$
+        <p>$x=1$ を代入する。まず部分和 $S$ を計算すると</p>
+        $$S = 1+1+\frac12+\frac16+\frac1{24} = 1+1+0.5+0.16667\ldots+0.04167\ldots = 2.70833\ldots$$
+        <p>剰余項は $\xi\in(0,1)$ を用いて</p>
+        $$R_5 = \frac{e^\xi}{5!} = \frac{e^\xi}{120}.$$
+        <p>
+          ここで $\xi\lt1$ かつ $e^x$ は単調増加なので $e^\xi\lt e^1=e$。命題2.3（<a href="../ch2.html#approx">../ch2.html#approx</a>）より $e\lt3$ なので、
+          合わせて $e^\xi\lt3$ が言える。よって
+        </p>
+        $$R_5 < \frac{3}{120} = 0.025.$$
+        <p>$R_5>0$（$e^\xi>0$ より）にも注意すると、$e=S+R_5$ より</p>
+        $$e \in \bigl(2.70833\ldots,\ 2.70833\ldots+0.025\bigr) = (2.70833\ldots,\ 2.73333\ldots).$$
+        <p>
+          この区間は $(2.7,\ 2.75)$ に含まれる（$2.7\lt2.70833\ldots$ かつ $2.73333\ldots\lt2.75$）ので、特に
+        </p>
+        $$2.7 < e < 2.75$$
+        <p>
+          が成り立つ。（実際には $e^\xi\lt e\lt2.75$ 程度まで詰めれば $e\lt2.734$ 程度のもっと狭い評価も可能だが、
+          問題が要求する $2.7\lt e\lt2.75$ は上の議論だけで十分に示された。）
+        </p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">注意 — $\xi$ の扱い</span>
+        <p>
+          繰り返しになるが、$\xi$ は「$0$ と $1$ の間のどこかにある、具体的には分からない点」であって、$\xi=1$ でも $\xi=0$ でもない。
+          剰余項の評価では常に「$\xi$ がとりうる範囲全体で成り立つ不等式」を作る必要がある。本問では $\xi\lt1\Rightarrow e^\xi\lt e\lt3$ という
+          単調性からの評価がその役割を果たしている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 問題2.4 -->
+  <div class="section" id="p2-4">
+    <div class="sec-header">
+      <span class="sec-tag">問題 2.4</span>
+      <span class="diff-badge">難易度 ★★★★★</span>
+      <h2>$e^{-1/x^2}$ 反例の一般化</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $$g(x) = \begin{cases} e^{-1/x^2}\sin(1/x) & (x\ne0) \\ 0 & (x=0) \end{cases}$$
+          とする。$g$ の全ての階数の導関数について $g^{(n)}(0)=0$（$n=0,1,2,\ldots$）となることを（少なくとも $n=0,1$ について厳密に、
+          それ以上は同じ論法の一般化として）示し、それにもかかわらず $g$ は原点のどんな近傍でも符号を無限回変える
+          （$g\equiv0$ ではない）ことを説明せよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">例2.6の発展形 — もう一段強い教訓</span>
+        <p>
+          Ch.2本文の例2.6（<a href="../ch2.html#series">../ch2.html#series</a>）は $f(x)=e^{-1/x^2}$ が $C^\infty$ 級でありながら、
+          $x=0$ でのマクローリン級数が恒等的に $0$ になり、元の関数 $f$（$x\ne0$ では常に正）には収束しないという反例だった。
+          本問はこの $f$ に振動因子 $\sin(1/x)$ を掛けた $g(x)=e^{-1/x^2}\sin(1/x)$ を考える、いわば例2.6の発展問題だ。
+        </p>
+        <p>
+          例2.6が示した教訓は「$C^\infty$ 級であっても、テーラー級数が元の関数に収束するとは限らない（$R_n\to0$ の確認が必須）」というものだった。
+          本問はそこにさらに強い教訓を付け加える：<strong>マクローリン級数が恒等的に $0$ になる関数は、原点の近くで恒等的に $0$ とは限らない
+          ——それどころか、原点にいくらでも近いところで激しく振動しうる</strong>、という事実だ。$e^{-1/x^2}$ 単体は常に $\ge0$（符号は変わらない）
+          だったが、$\sin(1/x)$ を掛けることで「原点近傍で符号が無限回入れ替わる」という、例2.6には無かった新しい現象が加わる。
+        </p>
+        <p>
+          なお本問は完全な帰納法による証明までは要求していない。$n=0,1$ を厳密に示した上で、
+          「同じ機構（$t^ke^{-t^2}\to0$ タイプの評価）が高階の導関数でも繰り返される」ことを明示的に述べれば、
+          学部教養レベルの扱いとして十分である。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">模範解答</span>
+        <p><strong>$n=0$ の場合：</strong> $g(0)=0$ は定義そのものなので直ちに成り立つ。</p>
+
+        <p><strong>$n=1$ の場合：</strong> 微分係数を差分商の極限として計算する。</p>
+        $$g'(0) = \lim_{h\to0}\frac{g(h)-g(0)}{h} = \lim_{h\to0}\frac{e^{-1/h^2}\sin(1/h)}{h}.$$
+        <p>$|\sin(1/h)|\le1$（$\sin$ の有界性）より</p>
+        $$\left|\frac{e^{-1/h^2}\sin(1/h)}{h}\right| \le \frac{e^{-1/h^2}}{|h|}.$$
+        <p>$t=1/|h|$ とおくと $h\to0$ のとき $t\to\infty$ で、</p>
+        $$\frac{e^{-1/h^2}}{|h|} = t\,e^{-t^2} \to 0 \quad(t\to\infty).$$
+        <p>
+          これはCh.2本文の例2.6・Ch.1の「指数関数はべき関数に勝つ」という増大度の階層と同系統の事実
+          （$\lim_{t\to\infty}t^ke^{-t^2}=0$、指数関数的な減少はどんな多項式的な増加よりも強い）による。
+          はさみうちの原理より $\dfrac{g(h)-g(0)}{h}\to0$、すなわち $g'(0)=0$。
+        </p>
+
+        <p><strong>高階の導関数について（一般化の方針）：</strong> $x\ne0$ のとき、積の微分・合成関数の微分を繰り返し適用すると、
+        $g^{(n)}(x)$ は常に</p>
+        $$g^{(n)}(x) = e^{-1/x^2}\times\bigl(\text{$1/x$ の多項式}\bigr)\times\bigl(\sin(1/x)\text{ または }\cos(1/x)\bigr)$$
+        <p>
+          という形の有限和になる（微分を1回行うごとに $1/x$ の多項式の次数は上がっていくが、$e^{-1/x^2}$ の因子は決して消えない——
+          これは例2.6の $f(x)=e^{-1/x^2}$ 自身の高階導関数と全く同じ構造）。
+        </p>
+        <p>
+          $0$ における $n$ 階微分係数を差分商の極限として評価するときも、$n=1$ の場合と全く同じ「$t^ke^{-t^2}\to0$」（$t=1/|h|$、
+          $k$ はそのとき現れる多項式の次数）という議論に帰着し、$\sin(1/x)$ や $\cos(1/x)$ の有界性（絶対値 $\le1$）と合わせて
+          はさみうちにより $0$ に潰れる。この議論はすべての $n$ について同じ形で繰り返せるので、
+        </p>
+        $$g^{(n)}(0) = 0 \quad (n=0,1,2,\ldots)$$
+        <p>が成り立つ。</p>
+
+        <p><strong>符号変化について：</strong> $x\ne0$ では $e^{-1/x^2}>0$ なので、$g(x)=e^{-1/x^2}\sin(1/x)$ の符号は $\sin(1/x)$ の符号と一致する。
+        $x\to0$（$x\ne0$）のとき $1/x\to\pm\infty$ と振動しながら発散するので、$\sin(1/x)$ は原点のどんな近傍
+        $(-\delta,\delta)\setminus\{0\}$ の中でも正の値・負の値をどちらも無限回とる（$\sin$ が周期関数であることによる）。
+        したがって $g$ もまた、原点のどんな近傍内でも符号を無限回変える。</p>
+
+        <p>
+          <strong>結論：</strong> 全ての $n$ で $g^{(n)}(0)=0$ なので、$g$ の $x=0$ でのマクローリン級数は
+          $\sum_{k=0}^\infty\dfrac{g^{(k)}(0)}{k!}x^k=0$（恒等的に $0$）である。しかし $g\not\equiv0$
+          （原点以外の点では $g(x)=e^{-1/x^2}\sin(1/x)$ は一般に非零であり、原点のどんな近傍にも $g\ne0$ となる点が存在する）。
+          よってテーラー級数は元の関数 $g$ を"復元"しない——例2.6と同じ現象だが、本問ではさらに「関数自身が原点近傍で
+          符号を無限回変える」という、より激しい振る舞いを伴っている。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 例2.6との対比のまとめ</span>
+        <table class="axiom-table">
+          <tr><th></th><th>例2.6：$f(x)=e^{-1/x^2}$</th><th>本問：$g(x)=e^{-1/x^2}\sin(1/x)$</th></tr>
+          <tr><td>$x=0$ での全ての導関数</td><td>$0$</td><td>$0$</td></tr>
+          <tr><td>マクローリン級数</td><td>恒等的に $0$</td><td>恒等的に $0$</td></tr>
+          <tr><td>$x\ne0$ での符号</td><td>常に正（$>0$）</td><td>原点近傍で無限回符号変化</td></tr>
+          <tr><td>教訓</td><td>$C^\infty$級でもテーラー級数は元の関数に収束するとは限らない</td><td>その関数自身が原点近傍でどれほど激しく振動しうるかは全く別の話</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <span class="sec-tag">Self-Check</span>
+      <h2>自力確認チェックリスト</h2>
+    </div>
+    <div class="sec-body">
+      <ul class="checklist">
+        <li>Lagrangeの剰余項（定理2.2）を使って、指定した次数の多項式近似の誤差を数値で評価できる（問題2.1）。</li>
+        <li>Lagrangeの剰余項とPeanoの剰余項（定理2.5）の違いを説明でき、「数値誤差の評価」と「極限の値の計算」のどちらに向いているかを場面に応じて使い分けられる（問題2.2）。</li>
+        <li>既に証明済みの命題・定理（例：命題2.3の $e\lt3$）を、新しい評価の中の部品として正しく組み込み、$\xi$ の範囲全体で成り立つ不等式を作れる（問題2.3）。</li>
+        <li>$C^\infty$ 級でもマクローリン級数が元の関数に収束しない例（例2.6）の構造を理解し、振動因子を加えた発展的な設定にも同じ論法を適用できる（問題2.4）。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; margin-top:2rem; padding:0 .5rem;">
+    <a href="yosou_ch1.html" style="color:var(--accent); text-decoration:none; font-weight:700;">← 予想問題 第1回</a>
+    <a href="yosou_ch3.html" style="color:var(--accent); text-decoration:none; font-weight:700;">予想問題 第3回 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

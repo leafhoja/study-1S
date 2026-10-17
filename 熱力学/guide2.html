@@ -1,0 +1,34 @@
+<!DOCTYPE html><!-- 「第2章ナビ 第一法則 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja"><!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head><meta charset="UTF-8"><script src="../access_control.js"></script><script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#1a365d"><title>第2章ナビ 第一法則 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"><link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="td.css"><link rel="stylesheet" href="guide.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script></head>
+<body data-nav-page="ch2"><!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar"><div class="navbar-inner"><a class="navbar-brand" href="index.html">熱力学ノート</a><div class="navbar-links">
+<a href="../index.html" class="nav-back">← 学習ノート</a><a href="index.html">ホーム</a><a href="ch0.html" data-page="ch0">第0章</a><a href="ch1.html" data-page="ch1">第1章</a><a href="ch2.html" data-page="ch2" class="active">第2章</a><a href="ch3.html" data-page="ch3">第3章</a><a href="ch4.html" data-page="ch4">第4章</a><a href="ch5.html" data-page="ch5">第5章</a><a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a><a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a><a href="kakomon_2025.html" data-page="kakomon_2025">2025</a><a href="kakomon_2023.html" data-page="kakomon_2023">2023</a><a href="kakomon_2014.html" data-page="kakomon_2014">2014</a><a href="kakomon_2012.html" data-page="kakomon_2012">2012</a><a href="kakomon_2011.html" data-page="kakomon_2011">2011</a><a href="kakomon_2010.html" data-page="kakomon_2010">2010</a><a href="kakomon_2009.html" data-page="kakomon_2009">2009</a><a href="kakomon_2008.html" data-page="kakomon_2008">2008</a><a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+</div></div></nav>
+<main class="guide-main">
+<!-- 学習ガイドの題名と導入文を、冒頭の目立つ領域にまとめる。 --><header class="guide-hero"><p class="guide-kicker">CHAPTER 2 READING GUIDE</p><h1>第2章ナビ｜熱と仕事をエネルギー収支として追う</h1><p class="guide-lead">一言でいうと、<strong>熱と仕事という二つの方法で系のエネルギーが変わることを整理し、条件ごとの温度・圧力・体積変化を計算できるようにする</strong>章です。</p></header>
+<p class="guide-usage">章の前半は「エネルギーの帳簿」を作り、後半はその帳簿を熱容量と理想気体に適用します。式を使う前に、系の境界、過程、符号規約を決めることが全体を貫く基本です。</p>
+
+<section class="guide-section"><h2>この章が解決したいこと</h2><div class="guide-card"><span class="guide-card-label">中心の問い</span><h3>物体を温めたり押したりしたとき、入ったエネルギーはどこへ行くのか</h3><p>力学だけのエネルギー保存則では、摩擦や加熱を含む変化を十分に追えません。熱も仕事も系と外界の間のエネルギー移動だと捉え、その合計を内部エネルギーの変化として記録します。</p><div class="guide-keyline">過程を指定する → 熱と仕事を数える → 内部エネルギーで収支を閉じる → 物質の応答を求める</div></div></section>
+
+<section class="guide-section"><h2>全体の流れ</h2><!-- 学習の手順を、順番に読む項目と矢印で示す。 --><div class="route">
+<article class="route-step"><span class="route-num">1</span><h3>最初に「どんな過程か」を分類する</h3><p>定温・断熱・定積・定圧は、何を固定または遮断するかの分類です。準静的過程は、途中の各瞬間を平衡状態として扱える理想化です。</p><p class="route-point">目的：後でゼロになる項や使える関係式を先に見極める。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">2</span><h3>内部エネルギーを導入し、第一法則で収支を閉じる</h3><p>$dU=\delta Q+\delta W$ は、系に熱または仕事として入ったエネルギーが内部エネルギーへ蓄えられることを表します。$U$ は状態量ですが、$Q,W$ は経路で変わります。</p><p class="route-point">目的：熱現象を含めても成り立つエネルギー保存則を作る。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">3</span><h3>準静的な体積仕事を $P$–$V$ 図で読む</h3><p>このノートの符号規約では $\delta W=-P\,dV$。積分した仕事は経路の下の面積なので、同じ始点・終点でも過程によって値が異なります。サイクルでは囲む面積が正味の仕事になります。</p><p class="route-point">目的：経路依存という性質を、計算と図の両方で理解する。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">4</span><h3>熱容量で「熱を入れたときの温度応答」を表す</h3><p>定積では膨張仕事がなく、入れた熱が内部エネルギーを変えます。定圧では一部が膨張仕事へ回るため、$C_V$ と $C_P$ は異なります。エンタルピー $H=U+PV$ は定圧加熱の収支を簡潔にします。</p><p class="route-point">目的：固定条件による加熱の違いを一つの枠組みで整理する。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">5</span><h3>理想気体で一般論を具体的な式にする</h3><p>$PV=nRT$ と、理想気体の $U$ が温度だけで決まる性質を第一法則へ入れると、Mayerの関係 $C_P-C_V=nR$ が得られます。</p><p class="route-point">目的：状態方程式とエネルギー収支から、測定量同士の関係を導く。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">6</span><h3>断熱過程で温度・圧力・体積を結ぶ</h3><p>$\delta Q=0$ でも、膨張仕事をすれば $U$ は減ります。理想気体ではこれが $PV^\gamma=\mathrm{const}$ などの断熱曲線になります。ポリトロープ過程は定温・断熱などを共通の形で眺める補助線です。</p><p class="route-point">目的：「断熱＝温度一定」ではないことを、定量的に理解する。</p></article>
+</div></section>
+
+<section class="guide-section"><h2>全体をつなぐ見方</h2><!-- 学習ガイドの要点や注意をカードの一覧にまとめる。 --><div class="guide-cards">
+<article class="guide-card"><span class="guide-card-label">三つの量</span><h3>$U$ と $Q,W$ は同じ種類ではない</h3><p>$U$ は状態の現在地、$Q,W$ は境界を越えたエネルギーの渡し方です。したがって「物体が熱を持つ」ではなく「熱としてエネルギーが移動する」と捉えます。</p></article>
+<article class="guide-card"><span class="guide-card-label">条件の役割</span><h3>定積・定圧・断熱は式を選ぶ鍵</h3><p>定積なら $dV=0$、断熱なら $\delta Q=0$ です。条件を先に式へ反映すれば、暗記した公式を無理に当てはめずに済みます。</p></article>
+<article class="guide-card"><span class="guide-card-label">次章への接続</span><h3>第一法則は「可能か」までは決めない</h3><p>エネルギー収支が合っていても、熱が自然にどちらへ流れるか、熱をすべて仕事へ変えられるかは判定できません。その不足を第3章の第二法則が補います。</p></article>
+</div></section>
+
+<section class="guide-section"><h2>本文と併用する</h2><div class="guide-links"><a href="ch2.html#s2-1">過程の分類</a><a href="ch2.html#s2-2">第一法則と内部エネルギー</a><a href="ch2.html#s2-3">準静的仕事とサイクル</a><a href="ch2.html#s2-4">熱容量・エンタルピー</a><a href="ch2.html#s2-5">理想気体・断熱曲線</a><a class="guide-open" href="ch2.html">第2章本文を開く →</a></div></section>
+<section class="guide-section"><div class="guide-card"><span class="guide-card-label">読後チェック</span><h3>ここまで見えれば次章へ進める</h3><ul><li>状態量 $U$ と過程量 $Q,W$ を区別できる</li><li>過程の条件から第一法則の不要な項を消せる</li><li>$C_P>C_V$ となる物理的理由を説明できる</li><li>断熱膨張で温度が下がる理由を説明できる</li></ul></div></section>
+<!-- ガイドを読み終えた後に、前後のページへ移動するリンクを置く。 --><nav class="guide-page-nav"><a href="guide1.html">← 第1章ナビ</a><a href="guide3.html">第3章ナビ →</a></nav></main>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer><script src="nav.js"></script><script src="../common.js?v=20260718-texcopy"></script><script src="../access-ui.js"></script></body></html>

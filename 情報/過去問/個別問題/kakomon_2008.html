@@ -1,0 +1,232 @@
+<!DOCTYPE html><!-- 「2008年度 | 情報 個別問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2008年度 | 情報 個別問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2008">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2008年度</h1>
+  <p class="subtitle">田中哲朗クラス（理科一類5,10,14,35組）</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">個別問題1（オートマトン）</a>
+    <a href="#q2">個別問題2（XORの実現）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">個別問題 1</div><h2>オートマトンの動作解析</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>(1) 5状態オートマトンのチェック表</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>以下の図はあるオートマトンを表している。</p>
+        <div class="diagram">
+          <img src="img/2008/automaton-mod5.png" alt="5状態のオートマトン。S(開始・受理,自己ループa)からbでAへ、AはaでC、bでBへ、BはaでA、bでCへ、CはaでD、bでSへ、DはaでB、bでD(自己ループ)へ。" style="max-width:600px;width:100%;height:auto;">
+          <div class="diagram-cap">5状態のオートマトン（原本より切り出し）。Sが開始・受理状態（2重丸）。</div>
+        </div>
+        <p>チェック表を埋め、説明(f)を埋めよ。</p>
+        <table class="q-table">
+          <tr><th>入力</th><th>終了状態</th></tr>
+          <tr><td>無し</td><td>Yes</td></tr>
+          <tr><td>b</td><td>No</td></tr>
+          <tr><td>aa</td><td>Yes</td></tr>
+          <tr><td>baaa</td><td>(a)</td></tr>
+          <tr><td>bab</td><td>(b)</td></tr>
+          <tr><td>baab</td><td>(c)</td></tr>
+          <tr><td>baba</td><td>(d)</td></tr>
+          <tr><td>bbaab</td><td>(e)</td></tr>
+        </table>
+        <p>「aとbだけからなる入力を、「a」が0、「b」が1に対応した2進数だと読みかえる。このとき、入力が(f)の時に終了状態となるオートマトン。」</p>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            図の5状態を左からS（開始・受理、2重丸、aの自己ループ）,A,B,C,D（bの自己ループ）とし、遷移をたどると次のようになる：S（a→S、b→A）、A（a→C、b→B）、B（a→A、b→C）、C（a→D、b→S）、D（a→B、b→D）。
+          </p>
+          <p>
+            各状態にmod 5の剰余を対応させると S=0（受理）,A=1,B=3,C=2,D=4 となり、これは遷移規則$新状態=(2\times旧状態+ビット)\bmod5$（aを0、bを1とする）に完全に一致する。すなわちこのオートマトンは、「aを0、bを1とみなした2進数を上位桁から読み、5で割った余りを状態として保持する」機械であり、余り0（＝5の倍数）で終了したときにだけ受理する。
+          </p>
+          <p>与えられた例で検算：無し（値0、余り0）→S→<strong>Yes</strong>、b（値1、余り1）→A→<strong>No</strong>、aa（値0、余り0）→S→<strong>Yes</strong>、いずれも整合する。</p>
+          <ul>
+            <li>baaa：b,a,a,a = 2進数「1000」= 8。$8\bmod5=3$。トレース：S$\xrightarrow{b}$A$\xrightarrow{a}$C$\xrightarrow{a}$D$\xrightarrow{a}$B。終了状態B（非受理）→<strong>No</strong>(a)</li>
+            <li>bab：b,a,b = 2進数「101」= 5。$5\bmod5=0$。トレース：S$\xrightarrow{b}$A$\xrightarrow{a}$C$\xrightarrow{b}$S。終了状態S（受理）→<strong>Yes</strong>(b)</li>
+            <li>baab：b,a,a,b = 2進数「1001」= 9。$9\bmod5=4$。トレース：S$\xrightarrow{b}$A$\xrightarrow{a}$C$\xrightarrow{a}$D$\xrightarrow{b}$D。終了状態D（非受理）→<strong>No</strong>(c)</li>
+            <li>baba：b,a,b,a = 2進数「1010」= 10。$10\bmod5=0$。トレース：S$\xrightarrow{b}$A$\xrightarrow{a}$C$\xrightarrow{b}$S$\xrightarrow{a}$S。終了状態S（受理）→<strong>Yes</strong>(d)</li>
+            <li>bbaab：b,b,a,a,b = 2進数「11001」= 25。$25\bmod5=0$。トレース：S$\xrightarrow{b}$A$\xrightarrow{b}$B$\xrightarrow{a}$A$\xrightarrow{a}$C$\xrightarrow{b}$S。終了状態S（受理）→<strong>Yes</strong>(e)</li>
+          </ul>
+          <p>(f) 与えられた入力を2進数として読んだ値が<strong>5の倍数（5で割り切れる数）</strong>である。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a) No　(b) Yes　(c) No　(d) Yes　(e) Yes　(f) 5の倍数（5で割り切れる数）</div>
+      </details>
+
+      <h3>(2) "abc"または"acaba"の電子錠</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>暗証番号「abc」または「acaba」が入力された時に解錠する（終了状態になる）電子錠をオートマトンとしてモデル化することを試みる。途中で間違った暗証番号を押しても、後からどちらかの暗証番号を入力すれば解錠するものとする。また、一度解錠した後は何を入力し続けても解錠状態となる。</p>
+        <p>次のチェック表の (g)〜(j) を埋めて完成させ、さらに、この条件を満たすオートマトンを作成して図にしなさい。</p>
+        <table class="q-table">
+          <tr><th>入力</th><th>終了状態</th></tr>
+          <tr><td>無し</td><td>No</td></tr>
+          <tr><td>acabc</td><td>Yes</td></tr>
+          <tr><td>acaba</td><td>Yes</td></tr>
+          <tr><td>abaca</td><td>(g)</td></tr>
+          <tr><td>ababa</td><td>(h)</td></tr>
+          <tr><td>aabc</td><td>(i)</td></tr>
+          <tr><td>acababc</td><td>(j)</td></tr>
+        </table>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            "abc"と"acaba"という2つのパターンの「接頭辞の一致状況」を状態とする状態機械（Aho-Corasick型の遷移構成）を作る。状態は $S_0=\varepsilon$（無一致）、$S_1=$「a」、$S_2=$「ab」、$S_3=$「ac」、$S_4=$「aca」、$S_5=$「acab」、そして完成状態 $K_1=$「abc」、$K_2=$「acaba」の8状態。
+          </p>
+          <p>各状態からの遷移は、「その状態が表す文字列の末尾に新しい文字を加えたとき、なお両パターンのどちらかの接頭辞として一致し続けられる最長の部分」へ移る（失敗時に戻る先を辿るfail関数の考え方）：</p>
+          <ul>
+            <li>$S_0$：a→$S_1$、それ以外（b,c）→$S_0$</li>
+            <li>$S_1$：b→$S_2$、c→$S_3$、a→$S_1$（自己ループ。fail($S_1$)=$S_0$からgoto($S_0$,a)=$S_1$）</li>
+            <li>$S_2$：c→$K_1$、a→$S_1$、b→$S_0$（fail($S_2$)=$S_0$を経由）</li>
+            <li>$S_3$：a→$S_4$、それ以外（b,c）→$S_0$</li>
+            <li>$S_4$：b→$S_5$、a→$S_1$、c→$S_3$（fail($S_4$)=$S_1$を経由）</li>
+            <li>$S_5$：a→$K_2$、b→$S_0$、c→$K_1$（fail($S_5$)=$S_2$を経由）</li>
+            <li>$K_1$,$K_2$：いずれの入力でも自身にとどまる（一度解錠したら外れない）</li>
+          </ul>
+          <p>まず与えられた2例で検算する。acabc：$S_0\xrightarrow{a}S_1\xrightarrow{c}S_3\xrightarrow{a}S_4\xrightarrow{b}S_5\xrightarrow{c}K_1$（受理）✓。acaba：$S_0\xrightarrow{a}S_1\xrightarrow{c}S_3\xrightarrow{a}S_4\xrightarrow{b}S_5\xrightarrow{a}K_2$（受理）✓。</p>
+          <ul>
+            <li>abaca：$S_0\xrightarrow{a}S_1\xrightarrow{b}S_2\xrightarrow{a}S_1\xrightarrow{c}S_3\xrightarrow{a}S_4$。終了状態$S_4$（非受理）→<strong>No</strong>(g)</li>
+            <li>ababa：$S_0\xrightarrow{a}S_1\xrightarrow{b}S_2\xrightarrow{a}S_1\xrightarrow{b}S_2\xrightarrow{a}S_1$。終了状態$S_1$（非受理）→<strong>No</strong>(h)</li>
+            <li>aabc：$S_0\xrightarrow{a}S_1\xrightarrow{a}S_1\xrightarrow{b}S_2\xrightarrow{c}K_1$。終了状態$K_1$（受理）→<strong>Yes</strong>(i)</li>
+            <li>acababc：$S_0\xrightarrow{a}S_1\xrightarrow{c}S_3\xrightarrow{a}S_4\xrightarrow{b}S_5\xrightarrow{a}K_2\xrightarrow{b}K_2\xrightarrow{c}K_2$。終了状態$K_2$（受理）→<strong>Yes</strong>(j)</li>
+          </ul>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(g) No　(h) No　(i) Yes　(j) Yes</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 剰余判定オートマトンと複数パターン検出オートマトン</span>
+        <p>
+          (1)の「2進数を上位桁から読んで5で割った余りを状態に保つ」しくみと、(2)の「複数の暗証番号の接頭辞一致状況を状態に保つ」しくみは、他の年度にも繰り返し出題される定番テーマである。前者は「$新状態=(2\times旧状態+新しいビット)\bmod n$」という漸化式に従う有限状態機械で、$n$を変えれば任意の$n$の倍数判定に応用できる。後者はAho-Corasick法として知られる複数パターン同時検索アルゴリズムの考え方そのもので、「一致が途切れたときにどこまで巻き戻るか」を表すfail関数を状態遷移としてあらかじめ埋め込んでおくことで、入力を1回なぞるだけで全パターンの一致・不一致を判定できる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">個別問題 2</div><h2>XORの実現</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>ICトレーナーでXORのICが壊れていたため、他の回路でXORを実現したい。XORは、入力xとyが異なる時に1、等しい時に0を出力する論理関数である。</p>
+      </div>
+
+      <h3>(1) 真理値表</h3>
+      <div class="ex"><span class="box-label">問題</span><p>XORの真理値表を書け。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>定義通り、xとyが異なるときにのみ出力zが1になる。</p></div>
+        <table class="q-table">
+          <tr><th>x</th><th>y</th><th>z</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td></tr>
+        </table>
+      </details>
+
+      <h3>(2) AND・OR・NOTでなるべく少ないゲート数</h3>
+      <div class="ex"><span class="box-label">問題</span><p>XORをAND,OR,NOTの3種類だけを使い、なるべく少ないゲート数で実現する回路をMIL記法で書け。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>真理値表で$z=1$となるのは$(x,y)=(0,1),(1,0)$の2行だから、主加法標準形は$z=\bar x y+x\bar y$である。この式に共通項はこれ以上まとめられないので、$\bar x,\bar y$を作るNOT2個、$x\bar y$と$\bar x y$を作るAND2個、それらのORを取る1個で構成する。</p>
+          <div class="mathblock">n1 = NOT(x)　　（= x̄）
+n2 = NOT(y)　　（= ȳ）
+n3 = AND(x, n2)　（= xȳ）
+n4 = AND(n1, y)　（= x̄y）
+z  = OR(n3, n4)　（= xȳ + x̄y）</div>
+          <p>検算：$(x,y)=(1,0)$のとき$n_1=0,n_2=1,n_3=\text{AND}(1,1)=1,n_4=\text{AND}(0,0)=0,z=\text{OR}(1,0)=1$ ✓。$(x,y)=(1,1)$のとき$n_1=0,n_2=0,n_3=\text{AND}(1,0)=0,n_4=\text{AND}(0,1)=0,z=\text{OR}(0,0)=0$ ✓。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>NOT×2, AND×2, OR×1の<strong>合計5ゲート</strong>（$z=x\bar y+\bar x y$）。</div>
+      </details>
+
+      <h3>(3) NANDだけでなるべく少ないゲート数</h3>
+      <div class="ex"><span class="box-label">問題</span><p>XORをNANDだけを使い、なるべく少ないゲート数で実現する回路をMIL記法で書け。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>NANDのみによるXORの標準的な最小構成は次の4ゲートである。</p>
+          <div class="mathblock">n1 = NAND(x, y)
+n2 = NAND(x, n1)
+n3 = NAND(y, n1)
+z  = NAND(n2, n3)</div>
+          <p>全4通りの入力で検算する：</p>
+          <ul>
+            <li>$(0,0)$：$n_1=\text{NAND}(0,0)=1$、$n_2=\text{NAND}(0,1)=1$、$n_3=\text{NAND}(0,1)=1$、$z=\text{NAND}(1,1)=0$ ✓</li>
+            <li>$(0,1)$：$n_1=\text{NAND}(0,1)=1$、$n_2=\text{NAND}(0,1)=1$、$n_3=\text{NAND}(1,1)=0$、$z=\text{NAND}(1,0)=1$ ✓</li>
+            <li>$(1,0)$：$n_1=\text{NAND}(1,0)=1$、$n_2=\text{NAND}(1,1)=0$、$n_3=\text{NAND}(0,1)=1$、$z=\text{NAND}(0,1)=1$ ✓</li>
+            <li>$(1,1)$：$n_1=\text{NAND}(1,1)=0$、$n_2=\text{NAND}(1,0)=1$、$n_3=\text{NAND}(1,0)=1$、$z=\text{NAND}(1,1)=0$ ✓</li>
+          </ul>
+          <p>すべて真理値表と一致する。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$n_1=\text{NAND}(x,y)$, $n_2=\text{NAND}(x,n_1)$, $n_3=\text{NAND}(y,n_1)$, $z=\text{NAND}(n_2,n_3)$。<strong>NAND4個</strong>で実現できる。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 単一素子だけで組む設計（NAND-NAND論理）</span>
+        <p>
+          (2)のAND/OR/NOT構成は5ゲート、(3)のNANDのみの構成は4ゲートであり、素子の種類を1つに絞った方がかえってゲート数が少なくなることがある。実際のIC製造では、異なる種類の素子を少数ずつ作るより、同一種類の素子（NAND）だけを大量生産する方が製造コストの面で有利なため、任意の論理回路をNANDだけで組み上げる設計手法（NAND-NAND論理）がしばしば用いられる。これは、NANDが「関数的完全性」を持つ素子——すなわちNANDだけの組合せでAND・OR・NOTを含むあらゆる論理関数を表現できる——という性質に基づいている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2009.html">← 2009年度へ</a>
+    <a href="kakomon_2007.html">2007年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲朗）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html><!-- 「微分積分学① 講義ノート」の一覧ページ。掲載されたページへ移動する入口をまとめる。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>微分積分学① 講義ノート</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../subject-home.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body class="subject-home home-calculus" data-nav-page="note-index">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html" class="active">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>微分積分学①</h1>
+  <p class="subtitle">講義ノート — S2ターム（6/9〜7/14）</p>
+</div>
+
+<!-- この科目のノートを探す入力欄と検索結果欄。検索の動作は共通のsearch.jsが担当する。 --><div class="search-box" data-search>
+  <div class="search-input-row">
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input type="search" class="search-input" placeholder="微分積分学①のノート内を検索（用語・キーワード）…" autocomplete="off" aria-label="微分積分学①内を検索">
+  </div>
+  <div class="search-results" hidden></div>
+</div>
+
+<div class="container">
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section">
+    <div class="sec-header">
+      <div class="sec-tag">Lecture Notes</div>
+      <h2>講義ノート</h2>
+    </div>
+    <div class="sec-body">
+      <!-- 見出し・説明文・リンクを持つカードを、まとまった一覧として並べる。 --><div class="card-grid">
+        <a class="card" href="ch1.html" data-page="ch1">
+          <div class="card-tag">Ch. 1</div>
+          <h3>コーシーの定理とロピタルの定理</h3>
+          <p>コーシーの平均値の定理（証明）、ロピタルの定理（0/0型・∞/∞型・x→∞型）の定式化と証明、不定型の極限の計算例。</p>
+        </a>
+        <a class="card" href="ch2.html" data-page="ch2">
+          <div class="card-tag">Ch. 2</div>
+          <h3>テーラーの定理</h3>
+          <p>テーラーの定理（剰余項の形式）、e^x・sin x・cos x・log(1+x)のテーラー展開、マクローリン展開。</p>
+        </a>
+        <a class="card" href="ch3.html" data-page="ch3">
+          <div class="card-tag">Ch. 3</div>
+          <h3>無限級数</h3>
+          <p>無限級数の収束・発散の定義、正項級数、比判定法・n乗根判定法、絶対収束と条件収束、交代級数。</p>
+        </a>
+        <a class="card" href="ch4.html" data-page="ch4">
+          <div class="card-tag">Ch. 4</div>
+          <h3>べき級数と収束半径</h3>
+          <p>べき級数の収束半径（定義・判定法）、テーラー級数の一意性、項別微分・項別積分、二項展開。</p>
+        </a>
+        <a class="card" href="ch5.html" data-page="ch5">
+          <div class="card-tag">Ch. 5</div>
+          <h3>偏微分と全微分</h3>
+          <p>二変数関数の連続性・開集合、偏微分の定義、全微分可能性の定義と判定、合成関数の微分・方向微分、変数変換とヤコビ行列。</p>
+        </a>
+        <a class="card" href="ch6.html" data-page="ch6">
+          <div class="card-tag">Ch. 6</div>
+          <h3>二変数のテーラーの定理と極値問題</h3>
+          <p>曲面の接平面、$C^n$級・$C^\infty$級、2変数の平均値の定理とテーラーの定理、臨界点・極大極小・鞍点の判定。</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-tag">Exam Prediction</div>
+      <h2>期末予想問題（全6回24問＋計算問題編）</h2>
+    </div>
+    <div class="sec-body">
+      <p style="font-family:var(--font-sans, inherit); font-size:.85rem; color:var(--muted); margin-bottom:1rem;">ch1〜ch6の内容に準拠したAI生成のオリジナル問題（実際の試験問題ではない）。各回4問・難易度★1〜5。</p>
+      <div class="card-grid">
+        <a class="card" href="過去問/yosou_ch1.html" data-page="過去問/yosou_ch1" style="border-color:var(--problem-b);">
+          <div class="card-tag">予想 第1回</div>
+          <h3>コーシーの定理とロピタルの定理</h3>
+          <p>全4問・難易度★2〜5</p>
+        </a>
+        <a class="card" href="過去問/yosou_ch2.html" data-page="過去問/yosou_ch2" style="border-color:var(--problem-b);">
+          <div class="card-tag">予想 第2回</div>
+          <h3>テーラーの定理</h3>
+          <p>全4問・難易度★2〜5</p>
+        </a>
+        <a class="card" href="過去問/yosou_ch3.html" data-page="過去問/yosou_ch3" style="border-color:var(--problem-b);">
+          <div class="card-tag">予想 第3回</div>
+          <h3>無限級数</h3>
+          <p>全4問・難易度★2〜5</p>
+        </a>
+        <a class="card" href="過去問/yosou_ch4.html" data-page="過去問/yosou_ch4" style="border-color:var(--problem-b);">
+          <div class="card-tag">予想 第4回</div>
+          <h3>べき級数と収束半径</h3>
+          <p>全4問・難易度★2〜5</p>
+        </a>
+        <a class="card" href="過去問/yosou_ch5.html" data-page="過去問/yosou_ch5" style="border-color:var(--problem-b);">
+          <div class="card-tag">予想 第5回</div>
+          <h3>偏微分と全微分</h3>
+          <p>全4問・難易度★2〜5</p>
+        </a>
+        <a class="card" href="過去問/yosou_ch6.html" data-page="過去問/yosou_ch6" style="border-color:var(--problem-b);">
+          <div class="card-tag">予想 第6回</div>
+          <h3>二変数のテーラーの定理と極値問題</h3>
+          <p>全4問・難易度★2〜5</p>
+        </a>
+        <a class="card" href="過去問/yosou_keisan.html" data-page="過去問/yosou_keisan" style="border-color:var(--problem-b);">
+          <div class="card-tag">番外編</div>
+          <h3>計算問題編</h3>
+          <p>テイラー展開・級数判定法の「なぜ使えるか」を問う4問（本編24問には含まない）</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-tag">Quick Reference</div>
+      <h2>重要公式・定理 早見表</h2>
+    </div>
+    <div class="sec-body">
+      <h3>主要定理一覧</h3>
+      <table class="axiom-table quickref-table quickref-theorems">
+        <tr><th>定理</th><th>条件</th><th>結論</th></tr>
+        <tr>
+          <td>コーシーの平均値の定理</td>
+          <td>$f,g$ は $[a,b]$ で連続・$(a,b)$ で微分可能、$g(a)\ne g(b)$</td>
+          <td>$\dfrac{f(b)-f(a)}{g(b)-g(a)}=\dfrac{f'(c)}{g'(c)}$ を満たす $c\in(a,b)$ が存在</td>
+        </tr>
+        <tr>
+          <td>ロピタルの定理（$0/0$ 型）</td>
+          <td>$\lim_{x\to a}f(x)=\lim_{x\to a}g(x)=0$、$g'(x)\ne 0$、$\lim_{x\to a}\frac{f'(x)}{g'(x)}$ が存在</td>
+          <td>$\lim_{x\to a}\dfrac{f(x)}{g(x)}=\lim_{x\to a}\dfrac{f'(x)}{g'(x)}$</td>
+        </tr>
+        <tr>
+          <td>テーラーの定理（$n$ 次）</td>
+          <td>$f$ は $x=a$ を含む開区間で $n$ 回微分可能</td>
+          <td>$f(x)=\sum_{k=0}^{n-1}\dfrac{f^{(k)}(a)}{k!}(x-a)^k+R_n$, $R_n=\dfrac{f^{(n)}(\xi)}{n!}(x-a)^n$</td>
+        </tr>
+        <tr>
+          <td>べき級数の収束半径</td>
+          <td>$\sum a_n x^n$</td>
+          <td>$R=\lim_{n\to\infty}\left|\dfrac{a_n}{a_{n+1}}\right|$ または $R=\dfrac{1}{\lim_{n\to\infty}\sqrt[n]{|a_n|}}$</td>
+        </tr>
+        <tr>
+          <td>全微分可能性</td>
+          <td>$f(x,y)$ が $(a,b)$ で全微分可能</td>
+          <td>$f(a+h,b+k)-f(a,b)=Ah+Bk+o(\sqrt{h^2+k^2})$, $A=f_x(a,b)$, $B=f_y(a,b)$</td>
+        </tr>
+        <tr>
+          <td>2変数のテーラーの定理（$n=2$）</td>
+          <td>$f$ は $(a,b)$ を含む開集合で $C^2$ 級</td>
+          <td>$f(a+h,b+k)-f(a,b)=f_xh+f_yk+\dfrac12(f_{xx}h^2+2f_{xy}hk+f_{yy}k^2)$（右辺は $(a+\theta h,b+\theta k)$ で評価）</td>
+        </tr>
+        <tr>
+          <td>臨界点の判定（$p=f_{xx},q=f_{xy},r=f_{yy}$）</td>
+          <td>$f_x(a,b)=f_y(a,b)=0$</td>
+          <td>$pr-q^2>0,p>0$：極小／$pr-q^2>0,p<0$：極大／$pr-q^2<0$：鞍点</td>
+        </tr>
+      </table>
+
+      <h3>主要なテーラー展開（$a=0$ のまわり）</h3>
+      <table class="axiom-table quickref-table quickref-series">
+        <tr><th>関数</th><th>テーラー展開</th><th>収束半径</th></tr>
+        <tr>
+          <td>$e^x$</td>
+          <td>$1+x+\dfrac{x^2}{2!}+\dfrac{x^3}{3!}+\cdots=\displaystyle\sum_{n=0}^{\infty}\dfrac{x^n}{n!}$</td>
+          <td>$R=\infty$（全$x$で収束）</td>
+        </tr>
+        <tr>
+          <td>$\sin x$</td>
+          <td>$x-\dfrac{x^3}{3!}+\dfrac{x^5}{5!}-\cdots=\displaystyle\sum_{n=1}^{\infty}(-1)^{n-1}\dfrac{x^{2n-1}}{(2n-1)!}$</td>
+          <td>$R=\infty$</td>
+        </tr>
+        <tr>
+          <td>$\cos x$</td>
+          <td>$1-\dfrac{x^2}{2!}+\dfrac{x^4}{4!}-\cdots=\displaystyle\sum_{n=0}^{\infty}(-1)^n\dfrac{x^{2n}}{(2n)!}$</td>
+          <td>$R=\infty$</td>
+        </tr>
+        <tr>
+          <td>$\log(1+x)$</td>
+          <td>$x-\dfrac{x^2}{2}+\dfrac{x^3}{3}-\cdots=\displaystyle\sum_{n=1}^{\infty}(-1)^{n-1}\dfrac{x^n}{n}$</td>
+          <td>$R=1$（$|x|<1$ で収束、$x=1$ でも収束）</td>
+        </tr>
+        <tr>
+          <td>$\dfrac{1}{1-x}$</td>
+          <td>$1+x+x^2+\cdots=\displaystyle\sum_{n=0}^{\infty}x^n$</td>
+          <td>$R=1$（$|x|<1$ で収束）</td>
+        </tr>
+        <tr>
+          <td>$(1+x)^\alpha$（$\alpha\in\mathbb{R}$）</td>
+          <td>$\displaystyle\sum_{n=0}^{\infty}\binom{\alpha}{n}x^n$，$\binom{\alpha}{n}=\dfrac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}$</td>
+          <td>$R=1$（$|x|<1$）</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+<script src="../search.js"></script>
+</body>
+</html>

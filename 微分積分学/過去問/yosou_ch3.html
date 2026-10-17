@@ -1,0 +1,487 @@
+<!DOCTYPE html><!-- 「予想問題 第3回（Ch.3）— 微分積分学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>予想問題 第3回（Ch.3）— 微分積分学①</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="exam-ch3">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="yosou_ch1.html" data-page="過去問/yosou_ch1">第1回</a>
+      <a href="yosou_ch2.html" data-page="過去問/yosou_ch2">第2回</a>
+      <a href="yosou_ch3.html" data-page="過去問/yosou_ch3" class="active">第3回</a>
+      <a href="yosou_ch4.html" data-page="過去問/yosou_ch4">第4回</a>
+      <a href="yosou_ch5.html" data-page="過去問/yosou_ch5">第5回</a>
+      <a href="yosou_ch6.html" data-page="過去問/yosou_ch6">第6回</a>
+      <a href="yosou_keisan.html" data-page="過去問/yosou_keisan">番外編</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>予想問題 第3回</h1>
+  <p class="subtitle">Ch.3 無限級数（全4問）</p>
+</div>
+
+<div class="container">
+
+  <div class="note">
+    <span class="box-label">この予想問題集について</span>
+    <p>
+      この第3回はCh.3（無限級数）の内容に準拠した<strong>AI生成のオリジナル問題</strong>であり、
+      実際に出題された試験問題ではない。過去に配布された中間試験・レポート課題は出題範囲や出題者の傾向がある程度近いものの、
+      「微分積分学①」（河野俊丈先生、S2ターム）そのものと同一科目・同一出題者による資料ではないため、
+      あくまで傾向をつかむための参考程度に留め、本予想問題および講義ノート（<a href="../ch3.html">ch3.html</a>）の理解を優先してほしい。
+      Ch.3では比較判定法・積分判定法・比判定法・$n$乗根判定法・ライプニッツの定理という複数の道具が登場するため、
+      本問題集では「どの判定法をいつ使うか」「ある判定法が効かないときにどう切り替えるか」という
+      判断力そのものを鍛えることを重視して問題を選んだ。各問題には模範解答に加えて、方針の立て方・別解・
+      よくある間違い・一般化のコメントを厚めに付けてある。
+    </p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#p3-1">問題3.1　比較判定法</a>
+    <a href="#p3-2">問題3.2　$n$乗根判定法</a>
+    <a href="#p3-3">問題3.3　比判定法が効かない場合のフォールバック</a>
+    <a href="#p3-4">問題3.4　条件収束級数の収束の遅さ</a>
+  </div>
+
+  <!-- =================== 問題3.1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="p3-1">
+    <div class="sec-header">
+      <span class="sec-tag">問題 3.1</span>
+      <span class="diff-badge">難易度 ★★☆☆☆</span>
+      <h2>比較判定法 — 既出の$1/n^2$を再利用する</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>次の級数の収束・発散を判定せよ。</p>
+        $$\sum_{n=1}^\infty \frac{n}{n^3+1}$$
+      </div>
+
+      <div class="mot">
+        <span class="box-label">🧠 方針・出発点</span>
+        <p>
+          $\dfrac{n}{n^3+1}$ をそのまま扱うのは難しいが、分母の $+1$ を無視して $\dfrac{n}{n^3}=\dfrac1{n^2}$ に
+          「甘く見積もる」ことで、既に収束することが分かっている級数と比較できる形に持ち込める。
+          この「分母を少しだけ緩めて既知の形に近づける」というテクニックは、比較判定法（定理3.4）を使う際の
+          最も基本的な発想であり、以前の演習（不等式評価全般）でも繰り返し登場する定石だ。
+          比較対象としては、既出の例3.2（<a href="../ch3.html#positive">../ch3.html#positive</a>、$\sum 1/n^2$ が収束する）を
+          そのまま再利用できる。新しい判定法を覚える前に、まず「知っている級数とどう比べるか」という
+          発想を確実にしておくことが本問のねらいだ。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（1）— 不等式の設定</span>
+        <p>
+          すべての $n\ge1$ について $n^3+1>n^3>0$ が成り立つので、両辺の逆数を取ると不等号の向きが反転し
+        </p>
+        $$0<\frac{n}{n^3+1}<\frac{n}{n^3}=\frac1{n^2}.$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（2）— 比較対象の級数の収束</span>
+        <p>
+          既出の例3.2（<a href="../ch3.html#positive">../ch3.html#positive</a>）より、$\displaystyle\sum_{n=1}^\infty\frac1{n^2}$ は収束する
+          （比較判定法により $1/n^2\le 1/(n(n-1))=1/(n-1)-1/n$ という差分の形と比較して示された、あるいは
+          バーゼル問題として値 $\pi^2/6$ が知られている、既出の級数である）。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（3）— 比較判定法の適用と結論</span>
+        <p>
+          $0\le \dfrac{n}{n^3+1} \le \dfrac1{n^2}$（$n\ge1$）であり、$\displaystyle\sum\frac1{n^2}$ が収束するので、
+          定理3.4（比較判定法、<a href="../ch3.html#positive">../ch3.html#positive</a>）の前半（各項が収束する級数の項以下で抑えられていれば収束する）より
+        </p>
+        $$\sum_{n=1}^\infty \frac{n}{n^3+1}\ \text{は収束する。}$$
+      </div>
+
+      <div class="note">
+        <span class="box-label">🔄 振り返り</span>
+        <p>
+          本問のポイントは、比較判定法を使う上で最も労力がかかるのは「不等号を証明すること」自体ではなく、
+          「どんな既知の級数と比べれば都合よく評価できるか」を見つけることだという点だ。
+          分子・分母のどちらかを定数倍したり、次数の低い項を切り捨てたり（本問のように $+1$ を無視する）
+          「甘く見積もる」ことで、既に収束・発散が分かっている単純な級数（$p$ 級数や幾何級数）に帰着させる、
+          という発想は今後も繰り返し使うことになる。特に分母の次数が最高次の項に比べて他の項が無視できる、
+          という直感（$n^3+1\sim n^3$、$n\to\infty$）を先に持ってから不等式を書き下すと見通しが良い。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題3.2 =================== -->
+  <div class="section" id="p3-2">
+    <div class="sec-header">
+      <span class="sec-tag">問題 3.2</span>
+      <span class="diff-badge">難易度 ★★★☆☆</span>
+      <h2>$n$乗根判定法 — 入れ子構造を見抜く</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>次の級数の収束・発散を判定せよ。</p>
+        $$\sum_{n=1}^\infty \left(1-\frac1n\right)^{n^2}$$
+      </div>
+
+      <div class="mot">
+        <span class="box-label">🧠 方針・出発点</span>
+        <p>
+          既出の例3.6・例3.7（<a href="../ch3.html#root">../ch3.html#root</a>、$n$乗根判定法の適用例）とは異なる級数だが、
+          同じ判定法を使う練習である。一般項 $a_n=(1-1/n)^{n^2}$ を見て「$n^2$ 乗を $n$ 乗根でどう割ればよいか」と
+          真正面から計算しようとすると混乱しやすい。ここで鍵になるのは、$a_n$ がもともと
+          「何かを $n$ 乗したものを、さらに $n$ 乗した」という<strong>入れ子構造</strong>を持っていることに気づくことだ：
+          $a_n=\bigl[(1-1/n)^n\bigr]^n$ と書き直せば、$n$ 乗根を取る操作は外側の $n$ 乗をそのまま打ち消すだけで済み、
+          内側の式 $(1-1/n)^n$ がそのまま取り出せる。この「入れ子の外側だけを $n$ 乗根で剥がす」という
+          計算の効率化は、$a_n$ が $n$ 乗の形をしている問題全般で使える発想だ。
+        </p>
+        <p>
+          さらに、内側に残る $(1-1/n)^n$ の極限は、既出の $\left(1+\dfrac1x\right)^x\to e$
+          （Ch.1、例題1.E、<a href="../ch1.html#examples">../ch1.html#examples</a>）の $x=-n$ 版（あるいは一般に
+          $(1+x/n)^n\to e^x$ の $x=-1$ の場合）にあたる基本極限であり、この関連を明示できるかも本問のポイントだ。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（1）— 入れ子構造への分解と$n$乗根</span>
+        <p>
+          $a_n=\left(1-\dfrac1n\right)^{n^2}=\left[\left(1-\dfrac1n\right)^{n}\right]^{n}$ と書き直せる。
+          両辺の $n$ 乗根を取ると、外側の $n$ 乗がちょうど打ち消されて
+        </p>
+        $$\sqrt[n]{a_n}=\left(1-\frac1n\right)^n.$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（2）— 内側の極限</span>
+        <p>
+          $\left(1-\dfrac1n\right)^n$ は、既知の基本極限 $\left(1+\dfrac{x}{n}\right)^n\to e^x$（$n\to\infty$）の $x=-1$ の場合
+          （あるいは Ch.1 の例題1.E、<a href="../ch1.html#examples">../ch1.html#examples</a>、$(1+1/x)^x\to e$ と本質的に同じ極限）にあたるので
+        </p>
+        $$\left(1-\frac1n\right)^n \longrightarrow e^{-1}\qquad(n\to\infty).$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（3）— $n$乗根判定法の適用と結論</span>
+        <p>
+          以上より $\sqrt[n]{a_n}\to e^{-1}$。$e^{-1}\approx0.368<1$ なので、定理3.7（$n$乗根判定法、
+          <a href="../ch3.html#root">../ch3.html#root</a>）より
+        </p>
+        $$\sum_{n=1}^\infty \left(1-\frac1n\right)^{n^2}\ \text{は収束する。}$$
+      </div>
+
+      <div class="note">
+        <span class="box-label">🔄 一般化・振り返り</span>
+        <p>
+          一般に $a_n=\bigl[b_n\bigr]^{n}$（$b_n$ 自体が $n$ に依存する式）という形をした一般項に対しては、
+          $n$ 乗根を取ると $\sqrt[n]{a_n}=b_n$ がそのまま得られる。これは $n$ 乗根判定法が
+          「$a_n$ 自体が $n$ 乗の形をしているとき」に特に相性が良いことの一例だ。
+          本問のように指数がさらに $n^2$（$n$ に依存する指数の指数）になっている場合でも、
+          $n^2=n\cdot n$ と分解して内側・外側の $n$ 乗に分ければ同じ発想が使える。
+          比判定法（定理3.6）でこの級数に挑もうとすると、$a_{n+1}/a_n$ の計算がかなり煩雑になることも
+          確認しておくとよい（$n$ 乗根判定法の方が明らかに見通しが良い、という判定法の使い分けの実例になっている）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題3.3 =================== -->
+  <div class="section" id="p3-3">
+    <div class="sec-header">
+      <span class="sec-tag">問題 3.3</span>
+      <span class="diff-badge">難易度 ★★★★☆</span>
+      <h2>比判定法が効かない場合のフォールバック</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $\displaystyle\sum_{n=1}^\infty \binom{2n}{n}4^{-n}$ について、以下の問いに答えよ。
+        </p>
+        <p>
+          (1) 比判定法（定理3.6）を適用すると判定不能（極限値が $1$）になることを確認せよ。
+        </p>
+        <p>
+          (2) 不等式 $\displaystyle\binom{2n}{n}\ge\frac{4^n}{2n+1}$（二項定理から従う初等的な評価）を用いて、
+          この級数が実際には発散することを示せ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">🧠 方針・出発点</span>
+        <p>
+          定理3.6・定理3.7（比判定法・$n$乗根判定法）は、既出の「判定法まとめ」の表（<a href="../ch3.html#alternating">../ch3.html#alternating</a>）に
+          明記されている通り、極限値が $1$ のときには何も言えないという限界を持つ。本問はその限界に実際に
+          ぶつかる具体例を提示し、行き詰まったときにどう別の判定法（比較判定法）へ切り替えるかという
+          実践的な対応力を問うものだ。$\binom{2n}{n}\ge 4^n/(2n+1)$ という評価自体は二項定理の基本的な帰結
+          （$2n+1$ 個の非負の項の和がちょうど $4^n$ になり、その中で最大の項である中央の二項係数は
+          全体の平均値以上でなければならない、という単純な観察）であり、既出のどの例とも重複しない
+          新しい初等的な評価である。「比判定法が効かない $\Rightarrow$ お手上げ」ではなく、
+          「別の道具（比較判定法）に切り替える」という発想の転換が本問の核心だ。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答 (1)-① — 比の計算</span>
+        <p>
+          $a_n=\binom{2n}{n}4^{-n}$ とおく。二項係数の定義から</p>
+        $$\frac{a_{n+1}}{a_n}=\frac{\binom{2n+2}{n+1}}{\binom{2n}{n}}\cdot\frac14
+        =\frac{(2n+1)(2n+2)}{(n+1)^2}\cdot\frac14.$$
+        <p>
+          （$\binom{2n+2}{n+1}=\dfrac{(2n+2)!}{(n+1)!(n+1)!}$、$\binom{2n}{n}=\dfrac{(2n)!}{n!\,n!}$ を比の形にすると、
+          階乗の大部分が約分されて $(2n+1)(2n+2)/(n+1)^2$ が残る。）
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答 (1)-② — 極限値の計算</span>
+        <p>式を整理すると</p>
+        $$\frac{a_{n+1}}{a_n}=\frac{(2n+1)\cdot2(n+1)}{4(n+1)^2}=\frac{2n+1}{2(n+1)}.$$
+        <p>$n\to\infty$ で分子・分母とも $n$ の1次式なので</p>
+        $$\frac{a_{n+1}}{a_n}=\frac{2n+1}{2(n+1)}\longrightarrow 1\qquad(n\to\infty).$$
+        <p>
+          定理3.6（比判定法、<a href="../ch3.html#ratio">../ch3.html#ratio</a>）は極限値が $1$ のとき判定不能と明記されているので、
+          比判定法だけではこの級数の収束・発散は決められない。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答 (2)-① — 二項定理による不等式の確認</span>
+        <p>二項定理より</p>
+        $$(1+1)^{2n}=\sum_{k=0}^{2n}\binom{2n}{k}=4^n.$$
+        <p>
+          右辺の和は $2n+1$ 個の非負の項 $\binom{2n}{0},\binom{2n}{1},\ldots,\binom{2n}{2n}$ からなり、
+          二項係数は $k=n$（中央）で最大になることが知られているので、そのうちで最大の項は $\binom{2n}{n}$ である。
+          $2n+1$ 個の項の合計が $4^n$ なのだから、最大項は全体の平均 $4^n/(2n+1)$ 以上でなければならない：
+        </p>
+        $$\binom{2n}{n}\ge\frac{4^n}{2n+1}.$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答 (2)-② — $a_n$ の下からの評価</span>
+        <p>両辺を $4^n$ で割ると</p>
+        $$a_n=\binom{2n}{n}4^{-n}\ge\frac1{2n+1}.$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答 (2)-③ — $\sum \frac{1}{2n+1}$ の発散</span>
+        <p>
+          すべての $n\ge1$ について $2n+1\le 3n$ が成り立つ（$n=1$ で等号）ので、逆数を取ると
+        </p>
+        $$\frac1{2n+1}\ge\frac1{3n}=\frac13\cdot\frac1n.$$
+        <p>
+          既出の調和級数の発散（命題3.2の直後、<a href="../ch3.html#necessary">../ch3.html#necessary</a>、$\sum 1/n=+\infty$）より
+          $\displaystyle\sum\frac13\cdot\frac1n$ も定数倍だから発散する。よって定理3.4（比較判定法、
+          <a href="../ch3.html#positive">../ch3.html#positive</a>）の後半（各項が発散する級数の項以上であれば発散する）より
+          $\displaystyle\sum\frac1{2n+1}$ も発散する。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答 (2)-④ — 結論</span>
+        <p>
+          $0\le\dfrac1{2n+1}\le a_n$ であり、$\displaystyle\sum\frac1{2n+1}$ が発散するので、
+          再び定理3.4（比較判定法、<a href="../ch3.html#positive">../ch3.html#positive</a>）より
+        </p>
+        $$\sum_{n=1}^\infty \binom{2n}{n}4^{-n}\ \text{は発散する。}\qquad\blacksquare$$
+      </div>
+
+      <div class="warn">
+        <span class="box-label">⚠️ よくある間違い</span>
+        <p>
+          比判定法（あるいは $n$乗根判定法）を適用して極限値が $1$ になった時点で、
+          「判定不能」という結論を「収束も発散もしない特殊な状態」だと誤解してはいけない。
+          正しくは「<strong>この判定法だけでは分からない</strong>」という意味であり、級数自体は必ず収束するか
+          発散するかのどちらかである（実際、本問の級数は発散する）。判定不能に遭遇したら、
+          比較判定法・積分判定法など別の道具に切り替えて改めて調べる必要がある、という手順を
+          徹底しておきたい。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">🔄 一般化・振り返り</span>
+        <p>
+          $\binom{2n}{n}4^{-n}$ は、実は $n$ が大きいときスターリングの公式により
+          $\binom{2n}{n}4^{-n}\sim \dfrac{1}{\sqrt{\pi n}}$（$p=1/2$ の $p$ 級数と同じ減衰の速さ）に
+          近づくことが知られている。$p$ 級数（既出の例3.3、<a href="../ch3.html#positive">../ch3.html#positive</a>）は
+          $p\le1$ で発散するので、$p=1/2$ 相当のこの評価とも整合的である。
+          今回使った $1/(2n+1)$ による評価は、この正確な漸近挙動より粗いものの、
+          発散を示すには十分に強い評価であり、「厳密な漸近挙動を求めずとも、目的（発散を示す）に
+          ちょうど足りるだけの粗い評価で済ませる」という判断も比較判定法を使いこなす上で重要な技術だ。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題3.4 =================== -->
+  <div class="section" id="p3-4">
+    <div class="sec-header">
+      <span class="sec-tag">問題 3.4</span>
+      <span class="diff-badge">難易度 ★★★★★</span>
+      <h2>条件収束級数の収束の遅さ</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          $\displaystyle\sum_{n=1}^\infty \frac{(-1)^{n-1}}{\sqrt n}$ について、以下の問いに答えよ。
+        </p>
+        <p>
+          (1) 定理3.10（ライプニッツの定理）によりこの級数が収束することを示し、絶対収束はしないことを示せ
+          （すなわち条件収束であることを示せ）。
+        </p>
+        <p>
+          (2) 誤差評価 $|S-S_N|\le a_{N+1}$ を用いて、部分和 $S_N$ が真の値 $S$ と $10^{-3}$ 未満の誤差で
+          一致するために必要な項数 $N$ を求めよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">🧠 方針・出発点</span>
+        <p>
+          既出の例3.8（<a href="../ch3.html#alternating">../ch3.html#alternating</a>、$\sum(-1)^{n-1}/n=\log2$）と同じ
+          「条件収束」の構造を持つ級数だが、$1/n$ の代わりに $1/\sqrt n$ を使うことで、絶対収束の判定
+          （$p$ 級数の指数が $p=1$ から $p=1/2$ に変わる、既出の例3.3、<a href="../ch3.html#positive">../ch3.html#positive</a>）も
+          新しい練習になっている。
+        </p>
+        <p>
+          (2) の数値評価は、単なる誤差評価の計算練習に留まらない。既出のライプニッツの $\pi/4$ 公式
+          （Ch.4、例4.5、<a href="../ch4.html#arctan">../ch4.html#arctan</a>）で言及される「収束が遅い」という性質と
+          同じ現象——<strong>条件収束級数は、絶対収束級数（例えば階乗を含む $\sum 1/n!$ のような級数）に比べて
+          収束が桁違いに遅い</strong>——を、「$10^{-3}$ の精度を得るのに約100万項も必要」という具体的な数値で
+          実感することがねらいだ。この対比は、Ch.2 の $e$ の近似（例2.2、<a href="../ch2.html#approx">../ch2.html#approx</a>、
+          わずか $n=7$ 項で小数第3位まで一致する）とも好対照であることに注目してほしい。
+          同じ「$10^{-3}$ 程度の精度」を得るのに、階乗型の級数ならたった数項で済むのに対し、
+          条件収束級数では100万項が必要になる——この収束の速さの違いの大きさこそが、
+          「絶対収束する級数を扱いたい」という数学的な動機の実感につながる。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答 (1)-① — ライプニッツの定理による収束</span>
+        <p>
+          $a_n=1/\sqrt n$ とおくと、$a_n>0$ であり、$\sqrt n$ は単調増加なので $a_n=1/\sqrt n$ は単調減少、
+          さらに $a_n\to0$（$n\to\infty$）を満たす。よって定理3.10（ライプニッツの定理、
+          <a href="../ch3.html#alternating">../ch3.html#alternating</a>）の前提をすべて満たすので
+        </p>
+        $$\sum_{n=1}^\infty \frac{(-1)^{n-1}}{\sqrt n}\ \text{は収束する。}$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答 (1)-② — 絶対収束しないことの確認</span>
+        <p>
+          絶対値を取った級数は
+        </p>
+        $$\sum_{n=1}^\infty \left|\frac{(-1)^{n-1}}{\sqrt n}\right| = \sum_{n=1}^\infty \frac1{\sqrt n} = \sum_{n=1}^\infty \frac{1}{n^{1/2}}.$$
+        <p>
+          これは既出の例3.3（$p$ 級数、<a href="../ch3.html#positive">../ch3.html#positive</a>）で $p=1/2\le1$ の場合にあたり、発散する。
+          したがって $\displaystyle\sum(-1)^{n-1}/\sqrt n$ は収束するが絶対収束はしない、すなわち<strong>条件収束</strong>である。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答 (2)-① — 誤差評価の設定</span>
+        <p>
+          定理3.10の誤差評価（<a href="../ch3.html#alternating">../ch3.html#alternating</a>）$|S-S_N|\le a_{N+1}$ に $a_{N+1}=1/\sqrt{N+1}$ を代入すると
+        </p>
+        $$|S-S_N|\le \frac1{\sqrt{N+1}}.$$
+        <p>
+          この右辺が $10^{-3}$ より小さくなるような $N$ を求めればよい（右辺が $10^{-3}$ 未満なら、
+          左辺の実際の誤差も自動的に $10^{-3}$ 未満になる）。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答 (2)-② — 不等式を解く</span>
+        <p>
+          $\dfrac1{\sqrt{N+1}}<10^{-3}$ を解く。両辺の逆数を取ると（両辺正なので不等号の向きは変わらない）
+        </p>
+        $$\sqrt{N+1}>10^{3}=1000.$$
+        <p>両辺を2乗すると</p>
+        $$N+1>10^{6}=1000000 \quad\Longleftrightarrow\quad N\ge 999999.$$
+        <p>
+          したがって $N=999999$（およそ100万項）の部分和を取れば、真の値との誤差は $10^{-3}$ 未満に収まることが保証される。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">🔄 一般化・振り返り — 収束の速さの桁違いの差</span>
+        <p>
+          本問の (2) が示す「$10^{-3}$ の精度に約100万項も必要」という結果を、Ch.2 の $e$ の近似
+          （例2.2、<a href="../ch2.html#approx">../ch2.html#approx</a>、$n=7$ 項で小数第3位まで一致）や、
+          既出の例3.5（$\sum x^n/n!$、<a href="../ch3.html#ratio">../ch3.html#ratio</a>、すべての $x$ で収束する階乗型の級数）と
+          比べてみてほしい。階乗型の級数は各項が $1/n!$ のスピードで急激に小さくなるため、わずか数項〜十数項で
+          実用的な精度に達する。一方、本問のような条件収束級数（一般項が $1/\sqrt n$ や $1/n$ のような
+          べき乗の逆数でしか減衰しない級数）は、各項の減衰が非常に緩やかなので、同程度の精度を得るのに
+          桁違いに多くの項数が必要になる。この現象は既出のライプニッツの $\pi/4$ 公式（Ch.4、例4.5、
+          <a href="../ch4.html#arctan">../ch4.html#arctan</a>）でも全く同じ形で現れており、「$\pi$ の近似値を実用的な精度で求める公式としては
+          効率が悪い」と評される所以である。「収束する」ことと「実用的な速さで収束する」ことは
+          全く別の性質であり、数値計算の場面では後者の方が重要になることも多い、という実践的な教訓を
+          本問から読み取ってほしい。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+    <summary>第3回を自力で解けるかセルフチェック</summary>
+    <ul class="checklist">
+      <li>与えられた級数の一般項を、既に収束・発散が分かっている級数（$p$ 級数・幾何級数など）と比べるために、
+        分母・分子を「甘く見積もる」不等式を自分で作れるか。</li>
+      <li>一般項が $[\,\cdots\,]^n$ のような入れ子構造をしているとき、$n$ 乗根判定法で $n$ 乗根を取る操作が
+        内側の式をそのまま取り出すだけで済むことに気づけるか。</li>
+      <li>比判定法・$n$ 乗根判定法の極限値がちょうど $1$ になり判定不能だったとき、「お手上げ」にせず
+        比較判定法など別の判定法に切り替えて調べ直せるか。</li>
+      <li>ライプニッツの定理で級数が収束することを示すのと、絶対収束するかどうかを調べることは
+        別の作業だと理解した上で、誤差評価 $|S-S_N|\le a_{N+1}$ を使って必要な項数を具体的に計算できるか。</li>
+    </ul>
+  </details>
+
+  <!-- ナビゲーション -->
+  <div style="display:flex; justify-content:space-between; margin-top:2rem; padding:0 .5rem;">
+    <span style="font-weight:700;">← 予想問題 第2回（<a href="yosou_ch2.html" style="color:var(--accent); text-decoration:none;">yosou_ch2.html</a>）</span>
+    <span style="font-weight:700;">予想問題 第4回 →（<a href="yosou_ch4.html" style="color:var(--accent); text-decoration:none;">yosou_ch4.html</a>）</span>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

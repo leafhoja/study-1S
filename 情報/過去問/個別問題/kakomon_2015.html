@@ -1,0 +1,301 @@
+<!DOCTYPE html><!-- 「2015年度 | 情報 個別問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2015年度 | 情報 個別問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2015">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2015年度</h1>
+  <p class="subtitle">田中哲朗クラス（理科一類26,27,28,29組）｜7月28日（月）5限</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">個別問題1（ブール代数とMIL記法）</a>
+    <a href="#q2">個別問題2（オートマトン・電子錠）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">個別問題 1</div><h2>ブール代数とMIL記法</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>ブール代数の演算規則をまとめたものを以下の表に示す。また、基本素子AND, OR, NOT, NANDをMIL記法で表現したものを以下の図に示す。</p>
+      </div>
+
+      <div class="diagram">
+        <table class="q-table">
+          <tr><th>規則名</th><th>式</th></tr>
+          <tr><td>交換則</td><td>$x_1\cdot x_2=x_2\cdot x_1$　　$x_1+x_2=x_2+x_1$</td></tr>
+          <tr><td>結合則</td><td>$(x_1\cdot x_2)\cdot x_3=x_1\cdot(x_2\cdot x_3)$　　$(x_1+x_2)+x_3=x_1+(x_2+x_3)$</td></tr>
+          <tr><td>分配則</td><td>$x_1\cdot(x_2+x_3)=x_1\cdot x_2+x_1\cdot x_3$　　$x_1+x_2\cdot x_3=(x_1+x_2)\cdot(x_1+x_3)$</td></tr>
+          <tr><td>ド・モルガン則</td><td>$\overline{x_1\cdot x_2}=\overline{x_1}+\overline{x_2}$　　$\overline{x_1+x_2}=\overline{x_1}\cdot\overline{x_2}$</td></tr>
+          <tr><td>否定</td><td>$x_1=\overline{\overline{x_1}}$</td></tr>
+          <tr><td>その他</td><td>$x_1\cdot1=x_1,\ x_1\cdot0=0,\ x_1\cdot x_1=x_1,\ x_1\cdot\overline{x_1}=0$<br>$x_1+0=x_1,\ x_1+1=1,\ x_1+x_1=x_1,\ x_1+\overline{x_1}=1$</td></tr>
+        </table>
+        <img src="img/2015/gates-and-or-not-nand.png" alt="AND, OR, NOT, NANDの4つの基本素子をMIL記法で描いた図（左からAND,OR,NOT,NANDの順）" style="max-width:560px;width:100%;height:auto;margin-top:.8rem;">
+        <div class="diagram-cap">基本素子AND, OR, NOT, NANDのMIL記法（原本PDFより切り出し）</div>
+      </div>
+
+      <p>以下の問に答えなさい。</p>
+      <div class="ex">
+        <span class="box-label">対象の式</span>
+        <p>(a) $(x_1+\overline{x_2})\cdot(\overline{x_1}+x_2+\overline{x_3})$</p>
+        <p>(b) $x_1\cdot\overline{x_2}+\overline{x_1}\cdot x_3$</p>
+      </div>
+
+      <h3>(1) 真理値表</h3>
+      <div class="ex"><span class="box-label">問題</span><p>(a),(b)式に対応する真理値表を書きなさい。</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(a)は2つの項$x_1+\overline{x_2}$と$\overline{x_1}+x_2+\overline{x_3}$の値をそれぞれ求めてANDをとればよい。(b)は2つの項$x_1\cdot\overline{x_2}$と$\overline{x_1}\cdot x_3$の値をそれぞれ求めてORをとればよい。$x_1,x_2,x_3$の8通りすべてについて計算すると次のようになる。</p>
+        </div>
+        <table class="q-table">
+          <tr><th>$x_1$</th><th>$x_2$</th><th>$x_3$</th><th>$x_1+\overline{x_2}$</th><th>$\overline{x_1}+x_2+\overline{x_3}$</th><th>(a)</th><th>$x_1\overline{x_2}$</th><th>$\overline{x_1}x_3$</th><th>(b)</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+        </table>
+        <div class="sol"><span class="box-label">解</span>上表の(a)列・(b)列。(a)は000,001,100,110,111の5行で1（残る3行で0）。(b)は001,011,100,101の4行で1（残る4行で0）。</div>
+      </details>
+
+      <h3>(2) AND・OR・NOTによる直接実装</h3>
+      <div class="ex"><span class="box-label">問題</span><p>(a)式に対応する論理回路をAND, OR, NOTの3種類を使って実現し、MIL記法で書きなさい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(a)式$(x_1+\overline{x_2})\cdot(\overline{x_1}+x_2+\overline{x_3})$は、すでに乗算標準形（POS：リテラルの論理和の論理積）で与えられているので、式の構造をそのまま素子に置き換えればよい——標準形の式は演算子の入れ子を書き出すだけで直接回路になる、という教科書的な直接実装である。</p>
+          <ul>
+            <li>NOT素子2個で$\overline{x_2}$と$\overline{x_1},\overline{x_3}$（NOTは3個必要：$\overline{x_1},\overline{x_2},\overline{x_3}$）を作る。</li>
+            <li>OR素子1個（2入力）で$x_1+\overline{x_2}$を作る。</li>
+            <li>OR素子1個（3入力、または2入力ORを2個カスケード）で$\overline{x_1}+x_2+\overline{x_3}$を作る。</li>
+            <li>最後にAND素子1個で両者をANDし、(a)を得る。</li>
+          </ul>
+        </div>
+        <div class="sol"><span class="box-label">解</span>NOT×3（$\overline{x_1},\overline{x_2},\overline{x_3}$）→OR×2（$x_1+\overline{x_2}$、$\overline{x_1}+x_2+\overline{x_3}$）→AND×1（両項のAND）で(a)式$(x_1+\overline{x_2})\cdot(\overline{x_1}+x_2+\overline{x_3})$をそのまま実現する。</div>
+      </details>
+
+      <h3>(3) NAND5個以下で実現</h3>
+      <div class="ex"><span class="box-label">問題</span><p>(b)式に対応する論理回路を二入力のNANDを使って実現し、MIL記法で書きなさい。ただし、使って良いNAND素子は5個以下とする。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(b)式$x_1\overline{x_2}+\overline{x_1}x_3$は積和標準形（SOP：リテラルの論理積の論理和）で与えられている。SOP形の式は「NAND-NANDの2段構成」で必ず実現できる——各積項を1個のNANDで作り（否定つきの積になる）、それらのNANDでもう一度NANDをとると、ド・モルガンの法則により否定が打ち消しあってちょうどORが得られる、という一般的なテクニックである。</p>
+          <div class="mathblock">g1 = NAND(x2,x2) = ￢x2
+g2 = NAND(x1,x1) = ￢x1
+g3 = NAND(x1,g1) = ￢(x1・￢x2)
+g4 = NAND(g2,x3) = ￢(￢x1・x3)
+g5 = NAND(g3,g4) = ￢(￢(x1・￢x2)・￢(￢x1・x3))
+   = x1・￢x2 + ￢x1・x3　（ド・モルガンの法則）</div>
+          <p>$g_1,g_2$で$\overline{x_2},\overline{x_1}$をNAND（同じ入力を2本つないだNANDはNOTとして働く）で作り、$g_3,g_4$で2つの積項をそれぞれ否定つきで作り、最後に$g_5$で$g_3,g_4$をNANDすることで、ド・モルガンの法則$\overline{\overline{A}\cdot\overline{B}}=A+B$により両積項のORがそのまま得られる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$g_1=\text{NAND}(x_2,x_2)$、$g_2=\text{NAND}(x_1,x_1)$、$g_3=\text{NAND}(x_1,g_1)$、$g_4=\text{NAND}(g_2,x_3)$、$g_5=\text{NAND}(g_3,g_4)=x_1\overline{x_2}+\overline{x_1}x_3=$(b)。<strong>NANDちょうど5個</strong>で実現できる。</div>
+      </details>
+
+      <h3>(4) 標準形の変換</h3>
+      <div class="ex"><span class="box-label">問題</span><p>乗算標準形（和積標準形、リテラルの論理和の論理積で表現）で表された(a)式を加算標準形（積和標準形、リテラルの論理積の論理和で表現）で表しなさい。また、加算標準形で表された(b)式を乗算標準形で表しなさい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>(a)：POS→SOP。</strong>(1)の真理値表で(a)が1になる行は000,001,100,110,111の5行。各行についてそのまま各変数を（値が1ならその変数、0ならその否定を）ANDした「ミンターム」を作り、それらをORでつなげば標準形（主加法標準形）が得られる。</p>
+          <div class="sol"><span class="box-label">解（a）</span>$$\overline{x_1}\,\overline{x_2}\,\overline{x_3}+\overline{x_1}\,\overline{x_2}\,x_3+x_1\overline{x_2}\,\overline{x_3}+x_1x_2\overline{x_3}+x_1x_2x_3$$</div>
+          <p>（補足：標準形としては上のミンターム形が正解だが、$\overline{x_1}\,\overline{x_2}\,\overline{x_3}+\overline{x_1}\,\overline{x_2}\,x_3=\overline{x_1}\,\overline{x_2}(\overline{x_3}+x_3)=\overline{x_1}\,\overline{x_2}$、$x_1x_2\overline{x_3}+x_1x_2x_3=x_1x_2$のように簡略化できることにも注目しておくとよい。）</p>
+          <p><strong>(b)：SOP→POS。</strong>(1)の真理値表で(b)が0になる行は000,010,110,111の4行。各行について「マクスターム」（値が0ならその変数自身、値が1ならその否定を使い、論理和でつないだ項）を作り、それらをANDでつなげば標準形（主乗法標準形）が得られる。</p>
+          <div class="sol"><span class="box-label">解（b）</span>$$(x_1+x_2+x_3)(x_1+\overline{x_2}+x_3)(\overline{x_1}+\overline{x_2}+x_3)(\overline{x_1}+\overline{x_2}+\overline{x_3})$$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — SOP/POSとNAND-NAND / NOR-NORの標準実装</span>
+        <p>
+          真理値表から積和標準形（SOP、加算標準形）を作るには「出力が1になる行」のミンタームを集めてORすればよく、逆に和積標準形（POS、乗算標準形）を作るには「出力が0になる行」のマクスタームを集めてANDすればよい——これは同じ真理値表の1の行と0の行のどちらに注目するかの違いにすぎない。さらに、SOP形の式は(3)で見たように「NAND-NANDの2段構成」で機械的に実現できる。双対的に、POS形の式は「NOR-NORの2段構成」で同様に実現できる（NORはORの否定であり、NANDとNORの関係はANDとORの関係にちょうど対応する）。すなわち、標準形さえ求めれば、単一種類の素子（NANDのみ、あるいはNORのみ）による実装の手順が自動的に決まる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">個別問題 2</div><h2>オートマトン・電子錠</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>(1) 電子錠オートマトンのチェック表</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>以下の左側の図は、ある状態数（丸の数）7のオートマトンを表している。</p>
+      </div>
+
+      <div class="diagram">
+        <img src="img/2015/automaton.png" alt="7状態からなる電子錠オートマトンの図。左端の状態（自己ループ'd'）から'a'で次状態へ、'b','c','a','a'と5文字（abcaa）の遷移で右端の二重丸（受理・解錠状態、elseで自己ループ）に至る直線的な状態列。途中の各中間状態からはelseのラベルで上部の非受理のわな状態へ分岐する矢印、および各状態からdのラベルで左端の開始状態へ戻る矢印がある。右端の受理状態からはeのラベルで左端の開始状態へ戻る長い矢印もある。" style="max-width:640px;width:100%;height:auto;">
+        <div class="diagram-cap">7状態の電子錠オートマトン（原本PDFより切り出し）。右端の二重丸が受理（解錠）状態。</div>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>上の右側の表はこのオートマトンの動作を説明するチェック表である。(a)〜(e)を埋めて、チェック表を完成させなさい。</p>
+        <table class="q-table">
+          <tr><th>入力</th><th>終了状態</th></tr>
+          <tr><td>無し</td><td>No</td></tr>
+          <tr><td>a</td><td>No</td></tr>
+          <tr><td>ac</td><td>No</td></tr>
+          <tr><td>acd</td><td>No</td></tr>
+          <tr><td>abcaa</td><td>Yes</td></tr>
+          <tr><td>abcaada</td><td>(a)</td></tr>
+          <tr><td>abcaaabcaa</td><td>(b)</td></tr>
+          <tr><td>abcadabcaa</td><td>(c)</td></tr>
+          <tr><td>adabcaae</td><td>(d)</td></tr>
+          <tr><td>abcadebabcaa</td><td>(e)</td></tr>
+        </table>
+        <p>また、以下はこのオートマトンの動作を説明したものである。(f)〜(h)を埋めて、説明を完成させなさい。</p>
+        <p>「このオートマトンでは解錠中の状態を終了状態、施錠された状態を非終了状態で表している。何も入力していない状態からパスワード<strong>(f)</strong>を入力すると解錠する。解錠状態では<strong>(g)</strong>のボタンを押すと施錠され、パスワードを何も入力していない状態に戻る。パスワード入力中に<strong>(h)</strong>のボタンを押すと、入力がリセットされパスワードを何も入力していない状態に戻る。」</p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            まず(f)〜(h)を図から直接読み取る。与えられた例「abcaa」が既にYes（解錠）になっていることから、パスワードは<strong>(f) abcaa</strong>（a,b,c,a,aの5文字）である。図で各中間状態にある"d"のラベルの矢印はいずれも開始状態（パスワード未入力の状態）へ戻る矢印なので、これはパスワード入力中の取消・リセットボタンであり<strong>(h) d</strong>。右端の受理状態（解錠状態）から開始状態へ戻る長い矢印のラベルは"e"であり、これは解錠状態での施錠ボタンなので<strong>(g) e</strong>。
+          </p>
+          <p>
+            この読み取りに基づいて、オートマトンの状態を左から $S_0$（開始・施錠、"d"で自己ループ）$\to S_1$（"a"を1文字読んだ）$\to S_2$（"ab"）$\to S_3$（"abc"）$\to S_4$（"abca"）$\to S_5$（"abcaa"＝受理・解錠）とし、これに加えて非受理の「わな」状態が1つある（合計7状態）。遷移規則は次の通り：
+          </p>
+          <ul>
+            <li>$S_0$〜$S_4$（施錠中）：パスワードの次の正しい1文字が来れば1つ進む。"d"が来れば$S_0$に戻る（$S_0$では"d"は自己ループ）。それ以外の文字（"else"）が来ればわな状態へ落ちる。</li>
+            <li>$S_5$（解錠中）："e"が来れば$S_0$に戻る（施錠）。それ以外の文字（"else"、a,b,c,dを含む）が来ても解錠状態にとどまる。</li>
+            <li>わな状態：どんな文字が来ても（"else"で自己ループ）わな状態にとどまる——一度わなに落ちたら二度と受理状態に戻れない。</li>
+          </ul>
+          <p>この規則で(a)〜(e)の各入力を1文字ずつシミュレーションする。</p>
+          <ul>
+            <li>
+              <strong>(a) abcaada：</strong>先頭5文字「abcaa」で$S_0\to S_1\to S_2\to S_3\to S_4\to S_5$（解錠）に到達。残る「d」「a」は$S_5$では"else"扱いなので、そのまま解錠状態にとどまる。→ <strong>Yes</strong>
+            </li>
+            <li>
+              <strong>(b) abcaaabcaa：</strong>先頭5文字「abcaa」で$S_5$（解錠）に到達。残る「abcaa」もすべて$S_5$では"else"扱いでとどまる。→ <strong>Yes</strong>
+            </li>
+            <li>
+              <strong>(c) abcadabcaa：</strong>先頭4文字「abca」で$S_4$まで進む（あと1文字"a"で解錠のはずだった）。5文字目が"d"なので$S_0$に戻る。残る「abcaa」でもう一度パスワードを正しく入力し直すことになり、$S_0\to S_1\to S_2\to S_3\to S_4\to S_5$に到達。→ <strong>Yes</strong>
+            </li>
+            <li>
+              <strong>(d) adabcaae：</strong>1文字目"a"で$S_1$へ。2文字目"d"で$S_0$に戻る。残る「abcaa」で正しく$S_0\to\cdots\to S_5$（解錠）まで進む（ここまでで7文字消費）。最後の8文字目"e"は解錠状態での施錠ボタンなので、$S_0$に戻る。→ <strong>No</strong>
+            </li>
+            <li>
+              <strong>(e) abcadebabcaa：</strong>先頭4文字「abca」で$S_4$まで進む。5文字目"d"で$S_0$に戻る。6文字目"e"は$S_0$では「正しい次の文字(a)」でも"d"でもないため"else"扱いとなり、わな状態に落ちる。残りの文字「babcaa」はすべてわな状態での"else"扱いなので、わな状態にとどまり続ける。→ <strong>No</strong>
+            </li>
+          </ul>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a) Yes　(b) Yes　(c) Yes　(d) No　(e) No　　(f) abcaa　(g) e　(h) d</div>
+      </details>
+
+      <h3>(2) 3進数で4の倍数を判定するオートマトン（上位桁から）</h3>
+      <div class="ex"><span class="box-label">問題</span><p>「0」,「1」,「2」からなる3進数を「上位」の桁から入力して、入力された数が4の倍数の時に終了状態になる「状態数4以下の」オートマトンを作成して図にしなさい。何も入力されていない時の数は0とする。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>上位桁から入力する場合、状態には「これまでに読んだ値を4で割った余り」だけを持たせればよい。桁を1つ読むごとに、これまでの値$s$は3倍されて新しい桁$d$（0,1,2）が足された値$3s+d$になるので、状態遷移は $\bmod4$ の世界で $s \mapsto (3s+d)\bmod4$ となる。剰余は0,1,2,3の4通りなので、<strong>状態数4</strong>で実現できる。開始状態も受理状態も剰余0の状態（「何も入力されていない時の数は0」であり、0は4の倍数）。</p>
+        </div>
+        <table class="q-table">
+          <tr><th>状態（余り）</th><th>0を読む</th><th>1を読む</th><th>2を読む</th></tr>
+          <tr><td>0（受理・開始）</td><td>0</td><td>1</td><td>2</td></tr>
+          <tr><td>1</td><td>3</td><td>0</td><td>1</td></tr>
+          <tr><td>2</td><td>2</td><td>3</td><td>0</td></tr>
+          <tr><td>3</td><td>1</td><td>2</td><td>3</td></tr>
+        </table>
+        <div class="proof-body"><p>検算：3進数「20」（10進 $2\times3+0=6$、4の倍数ではない）：余り0→(2を読む)→余り2→(0を読む)→余り2。最終余り2で受理せず、$6\bmod4=2$と一致 ✓。3進数「100」（10進9）は4の倍数ではないが、「111」（10進13）も4の倍数でない。3進数で4の倍数になる最小の非自明な例として「111$_3$+3=…」ではなく直接「$8=22_3$」を検算する：余り0→(2を読む)→余り2→(2を読む)→$(3\times2+2)\bmod4=8\bmod4=0$。最終余り0で受理、$8$は4の倍数 ✓。</p></div>
+        <div class="sol"><span class="box-label">解</span>状態を「値mod4」（0,1,2,3）とし、状態$s$で桁$d$を読むと新状態は$(3s+d)\bmod4$。余り0が開始状態かつ唯一の受理状態。<strong>状態数4</strong>で実現できる。</div>
+      </details>
+
+      <h3>(3) 2進数で3の倍数を判定するオートマトン（下位桁から）</h3>
+      <div class="ex"><span class="box-label">問題</span><p>「0」,「1」からなる2進数を「下位」の桁から入力して、入力された数が3の倍数の時に終了状態になる「状態数6以下の」オートマトンを作成して図にしなさい。何も入力されていない時の数は0とする。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            下位桁から入力する場合、(2)のように「これまでの値mod3」だけを状態にするのでは不十分である。理由は桁の重みにある：2進数の桁の重みは$2^0,2^1,2^2,\dots$であり、これを3で割った余りは $2^0\equiv1,\ 2^1\equiv2,\ 2^2\equiv1,\ 2^3\equiv2,\dots\pmod3$ と、周期2で「1,2,1,2,…」を繰り返す。つまり、いま読んでいる桁が数値に与える影響（重み）が「1倍」なのか「2倍」なのかは、下から数えて奇数番目・偶数番目のどちらの桁かによって変わってしまう。上位桁から読む場合は最後に読む桁が常に重み1（1の位）なので影響が単純だったが、下位桁から読む場合はこの重みの位相を状態として持ち歩く必要がある。
+          </p>
+          <p>
+            そこで状態を $(r,w)$（$r$=これまでの値を3で割った余り、$w\in\{1,2\}$=次に読む桁の重みが3を法として1か2か）の組とする。剰余3通り×重みの位相2通りで<strong>状態数6</strong>となる。開始状態は $(0,1)$（値0、最初に読む桁は$2^0$で重み1）。ビット$b$を読むと、
+          </p>
+          <div class="mathblock">新しい余り r' = (r + b・w) mod 3
+新しい重み w' = w が1なら2、2なら1（交互に切り替え）</div>
+          <p>受理状態は余り$r=0$であるもの、すなわち $(0,1)$ と $(0,2)$ の2つ（重みの位相にかかわらず余りが0なら3の倍数）。全6状態の遷移表は以下の通り。</p>
+        </div>
+        <table class="q-table">
+          <tr><th>状態 $(r,w)$</th><th>0を読む</th><th>1を読む</th></tr>
+          <tr><td>$(0,1)$（受理・開始）</td><td>$(0,2)$</td><td>$(1,2)$</td></tr>
+          <tr><td>$(0,2)$（受理）</td><td>$(0,1)$</td><td>$(2,1)$</td></tr>
+          <tr><td>$(1,1)$</td><td>$(1,2)$</td><td>$(2,2)$</td></tr>
+          <tr><td>$(1,2)$</td><td>$(1,1)$</td><td>$(0,1)$</td></tr>
+          <tr><td>$(2,1)$</td><td>$(2,2)$</td><td>$(0,2)$</td></tr>
+          <tr><td>$(2,2)$</td><td>$(2,1)$</td><td>$(1,1)$</td></tr>
+        </table>
+        <div class="proof-body">
+          <p>
+            検算：入力列「0,1,1」を下位桁から順に与える（最初に読む文字が$2^0$の位、次が$2^1$の位、最後が$2^2$の位）。$(0,1)\xrightarrow{0}(0,2)\xrightarrow{1}(2,1)\xrightarrow{1}(0,2)$。最終状態$(0,2)$は受理状態である。この入力列は下位桁から「0,1,1」の順で読まれているので、通常の（上位桁が先の）表記に直すと「1,1,0」すなわち2進数110＝10進6であり、確かに3の倍数——受理と一致する ✓。
+          </p>
+          <p>
+            もう1つ：入力列「1」（1文字だけ、$2^0$の位が1で終了）。$(0,1)\xrightarrow{1}(1,2)$。最終状態$(1,2)$は余り1で受理せず。2進数「1」＝10進1は3の倍数ではないので一致 ✓。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>状態を$(r,w)$（$r$=値mod3、$w$=次桁の重みの位相∈{1,2}）とする6状態オートマトン。開始状態$(0,1)$。遷移は$r'=(r+bw)\bmod3$、$w'$は1と2を交互に切替。受理状態は$(0,1),(0,2)$の2つ。<strong>状態数6</strong>で実現できる。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 上位桁から読むか下位桁から読むかで状態数が変わる</span>
+        <p>
+          (2)と(3)を比べると、同じ「$N$の倍数判定」でも、上位桁から読む場合は「値mod$N$」だけを状態にすればよく状態数は$N$個で済む一方、下位桁から読む場合は「値mod$N$」に加えて「次に読む桁の重みが$N$を法として何に対応するか」という位相情報も状態に持たせる必要があり、状態数が余分に増える（一般には桁の重み$2^k\bmod N$の周期の長さの分だけ倍増する）。これは、上位桁から読むときは新しい桁が来るたびに既存の値を基数倍してから足すという操作が常に同じ形（$s\mapsto (\text{基数}\cdot s+d)\bmod N$）で済むのに対し、下位桁から読むときは既存の値に足す量が「桁の位置」に応じて変わってしまう（$s\mapsto (s+d\cdot 2^k)\bmod N$ の$2^k\bmod N$が桁ごとに違う）ことに由来する。同じ計算でも情報を読む順序次第で、有限状態機械として表現するのに必要な「記憶」の量が変わる、という好例である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2018.html">← 2018年度へ</a>
+    <a href="kakomon_2014.html">2014年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

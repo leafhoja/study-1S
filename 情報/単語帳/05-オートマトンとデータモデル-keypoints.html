@@ -1,0 +1,209 @@
+<!DOCTYPE html><!-- 「オートマトンとデータモデル — 押さえておきたい事項｜情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>オートマトンとデータモデル — 押さえておきたい事項｜情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-05-kp">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>オートマトンとデータモデル — 押さえておきたい事項</h1>
+  <p class="subtitle">状態遷移図の作り方・木構造の見分け方などのまとめ</p>
+</div>
+
+<div class="container">
+
+  <div class="page-toc">
+    <strong>この分野の要点</strong>
+    <ol>
+      <li><a href="#kp-1">接頭辞追跡という構成法（電子錠パターン）</a></li>
+      <li><a href="#kp-2">剰余判定オートマトン（倍数判定の定石）</a></li>
+      <li><a href="#kp-3">KMP法・Aho-Corasick法との対応</a></li>
+      <li><a href="#kp-4">有限状態機械では判定できない条件がある</a></li>
+      <li><a href="#kp-5">末尾からk文字目の判定は状態数が指数的に増える</a></li>
+      <li><a href="#kp-6">バグのあるオートマトンの読み方</a></li>
+      <li><a href="#kp-7">状態数削減（機能等価な状態の統合）</a></li>
+      <li><a href="#kp-8">木かグラフかの判定基準</a></li>
+      <li><a href="#kp-9">木構造かどうかの判定条件（頂点数と辺数）</a></li>
+      <li><a href="#kp-10">ドメイン名と木構造の対応・DNSの分散管理</a></li>
+      <li><a href="#kp-11">ファイルの派生関係を木構造として捉える考え方</a></li>
+      <li><a href="#kp-12">グラフ上の最短経路をBFSで求める考え方</a></li>
+      <li><a href="#kp-13">階層モデル vs ネットワークモデルの使い分け</a></li>
+      <li><a href="#kp-14">有向グラフでも対称的な関係を数えるときは無向として扱う</a></li>
+    </ol>
+  </div>
+
+  <h2 class="word-cat-title">オートマトンの構成テクニック（電子錠・倍数判定）</h2>
+
+  <div class="mot" id="kp-1">
+    <span class="box-label">接頭辞追跡という構成法（電子錠パターン）</span>
+    <p>
+      暗証番号（複数可）を判定するオートマトンは、<strong>「これまで読んだ文字列の末尾と目標文字列の
+      先頭が一致している最長の部分」を状態とすればよい</strong>。一致が崩れたときの戻り先（fail関数）を
+      状態ごとに事前計算しておく。「電子錠」問題として繰り返し出題される定番の構成テクニック。
+    </p>
+  </div>
+
+  <div class="thm" id="kp-2">
+    <span class="box-label">剰余判定オートマトン（倍数判定の定石）</span>
+    <p>
+      状態＝「これまでの値をNで割った余り」とする。桁を1つ読むごとに
+      新しい余り $=(基数\times現在の余り+新しい桁)\bmod N$ で更新する。
+      <strong>上位桁から読む場合はこれで十分</strong>（状態数はちょうどN）。下位桁から読む場合は
+      単純に「値 mod N」だけでは不十分で、<strong>桁の重みの位相も状態として持つ必要があり状態数が
+      増える</strong>（2015・2024年度で対比）。
+    </p>
+  </div>
+
+  <div class="note" id="kp-3">
+    <span class="box-label">KMP法・Aho-Corasick法との対応</span>
+    <p>
+      暗証番号型オートマトンの構成テクニックは、単一パターンならKMP法、複数パターン同時なら
+      Aho-Corasick法の考え方そのもの。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">有限状態機械の限界</h2>
+
+  <div class="thm" id="kp-4">
+    <span class="box-label">有限状態機械では判定できない条件がある</span>
+    <p>
+      入力の長さに比例して際限なく情報（差・比など）を保持しなければならない判定は、有限個の状態では
+      実現不可能。証明の型は<strong>鳩の巣原理</strong>：状態数Nに対し入力 $a^0,\dots,a^N$ を考えれば
+      必ずどこかで同じ状態に落ちる2つの入力が存在し矛盾を導く。チューリングマシンなら「1対1で消し込む」
+      手続きで解ける。
+    </p>
+  </div>
+
+  <div class="note" id="kp-5">
+    <span class="box-label">末尾からk文字目の判定は状態数が指数的に増える</span>
+    <p>
+      「先頭からk文字目」の判定は状態数がおよそk+2個で済むが、<strong>「末尾からk文字目」の判定は
+      直近k文字の履歴をシフトレジスタのように保持する必要があり状態数が2^k個に増える</strong>、という
+      非対称性が有限状態機械（有限メモリの計算モデル）の本質的制約。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">オートマトンの設計・デバッグ</h2>
+
+  <div class="note" id="kp-6">
+    <span class="box-label">バグのあるオートマトンの読み方</span>
+    <p>
+      自己ループが「本来届くべき戻り先」を誤って自分自身にしてしまうと、非受理であるべき入力を
+      誤って受理する例、受理であるべき入力を誤って非受理とする例の両方が起こりうる。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-7">
+    <span class="box-label">状態数削減（機能等価な状態の統合）</span>
+    <p>
+      2つの状態が統合可能なのは<strong>「将来のどんな入力列に対しても常に同じ結果を返す」場合のみ</strong>。
+      見かけが似ていても将来のある入力で振る舞いが分岐する状態同士は統合できない。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">グラフ・木構造の判定</h2>
+
+  <div class="thm" id="kp-8">
+    <span class="box-label">木かグラフかの判定基準</span>
+    <p>
+      「各要素はただ1つの親（上位）を持つか」を機械的にチェックする。複数の親を持ちうる（多対多）、
+      または閉路（ループ）が生じうる場合は木ではなく一般のグラフが必要（路線図・インターネット接続は
+      不適切、組織の上司部下・課題の下位分割は適切）。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-9">
+    <span class="box-label">木構造かどうかの判定条件（頂点数と辺数）</span>
+    <p>
+      連結なグラフで「頂点数−1＝辺数」なら木。頂点数＝辺数なら閉路がちょうど1つある
+      「一輪車状（unicyclic）」で、その閉路上のどの1辺を除いても木になる。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">木構造の応用例</h2>
+
+  <div class="note" id="kp-10">
+    <span class="box-label">ドメイン名と木構造の対応・DNSの分散管理</span>
+    <p>
+      ホスト名は右側（jp）を根として左（www）へ向かう木構造。木構造の特徴（各ノードの管理を
+      その下位の枝ごとに分散できること）を活かして、階層ごとに管理権限を委任できる。
+    </p>
+  </div>
+
+  <div class="note" id="kp-11">
+    <span class="box-label">ファイルの派生関係を木構造として捉える考え方（バージョン管理）</span>
+    <p>
+      ①各ファイルを「どのファイルから派生したか（親）」で記録すれば派生関係は木構造として表現できる
+      ②葉（子を持たないファイル）だけが最新情報を持ちうるので中間ファイルは削除してよい
+      ③複数の葉に同じ要素の異なる版がある場合、片方がもう片方の祖先なら子孫側だけ残せばよい
+      （fast-forward）、独立した枝にある場合は両方残して人間によるマージが必要（コンフリクト）。
+      Gitのブランチ・マージコンフリクトと同じ構造。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">グラフの探索・使い分け</h2>
+
+  <div class="mot" id="kp-12">
+    <span class="box-label">グラフ上の最短経路をBFSで求める考え方</span>
+    <p>
+      ノードから出発し1回で着くもの、2回で着くもの……と近い順に段階的に到達ノードを広げていく。
+      検索エンジンのクローラーの探索やPageRank（多くの経路から到達されるページほど重要）の
+      考え方の土台。
+    </p>
+  </div>
+
+  <div class="note" id="kp-13">
+    <span class="box-label">階層モデル vs ネットワークモデルの使い分け</span>
+    <p>
+      階層モデル（木構造）は「上位から下位への管理・委譲」関係（DNS、組織図）に向き、一般の
+      ネットワークモデル（グラフ）は「対等なもの同士の直接接続」（ルータ間リンク）に向く。
+    </p>
+  </div>
+
+  <div class="note" id="kp-14">
+    <span class="box-label">有向グラフでも対称的な関係を数えるときは無向として扱う</span>
+    <p>
+      親等（世代を問わない血縁の近さ）のようにエッジの向きを問わない量を求めるときは、有向グラフの
+      エッジを無向として扱い、始点から層ごとに広げるBFSで最初に目的ノードが現れた層番号が
+      最短距離になる。
+    </p>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="05-オートマトンとデータモデル-word.html">← 単語一覧</a>
+    <a href="05-オートマトンとデータモデル-descriptive.html">記述式で狙われる内容 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

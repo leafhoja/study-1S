@@ -1,0 +1,400 @@
+<!DOCTYPE html><!-- 「2012年度 | 情報 個別問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2012年度 | 情報 個別問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2012">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2012年度</h1>
+  <p class="subtitle">田中哲朗クラス（理科一類8,24,26組）｜7月26日（木）2限</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">個別問題1（グレイ符号とハミング符号）</a>
+    <a href="#q2">個別問題2（2の補数表現と全加算器・減算器）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">個別問題 1</div><h2>グレイ符号とハミング符号</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>
+          0と1を使った数の表現には2進符号（通常の2進数表現）を用いることが多い。0と1からなる同じ桁数の2つの符号を比較したとき、桁ごとの0と1が異なる個数を数えたものを<strong>ハミング距離</strong>と呼ぶ（例：$5=$"101"と$6=$"110"のハミング距離は下位2桁が異なるので2）。2進符号以外に<strong>グレイ符号</strong>がある。0〜7までの4桁2進符号とグレイ符号の対応は次の通り。
+        </p>
+        <table class="q-table">
+          <tr><th>10進数</th><th>2進符号</th><th>グレイ符号</th></tr>
+          <tr><td>0</td><td>0000</td><td>0000</td></tr>
+          <tr><td>1</td><td>0001</td><td>0001</td></tr>
+          <tr><td>2</td><td>0010</td><td>0011</td></tr>
+          <tr><td>3</td><td>0011</td><td>0010</td></tr>
+          <tr><td>4</td><td>0100</td><td>0110</td></tr>
+          <tr><td>5</td><td>0101</td><td>0111</td></tr>
+          <tr><td>6</td><td>0110</td><td>0101</td></tr>
+          <tr><td>7</td><td>0111</td><td>0100</td></tr>
+        </table>
+        <p>グレイ符号は2進符号と同じ桁数で符号化可能であり、値が隣接する符号どうしのハミング距離が常に1になる、という性質を持つ。</p>
+      </div>
+
+      <h3>(a) 8〜15の2進符号とグレイ符号</h3>
+      <div class="ex"><span class="box-label">問題</span><p>8〜15までの数に対応する4桁の2進符号、グレイ符号の表を作成しなさい（条件：4桁の0/1符号、異なる数は異なる符号、隣接する符号間のハミング距離が常に1。この3条件を満たせば正解とする）。</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            上の表の0〜7のグレイ符号は、標準的な「反射二進グレイ符号」$g=b\oplus(b\gg1)$（2進符号$b$と、それを1ビット右シフトしたものとのXOR）で作られている。実際に0〜7で確認すると、例えば$6=0110$を右シフトすると$0011$、XORをとると$0110\oplus0011=0101$となり表と一致する。この規則をそのまま8〜15まで延長すればよい。
+          </p>
+          <p>各行の計算（2進符号を右に1ビットシフトし、元の符号とXORする）：</p>
+          <ul>
+            <li>$8=1000$、右シフト$0100$、XOR$=1100$</li>
+            <li>$9=1001$、右シフト$0100$、XOR$=1101$</li>
+            <li>$10=1010$、右シフト$0101$、XOR$=1111$</li>
+            <li>$11=1011$、右シフト$0101$、XOR$=1110$</li>
+            <li>$12=1100$、右シフト$0110$、XOR$=1010$</li>
+            <li>$13=1101$、右シフト$0110$、XOR$=1011$</li>
+            <li>$14=1110$、右シフト$0111$、XOR$=1001$</li>
+            <li>$15=1111$、右シフト$0111$、XOR$=1000$</li>
+          </ul>
+          <p>境界のつなぎ目もハミング距離1になっていることを確認しておく。$7=0111$のグレイ符号は$0100$、$8=1000$のグレイ符号は$1100$。両者は上2桁が"01"と"11"で1桁だけ異なり、下2桁は"00"どうしで一致するので、ハミング距離はちょうど1である。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <table class="q-table">
+            <tr><th>10進数</th><th>2進符号</th><th>グレイ符号</th></tr>
+            <tr><td>8</td><td>1000</td><td>1100</td></tr>
+            <tr><td>9</td><td>1001</td><td>1101</td></tr>
+            <tr><td>10</td><td>1010</td><td>1111</td></tr>
+            <tr><td>11</td><td>1011</td><td>1110</td></tr>
+            <tr><td>12</td><td>1100</td><td>1010</td></tr>
+            <tr><td>13</td><td>1101</td><td>1011</td></tr>
+            <tr><td>14</td><td>1110</td><td>1001</td></tr>
+            <tr><td>15</td><td>1111</td><td>1000</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">問題（続き）</span>
+        <p>
+          4ビットの符号$X=x_1x_2x_3x_4$に対し、3個のビットを付加した7ビットの符号$X'=x_1x_2x_3x_4y_1y_2y_3$を、次の3条件を満たすように決める（これを4ビットの<strong>ハミング符号</strong>と呼ぶ）。
+        </p>
+        <p>
+          $$x_1+x_2+x_3+y_1\equiv0\pmod2,\qquad x_1+x_2+x_4+y_2\equiv0\pmod2,\qquad x_1+x_3+x_4+y_3\equiv0\pmod2$$
+        </p>
+      </div>
+
+      <h3>(b) 4ビット符号とハミング符号の対応表</h3>
+      <div class="ex"><span class="box-label">問題</span><p>0〜15までの数を4桁で2進符号化して得られる4ビット符号$X$とハミング符号$X'$の対応表を完成させなさい（$0\to0000000$、$15\to1111111$は既知）。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            3つの合同式は「$y_1,y_2,y_3$を、$x_1,\dots,x_4$のうち3つずつのXORとして決める」という意味であり、$y_1=x_1\oplus x_2\oplus x_3$、$y_2=x_1\oplus x_2\oplus x_4$、$y_3=x_1\oplus x_3\oplus x_4$と読み直せる。これを$X=0000$から$1111$まで16通りすべてに適用して求める。
+          </p>
+          <ul>
+            <li>0000：$y_1=0,y_2=0,y_3=0\to$0000000</li>
+            <li>0001：$y_1=0\oplus0\oplus0=0,y_2=0\oplus0\oplus1=1,y_3=0\oplus0\oplus1=1\to$0001011</li>
+            <li>0010：$y_1=0\oplus0\oplus1=1,y_2=0\oplus0\oplus0=0,y_3=0\oplus1\oplus0=1\to$0010101</li>
+            <li>0011：$y_1=0\oplus0\oplus1=1,y_2=0\oplus0\oplus1=1,y_3=0\oplus1\oplus1=0\to$0011110</li>
+            <li>0100：$y_1=0\oplus1\oplus0=1,y_2=0\oplus1\oplus0=1,y_3=0\oplus0\oplus0=0\to$0100110</li>
+            <li>0101：$y_1=0\oplus1\oplus0=1,y_2=0\oplus1\oplus1=0,y_3=0\oplus0\oplus1=1\to$0101101</li>
+            <li>0110：$y_1=0\oplus1\oplus1=0,y_2=0\oplus1\oplus0=1,y_3=0\oplus1\oplus0=1\to$0110011</li>
+            <li>0111：$y_1=0\oplus1\oplus1=0,y_2=0\oplus1\oplus1=0,y_3=0\oplus1\oplus1=0\to$0111000</li>
+            <li>1000：$y_1=1\oplus0\oplus0=1,y_2=1\oplus0\oplus0=1,y_3=1\oplus0\oplus0=1\to$1000111</li>
+            <li>1001：$y_1=1\oplus0\oplus0=1,y_2=1\oplus0\oplus1=0,y_3=1\oplus0\oplus1=0\to$1001100</li>
+            <li>1010：$y_1=1\oplus0\oplus1=0,y_2=1\oplus0\oplus0=1,y_3=1\oplus1\oplus0=0\to$1010010</li>
+            <li>1011：$y_1=1\oplus0\oplus1=0,y_2=1\oplus0\oplus1=0,y_3=1\oplus1\oplus1=1\to$1011001</li>
+            <li>1100：$y_1=1\oplus1\oplus0=0,y_2=1\oplus1\oplus0=0,y_3=1\oplus0\oplus0=1\to$1100001</li>
+            <li>1101：$y_1=1\oplus1\oplus0=0,y_2=1\oplus1\oplus1=1,y_3=1\oplus0\oplus1=0\to$1101010</li>
+            <li>1110：$y_1=1\oplus1\oplus1=1,y_2=1\oplus1\oplus0=1,y_3=1\oplus1\oplus0=0\to$1110100</li>
+            <li>1111：$y_1=1\oplus1\oplus1=1,y_2=1\oplus1\oplus1=1,y_3=1\oplus1\oplus1=1\to$1111111</li>
+          </ul>
+          <p>$X=0001$の結果0001011、$X=1111$の結果1111111は、問題文で既に与えられている値とそれぞれ一致しており、計算方法が正しいことを裏づけている。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <table class="q-table">
+            <tr><th>$X$</th><th>$X'$</th><th>$X$</th><th>$X'$</th></tr>
+            <tr><td>0000</td><td>0000000</td><td>1000</td><td>1000111</td></tr>
+            <tr><td>0001</td><td>0001011</td><td>1001</td><td>1001100</td></tr>
+            <tr><td>0010</td><td>0010101</td><td>1010</td><td>1010010</td></tr>
+            <tr><td>0011</td><td>0011110</td><td>1011</td><td>1011001</td></tr>
+            <tr><td>0100</td><td>0100110</td><td>1100</td><td>1100001</td></tr>
+            <tr><td>0101</td><td>0101101</td><td>1101</td><td>1101010</td></tr>
+            <tr><td>0110</td><td>0110011</td><td>1110</td><td>1110100</td></tr>
+            <tr><td>0111</td><td>0111000</td><td>1111</td><td>1111111</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <h3>(c) 受信符号からの復号</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          0〜15までの数を4ビットハミング符号に符号化して信頼できない通信経路で送り、<strong>2ビット以上の誤りがない</strong>と仮定して、受け取った符号から元の数を求める表を完成させなさい（$0001000\to0$は既知の例）。
+        </p>
+        <table class="q-table">
+          <tr><th>受け取った符号</th><th>元の数</th></tr>
+          <tr><td>0001000</td><td>0</td></tr>
+          <tr><td>0010010</td><td>?</td></tr>
+          <tr><td>0100111</td><td>?</td></tr>
+          <tr><td>1001000</td><td>?</td></tr>
+          <tr><td>1100010</td><td>?</td></tr>
+          <tr><td>0110011</td><td>?</td></tr>
+        </table>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            復号方法は次の通り。受信した符号の前半4ビット$x_1x_2x_3x_4$から、正しいはずの$y_1,y_2,y_3$を$y_1=x_1\oplus x_2\oplus x_3$、$y_2=x_1\oplus x_2\oplus x_4$、$y_3=x_1\oplus x_3\oplus x_4$として計算し、実際に受信した$y_1,y_2,y_3$と比較する。
+          </p>
+          <ul>
+            <li>3つとも一致すれば誤りなし。</li>
+            <li>1つだけ不一致なら、その$y$ビット自身が誤り（$x$部分は正しい）。</li>
+            <li>2つの$y$が同時に不一致になる場合は、その2つの式に共通して現れる$x$変数に誤りがある。$y_1$式には$x_1,x_2,x_3$、$y_2$式には$x_1,x_2,x_4$、$y_3$式には$x_1,x_3,x_4$が使われているので、例えば「$y_2,y_3$だけ不一致（$y_1$は一致）」なら、誤りは$y_2,y_3$に共通し$y_1$には含まれない変数、すなわち$x_4$にあると特定できる（他の組も同様に特定できる）。</li>
+          </ul>
+          <p>実務上もっとも簡単な確認方法は、受信符号と(b)の対応表にある16個の正しい符号すべてとのハミング距離を見て、距離1（または距離0）のものを探すことである。以下、各行をこの方法で確認する。</p>
+          <ul>
+            <li>
+              $0010010$：$x=0010$から期待される$y_1=0\oplus0\oplus1=1,y_2=0\oplus0\oplus0=0,y_3=0\oplus1\oplus0=1$。(b)の表で$X=1010$の符号は$1010010$であり、これと$0010010$を比べると先頭の1ビットのみ異なりハミング距離1。<strong>元の数=10</strong>。
+            </li>
+            <li>
+              $0100111$：(b)の表で$X=0100$の符号は$0100110$であり、これと比べると末尾の1ビットのみ異なりハミング距離1。<strong>元の数=4</strong>。
+            </li>
+            <li>
+              $1001000$：(b)の表で$X=1001$の符号は$1001100$であり、これと比べると5番目のビットのみ異なりハミング距離1。<strong>元の数=9</strong>。
+            </li>
+            <li>
+              $1100010$：(b)の表で$X=1101$の符号は$1101010$であり、これと比べると4番目のビットのみ異なりハミング距離1。<strong>元の数=13</strong>。
+            </li>
+            <li>
+              $0110011$：(b)の表で$X=0110$の符号はそのまま$0110011$であり、完全に一致（ハミング距離0、誤りなし）。<strong>元の数=6</strong>。
+            </li>
+          </ul>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <table class="q-table">
+            <tr><th>受け取った符号</th><th>元の数</th></tr>
+            <tr><td>0001000</td><td>0</td></tr>
+            <tr><td>0010010</td><td>10</td></tr>
+            <tr><td>0100111</td><td>4</td></tr>
+            <tr><td>1001000</td><td>9</td></tr>
+            <tr><td>1100010</td><td>13</td></tr>
+            <tr><td>0110011</td><td>6</td></tr>
+          </table>
+        </div>
+      </details>
+
+      <h3>(d) 一意に復元できる理由</h3>
+      <div class="ex"><span class="box-label">問題</span><p>4ビットハミング符号を送ったとき、7ビット中2ビット以上の誤りがなければ、受信符号から元の4ビット符号$X$を一通りに決められる理由を「ハミング距離」という言葉を使って説明しなさい（厳密な証明は不要）。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            このハミング符号化によって生成される16個の正しい7ビット符号どうしは、互いのハミング距離が必ず3以上になるように設計されている。したがって、通信中に1ビットだけ誤りが生じても、誤りを含む受信符号と元の（正しい）符号とのハミング距離は1であり、他のどの正しい符号ともハミング距離2以上離れている（異なる2つの正しい符号間の距離が3以上あるため、それぞれから距離1の範囲どうしは重ならない）。したがって、受信した符号に最も近い（ハミング距離が最小の）正しい符号がただ1つに定まり、元の符号を一意に復元できる。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>正しい符号どうしのハミング距離が常に3以上になるように設計されているため、1ビットの誤りが生じても、誤り符号から距離1以内にある正しい符号は元の符号ただ1つに限られる。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — グレイ符号とハミング符号は「符号化の工夫」という同じ発想</span>
+        <p>
+          グレイ符号は、ロータリーエンコーダなど機械的に値を読み取るセンサでよく使われる。値が1つ変わるごとにビットが1個しか変わらないため、複数ビットの切り替わりタイミングがずれても読み取り誤差が小さく抑えられる（2進符号のように複数ビットが同時に変わると、読み取りタイミングのずれから全く違う値を誤読するおそれがある）。一方ハミング符号は、実際の通信路やメモリ・ストレージにおける誤り訂正符号（ECC: Error-Correcting Code）の最も基本的な形であり、「正しい符号どうしのハミング距離を十分大きく保つ」という設計思想は、現代のより高度な誤り訂正符号にも共通する。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">個別問題 2</div><h2>2の補数表現と全加算器・減算器</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>
+          $n$ビットの2の補数表現では、$-2^{n-1}\le x\le2^{n-1}-1$の整数$x$を表現できる。非負数はそのままの2進表現を用い、負数$x$は$x+2^n$の2進表現を用いる。
+        </p>
+      </div>
+
+      <h3>(a) 表現可能性と一意性</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この範囲の整数$x$を$n$ビットの2の補数表現で表したとき、$n$ビット数で表現可能であること、また異なる整数を表現した結果は必ず異なることを説明しなさい（厳密な証明不要）。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            $n$桁の2進数は、$0$から$2^n-1$までの$2^n$通りの異なるビット列を表現できる。
+          </p>
+          <p>
+            非負数$x$（$0\le x\le2^{n-1}-1$）はそのままの$n$桁2進表現を用いる。この範囲は$0\sim2^{n-1}-1$のちょうど$2^{n-1}$通りを埋める。
+          </p>
+          <p>
+            負数$x$（$-2^{n-1}\le x\le-1$）は$x+2^n$の$n$桁2進表現を用いる。この$x+2^n$の値域は$2^{n-1}\le x+2^n\le2^n-1$となり、これは非負数が使う範囲とは重ならない、残りの$2^{n-1}$通りをちょうど埋める。
+          </p>
+          <p>
+            両者を合わせると、ちょうど$0\sim2^n-1$の$2^n$通りすべてを1回ずつ使うことになる。したがって$-2^{n-1}\sim2^{n-1}-1$のすべての整数が$n$桁のビット列で表現可能であり（表現可能性）、かつ異なる整数どうしが同じビット列に対応することはない（一意性・単射性）。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>非負数の範囲がちょうど$2^{n-1}$通り、負数の範囲（$x+2^n$）が残りの$2^{n-1}$通りを重複なく埋め、合わせて$n$桁で表せる$2^n$通りすべてを1対1に使い切るため、表現可能かつ一意である。</div>
+      </details>
+
+      <h3>(b) 1ビット全加算器の実現</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>1ビットの数$x,y$と下位ビットからの桁上げ$c_{in}$を入力とし、和のビット$s$と上位ビットへの桁上げ$c_{out}$を出力とする1ビット全加算器の真理値表は次の通り。</p>
+        <table class="q-table">
+          <tr><th>$x$</th><th>$y$</th><th>$c_{in}$</th><th>$s$</th><th>$c_{out}$</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+        </table>
+        <p>次の7種類の基本素子を自由に（何個でも）使うことができる。</p>
+        <div class="diagram">
+          <img src="img/2012/gates-7.png" alt="7つの基本素子をMIL記法で描いた図。上段左からAND, OR, NOT, XOR。下段左からNAND, NOR, EQ。" style="max-width:640px;width:100%;height:auto;">
+          <div class="diagram-cap">MIL記法による7つの基本素子（AND, OR, NOT, XOR, NAND, NOR, EQ）。</div>
+        </div>
+        <p>この基本素子を5つ使って1ビット全加算器を実現し、MIL記法で書きなさい。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            次のように5個のゲートを組む。
+          </p>
+          <div class="mathblock">t     = XOR(x, y)
+s     = XOR(t, cin)        (= x XOR y XOR cin)
+p     = AND(x, y)
+q     = AND(cin, t)
+cout  = OR(p, q)</div>
+          <p>
+            合計5ゲート（XOR×2、AND×2、OR×1）。真理値表の8行すべてで検証する。
+          </p>
+          <ul>
+            <li>$(x,y,c_{in})=(0,0,0)$：$t=0,s=0,p=0,q=0,c_{out}=0$</li>
+            <li>$(0,0,1)$：$t=0,s=1,p=0,q=0,c_{out}=0$</li>
+            <li>$(0,1,0)$：$t=1,s=1,p=0,q=0,c_{out}=0$</li>
+            <li>$(0,1,1)$：$t=1,s=0,p=0,q=1,c_{out}=1$</li>
+            <li>$(1,0,0)$：$t=1,s=1,p=0,q=0,c_{out}=0$</li>
+            <li>$(1,0,1)$：$t=1,s=0,p=0,q=1,c_{out}=1$</li>
+            <li>$(1,1,0)$：$t=0,s=0,p=1,q=0,c_{out}=1$</li>
+            <li>$(1,1,1)$：$t=0,s=1,p=1,q=0,c_{out}=1$</li>
+          </ul>
+          <p>いずれも与えられた真理値表の$s,c_{out}$と一致する。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$t=\text{XOR}(x,y)$、$s=\text{XOR}(t,c_{in})$、$p=\text{AND}(x,y)$、$q=\text{AND}(c_{in},t)$、$c_{out}=\text{OR}(p,q)$。XOR2個・AND2個・OR1個の<strong>合計5個</strong>で実現できる。</div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">問題（続き）</span>
+        <p>
+          以下、1ビット全加算器は、入力$x,y,c_{in}$と出力$s,c_{out}$を持つ次の箱として表す。
+        </p>
+        <div class="diagram">
+          <img src="img/2012/full-adder-box.png" alt="1ビット全加算器を1つの箱として表した図。左から入力x,y（矢印）、下から入力cin（矢印）、上へ出力cout（矢印）、右へ出力s（矢印）。" style="max-width:420px;width:100%;height:auto;">
+          <div class="diagram-cap">1ビット全加算器の箱表現（入力$x,y,c_{in}$、出力$s,c_{out}$）。</div>
+        </div>
+      </div>
+
+      <h3>(c) 4ビット減算器の構成</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          この1ビット全加算器を4個、次のようにカスケード接続すると、4ビットの2進数$x(x_1x_2x_3x_4)$と$y(y_1y_2y_3y_4)$の加算を行う4ビット加算器になる（最下位の$c_{in}$は0）。
+        </p>
+        <div class="diagram">
+          <img src="img/2012/adder-cascade.png" alt="1ビット全加算器4個をカスケード接続した4ビット加算器。各段はx,yとcinを入力しs,coutを出力する。上段（最上位）の箱の入力はx1,y1、出力sはs1、coutは全体の出力Cout。以下2段目x2y2→s2、3段目x3y3→s3、4段目（最下位）x4y4→s4で、この最下位段のcinに0を入力。各段のcoutは1段上の段のcinに接続される。" style="max-width:420px;width:100%;height:auto;">
+          <div class="diagram-cap">1ビット全加算器4個のカスケード接続による4ビット加算器。</div>
+        </div>
+        <p>
+          この1ビット全加算器と他の基本素子を用いて、4ビットの2進数$x(x_1x_2x_3x_4)$と$y(y_1y_2y_3y_4)$から減算$x-y$を実行する4ビット減算器を構成して図で示しなさい。$x-y$の演算結果が4ビットの2の補数表現で表せない場合は、どのような出力であっても良い。
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            2の補数表現の基本的な性質「$-y=\overline{y}+1$」（各ビットを反転してから1を加えると符号が反転する）を利用し、
+          </p>
+          <p>$$x-y=x+(-y)=x+\overline{y}+1$$</p>
+          <p>
+            として計算する。具体的には、上図の4ビット加算器と全く同じ4個の1ビット全加算器のカスケード構成をそのまま使い、次の2点だけを変更する。
+          </p>
+          <ul>
+            <li>各段の$y$入力を、$y_i$そのものではなく、$y_i$をNOTゲートに通して反転した$\overline{y_i}$にする（$i=1,2,3,4$、合計NOTゲート4個が追加で必要）。</li>
+            <li>最下位段（4段目）の$c_{in}$を、加算器では0だったところを<strong>1</strong>にする。</li>
+          </ul>
+          <p>
+            この2点の変更により、カスケード全体で計算される値は$x+\overline{y}+1$となり、これがちょうど$x-y$の2の補数表現に等しい。必要な追加素子はNOTゲート4個（$y_1\sim y_4$の反転用）のみで、1ビット全加算器4個の配線構造自体は加算器のときと変えなくてよい。
+          </p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <p>
+            加算器と同じ4個の1ビット全加算器のカスケード構成を使い、各段の$y$入力をNOTゲートで反転した$\overline{y_i}$に置き換え、最下位段の$c_{in}$を0の代わりに1にする（$x-y=x+\overline{y}+1$）。追加素子はNOT×4個のみ。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「反転して+1」で減算専用回路が不要になる</span>
+        <p>
+          「減算は各ビットを反転してから1を加えて加算する」という2の補数演算のテクニックは、CPU内部に減算専用の回路を別途持たなくても、加算器（と少数のNOTゲート、桁上げ入力の切り替え）だけで加算と減算の両方を実現できる、という実用上非常に重要な性質を生んでいる。個別問題1のハミング符号（誤り訂正）と個別問題2の2の補数表現（負数の表現）は見た目の題材は大きく異なるが、どちらも「限られたビット数の中で情報をどのように安全に、あるいは効率よく符号化するか」という情報表現の工夫という共通のテーマを持っている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2013.html">← 2013年度へ</a>
+    <a href="kakomon_2011.html">2011年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

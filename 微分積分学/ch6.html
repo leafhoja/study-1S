@@ -1,0 +1,488 @@
+<!DOCTYPE html><!-- 「Ch.6 二変数のテーラーの定理と極値問題 — 微分積分学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>Ch.6 二変数のテーラーの定理と極値問題 — 微分積分学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="ch6">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="ch1.html" data-page="ch1">Ch.1</a>
+      <a href="ch2.html" data-page="ch2">Ch.2</a>
+      <a href="ch3.html" data-page="ch3">Ch.3</a>
+      <a href="ch4.html" data-page="ch4">Ch.4</a>
+      <a href="ch5.html" data-page="ch5">Ch.5</a>
+      <a href="ch6.html" data-page="ch6" class="active">Ch.6</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>Ch.6 二変数のテーラーの定理と極値問題</h1>
+  <p class="subtitle">講義日: 7/14 — 接平面、高階偏導関数、極大・極小の判定</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#motivation">動機</a>
+    <a href="#tangent">接平面</a>
+    <a href="#cn">$C^n$級・$C^\infty$級</a>
+    <a href="#mvt2">2変数の平均値の定理</a>
+    <a href="#taylor2">2変数のテーラーの定理</a>
+    <a href="#extrema">極大・極小への応用</a>
+  </div>
+
+  <!-- 動機 -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="motivation">
+    <div class="sec-header">
+      <div class="sec-tag">Motivation</div>
+      <h2>Ch.5の続き：線形近似から2次近似へ</h2>
+    </div>
+    <div class="sec-body">
+      <div class="mot">
+        <span class="box-label">動機</span>
+        <p>
+          Ch.5では、$f(x,y)$ が $(a,b)$ で全微分可能であるとは、$f$ を $(a,b)$ の近くで1次式（平面）
+          $f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)$ で近似できることだった。これは曲面 $z=f(x,y)$ に<strong>接平面</strong>が
+          引けるということでもある——本章はまずこれを正確に定式化するところから始める。
+        </p>
+        <p>
+          その先には、1変数のときと同じ問いが待っている。1次近似（接線・接平面）の次は2次近似だ。
+          Ch.2で1変数のテーラーの定理を学んだのと同じ要領で、2変数関数にもテーラーの定理を拡張する。
+          そして2次近似が最も威力を発揮する場面が、関数の<strong>極大・極小</strong>の判定だ。
+          1変数では $f'(a)=0$ が極値の候補（臨界点）を与え、$f''(a)$ の符号がその種類を決めた。
+          2変数でも同じ構造——ただし「符号」の役割を担うのが2次形式になる——が現れる。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 接平面 -->
+  <div class="section" id="tangent">
+    <div class="sec-header">
+      <div class="sec-tag">Definition</div>
+      <h2>曲面 $z=f(x,y)$ の接平面</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 6.1　接平面</span>
+        <p>$S=\{(x,y,z)\in\mathbb{R}^3 \mid z=f(x,y)\}$ を $f$ のグラフとする。$P=(a,b,f(a,b))\in S$ とする。
+        $P$ を通る平面 $T$ が $S$ の $P$ における<strong>接平面</strong>であるとは、$S$ 上の任意の曲線
+        $\gamma(t)=\bigl(x(t),y(t),f(x(t),y(t))\bigr)$（$x(t),y(t)$ は微分可能、$(x(0),y(0))=(a,b)$）について、
+        その速度ベクトル $\gamma'(0)$ が常に $T$ に含まれることをいう。</p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 6.2　接平面の存在</span>
+        <p>$f(x,y)$ が $(a,b)$ で全微分可能ならば、$S$ の $P=(a,b,f(a,b))$ における接平面が存在し、</p>
+        $$z = f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)$$
+        <p>で表される。</p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details open>
+        <summary>証明を見る（曲線の速度ベクトルを直接計算する）</summary>
+        <div class="proof-body">
+          <p>$\gamma(t)=\bigl(x(t),y(t),f(x(t),y(t))\bigr)$ を $S$ 上の任意の曲線とする（$x(0)=a,y(0)=b$）。
+          $f$ が $(a,b)$ で全微分可能なので、Ch.5の連鎖律（定理5.8）より $F(t)=f(x(t),y(t))$ は $t=0$ で微分可能で、</p>
+          $$\gamma'(t) = \bigl(x'(t),\,y'(t),\,f_x(x(t),y(t))x'(t)+f_y(x(t),y(t))y'(t)\bigr),$$
+          $$\gamma'(0) = \bigl(x'(0),\,y'(0),\,f_x(a,b)x'(0)+f_y(a,b)y'(0)\bigr).$$
+          <p>$T$ を平面 $z=f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)$ とする。$P$ を始点として $\gamma'(0)$ だけ進んだ点は</p>
+          $$\overrightarrow{OP}+\gamma'(0) = \bigl(a+x'(0),\ b+y'(0),\ f(a,b)+f_x(a,b)x'(0)+f_y(a,b)y'(0)\bigr)$$
+          <p>であり、この点の $z$ 座標はちょうど $T$ の式に $x=a+x'(0)$, $y=b+y'(0)$ を代入した値
+          $f(a,b)+f_x(a,b)(x-a)+f_y(a,b)(y-b)$ に一致する。$\gamma$ は任意だったので、
+          <strong>すべての</strong>曲線 $\gamma(t)$ について $\gamma'(0)$ は $T$ に含まれる。よって $T$ は接平面。$\blacksquare$</p>
+        </div>
+      </details>
+
+      <div class="warn">
+        <span class="box-label">全微分不可能なら接平面が存在するとは限らない</span>
+        <p>Ch.5の例5.7で見た $f(x,y)=\sqrt{|xy|}$ を考える。原点で $f_x(0,0)=f_y(0,0)=0$ なので、もし接平面が
+        存在するなら平面 $z=0$ のはずだ。しかし $f$ は原点で全微分不可能（例5.7）なので、この $z=0$ は
+        実際には接平面になっていない——$x=y=t$ という経路に沿って原点に近づく曲線を取ると、$z=\sqrt{t^2}=|t|$ で、
+        速度ベクトルの $z$ 成分がその曲線ごとに一致せず、平面 $z=0$ に「すべての方向から滑らかに一致する」という
+        接平面の条件（定義6.1）を満たさない。<strong>偏微分可能だけでは接平面の存在は保証されない</strong>——
+        これはCh.5で見た「偏微分可能 $\ne$ 全微分可能」という落とし穴の、幾何的な言い換えにほかならない。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- C^n級・C^∞級 -->
+  <div class="section" id="cn">
+    <div class="sec-header">
+      <div class="sec-tag">Definition</div>
+      <h2>$C^n$ 級・$C^\infty$ 級</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 6.3　$C^n$ 級・$C^\infty$ 級</span>
+        <p>$f(x,y)$ が $(a,b)$ を含むある開集合で $C^n$ <strong>級</strong>であるとは、$n$ 階までのすべての偏導関数が存在し、
+        それらがすべて連続であることをいう。すべての階数の偏導関数が存在するとき、$f$ は $C^\infty$ <strong>級</strong>であるという。</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">Ch.5のシュワルツの定理との関係</span>
+        <p>
+          $f$ が $C^2$ 級ならば、特に $f_{xy},f_{yx}$ が存在して連続なので、Ch.5の定理5.4'（シュワルツの定理）より
+          $f_{xy}=f_{yx}$ が成り立つ。この事実は本章の2変数のテーラーの定理で、混合偏導関数の順序を気にせず
+          二項係数でまとめて書くために使う。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2変数の平均値の定理 -->
+  <div class="section" id="mvt2">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>2変数の平均値の定理</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">アイデア — 直線に制限して1変数の定理に帰着する</span>
+        <p>
+          2変数の関数に1変数の道具（平均値の定理・テーラーの定理）を使うための標準的な手口がある：
+          $(a,b)$ と $(a+h,b+k)$ を結ぶ<strong>線分</strong>上に $f$ を制限した1変数関数
+          $F(t)=f(a+th,b+tk)$（$0\le t\le 1$）を考え、$F$ に1変数の定理を適用する。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 6.4　2変数の平均値の定理</span>
+        <p>$f(x,y)$ は $(a,b)$ を含むある開集合で $C^1$ 級とする。このとき、ある $\theta\in(0,1)$ が存在して</p>
+        $$f(a+h,b+k)-f(a,b) = f_x(a+\theta h,b+\theta k)\,h + f_y(a+\theta h,b+\theta k)\,k.$$
+      </div>
+
+      <details>
+        <summary>証明を見る（$F(t)=f(a+th,b+tk)$ に1変数の平均値の定理を使う）</summary>
+        <div class="proof-body">
+          <p>$F(t)=f(a+th,b+tk)$ とおく。連鎖律（Ch.5定理5.8、$x(t)=a+th$, $y(t)=b+tk$）より</p>
+          $$F'(t) = f_x(a+th,b+tk)\,h+f_y(a+th,b+tk)\,k.$$
+          <p>$F$ に（1変数の）平均値の定理を $[0,1]$ で適用すると、ある $\theta\in(0,1)$ が存在して</p>
+          $$F(1)-F(0) = F'(\theta).$$
+          <p>$F(1)=f(a+h,b+k)$, $F(0)=f(a,b)$ なので、</p>
+          $$f(a+h,b+k)-f(a,b) = f_x(a+\theta h,b+\theta k)\,h+f_y(a+\theta h,b+\theta k)\,k. \quad \blacksquare$$
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- 2変数のテーラーの定理 -->
+  <div class="section" id="taylor2">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>2変数のテーラーの定理</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">作用素 $h\partial_x+k\partial_y$ という書き方</span>
+        <p>
+          $F(t)=f(a+th,b+tk)$ を繰り返し微分すると、$F^{(n)}(t)$ は「$f$ に $h\partial/\partial x+k\partial/\partial y$ という
+          偏微分の組み合わせを $n$ 回作用させたもの」として統一的に書ける。この記法を使うと、$n$ 変数のテーラーの定理の
+          見た目が1変数の場合とほとんど変わらない形にまとまる。
+        </p>
+      </div>
+
+      <div class="prop">
+        <span class="box-label">命題 6.5　$F^{(n)}(0)$ の計算</span>
+        <p>$f$ が $(a,b)$ の近傍で $C^n$ 級、$F(t)=f(a+th,b+tk)$ とする。</p>
+        $$F'(0) = f_x(a,b)h+f_y(a,b)k = \left(h\frac{\partial}{\partial x}+k\frac{\partial}{\partial y}\right)f(a,b),$$
+        $$F''(0) = f_{xx}(a,b)h^2+2f_{xy}(a,b)hk+f_{yy}(a,b)k^2 = \left(h\frac{\partial}{\partial x}+k\frac{\partial}{\partial y}\right)^2f(a,b),$$
+        <p>一般に帰納的に</p>
+        $$F^{(n)}(0) = \left(h\frac{\partial}{\partial x}+k\frac{\partial}{\partial y}\right)^n f(a,b) = \sum_{p=0}^{n}\binom{n}{p}\frac{\partial^n f}{\partial x^p\partial y^{n-p}}(a,b)\,h^p k^{n-p}.$$
+      </div>
+
+      <details>
+        <summary>$F''(0)$ の計算を見る（$C^2$ 級だから $f_{xy}=f_{yx}$ が使える）</summary>
+        <div class="proof-body">
+          <p>$F'(t)=f_x(a+th,b+tk)h+f_y(a+th,b+tk)k$ をもう一度 $t$ で微分すると（連鎖律を $f_x,f_y$ それぞれに適用）</p>
+          $$F''(t) = \bigl[f_{xx}h+f_{xy}k\bigr]h+\bigl[f_{yx}h+f_{yy}k\bigr]k = f_{xx}h^2+f_{yx}hk+f_{xy}hk+f_{yy}k^2$$
+          <p>（すべて $(a+th,b+tk)$ で評価）。$f$ が $C^2$ 級なので Ch.5の定理5.4'より $f_{xy}=f_{yx}$、よって</p>
+          $$F''(t) = f_{xx}h^2+2f_{xy}hk+f_{yy}k^2. \quad \blacksquare$$
+        </div>
+      </details>
+
+      <div class="thm">
+        <span class="box-label">定理 6.6　2変数のテーラーの定理（$n=2$ の場合）</span>
+        <p>$f(x,y)$ は $(a,b)$ を含むある開集合で $C^2$ 級とする。このとき、ある $\theta\in(0,1)$ が存在して</p>
+        $$f(a+h,b+k)-f(a,b) = f_x(a,b)h+f_y(a,b)k+R_2,$$
+        $$R_2 = \frac12\Bigl\{f_{xx}(a+\theta h,b+\theta k)h^2+2f_{xy}(a+\theta h,b+\theta k)hk+f_{yy}(a+\theta h,b+\theta k)k^2\Bigr\}.$$
+      </div>
+
+      <details>
+        <summary>証明を見る（Ch.2のテーラーの定理を $F(t)$ に適用する）</summary>
+        <div class="proof-body">
+          <p>$F(t)=f(a+th,b+tk)$ に Ch.2定理2.1（1変数のテーラーの定理、$n=2$）を $t=0$ から $t=1$ まで適用すると、
+          ある $\theta\in(0,1)$ が存在して</p>
+          $$F(1)-F(0) = F'(0)+\frac12F''(\theta).$$
+          <p>命題6.5より $F'(0)=f_x(a,b)h+f_y(a,b)k$、また先ほどの計算より
+          $F''(\theta)=f_{xx}(a+\theta h,b+\theta k)h^2+2f_{xy}(a+\theta h,b+\theta k)hk+f_{yy}(a+\theta h,b+\theta k)k^2$。
+          $F(1)-F(0)=f(a+h,b+k)-f(a,b)$ に代入すれば定理の等式を得る。$\blacksquare$</p>
+        </div>
+      </details>
+
+      <div class="thm">
+        <span class="box-label">定理 6.7　2変数のテーラーの定理（一般形）</span>
+        <p>$f(x,y)$ は $(a,b)$ を含むある開集合で $C^n$ 級とする。このとき、ある $\theta\in(0,1)$ が存在して</p>
+        $$f(a+h,b+k) = f(a,b)+\sum_{j=1}^{n-1}\frac{1}{j!}\left(h\frac{\partial}{\partial x}+k\frac{\partial}{\partial y}\right)^j f(a,b) + R_n,$$
+        $$R_n = \frac{1}{n!}\left(h\frac{\partial}{\partial x}+k\frac{\partial}{\partial y}\right)^n f(a+\theta h,b+\theta k).$$
+        <p>証明は $n=2$ の場合と全く同様に、$F(t)=f(a+th,b+tk)$ に Ch.2定理2.2（1変数の一般のテーラーの定理）を適用し、
+        命題6.5の $F^{(j)}(0)$ の式を代入すればよい。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 極大・極小への応用 -->
+  <div class="section" id="extrema">
+    <div class="sec-header">
+      <div class="sec-tag">Application</div>
+      <h2>極大・極小への応用</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 6.8　極大・極小・臨界点</span>
+        <p>$f(x,y)$ は $(a,b)$ を含むある開集合で定義されているとする。ある $\varepsilon>0$ が存在して、
+        $U_\varepsilon(a,b)$ 内の $(x,y)\ne(a,b)$ について常に $f(x,y)>f(a,b)$ となるとき、$f$ は $(a,b)$ で<strong>極小</strong>であるという。
+        同様に常に $f(x,y)<f(a,b)$ となるとき<strong>極大</strong>であるという。</p>
+        <p>$f$ が $(a,b)$ で偏微分可能で $f_x(a,b)=f_y(a,b)=0$ となるとき、$(a,b)$ を<strong>臨界点</strong>（critical point）という。</p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 6.9　極値ならば臨界点</span>
+        <p>$f(x,y)$ が $(a,b)$ で極大または極小であり、かつ偏微分可能ならば、$(a,b)$ は臨界点である
+        （$f_x(a,b)=f_y(a,b)=0$）。逆は成り立たない。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 6.1　$f(x,y)=x^2+y^2$：原点は極小</span>
+        <p>$f_x=2x$, $f_y=2y$ より原点は臨界点。$f(x,y)=x^2+y^2>0=f(0,0)$（$(x,y)\ne(0,0)$）なので原点は極小
+        （上に開いた回転放物面の底）。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 6.2　$f(x,y)=x^2-y^2$：原点は鞍点（極大でも極小でもない）</span>
+        <p>$f_x=2x$, $f_y=-2y$ より原点は臨界点。しかし $x$ 軸上（$y=0$）では $f(x,0)=x^2>0=f(0,0)$（極小的挙動）、
+        $y$ 軸上（$x=0$）では $f(0,y)=-y^2<0=f(0,0)$（極大的挙動）と、方向によって符号が変わる。
+        つまり原点はどちらの近傍条件も満たさず、極大でも極小でもない<strong>鞍点</strong>（saddle point）である
+        （定理6.9の「逆は成り立たない」の具体例）。</p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">2次近似で臨界点の種類を判定する</span>
+        <p>
+          臨界点であるだけでは極大・極小・鞍点のどれかは分からない。1変数のとき $f'(a)=0$ の下で $f''(a)$ の符号を見たのと
+          同じように、2変数でも $f_x(a,b)=f_y(a,b)=0$ の下で定理6.6（$n=2$ の場合）の2次の項を調べればよい。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 6.10　臨界点における2次近似</span>
+        <p>$f$ は $(a,b)$ の近傍で $C^2$ 級、$f_x(a,b)=f_y(a,b)=0$（臨界点）とする。定理6.6より、ある $\theta\in(0,1)$ が存在して</p>
+        $$f(a+h,b+k)-f(a,b) = \frac12\Bigl\{f_{xx}(a+\theta h,b+\theta k)h^2+2f_{xy}(a+\theta h,b+\theta k)hk+f_{yy}(a+\theta h,b+\theta k)k^2\Bigr\}.$$
+        <p>$p=f_{xx}(a,b)$, $q=f_{xy}(a,b)$, $r=f_{yy}(a,b)$ とおくと、$(h,k)$ が十分小さいとき右辺の符号はおおむね
+        2次形式</p>
+        $$\frac12\bigl(ph^2+2qhk+rk^2\bigr) \qquad \bigl(\text{対応する2次形式：}\ px^2+2qxy+ry^2\bigr)$$
+        <p>の符号で決まる。</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">2次形式の符号による判定（判別式 $pr-q^2$）</span>
+        <p>2次形式 $px^2+2qxy+ry^2$ は、平方完成すると $p\left(x+\dfrac{q}{p}y\right)^2+\dfrac{pr-q^2}{p}y^2$（$p\ne0$）の形になり、
+        符号は $p$ と判別式 $pr-q^2$ の組み合わせで決まる：</p>
+        <table class="axiom-table">
+          <tr><th>条件</th><th>2次形式の符号</th><th>$(a,b)$ の種類</th></tr>
+          <tr><td>$pr-q^2>0$ かつ $p>0$</td><td>正定値（常に $\ge 0$）</td><td>極小</td></tr>
+          <tr><td>$pr-q^2>0$ かつ $p<0$</td><td>負定値（常に $\le 0$）</td><td>極大</td></tr>
+          <tr><td>$pr-q^2<0$</td><td>不定符号</td><td>鞍点</td></tr>
+          <tr><td>$pr-q^2=0$</td><td>退化</td><td>この判定では決まらない</td></tr>
+        </table>
+        <p>例6.1（$f=x^2+y^2$）では $p=2,q=0,r=2$ で $pr-q^2=4>0$, $p>0$ より極小、例6.2（$f=x^2-y^2$）では
+        $p=2,q=0,r=-2$ で $pr-q^2=-4<0$ より鞍点——どちらも上の表と一致する。この表を厳密に導くには、
+        まず2次形式そのものの符号を完全に分類し（補題6.11）、それを定理6.10の $R_2$ に適用する（定理6.12）という
+        2段階の議論が必要になる。以下でこれを詳しく見る。</p>
+      </div>
+
+      <div class="prop">
+        <span class="box-label">補題 6.11　2次形式の符号判定</span>
+        <p>$Q(X,Y)=pX^2+2qXY+rY^2$（$p,q,r$ は実数の定数）とし、$\det A=pr-q^2$ とする。</p>
+        <p>(1) $p>0$ かつ $\det A>0$ ならば、$Q(X,Y)\ge 0$ で、等号は $(X,Y)=(0,0)$ のときに限る（<strong>正定値</strong>）。</p>
+        <p>(2) $p<0$ かつ $\det A>0$ ならば、$Q(X,Y)\le 0$ で、等号は $(X,Y)=(0,0)$ のときに限る（<strong>負定値</strong>）。</p>
+        <p>(3) $\det A<0$ ならば、$Q(X,Y)$ は正・負両方の値を取る（<strong>不定符号</strong>）。</p>
+      </div>
+
+      <details>
+        <summary>証明を見る（平方完成、および $\det A<0$ のとき正負両方の値を取ることの確認）</summary>
+        <div class="proof-body">
+          <p><strong>(1)(2)：$p\ne 0$ のときの平方完成。</strong> $p\ne0$ なので</p>
+          $$Q(X,Y) = p\left(X+\frac{q}{p}Y\right)^2 + \frac{pr-q^2}{p}Y^2.$$
+          <p>
+            $p>0$ かつ $pr-q^2>0$ ならば右辺の2つの項はいずれも $\ge0$ なので $Q(X,Y)\ge0$。等号は
+            $X+\dfrac{q}{p}Y=0$ かつ $Y=0$ のとき、すなわち $Y=0$ かつ $X=0$ のときに限る。
+            $p<0$ かつ $pr-q^2>0$ のときは、右辺の $\dfrac{pr-q^2}{p}$ が負になるので2つの項はいずれも $\le0$ となり、
+            同様に $Q(X,Y)\le0$、等号は $(X,Y)=(0,0)$ のときに限る。
+          </p>
+          <p><strong>(3)：$\det A=pr-q^2<0$ のとき。</strong> まず $p\ne0$ の場合を考える。$Y\ne0$ を固定し、
+          $\xi=X/Y$ とおくと</p>
+          $$\frac{Q(X,Y)}{Y^2} = p\xi^2+2q\xi+r =: g(\xi).$$
+          <p>$g(\xi)=0$ の判別式は $4(q^2-pr)>0$（$pr-q^2<0$ より）なので、$g$ は異なる2つの実根 $\xi_1<\xi_2$ を持つ。
+          $g$ は2次関数で、$\xi\to\pm\infty$ では最高次の係数 $p$ の符号に従うので、$\xi_1$ と $\xi_2$ の間では
+          $g(\xi)$ の符号は $p$ と逆、外側では $p$ と同じになる。よって $g$、すなわち $Q(X,Y)/Y^2$（したがって
+          $Q(X,Y)$ 自身）は $\xi$（＝直線 $Y\ne0$ 上の傾き）を動かすことで正・負両方の値を取る。</p>
+          <p>$p=0$ の場合は $pr-q^2=-q^2<0$ より $q\ne0$。このとき $Q(1,t)=2qt+rt^2$ は $t$ が小さいとき
+          $2qt$ の項が支配的なので、$t$ の符号（$t>0$ か $t<0$ か）に応じて $Q(1,t)$ の符号が変わる。
+          いずれの場合も $Q$ は不定符号。$\blacksquare$</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">$z=Q(X,Y)$ のグラフの形</span>
+        <p>
+          補題6.11の3つの場合は、曲面 $z=Q(X,Y)$ の形にそのまま対応する。(1) 正定値のときは
+          上に開いた回転（楕円）放物面——水平面 $z=c$（$c>0$）による切り口は楕円になる。
+          (2) 負定値のときは下に開いた楕円放物面。(3) 不定符号のときは、$X$ 軸方向には下に、
+          $Y$ 軸方向には上に（あるいはその逆に）曲がる鞍点の曲面（双曲放物面）になる——
+          例6.2（$f=x^2-y^2$）のグラフがちょうどこの形。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 6.12　極値の2次判定法（証明つき）</span>
+        <p>$f(x,y)$ は $(a,b)$ を含むある開集合で $C^2$ 級、$f_x(a,b)=f_y(a,b)=0$（臨界点）とする。
+        $p=f_{xx}(a,b)$, $q=f_{xy}(a,b)$, $r=f_{yy}(a,b)$, $\det H(a,b)=pr-q^2$ とおく。</p>
+        <p>(1) $f_{xx}(a,b)>0$ かつ $\det H(a,b)>0$ ならば、$f$ は $(a,b)$ で<strong>極小</strong>。</p>
+        <p>(2) $f_{xx}(a,b)<0$ かつ $\det H(a,b)>0$ ならば、$f$ は $(a,b)$ で<strong>極大</strong>。</p>
+        <p>(3) $\det H(a,b)<0$ ならば、$f$ は $(a,b)$ で極大でも極小でもない（<strong>鞍点</strong>）。</p>
+      </div>
+
+      <details>
+        <summary>証明を見る（$f_{xx},\det H$ の連続性 → 定理6.10のR₂に補題6.11を適用）</summary>
+        <div class="proof-body">
+          <p>
+            $f$ は $C^2$ 級なので $f_{xx},f_{xy},f_{yy}$ は連続、したがって $\det H(x,y)=f_{xx}(x,y)f_{yy}(x,y)-f_{xy}(x,y)^2$
+            も連続関数である。
+          </p>
+          <p><strong>(1)(2)：</strong> $f_{xx}(a,b)$ と $\det H(a,b)$ が同じ符号条件を満たすと仮定する。連続性より、
+          ある $\delta>0$ が存在して、$\sqrt{h^2+k^2}<\delta$ ならば</p>
+          $$\operatorname{sgn} f_{xx}(a+\theta h,b+\theta k) = \operatorname{sgn} f_{xx}(a,b), \qquad \det H(a+\theta h,b+\theta k)>0$$
+          <p>が任意の $\theta\in[0,1]$ に対して成り立つ（$(a+\theta h,b+\theta k)$ も $(a,b)$ の $\delta$ 近傍に入るため）。
+          このとき定理6.10（$n=2$ のテーラーの定理）より、ある $\theta\in(0,1)$ が存在して</p>
+          $$f(a+h,b+k)-f(a,b) = \frac12\Bigl\{f_{xx}(a+\theta h,b+\theta k)h^2+2f_{xy}(a+\theta h,b+\theta k)hk+f_{yy}(a+\theta h,b+\theta k)k^2\Bigr\}.$$
+          <p>右辺の中括弧は、係数 $p'=f_{xx}(a+\theta h,b+\theta k)$, $q'=f_{xy}(a+\theta h,b+\theta k)$, $r'=f_{yy}(a+\theta h,b+\theta k)$
+          を持つ2次形式 $Q(h,k)$ で、$p'$ の符号は $f_{xx}(a,b)$ と同じ、$p'r'-q'^2=\det H(a+\theta h,b+\theta k)>0$。
+          補題6.11の(1)または(2)より、$Q(h,k)$ は $f_{xx}(a,b)>0$ なら常に $\ge0$（$(h,k)\ne(0,0)$ で真に $>0$。
+          実際、等号 $Q(h,k)=0$ は $(h,k)=(0,0)$ のときのみ）、$f_{xx}(a,b)<0$ なら常に $<0$。
+          よって $0<\sqrt{h^2+k^2}<\delta$ なるすべての $(h,k)$ について $f(a+h,b+k)-f(a,b)$ は
+          $f_{xx}(a,b)>0$ のとき常に $>0$、$f_{xx}(a,b)<0$ のとき常に $<0$。これは定義6.8の
+          極小・極大の条件そのもの。$\blacksquare$</p>
+          <p><strong>(3)：</strong> $\det H(a,b)<0$ とする。連続性より、ある $\delta>0$ が存在して
+          $\sqrt{h^2+k^2}<\delta$ のとき常に $\det H(a+\theta h,b+\theta k)<0$（$\theta\in[0,1]$）。
+          補題6.11(3)の証明と同様に、この $\delta$ 近傍の中で $(h,k)$ の向き（$\xi=h/k$ に相当する方向）を
+          変えることで、上の中括弧——したがって $f(a+h,b+k)-f(a,b)$ の符号——は正にも負にもなる。
+          つまり $(a,b)$ のどんな小さい近傍を取っても、その中に $f>f(a,b)$ となる点と $f<f(a,b)$ となる点が
+          両方存在するので、$(a,b)$ は極大にも極小にもなれない（定義6.8のいずれの条件も満たさない）。$\blacksquare$</p>
+        </div>
+      </details>
+
+      <div class="warn">
+        <span class="box-label">$\det H(a,b)=0$ のときは判定不能</span>
+        <p>
+          証明の中で「$\det H(a+\theta h,b+\theta k)$ が $(a,b)$ の近くで一定の符号を保つ」ことを連続性から導いたが、
+          これは $\det H(a,b)\ne0$ だからこそ成り立つ議論だった。$\det H(a,b)=0$ のときは、この2次近似（$R_2$）
+          だけでは極大・極小・鞍点のいずれかを結論できない——2次の項がちょうど退化していて、符号を決める情報が
+          もっと高次の項（3次・4次…）に押しやられてしまうため。具体的に $\det H=0$ になる2つの関数
+          （$x^4+y^4$ と $x^4-y^4$）で結論が正反対になる例は、過去問問題6.3
+          （<a href="過去問/yosou_ch6.html">過去問/yosou_ch6.html</a>）で確認できる。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 6.3　$f(x,y)=xy(x^2+y^2-1)$ の臨界点の分類</span>
+        <p>
+          $f_x(x,y)=y(3x^2+y^2-1)$, $f_y(x,y)=x(3y^2+x^2-1)$（$f$ は $x,y$ の入れ替えについて対称なので、
+          $f_y$ は $f_x$ の $x,y$ を入れ替えたものになっている）。
+        </p>
+        <details open>
+          <summary>臨界点をすべて求める</summary>
+          <div class="proof-body">
+            <p>$f_x=0$ より $y=0$ または $3x^2+y^2=1$。$f_y=0$ より $x=0$ または $3y^2+x^2=1$。</p>
+            <p><strong>$y=0$ のとき：</strong> $f_y=x(x^2-1)=0$ より $x=0,\pm1$。点 $(0,0),(1,0),(-1,0)$。</p>
+            <p><strong>$x=0$ のとき（$y=0$ 以外）：</strong> $f_x=y(y^2-1)=0$ より $y=\pm1$。点 $(0,1),(0,-1)$。</p>
+            <p><strong>$3x^2+y^2=1$ かつ $3y^2+x^2=1$ のとき：</strong> 辺々引くと $2x^2-2y^2=0$ より $x=\pm y$。
+            $x=y$ を代入すると $4x^2=1$ より $x=\pm\frac12$（点 $\bigl(\frac12,\frac12\bigr),\bigl(-\frac12,-\frac12\bigr)$）。
+            $x=-y$ を代入すると同様に $4x^2=1$ より $x=\pm\frac12$（点 $\bigl(\frac12,-\frac12\bigr),\bigl(-\frac12,\frac12\bigr)$）。</p>
+            <p>以上で臨界点は9個：$(0,0)$、$(\pm1,0)$、$(0,\pm1)$、$\bigl(\pm\frac12,\pm\frac12\bigr)$（符号は任意の4通り）。</p>
+          </div>
+        </details>
+        <details open>
+          <summary>ヘッセ行列で分類する</summary>
+          <div class="proof-body">
+            <p>$f_{xx}=6xy$, $f_{xy}=3x^2+3y^2-1$, $f_{yy}=6xy$（$f_{xx}=f_{yy}$ になるのは、この $f$ がたまたま
+            $x\leftrightarrow y$ 対称かつ両偏微分が同じ式に帰着する特別な形をしているため）。よって
+            $\det H = 36x^2y^2-(3x^2+3y^2-1)^2$。</p>
+            <p><strong>$(0,0),(\pm1,0),(0,\pm1)$：</strong> いずれも $xy=0$ の点なので $f_{xx}=f_{yy}=0$。
+            $(0,0)$ では $f_{xy}=-1$、$\det H=0-1=-1<0$。$(\pm1,0),(0,\pm1)$ では $f_{xy}=3(1)-1=2$、
+            $\det H=0-4=-4<0$。定理6.12(3)より、この5点はいずれも<strong>鞍点</strong>（極値ではない）。</p>
+            <p><strong>$\bigl(\frac12,\frac12\bigr),\bigl(-\frac12,-\frac12\bigr)$：</strong> $xy=\frac14$ より
+            $f_{xx}=f_{yy}=\frac32$、$f_{xy}=3\cdot\frac14+3\cdot\frac14-1=\frac12$、
+            $\det H=\bigl(\frac32\bigr)^2-\bigl(\frac12\bigr)^2=2>0$。$f_{xx}=\frac32>0$ なので定理6.12(1)より<strong>極小</strong>
+            （値は $f=\frac14\cdot\bigl(-\frac12\bigr)=-\frac18$）。</p>
+            <p><strong>$\bigl(\frac12,-\frac12\bigr),\bigl(-\frac12,\frac12\bigr)$：</strong> $xy=-\frac14$ より
+            $f_{xx}=f_{yy}=-\frac32$、$f_{xy}=\frac12$（$x^2,y^2$ だけで決まるので同じ）、$\det H=2>0$。
+            $f_{xx}=-\frac32<0$ なので定理6.12(2)より<strong>極大</strong>（値は $f=-\frac14\cdot\bigl(-\frac12\bigr)=\frac18$）。</p>
+          </div>
+        </details>
+        <p>
+          結局、$x$ 軸・$y$ 軸上の5個の臨界点はすべて鞍点で、原点まわりに斜め45°方向へ4個並ぶ臨界点だけが
+          極値（同符号の対 $\bigl(\pm\frac12,\pm\frac12\bigr)$ が極小、異符号の対 $\bigl(\pm\frac12,\mp\frac12\bigr)$ が極大）になる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; margin-top:2rem; padding:0 .5rem;">
+    <a href="ch5.html" style="color:var(--accent); text-decoration:none; font-weight:700;">← Ch.5 偏微分と全微分</a>
+    <a href="index.html" style="color:var(--accent); text-decoration:none; font-weight:700;">トップへ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

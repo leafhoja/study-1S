@@ -1,0 +1,615 @@
+<!DOCTYPE html><!-- 「ネットワークとセキュリティ 単語帳｜情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>ネットワークとセキュリティ 単語帳｜情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="tango-02-word">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>ネットワークとセキュリティ</h1>
+  <p class="subtitle">インターネット通信・暗号と認証・情報セキュリティ</p>
+</div>
+
+<div class="container">
+
+  <!-- 単語のチェック件数と、一覧の絞り込み・チェック解除の操作をまとめる。 --><div class="word-toolbar">
+    <div class="word-progress">
+      <span class="wp-text">チェック済み 0 / 0</span>
+      <span class="wp-bar"><span class="wp-fill"></span></span>
+    </div>
+    <div class="word-filter-group">
+      <button type="button" class="word-filter-btn active" data-filter="all">すべて</button>
+      <button type="button" class="word-filter-btn" data-filter="unchecked">未チェック</button>
+      <button type="button" class="word-filter-btn" data-filter="checked">チェック済み</button>
+    </div>
+    <button type="button" class="word-reset-btn">リセット</button>
+  </div>
+  <p class="word-hint">チェックはこのブラウザだけに保存されます（他の端末・ブラウザとは同期しません）。</p>
+
+  <h2 class="word-cat-title" id="sub-1">ネットワークの基礎</h2>
+  <div class="word-list">
+    <!-- 用語の説明とチェック欄をひとまとまりにし、単語帳のひとつの項目として表示する。 --><div class="word-item" data-term-id="net-001">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">サーバ</div>
+        <div class="word-def">サービスを提供する側のコンピュータ・プログラム。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-002">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">クライアント</div>
+        <div class="word-def">サービスを要求する側のコンピュータ・プログラム。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-003">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">クライアント・サーバ型<span class="word-tag">頻出</span></div>
+        <div class="word-def">サーバがサービスを提供し、クライアントがそれを要求するという役割分担でネットワークを構成する方式。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-004">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">P2P（Peer to Peer）<span class="word-tag">頻出</span></div>
+        <div class="word-def">対等な立場にある者どうしが直接通信する形態。Winnyが代表例。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-005">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ルータ</div>
+        <div class="word-def">ネットワーク同士を接続する中継機器。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-006">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">経路表</div>
+        <div class="word-def">配送先と、次に送るべきルータの対応を記録した表。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-007">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">静的経路制御</div>
+        <div class="word-def">経路表をあらかじめ固定的に設定しておく経路制御の方式。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-008">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">動的経路制御</div>
+        <div class="word-def">ネットワークの状況に応じて経路表を自動的に更新していく経路制御の方式。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-009">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">防火壁（ファイアウォール）</div>
+        <div class="word-def">外部との通信を監視し、不正な通信を遮断する仕組み。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-010">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">パケット</div>
+        <div class="word-def">データを分割した送信単位。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-011">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">パケット交換方式</div>
+        <div class="word-def">データをパケットに分割して送受信する通信方式。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-012">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ベストエフォート方式</div>
+        <div class="word-def">データが確実に届くことを保証しない通信の考え方。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-013">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">プロトコル</div>
+        <div class="word-def">通信における約束事。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-2">TCP/IP階層とプロトコル</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="net-014">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">TCP/IP階層モデル<span class="word-tag">頻出</span></div>
+        <div class="word-def">アプリケーション層→トランスポート層→インターネット層→ネットワークインタフェース層、の4階層でネットワークの働きを整理したモデル。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-015">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">HTTP</div>
+        <div class="word-def">ウェブブラウザとウェブサーバのやりとりを規定するプロトコル。ブラウザ以外の任意のプログラムも用いることができる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-016">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">HTTPS<span class="word-tag">頻出</span></div>
+        <div class="word-def">HTTPをTLSにより暗号化・認証したもの。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-017">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">TCP</div>
+        <div class="word-def">接続の確立、シーケンス番号、確認応答によって信頼性のある通信を実現するプロトコル。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-018">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">UDP</div>
+        <div class="word-def">再送要求を行わないプロトコル。ライブ配信のように速さが優先される用途に向く。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-019">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">IP</div>
+        <div class="word-def">データの送信のやり方を定めるプロトコル。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-020">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">IPアドレス</div>
+        <div class="word-def">ネットワーク上の機器を識別するアドレス。IPv4は32bit、IPv6は128bit。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-021">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ネットワークアドレス</div>
+        <div class="word-def">IPアドレスのうち、どのネットワークに属するかを表す部分。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-022">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ホスト番号</div>
+        <div class="word-def">IPアドレスのうち、そのネットワーク内のどの機器かを表す部分。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-023">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">サブネットマスク</div>
+        <div class="word-def">IPアドレスをネットワークアドレスとホスト番号に分割するために用いるマスク。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-024">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">CIDR（プレフィックス長）</div>
+        <div class="word-def">ネットワークアドレス部のビット数（プレフィックス長）でアドレスの範囲を表す表記方法。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-025">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">MACアドレス</div>
+        <div class="word-def">イーサネットにおいて機器を識別する48bitのアドレス。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-026">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ポート番号</div>
+        <div class="word-def">通信相手となるアプリケーションを識別する番号。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-3">DNSとURL</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="net-027">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ホスト名・ドメイン名<span class="word-tag">頻出</span></div>
+        <div class="word-def">ネットワーク上の機器・組織を表す名前。ピリオド区切りで、右から読むと木構造になっている。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-028">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">DNS<span class="word-tag">頻出</span></div>
+        <div class="word-def">ホスト名とIPアドレスの対応を管理する仕組み。ルートサーバ→上位（TLD）サーバ→権威サーバの順に問い合わせる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-029">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">DNSキャッシュ<span class="word-tag">頻出</span></div>
+        <div class="word-def">一度調べたホスト名とIPアドレスの対応を一時的に記憶しておく仕組み。記憶があふれたときの追い出し方式にFIFO・LRUなどがある。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-030">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">URL</div>
+        <div class="word-def">インターネット上の情報の場所を示す表記。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-4">セッション・トランザクション処理</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="net-031">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">Cookie</div>
+        <div class="word-def">クライアントを識別するための符号。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-032">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">セッション</div>
+        <div class="word-def">クライアントとサーバの間の一連の連続したやりとりのまとまり。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-033">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">トランザクション</div>
+        <div class="word-def">一体として扱われるべき処理のまとまり。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-034">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">排他制御<span class="word-tag">頻出</span></div>
+        <div class="word-def">複数の処理が同じデータへ同時にアクセスして矛盾が生じないよう制御すること。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-035">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ロールバック</div>
+        <div class="word-def">処理を開始前の状態に戻すこと。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-036">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ACID性<span class="word-tag">頻出</span></div>
+        <div class="word-def">トランザクション処理が満たすべき、原子性・一貫性・独立性・耐久性の4性質。排他制御は独立性を、ロールバックは原子性を保つ仕組みにあたる。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-5">ネットワークのモデル化</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="net-037">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ネットワークモデル<span class="word-tag">頻出</span></div>
+        <div class="word-def">要素どうしの関係をグラフとして表すモデル。閉路（ループ）を持つことができる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-038">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">階層モデル<span class="word-tag">頻出</span></div>
+        <div class="word-def">要素どうしの関係を木構造として表すモデル。閉路を持つことができない。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-039">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">幅優先探索（BFS）</div>
+        <div class="word-def">グラフ上で近い頂点から順に探索していく方法。最短経路を求めるのに使われる。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-6">暗号方式</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="net-040">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">平文</div>
+        <div class="word-def">暗号化されていない、元のデータ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-041">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">暗号文</div>
+        <div class="word-def">暗号化されたデータ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-042">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">暗号化</div>
+        <div class="word-def">平文を暗号文に変換すること。鍵を持つ者だけが元に戻せる点で、単なる符号化とは本質的に異なる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-043">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">復号</div>
+        <div class="word-def">暗号文を平文に戻すこと。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-044">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">共通鍵暗号<span class="word-tag">頻出</span></div>
+        <div class="word-def">暗号化と復号に同じ鍵を用いる方式。鍵自体を安全な経路で秘密裏に渡す必要があるという鍵配送問題がある。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-045">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">公開鍵暗号<span class="word-tag">頻出</span></div>
+        <div class="word-def">受信者が公開鍵・秘密鍵の鍵ペアを作成し、公開鍵のみを公開する方式。送信者は公開鍵で暗号化し、受信者は秘密鍵で復号する。公開鍵から秘密鍵を求めるのは現実的な時間ではできず（一方向性）、片方の鍵で暗号化したものはもう片方の鍵でしか復号できない。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-046">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ハイブリッド暗号方式<span class="word-tag">頻出</span></div>
+        <div class="word-def">公開鍵暗号で共通鍵そのものを安全に交換し、その後の大量データのやりとりは計算が高速な共通鍵暗号で行う方式。HTTPSで実際に使われている。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-7">認証・署名・PKI</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="net-047">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">一方向ハッシュ関数</div>
+        <div class="word-def">元のデータから、それを一方向的に反映した固定長の値（ハッシュ値）を求める関数。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-048">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">電子指紋</div>
+        <div class="word-def">一方向ハッシュ関数によって求めたハッシュ値。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-049">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ディジタル署名<span class="word-tag">頻出</span></div>
+        <div class="word-def">送信者がデータの電子指紋（ハッシュ値）を自分の秘密鍵で暗号化したもの。暗号化とは鍵の向きが逆で、受信者は送信者の公開鍵で検証する。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-050">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">電子証明書</div>
+        <div class="word-def">公開鍵の正当性を証明する証明書。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-051">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">認証局（CA）</div>
+        <div class="word-def">電子証明書を発行する機関。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-052">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">PKI（Public Key Infrastructure）<span class="word-tag">頻出</span></div>
+        <div class="word-def">認証局を頂点とする階層的な信頼モデルにより、公開鍵の正当性を保証する仕組み全体。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-053">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">信頼の輪（Web of Trust）</div>
+        <div class="word-def">認証局に頼らず、ユーザの個人的な知り合いなどを介して公開鍵を保証する分散型のモデル。PKIと対比される。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-054">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">チャレンジ・レスポンス認証<span class="word-tag">頻出</span></div>
+        <div class="word-def">公開鍵暗号などを用いて相手の正当性を確認する認証方式。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-055">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">DRM（Digital Rights Management）<span class="word-tag">頻出</span></div>
+        <div class="word-def">デジタルコンテンツの著作権を保護し、不正な複製・利用を防ぐ仕組み。公開鍵暗号・ディジタル署名・PKIを組み合わせて設計される。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-056">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">SSL/TLS<span class="word-tag">頻出</span></div>
+        <div class="word-def">通信の暗号化（盗聴対策）と、サーバ証明書による接続先の身元検証（なりすまし対策）の両方を行うプロトコル。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-057">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">3ウェイハンドシェイク</div>
+        <div class="word-def">TCPにおける接続確立の手順。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-8">情報セキュリティとCIA</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="net-058">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">機密性（Confidentiality）<span class="word-tag">頻出</span></div>
+        <div class="word-def">許可された者だけが情報にアクセスできること。情報セキュリティのCIA三要素の一つ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-059">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">完全性（Integrity）<span class="word-tag">頻出</span></div>
+        <div class="word-def">情報が正確であり、改ざんされていないこと。CIA三要素の一つ。改ざんによって最も直接的に侵害される要素。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-060">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">可用性（Availability）<span class="word-tag">頻出</span></div>
+        <div class="word-def">必要なときに情報やシステムを利用できること。CIA三要素の一つ。DoS攻撃によって直接損なわれる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-061">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">DoS攻撃<span class="word-tag">頻出</span></div>
+        <div class="word-def">大量の要求を送りつけるなどして、サービスを提供できない状態にする攻撃。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-062">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">フィッシング詐欺</div>
+        <div class="word-def">偽のウェブサイトやメッセージで利用者を誘導し、認証情報などをだまし取る行為。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-063">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">なりすまし</div>
+        <div class="word-def">別人・別の機器・別のサーバであるかのように装うこと。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-064">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">盗聴</div>
+        <div class="word-def">通信内容を第三者が不正に取得すること。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-065">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">改ざん</div>
+        <div class="word-def">データを不正に書き換えること。完全性を侵害する。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-066">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">サーバ証明書</div>
+        <div class="word-def">サーバの身元を証明する電子証明書。SSL/TLSによるなりすまし対策に用いられる。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-9">法律・事件・関連概念</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="net-067">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">不正アクセス禁止法<span class="word-tag">頻出</span></div>
+        <div class="word-def">ID・パスワード等の無断使用や、アクセス制御機能の回避を禁止する法律。攻撃者側の行為を規律する。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-068">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">個人情報保護法<span class="word-tag">頻出</span></div>
+        <div class="word-def">利用目的の特定・公表・通知、目的外利用の禁止、安全管理措置、第三者提供の制限などを事業者に求める法律。情報を預かる事業者側の管理責任を規律する。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-069">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">脆弱性関連情報の届出制度</div>
+        <div class="word-def">ソフトウェア等の脆弱性に関する情報をIPA（情報処理推進機構）へ届け出る制度。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-070">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">Winny事件<span class="word-tag">頻出</span></div>
+        <div class="word-def">P2Pファイル共有ソフトWinnyをめぐる事件。送信可能化権侵害・複製権侵害が問題となり、開発者は著作権法違反幇助の容疑で逮捕されたが、2011年に最高裁で無罪が確定した。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-071">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">著作権法上のプログラムの保護対象<span class="word-tag">頻出</span></div>
+        <div class="word-def">アプリケーションプログラム・オブジェクトプログラム・ソースプログラムのみが著作権法の保護対象。解法（アルゴリズム）・規約（プロトコル）・プログラミング言語自体は著作権法10条3項により保護対象外。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-072">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">多対多の通信</div>
+        <div class="word-def">一対一ではなく、多数の参加者どうしが互いに通信できる形態。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-073">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">複製可能性</div>
+        <div class="word-def">デジタルデータが容易に複製できるという性質。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="net-074">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">匿名性</div>
+        <div class="word-def">発信者が誰であるか特定されにくい性質。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="index.html">← 単語帳トップ</a>
+    <a href="02-ネットワークとセキュリティ-keypoints.html">押さえておきたい事項 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+<script src="checklist.js"></script>
+</body>
+</html>

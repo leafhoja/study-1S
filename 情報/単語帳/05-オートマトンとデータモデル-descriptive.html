@@ -1,0 +1,187 @@
+<!DOCTYPE html><!-- 「オートマトンとデータモデル — 記述式で狙われる内容｜情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>オートマトンとデータモデル — 記述式で狙われる内容｜情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-05-desc">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>オートマトンとデータモデル — 記述式で狙われる内容</h1>
+  <p class="subtitle">過去問の記述・作図問題と得点ポイント</p>
+</div>
+
+<div class="container">
+
+  <div class="ex" id="desc-lock">
+    <span class="box-label desc-q">個別2006・2008・2009・2011・2013・2014・2015・2018年度 <span class="desc-src">電子錠オートマトンの作図（頻出パターン）</span></span>
+    <p>「暗証番号『abc』または『acaba』で解錠する電子錠」のようなオートマトンの状態遷移図を作図する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>共通接頭辞を共有する状態設計（これまで読んだ文字列の末尾と目標文字列の先頭が一致する最長部分を状態にする）を行い、受理状態は吸収状態（自己ループ）にする。</p>
+  </div>
+
+  <div class="ex" id="desc-2007">
+    <span class="box-label desc-q">共通2007年度問2 <span class="desc-src">階層的ファイルシステムの木構造としての特徴</span></span>
+    <p>階層的ファイルシステムを木構造とみなした場合の特徴を説明する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>2つの特徴を挙げる：①各要素はただ1つの親に属する、②ルートから任意の要素に至るパスがただ1通りに定まる。ホスト名・ドメイン名の木構造との対応、DNSの分散管理への応用にも触れる。</p>
+  </div>
+
+  <div class="ex" id="desc-2008-hier">
+    <span class="box-label desc-q">共通2008年度大問1 <span class="desc-src">階層モデルが不適切な対象</span></span>
+    <p>階層モデル（木構造）を用いるのが適切でない対象を挙げ、理由を述べる問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>先修関係・インターネット接続のように、複数の親（多対多の関係）や閉路を持ちうる対象は木構造では表現できないため不適切と説明する。</p>
+  </div>
+
+  <div class="ex" id="desc-2009-bug">
+    <span class="box-label desc-q">個別2009年度 <span class="desc-src">バグ入りオートマトンの反例発見</span></span>
+    <p>与えられたオートマトンのバグ（反例）を発見し修正する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>自己ループが本来届くべき戻り先を誤って自分自身にしている箇所を指摘し、非受理であるべきなのに受理してしまう例、または受理であるべきなのに非受理としてしまう例を具体的に示して修正する。</p>
+  </div>
+
+  <div class="ex" id="desc-2009-b2a">
+    <span class="box-label desc-q">個別2009年度 <span class="desc-src">「bの個数がaの個数のちょうど2倍」判定不可能の証明</span></span>
+    <p>「bの個数がaの個数のちょうど2倍」という条件を判定するオートマトンが作れないことを証明する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>鳩の巣原理を使う：状態数を有限のNと仮定し、$a^0,\dots,a^N$ を入力すれば必ず同じ状態に落ちる2つの入力が存在し、そこから矛盾を導く。</p>
+  </div>
+
+  <div class="ex" id="desc-2010">
+    <span class="box-label desc-q">共通2010年度大問1 <span class="desc-src">ファイルバージョン管理の木構造としての説明</span></span>
+    <p>ファイルバージョン管理を木構造で捉える一般的なやり方を説明する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>派生関係を「親」の記録によって木構造として記録すること、葉だけが最新情報を持つこと、祖先子孫関係ならfast-forward、独立した枝なら人間がマージする必要があることを説明する。</p>
+  </div>
+
+  <div class="ex" id="desc-2011-13">
+    <span class="box-label desc-q">個別2011年度 <span class="desc-src">13状態電子錠オートマトンの状態統合</span></span>
+    <p>13状態の電子錠オートマトンを、機能を変えずに何個の状態で実現できるか示す問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>2つの状態が統合可能なのは「将来のどんな入力列に対しても常に同じ結果を返す」場合のみである、という条件で状態を精査し、機能等価な状態を統合して最小状態数を示す。</p>
+  </div>
+
+  <div class="ex" id="desc-2012">
+    <span class="box-label desc-q">共通2012年度大問1 <span class="desc-src">ハイパーリンク構造のデータモデルとBFS</span></span>
+    <p>ウェブページのハイパーリンク構造に適したデータモデルの説明と、BFSでの最短到達回数の求め方を説明する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>ハイパーリンクは多対多・閉路ありのためネットワークモデル（有向グラフ）が適切と説明し、BFS（出発ノードから1回で着くもの、2回で着くもの……と段階的に広げる探索）で最短到達回数を求める手順を示す。</p>
+  </div>
+
+  <div class="ex" id="desc-2014-2024-mod">
+    <span class="box-label desc-q">個別2014・2015・2018・2019・2022・2024年度 <span class="desc-src">N進数の倍数判定オートマトン（頻出パターン）</span></span>
+    <p>N進数を上位桁／下位桁から入力し、Mの倍数のとき受理するオートマトンをなるべく少ない状態数で作成し状態遷移図で示す問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>上位桁から読む場合は「値 mod M」のM状態で済む。下位桁から読む場合は桁の重みの位相も状態に含める必要があり状態数が増える、という非対称性を説明する。</p>
+  </div>
+
+  <div class="ex" id="desc-2016">
+    <span class="box-label desc-q">共通2016年度問1-5 <span class="desc-src">路線図の木構造としての不適切さ・リンク解析</span></span>
+    <p>路線図を木構造で表すのが不適切な理由を述べ、サーチエンジンのリンク解析を説明する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>乗換駅で閉路が生じうるため木構造では表現できないと説明する。リンク解析はノード・エッジ・多くの経路から到達されるページほど重要とする再帰的評価として説明する。</p>
+  </div>
+
+  <div class="ex" id="desc-2017">
+    <span class="box-label desc-q">共通2017年度問題B <span class="desc-src">図示された機械が判定している性質の説明</span></span>
+    <p>図示された状態遷移図の機械が実際にどのような性質を判定しているか説明する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>状態遷移図をたどって各状態が何を表しているか（例：「aが3回以上現れる」等）を読み解き、受理状態に至る条件を言語化する。</p>
+  </div>
+
+  <div class="ex" id="desc-2019-graph">
+    <span class="box-label desc-q">共通2019年度大問1 <span class="desc-src">グラフから1辺を除いて木構造にする</span></span>
+    <p>与えられたグラフから1辺を除いて木構造にする問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>連結なグラフで「頂点数−1＝辺数」なら木、頂点数＝辺数なら一輪車状（閉路がちょうど1つ）であり、その閉路上のどの1辺を除いても木になるという条件を用いて除く辺を選ぶ。</p>
+  </div>
+
+  <div class="ex" id="desc-2022-hier-net">
+    <span class="box-label desc-q">共通2022年度大問1 <span class="desc-src">階層モデルとネットワークモデルの使い分け</span></span>
+    <p>DNS階層構造の共通祖先の説明、ルータ間の最短経路の説明、郵便配送のモデル化を問う問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>階層モデル（木構造）は上位から下位への管理・委譲関係（DNS）に向き、ネットワークモデル（グラフ）は対等なもの同士の直接接続（ルータ間リンク）に向くという使い分けを説明し、最短経路はBFSで求める。</p>
+  </div>
+
+  <div class="ex" id="desc-2025-automaton">
+    <span class="box-label desc-q">個別2025年度 <span class="desc-src">「aの個数がbの個数より多いか」の判定不可能性</span></span>
+    <p>有限状態機械が「aの個数がbの個数より多いか」を正しく解けないことを示す反例と、鳩の巣原理による証明、チューリングマシンでの解法を問う問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>状態数を有限と仮定し鳩の巣原理で矛盾を導く（$a^0,\dots,a^N$ のいずれか2つが同じ状態に落ちることを利用）。チューリングマシンなら「1対1で消し込む」手続きで解けることを説明する。</p>
+  </div>
+
+  <div class="ex" id="desc-2025-common">
+    <span class="box-label desc-q">共通2025年度大問2 <span class="desc-src">「親がたかだか2個体」という制約と入次数</span></span>
+    <p>「親がたかだか2個体」という制約がグラフ上でどう表れるかを説明する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>親子関係を表す有向グラフにおいて、各ノードの入次数が0・1・2のいずれかであることとして表れる、と説明する。</p>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="05-オートマトンとデータモデル-keypoints.html">← 押さえておきたい事項</a>
+    <a href="index.html">単語帳トップ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html><!-- 「英語一列① — 東京大学」の一覧ページ。掲載されたページへ移動する入口をまとめる。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>英語一列① — 東京大学</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="eng.css">
+<link rel="stylesheet" href="../subject-home.css">
+</head>
+<body class="subject-home home-english" data-nav-page="index">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">英語一列①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html" class="active">ホーム</a>
+      <a href="session9.html" data-page="session9">Session 9</a>
+      <a href="session10.html" data-page="session10">Session 10</a>
+      <a href="session11.html" data-page="session11">Session 11</a>
+      <a href="session12.html" data-page="session12">Session 12</a>
+      <a href="session13.html" data-page="session13">Session 13</a>
+      <a href="過去問/index.html">過去問</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>英語一列①</h1>
+  <p class="subtitle">東京大学 2026年 Sターム · 期末試験範囲（Session 9〜13）読解ノート</p>
+</div>
+
+<!-- この科目のノートを探す入力欄と検索結果欄。検索の動作は共通のsearch.jsが担当する。 --><div class="search-box" data-search>
+  <div class="search-input-row">
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input type="search" class="search-input" placeholder="英語一列① 内を検索（単語・キーワード）…" autocomplete="off" aria-label="英語一列① 内を検索">
+  </div>
+  <div class="search-results" hidden></div>
+</div>
+
+<div class="eng-body">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    試験範囲は Session 9〜10（内容的に連続）と Session 11〜12（内容的に連続）、それにSession13である。ただし作業・表示はセッションごとに行う。
+    過去問は年度ごとに試験範囲が異なるため、2021〜2025年度の過去問を本文と照らし合わせ、今年度の範囲と一致する箇所だけを
+    <a href="過去問/index.html">過去問（セッション対応分）</a>にまとめた（一致したのは2024年度 Session 11〜13 のみ）。
+    各ページでは英語本文と日本語訳を並べ、難単語をタップすると意味と背景解説（語源など）が表示される。ページ末尾には単語帳（フリップカード）も用意した。
+  </div>
+
+  <h2 class="home-section-title">読解ノート</h2>
+
+  <div class="sec-grid">
+    <a class="sec-card" href="session9.html" data-page="session9">
+      <div class="sec-num">Session 9</div>
+      <div class="sec-title">William Hodges: Artist of Empire (Part I)</div>
+      <div class="sec-sub">18世紀イギリスの画家ホジスと帝国</div>
+    </a>
+    <a class="sec-card" href="session10.html" data-page="session10">
+      <div class="sec-num">Session 10</div>
+      <div class="sec-title">William Hodges: Artist of Empire (Part II)</div>
+      <div class="sec-sub">歴史認識・風景画とムガル帝国</div>
+    </a>
+    <a class="sec-card" href="session11.html" data-page="session11">
+      <div class="sec-num">Session 11</div>
+      <div class="sec-title">The Man Who Tried to Redeem the World with Logic (Part I)</div>
+      <div class="sec-sub">Walter Pitts と McCulloch の出会い</div>
+    </a>
+    <a class="sec-card" href="session12.html" data-page="session12">
+      <div class="sec-num">Session 12</div>
+      <div class="sec-title">The Man Who Tried to Redeem the World with Logic (Part II)</div>
+      <div class="sec-sub">McCulloch と Wiener、サイバネティクス</div>
+    </a>
+    <a class="sec-card" href="session13.html" data-page="session13">
+      <div class="sec-num">Session 13</div>
+      <div class="sec-title">Nollywood (Part I)</div>
+      <div class="sec-sub">ナイジェリア映画と英語・現地語の言語政治</div>
+    </a>
+  </div>
+
+  <h2 class="home-section-title">過去問</h2>
+
+  <!-- 年度などの区分ごとに、過去問ページへのリンクをカードで並べる。 --><div class="year-grid">
+    <a class="year-card" href="過去問/index.html">
+      <div class="yn">2024</div>
+      <div class="yl">Session 11〜13 対応分</div>
+    </a>
+  </div>
+
+</div><!-- /eng-body -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">英語一列①ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js"></script>
+<script src="../access-ui.js"></script>
+<script src="../search.js"></script>
+</body>
+</html>

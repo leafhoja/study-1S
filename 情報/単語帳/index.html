@@ -1,0 +1,130 @@
+<!DOCTYPE html><!-- 「単語帳 | 情報」の一覧ページ。掲載されたページへ移動する入口をまとめる。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>単語帳 | 情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="tango-index">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html" class="active">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>単語帳</h1>
+  <p class="subtitle">押さえておきたい用語・重要事項・記述対策を分野別にまとめたチェックリスト</p>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <p>
+      共通問題・個別問題（田中哲郎クラス）の過去問と講義ノート・神シケプリの内容から、押さえておくべき用語を6分野・
+      計346語にまとめた。各分野は3種類のページに分かれている：
+    </p>
+    <p>
+      <strong>①用語一覧</strong>＝チェックボックス付きの単語帳本体。スマホでも使いやすいよう、1行タップでチェックでき、
+      「未チェックのみ」「チェック済みのみ」で絞り込める。<strong>②押さえておきたい事項</strong>＝単なる用語の意味に
+      とどまらない、公式・手順・典型的な考え方や暗記のコツ。<strong>③記述式で狙われる内容</strong>＝過去問の記述問題の
+      要旨と、模範解答として書くべきポイントをまとめたもの。
+    </p>
+    <p>
+      チェックの状態は<strong>このブラウザだけ</strong>にlocalStorageで保存される、完全に静的な仕組み。サーバには何も
+      送信されず、他の端末・ブラウザとは同期しない。
+    </p>
+  </div>
+
+  <h2 class="home-section-title">分野別ページ</h2>
+
+  <div class="tango-hub-grid">
+
+    <div class="tango-cat-block">
+      <div class="thc-num">01 <span class="tango-count">用語50語</span></div>
+      <h3>符号化と情報量</h3>
+      <p>情報の表現・符号化・情報量（エントロピー）・標本化と量子化</p>
+      <div class="tango-cat-links">
+        <a class="is-primary" href="01-符号化と情報量-word.html">用語一覧</a>
+        <a href="01-符号化と情報量-keypoints.html">押さえておきたい事項</a>
+        <a href="01-符号化と情報量-descriptive.html">記述対策</a>
+      </div>
+    </div>
+
+    <div class="tango-cat-block">
+      <div class="thc-num">02 <span class="tango-count">用語74語</span></div>
+      <h3>ネットワークとセキュリティ</h3>
+      <p>インターネット通信・暗号と認証・情報セキュリティ</p>
+      <div class="tango-cat-links">
+        <a class="is-primary" href="02-ネットワークとセキュリティ-word.html">用語一覧</a>
+        <a href="02-ネットワークとセキュリティ-keypoints.html">押さえておきたい事項</a>
+        <a href="02-ネットワークとセキュリティ-descriptive.html">記述対策</a>
+      </div>
+    </div>
+
+    <div class="tango-cat-block">
+      <div class="thc-num">03 <span class="tango-count">用語32語</span></div>
+      <h3>アルゴリズムと計算量</h3>
+      <p>プログラミングの基礎・アルゴリズム・計算量（オーダー記法）</p>
+      <div class="tango-cat-links">
+        <a class="is-primary" href="03-アルゴリズムと計算量-word.html">用語一覧</a>
+        <a href="03-アルゴリズムと計算量-keypoints.html">押さえておきたい事項</a>
+        <a href="03-アルゴリズムと計算量-descriptive.html">記述対策</a>
+      </div>
+    </div>
+
+    <div class="tango-cat-block">
+      <div class="thc-num">04 <span class="tango-count">用語62語</span></div>
+      <h3>コンピュータの仕組みと論理回路</h3>
+      <p>機械語・CPU・OS・論理回路とブール代数</p>
+      <div class="tango-cat-links">
+        <a class="is-primary" href="04-コンピュータの仕組みと論理回路-word.html">用語一覧</a>
+        <a href="04-コンピュータの仕組みと論理回路-keypoints.html">押さえておきたい事項</a>
+        <a href="04-コンピュータの仕組みと論理回路-descriptive.html">記述対策</a>
+      </div>
+    </div>
+
+    <div class="tango-cat-block">
+      <div class="thc-num">05 <span class="tango-count">用語52語</span></div>
+      <h3>オートマトンとデータモデル</h3>
+      <p>有限状態機械・グラフ・木構造・機械学習</p>
+      <div class="tango-cat-links">
+        <a class="is-primary" href="05-オートマトンとデータモデル-word.html">用語一覧</a>
+        <a href="05-オートマトンとデータモデル-keypoints.html">押さえておきたい事項</a>
+        <a href="05-オートマトンとデータモデル-descriptive.html">記述対策</a>
+      </div>
+    </div>
+
+    <div class="tango-cat-block">
+      <div class="thc-num">06 <span class="tango-count">用語76語</span></div>
+      <h3>UIと情報社会</h3>
+      <p>ユーザインタフェース・情報システムの信頼性・情報技術と社会</p>
+      <div class="tango-cat-links">
+        <a class="is-primary" href="06-UIと情報社会-word.html">用語一覧</a>
+        <a href="06-UIと情報社会-keypoints.html">押さえておきたい事項</a>
+        <a href="06-UIと情報社会-descriptive.html">記述対策</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

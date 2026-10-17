@@ -1,0 +1,201 @@
+<!DOCTYPE html><!-- 「08 論理関数 | 神シケプリ | 情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>08 論理関数 | 神シケプリ | 情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kami-08">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">神シケプリ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>神シケプリ 08 — 論理関数</h1>
+  <p class="subtitle">AND/OR/NOT/NAND/NOR/XOR/EQの7つの論理関数と、NAND単体による完備性</p>
+  <p class="meta">教科書対応箇所 pp.188-193</p>
+</div>
+
+<div class="container">
+
+  <div class="def">
+    <span class="box-label">定義 — 論理関数（AND・OR・NOT・XOR・NAND・NOR・EQ）</span>
+    <p>
+      論理関数とは、0・1（偽・真）の値をとる2つの入力（NOTのみ1つの入力）から0・1の値をとる出力を1つ定める
+      演算で、コンピュータの制御・演算回路を組み立てる基本部品になっている。代表的な7つの論理関数は次のとおり。
+    </p>
+    <table class="axiom-table">
+      <tr><th>名称</th><th>読み</th><th>意味</th><th>ブール代数表記の例</th></tr>
+      <tr><td>AND</td><td>論理積</td><td>両方とも1のときだけ1</td><td>$x_0 \cdot x_1$</td></tr>
+      <tr><td>OR</td><td>論理和</td><td>少なくとも一方が1なら1</td><td>$x_0 + x_1$</td></tr>
+      <tr><td>NOT</td><td>論理否定</td><td>値を反転する（1入力）</td><td>$\overline{x_0}$</td></tr>
+      <tr><td>XOR</td><td>排他的論理和</td><td>2入力が異なるとき1</td><td>$x_0 \oplus x_1$</td></tr>
+      <tr><td>NAND</td><td>否定論理積</td><td>ANDの結果を反転（NOT+AND）</td><td>$\overline{x_0 \cdot x_1}$</td></tr>
+      <tr><td>NOR</td><td>否定論理和</td><td>ORの結果を反転（NOT+OR）</td><td>$\overline{x_0 + x_1}$</td></tr>
+      <tr><td>EQ</td><td>等値（一致）</td><td>2入力が等しいとき1（NOT+XOR）</td><td>$\overline{x_0 \oplus x_1}$</td></tr>
+    </table>
+    <p>
+      それぞれMIL記法（規格化されたゲート図記号）で回路図に描き表すことができるほか、上表右列のような
+      ブール代数の数式でも表現できる。両者は同じ演算の異なる書き方に過ぎない。
+    </p>
+  </div>
+
+  <div class="prop">
+    <span class="box-label">性質 — 完備性とNANDのみによる構成</span>
+    <p>
+      $n$ 入力1出力の論理関数は、真理値表の出力欄の埋め方が $2^n$ 行それぞれ0か1の2通りずつあるので、
+      全部で $2^{2^n}$ 通り存在する。一見するとこれら全てを実現するには様々な部品が必要に思えるが、
+      実は<strong>AND・OR・NOTの3つの組み合わせだけで、任意の論理関数を作れる</strong>
+      （これを {AND, OR, NOT} は<strong>完備</strong>であるという）。
+    </p>
+    <p>
+      さらに驚くべきことに、<strong>NANDだけ、あるいはNORだけでも単体で完備</strong>である。
+      これは、NOT・AND・OR の3つがいずれもNANDのみから組み立てられることによる（後述の過去問で実際に確認する）。
+    </p>
+  </div>
+
+  <div class="note">
+    <span class="box-label">出題対策のポイント</span>
+    <p>論理関数の問題はパズルのようなものだと思って気軽に取り組めばよい。複雑な回路になって状況がつかめなくなったときは、素直に真理値表を書き出すと見通しがよくなる。</p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">第1問（2009年度共通問題3問題B）</a>
+  </div>
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">第1問</div><h2>2009年度共通問題3問題B — NANDのみによる論理関数の構成</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>表1はNOT, AND, OR, NAND, XORの各演算を表わした真理値表である。</p>
+
+        <div class="mathblock" style="overflow-x:auto;">
+          <table class="q-table">
+            <tr>
+              <th>$x_0$</th><th>$x_1$</th>
+              <th>NOT($x_0$)</th><th>AND($x_0,x_1$)</th><th>OR($x_0,x_1$)</th>
+              <th>NAND($x_0,x_1$)</th><th>XOR($x_0,x_1$)</th>
+            </tr>
+            <tr><td>0</td><td>0</td><td>1</td><td>0</td><td><span class="blank">A</span></td><td><span class="blank">E</span></td><td>0</td></tr>
+            <tr><td>0</td><td>1</td><td>1</td><td>0</td><td><span class="blank">B</span></td><td><span class="blank">F</span></td><td>1</td></tr>
+            <tr><td>1</td><td>0</td><td>0</td><td>0</td><td><span class="blank">C</span></td><td><span class="blank">G</span></td><td>1</td></tr>
+            <tr><td>1</td><td>1</td><td>0</td><td>1</td><td><span class="blank">D</span></td><td><span class="blank">H</span></td><td>0</td></tr>
+          </table>
+        </div>
+        <p style="font-size:.85rem;color:var(--muted);">表1: NOT, AND, OR, NAND, XORの真理値表</p>
+
+        <p>NANDはNAND($x_0,x_1$) = NOT(AND($x_0,x_1$))となる演算である。</p>
+
+        <p>(1) 表1中の空欄AからHを埋めよ。</p>
+
+        <p>
+          (2) NOT($x_0$) = NAND($x_0,x_0$)であるため、MIL記法を用いるとNOTは次のように1つのNANDによって
+          表現できる。MIL記法を用いてANDを2つのNANDにより表現せよ。
+        </p>
+        <img src="img/ronri-nand.png" alt="x0を2入力とも同じ信号にしたNANDゲートでNOT(x0)を作る例" style="max-width:260px;display:block;margin:.6rem auto;">
+
+        <p>(3) MIL記法を用いてORを3つのNANDにより表現せよ。</p>
+
+        <p>(4) MIL記法を用いてXORをなるべく少ない(最少は4つ)NANDにより表現せよ。</p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            (1) OR($x_0,x_1$)の各行は $(0,0)\to0$、$(0,1)\to1$、$(1,0)\to1$、$(1,1)\to1$。
+            NAND($x_0,x_1$)=NOT(AND($x_0,x_1$))の各行は、AND=0のとき1・AND=1のとき0になるので
+            $(0,0)$：AND=0→1、$(0,1)$：AND=0→1、$(1,0)$：AND=0→1、$(1,1)$：AND=1→0。
+          </p>
+          <p class="blank-ans">
+            <span class="blank">A=0</span>　<span class="blank">B=1</span>　<span class="blank">C=1</span>　<span class="blank">D=1</span>
+            <span class="blank">E=1</span>　<span class="blank">F=1</span>　<span class="blank">G=1</span>　<span class="blank">H=0</span>
+          </p>
+
+          <p>
+            (2) AND($x_0,x_1$) = NOT(NAND($x_0,x_1$)) であり、NOT(y)=NAND(y,y) が使えるので、
+          </p>
+          <div class="mathblock">$$\text{AND}(x_0,x_1) = \text{NAND}\big(\text{NAND}(x_0,x_1),\ \text{NAND}(x_0,x_1)\big)$$</div>
+          <p>
+            回路としては、1つ目のNANDゲートに $x_0,x_1$ を入力しその出力を $n_1=\text{NAND}(x_0,x_1)$ とし、
+            2つ目のNANDゲートの2つの入力の両方に $n_1$ を入れる（＝2つ目のNANDをNOTとして使う）と、
+            出力が $\text{AND}(x_0,x_1)$ になる。
+          </p>
+
+          <p>
+            (3) ド・モルガンの法則より $\text{OR}(x_0,x_1) = \overline{\overline{x_0}\cdot\overline{x_1}} = \text{NAND}(\overline{x_0},\overline{x_1})$。
+            NOT(x)=NAND(x,x) を使って、次の3つのNANDで構成できる。
+          </p>
+          <ul style="margin:.4rem 0 .8rem 1.2rem;">
+            <li>1つ目のNAND：$n_1 = \text{NAND}(x_0,x_0) = \text{NOT}(x_0)$</li>
+            <li>2つ目のNAND：$n_2 = \text{NAND}(x_1,x_1) = \text{NOT}(x_1)$</li>
+            <li>3つ目のNAND：出力 $= \text{NAND}(n_1,n_2) = \overline{\overline{x_0}\cdot\overline{x_1}} = x_0+x_1 = \text{OR}(x_0,x_1)$</li>
+          </ul>
+
+          <p>
+            (4) 標準的な4個のNANDによる構成は次のとおり。
+          </p>
+          <ul style="margin:.4rem 0 .8rem 1.2rem;">
+            <li>1つ目のNAND：$n_1 = \text{NAND}(x_0,x_1)$</li>
+            <li>2つ目のNAND：$n_2 = \text{NAND}(x_0,n_1)$</li>
+            <li>3つ目のNAND：$n_3 = \text{NAND}(x_1,n_1)$</li>
+            <li>4つ目のNAND：出力 $= \text{NAND}(n_2,n_3)$</li>
+          </ul>
+          <p>
+            これが本当にXORになっているかは真理値表で確かめられる。例えば $(x_0,x_1)=(0,0)$ のとき
+            $n_1=\text{NAND}(0,0)=1$、$n_2=\text{NAND}(0,1)=1$、$n_3=\text{NAND}(0,1)=1$、
+            出力$=\text{NAND}(1,1)=0$ となり XOR(0,0)=0 と一致する。同様に $(0,1),(1,0),(1,1)$ でも
+            それぞれ出力は $1,1,0$ となり、いずれもXORの値と一致する。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) A=0, B=1, C=1, D=1, E=1, F=1, G=1, H=0　(2) AND($x_0,x_1$)=NAND(NAND($x_0,x_1$), NAND($x_0,x_1$))　(3) OR($x_0,x_1$)=NAND(NAND($x_0,x_0$), NAND($x_1,x_1$))　(4) $n_1$=NAND($x_0,x_1$)、$n_2$=NAND($x_0,n_1$)、$n_3$=NAND($x_1,n_1$)、XOR=NAND($n_2,n_3$)（4個のNAND）</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — NANDだけで何でも作れることの意味</span>
+        <p>
+          (2)〜(4)で見たように、NOT・AND・ORはすべてNANDだけから組み立てられる（NANDが単体で完備であること
+          の直感的な理由）。これは単なる数式上の面白さではなく、実際の集積回路の設計にとって大きな利点になる。
+          1種類のゲート（NAND）だけを大量に規則的に並べれば、原理的にはどんな論理回路も実現できるため、
+          製造工程を単純化・標準化しやすく、素子の特性を1種類だけそろえればよいという実用上のメリットが
+          生まれる。実際に多くのディジタル回路がNANDゲート（あるいはNORゲート）を基本部品として設計されている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="07-プログラミング.html">← 07 プログラミング</a>
+    <a href="09-データモデル.html">09 データモデルへ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,551 @@
+<!DOCTYPE html><!-- 「第8回 都市経済学入門｜現代経済理論」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第8回 都市経済学入門｜現代経済理論</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="lec-8">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">現代経済理論</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">HOME</a>
+      <a href="index.html" class="active">講義</a>
+      <a href="../kakomon_2025.html">過去問</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <span class="hero-badge">第8回</span>
+  <h1>都市経済学入門</h1>
+  <p class="subtitle">2026年6月5日｜佐藤 泰裕</p>
+  <p class="meta">東京大学大学院経済学研究科 教授</p>
+</div>
+
+<div class="container">
+
+  <div class="section-card">
+    <h2>講師プロフィール</h2>
+    <div class="teacher-profile">
+      <div class="teacher-icon">🏙️</div>
+      <div class="teacher-info">
+        <h3>佐藤 泰裕</h3>
+        <div class="affil">東京大学大学院経済学研究科 教授（2018年〜）<br>大分県別府市出身。名古屋大学・大阪大学を経て東京大学へ。三大都市圏制覇！</div>
+        <div class="specialty">
+          専門：都市経済学・空間経済学・地域経済学<br>
+          人口の地理的分布、集積の経済効果、土地価格分析、地方財政論などを研究。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2>講義概要</h2>
+    <p style="font-size:.92rem;color:#4a5568;line-height:1.85;">
+      なぜ人は都市に集まるのか。日本では三大都市圏（東京・大阪・名古屋）に人口・生産が高度に集中しており、東京圏だけでカナダと同規模のGDPを持つ。
+      都市経済学の核心は「集積の経済」——人が集まることで生まれる外部経済効果——がなぜ・どのように生じるかを解明すること。
+      同時に集積の費用（地価上昇・通勤・混雑）との均衡で都市規模が決まるメカニズムを理解し、
+      「東京は過大か」「地方創生はなぜ難しいか」という現実の政策問題を考える。
+    </p>
+  </div>
+
+  <div class="section-card">
+    <h2>主なトピック</h2>
+    <ul class="topic-list">
+
+      <li>
+        <div class="tn-col"><span class="tn">1</span></div>
+        <div class="topic-content">
+          <span class="topic-title">日本の都市集中の実態</span>
+          <p class="topic-desc">
+            三大都市圏（東京都・大阪府・愛知県）は国土面積のわずか5%未満にもかかわらず、日本の人口の2割以上・県内総生産の3割以上が集中している。
+            DID（人口集中地区）の人口割合は1960年の43.7%から2020年には約70%へと急増し、その面積はなお全国土の3.6%程度に留まる。
+            東京圏（南関東）のGDPはカナダと同規模、近畿はオーストラリア、東海はオランダに相当する。
+            夜間の衛星画像を見ると光の集積がそのまま経済活動の集積を示し、東京・大阪・名古屋周辺に際立った光の帯が見られる。
+          </p>
+          <div class="def-box">
+            <strong>DID（人口集中地区）</strong>：人口密度4,000人/km²以上の地区が連続し、合計人口5,000人以上の地区。<br>
+            日本の大都市圏（2020）：①東京3,563万人 ②大阪1,187万人 ③名古屋672万人<br>
+            南関東の人口シェア：1840年11.6% → 2010年27.8%（近代化・工業化とともに急上昇）
+          </div>
+          <div class="insight"><strong>数字の読み方</strong>：DID人口割合は「日本人口のうち、この密度基準を満たす連続地区に住む人の割合」であり、行政上の「市」の人口割合ではない。人口の約7割が国土の約3.6%に住むという対比が、地理的集中の強さを示す。GDPの国際比較は経済規模の目安であり、生活水準がその国と同じという意味ではない。</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">2</span></div>
+        <div class="topic-content">
+          <span class="topic-title">都市経済学と隣接分野のマップ</span>
+          <p class="topic-desc">
+            都市経済学は「同一国内でなぜ特定の地域に人・企業が集まるのか」を問う学問。
+            かつては地域経済学と方法論が異なったが、現在は実証的手法が統一されてほぼ一体となっている。
+            空間経済学は都市・地域・国際貿易を統一的に扱う理論的フレームワーク。
+            国際経済学（国と国の貿易）とも問いが重なる——EUのような統合経済圏では国境をまたいだ都市集積という同じ問いが生じる。
+            地方財政論（誰がどこで税を払い公共サービスを受けるか）、経済地理学、土木工学とも深く関連する。
+          </p>
+          <div class="insight">
+            「田舎では見上げれば山、都市では見上げればビル」——地理的条件ではなく、人の選択と外部性が都市をつくる。都市経済学の出発点は「なぜここが農村と違うのか」という問いにある。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">3</span></div>
+        <div class="topic-content">
+          <span class="topic-title">人口移動のパターンと歴史</span>
+          <p class="topic-desc">
+            日本の三大都市圏への転入超過数推移（1954〜2022年）は歴史的イベントと明確に対応している。
+            高度経済成長期には東北・関東甲信越→東京、九州・四国→大阪という大量人口移動が生じた（「上野駅に夜行列車が殺到した時代」）。
+            1973年オイルショックで急減し安定期へ。バブル期に東京一極集中が再加速。
+            バブル崩壊直後（1990年代前半）は史上唯一の三大都市圏社会減を記録。
+            コロナ禍（2020〜）では23区→多摩地区への移動が多く、東京圏全体の転入超過は大きく変化しなかった。
+          </p>
+          <div class="def-box">
+            <strong>人口移動の2パターン</strong>：北海道・東北から移動する人の45%が南関東へ、九州・沖縄からは26%が南関東・44%が九州内へ。<br>
+            広域では「近隣地域（移動コスト低）」か「東京（日本の中心）」かという二択構造が見られる。
+          </div>
+          <div class="insight">
+            先生の出身小中高はすべて閉校——地方の人口減少と都市集積の加速は表裏一体である。都市経済学はこの現象の「なぜ」を解明し、政策を評価する道具を提供する。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">4</span></div>
+        <div class="topic-content">
+          <span class="topic-title">人口集中の要因：比較優位・公共財 vs 集積の経済</span>
+          <p class="topic-desc">
+            なぜ人は都市に集まるのか。標準的な説明として、①比較優位（特定産業に向いた土地・気候）、②移動不可能な生産要素（港・河川・政治的中心の固定）、③規模の経済（工場の大規模化による費用逓減）、④公共財（インフラ・行政機能の集積地へのアクセス）がある。
+            しかしこれらは都市集積の一部しか説明できない。「都市経済学固有の要因」こそが集積の経済である。
+          </p>
+          <div class="def-box">
+            <strong>集積の経済の定義</strong>：様々な経済主体が集中することの外部経済——経済主体が意図しない他者への良い影響——の総称。<br>
+            個々の企業・家計が「人が集まるから」という理由で集積することで、意図せず他者にもメリットをもたらす点が決定的に重要。
+          </div>
+          <div class="insight">
+            集積の経済が働くと「人が集まる→さらに集まりやすくなる→もっと集まる」という自己強化の循環が生まれる。これが東京が大きくなり続ける根本的な理由。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">5</span></div>
+        <div class="topic-content">
+          <span class="topic-title">集積の経済の2種類：地域特化の経済と都市化の経済</span>
+          <p class="topic-desc">
+            集積の経済は発生メカニズムによって2種類に分類される。どちらも「外部性」が本質だが、「誰と」集積するかが異なる。
+          </p>
+          <div class="def-box">
+            <strong>地域特化の経済（MAR外部性）</strong>：同一産業内の企業が特定地域に集中して立地することから発生するメリット。特定産業に用いられる労働力（専門人材）や中間投入財の調達が容易になる。<br>
+            例：豊田市西広瀬工業団地（自動車関連製造）、神田神保町（古書店街——ライバルでもあり客を引き合う共同体）、秋葉原（電器・電子部品）
+          </div>
+          <div class="def-box" style="margin-top:10px;">
+            <strong>都市化の経済（Jacobs外部性）</strong>：様々な産業が特定地域に集中して立地することから発生するメリット。産業をまたぐアウトソーシング・情報交換・労働力の確保・中間投入財の調達について発生。消費についても発生（財・サービスの多様性）。<br>
+            例：渋谷・東京（多業種混在→異業種交流・マッチング・多様なサービス消費）
+          </div>
+          <div class="insight"><strong>見分け方</strong>：自動車会社と部品会社のように「同じ産業の企業が近くにいるから」生じる便益なら地域特化の経済。IT企業が金融・デザイン・専門サービスと接触できるように「異なる産業が多いから」生じる便益なら都市化の経済である。</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">6</span></div>
+        <div class="topic-content">
+          <span class="topic-title">集積の経済の源泉：5つのメカニズム</span>
+          <p class="topic-desc">
+            Marshall（1890）以来、集積の経済の源泉として5つのメカニズムが指摘される。いずれも「自分の行動が意図せず他者にも利益をもたらす」外部性の構造を持つ。
+          </p>
+          <div class="def-box">
+            <strong>①ショックの平滑化（大数の法則）</strong>：多数の取引相手がいると予期せぬショックを吸収できる。在庫を過剰に抱える必要がなくなり（雇用調整・在庫費用の削減）、これが近隣他社にとっても外部性となる。<br><br>
+            <strong>②Labor Pooling（厚みのある労働市場）</strong>：多様なスキルをもつ人材と、それを活かせる職種・企業が集積する「厚みのある」労働市場。適材適所が速やかに達成される（人為的な就職説明会を自然発生させるようなもの）。<br><br>
+            <strong>③Spillover / Innovation（知識の外部性）</strong>：人・企業の交流が活発な場所では暗黙知や情報が拡散し、交流によって刺激されて革新的アイデアが生まれる。シリコンバレーのカフェでのカジュアルな会話から技術革新が生まれる例が典型。<br><br>
+            <strong>④企業間取引（取引費用の節約）</strong>：他の企業との取引費用を節約するために、企業が集まる場所に引き寄せられる。自分の立地選択が他社の取引費用も下げる正の外部性。<br><br>
+            <strong>⑤財・サービスの多様性</strong>：消費できる財・サービスが多様化し、自分の好みに合ったものが見つかりやすくなる（地方ではそうはいかない）。生産サイドでも中間投入財の多様性がメリットとなる。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">7</span></div>
+        <div class="topic-content">
+          <span class="topic-title">大都市形成のメカニズム：前方・後方連関効果</span>
+          <p class="topic-desc">
+            藤田昌久（1996）の空間経済学モデルは、大都市形成を「自己組織化」として説明する。
+            集積が集積を呼ぶ循環メカニズムには互いに補強し合う2種類がある。
+          </p>
+          <div class="def-box">
+            <strong>後方連関効果（生産サイド）</strong>：その地域に企業が集まる → 市場規模が大きくなり規模の経済の効果をより享受できる → さらに多くの企業が集まる<br><br>
+            <strong>前方連関効果（消費サイド）</strong>：その地域でより多くの種類の消費財が供給される → 同じ名目所得でも財の種類が多く効用が上がる（実質所得上昇）→ さらに多くの消費者が集まる<br><br>
+            この2つのサイクルが互いに強化し合い、大都市が「スノーボール効果」で自律的に成長する。
+            出典：藤田昌久（1996）「空間経済システムの自己組織化と発展について」
+          </div>
+          <div class="insight"><strong>矢印の読み方</strong>：後方連関は「需要の大きな市場の近くで生産したい」という企業の誘因、前方連関は「豊富な商品や投入財に近い場所にいたい」という家計・企業の誘因である。「人口増→需要増→企業増→品揃えと雇用増→人口増」と一周するため、最初の小さな差が拡大する。</div>
+          <div class="insight">
+            名古屋・大阪の成長が止まった理由：集積の経済が働き続けると集積の費用も急増するため、ある規模で均衡が成立する。東京だけが引き続き成長しているのは、日本全体の政治・経済的中心という固定された優位性があるため。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">8</span></div>
+        <div class="topic-content">
+          <span class="topic-title">都市化の費用と集積の不経済</span>
+          <p class="topic-desc">
+            都市が大きくなるほど集積の費用（集積の不経済）も増大する。これらは都市レベルでの純損失となるが、個人レベルでは費用でも別の誰かには利益となる場合もある（個人費用と都市レベル費用の乖離）。
+          </p>
+          <div class="def-box">
+            <strong>土地・住宅の値上がり</strong>：地価・地代・住宅価格・家賃の上昇。持ち主には資産価値上昇（プラス）だが借り手には費用増大（マイナス）。<br><br>
+            <strong>通勤費用</strong>：長時間通勤・金銭的費用・時間費用。鉄道事業者には収入増となるが、通勤者には時間費用（都市レベルで純損失）。<br><br>
+            <strong>混雑</strong>：満員電車・道路渋滞。<br><br>
+            <strong>歴史的事例（江戸）</strong>：17世紀明暦大火10万人以上死亡、19世紀安政地震13万人以上、19世紀コレラ20万人以上。農村より都市の方が長らく死亡率が高かった（「江戸は蟻地獄：人を消費し続ける都市」）。日露戦争以降、上下水道整備・近代的設備・防疫体制整備により逆転。
+          </div>
+          <div class="insight">
+            コロナ禍は「都市は感染症に弱い」という集積の不経済を再認識させた。リモートワーク普及→集積の経済を弱める可能性がある一方、オンライン交流と対面交流は補完的との研究がある（Gaspar &amp; Glaeser 1998）。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">9</span></div>
+        <div class="topic-content">
+          <span class="topic-title">都市規模の決定と実証的推定</span>
+          <p class="topic-desc">
+            都市規模は「集積の経済による便益」と「集積の不経済による費用」のバランスで決まる。
+            便益は人口とともに増えるが、追加的な便益はやがて小さくなる（初期は急増、やがて緩やかな上に凸の曲線）。一方、混雑や地価などの費用は規模とともに急増する。
+            便益と費用の差（純便益）が最大となる都市人口がL**（社会的最適規模）。
+            しかし人口移動の安定均衡ではL̄（市場均衡規模）が実現し、L**よりも大きくなる——過剰な都市化が生じる。
+          </p>
+          <div class="insight"><strong>図の読み方</strong>：横軸は都市人口 L、縦軸は1人あたりの便益・費用（または効用）と読む。L**は人口を1人増やしたときの<strong>社会全体</strong>の追加便益と追加費用が等しい点。L̄は移住者が自分の賃金・家賃等だけを見て、他人に与える混雑等を考慮しないときの均衡である。その外部費用の分だけ L̄&gt;L** になり得る。ただし、これはモデルの結論であり、実際の各都市が必ず過大だと直ちに言うものではない。</div>
+          <div class="def-box">
+            <strong>実証推定（Combes, Duranton &amp; Gobillon 2015）</strong>：様々な国で都市人口密度に対する生産性上昇の弾力性が0.05前後。都市人口密度が2倍になると生産性が約3.5%上昇する。<br><br>
+            <strong>費用の弾力性（フランス2000年代・Combes et al. 2012）</strong>：都市化の費用上昇の弾力性もほぼ同程度。10万人都市で0.03、パリ（約220万人）で0.08。<br><br>
+            → 便益と費用の弾力性がほぼ拮抗しているが、外部性の存在により均衡が最適とは限らない。市場均衡では過剰都市化が生じやすい。
+          </div>
+          <div class="insight"><strong>弾力性0.05の読み方</strong>：密度が1%高いと生産性が平均で0.05%高いという比率の関係。2倍化の近似は 0.05×ln(2)≈0.035（3.5%）である。これは平均的な推定値で、「人口を2倍にすれば必ず生産性が3.5%上がる」という機械的な予測ではない。</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">10</span></div>
+        <div class="topic-content">
+          <span class="topic-title">外部性・ピグー税・ヘンリージョージ定理</span>
+          <p class="topic-desc">
+            集積の経済は外部性（意図せざる他者への好影響）であるため、市場均衡では社会的最適が達成されない。
+            ピグー補助金・ピグー税によって、外部性の限界的な効果に見合った税/補助金を課すことで非効率性を排除できる。
+          </p>
+          <div class="def-box">
+            <strong>ヘンリージョージ定理</strong>：都市規模が最適（L**）のとき、集積の外部性に対するピグー補助金の総額が地代総額に等しい。都市が過大（L̄ &gt; L**）なら地代総額がピグー補助金総額より大きい。<br><br>
+            <strong>検証（金本良嗣2006）：1995年日本の大都市雇用圏（地価を地代の代理変数として使用）</strong><br>
+            東京：地価総額518,810億円 vs ピグー補助金9,493億円（比率55）<br>
+            大阪：176,168億円 vs 3,216億円（比率55）<br>
+            名古屋：62,517 vs 1,594（比率39）　京都：44　神戸：38　福岡：37　札幌：25<br>
+            → 東京・大阪は地価/補助金比率が特に高く、他の大都市に比べて過大都市化の可能性が高い。
+          </div>
+          <div class="insight"><strong>比率の読み方</strong>：東京の55は 518,810÷9,493≈55 という比で、地価総額が推計ピグー補助金の55倍という意味。この指標では、理論上の最適状態からの乖離が他都市より大きい可能性を示唆する。ただし、地価を地代の代理に使うことや補助金の推定に仮定があるため、「東京の人口を何人減らすべきか」を直接示す数字ではない。</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">11</span></div>
+        <div class="topic-content">
+          <span class="topic-title">過剰都市化への政策</span>
+          <p class="topic-desc">
+            東京・大阪が過大である可能性が高い場合、どのような政策が有効か。現行の主な政策と経済学的評価を整理する。
+          </p>
+          <div class="def-box">
+            <strong>地方交付税</strong>：都道府県レベルでの不交付団体は東京都のみ（市町村は59団体）。東京一極集中是正に一定の役割を果たしているが、より踏み込んだ分析が必要。<br><br>
+            <strong>首都機能移転</strong>：国会等移転調査会（1993年〜）で栃木・福島地域や岐阜・愛知地域が候補地として検討されたが実現せず。成功例：韓国の世宗市（ソウルの南110km——行政首都）、インドネシア首都移転（進行中）、中国明代の都市研究も参照。<br><br>
+            <strong>地方創生</strong>：地方から大都市への人口移動を止めようとする政策。外部性を伴わない純粋な人口移動（個人の合理的選択）は静観すべきとの経済学的見方がある。産業保護政策との類似性あり。外部性の存在を意識した上で、地方の生産性向上への動機付けが重要。
+          </div>
+          <div class="insight">
+            東京一極集中を是正するには「東京に集まることの外部費用を内部化する」か「地方の生産性を高めて引力を強める」かの二択に近い。ふるさと納税・税源移転などの制度が同時並行で走っており、個別の効果を評価することが難しい状況にある。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">12</span></div>
+        <div class="topic-content">
+          <span class="topic-title">コロナ禍と都市経済学の今後</span>
+          <p class="topic-desc">
+            COVID-19は都市経済学に根本的な問いを突きつけた。集積の経済の将来を左右しうる変化として：
+          </p>
+          <div class="def-box">
+            <strong>直接的影響</strong>：感染が拡大 → 人が多い場所にいること自体が危険に。集積の不経済として感染症リスクが前景化。<br><br>
+            <strong>リモートワーク普及（間接的影響）</strong>：①リモートワーク推進 → 集積の経済を弱める可能性（オフィスへの通勤不要化）②ただしオンライン交流と対面交流は補完的との研究がある（Gaspar &amp; Glaeser 1998; Cuberes 2013）③全体でのコミュニケーション量の変化に依存する。<br><br>
+            <strong>郊外化の進展</strong>（Delventhal, Kwon &amp; Parkhomenko 2021）：在宅勤務普及によって都市内の人口分布がどう変化するか——都心の商業地・住宅地需要の変化。
+          </div>
+          <div class="insight">
+            日本のデータ：コロナ禍では23区→多摩地区への移動が増加したが、東京圏全体の転入超過は大きく変化せず。「東京をやめる」ではなく「東京圏内での再配置」に過ぎない可能性が高い。集積の経済を弱めるかどうかは、オンライン・対面の代替性の実証的解明にかかっている。
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2>重要キーワード</h2>
+    <div class="concept-tags">
+      <span class="concept-tag t-blue">集積の経済</span>
+      <span class="concept-tag t-blue">地域特化の経済</span>
+      <span class="concept-tag t-blue">都市化の経済</span>
+      <span class="concept-tag t-orange">Labor Pooling</span>
+      <span class="concept-tag t-orange">Knowledge Spillover</span>
+      <span class="concept-tag t-orange">前方・後方連関効果</span>
+      <span class="concept-tag t-red">集積の不経済</span>
+      <span class="concept-tag t-purple">ヘンリージョージ定理</span>
+      <span class="concept-tag t-purple">ピグー税／補助金</span>
+      <span class="concept-tag t-gray">DID人口</span>
+      <span class="concept-tag t-gray">東京一極集中</span>
+      <span class="concept-tag t-gray">地方交付税</span>
+      <span class="concept-tag t-gray">地方創生</span>
+      <span class="concept-tag t-gray">ヘドニック分析</span>
+    </div>
+  
+  <div class="kw-detail-list">
+    <p class="kw-detail-label">各キーワードの解説（クリックで展開）</p>
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details class="kw-item">
+      <summary class="kw-summary">集積の経済</summary>
+      <div class="kw-body">経済主体が集積することで生まれる外部経済——意図せず他者に利益をもたらす好影響の総称。「人が集まる→さらに集まりやすくなる」という自己強化循環の根源。東京が大きくなり続ける根本的な理由。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">地域特化の経済</summary>
+      <div class="kw-body">同一産業内の企業が特定地域に集まることで生まれるメリット（MAR外部性）。専門人材・中間投入財の調達が容易になる。例：豊田市の自動車関連製造業、神田神保町の古書店街、秋葉原の電子部品街。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">都市化の経済</summary>
+      <div class="kw-body">異なる産業が混在する都市から生まれるメリット（Jacobs外部性）。産業をまたぐ情報交換・中間投入財調達・消費の多様性から発生。例：東京・渋谷の多業種混在による異業種交流・多様なサービス消費。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">Labor Pooling</summary>
+      <div class="kw-body">多様なスキルの人材と多様な職種が集積する「厚みのある」労働市場。適材適所が速やかに達成される。Marshall (1890) 以来の古典的集積メカニズムのひとつ。「人為的な就職説明会を自然発生させるようなもの」という直感的説明。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">Knowledge Spillover</summary>
+      <div class="kw-body">人・企業の交流が活発な場所では暗黙知・情報が拡散し革新的アイデアが生まれやすい。シリコンバレーのカフェでの会話が技術革新を生む例が典型。Spilloverは意図せず起きるため外部性。集積の経済の主要源泉のひとつ。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">前方・後方連関効果</summary>
+      <div class="kw-body">藤田昌久 (1996) の大都市形成モデル。後方連関（企業集積→市場規模拡大→規模の経済→さらに企業集積）と前方連関（消費財多様性→実質所得上昇→さらに消費者集積）が互いを強化し、スノーボール効果で都市が自律的に成長する。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">集積の不経済</summary>
+      <div class="kw-body">都市が大きくなるほど増大する費用：地価・家賃上昇・長時間通勤・混雑・感染症リスク。集積の経済と集積の不経済のバランスで都市規模が決まる。均衡規模は社会的最適規模より大きくなりがち（過剰都市化）。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">ヘンリージョージ定理</summary>
+      <div class="kw-body">都市規模が最適のとき、集積外部性へのピグー補助金総額 ＝ 地代総額。検証（金本 2006）：東京の地価総額は518,810億円、ピグー補助金推計は9,493億円（比率55）。東京・大阪はこの比率が特に高く、過大都市化の可能性を示唆する。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">ピグー税／補助金</summary>
+      <div class="kw-body">外部性の限界的効果に見合った税/補助金を課して市場の非効率を矯正する手段。集積の経済（正の外部性）にはピグー補助金が理論的解。地方交付税・首都機能移転・地方創生政策の経済学的根拠となる。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">DID人口</summary>
+      <div class="kw-body">人口集中地区（人口密度4,000人/km²以上の連続地区）の人口割合。1960年43.7%→2020年約70%に急増。日本の集積の加速を示す主要指標として講義の冒頭で提示される。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">東京一極集中</summary>
+      <div class="kw-body">東京圏GDP≒カナダ規模という集中の実態。ヘンリージョージ定理から見ると「過大である可能性が高い」が政策的是正は難しい。経済学的には「外部性のある移動のみを是正すればよい」という考え方が基本。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">地方交付税</summary>
+      <div class="kw-body">不交付団体は東京都のみ（市町村59団体）という現状。東京一極集中是正の手段のひとつだが経済学的効果の評価は難しい。過剰都市化への政策として首都機能移転・地方創生とともに紹介される。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">地方創生</summary>
+      <div class="kw-body">地方への人口移動を促す政策。ただし「外部性のない純粋な人口移動を止めることが効率的か」という経済学的疑問もある。産業保護政策との類似性を指摘しつつ、地方の生産性向上こそが重要という結論。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">ヘドニック分析</summary>
+      <div class="kw-body">土地・住宅の価格を特性（立地・面積・騒音等）の関数として推定する手法。集積の経済の価値を地価に内包された形で推計するのに使われる。ヘンリージョージ定理の実証検証でも地価を地代の代理変数として活用。</div>
+    </details>
+  </div>
+</div>
+
+  <div class="section-card">
+    <h2>過去問との対応</h2>
+    <div class="exam-ref-box">
+
+      <!-- 2025 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2025年度 期末試験</span>
+          <a href="../kakomon_2025.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q13</span><span class="eq-topic">都市経済学・ヘンリー・ジョージ定理</span></div>
+<div class="exam-qa-q">「ヘンリー・ジョージ定理」について述べた文章として最も適切なものを選びなさい。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>規模の経済と工場の敷地の地代総額との大小と、工場規模の最適性との対応関係を述べたもの。</li>
+<li class="opt"><span class="opt-label">(b)</span>比較優位に基づく産業の特化の様子を、地域間交易パターンと対応させ、最適な企業集積の形成の必要条件を明らかにしたもの。</li>
+<li class="opt correct"><span class="opt-label">(c)</span>都市の集積の経済に対応するピグー補助金総額と都市内の地代総額との大小と、都市規模の最適性との対応関係を述べたもの。<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>おさるのジョージとヘンリーおじさんとの長年にわたる交友関係を述べたもの。</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><em>ヘンリー・ジョージ定理（Henry George Theorem）</em>：都市経済学の重要定理。</p>
+<p>内容：最適な都市規模では、<strong>都市内の集積の経済に対応するピグー補助金の総額</strong>が<strong>都市内の地代総額</strong>に等しくなる。</p>
+<p>含意：集積の経済による外部経済（ピグー補助金で内部化すべき分）をそのまま地代として徴収できれば、都市は最適規模になる。土地課税の正当性の理論的根拠にもなっており、19世紀の経済思想家ヘンリー・ジョージの「土地単税論」に通じる。</p>
+<p>(d)は明らかにユーモアの選択肢。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q14</span><span class="eq-topic">集積の経済の源泉（不適切な選択肢）</span></div>
+<div class="exam-qa-q">集積の経済の源泉として最も適切でないものを選びなさい。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>消費及び生産活動に関わる財やサービスの多様性</li>
+<li class="opt correct"><span class="opt-label">(b)</span>通勤電車における混雑や道路の渋滞<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(c)</span>企業間取引の費用節約</li>
+<li class="opt"><span class="opt-label">(d)</span>情報や知識のスピルオーバー</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>(b)が「最も適切でない」＝集積の経済の源泉ではない。</p>
+<p>通勤電車の混雑や道路の渋滞は<em>集積の「不経済」</em>（負の外部効果）の典型例。人口・企業が密集することで生じる混雑コスト、環境悪化、地価上昇などが集積の不経済。</p>
+<p>集積の<em>経済</em>（正の外部効果）の源泉：<br/>
+    (a) 財・サービスの多様性 → 消費者の選好を満たす多様な選択肢（ジェイコブス外部性）。<br/>
+    (c) 企業間取引の費用節約 → サプライヤーと顧客の近接でサプライチェーンコスト低下（マーシャル外部性）。<br/>
+    (d) 知識のスピルオーバー → 近くにいることでアイデアが伝播し技術革新が促進（知識外部性）。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2024年度 期末試験</span>
+          <a href="../kakomon_2024.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q19</span><span class="eq-topic">地域特化の経済・事例</span></div>
+<div class="exam-qa-q">地域特化の経済が観察される事例として取り上げるのに最もふさわしい街を、「都市経済学入門」の講義内容に即して選びなさい。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>渋谷</li>
+<li class="opt"><span class="opt-label">(b)</span>新宿</li>
+<li class="opt correct"><span class="opt-label">(c)</span>秋葉原<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>梅田</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><em>地域特化の経済（MAR外部性）</em>とは、同一産業の企業が同じ地域に集積することで生まれる効率化・スピルオーバー。</p>
+<p>秋葉原は<em>電気・電子・アニメ・ゲーム・IT</em>といった特定業種が高度に集積した典型的な地域特化の例。同業者が集まることで情報交換・仕入れコスト低減・専門人材の調達が容易になる。</p>
+<p>渋谷：IT・スタートアップ集積（多様化の経済の側面も強い）。<br/>
+    新宿・梅田：総合的な商業集積で特化の経済よりも多様化の経済（Jacobs外部性）の側面が強い。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q20</span><span class="eq-topic">大都市と出生率</span></div>
+<div class="exam-qa-q">大都市への人口集中が出生率に及ぼす影響について述べた文章として最も適切なものを選びなさい。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>人口集中は集積の経済を通じては出生率に影響しない</li>
+<li class="opt"><span class="opt-label">(b)</span>人口集中は規模の経済を通じて出生率を必ず引き上げる</li>
+<li class="opt"><span class="opt-label">(c)</span>人口集中は比較優位を通じて出生率を引き下げる効果を持つ</li>
+<li class="opt correct"><span class="opt-label">(d)</span>人口集中は混雑の不経済を通じて出生率を引き下げる効果を持つ<span class="correct-mark">正解</span></li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>大都市（特に東京）では出生率が低い。メカニズム：</p>
+<p><em>混雑の不経済</em>（住居費高騰、通勤時間の長さ、保育所の不足）により：<br/>
+    ①高い地価・家賃 → 広い住居が持てない → 子育てコスト増大。<br/>
+    ②女性の労働市場参加 → 機会費用の上昇（高収入の仕事と育児のトレードオフ）。<br/>
+    ③保育所不足・待機児童問題。</p>
+<p>比較優位は貿易の概念で出生率との関係は直接的ではない。規模の経済は「必ず引き上げる」とは言えない。集積の経済も出生率への影響は負（混雑コストを通じて）の側面がある。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2023年度 期末試験</span>
+          <a href="../kakomon_2023.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q13</span><span class="eq-topic">都市経済学・三大都市圏のシェア</span></div>
+<div class="exam-qa-q">東京都、大阪府、愛知県の三都府県を合わせたシェアが最も大きいものはどれか。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>人口</li>
+<li class="opt correct"><span class="opt-label">(b)</span>県内総生産<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(c)</span>可住地面積</li>
+<li class="opt"><span class="opt-label">(d)</span>すべて同じ</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>三大都市圏（東京・大阪・愛知）の集積の経済が機能しており、<em>経済規模（GRP）のシェアが人口シェアを上回る</em>。</p>
+<p>・<strong>県内総生産シェア</strong>：東京約35%、大阪約8%、愛知約8% → 合計約50%以上と突出。<br/>
+    ・<strong>人口シェア</strong>：東京約11%、大阪約7%、愛知約6% → 合計約24%程度。<br/>
+    ・<strong>可住地面積シェア</strong>：三大都市は狭い → 合計数%程度に過ぎない。</p>
+<p>生産性の高い産業・企業が大都市に集中することで、人口シェア以上の経済規模を持つ。これが集積の経済の表れ。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q14</span><span class="eq-topic">集積の経済の定義</span></div>
+<div class="exam-qa-q">集積の経済の説明として最も適切なものを以下から一つ選びなさい。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>人口集中がもたらす影響全体のこと</li>
+<li class="opt"><span class="opt-label">(b)</span>ゴミ集積場を効率的に運用すること</li>
+<li class="opt"><span class="opt-label">(c)</span>人口集中が引き起こす問題の総称</li>
+<li class="opt correct"><span class="opt-label">(d)</span>人口集中が引き起こす外部経済（意図せず他者へ与える良い影響）の総称<span class="correct-mark">正解</span></li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><em>集積の経済（Agglomeration Economies）</em>とは、人口・企業・産業が一か所に集まることで生まれる<strong>正の外部経済効果（良い影響）</strong>の総称。</p>
+<p>主な源泉：<br/>
+    ・厚い労働市場（多様な人材・スキルが集まる）<br/>
+    ・サプライヤー・顧客との近接（取引コスト低下）<br/>
+    ・情報・知識のスピルオーバー（アイデアの伝播）<br/>
+    ・消費の多様性（多様なサービス・文化施設）</p>
+<p>逆に渋滞・地価高騰・環境悪化などのマイナス面は「集積の不経済」。(a)影響「全体」は不経済を含み不正確。(c)は不経済の説明。(b)は無関係。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="lecture-nav">
+    <a href="第7回.html">← 第7回</a>
+    <a href="index.html" class="center">講義一覧</a>
+    <a href="第9回.html">第9回 →</a>
+  </div>
+
+</div>
+
+<script>
+// 押されたボタンに対応する解説欄の表示を切り替える。
+function toggleExp(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const opt = e.target.closest('.opt');
+  if (!opt) return;
+  const options = opt.closest('.options');
+  if (!options || options.classList.contains('revealed')) return;
+  options.classList.add('revealed');
+  opt.classList.add('selected');
+});
+</script>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">現代経済理論（渡辺安虎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+</body>
+</html>

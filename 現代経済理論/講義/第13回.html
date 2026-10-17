@@ -1,0 +1,506 @@
+<!DOCTYPE html><!-- 「第13回 情報カスケードと群衆行動｜現代経済理論」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第13回 情報カスケードと群衆行動｜現代経済理論</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="lec-13">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">現代経済理論</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">HOME</a>
+      <a href="index.html" class="active">講義</a>
+      <a href="../kakomon_2025.html">過去問</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <div class="hero-badge">第13回</div>
+  <h1>情報カスケードと群衆行動</h1>
+  <p class="subtitle">粟屋 祐｜東京大学</p>
+  <p class="meta">合理的な個人がなぜ同じ間違いに雪崩れ込むのか — ベイズ推論と情報カスケード｜2026年7月10日</p>
+</div>
+
+<div class="container">
+
+  <div class="section-card">
+    <h2><span class="h2-icon">👤</span>講師プロフィール</h2>
+    <div class="teacher-profile">
+      <div class="teacher-icon">🎲</div>
+      <div class="teacher-info">
+        <h3>粟屋 祐（Awaya, Yu）</h3>
+        <div class="affil">
+          東京大学
+        </div>
+        <div class="specialty">
+          専門：ゲーム理論（不完全観測下の繰り返しゲーム・共謀、情報の経済学）。講義中で紹介された自身の研究「Awaya and Krishna」では、群衆行動モデルにおけるヒントの相関構造とカスケードの持続性（persistence）を分析している。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📖</span>講義概要</h2>
+    <div class="summary-text">
+      <p>
+        COVID-19流行初期のトイレットペーパー買い占めや、銀行の取り付け騒ぎのように、人々が周囲の行動に付和雷同して群れをなす現象は、現実の経済で繰り返し観察される。こうした<strong>群衆行動（herding）</strong>は「人類が非合理的だから」起きるのだと片付けられがちだが、本講義はその説明に真っ向から挑む。
+      </p>
+      <p>
+        現実そのものではなく、<strong>あえて非常に単純化した世界</strong>を設定し、条件付き確率とベイズルールだけを武器に、一人ひとりが完全に合理的にふるまう状況をモデル化する。その結果見えてくるのは、<strong>合理的な個人の意思決定が積み重なるだけで、社会全体が同じ間違った選択に雪崩れ込みうる</strong>という驚くべき結論——これが<strong>情報カスケード（Information Cascade）</strong>である。
+      </p>
+      <div class="insight"><strong>この回の読み方</strong>：「正解」は社会全体でaかbの一つ。各人は自分だけの私的ヒントを1つ受け取り、前の人の「選択」は見られるが「ヒント」は見られない。以下では、誰が何を実際に見たのかと、他人の選択から何を逆算できるのかを区別して追う。</div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📋</span>主なトピック</h2>
+    <ul class="topic-list">
+
+      <li>
+        <div class="tn-col"><span class="tn">1</span></div>
+        <div class="topic-content">
+          <span class="topic-title">導入 — パニュルジュの羊</span>
+          <div class="topic-desc">
+            <p>
+              講義冒頭、群衆行動を象徴する逸話として「パニュルジュの羊」が紹介される。フランス語には付和雷同する様を指す慣用表現があり、智慧者のいたずら者パニュルジュの物語に由来する。
+            </p>
+            <div class="insight">
+              彼を笑いものにした商人からリーダー格と思しき羊を一匹買い取ったパニュルジュが、すぐさまその羊を海に投げ込むと、残りの羊もみな後を追って海に飛び込んでしまい、商人は大損した——という故事（全卓樹『銀河の片隅で科学夜話』より）。1匹の行動が、それを見ていた他の羊たち全員の行動を決めてしまう、という構図がそのまま本講義のテーマになる。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">2</span></div>
+        <div class="topic-content">
+          <span class="topic-title">群衆行動というパズル</span>
+          <div class="topic-desc">
+            <p>
+              パニックはしばしば伝染する。COVID-19流行時に世界各地で発生したトイレットペーパーの買い占めが典型例として挙げられる。当時は物心のついた学生でも記憶に残っているはずの出来事だが、なぜ「特に品薄になる理由がない」商品が売り切れたのか。
+            </p>
+            <p>
+              素朴な説明は「人類が非合理的だから」というものだが、本講義はこれとは異なるアプローチを取る。現実そのものを描写するのではなく、あえて<strong>すごく単純化されたモデル</strong>で本質的なメカニズムを抽出し、そこで何が起きているのかを考える——これが本講義（および経済学一般）の理論の進め方である。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">3</span></div>
+        <div class="topic-content">
+          <span class="topic-title">意思決定問題の設定</span>
+          <div class="topic-desc">
+            <div class="def-box">
+              <strong>基本設定</strong>：正解は a か b のいずれか。a が正解である事前確率は Pr[a] = 0.6（したがって Pr[b] = 0.4）。利得は正解を選べば1、不正解なら0。
+            </div>
+            <p>
+              最適な意思決定ルールは単純である。a が正解である確率が0.5を超えていれば a を、そうでなければ b を選べばよい。事前確率だけで判断するなら、Pr[a]=0.6&gt;0.5 なので何もヒントがなくても a を選ぶのが最適ということになる。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">4</span></div>
+        <div class="topic-content">
+          <span class="topic-title">シグナル（ヒント）の導入</span>
+          <div class="topic-desc">
+            <p>
+              ここに、追加情報として<strong>シグナル（ヒント）</strong>を導入する。ヒントは s<sub>a</sub> か s<sub>b</sub> のいずれかで、常に正しいとは限らない。
+            </p>
+            <div class="def-box">
+              q = Pr[s<sub>a</sub> | a] = Pr[s<sub>b</sub> | b] = 0.7
+            </div>
+            <p>
+              つまり正解が a なら70%の確率でヒント s<sub>a</sub> が、正解が b なら70%の確率でヒント s<sub>b</sub> が出る（残り30%は逆のヒントが出る「ノイズ」）。ヒントが s<sub>a</sub> ならノーヒントの時より a の可能性が、s<sub>b</sub> なら b の可能性が高くなるはずだが、ヒントを受け取った後の正確な確率 Pr[a|s<sub>a</sub>]、Pr[a|s<sub>b</sub>] を求めることが最初の課題になる。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">5</span></div>
+        <div class="topic-content">
+          <span class="topic-title">条件付き確率とベイズルール</span>
+          <div class="topic-desc">
+            <p>求めたいのは Pr[a|s<sub>a</sub>]（ヒントが s<sub>a</sub> だった時に a が正解である確率）である。これは講義スライドの尤度 Pr[s<sub>a</sub>|a] = 0.7 の「逆」にあたる量で、直接は分からない。そこで条件付き確率の公式を2通りの向きで書き下す。</p>
+            <div class="def-box">
+              Pr[a|s<sub>a</sub>] = Pr[a ∩ s<sub>a</sub>] / Pr[s<sub>a</sub>]　および　Pr[s<sub>a</sub>|a] = Pr[a ∩ s<sub>a</sub>] / Pr[a]
+            </div>
+            <p>
+              両式とも分子 Pr[a ∩ s<sub>a</sub>] が共通しているので、これを消去すると次のベイズルールが得られる。
+            </p>
+            <div class="def-box">
+              Pr[a|s<sub>a</sub>] = Pr[s<sub>a</sub>|a] × Pr[a] / Pr[s<sub>a</sub>]
+            </div>
+            <p>右辺の Pr[s<sub>a</sub>|a]=0.7、Pr[a]=0.6 は既知。あとは分母の Pr[s<sub>a</sub>]（ヒントが s<sub>a</sub> になる確率そのもの）が分かればよい。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">6</span></div>
+        <div class="topic-content">
+          <span class="topic-title">Pr[a|s<sub>a</sub>] の計算 — ヒントに従うのが最適</span>
+          <div class="topic-desc">
+            <p>Pr[s<sub>a</sub>] は、正解が a のときに s<sub>a</sub> が出る場合と、正解が b なのに間違って s<sub>a</sub> が出てしまう場合を足し合わせた「全確率」として求まる。</p>
+            <div class="def-box">
+              Pr[s<sub>a</sub>] = Pr[s<sub>a</sub>|a]Pr[a] + Pr[s<sub>a</sub>|b]Pr[b] = 0.7×0.6 + 0.3×0.4 = 0.54
+            </div>
+            <div class="def-box">
+              Pr[a|s<sub>a</sub>] = (0.7 × 0.6) / 0.54 ≈ 0.78
+            </div>
+            <div class="insight">
+              0.78は0.5を大きく超えているので a を選ぶのが最適。この場合はノーヒントの時点ですでに a を選びたく（Pr[a]=0.6）、ヒントも a を示唆しているので、両者が同じ方向を向いて確信が強まっただけの「順当な」結果である。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">7</span></div>
+        <div class="topic-content">
+          <span class="topic-title">Pr[a|s<sub>b</sub>] の計算 — ヒントが事前確率を覆す</span>
+          <div class="topic-desc">
+            <p>今度はヒントが s<sub>b</sub> だった場合を考える。ノーヒントなら a を選びたいが、ヒントは b を示唆しており、両者が対立する興味深いケースになる。同じ公式を Pr[s<sub>b</sub>|a]=1−0.7=0.3、Pr[s<sub>b</sub>]=1−0.54=0.46 として適用する。</p>
+            <div class="def-box">
+              Pr[a|s<sub>b</sub>] = (0.3 × 0.6) / 0.46 ≈ 0.39
+            </div>
+            <div class="insight">
+              0.39は0.5を下回るので、事前確率ではaが優勢だったにもかかわらず、<strong>bを選ぶのが最適</strong>になる。事前確率とヒントが対立する場合、この設定ではヒントの効果の方が事前確率の効果より大きく、判断がひっくり返るということが数値的に確認できる。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">8</span></div>
+        <div class="topic-content">
+          <span class="topic-title">ベイズルールの他の応用</span>
+          <div class="topic-desc">
+            <p>
+              ここで使った条件付き確率の反転（ベイズルール）は非常に汎用的な道具であり、他にも面白い応用が多数ある。講義内では深く扱わないが、興味があれば調べてみるとよいトピックとして次が紹介された。
+            </p>
+            <ul>
+              <li><strong>偽陽性の問題</strong>：ある病気にかかっている事前確率が非常に低いとき、検査で「陽性」と出ても、実際にその病気にかかっている確率（事後確率）はそれほど高くならないことがある。COVID-19の検査結果を解釈する際にも関わる論点。</li>
+              <li><strong>モンティ・ホール問題</strong>：3つの扉から1つを選んだ後に司会者が別の扉を開けて見せる、有名な確率パズル。</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">9</span></div>
+        <div class="topic-content">
+          <span class="topic-title">2番さんの登場 — 選択は見えるがヒントは見えない</span>
+          <div class="topic-desc">
+            <p>
+              次に意思決定者を1人増やす。2番さんは1番さんの<strong>選択</strong>を見ることができるが、1番さんに与えられた<strong>ヒント自体は見えない</strong>という設定にする。両者のヒントは条件付き独立に与えられるとする（イメージとしては、サイコロを2個振るが、そのうちどちらが1番さんへのヒントになるかだけが決まっている状況）。
+            </p>
+            <div class="insight">
+              これはトイレットペーパーを買っている人を見かける状況に対応する。目の前の人がなぜ買っているのかは分からない——単に使い切ったからなのか、それとも将来の品薄を示唆する情報を手に入れたからなのかは区別できない。しかし、その人が「買う」という行動を選んだという事実そのものが、2番さんにとっての情報になる。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">10</span></div>
+        <div class="topic-content">
+          <span class="topic-title">2番さんの推論と「打ち消し合い」</span>
+          <div class="topic-desc">
+            <p>
+              1番さんが a を選び、2番さん自身に与えられたヒントは s<sub>b</sub> だったとする。1番さんはトピック6・7で見た通りヒントに完全に従って行動するので、1番さんが a を選んだという事実から「1番さんのヒントは s<sub>a</sub> だったのだろう」と<strong>選択から逆算（推測）</strong>できる。つまり2番さんは、自分の s<sub>b</sub> と、推測した1番さんの s<sub>a</sub> という2つのヒント情報を実質的に使える。
+            </p>
+            <p>求める事後確率は Pr[a|s<sub>a</sub>, s<sub>b</sub>]。条件付き独立の仮定を使って分子・分母を展開すると、q(1−q) という因子が分子・分母の双方に現れて<strong>綺麗に打ち消し合い</strong>、驚くべき結果が得られる。</p>
+            <div class="def-box">
+              Pr[a|s<sub>a</sub>, s<sub>b</sub>] = q(1−q)Pr[a] / [q(1−q)Pr[a] + (1−q)q Pr[b]] = Pr[a] = 0.6
+            </div>
+            <div class="insight">
+              1番さんのヒント s<sub>a</sub> と2番さん自身のヒント s<sub>b</sub> が互いに打ち消し合い、結局<strong>ノーヒントの時と全く同じ確率（事前確率そのもの）</strong>に戻ってしまう。したがって2番さんの最適行動は、自分のヒント s<sub>b</sub> を完全に無視して、1番さんと同じ a を選ぶことになる。さらに、2番さんのヒントが s<sub>a</sub> だった場合（1番さんと同じ向き）も同様の計算により a を選ぶのが最適であることが確認できる——1番さんが a を選んだ以上、2番さんは<strong>自分のヒントによらず</strong>常に a を選ぶ。
+            </div>
+            <p><strong>時系列で確認</strong>：①1番は私的ヒントs<sub>a</sub>を見てaを選ぶ。②2番はaという選択から1番のヒントをs<sub>a</sub>と推測する。③2番はs<sub>b</sub>を見るが、2つのヒントが相殺して事前確率0.6に戻るためaを選ぶ。「自分のヒントを無視」とはヒントに価値がないという意味ではなく、全情報を組み合わせた後の最適選択がaになるという意味である。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">11</span></div>
+        <div class="topic-content">
+          <span class="topic-title">3番さんとベンチマーク — 「ヒントが見える」場合との比較</span>
+          <div class="topic-desc">
+            <p>
+              さらに3番さんを追加する。3番さんは1番さん・2番さんの選択は見えるが、彼らに与えられたヒントそのものは見えない。ここで比較のため、まず<strong>ベンチマークとして「前の人のヒントまで見える」場合</strong>を考える（1番さんに s<sub>a</sub>、2番さん・3番さんに s<sub>b</sub> が与えられたケース）。
+            </p>
+            <p>
+              1番さんはヒント通り a を、2番さんは（トピック10の通り）自分のヒントを無視して a を選ぶ——ヒントまで分かっても2番さんの行動は変わらない。問題は3番さんで、Pr[a|s<sub>a</sub>, s<sub>b</sub>, s<sub>b</sub>] を計算すると、独立性から Pr[s<sub>a</sub>,s<sub>b</sub>,s<sub>b</sub>|a]=q(1−q)<sup>2</sup> などとなり、整理すると (1−q)Pr[a] / [(1−q)Pr[a]+qPr[b]] = (0.3×0.6)/(0.3×0.6+0.7×0.4) ≈ 0.39 が得られる。
+            </p>
+            <div class="insight">
+              全員のヒントが見える場合、3番さんは <strong>b を選ぶのが最適</strong>になる（2つの s<sub>b</sub> が1つの s<sub>a</sub> を上回る）。この「ヒントまで見える」ケースは、次のトピックで見る「選択しか見えない」現実的なケースとの比較対象（ベンチマーク）として導入されたものである。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">12</span></div>
+        <div class="topic-content">
+          <span class="topic-title">情報カスケードの発生</span>
+          <div class="topic-desc">
+            <p>
+              現実の設定（選択のみが見え、ヒントそのものは見えない）に戻る。3番さんが確実に知っているのは、1番さんの選択から逆算できるヒント s<sub>a</sub> と、自分自身のヒント s<sub>b</sub> の2つだけである（2番さんのヒントは、2番さんが1番さんの選択に完全に従っただけなので<strong>何の情報にもならない</strong>）。これはトピック10で計算済みの Pr[a|s<sub>a</sub>, s<sub>b</sub>] = 0.6 と同じ状況であり、3番さんは a を選ぶ。
+            </p>
+            <div class="def-box">
+              <strong>情報カスケード（Information Cascade）</strong>：ある時点以降、各人の意思決定が自分自身のヒントに一切依存せず、専ら他人の過去の選択（の模倣）だけで決まってしまう状態。
+            </div>
+            <p>
+              4番さん以降になると、3番さんのヒントさえも2番さんの選択に埋もれて全く伝わらなくなる（3番さんが「2番さんは自分のヒントに関わらずaを選ぶ」と分かるのと同様、以降の全員がそう推論する）。結果として4番さん以降は全員、自分のヒントを完全に無視して1番さんの選択のみに追随し続ける。
+            </p>
+            <div class="insight">
+              もし正解が実は b であり、1番さんがたまたま間違ったヒントを受け取って a を選んでしまった場合、<strong>1番さん以外の全員が正しいヒントを受け取っていたとしても、全員が同じ間違いを犯す</strong>。しかもこれは人々が愚かだからではなく、各人が自分の持つ情報を最大限合理的に使った結果として起きる。これがトイレットペーパーの買い占めや銀行の取り付け騒ぎに共通する構造であり、「一部の人が偽の（あるいは誤った）情報を信じて行動した結果が、社会全体に波及する」というメカニズムを説明する。
+            </div>
+            <p><strong>なぜ2番以降の選択が情報を増やさないのか</strong>：2番はヒントがs<sub>a</sub>でもs<sub>b</sub>でもaを選ぶ。よって後続者が2番のaを見ても2番のヒントを逆算できない。同じ理由で3番以降の選択も私的情報を公開せず、社会は多数のヒントを集約できなくなる。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">13</span></div>
+        <div class="topic-content">
+          <span class="topic-title">戦略的補完性</span>
+          <div class="topic-desc">
+            <p>
+              パニックにはもう一つ重要な側面——<strong>戦略的補完性（strategic complementarity）</strong>がある。他の人が買い占めに走っているなら、たとえ「他の人が買い占めなければ十分足りるだけの」供給が実際にはあったとしても、自分も買い占めに走る方が合理的になる。
+            </p>
+            <div class="insight">
+              銀行の取り付け騒ぎも同じ構造で説明できる。銀行が十分な信用力を持ち、本当に必要な人だけが預金を引き出すのであれば全く問題は起きない。しかし他の預金者が我先にと引き出しに走ると、自分も早めに引き出しておかないと後で引き出せなくなるかもしれない——という予想自体が、実際に取り付け騒ぎを引き起こす。「何が最適かは他の人の行動次第で決まる」という点が、情報カスケードと合わさってパニックを増幅させる。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">14</span></div>
+        <div class="topic-content">
+          <span class="topic-title">発展 — ヒントの質・相関、Awaya and Krishna (2006)</span>
+          <div class="topic-desc">
+            <p>
+              講義の最後に、関連する新しい研究が2つ紹介された。1つ目は、1番さんに与えられるヒントの質をより良いものにすると、（例外的な数人を除いて）かえって社会全体にとって迷惑になりうるという結果。良いヒントほど後続の人がそれに強く追随してカスケードに入りやすくなるためである。
+            </p>
+            <p>
+              2つ目は講師自身の研究テーマで、ここまでの議論は各人のヒントが<strong>条件付き独立</strong>であることを仮定していたが、SNSのように人々が同じ情報源を共有する場合、ヒントには<strong>相関</strong>が生じる（1番さんのヒントが s<sub>a</sub> なら2番さんのヒントも s<sub>a</sub> である確率が上がる）。ヒントがマルコフ過程に従うと仮定して分析する。
+            </p>
+            <div class="def-box">
+              <strong>Awaya and Krishna (2006)</strong>：ヒントの相関（persistence、横軸）と、群衆全体が模倣の結果として誤った選択に収束してしまう確率（縦軸）の関係を分析。結果は単調ではなく、相関の強さに応じて段差状に確率が変化する非自明な形状になる。
+            </div>
+            <p>
+              直感的には、すでに100人がaを選んでいても、ヒントの相関が十分低ければ後続の人にとってその模倣はあまり参考にならず、自分自身のヒントに従う方が良いというタイミングが訪れる——これが段差の生じる理由である。ヒントの相関が高くなるほど、最初の数人の間違いが尾を引いて全体に波及しやすくなる（persistenceが高まる）ことが示される。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">15</span></div>
+        <div class="topic-content">
+          <span class="topic-title">板書のおまけ話 — 道路を作ると逆に遅くなる「ブラウエスのパラドックス」</span>
+          <div class="topic-desc">
+            <p>
+              講義の最後、スライドにはない黒板だけの例として、情報カスケードとは別のタイプの「合理的な個人の意思決定が積み重なると社会全体が損をする」現象が紹介された。舞台は出発地 S からゴール G まで、途中の中継地点 A・B のどちらかを経由する40台の車の交通ネットワークである。
+            </p>
+            <div class="def-box">
+              <strong>設定</strong>：中継地点 A・B の間はまだつながっていないとする。<br>
+              ・ルートA（S→A→G）：S→A の所要時間は t 分（<em>それまでにルートAを選んだ台数</em>）、A→G の所要時間は<strong>固定45分</strong><br>
+              ・ルートB（S→B→G）：S→B の所要時間は<strong>固定45分</strong>、B→G の所要時間は t 分（<em>それまでにルートBを選んだ台数</em>）
+            </div>
+            <p>
+              40台の車は1台ずつ順番に出発し、各車はそれまでに何台がルートA・ルートBをそれぞれ選んだかを見た上で、自分にとって最も早く着けそうな方を選ぶ（例えば自分が40台目で、それまでにルートAに20台・ルートBに19台が向かっていたとする。自分がルートAを選べば所要時間は21＋45＝66分、ルートBを選べば45＋20＝65分となり、<strong>1分早く着けるルートBを選ぶ</strong>）。
+            </p>
+            <div class="insight">
+              この逐次的な選択の結果、40台は<strong>ルートA・ルートBに20台ずつ均等に分かれる</strong>のが均衡になる。このとき両ルートとも所要時間は 20（渋滞分）＋45（固定区間）＝<strong>65分</strong>で完全に一致する。これは「誰も損をしない」ことを目指した結果ではなく、各車がそれぞれ与えられた状況（それまでの他の車の選択）の中で自分が最も早く着ける選択をした結果、たまたま両ルートの所要時間が一致するところに落ち着いた、という均衡である。
+            </div>
+            <p>
+              ここで問いが立てられる——もし A と B の間に、無料で一瞬で移動できる<strong>近道（ループ）</strong>を新たに作ったらどうなるか。
+            </p>
+            <div class="insight">
+              一見、道路が便利になった分だけ全体の移動時間は短くなりそうに思える。しかし実際には、A に着いた車は皆「A→B の近道を使ってから B→G に抜ける方が得だ」と考えるようになり、<strong>全40台が S→A→（近道）→B→G という同じ経路に殺到</strong>してしまう。その結果、S→A の区間にも B→G の区間にも40台全員が集中し、それぞれの所要時間は t＝40分となって、合計の移動時間は<strong>40＋40＝80分</strong>まで悪化する——近道を作らなかった場合の65分よりも<strong>大幅に遅くなってしまう</strong>。
+            </div>
+            <div class="def-box">
+              <strong>ブラウエスのパラドックス（Braess's Paradox）</strong>：交通ネットワークに新しい道路（近道）を追加すると、各利用者が個別に最適な経路を選び続けた結果として、かえってネットワーク全体の均衡所要時間が悪化してしまう現象。逆に言えば、「混雑した道路を封鎖・撤去したらむしろ到着時間が短くなった」という一見矛盾した事例も、この現象の裏返しとして実際に起こりうる。
+            </div>
+            <p>
+              道路網は「作ればとりあえず良い」というものではなく、追加によって各人の経路選択インセンティブがどう変わるかまで考えないと、かえって渋滞を悪化させかねない——という、講義前半の情報カスケードや戦略的補完性とも通じる「個人の合理性の総和が社会的に望ましい結果を保証しない」というテーマの、もう一つの具体例として締めくくられた。
+            </p>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">🏷️</span>重要キーワード</h2>
+    <div class="concept-tags">
+      <span class="concept-tag t-blue">情報カスケード</span>
+      <span class="concept-tag t-blue">群衆行動</span>
+      <span class="concept-tag t-orange">ベイズルール</span>
+      <span class="concept-tag t-orange">条件付き確率</span>
+      <span class="concept-tag t-orange">シグナル（ヒント）</span>
+      <span class="concept-tag t-red">事前確率・事後確率</span>
+      <span class="concept-tag">条件付き独立</span>
+      <span class="concept-tag">選択からの推論</span>
+      <span class="concept-tag t-purple">戦略的補完性</span>
+      <span class="concept-tag t-purple">銀行取り付け騒ぎ</span>
+      <span class="concept-tag t-gray">ヒントの相関</span>
+      <span class="concept-tag t-gray">persistence</span>
+      <span class="concept-tag">偽陽性</span>
+      <span class="concept-tag">モンティ・ホール問題</span>
+      <span class="concept-tag t-red">ブラウエスのパラドックス</span>
+    </div>
+
+    <div class="kw-detail-list">
+      <p class="kw-detail-label">各キーワードの解説（クリックで展開）</p>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details class="kw-item">
+        <summary class="kw-summary">情報カスケード</summary>
+        <div class="kw-body">各人の意思決定が自分自身の情報（ヒント）に依存せず、専ら他人の過去の選択の模倣だけで決まってしまう状態。一度発生すると以降の全員の情報が一切社会に集約されなくなり、最初の数人が間違えると全員が同じ間違いを犯す。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">群衆行動</summary>
+        <div class="kw-body">人々が周囲の行動に付和雷同する現象。COVID-19時のトイレットペーパー買い占めや銀行取り付け騒ぎなど、パニックが伝染するように見える現象を指す。「非合理性」ではなく合理的な情報カスケードとして説明できる点が本講義の主眼。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">ベイズルール</summary>
+        <div class="kw-body">条件付き確率 Pr[A|B] を、逆向きの条件付き確率 Pr[B|A] と事前確率 Pr[A]・Pr[B] から求める公式：Pr[A|B]=Pr[B|A]Pr[A]/Pr[B]。ヒントを受け取った後の事後確率を求める中心的な道具。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">条件付き確率</summary>
+        <div class="kw-body">ある事象が起きたという条件のもとでの、別の事象の確率。Pr[a|sa] = Pr[a∩sa]/Pr[sa] のように定義される。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">シグナル（ヒント）</summary>
+        <div class="kw-body">正解 a・b のどちらであるかを示唆する、確率q=0.7で正しい情報。ヒントが正しい確率qと事前確率の組み合わせで、事後確率と最適な選択が決まる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">事前確率・事後確率</summary>
+        <div class="kw-body">事前確率はヒントを受け取る前の確率（本講義では Pr[a]=0.6）、事後確率はヒントなど新情報を受け取った後にベイズルールで更新した確率。両者の乖離・一致がカスケード発生の鍵になる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">条件付き独立</summary>
+        <div class="kw-body">各人に与えられるヒントが、正解（aかb）が決まった条件のもとでは互いに独立に生成されるという仮定。この仮定のもとで情報カスケードのメカニズムが導かれる（最後のトピックでは仮定を外し、相関がある場合が分析される）。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">選択からの推論</summary>
+        <div class="kw-body">他人に与えられたヒント自体は見えなくても、その人がヒントに従って行動していると分かっていれば、選択結果から与えられたヒントを逆算（推測）できるという考え方。情報カスケードのモデルの核心にあたる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">戦略的補完性</summary>
+        <div class="kw-body">他の人が特定の行動（買い占めなど）を取るほど、自分も同じ行動を取ることが最適になる性質。情報カスケードとは独立に、パニックを増幅させるもう一つの要因として紹介された。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">銀行取り付け騒ぎ</summary>
+        <div class="kw-body">預金者が一斉に預金を引き出そうとする現象。他の預金者が引き出すなら自分も早めに引き出す方がよいという戦略的補完性と、情報カスケードの両方が組み合わさって発生しうる典型例として言及された。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">ヒントの相関</summary>
+        <div class="kw-body">各人に与えられるヒントが独立ではなく、SNSなど同じ情報源を共有することで互いに相関を持つ状況。ヒントがマルコフ過程に従うと仮定して分析される、講義後半の発展トピック。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">persistence</summary>
+        <div class="kw-body">Awaya and Krishna (2006) で分析される、ヒントの相関の強さを表す指標。相関が強くなるほど、最初の数人の間違いが後に残りやすく（persistする）、群衆全体が誤った選択に収束する確率が変化する。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">偽陽性</summary>
+        <div class="kw-body">検査で「陽性」と出ても、対象の病気にかかっている事前確率が低ければ、実際にかかっている事後確率はそれほど高くならないという現象。ベイズルールの応用例として言及された（講義では詳しく扱わず）。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">モンティ・ホール問題</summary>
+        <div class="kw-body">3つの扉から1つを選んだ後、司会者が不正解の扉を1つ開けて見せる有名な確率パズル。ベイズルールの直感に反する応用例として、興味があれば調べてみるよう紹介された。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">ブラウエスのパラドックス</summary>
+        <div class="kw-body">交通ネットワークに新しい道路（近道）を追加すると、各利用者の合理的な経路選択の結果としてかえって全体の所要時間が悪化してしまう現象（Braess's Paradox）。板書のみで紹介された講義最後の例で、S・A・B・Gの4地点・40台の車のモデルでは、近道を作らない場合65分だった均衡所要時間が、近道を作ると80分に悪化することが示された。</div>
+      </details>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📝</span>過去問との対応</h2>
+    <div class="exam-ref-box">
+
+      <!-- 2025 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2025年度 期末試験</span>
+          <a href="../kakomon_2025.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-no-data">2025年度は本講義（情報カスケードと群衆行動）に対応する問題が出題されていません。本講義は2026年度に新たに追加された回です。</div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2024年度 期末試験</span>
+          <a href="../kakomon_2024.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-no-data">2024年度は本講義に対応する問題が出題されていません。本講義は2026年度に新たに追加された回です。</div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2023年度 期末試験</span>
+          <a href="../kakomon_2023.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-no-data">2023年度は本講義に対応する問題が出題されていません。本講義は2026年度に新たに追加された回です。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="lecture-nav">
+    <a href="第12回.html">← 第12回</a>
+    <a href="index.html" class="center">講義一覧</a>
+    <span style="width:120px;"></span>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">現代経済理論（渡辺安虎）ー2026前期課程Sセメスター</footer>
+
+<script>
+// 押されたボタンに対応する解説欄の表示を切り替える。
+function toggleExp(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const opt = e.target.closest('.opt');
+  if (!opt) return;
+  const options = opt.closest('.options');
+  if (!options || options.classList.contains('revealed')) return;
+  options.classList.add('revealed');
+  opt.classList.add('selected');
+});
+</script>
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+</body>
+</html>

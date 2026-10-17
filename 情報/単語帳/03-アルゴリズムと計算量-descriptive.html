@@ -1,0 +1,103 @@
+<!DOCTYPE html><!-- 「アルゴリズムと計算量 — 記述式で狙われる内容 | 情報」の内容を表示する学習ページ。 --><html lang="ja"><!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head><meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="theme-color" content="#0a4f5c"><title>アルゴリズムと計算量 — 記述式で狙われる内容 | 情報</title><link rel="stylesheet" href="../../common.css"><link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+  MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-03-desc">
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>アルゴリズムと計算量 — 記述式で狙われる内容</h1>
+  <p class="subtitle">過去問の記述問題と得点ポイント</p>
+</div>
+
+<div class="container">
+
+<div class="page-toc">
+  <strong>目次</strong>
+  <ol>
+    <li><a href="#desc-1">共通2006 q2b — 分割統治法による最大値探索</a></li>
+    <li><a href="#desc-2">共通2010 q3B — 金貨探索</a></li>
+    <li><a href="#desc-3">共通2022 q2-6 — 計算量オーダーの考え方</a></li>
+    <li><a href="#desc-4">共通2015 q2b・2016 q1(5)a — 木構造の巡回</a></li>
+    <li><a href="#desc-5">個別2013・2019・2022 q1c — 同じ計算をしていることの説明</a></li>
+    <li><a href="#desc-6">個別2013・2019・2022 — より少ないステップ数のプログラム</a></li>
+    <li><a href="#desc-7">共通2017 q2-2 — 偶奇判定</a></li>
+    <li><a href="#desc-8">共通2021 q2(1)(3) — 二分探索を選ぶ理由</a></li>
+  </ol>
+</div>
+
+<div class="desc-item" id="desc-1">
+  <p class="desc-q">共通2006 q2b <span class="desc-src">分割統治法による最大値探索</span></p>
+  <div class="ex"><span class="box-label">設問要旨</span><p>分割統治法によって配列の最大値を求めるアルゴリズムについて、なぜこのアルゴリズムが正しいといえるのか説明する。</p></div>
+  <div class="sol"><span class="box-label">書くべきポイント</span><p>次の2点を明示する。①基底ケース：区間の要素が1つだけのとき、その要素自身がその区間の最大値である。②再帰ケース：区間を2つの半分に分割し、それぞれの半分について（同じ方法で）最大値を求めたうえで、2つの最大値を比較して大きい方を返せば、それが元の区間全体の最大値になる。</p></div>
+</div>
+
+<div class="desc-item" id="desc-2">
+  <p class="desc-q">共通2010 q3B <span class="desc-src">金貨探索</span></p>
+  <div class="ex"><span class="box-label">設問要旨</span><p>複数の方法（総当たり法、逐次更新・トーナメント方式、バブルソート型）で金貨の中から目的のものを探すアルゴリズムを比較し、それぞれの計算量を説明する。</p></div>
+  <div class="sol"><span class="box-label">書くべきポイント</span><p>総当たり法は$O(n^2)$、逐次更新・トーナメント方式は$O(n)$、バブルソート型は$O(n^2)$であることを示したうえで、「1回の比較で必ず1枚脱落する」ことから比較回数の下限が$n-1$回であると説明し、逐次更新・トーナメント方式がこの下限をちょうど達成すること、バブルソート型のように全体を整列する手続きは目的に対して過剰であり非効率であることを書く。</p></div>
+</div>
+
+<div class="desc-item" id="desc-3">
+  <p class="desc-q">共通2022 q2-6 <span class="desc-src">計算量オーダーの考え方</span></p>
+  <div class="ex"><span class="box-label">設問要旨</span><p>計算量のオーダーという考え方そのものを説明する。</p></div>
+  <div class="sol"><span class="box-label">書くべきポイント</span><p>定数倍や下位の項を無視して、計算回数の増加傾向を大まかに捉える表し方であること、そしてハードウェア（コンピュータの速さ）によらず、オーダーだけでアルゴリズムの増加傾向がほぼ決まってしまう、という点を書く。</p></div>
+</div>
+
+<div class="desc-item" id="desc-4">
+  <p class="desc-q">共通2015 q2b・2016 q1(5)a <span class="desc-src">木構造の巡回</span></p>
+  <div class="ex"><span class="box-label">設問要旨</span><p>木構造であれば、単純な2つの操作（↓子に降りる／↑親に戻る）だけで全体を巡回できるのはなぜか説明する。</p></div>
+  <div class="sol"><span class="box-label">書くべきポイント</span><p>木構造は「親がただ1つに定まり、閉路を持たない」という性質を持つため、この2操作だけで迷わず全体を巡れることを明示し、閉路を持つ一般のグラフではこの前提が成り立たない（同じ2操作だけでは巡回しきれない、または迷子になりうる）ことと対比して書く。</p></div>
+</div>
+
+<div class="desc-item" id="desc-5">
+  <p class="desc-q">個別2013 q1c・2019 q1c・2022 q1c <span class="desc-src">同じ計算をしていることの説明</span></p>
+  <div class="ex"><span class="box-label">設問要旨</span><p>2つのプログラムが同じ計算をしていることを説明する。</p></div>
+  <div class="sol"><span class="box-label">書くべきポイント</span><p>両方のプログラムを実際にトレースし、最終的なアキュムレータ（結果を保持する変数）の値を式として導出したうえで、2つの式が数式として同一であることを示す。</p></div>
+</div>
+
+<div class="desc-item" id="desc-6">
+  <p class="desc-q">個別2013・2019・2022 <span class="desc-src">より少ないステップ数のプログラム</span></p>
+  <div class="ex"><span class="box-label">設問要旨</span><p>与えられたプログラムより少ないステップ数で同じ計算を行うプログラムを作る。</p></div>
+  <div class="sol"><span class="box-label">書くべきポイント</span><p>倍々計算（値を繰り返し2乗するなどして倍々に増やす）、演算順序の入れ替え、重複している計算の除去といった具体的な高速化の技法を、実際にプログラムとして構成できるかが問われる。</p></div>
+</div>
+
+<div class="desc-item" id="desc-7">
+  <p class="desc-q">共通2017 q2-2 <span class="desc-src">偶奇判定</span></p>
+  <div class="ex"><span class="box-label">設問要旨</span><p>符号反転の回数を数えるアルゴリズムで、なぜ「符号反転回数の偶奇」によって判定ができるのか、また負数に対してなぜ前処理（絶対値化）が必要なのかを説明する。</p></div>
+  <div class="sol"><span class="box-label">書くべきポイント</span><p>符号反転回数の偶奇と判定したい性質が対応することを筋道立てて説明し、さらに負数をそのまま扱うと処理が無限ループに陥りうるため、絶対値化という前処理が必要であることを書く。</p></div>
+</div>
+
+<div class="desc-item" id="desc-8">
+  <p class="desc-q">共通2021 q2(1)(3) <span class="desc-src">二分探索を選ぶ理由</span></p>
+  <div class="ex"><span class="box-label">設問要旨</span><p>なぜ二分探索を選ぶべきか、また測定回数がおよそ$\log_2 N$になる理由を説明する。</p></div>
+  <div class="sol"><span class="box-label">書くべきポイント</span><p>「候補の範囲を毎回半分に絞り込める」という二分探索の性質から、測定回数がおよそ$\log_2 N$になることを導出して説明する。</p></div>
+</div>
+
+<!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+  <a href="03-アルゴリズムと計算量-keypoints.html">← 押さえておきたい事項</a>
+  <a href="index.html">単語帳トップ →</a>
+</div>
+
+</div>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body></html>

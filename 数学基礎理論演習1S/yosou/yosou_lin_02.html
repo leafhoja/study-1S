@@ -1,0 +1,303 @@
+<!DOCTYPE html><!-- 「線形代数 予想問題 第2回 回転・鏡映・直交行列 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>線形代数 予想問題 第2回 回転・鏡映・直交行列 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="yosou_lin_01.html" data-page="yosou/yosou_lin_01">← 前のテーマ</a>
+      <a href="yosou_lin_03.html" data-page="yosou/yosou_lin_03">次のテーマ →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-linear">
+  <h1>線形代数学演習　予想問題　第2回</h1>
+  <p class="subtitle">回転・鏡映・直交行列（全5問）</p>
+</div>
+
+<div class="container">
+
+<!-- 免責 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#fff5f5; color:#c53030;">⚠️ この問題セットについて</div>
+  <div class="section-card-body">
+    <div class="warn-box">
+      <div class="warn-title">AIが作成した予想問題です（実際の試験問題ではありません）</div>
+      <p>演習第2回（<a href="../linear/lin_02.html">回転・鏡映・直交行列</a>）と同程度〜少し発展した難易度で構成した学習用オリジナル問題です。全4テーマ・20問構成の第2回です。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 このテーマの要点</div>
+  <div class="section-card-body">
+    <div class="def-box">
+      <div class="def-title">この5問で使う道具</div>
+      <ul>
+        <li>$R_\theta = \begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}$，$T_\tau = \begin{pmatrix}\cos2\tau&\sin2\tau\\\sin2\tau&-\cos2\tau\end{pmatrix}$</li>
+        <li>直交行列 $\Leftrightarrow$ ${}^t\!AA=AA^t=E$ $\Leftrightarrow$ 列ベクトルが正規直交系</li>
+        <li>$2\times2$ 直交行列は回転行列（$\det=1$）か鏡映行列（$\det=-1$）のいずれか</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">1</span> 回転行列の逆行列と転置
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <ol>
+        <li>任意の $\theta$ に対し，$R_\theta^{-1} = R_{-\theta} = {}^t\!R_\theta$ であることを示せ。</li>
+        <li>$\theta=60°$ のとき，$R_\theta$ とその逆行列 $R_\theta^{-1}$ を成分で書き，$R_\theta R_\theta^{-1}=E$ を直接計算で確かめよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>${}^t\!R_\theta = \begin{pmatrix}\cos\theta&\sin\theta\\-\sin\theta&\cos\theta\end{pmatrix} = \begin{pmatrix}\cos(-\theta)&-\sin(-\theta)\\\sin(-\theta)&\cos(-\theta)\end{pmatrix} = R_{-\theta}$（$\cos$ は偶関数，$\sin$ は奇関数を使用）。</p>
+      <p>また $R_\theta R_{-\theta} = R_{\theta+(-\theta)} = R_0 = E$，$R_{-\theta}R_\theta = R_0 = E$（回転の合成則）なので，$R_{-\theta}$ は $R_\theta$ の逆行列の定義を満たす。よって $R_\theta^{-1}=R_{-\theta}={}^t\!R_\theta$。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      $$R_{60°} = \begin{pmatrix}\tfrac12 & -\tfrac{\sqrt3}2\\ \tfrac{\sqrt3}2 & \tfrac12\end{pmatrix},\qquad R_{60°}^{-1}=R_{-60°}=\begin{pmatrix}\tfrac12 & \tfrac{\sqrt3}2\\ -\tfrac{\sqrt3}2 & \tfrac12\end{pmatrix}$$
+      $$R_{60°}R_{-60°} = \begin{pmatrix}\tfrac14+\tfrac34 & \tfrac{\sqrt3}4-\tfrac{\sqrt3}4\\ \tfrac{\sqrt3}4-\tfrac{\sqrt3}4 & \tfrac34+\tfrac14\end{pmatrix} = \begin{pmatrix}1&0\\0&1\end{pmatrix} = E\quad\blacksquare$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>「逆行列 $=$ 転置」という直交行列の特徴は，回転行列においては「回転を打ち消すには逆向きに回せばよい」という直感そのもの。$R_\theta^{-1}=R_{-\theta}$ が幾何的に明らかな一方，${}^t\!R_\theta=R_{-\theta}$ は成分を見比べるだけの代数的事実。この2つが一致するところに，直交行列という抽象的な代数的条件と，等長変換という具体的な幾何学的性質のつながりが見える。</p>
+      <p><strong>パターン認識：</strong>問題文に「$\cos\theta,-\sin\theta,\sin\theta,\cos\theta$」のような三角関数の並びを見たら，反射的に「これは直交行列では？」と疑うのが定石である。直交行列であることに気づけば，逆行列を求める際に $2\times2$ の余因子公式 $A^{-1}=\dfrac1{\det A}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$ をいちいち計算する必要がなく，転置を書くだけで済む。小テストでは「直交性に気づけたか」だけで解答時間が数分単位で変わる。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 ${}^t\!R_\theta=R_{-\theta}$ という等式はどこから予想するか（逆算の視点）</div>
+        <p>解答は成分を書いて見比べる「順算」だが，試験場で実際にこの等式を<strong>思いつく</strong>順序は逆であることが多い。まず一般論として「直交行列なら ${}^tA=A^{-1}$」（これが直交行列の定義そのもの）を知っているので，$R_\theta$ が直交行列だと分かった時点で「${}^t\!R_\theta$ は $R_\theta$ の逆行列に等しいはずだ」と<strong>結論を先に予想</strong>できる。</p>
+        <p>次に，逆行列が何かは幾何的に自明（回転を打ち消すには逆向きに $-\theta$ だけ回せばよい）なので $R_\theta^{-1}=R_{-\theta}$ もすでに分かっている。この2つの予想を組み合わせると，${}^t\!R_\theta=R_{-\theta}$ という具体的な等式が計算する前から見えてくる。成分を書いて確かめるのは，予想が正しいことの<strong>検算</strong>にすぎない——これが答案作成の実際の思考順序である。</p>
+      </div>
+      <p><strong>別解（複素数を使う視点）：</strong>平面ベクトル $(x,y)$ を複素数 $x+iy$ と同一視すると，$R_\theta$ による変換は $z\mapsto e^{i\theta}z$（絶対値1の複素数を掛ける操作）に対応する。この対応では，逆回転 $R_\theta^{-1}$ は $e^{-i\theta}$ 倍，つまり複素共役 $\overline{e^{i\theta}}$ 倍に対応する。一方，行列の転置は非対角成分の符号を反転させる操作であり，これは複素共役 $\overline{x+iy}=x-iy$ に対応する演算とちょうど同じ構造を持つ。したがって「転置＝逆行列」は，複素数の言葉では「絶対値1の複素数において，共役＝逆数」というよく知られた事実の言い換えにすぎない。</p>
+      <p><strong>よくある間違い：</strong>①直交性に気づかず余因子行列で逆行列を計算してしまい，符号ミスを誘発する。②${}^t\!R_\theta$ を求める際に，$\cos$ が偶関数・$\sin$ が奇関数であることを混同し，$\cos(-\theta)=-\cos\theta$ のように誤って扱ってしまう。③$R_\theta^{-1}$ を「各成分の符号を反転させた $-R_\theta$」と早合点する誤り——回転を打ち消すのは<strong>角度</strong>を反転させることであり，行列の成分をそのまま反転させることではない（実際 $-R_\theta=R_{\theta+\pi}$ であり $R_{-\theta}$ とは別物）。</p>
+      <p><strong>一般化・出題対応：</strong>この事実は $2\times2$ に限らず，任意の $n$ 次の回転（特殊直交群 $SO(n)$ の元）に対して成り立つ一般定理「直交行列の逆行列は転置に等しい（${}^tAA=E \Leftrightarrow A^{-1}={}^tA$）」の具体例である。本番で3次以上の回転行列や見慣れない直交行列の逆行列を求めよと言われたら，まず ${}^tAA=E$（または列が正規直交系）を確認し，成り立てば即座に転置を書くのが最速の解法になる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">2</span> 鏡映変換による点の像
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$x$ 軸と角 $\tau=30°$ をなす直線 $l_\tau$ に関する鏡映を考える。点 $(2,1)$ の像を求めよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      $$T_{30°} = \begin{pmatrix}\cos60° & \sin60°\\ \sin60° & -\cos60°\end{pmatrix} = \begin{pmatrix}\tfrac12 & \tfrac{\sqrt3}2\\ \tfrac{\sqrt3}2 & -\tfrac12\end{pmatrix}$$
+      $$T_{30°}\binom{2}{1} = \binom{\tfrac12\cdot2+\tfrac{\sqrt3}2\cdot1}{\tfrac{\sqrt3}2\cdot2-\tfrac12\cdot1} = \boxed{\binom{1+\tfrac{\sqrt3}2}{\sqrt3-\tfrac12}}$$
+      <p>（数値では $\approx (1.87,\ 1.23)$。）</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>鏡映行列 $T_\tau$ の $(1,1)$ 成分・$(2,2)$ 成分に現れる角が $\tau$ ではなく $2\tau$ になる点を忘れないこと（第2回参照）。$\tau=30°$ なら $2\tau=60°$ を代入する。公式さえ正しく思い出せれば，あとは行列とベクトルの積の計算だけ。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ角度が $2\tau$ になるのか（$T_\tau$ の公式の逆算）</div>
+        <p>$T_\tau$ を孤立した公式として覚えるのではなく，どこから来るかを追うと忘れにくくなる。直線 $l_\tau$（$x$ 軸との角が $\tau$）に関する鏡映は，次の3段階の合成として作れる：①角度 $-\tau$ だけ回転させて $l_\tau$ を $x$ 軸に一致させる（$R_{-\tau}$），②$x$ 軸に関する鏡映を行う（対角行列 $D=\begin{pmatrix}1&0\\0&-1\end{pmatrix}$），③角度 $\tau$ だけ回転させて元の位置に戻す（$R_\tau$）。まとめると</p>
+        $$T_\tau = R_\tau\,D\,R_{-\tau} = \begin{pmatrix}\cos\tau&-\sin\tau\\\sin\tau&\cos\tau\end{pmatrix}\begin{pmatrix}1&0\\0&-1\end{pmatrix}\begin{pmatrix}\cos\tau&\sin\tau\\-\sin\tau&\cos\tau\end{pmatrix}$$
+        <p>これを実際に展開すると，$(1,1)$成分は $\cos^2\tau-\sin^2\tau=\cos2\tau$，$(2,1)$成分は $2\sin\tau\cos\tau=\sin2\tau$ となり，2倍角の公式が自然に現れる。「$2\tau$」は覚えるべき孤立した数字ではなく，<strong>回転を前後に挟むことで三角関数の積が2倍角公式に化ける</strong>という構造から必然的に出てくるものだと理解しておけば，公式を忘れてもその場で作り直せる。</p>
+      </div>
+      <p><strong>別解（射影の公式を使う視点）：</strong>直線 $l_\tau$ の方向単位ベクトルを $u=(\cos\tau,\sin\tau)$ とすると，一般に直線 $\mathrm{span}(u)$ に関する鏡映は $\mathrm{refl}(v)=2(u\cdot v)u-v$ で与えられる（$v$ を $u$ 方向の成分と直交成分に分解し，直交成分だけ反転させる，という鏡映の定義そのもの）。$v=(2,1)$，$u=\left(\tfrac{\sqrt3}2,\tfrac12\right)$ とすると $u\cdot v=\sqrt3+\tfrac12$ なので $2(u\cdot v)u-v=(2\sqrt3+1)\left(\tfrac{\sqrt3}2,\tfrac12\right)-(2,1)$ を展開すればよく，本文の行列計算と同じ答えに一致する。行列を使う方が計算は速いが，この視点は「鏡映とは何をしているか」を最も直接的に表している。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 検算：像は直線 $l_\tau$ に関して対称</div>
+        <p>元の点 $(2,1)$ と像 $\left(1+\tfrac{\sqrt3}2,\ \sqrt3-\tfrac12\right)$ を結ぶ線分の中点は，直線 $l_{30°}$（傾き $\tan30°=1/\sqrt3$ の直線）上にあるはずである。中点は $\left(\tfrac32+\tfrac{\sqrt3}4,\ \tfrac12+\tfrac{\sqrt3}2\right)$ となり，実際にこの直線の方程式 $y=x\tan30°$ を満たすことを確認できる（鏡映の定義そのものの検算）。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①$\tau$ をそのまま $(1,1)$ 成分に代入してしまい，$\cos\tau,\sin\tau$ を使ってしまう（正しくは $\cos2\tau,\sin2\tau$）。②$(2,2)$ 成分の符号を見落とし，$-\cos2\tau$ とすべきところを $\cos2\tau$ としてしまう。③鏡映と回転を混同し，$\det T_\tau=-1$（鏡映は向きを反転させる）を確認しないまま計算を進めてしまう——回転なら $\det=1$ のはずなので，符号のセルフチェックに使える。</p>
+      <p><strong>一般化・出題対応：</strong>「回転で軸を揃え，標準的な鏡映を行い，回転で戻す」という構成は，$n$ 次元の超平面に関する鏡映（Householder変換 $H=I-2uu^\top$，$u$ は法線方向の単位ベクトル）にも通じる一般的な考え方である。本番で「任意の直線・平面に関する鏡映を求めよ」という類題が出たら，この3段階分解が汎用的な解法になる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">3</span> 直交行列の未知成分を決定する
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$A=\begin{pmatrix}\tfrac35 & a\\ b & \tfrac35\end{pmatrix}$ が直交行列（${}^t\!AA=E$）となるような実数 $a,b$ をすべて求めよ。また，そのとき $A$ は回転行列・鏡映行列のどちらであるか答えよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>${}^t\!AA=E$ を成分で書く。第1列の長さ：$\left(\tfrac35\right)^2+b^2=1 \Rightarrow b^2=\tfrac{16}{25} \Rightarrow b=\pm\tfrac45$。第2列の長さ：$a^2+\left(\tfrac35\right)^2=1 \Rightarrow a=\pm\tfrac45$。列の直交性：$\tfrac35 a+b\cdot\tfrac35=0 \Rightarrow a=-b$。</p>
+      <p>よって $(a,b)=\left(-\tfrac45,\tfrac45\right)$ または $(a,b)=\left(\tfrac45,-\tfrac45\right)$。</p>
+      <p>いずれも $\det A = \tfrac35\cdot\tfrac35-ab = \tfrac9{25}-\left(-\tfrac{16}{25}\right) = 1$（$a=-\tfrac45,b=\tfrac45$ のとき $ab=-\tfrac{16}{25}$）なので，どちらも<strong>回転行列</strong>である。実際 $\cos\theta=\tfrac35,\sin\theta=\tfrac45$（$3$-$4$-$5$ の直角三角形）とすると，$A=R_\theta$（$(a,b)=(-\tfrac45,\tfrac45)$）または $A=R_{-\theta}$（$(a,b)=(\tfrac45,-\tfrac45)$）に一致する。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p>${}^t\!AA=E$ という行列の等式を，成分ごとの3つの条件（列の長さ2本 $+$ 列の直交性1本）に分解するのが定石。$2\times2$ 対称な対角成分（$\tfrac35$ が2箇所）を持つ場合，鏡映行列 $T_\tau=\begin{pmatrix}\cos2\tau&\sin2\tau\\\sin2\tau&-\cos2\tau\end{pmatrix}$ の対角成分は符号が逆でなければならないため，この設定では鏡映行列の解が出てこない，という点も観察しておくとよい。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ鏡映が出てこないのか（列ベクトルを「90°回転」として見る別視点）</div>
+        <p>成分計算とは別に，もっと構造的な見方がある。直交行列 $A$ の列を $\mathbf{a}_1,\mathbf{a}_2$ とすると，$\{\mathbf{a}_1,\mathbf{a}_2\}$ は正規直交系。平面上で第1列 $\mathbf{a}_1$ を $90°$ 回転させたベクトル $J\mathbf{a}_1$（$J=\begin{pmatrix}0&-1\\1&0\end{pmatrix}$）は $\mathbf{a}_1$ と直交する単位ベクトルなので，第2列 $\mathbf{a}_2$ は $J\mathbf{a}_1$ か $-J\mathbf{a}_1$ のどちらかに必ず一致する。前者なら $\det A=1$（回転），後者なら $\det A=-1$（鏡映）。</p>
+        <p>本問では $\mathbf{a}_1=\left(\tfrac35,b\right)$，$J\mathbf{a}_1=\left(-b,\tfrac35\right)$。第2列は $\mathbf{a}_2=\left(a,\tfrac35\right)$（行列の $(2,2)$ 成分が $\tfrac35$ に<strong>固定</strong>されている）。回転の場合 $\mathbf{a}_2=J\mathbf{a}_1=(-b,\tfrac35)$ を要求すると，第2成分は自動的に $\tfrac35=\tfrac35$ で一致し，第1成分から $a=-b$ が出る——これがまさに解答の関係式。一方，鏡映の場合は $\mathbf{a}_2=-J\mathbf{a}_1=(b,-\tfrac35)$ を要求するので第2成分が $-\tfrac35=\tfrac35$ となり<strong>矛盾</strong>（両立しない）。こうして「$(2,2)$成分が固定されている」という設定そのものが鏡映を排除していることが，計算を通さずに見える。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 3-4-5 のような「よい比」に気づく</div>
+        <p>$\left(\tfrac35\right)^2+\left(\tfrac45\right)^2=1$ は $3^2+4^2=5^2$（ピタゴラス数）からきている。$\sin,\cos$ の具体的な角度が分からなくても，$(\cos\theta,\sin\theta)=(3/5,4/5)$ という具体的な単位ベクトルとして扱えることに気づくと，答えをすっきり書ける。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①$a,b$ の符号の組合せを全部書き出さず，$(a,b)=\left(\tfrac45,\tfrac45\right)$ のように直交性を確認せずに決めてしまう（長さの条件だけでは符号が確定しない。直交性の式を必ず併用する）。②${}^t\!AA=E$ だけ確認して満足してしまう場合があるが，正方行列では一方の等式（${}^t\!AA=E$）が成り立てば $A$ は正則で $A^{-1}={}^t\!A$ となり，自動的に $AA^t=E$ も成り立つ——この事実を知っておくと，両方を律儀に検算する手間を省ける。</p>
+      <p><strong>一般化・出題対応：</strong>「列の長さ＝1」「列同士の直交性＝0」という連立方程式に分解する手法は，$n\times n$ の直交行列の未知成分を決定する問題全般（$n(n+1)/2$本の独立な式が立つ）に通用する定石。また「第2列は第1列を$90°$回転したもの（回転）か，その逆（鏡映）か」という$J$を使った見方は，$2\times2$ の直交行列を素早く分類する強力な視点として覚えておくとよい。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">4</span> $A^4=E$ を満たす直交行列
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>実数係数の $2\times2$ 直交行列 $A$（${}^t\!AA=AA^t=E$）で $A^4=E$ を満たすものをすべて求めよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$A$ は回転行列 $R_\theta$ か鏡映行列 $T_\tau$ のいずれか。</p>
+      <p><strong>$A=R_\theta$ の場合：</strong>$R_\theta^4=R_{4\theta}=E \Leftrightarrow 4\theta\equiv0\pmod{2\pi} \Leftrightarrow \theta=\dfrac{2\pi k}{4}=\dfrac{\pi k}{2}$（$k=0,1,2,3$）。よって</p>
+      $$R_0=E,\quad R_{\pi/2}=\begin{pmatrix}0&-1\\1&0\end{pmatrix},\quad R_\pi=\begin{pmatrix}-1&0\\0&-1\end{pmatrix},\quad R_{3\pi/2}=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$$
+      <p><strong>$A=T_\tau$ の場合：</strong>鏡映行列は常に $T_\tau^2=E$（対合）を満たすので，$T_\tau^4=(T_\tau^2)^2=E^2=E$ は $\tau$ によらず<strong>常に成立</strong>。</p>
+      <p><strong>まとめ：</strong>$A^4=E$ を満たす直交行列は，「$\theta=0,\dfrac{\pi}2,\pi,\dfrac{3\pi}2$ のいずれかの回転行列」，または「<strong>任意の</strong>鏡映行列 $T_\tau$（$\tau\in\mathbb{R}$ は自由）」の全体。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p>回転と鏡映で条件の効き方が全く違う点に注意。回転は「角度が $2\pi$ の何分のいくつになるか」という<strong>離散的な</strong>条件になり，解は有限個（ここでは4個）。一方，鏡映は $\tau$ によらず対合性 $T_\tau^2=E$ が自動的に成り立つので，$n$ が<strong>偶数</strong>ならどんな $\tau$ でも条件を満たしてしまい，解は無限個（$\tau\in\mathbb{R}$）になる。</p>
+      <p><strong>パターン認識：</strong>「実直交行列 $+$ $A^n=E$」という設定を見たら，反射的に「まず回転・鏡映の2分類に落とす」→「回転は角度の合同方程式，鏡映は対合性」という2段階の処理を思い出すこと。この問題は $n=4$ の特殊化にすぎず，$n$ が変わっても同じ2段階の思考をなぞればよい。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 別解：固有値で考える（幾何を使わない代数的な視点）</div>
+        <p>回転・鏡映という幾何的な分類を使わず，固有値だけで攻めることもできる。$2\times2$ 実直交行列の固有値は，回転の場合は複素共役の対 $e^{\pm i\theta}$（$\theta\ne0,\pi$ のとき実固有値を持たない），鏡映の場合は実固有値 $\pm1$（対称行列なので実固有値を持つ）。</p>
+        <p>$A^4=E$ は「$A$ の固有値がすべて $4$ 乗して $1$ になる」ことと同値。回転の場合，$e^{\pm i\theta}$ が $4$乗して $1$ になるのは $e^{4i\theta}=1 \Leftrightarrow \theta=\dfrac{\pi k}2$（$k=0,1,2,3$）のとき。鏡映の場合，固有値は $\pm1$ でともに $(\pm1)^4=1$ を満たすので，$\tau$ に関わらず自動的に成立する。結論は本文と完全に一致するが，「固有値の視点」は回転・鏡映を統一的に扱える点で見通しがよく，$n$ が変わったときも同じ議論をそのまま使い回せる。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①回転行列だけを考えて4個の解を出し，鏡映のケースを完全に見落として「解は4個」と誤答してしまう（実直交行列＝回転行列，と思い込むのが原因）。②$T_\tau^2=E$ を確かめずに，$T_\tau^4=E$ を回転と同様に「角度の条件」として処理しようとしてしまう（鏡映には角度の条件は存在せず，対合性という代数的性質だけで押し切れる）。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 一般の $n$ ではどうなるか（定性的なまとめ）</div>
+        <p>$n$ が偶数のとき：回転は $n$ 個の離散的な角度，鏡映はすべて解になる。$n$ が奇数のとき：$\det(A^n)=(\det A)^n=1$ から $\det A=1$ に限られる（奇数乗で $-1$ にはならない）ので，鏡映は排除され，回転のみが $n$ 個の離散的な解として残る。「回転は方程式 $n\theta\equiv0$ を解く離散的な問題，鏡映は $\tau$ に依存しない代数的な恒等式」という違いを覚えておくと，$n$ がどんな値でもすぐに答えの構造が見通せる。</p>
+      </div>
+      <p><strong>一般化・出題対応：</strong>この問題は「$SO(2)\cong$（単位円周上の点，$e^{i\theta}$ 全体）における $n$ 乗根を求める」という問題の言い換えであり，$1$ の $n$ 乗根（$n$ 個の等間隔な点）を求める複素数の議論と本質的に同じ構造を持つ。本番で $n$ の値が変わった類題や，「$A^n=A$」「$A^n=-E$」のような条件に変えた類題が出ても，まず回転・鏡映に分類し，回転側は角度の合同方程式，鏡映側は対合性 $T_\tau^2=E$ から出発すればよい。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問5 -->
+<section class="section-card" id="problem5">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">5</span> 鏡映の合成の数値検証
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$\tau_1=45°$，$\tau_2=15°$ とする。$T_{\tau_1}T_{\tau_2}$ を直接計算し，これが回転行列 $R_{2(\tau_1-\tau_2)}=R_{60°}$ に一致することを確認せよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      $$T_{45°}=\begin{pmatrix}\cos90°&\sin90°\\\sin90°&-\cos90°\end{pmatrix}=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+        T_{15°}=\begin{pmatrix}\cos30°&\sin30°\\\sin30°&-\cos30°\end{pmatrix}=\begin{pmatrix}\tfrac{\sqrt3}2&\tfrac12\\\tfrac12&-\tfrac{\sqrt3}2\end{pmatrix}$$
+      $$T_{45°}T_{15°} = \begin{pmatrix}0&1\\1&0\end{pmatrix}\begin{pmatrix}\tfrac{\sqrt3}2&\tfrac12\\\tfrac12&-\tfrac{\sqrt3}2\end{pmatrix} = \begin{pmatrix}\tfrac12&-\tfrac{\sqrt3}2\\\tfrac{\sqrt3}2&\tfrac12\end{pmatrix}$$
+      <p>一方，$R_{60°}=\begin{pmatrix}\cos60°&-\sin60°\\\sin60°&\cos60°\end{pmatrix}=\begin{pmatrix}\tfrac12&-\tfrac{\sqrt3}2\\\tfrac{\sqrt3}2&\tfrac12\end{pmatrix}$ であり，$2(\tau_1-\tau_2)=2(45°-15°)=60°$。両者は一致する。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景</div>
+      <p>公式 $T_{\tau_1}T_{\tau_2}=R_{2(\tau_1-\tau_2)}$（第2回で証明済み）を丸暗記するだけでなく，具体的な角度で自分の手で検算すると理解が深まる。今回のように角度が $45°,15°,60°$ のような「よく知っている三角比」で計算できるように問題を選ぶと，検算がしやすい。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 公式 $T_{\tau_1}T_{\tau_2}=R_{2(\tau_1-\tau_2)}$ を一般の角度で証明する</div>
+        <p>数値検算だけでなく，一般の $\tau_1,\tau_2$ で直接計算すればこの公式そのものを証明できる（第2回の証明を再現する）。</p>
+        $$T_{\tau_1}T_{\tau_2} = \begin{pmatrix}\cos2\tau_1&\sin2\tau_1\\\sin2\tau_1&-\cos2\tau_1\end{pmatrix}\begin{pmatrix}\cos2\tau_2&\sin2\tau_2\\\sin2\tau_2&-\cos2\tau_2\end{pmatrix}$$
+        <p>$(1,1)$成分：$\cos2\tau_1\cos2\tau_2+\sin2\tau_1\sin2\tau_2=\cos(2\tau_1-2\tau_2)$。$(1,2)$成分：$\cos2\tau_1\sin2\tau_2-\sin2\tau_1\cos2\tau_2=-\sin(2\tau_1-2\tau_2)$。$(2,1)$成分：$\sin2\tau_1\cos2\tau_2-\cos2\tau_1\sin2\tau_2=\sin(2\tau_1-2\tau_2)$。$(2,2)$成分：$\sin2\tau_1\sin2\tau_2+\cos2\tau_1\cos2\tau_2=\cos(2\tau_1-2\tau_2)$（加法定理を使用）。まとめると</p>
+        $$T_{\tau_1}T_{\tau_2}=\begin{pmatrix}\cos2(\tau_1-\tau_2)&-\sin2(\tau_1-\tau_2)\\\sin2(\tau_1-\tau_2)&\cos2(\tau_1-\tau_2)\end{pmatrix}=R_{2(\tau_1-\tau_2)}$$
+        <p>本問の数値（$\tau_1=45°,\tau_2=15°$）はこの一般公式に代入した特殊例にすぎない。公式を導出できれば，どんな角度の組が出題されても対応できる。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 幾何学的な意味：2回の鏡映＝回転</div>
+        <p>直線 $l_{45°}$ に関する鏡映の後，さらに直線 $l_{15°}$ に関する鏡映を行う（合成は右から，つまり $T_{15°}$ が先）と，結果は原点中心の回転になる。回転角は「2つの鏡映軸のなす角の2倍」（$45°-15°=30°$ の2倍で $60°$）。これは，鏡映を2回行うと向きの反転が打ち消し合って回転（向き保存）に戻る，という一般的な事実の具体例になっている。工学的には，光学における2枚の平面鏡の間の反射（潜望鏡の原理）が全く同じ数学的構造を持つ：2枚の鏡のなす角の2倍だけ像が回転する。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①合成の順序を取り違える——$T_{\tau_1}T_{\tau_2}$ は「$T_{\tau_2}$ を先に適用し，その結果に $T_{\tau_1}$ を適用する」という意味（右から順に作用）であり，$T_{\tau_2}T_{\tau_1}$ とは一般に異なる。実際 $T_{\tau_2}T_{\tau_1}=R_{2(\tau_2-\tau_1)}=R_{-2(\tau_1-\tau_2)}=\left(T_{\tau_1}T_{\tau_2}\right)^{-1}$ となり，回転の向きが逆になる（角度の符号だけ反転し，回転角自体が変わるわけではない点に注意）。②「鏡映を2回合成したから鏡映になるはず」という誤解——鏡映を偶数回合成すると向き反転が打ち消し合って必ず回転になる（$\det$ が $(-1)\times(-1)=1$ になることからも分かる）。</p>
+      <p><strong>一般化・出題対応：</strong>「奇数回の鏡映の合成は鏡映，偶数回の合成は回転」という偶奇のパターンは，行列式が乗法的（$\det(AB)=\det A\det B$）であることの直接的な帰結であり，本番で3枚以上の鏡映の合成を問われても $\det$ の偶奇だけで種類（回転か鏡映か）を即答できる。さらに一般の次元では，任意の直交変換（$O(n)$ の元）は高々 $n$ 回の鏡映の合成として書けるという Cartan–Dieudonné の定理が知られており，本問の「2回の鏡映＝回転」はその $n=2$ の場合の具体例にあたる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第2回（回転・鏡映・直交行列）を自力で解けるかセルフチェック</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$R_\theta^{-1}=R_{-\theta}={}^t\!R_\theta$ を代数的に示し，具体的な角度で数値検算できるか</li>
+          <li>鏡映行列 $T_\tau$ の $(1,1)$ 成分が $\cos2\tau$ になる点を忘れず，具体的な点の像を計算できるか</li>
+          <li>${}^t\!AA=E$ を「列の長さ・直交性」の3条件に分解して未知数を決定できるか</li>
+          <li>$A^n=E$ を満たす直交行列を求めるとき，回転（離散的な角度）と鏡映（対合性）で条件の効き方が違う理由を説明できるか</li>
+          <li>$T_{\tau_1}T_{\tau_2}=R_{2(\tau_1-\tau_2)}$ を具体的な角度で数値的に検算できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html><!-- 「神シケプリ | 情報」の一覧ページ。掲載されたページへ移動する入口をまとめる。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>神シケプリ | 情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="kami-index">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>神シケプリ</h1>
+  <p class="subtitle">分野別まとめ＋過去の出題例の解答・解説</p>
+  <p class="meta">先輩が作成した対策資料「神シケプリ」収録の過去問を、分野ごとに模範解答・解説つきで再構成</p>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <p>
+      「神シケプリ」は、教科書の章立てとは別に<strong>10の分野</strong>で要点をまとめた対策資料で、
+      各分野の末尾に「過去の出題例」として実際の過去問（2006〜2016年度）が抜粋されている。
+      ここでは、その抜粋問題を分野ごとに再掲し、模範解答と解説を新たに作成した。
+      年度別に通読したい場合は<a href="../過去問/共通問題/index.html">過去問（共通問題）</a>、
+      章立てで学びたい場合は<a href="../講義ノート/index.html">講義ノート</a>を参照。
+    </p>
+  </div>
+
+  <h2 class="home-section-title" style="border:none;padding:0;margin:1.6rem 0 1rem;font-size:1.25rem;color:var(--accent2);">情報の表現</h2>
+  <!-- 見出し・説明文・リンクを持つカードを、まとまった一覧として並べる。 --><div class="card-grid">
+    <a class="card" href="01-情報量.html" data-page="神シケプリ/01-情報量"><div class="card-tag">01</div><h3>情報量</h3><p>場合の数・確率による情報量の定義、情報量の加法性、平均情報量（エントロピー）。2008・2013年度の過去問2問。</p></a>
+    <a class="card" href="02-符号化.html" data-page="神シケプリ/02-符号化"><div class="card-tag">02</div><h3>符号化</h3><p>2進符号・グレイ符号、文字コード、平均符号長と情報源符号化定理。2012年度の過去問1問。</p></a>
+    <a class="card" href="03-標本化と量子化.html" data-page="神シケプリ/03-標本化と量子化"><div class="card-tag">03</div><h3>標本化・量子化</h3><p>標本化定理・ナイキスト周波数、量子化ビット数、音楽CDのデータ量計算。2006・2009・2013年度の過去問3問。</p></a>
+  </div>
+
+  <h2 class="home-section-title" style="border:none;padding:0;margin:1.6rem 0 1rem;font-size:1.25rem;color:var(--accent2);">情報の伝達と通信</h2>
+  <div class="card-grid">
+    <a class="card" href="04-ネットワーク.html" data-page="神シケプリ/04-ネットワーク"><div class="card-tag">04</div><h3>ネットワーク</h3><p>クライアント/サーバモデル、ルータと経路表、防火壁。2006年度の過去問1問。</p></a>
+    <a class="card" href="05-インターネット通信.html" data-page="神シケプリ/05-インターネット通信"><div class="card-tag">05</div><h3>インターネット通信</h3><p>DNS・IPアドレス・パケット・TCP/IP階層モデルの仕組み。2011・2014年度の過去問2問。</p></a>
+    <a class="card" href="06-安全な通信.html" data-page="神シケプリ/06-安全な通信"><div class="card-tag">06</div><h3>安全な通信</h3><p>共通鍵暗号・公開鍵暗号・ディジタル署名・PKI。2014年度の過去問1問。</p></a>
+  </div>
+
+  <h2 class="home-section-title" style="border:none;padding:0;margin:1.6rem 0 1rem;font-size:1.25rem;color:var(--accent2);">コンピュータ</h2>
+  <div class="card-grid">
+    <a class="card" href="07-プログラミング.html" data-page="神シケプリ/07-プログラミング"><div class="card-tag">07</div><h3>プログラミング</h3><p>プログラム内蔵方式、擬似プログラミング言語、機械語トレース、計算量のオーダー。2015年度の過去問2問。</p></a>
+    <a class="card" href="08-論理関数.html" data-page="神シケプリ/08-論理関数"><div class="card-tag">08</div><h3>論理関数</h3><p>AND/OR/NOT/NAND/NORなど7つの論理関数、完備性、NANDのみによる回路構成。2009年度の過去問1問。</p></a>
+  </div>
+
+  <h2 class="home-section-title" style="border:none;padding:0;margin:1.6rem 0 1rem;font-size:1.25rem;color:var(--accent2);">その他もろもろ</h2>
+  <div class="card-grid">
+    <a class="card" href="09-データモデル.html" data-page="神シケプリ/09-データモデル"><div class="card-tag">09</div><h3>データモデル</h3><p>ネットワークモデル・階層モデル・ファイルパス、ターミナル操作のトレース。2016年度の過去問1問。</p></a>
+    <a class="card" href="10-ユーザインターフェース.html" data-page="神シケプリ/10-ユーザインターフェース"><div class="card-tag">10</div><h3>ユーザインターフェース</h3><p>GUI/CUI、デスクトップメタファ、アフォーダンス、アイコンデザイン。2016年度の過去問1問。</p></a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#164e63">
+<title>2013年度 過去問解説 | アルゴリズム入門</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+<script>
+MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams'}, options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body class="algorithm-page" data-nav-page="kakomon_2013">
+<nav class="navbar">
+<div class="navbar-inner"><a class="navbar-brand" href="index.html">アルゴリズム入門</a>
+<div class="navbar-links"><a href="../index.html" class="nav-back">← 学習ノート</a><a href="index.html">トップ</a><a href="lecture1.html" data-page="lecture1">第1回</a><a href="lecture2.html" data-page="lecture2">第2回</a><a href="index.html#exams">過去問</a>
+</div>
+</div></nav>
+<div class="hero">
+<h1>2013年度 過去問解説</h1>
+<p class="subtitle">併合整列・重複再帰・複素Newton法・確率の動的計画法</p>
+<p class="meta">1A · 共通試験 · 年度は原本の表題に準拠</p>
+</div>
+<main class="container">
+<div class="intro-box">
+<p>共通試験の解答例と解説。併合整列・重複再帰・複素Newton法・確率の動的計画法を扱う。問題番号・空欄記号は原本に対応する。<a href="https://lecture.ecc.u-tokyo.ac.jp/johzu/joho-kagaku/exam/common-exam-2013.pdf" target="_blank" rel="noopener">2013年度 共通試験問題（出典）</a>を手元で参照しながら読もう。</p>
+<p>以下は独自に作成した解答例であり、公式解答ではない。原題のコードはRuby。空欄解答はRubyの記法に合わせ、Pythonで示す実装にはその旨を明記する。当時の科目名は「情報科学」。計算量は、特記がなければ基本演算を定数時間とする問題文のモデルで評価する。</p>
+</div>
+<nav class="toc" aria-label="ページ内目次"><a href="#q1">第1問 下から併合する整列</a><a href="#q2">第2問 一度の走査と重複再帰</a><a href="#q3">第3問 複素数とNewton法</a><a href="#q4">第4問 勝敗引分の状態と確率</a></nav>
+<section class="section" id="q1">
+<div class="sec-header">
+<h2>第1問 下から併合する整列</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答（Ruby）</th></tr></thead>
+<tbody>
+<tr><td>ア</td><td>from[n-1]</td></tr>
+<tr><td>イ</td><td>(n+1) / 2</td></tr>
+<tr><td>ウ</td><td>from[0]</td></tr></tbody></table>
+</div>
+<p>(a) 本数が奇数なら最後の配列をそのまま次段へ送る。Rubyの整数除算で(n+1)/2は本数の切り上げ半分となる。</p>
+<p>(b) whileの条件(エ)を評価するたびのfromは次の4段階（最後はn=1で終了）。</p><pre><code class="language-text">[[7],[2],[8],[3],[1],[4],[6],[5]]
+[[2,7],[3,8],[1,4],[5,6]]
+[[2,3,7,8],[1,4,5,6]]
+[[1,2,3,4,5,6,7,8]]</code></pre><p>(c) 単純整列は$O(n^2)$時間、追加メモリ$O(1)$で実装できる。併合整列は$O(n\log n)$時間で、配列を複製するこの方式では追加メモリ$O(n)$を使う。段ごとに不要な旧配列を保持しないものとする。</p>
+</div>
+</section>
+<section class="section" id="q2">
+<div class="sec-header">
+<h2>第2問 一度の走査と重複再帰</h2>
+</div>
+<div class="sec-body">
+<h3>(a) 隣接比較の1回走査</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>(オ)でのi</th><th>a</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>[1,3,2,5,4]</td></tr>
+<tr><td>2</td><td>[1,2,3,5,4]</td></tr>
+<tr><td>3</td><td>[1,2,3,5,4]</td></tr>
+<tr><td>4</td><td>[1,2,3,4,5]</td></tr></tbody></table>
+</div>
+<p>この例は整列するが、一般には1回の走査では足りない。反例は[3,2,1]で、返値は[2,1,3]。最大値が右端へ移るだけで、残りまで整列したとは限らない。</p>
+<h3>(b) 同じ再帰呼び出しを2回しない</h3>
+<p>(i) 例えば昇順の[1,2,3,4]では毎回elseとなり、min(a,i,j−1)が2回ずつ呼ばれる。$C(1)=1,C(n)=1+2C(n-1)$より $C(n)=2^n-1$、時間は$\Theta(2^n)$。</p>
+<p>(ii) 再帰で求めた値を変数に保存し、比較と返値で再利用する。</p><pre><code class="language-python">def recursive_min(a, i, j):
+    if i == j:
+        return a[i]
+    previous = recursive_min(a, i, j - 1)
+    return a[j] if a[j] &lt; previous else previous</code></pre><p>これはPython版。呼び出しは1段1回となり、時間$O(n)$、スタック$O(n)$。</p>
+</div>
+</section>
+<section class="section" id="q3">
+<div class="sec-header">
+<h2>第3問 複素数とNewton法</h2>
+</div>
+<div class="sec-body">
+<h3>(a) 除算（Ruby）</h3><pre><code class="language-ruby">def div(x, y)
+  den = y[0]*y[0] + y[1]*y[1]
+  [(x[0]*y[0] + x[1]*y[1])*1.0/den,
+   (x[1]*y[0] - x[0]*y[1])*1.0/den]
+end</code></pre><p>分母はyの絶対値の二乗。y≠0を仮定し、整数入力でも実数の除算にする。</p>
+<p>(b) 実部に1を足す場合は10⁸+1自体を正確に表せる。一方、虚部に1を足した絶対値は√(10¹⁶+1)となり、二乗和で+1が情報落ちし、元の10⁸と同じ値になる。</p>
+<h3>(c) fと導関数（Ruby）</h3><pre><code class="language-ruby">def f(x)
+  plus(plus(mul(x,x),x),[1.0,0.0])
+end
+
+def fd(x)
+  plus(mul([2.0,0.0],x),[1.0,0.0])
+end</code></pre><p>(d) カは <code>plus(x, mul([-1.0,0.0], div(f(x), fd(x))))</code>。更新式は $x\leftarrow x-f(x)/f'(x)$。f′(x)=0での除算や非収束の可能性があるため、実用版では初期値・反復上限も検討する。停止した場合の残差を指定値未満にする原題の条件と、全初期値で必ず停止するという主張は別である。</p>
+</div>
+</section>
+<section class="section" id="q4">
+<div class="sec-header">
+<h2>第4問 勝敗引分の状態と確率</h2>
+</div>
+<div class="sec-body">
+<p>(a) 負の添字の状態を0、初期状態(0,0,0)を1とする。その他では最後の試合の直前の状態から確率を流入させる。</p>
+<div class="mathblock">$$P(i,j,k)=P(i-1,j,k)w(i-1,j,k)+P(i,j-1,k)l(i,j-1,k)+P(i,j,k-1)d(i,j,k-1).$$</div>
+<p>添字が負になる項は0として除外する。勝率等は<strong>到着先ではなく直前の状態</strong>で評価する。</p>
+<p>(b) 単純再帰では同じ(i,j,k)を多数の経路から求めるため、試合数に応じて呼び出しが急増する。</p>
+<p>(c) キは <strong>1.0</strong>。クは上式のPを配列参照に置き換えたもの：</p><pre><code class="language-ruby">value(a,x-1,y,z)*w(x-1,y,z) +
+value(a,x,y-1,z)*l(x,y-1,z) +
+value(a,x,y,z-1)*d(x,y,z-1)</code></pre><p>率の関数が非負の状態だけで定義される場合、x&gt;0,y&gt;0,z&gt;0をそれぞれ確認してから対応する項を加える必要がある。0を掛ける式でもRubyはその関数を評価するためである。表の走査順は依存する小さい座標を先に計算する。状態数は$O(n^3)$、各状態は定数時間なので、時間・表の領域とも$O(n^3)$。</p>
+</div>
+</section>
+<div class="page-nav"><a href="index.html">← 科目トップ</a><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">ページ上部へ ↑</a>
+</div></main>
+<footer class="site-footer">アルゴリズム入門 · 1A · 学習ノート</footer>
+<script src="../common.js"></script>
+<script src="nav.js"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

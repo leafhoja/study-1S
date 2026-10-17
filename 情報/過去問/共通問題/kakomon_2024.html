@@ -1,0 +1,336 @@
+<!DOCTYPE html><!-- 「2024年度 | 情報 共通問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2024年度 | 情報 共通問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kyotsu-2024">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>共通問題 2024年度</h1>
+  <p class="subtitle">7月26日（金）3限｜大問3</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（遠隔会議システム）</a>
+    <a href="#q2">大問2（ディスプレイと配列）</a>
+    <a href="#q3">大問3（フィッツの法則／情報社会）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>遠隔会議システムのネットワークと認証</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>認証されたユーザだけが参加でき、画面共有・書き込み共有・チャット共有ができる遠隔会議システムを考える。</p>
+      </div>
+
+      <h3>問1 — 通信の中継</h3>
+      <div class="ex"><span class="box-label">問題</span><p>操作データは参加者間で直接送受信されるのではなく、一旦<span class="blank">A</span>に送られ他の参加者へ転送される。各参加者は<span class="blank">B</span>にあたる。通信先を<span class="blank">C</span>で特定するが、<span class="blank">A</span>の中で複数のアプリケーションが動作している場合もあるので、どのアプリケーション宛かを<span class="blank">D</span>で指定する。（語群：DNS・IPアドレス・クライアント・サーバ・ネットワークアドレス・ポート番号）</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>各参加者のPC同士が直接つながるP2P型ではなく、中継役を置く<strong>クライアント・サーバ型</strong>の構成である。<span class="blank">A=サーバ</span>／<span class="blank">B=クライアント</span>／<span class="blank">C=IPアドレス</span>（宛先ホストの特定）／<span class="blank">D=ポート番号</span>（同じホスト内の複数アプリの区別）。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>A=サーバ、B=クライアント、C=IPアドレス、D=ポート番号</div>
+        <div class="note">
+          <span class="box-label">語群の全用語</span>
+          <p><strong>DNS</strong>：ホスト名・ドメイン名をIPアドレスなどへ対応づける仕組み。／<strong>IPアドレス</strong>：IPネットワーク上の通信先ホストを識別する数値。／<strong>クライアント</strong>：サーバへ処理や資源を要求する側。／<strong>サーバ</strong>：要求を受け、処理や資源を提供する側。／<strong>ネットワークアドレス</strong>：IPアドレスのうち所属ネットワークを表す部分で、個々の通信先全体を示すIPアドレスとは役割が異なる。／<strong>ポート番号</strong>：同じホスト上のどのアプリケーション宛かを区別する番号。</p>
+        </div>
+      </details>
+
+      <h3>問2 — 公開鍵暗号による認証（チャレンジ・レスポンス）</h3>
+      <div class="ex"><span class="box-label">問題</span><p>ユーザは<span class="blank">E</span>と<span class="blank">F</span>のペアを生成し<span class="blank">F</span>を公開する。メッセージは受信者の<span class="blank">F</span>で暗号化され<span class="blank">E</span>で復号される。ユーザはまず<span class="blank">F</span>を接続先に保存する。接続の際、ユーザは<span class="blank">E</span>を用いて<span class="blank">G</span>を生成し送信する。接続先は<span class="blank">F</span>を用いて<span class="blank">G</span>を検証することで認証を行う。（語群：PKI・共通鍵・公開鍵・指紋・ディジタル署名・秘密鍵・ファイアウォール）</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p><span class="blank">E=秘密鍵</span>／<span class="blank">F=公開鍵</span>（生成・公開の順、暗号化は公開鍵Fで・復号は秘密鍵Eで、という記述と整合）。認証時は秘密鍵Eで何かに<span class="blank">G=ディジタル署名</span>を行い、相手は保存済みの公開鍵Fでその署名を検証する——「秘密鍵でしか作れない署名を、公開鍵で誰でも検証できる」という、公開鍵暗号を使った本人確認（チャレンジ・レスポンス認証）の典型例。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>E=秘密鍵、F=公開鍵、G=ディジタル署名</div>
+        <div class="note">
+          <span class="box-label">語群の全用語</span>
+          <p><strong>PKI</strong>：認証局と電子証明書により公開鍵の正当性を保証する基盤。／<strong>共通鍵</strong>：暗号化と復号に同じ秘密鍵を用いる方式、またはその鍵。／<strong>公開鍵</strong>：鍵ペアのうち公開し、暗号化や署名検証に用いる鍵。／<strong>指紋</strong>：公開鍵やデータをハッシュして得る短い識別値。／<strong>ディジタル署名</strong>：秘密鍵で生成し公開鍵で検証することで、作成者と改ざんの有無を確認する仕組み。／<strong>秘密鍵</strong>：所有者だけが保持し、復号や署名生成に使う鍵。／<strong>ファイアウォール</strong>：規則に基づいてネットワーク通信を許可・遮断する仕組み。</p>
+        </div>
+      </details>
+
+      <h3>問3 — 通信量の計算</h3>
+      <div class="ex"><span class="box-label">問題</span><p>1秒間にF回、ポインタ座標（横W以下・縦H以下の正整数）と線の色（C種類のうち1色）を送信する。1秒あたり何ビット送信することになるか。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>W通りの横座標を区別する最小ビット数は、$2^k\ge W$を満たす最小の整数$k=\lceil\log_2 W\rceil$。同様に縦座標は$\lceil\log_2 H\rceil$ビット、C色の識別は$\lceil\log_2 C\rceil$ビット必要である。1回の操作データはこの3項の和で、毎秒F回送るためF倍する。プロトコルのヘッダ等を数えないという問題のモデルでは：</p></div>
+        <div class="sol"><span class="box-label">解</span>$$F\times\left(\lceil\log_2 W\rceil+\lceil\log_2 H\rceil+\lceil\log_2 C\rceil\right)\text{ ビット/秒}$$</div>
+      </details>
+
+      <h3>問4 — 通信量削減の影響</h3>
+      <div class="ex"><span class="box-label">問題</span><p>(1) Fを半分にする、(2) W・Hを半分にして送る（描画時に2倍する）。それぞれの通信量削減で、表示される線にどのような差異が生じるか。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>(1) Fを半分（時間方向の間引き）：</strong>単位時間あたりの送信回数が減るため、点と点の間の間隔（時間的にも移動距離的にも）が広がる。ポインタをゆっくり動かす分にはほぼ違いが出ないが、<em>素早く動かして急に曲がるような動き</em>をした場合、本来のカーブが再現されず、実際より角張った・直線的な軌跡として表示されてしまう。</p>
+          <p><strong>(2) W・Hを半分（空間方向の間引き）：</strong>座標が2の倍数の位置にしか丸められなくなるため、位置の分解能が粗くなる。<em>小さくゆっくりとした動きや、細かい位置合わせを伴う動き</em>をした場合、1ピクセル単位の移動が送信されず無視されたり、斜めの線が実際よりカクカクした階段状に表示されたりする。</p>
+          <p>(1)は「時間軸の粗さ」が速い動きのカーブを崩し、(2)は「空間軸の粗さ」が細かく精密な動き・斜め線を崩す、という点で影響の現れ方が異なる。</p>
+        </div>
+      </details>
+
+      <h3>問5 — チャットの文字列圧縮</h3>
+      <div class="ex"><span class="box-label">問題</span><p>チャットメッセージの送受信データ量を減らすには、符号化方式としてどのような工夫が考えられるか。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>過去のチャットから各文字の出現頻度を求め、頻出文字に短いビット列、まれな文字に長いビット列を割り当てる可変長符号を使う。例えばハフマン符号なら、どの符号語も別の符号語の接頭辞にならないため、区切り記号なしで一意に復号でき、頻度が偏っているほど固定長符号より平均符号長を短くできる。送受信側で同じ符号表を共有する必要があり、符号表自体の送信量も含めて有利かを判断する。</p></div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — クライアント・サーバとP2P</span>
+        <p>通信の中継方式には大きく2つの型がある。<strong>クライアント・サーバ型</strong>は中央のサーバが全参加者からのデータを集約・転送するため管理しやすい反面、サーバに負荷が集中する。<strong>P2P型</strong>（Winnyなど）は参加者同士が直接データをやり取りするためサーバ負荷は小さいが、匿名性が高くなり著作権侵害等の温床にもなりやすい（共通問題2023・2025のWinnyの出題と関連）。認証においては「公開鍵で暗号化して秘密鍵で復号（機密性）」と「秘密鍵で署名して公開鍵で検証（認証）」の2つの使い方の違いを区別できることが重要。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>ディスプレイの配列表現とプログラム</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>縦横N画素・合計N²画素のディスプレイを長さN²の配列dispで管理する（1=黒,0=白、添字は1始まり、横書きの文のように左上→右上→…→右下の順に対応）。図1はN=3の場合の配列添字(1,2,…,9)に対応する画素位置を示した図である。</p>
+        <div class="diagram">
+          <img src="img/2024/fig1-grid.png" alt="図1：N=3の場合の配列添字(1〜9)に対応する画素位置" style="max-width:220px;width:100%;height:auto;">
+          <div class="diagram-cap">図1：N=3の場合の配列添字と画素位置の対応（原本PDFより切り出し）</div>
+        </div>
+      </div>
+
+      <div class="note"><span class="box-label">選択肢（問3〜5共通）</span><p>問3から問5については、以下の選択肢から選んで答えよ。各選択肢は複数回使ってよい。<br>(ア) a　(イ) b　(ウ) c　(エ) δ　(オ) i　(カ) a+b　(キ) a−b　(ク) b−a　(ケ) disp<sub>i</sub>　(コ) disp<sub>j</sub>　(サ) disp<sub>i</sub>+1　(シ) disp<sub>j</sub>+1　(ス) i−1　(セ) i+1　(ソ) j−1　(タ) j+1　(チ) i−N　(ツ) i+N　(テ) j+N　(ト) m−1　(ナ) m+1　(ニ) 2NL　(ヌ) N²　(ネ) N²−1　(ノ) N²+1</p></div>
+
+      <h3>問1 — 配列から表示内容を読む</h3>
+      <div class="ex"><span class="box-label">問題</span><p>N=5として、配列 <code>1111110000111110000111111</code> が表示する内容をアラビア数字1文字で答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>5個ずつ5行に区切ると：</p>
+          <div class="mathblock">11111
+10000
+11111
+00001
+11111</div>
+          <p>1行目・3行目・5行目が全黒（横棒3本）、2行目は左端のみ黒（上部の縦棒が左）、4行目は右端のみ黒（下部の縦棒が右）——これは7セグメント表示でいう「上・左上・中央・右下・下」の5画をなぞった形であり、数字の<strong>5</strong>そのものである。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>5</div>
+      </details>
+
+      <h3>問2 — 情報量の計算</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>N=2のディスプレイに、図2に挙げた4つの模様のいずれかが等確率で表示されるとする。この状況において「配列dispのi番目の要素が1である」というメッセージの情報量は何ビットか、$i$が1、2、3、4である場合それぞれについて数値で答えよ。但し$\log_2 3=1.6$であるとする。</p>
+        <div class="diagram">
+          <img src="img/2024/fig2-patterns.png" alt="図2：N=2のディスプレイに現れる4通りの模様" style="max-width:260px;width:100%;height:auto;">
+          <div class="diagram-cap">図2：N=2のディスプレイに現れる4通りの模様（原本PDFより切り出し）</div>
+        </div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>図2の4通りを添字順$(\mathrm{disp}_1,\mathrm{disp}_2,\mathrm{disp}_3,\mathrm{disp}_4)$（1=黒,0=白）で書き出すと、$(1,0,1,1)$・$(1,1,1,0)$・$(1,1,0,0)$・$(1,0,1,0)$の4通りである（3黒1白の模様は2通りだけで、残り2通りは2黒2白であることに注意）。各iについて、この4通りのうちdisp<sub>i</sub>=1となるものの個数を数えると：</p>
+          <ul>
+            <li>$i=1$：4通りすべてでdisp<sub>1</sub>=1（左上は常に黒）。$P(\mathrm{disp}_1=1)=4/4=1$。</li>
+            <li>$i=2$：4通り中2通り（$(1,1,1,0)$と$(1,1,0,0)$）でdisp<sub>2</sub>=1。$P(\mathrm{disp}_2=1)=2/4=1/2$。</li>
+            <li>$i=3$：4通り中3通りでdisp<sub>3</sub>=1（白になるのは$(1,1,0,0)$のみ）。$P(\mathrm{disp}_3=1)=3/4$。</li>
+            <li>$i=4$：4通り中1通り（$(1,0,1,1)$のみ）でdisp<sub>4</sub>=1。$P(\mathrm{disp}_4=1)=1/4$。</li>
+          </ul>
+          <p>情報量は$-\log_2 P(\mathrm{disp}_i=1)$で求まる：</p>
+          <div class="mathblock">$$i=1:\ -\log_2 1 = 0\text{ ビット}\qquad i=2:\ -\log_2\frac12 = 1\text{ ビット}$$
+$$i=3:\ -\log_2\frac34 = 2-\log_2 3 = 0.4\text{ ビット}\qquad i=4:\ -\log_2\frac14 = 2\text{ ビット}$$</div>
+          <p>4通りの模様は一見「対称」に見えるが、実際には左上（位置1）が全パターン共通で黒、右下（位置4）は1パターンでしか黒にならないなど、位置ごとに黒である事前確率が異なるため、情報量も位置ごとに異なる値になる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$i=1$：0ビット、$i=2$：1ビット、$i=3$：0.4ビット、$i=4$：2ビット。</div>
+      </details>
+
+      <h3>問3 — 黒画素数を数えるプログラム</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          <span class="mathblock">i ← 1
+m ← 0
+while i ≤ <span class="blank">31</span> do
+&nbsp;&nbsp;if 0 &lt; disp<sub>i</sub> then m ← <span class="blank">32</span>
+&nbsp;&nbsp;i ← <span class="blank">33</span>
+done
+return m</span>
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>画面は縦N×横Nなので、配列dispの要素数はN²。したがってループ上限31はN²になる。各反復でdisp<sub>i</sub>=1なら黒画素を1個見つけたので、個数mをm+1（32）へ更新する。黒白にかかわらず次の画素へ進むため、添字iはi+1（33）へ更新する。これで1番からN²番までをちょうど1回ずつ走査し、終了時のmが黒画素総数になる。</p></div>
+        <div class="sol"><span class="box-label">解</span>31=N²（ヌ）、32=m+1（ナ）、33=i+1（セ）</div>
+      </details>
+
+      <h3>問4 — 表示内容を下に1画素ずらすプログラム</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          <span class="mathblock">i ← N²
+while 0 &lt; i do
+&nbsp;&nbsp;if N &lt; i then
+&nbsp;&nbsp;&nbsp;&nbsp;j ← <span class="blank">41</span>
+&nbsp;&nbsp;&nbsp;&nbsp;disp<sub>i</sub> ← <span class="blank">42</span>
+&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;disp<sub>i</sub> ← 0
+&nbsp;&nbsp;endif
+&nbsp;&nbsp;i ← <span class="blank">43</span>
+done</span>
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>下方向に1画素ずらすには、位置iの新しい値を「N個上（1行上）」にあった元の値でコピーすればよい：$\mathrm{disp}_i \leftarrow \mathrm{disp}_{i-N}$。ただしi≤Nの最上段は上に画素がないので0（白）で埋める。<br>
+          添字を<strong>N²から1へ減らしながら</strong>処理するのがポイント：先に大きいiから処理すれば、$\mathrm{disp}_{i-N}$（まだ書き換えていない元の値）を安全に読み出せる。もし逆順（1→N²）に処理すると、参照するはずの上の行がすでに書き換え済みになってしまい正しく動かない。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>41=i−N（チ）、42=disp<sub>j</sub>（コ）、43=i−1（ス）</div>
+      </details>
+
+      <h3>問5 — 対角線の長さを求める二分法</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>1画素の辺の長さをLとして、対角線の長さ$\sqrt{2N^2L^2}$を精度δで求める：</p>
+        <p>
+          <span class="mathblock">a ← 0
+b ← 2N²L²
+while <span class="blank">51</span> &gt; δ do
+&nbsp;&nbsp;c ← (a+b)/2
+&nbsp;&nbsp;if 2N²L² &lt; c² then <span class="blank">52</span> ← c else <span class="blank">53</span> ← c
+done
+return a</span>
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>a,bで答え（対角線の長さ）を挟み込みながら半分ずつ範囲を狭める二分探索。区間の幅$b-a$がδ以下になるまで繰り返す。cが大きすぎれば（$c^2$が目標$2N^2L^2$を超えれば）上限bをcに更新し、そうでなければ下限aをcに更新する。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>51=b−a（ク）、52=b（イ）、53=a（ア）</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 配列の添字と2次元配置の対応</span>
+        <p>2次元的な画素配置を1次元配列で表すとき、「横書きの文のように並べる」規則（row-major）では、位置$(row, col)$（1始まり、$1\le row,col\le N$）は添字 $i=(row-1)N+col$ に対応する。逆に添字$i$から「1行上」に対応する添字を求めると単純に$i-N$になる——これが問4の核心。二分法（問5）は「範囲を半分に絞り込む」という発想が問3(共通問題2022)の平方根探索などとも共通する、頻出のアルゴリズムパターンである。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q3">
+    <div class="sec-header"><div class="sec-tag">大問 3</div><h2>フィッツの法則／プライバシーと自動運転の責任</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>問1(1) — フィッツの法則の意味</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>マウスなどのポインティングデバイスを用いて画面上のポインタをアイコンなどの目標物まで移動させる際に要する所要時間 \(T\) を求めるモデルとして、以下のフィッツの法則が知られている。ここで、\(D\) はポインタの始点位置から目標物の中心までの距離を、\(W\) は目標物の幅（大きさ）を表すものとする。以下の (1) から (3) に答えよ。</p>
+        <div class="mathblock">\[
+          T=a+b\log_2\left(\frac{D}{W}+1\right)
+        \]</div>
+        <p>(1) この式から所要時間 \(T\) についてどのようなことが言えるのか、3行以内で答えよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>目標までの距離Dが大きいほど、また目標の幅（大きさ）Wが小さいほど、ポインタを目標に合わせるのにかかる時間Tは長くなる。しかもその増え方は$D/W$そのものに比例するのではなく、対数的（$\log_2$）に緩やかに増加する。</p></div>
+      </details>
+
+      <h3>問1(2) — 定数a,bの意味</h3>
+      <div class="ex"><span class="box-label">問題</span><p>(2) \(a\) と \(b\) はどのような定数か、合わせて4行以内で答えよ。また、\(a\) と \(b\) の値が小さいことは何を意味しているのか、合わせて2行以内で説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>aは、動作の開始・終了に要する準備時間など、移動の難易度（D,W）によらない基本的なオフセット時間を表す定数。bは、難易度（$\log_2(D/W+1)$、これを「難易度指数」と呼ぶ）が1単位増えるごとに所要時間がどれだけ増えるかという感度を表す定数で、どちらもポインティングデバイスや操作者の熟練度に依存する。a,bがともに小さいことは、基本準備時間が短く、かつ距離や目標の大きさが変わっても所要時間があまり増えない、つまりそのデバイス・操作方法が高性能（速く正確に操作できる）であることを意味する。</p></div>
+      </details>
+
+      <h3>問1(3) — 近似式の導出</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(3) この式の近似式を、人が目標物まで手を動かす動作の分析から導くことを考える。このとき、以下の「あ」から「え」に当てはまる式を答えよ。</p>
+        <p>いま、手から距離 \(D\) の位置（手の届く範囲内にあるとする）に、直径 \(W\) の円形の目標物の中心があるとする。手を素早くかつ円滑に動かして、しかし動かし過ぎることなく、人差し指で円形の目標物に触れるには、目標物にある程度近づくまでは手を素早く動かし、目標物に近づくにしたがって手を減速させるのが良さそうである。</p>
+        <p>そのために、まず目標物の手前に仮の目標地点を定めて、そこまで手を高速に動かす。仮の目標地点に手が到達したら、残りの距離を見て、再び目標物の手前に次の仮の目標地点を定めて、そこまで手を動かす。以上の動作を、人差し指が目標物に触れる（目標物の直径内に到達する）まで何度か繰り返す。</p>
+        <p>この際、手を動かすという1サイクルの動作にかかる時間は、目標物までの距離によらず一定だと仮定する（これにより、手は目標物に近づくにつれて減速することになる）。また、仮の目標地点を、目標物の中心までの直線上の中点に定めると仮定する。</p>
+        <p>この2つの仮定を置くと、\(k\) サイクル後の人差し指から目標物までの距離（つまり、目標物までの残りの距離）は <span class="blank">あ</span> となる。したがって、人差し指が目標物に触れる（目標物の直径の縁に到達する）のに必要なサイクル数 \(N\) は <span class="blank">い</span> を満たす。両辺の対数（底は2）をとって整理すると \(N=\)<span class="blank">う</span> が得られる。手を動かすという1サイクルの動作にかかる時間を \(t\) 秒とすれば、目標物に触れるまでの所要時間 \(T\) は <span class="blank">え</span> となり、フィッツの法則に近い形の式が得られることになる。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>目標中心までの距離は1サイクルごとに半分になるので、$k$サイクル後の残り距離は</p>
+          <div class="mathblock">あ： $\dfrac{D}{2^k}$</div>
+          <p>目標（直径W）の縁に触れる＝中心までの距離が半径W/2以下になる、が条件：</p>
+          <div class="mathblock">い： $\dfrac{D}{2^N}\le\dfrac{W}{2}$</div>
+          <p>両辺を$W/2$で割って$2^N\ge 2D/W$、底2の対数をとると：</p>
+          <div class="mathblock">う： $N=\log_2\!\left(\dfrac{2D}{W}\right)=\log_2\!\left(\dfrac{D}{W}\right)+1$</div>
+          <p>1サイクルの時間$t$として$T=Nt$：</p>
+          <div class="mathblock">え： $T = t\log_2\!\left(\dfrac{2D}{W}\right)$</div>
+          <p>形として$T=a+b\log_2(D/W+1)$と完全には一致しない（対数の中身に「+1」が入るか外に出るかの違い）が、$D/W$が大きいときはどちらも$\log_2(D/W)$にほぼ比例する、という同じ性質を持ち、「フィッツの法則に近い形」になっていることが確認できる。</p>
+        </div>
+      </details>
+
+      <h3>問2(1) — プライバシーと民主主義</h3>
+      <div class="ex"><span class="box-label">問題</span><p>(1) 人々がスマートフォンやパソコンで入力する住所、氏名、職業、家族構成、学歴などの情報、ソーシャルメディアで書き込む内容や共有する画像、購買履歴、ウェブサイトのページ閲覧履歴、GPSの位置情報や移動履歴など、様々な情報が膨大なビッグデータとして収集され、しばしば何らかの用途のために管理や利用がなされている。このような状況において、プライバシーの保護が民主主義にとって重要となる理由を3行程度で述べよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>プライバシーが保護されないと、政府や企業が個人の思想信条・行動傾向を把握し、その情報をもとに特定の意見を持つ人を萎縮させたり、投票行動・政治的立場を予測して誘導したりすることが可能になる。民主主義は市民が周囲の目を気にせず自由に意見を形成し表明できることを前提とするため、プライバシーの保護はこの自由な意思形成・表明を守るために不可欠である。</p></div>
+      </details>
+
+      <h3>問2(2) — 自動運転の責任境界</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(2) 情報技術を駆使した最先端技術は、社会における責任の境界に影響を与えうる。自動運転はそのような技術のひとつである。自動運転レベルについて、アメリカ運輸省高速道路交通安全局（NHTSA）は、レベル0（ドライバーが完全に運転に責任をもち自動化なし）からレベル5（完全自動運転）までの基準を示した。レベル2まではドライバーが安全確認を継続しなければならないとされているが、その先のレベル3およびレベル4（加速・操舵・制動にわたってシステムが主体となって行う）の自動運転車による事故において生じうる責任境界について、人間のドライバーのみが運転を担うレベル0の場合と比べつつ4行程度で説明せよ。</p>
+        <p>その際、「責任の境界」として誰が責任を持ちうるかということと、新たに考慮されるべき事項に焦点を置くこと。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>レベル0では運転操作の主体が常に人間のドライバーであるため、事故の責任は基本的にドライバー個人に帰属する。レベル3・4では加速・操舵・制動をシステムが担うため、事故発生時にはドライバーの操作ミスだけでなく、自動運転システムの設計・実装（メーカーやソフトウェア開発者）、およびシステムからドライバーへの運転引き継ぎ要求（テイクオーバー）のタイミングや伝達方法の適切性にも責任が及びうる。つまり責任の所在がドライバー個人からメーカー・開発者・保守事業者などへと分散し、単純な「運転者の過失」という単一の枠組みでは捉えきれなくなる。新たに考慮すべき事項として、システムの判断ログの記録・保存による事故原因の究明可能性や、制御移譲プロセスの設計の妥当性が挙げられる。</p></div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2025.html">← 2025年度へ</a>
+    <a href="kakomon_2023.html">2023年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

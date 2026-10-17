@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#164e63">
+<title>2020年度 過去問解説 | アルゴリズム入門</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+<script>
+MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams'}, options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body class="algorithm-page" data-nav-page="kakomon_2020">
+<nav class="navbar">
+<div class="navbar-inner"><a class="navbar-brand" href="index.html">アルゴリズム入門</a>
+<div class="navbar-links"><a href="../index.html" class="nav-back">← 学習ノート</a><a href="index.html">トップ</a><a href="lecture1.html" data-page="lecture1">第1回</a><a href="lecture2.html" data-page="lecture2">第2回</a><a href="index.html#exams">過去問</a>
+</div>
+</div></nav>
+<div class="hero">
+<h1>2020年度 過去問解説</h1>
+<p class="subtitle">再帰的図形・放物運動・行列の高速べき乗</p>
+<p class="meta">1A · 共通試験 · 年度は原本の表題に準拠</p>
+</div>
+<main class="container">
+<div class="intro-box">
+<p>共通試験の解答例と解説。再帰的図形・放物運動・行列の高速べき乗を扱う。問題番号・空欄記号は原本に対応する。<a href="https://lecture.ecc.u-tokyo.ac.jp/johzu/joho-kagaku/exam/common-exam-2020.pdf" target="_blank" rel="noopener">2020年度 共通試験問題（出典）</a>を手元で参照しながら読もう。</p>
+<p>以下は独自に作成した解答例であり、公式解答ではない。計算量は、特記がなければ基本演算を定数時間とする問題文のモデルで評価する。</p>
+</div>
+<nav class="toc" aria-label="ページ内目次"><a href="#q1">問題1 小図形の原点をずらす</a><a href="#q2">問題2 放物運動の差分と誤差</a><a href="#q3">問題2(5)〜(7) 行列べきで更新をまとめる</a></nav>
+<section class="section" id="q1">
+<div class="sec-header">
+<h2>問題1 小図形の原点をずらす</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>x + 3 ** (level - 1)</td></tr>
+<tr><td>B</td><td>x + 2 * 3 ** (level - 1)</td></tr>
+<tr><td>C</td><td>x</td></tr>
+<tr><td>D</td><td>x</td></tr>
+<tr><td>E</td><td>x + 3 ** (level - 1)</td></tr>
+<tr><td>F</td><td>x</td></tr>
+<tr><td>G</td><td>x + 3 ** (level - 1)</td></tr>
+<tr><td>H</td><td>x + 2 * 3 ** (level - 1)</td></tr>
+<tr><td>I</td><td>x</td></tr>
+<tr><td>J</td><td>x + 2 ** (level - 1)</td></tr></tbody></table>
+</div>
+<p>(1) カーペットは3×3の位置のうち中央を除く8か所。小正方形の一辺は $3^{level-1}$ なので、その整数倍だけ原点を動かす。</p>
+<p>(2) 原図のパスカル三角形は左上に寄せた三角形。小三角形の位置は最上段1個、中段2個、下段3個で、x方向のずれは順に0、(0,w)、(0,w,2w)。</p>
+<p>(3) ガスケットは2×2の左上・左下・右下の3か所へ、一辺 $2^{level-1}$ の図形を置く。上下左右の座標の順序に注意し、引数は(y,x)である。</p>
+</div>
+</section>
+<section class="section" id="q2">
+<div class="sec-header">
+<h2>問題2 放物運動の差分と誤差</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>g * stride</td></tr>
+<tr><td>B</td><td>[y, x, vel_y, vel_x]</td></tr>
+<tr><td>C・D・E・F</td><td>cur[0]・cur[1]・cur[2]・cur[3]</td></tr>
+<tr><td>G</td><td>range(0, len(matrix))</td></tr>
+<tr><td>H</td><td>range(0, len(vector))</td></tr>
+<tr><td>I</td><td>result[i] + matrix[i][j] * vector[j]</td></tr></tbody></table>
+</div>
+<p>(1) 位置は更新前の速度で進め、その後に重力で速度を減らす陽的Euler法。(2) stride≈10⁻¹⁷では各回の増減が現在値の表現間隔に比べて小さく、情報落ちで毎回元の値へ丸められる。増分を10万回まとめれば変わる可能性があっても、毎回消えれば蓄積できない。</p>
+<h3>(3) 離散化誤差の導出</h3>
+<p>$h=stride$、$m=steps$、初速$v_0$と置く。第k段の速度は$v_0-gkh$なので、</p>
+<div class="mathblock">$$y_m=y_0+\sum_{k=0}^{m-1}(v_0-gkh)h=y_0+mv_0h-\frac{g h^2m(m-1)}2.$$</div>
+<p>正解は $y_0+mv_0h-gh^2m^2/2$。したがって「数値解−正解」は $\boxed{g h^2m/2}$（上方へのずれ）。T=mhを固定すれば$gTh/2$で、刻み幅に比例する。</p>
+<p>(4) 行列とベクトルの積では、各行の内積を累積する。初期値0の配列が必要。</p>
+</div>
+</section>
+<section class="section" id="q3">
+<div class="sec-header">
+<h2>問題2(5)〜(7) 行列べきで更新をまとめる</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答</th></tr></thead>
+<tbody>
+<tr><td>J</td><td>[y, x, vel_y, vel_x, g]</td></tr>
+<tr><td>K</td><td>[0, 1, 0, stride, 0]</td></tr>
+<tr><td>L</td><td>[0, 0, 0, 0, 1]</td></tr>
+<tr><td>M</td><td>mMm(matrix, matrix)</td></tr>
+<tr><td>N</td><td>n // 2</td></tr>
+<tr><td>O</td><td>mMm(m, matrix)</td></tr></tbody></table>
+</div>
+<p>(5) 最後の要素に定数gを持たせることで、速度からghを引く操作も行列積に組み込める。ベクトルの順は(y,x,v_y,v_x,g)。</p>
+<p>(6) $A^{2k}=(A^2)^k$、$A^{2k+1}=(A^2)^kA$。再帰のたびに指数を半分にする。原題のmPnの入力はn≥1なので、steps=0を扱う実用版なら単位行列を返す基底条件を追加する。</p>
+<p>(7) 行列サイズは5×5で一定なので行列積1回はstepsに関して定数時間。$T(m)=T(\lfloor m/2\rfloor)+O(1)$ より $\boxed{O(\log m)}$。ただし演算順序が変わるため、floatでビット単位まで元の逐次更新と一致する保証はない。数学的に同じ差分法の値を求めるという意味である。</p>
+</div>
+</section>
+<div class="page-nav"><a href="index.html">← 科目トップ</a><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">ページ上部へ ↑</a>
+</div></main>
+<footer class="site-footer">アルゴリズム入門 · 1A · 学習ノート</footer>
+<script src="../common.js"></script>
+<script src="nav.js"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

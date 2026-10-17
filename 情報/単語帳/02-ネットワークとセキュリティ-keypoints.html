@@ -1,0 +1,255 @@
+<!DOCTYPE html><!-- 「ネットワークとセキュリティ — 押さえておきたい事項｜情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>ネットワークとセキュリティ — 押さえておきたい事項｜情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="tango-02-kp">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>ネットワークとセキュリティ — 押さえておきたい事項</h1>
+  <p class="subtitle">公式・手順・典型的な考え方のまとめ</p>
+</div>
+
+<div class="container">
+
+  <div class="page-toc">
+    <strong>この分野の要点</strong>
+    <ol>
+      <li><a href="#kp-1">暗号化と符号化の違い</a></li>
+      <li><a href="#kp-2">公開鍵暗号の頻出誤りパターン</a></li>
+      <li><a href="#kp-3">鍵ペアが満たすべき性質</a></li>
+      <li><a href="#kp-4">鍵配送問題</a></li>
+      <li><a href="#kp-5">ハイブリッド暗号方式</a></li>
+      <li><a href="#kp-6">公開鍵暗号の「2つの使い分け」</a></li>
+      <li><a href="#kp-7">ディジタル署名の検証手順</a></li>
+      <li><a href="#kp-8">PKIと信頼の輪</a></li>
+      <li><a href="#kp-9">DRMの典型設計パターン</a></li>
+      <li><a href="#kp-10">DNSの階層問い合わせ</a></li>
+      <li><a href="#kp-11">DNSキャッシュの2方式</a></li>
+      <li><a href="#kp-12">クライアントサーバ型とP2P型</a></li>
+      <li><a href="#kp-13">ACID性・排他制御・ロールバック</a></li>
+      <li><a href="#kp-14">木構造かグラフかの判定</a></li>
+      <li><a href="#kp-15">通信時間はファイルサイズに単純比例しない</a></li>
+      <li><a href="#kp-16">HTTPはプロトコルであり相手はブラウザに限らない</a></li>
+      <li><a href="#kp-17">セキュリティとプライバシーは原因と結果の関係</a></li>
+      <li><a href="#kp-18">不正アクセス禁止法と個人情報保護法の違い</a></li>
+      <li><a href="#kp-19">フィッシング対策としてのSSL/httpsの2つの役割</a></li>
+      <li><a href="#kp-20">通信手順を時間順に説明できるようにする</a></li>
+    </ol>
+  </div>
+
+  <h2 class="word-cat-title">暗号方式の基本的な考え方</h2>
+
+  <div class="note" id="kp-1">
+    <span class="box-label">暗号化と符号化の違い</span>
+    <p>
+      符号化（文字コード変換・圧縮など）は仕組みを知れば誰でも元に戻せる操作であり、盗聴対策にならない。
+      暗号化は「鍵を持つ者だけが元に戻せる」ことを目的とする点で本質的に異なる（2010年度）。
+    </p>
+  </div>
+
+  <div class="note" id="kp-2">
+    <span class="box-label">公開鍵暗号の頻出誤りパターン</span>
+    <p>
+      「送受信者が互いに鍵を公開し合う」「暗号化と復号に同じ鍵を使う」は誤り。正しくは、公開するのは
+      <strong>受信者の公開鍵のみ</strong>であり、暗号化には公開鍵、復号には秘密鍵という<strong>異なる鍵</strong>
+      を使う（2007・2011年度）。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-3">
+    <span class="box-label">鍵ペアが満たすべき性質</span>
+    <p>
+      2007年度大問1(3)で問われた、鍵ペアが満たすべき性質は3つ。
+      ①公開鍵から秘密鍵を計算で求めるのが現実的な時間ではできない（一方向性）。
+      ②片方の鍵で暗号化したものは、もう片方の鍵でしか復号できない。
+      ③公開鍵は公開してよいが、秘密鍵は本人だけが厳重に保持する。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-4">
+    <span class="box-label">鍵配送問題</span>
+    <p>
+      共通鍵暗号は、鍵自体を安全な経路で秘密裏に相手へ渡す必要がある（鍵配送問題）。公開鍵暗号は
+      暗号化にしか使えない鍵（公開鍵）を配るだけなので、配送経路を秘匿する必要がない（2007年度）。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-5">
+    <span class="box-label">ハイブリッド暗号方式（HTTPSで実際に使われる方式）</span>
+    <p>
+      公開鍵暗号で共通鍵そのものを安全に交換し、その後の大量データのやりとりは計算が高速な共通鍵暗号で
+      行う（2007・2014年度）。
+    </p>
+  </div>
+
+  <div class="note" id="kp-6">
+    <span class="box-label">公開鍵暗号の「2つの使い分け」</span>
+    <p>
+      2022・2024・2025年度で反復されている対比。
+      <strong>機密性の確保</strong>→「公開鍵で暗号化→秘密鍵で復号」（受け手だけが読める）。
+      <strong>署名（真正性・完全性）の確保</strong>→「秘密鍵で暗号化＝署名→公開鍵で復号＝検証」
+      （送り手本人にしか作れない）。向きが逆であることを混同しないこと。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">署名・PKI・DRM</h2>
+
+  <div class="mot" id="kp-7">
+    <span class="box-label">ディジタル署名の検証手順</span>
+    <p>
+      送信者が「データのハッシュ値（電子指紋）」を自分の秘密鍵で暗号化したものが署名。受信者は、届いた
+      データから計算した電子指紋と、署名を送信者の公開鍵で復号して得た電子指紋を比較し、一致すれば
+      改ざんなしと確認する。
+    </p>
+  </div>
+
+  <div class="note" id="kp-8">
+    <span class="box-label">PKIと信頼の輪</span>
+    <p>
+      <strong>PKI</strong>＝認証局を頂点とする階層的な信頼モデル。<strong>信頼の輪（Web of Trust）</strong>
+      ＝ユーザの個人的な知り合いなどを介して公開鍵を保証する分散型モデル、という対比で覚える。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-9">
+    <span class="box-label">DRMの典型設計パターン</span>
+    <p>
+      2025年度で問われた流れ。
+      ①受信者が鍵ペアを作り公開鍵をサーバに登録する。
+      ②サーバが共通鍵Kでコンテンツを暗号化し、ライセンスファイルを受信者の公開鍵で暗号化する（機密性）。
+      ③サーバが自分の秘密鍵でライセンスファイルに署名し、受信者がサーバの公開鍵で検証する
+      （真正性・完全性）。
+      ④認証局（PKI）がサーバの公開鍵の正当性を保証する。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">DNS・ネットワーク構成</h2>
+
+  <div class="mot" id="kp-10">
+    <span class="box-label">DNSの階層問い合わせ</span>
+    <p>
+      ホスト名はピリオド区切りで、後ろから読むと木構造になる（jp→ac.jp→u-tokyo.ac.jp→
+      www.u-tokyo.ac.jp）。DNSの問い合わせはルートサーバ（根）→上位ドメイン→下位ドメインの順に、
+      根から葉へ向けて繰り返される。木構造の特徴（枝ごとに管理を分散できる）を活かし、階層ごとに
+      管理権限を委任している（JPNICが.jp全体、大学がu-tokyo.ac.jpを管理、など）。
+    </p>
+  </div>
+
+  <div class="note" id="kp-11">
+    <span class="box-label">DNSキャッシュの2方式</span>
+    <p>
+      <strong>FIFO</strong>（最も昔に記憶したものを追い出す）と<strong>LRU</strong>
+      （最後のアクセスが最も昔のものを追い出す）を区別する。
+    </p>
+  </div>
+
+  <div class="note" id="kp-12">
+    <span class="box-label">クライアントサーバ型とP2P型</span>
+    <p>
+      クライアントサーバ型は管理・制御がしやすい反面、サーバに負荷・障害が集中しやすい。P2P型は
+      特定サーバへの依存がなく耐障害性に優れる一方、匿名性の高さから著作権侵害等の温床になりやすい
+      （Winnyが例）。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-13">
+    <span class="box-label">ACID性・排他制御・ロールバック</span>
+    <p>
+      ACID性＝原子性(Atomicity)・一貫性(Consistency)・独立性(Isolation)・耐久性(Durability)。
+      排他制御＝独立性を保つ仕組み、ロールバック＝「全部成功」か「全部失敗（開始前に戻す）」の
+      どちらかしか許さないことで原子性を保つ仕組み。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-14">
+    <span class="box-label">木構造かグラフ（ネットワークモデル）かの判定</span>
+    <p>
+      「各要素はただ1つの親を持つか」を機械的にチェックする。インターネットの接続関係は冗長性確保の
+      ため複数経路（閉路）を持つのが普通なので、閉路を持てない木構造では正しく表現できない。
+    </p>
+  </div>
+
+  <div class="note" id="kp-15">
+    <span class="box-label">通信時間はファイルサイズに単純比例しない</span>
+    <p>
+      DNS問い合わせ・接続確立などサイズに依存しない固定的なオーバーヘッドがあり、回線の混雑・
+      ルータでの遅延・パケットの再送によっても変動する。
+    </p>
+  </div>
+
+  <div class="note" id="kp-16">
+    <span class="box-label">HTTPはプロトコル（規約）であり相手はブラウザに限らない</span>
+    <p>
+      任意のプログラムがHTTPでサーバと通信できる。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">情報セキュリティと法律</h2>
+
+  <div class="mot" id="kp-17">
+    <span class="box-label">セキュリティとプライバシーは原因と結果の関係</span>
+    <p>
+      セキュリティ対策の不備（技術的な管理体制の不備）という「原因」が、プライバシー侵害
+      （個人情報のコントロール喪失）という「結果」を引き起こす。
+    </p>
+  </div>
+
+  <div class="note" id="kp-18">
+    <span class="box-label">不正アクセス禁止法と個人情報保護法は規律対象が異なる</span>
+    <p>
+      不正アクセス禁止法＝攻撃者側の行為を規律、個人情報保護法＝情報を預かる事業者側の管理責任を
+      規律する。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-19">
+    <span class="box-label">フィッシング対策としてのSSL/httpsの2つの役割</span>
+    <p>
+      ①通信内容の暗号化（盗聴対策）、②サーバ証明書による接続先サーバの身元検証（なりすまし対策）。
+      暗号化だけでは偽サイトに情報を送るリスクは防げない。認証だけでは途中の盗聴は防げない。
+      両方の組み合わせが必要である。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-20">
+    <span class="box-label">通信手順を時間順に説明できるようにする</span>
+    <p>
+      URL解析→DNS問い合わせ（階層的）→TCP接続確立（3ウェイハンドシェイク）→SSL/TLSハンドシェイク
+      （証明書検証・鍵共有）→HTTPリクエスト→パケット中継→サーバでのページ生成→レスポンス→復元→描画、
+      という順序で説明できるようにしておく。
+    </p>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="02-ネットワークとセキュリティ-word.html">← 単語一覧</a>
+    <a href="02-ネットワークとセキュリティ-descriptive.html">記述式で狙われる内容 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

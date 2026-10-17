@@ -1,0 +1,607 @@
+<!DOCTYPE html><!-- 「第5回 実証会計理論入門｜現代経済理論」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第5回 実証会計理論入門｜現代経済理論</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="lec-5">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">現代経済理論</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">HOME</a>
+      <a href="index.html" class="active">講義</a>
+      <a href="../kakomon_2025.html">過去問</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <span class="hero-badge">第5回</span>
+  <h1>本郷で学ぶ会計学：実証会計理論入門</h1>
+  <p class="subtitle">首藤 昭信（東京大学大学院経済学研究科 准教授）</p>
+  <p class="meta">財務会計・管理会計 ／ 利益調整・会計発生高アノマリー</p>
+</div>
+
+<div class="container">
+
+  <div class="section-card">
+    <h2><span class="h2-icon">👤</span> 講師プロフィール</h2>
+    <div class="teacher-profile">
+      <div class="teacher-icon">📊</div>
+      <div class="teacher-info">
+        <h3>首藤 昭信（Akinobu SHUTO）</h3>
+        <div class="affil">東京大学大学院経済学研究科・経済学部 准教授</div>
+        <div class="specialty">
+          専門：財務会計・管理会計（実証会計理論）<br>
+          経営者の利益調整行動、会計情報の有用性、利益の質に関する実証研究が専門。著書に『日本企業の利益調整』（中央経済社, 2010）。EY新日本有限責任監査法人と共同で不正会計を検出するAIシステムを開発（2017年〜）。駒場・本郷の分業として、「会計基準はこうあるべきか」という規範的分析を駒場で、「なぜ経営者は特定の会計行動を選択するのか」という事実解明的分析を本郷で学ぶ。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📝</span> 講義概要</h2>
+    <p class="summary-text">
+      <p>会計学の研究は長らく「どの会計基準を採用すべきか」という規範的分析が中心だった。しかし Watts &amp; Zimmerman（1986）『Positive Accounting Theory』以降、「なぜ経営者は特定の会計方法を選ぶのか」という事実解明的アプローチが主流になった。米国の主要学術誌 TAR（The Accounting Review）における実証研究論文の比率は、1978年の46%から2008年には91%に達している。</p>
+      <p>本講義は①<strong>会計情報の有用性</strong>（市場に与える影響）と②<strong>利益の質・利益調整</strong>（経営者の裁量行動）という実証会計理論の2大テーマを、効率的市場仮説・Ball and Brown (1968)・会計発生高アノマリーの3本柱で理解することを目標とする。さらに最新の会計学研究として、因果推論の導入とAI・機械学習の活用を紹介する。</p>
+    </p>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📚</span> 主なトピック</h2>
+    <ul class="topic-list">
+
+      <li>
+        <div class="tn-col"><span class="tn">1</span></div>
+        <div class="topic-content">
+          <span class="topic-title">会計の体系と財務諸表の役割</span>
+          <p class="topic-desc">
+            会計の体系は「企業 → 財務諸表（報告書） → 利害関係者（投資家・債権者・税務当局など）」という情報フローで成り立つ。財務諸表の代表は貸借対照表（B/S：資産・負債・純資産）と損益計算書（P/L：収益・費用・利益）。
+          </p>
+          <p class="topic-desc">
+            会計学は駒場（教養）と本郷（専門）で視点が異なる。駒場では「会計基準はこうあるべき」という規範的分析、本郷では「経営者はなぜその会計処理を選ぶのか」という実証・事実解明的分析が中心になる。
+          </p>
+          <div class="def-box">
+            <strong>財務会計の2機能</strong><br>
+            ① <strong>資本市場ベース（意思決定支援機能）</strong>：投資家が株式売買・資金調達などの意思決定に会計情報を活用する機能。効率的市場仮説が前提。<br>
+            ② <strong>契約理論ベース（契約支援機能）</strong>：経営者報酬を業績（利益）に連動させることで、所有と経営の分離に伴うモラルハザード（エージェンシー問題）を緩和する機能。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">2</span></div>
+        <div class="topic-content">
+          <span class="topic-title">実証会計理論（Positive Accounting Theory）の確立</span>
+          <p class="topic-desc">
+            1970年代以前の会計学は「利益はこう計算すべき」という規範的議論が中心だった。Watts &amp; Zimmerman（1986）は、経営者の会計選択を経済合理性から説明する実証会計理論を体系化した。同時期に Beaver（1981）『Financial Reporting: An Accounting Revolution』も刊行され、資本市場と会計情報の関係を実証する研究が急増した。
+          </p>
+          <div class="insight">
+            TAR誌の実証研究論文比率：1978年<strong>46%</strong> → 2008年<strong>91%</strong>。会計学はいまや事実解明の科学へとパラダイムシフトした。
+          </div>
+          <p class="topic-desc">
+            実証会計理論の問いは「なぜ経営者は定額法より定率法を選ぶのか」「なぜ在庫評価に先入先出法を採用するのか」といった具体的な会計選択行動の解明に向かう。経営者の選択は報酬制度・債務契約・規制コストという3要因から説明される（Watts and Zimmerman, 1977）。
+          </p>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">3</span></div>
+        <div class="topic-content">
+          <span class="topic-title">効率的市場仮説（EMH）と会計情報の有用性</span>
+          <p class="topic-desc">
+            Fama（1970）が提唱した効率的市場仮説（Efficient Market Hypothesis）は、株価が利用可能な情報を即座に・完全に反映するという命題。会計情報の有用性を論じるには EMH の理解が不可欠。
+          </p>
+          <div class="def-box">
+            <strong>EMH の3分類</strong><br>
+            ① <strong>弱度（Weak Form）</strong>：過去の株価・取引量のみ織り込み済み。チャート分析（テクニカル分析）では超過リターンは得られない。<br>
+            ② <strong>半強度（Semi-Strong Form）</strong>：公表されたすべての情報（決算・ニュース等）が即座に織り込まれる。基本的分析（ファンダメンタルズ分析）でも超過リターンは得られない。<br>
+            ③ <strong>強度（Strong Form）</strong>：インサイダー情報を含むすべての情報が反映される。現実には成立していないとされる。
+          </div>
+          <p class="topic-desc">
+            日米の株式市場では<strong>半強度の EMH が概ね認められる</strong>。これは「財務諸表の数値が公表された瞬間に株価に反映される」ことを意味し、財務会計情報の意思決定支援機能の前提となる。
+          </p>
+          <div class="insight">
+            <strong>潜在的有用性 vs 実際的有用性</strong>：財務情報が理論上有用でも（潜在的有用性）、実際に投資家が使いこなしていなければ（実際的有用性）市場への影響は限定的。会計発生高アノマリーはこの乖離を示す証拠となる。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">4</span></div>
+        <div class="topic-content">
+          <span class="topic-title">Ball and Brown（1968）— 会計情報の有用性の実証</span>
+          <p class="topic-desc">
+            Ball and Brown（1968）は実証会計研究の古典中の古典。決算発表を Good News / Bad News に分類し、発表前後12ヶ月の株価累積異常リターン（CAR: Cumulative Abnormal Return）を追った。
+          </p>
+          <div class="def-box">
+            <strong>分析の設計</strong><br>
+            期待外利益（FE: Forecast Error）＝ 実際利益 − 期待利益<br>
+            FE &gt; 0（期待を上回る利益）→ Good News グループ → <strong>CAR プラス</strong><br>
+            FE &lt; 0（期待を下回る利益）→ Bad News グループ → <strong>CAR マイナス</strong>
+          </div>
+          <div class="def-box"><strong>グラフの読み方：</strong>横軸は決算発表月を0とした相対月（−12は1年前、＋12は1年後）、縦軸のCARは各月の「実際の株式リターン−市場全体などから予測される通常リターン」を累積した値である。Good News線が上昇しBad News線が下降するほど、予想外利益の符号と株価反応が対応する。発表後に線が水平なら、公表後に同じ情報だけで追加収益を得にくいと読む。</div>
+          <p class="topic-desc">
+            結果：①決算発表の<strong>12ヶ月前から株価は動き始める</strong>（市場が決算前に情報を先取りする）。②決算発表後は CAR がフラットになる（情報が発表時点で出尽くし）。これは半強度 EMH と整合し、かつ利益情報が株価に有意な影響を与えること（有用性の証明）を同時に示す。
+          </p>
+          <div class="insight">
+            会計情報の<strong>約85%の情報</strong>は決算発表前に株価に織り込まれているとされる（Beaver, 1968）。利益発表それ自体より、その前のニュース・アナリスト予測の方が価格形成を主導している。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">5</span></div>
+        <div class="topic-content">
+          <span class="topic-title">利益の質（Earnings Quality）— 同じ1億円でも価値が異なる</span>
+          <p class="topic-desc">
+            「利益1億円」という数字を額面通りに受け取ってはいけない。同じ金額でも質（将来再現可能性・現金裏付け）は大きく異なる。
+          </p>
+          <p class="topic-desc">
+            <strong>観察の視点：</strong><br>
+            ① <em>水準</em>：ROA・ROE が高い利益か？　業界平均との乖離は？<br>
+            ② <em>方向</em>：前年比で増益か？　赤字からの回復か、黒字から赤字への転落か？<br>
+            ③ <em>背景</em>：本業（新薬開発・製品販売）からの利益か、一時的事象（不動産売却・子会社売却）からか？<br>
+            ④ <em>会計処理</em>：定額法→定率法への減価償却変更だけで数百億円が増減しうる。
+          </p>
+          <div class="insight">
+            <strong>利益はコンセプト</strong>であり、現金ではない。同じ経済的実態に対して、採用する会計基準・見積もり次第で利益の数値は変わる。経営者には広い裁量の余地がある。
+          </div>
+          <div class="def-box"><strong>簡単な例：</strong>商品100万円を掛けで売れば、入金前でも売上・利益を計上し、同額の売掛金が増える。反対に設備100万円を買っても、支払時に全額を費用にせず数年に分けて減価償却する。したがって「利益が出た」と「同額の現金が増えた」は同義ではない。</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">6</span></div>
+        <div class="topic-content">
+          <span class="topic-title">会計発生高（Accruals）と裁量的発生高の抽出</span>
+          <p class="topic-desc">
+            会計発生高（Accruals）とは「会計利益のうち、現金の裏付けがない部分」（Healy, 1985）。売掛金・棚卸資産の増加、減価償却費の変更などがこれにあたる。
+          </p>
+          <div class="def-box">
+            <strong>会計利益の分解</strong><br>
+            会計利益 ＝ 営業キャッシュ・フロー ＋ 会計発生高<br>
+            　　　　　＝ 営業CF ＋ 非裁量的発生高 ＋ <strong>裁量的発生高</strong><br><br>
+            <strong>Jonesモデル（Jones, 1991）</strong>：非裁量的発生高を推定する回帰式<br>
+            会計発生高 ＝ α₀ ＋ α₁Δ売上高 ＋ α₂償却性固定資産 ＋ ε<br>
+            残差 ε が<strong>裁量的発生高（discretionary accruals）</strong>の代理変数。
+          </div>
+          <p><strong>記号の読み方</strong>：α₀は説明変数がすべて0のときの基準値（定数項）、α₁とα₂はそれぞれ売上変化と固定資産が通常の発生高に与える関係を表す係数。εは実際値からこの予測値を引いた残りである。αとεは企業が選ぶ金額ではなく、回帰モデルの係数と残差の記号である。</p>
+          <div class="insight"><strong>回帰式をどう使うか：</strong>売上増に伴う売掛金や設備規模に伴う減価償却など、通常の事業活動で生じる発生高を右辺で予測する。実際の発生高が予測値を上回る差εを「経営者の裁量らしい部分」とみなす。ただしεにはモデルが捉え損ねた正常要因も混ざるため、裁量や不正を直接観察した値ではなく代理変数である。</div>
+          <p class="topic-desc">
+            会計発生高には重要な特性がある：<strong>発生高は将来必ず反転する（accruals reverse）</strong>。売掛金を操作して今期利益を増やしても、翌期には回収不能として損失が発生するか、現金が入ってきて CF は増えるが発生高は減る。この反転特性が、発生高の大きい企業の将来利益が低い傾向（会計発生高アノマリー）を生む。
+          </p>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">7</span></div>
+        <div class="topic-content">
+          <span class="topic-title">利益調整の動機 — 12の仮説と2軸の分類</span>
+          <p class="topic-desc">
+            利益調整（earnings management）とは「何らかの特定の目的を達成するために、経営者によって行われる会計数値を対象とした裁量行動」（首藤, 2010）。<strong>利益操作（不正会計）とは明確に異なる</strong>——基準の範囲内の裁量行動が利益調整、基準を逸脱した違法行為が利益操作。
+          </p>
+          <div class="def-box">
+            <strong>【契約に基づく動機（6仮説）】</strong><br>
+            ① ボーナス制度仮説：利益連動型ボーナスを最大化するために利益を調整<br>
+            ② 債務契約仮説：財務制限条項（コベナンツ）に抵触しないように利益増加<br>
+            ③ 政治費用仮説：大企業ほど政府の規制を避けるために利益を抑制<br>
+            ④ 税コスト仮説：課税所得を減らすために利益を減少<br>
+            ⑤ 経営者交代契約仮説：新任経営者のビッグ・バス／前任者の利益増加<br>
+            ⑥ 黙示的契約仮説：消費者・従業員との暗黙の関係を維持するために利益増加<br><br>
+            <strong>【株式市場に基づく動機（6仮説）】</strong><br>
+            ① IPO仮説：新規株式公開時の価格形成を有利にするために利益増加<br>
+            ② SEO仮説（公募増資）：株価を維持するために利益増加<br>
+            ③ エクイティ・インセンティブ仮説：自社株・ストックオプション保有者が利益増加<br>
+            ④ MBO仮説：買収価格を低くするために利益減少<br>
+            ⑤ M&amp;A仮説：交換比率を有利にするために利益増加<br>
+            ⑥ 利益ベンチマーク仮説：損失回避・減益回避・アナリスト予想達成のために利益調整
+          </div>
+          <div class="insight">
+            エージェンシー理論の核心：株主（<strong>プリンシパル</strong>）は企業運営を経営者（<strong>エイジェント</strong>）に委託するが、経営者は必ずしも株主の利益を最大化するとは限らない。利益連動型報酬契約はこのエージェンシー費用を削減する仕組みだが、逆に利益調整インセンティブを生む。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">8</span></div>
+        <div class="topic-content">
+          <span class="topic-title">ボーナス制度仮説・ビッグ・バス・利益ベンチマーク</span>
+          <p class="topic-desc">
+            <strong>Healy（1985）のボーナス制度仮説</strong>：利益連動型報酬制度には「下限（Bogey）」と「上限（Cap）」が存在する。
+          </p>
+          <div class="def-box">
+            <strong>3パターンの利益調整行動（Healy, 1985）</strong><br>
+            ① 利益 &lt; Bogey（下限）：どうせボーナスは出ない → <strong>ビッグ・バス</strong>（損失をさらに拡大して将来の調整余地を作る）<br>
+            ② Bogey ≤ 利益 ≤ Cap：ボーナスが利益に比例して増加 → <strong>利益増加型</strong>（できるだけ利益を押し上げる）<br>
+            ③ 利益 &gt; Cap（上限）：これ以上ボーナスは増えない → <strong>利益減少型</strong>（翌期のためにプールする）
+          </div>
+          <p class="topic-desc">
+            <strong>経営者交代仮説（Strong and Meyer, 1987 他）</strong>：新任経営者は就任初年度にビッグ・バスを行い、業績悪化を前任者のせいにする。実証証拠：日本のある自動車会社の事例で、<em>当期純利益はV字回復するが、営業キャッシュ・フローはV字ではない</em>。CFO修正ジョーンズモデルで算定した裁量的発生高がV字を示し、利益調整（ビッグ・バス）の存在を確認。
+          </p>
+          <p class="topic-desc">
+            <strong>利益ベンチマーク仮説（Burgstahler and Dichev, 1997）</strong>：経営者は①損失回避②減益回避③アナリスト予想値達成のために利益を調整する。検証方法は「利益分布アプローチ」：利益変数のヒストグラムを作成し、ゼロ付近の分布の不規則性（ゼロ直上が異常に多く、ゼロ直下が少ない）を観察する。米国データ（Burgstahler and Dichev, 1997）・日本データ（首藤, 2010）ともに同様の不規則性を確認。
+          </p>
+          <div class="def-box"><strong>ヒストグラムからの推論：</strong>横軸に利益（または利益変化）、縦軸に企業数を置く。操作がなければゼロ付近も概ね滑らかにつながると考えるのに、ゼロ直下だけ少なく直上だけ多ければ、一部企業が小幅赤字を小幅黒字へ移した可能性と整合する。ただし段差だけで個々の企業の操作を断定はできず、税制・企業退出など別の説明も検討が必要である。</div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">9</span></div>
+        <div class="topic-content">
+          <span class="topic-title">利益調整と株式市場 — 会計発生高アノマリー（Sloan, 1996）</span>
+          <p class="topic-desc">
+            <strong>Question：一般投資家は利益の質を見抜いているのか？</strong>
+          </p>
+          <p class="topic-desc">
+            Sloan（1996）は会計発生高が利益の持続性に与える影響を考慮し、会計発生高にもとづく投資戦略の有効性を実証した。
+          </p>
+          <div class="def-box">
+            <strong>投資戦略の設計（Sloan, 1996）</strong><br>
+            ① 会計発生高（TA）の大きさでサンプルを10分位に分類<br>
+            ② 第1分位（TAが小さい ＝ キャッシュ裏付けが大きい）ポートフォリオを<strong>購入</strong><br>
+            ③ 第10分位（TAが大きい ＝ 発生高依存が高い）ポートフォリオを<strong>空売り</strong><br>
+            ④ 1年間保有して超過リターンを計算<br>
+            → 平均<strong>10.4%の超過リターン</strong>が持続的に獲得可能
+          </div>
+          <div class="insight"><strong>10.4%の意味：</strong>低発生高株を買う側と高発生高株を空売りする側を組み合わせたロング・ショート戦略の平均的な異常収益であり、全銘柄が10.4%上昇したという意味ではない。公表済みの発生高で銘柄を分けた後にも価格差が修正されたため、市場が利益の持続性の差を当初は十分織り込んでいなかった、と解釈する。</div>
+          <p class="topic-desc">
+            この結果は半強度 EMH と矛盾する。会計発生高は<em>公表されている</em>情報にもかかわらず、市場はそれを完全に反映できていない。投資家は表面的な利益額だけを見て企業を評価し、発生高が多い企業を過大評価・発生高が少ない企業を過小評価している（Sloan, 1996, p.290）。
+          </p>
+          <div class="insight">
+            会計情報の<strong>実際的有用性の証拠</strong>：会計発生高アノマリーは、財務諸表を精緻に読み込む（発生高を抽出する）ことで市場平均を上回れることを示す。これは会計情報が「潜在的に有用」であっても「実際には活用されていない」ことの表れでもある。
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">10</span></div>
+        <div class="topic-content">
+          <span class="topic-title">現代の会計学研究 — 因果推論・AI・実務への応用</span>
+          <p class="topic-desc">
+            <strong>2つの新潮流</strong>
+          </p>
+          <p class="topic-desc">
+            <strong>① 因果関係の解明を意識した計量経済学の導入</strong><br>
+            ・差の差分析（DiD）：IFRS導入の効果検証など<br>
+            ・傾向スコアマッチング：ストック・オプション採用と利益操作の関係<br>
+            ・不連続回帰デザイン（RDD）：財務制限条項の抵触・Russell 2000指数の組み入れ効果
+          </p>
+          <p class="topic-desc">
+            <strong>② 機械学習・AIの台頭</strong><br>
+            ・<em>不正会計予測モデル</em>（Dechow et al., 2011）：財務比率から「不正スコア（Fスコア）」を算出。2000年度のエンロンのFスコアは2.76 → 平均的企業より<strong>不正リスクが2倍以上</strong>高い。<br>
+            ・<em>テキスト分析</em>（Purda and Skillicorn, 2015）：アニュアルレポートの MD&amp;A（経営者の分析と議論）を分析して不正会計を予測。近年は生成AI（ChatGPT）を活用した予測能力の検証も進む。<br>
+            ・<em>画像情報の活用</em>（Judd et al., 2017）：アニュアルレポートの経営者写真の大きさ・構成でナルシズムを測定 → ナルシズムの強い経営者ほど監査報酬が高い。
+          </p>
+          <div class="insight">
+            <strong>実務への3つの応用領域</strong>：①会計監査・規制当局・税務当局（EY新日本×首藤准教授のAI異常検知システム、国税庁のAI税務調査）②株式投資（会計発生高アノマリーを利用した投資戦略）③信用リスク分析（格付け会社・銀行によるスコアリングモデル）。研究知見が実際の市場・制度に応用される好例。
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">🔑</span> 重要キーワード</h2>
+    <div class="concept-tags">
+      <span class="concept-tag t-blue">実証会計理論（PAT）</span>
+      <span class="concept-tag t-blue">Watts &amp; Zimmerman 1986</span>
+      <span class="concept-tag t-blue">財務会計の2機能</span>
+      <span class="concept-tag t-orange">効率的市場仮説（EMH）</span>
+      <span class="concept-tag t-orange">半強度の効率性</span>
+      <span class="concept-tag t-orange">Ball and Brown 1968</span>
+      <span class="concept-tag t-orange">CAR（累積異常リターン）</span>
+      <span class="concept-tag">利益の質</span>
+      <span class="concept-tag">潜在的有用性 vs 実際的有用性</span>
+      <span class="concept-tag t-purple">会計発生高（Accruals）</span>
+      <span class="concept-tag t-purple">裁量的発生高</span>
+      <span class="concept-tag t-purple">Jonesモデル</span>
+      <span class="concept-tag t-purple">会計発生高の反転</span>
+      <span class="concept-tag t-red">利益調整（Earnings Management）</span>
+      <span class="concept-tag t-red">ボーナス制度仮説</span>
+      <span class="concept-tag t-red">ビッグ・バス</span>
+      <span class="concept-tag t-red">Healy 1985</span>
+      <span class="concept-tag t-red">経営者交代仮説</span>
+      <span class="concept-tag t-red">利益ベンチマーク仮説</span>
+      <span class="concept-tag t-red">損失回避・減益回避</span>
+      <span class="concept-tag">エージェンシー理論</span>
+      <span class="concept-tag t-purple">会計発生高アノマリー</span>
+      <span class="concept-tag t-purple">Sloan 1996</span>
+      <span class="concept-tag t-blue">不正会計予測モデル</span>
+      <span class="concept-tag t-blue">Fスコア（Dechow 2011）</span>
+      <span class="concept-tag t-gray">テキスト分析</span>
+      <span class="concept-tag t-gray">AI・機械学習</span>
+    </div>
+  
+  <div class="kw-detail-list">
+    <p class="kw-detail-label">各キーワードの解説（クリックで展開）</p>
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details class="kw-item">
+      <summary class="kw-summary">実証会計理論（PAT）</summary>
+      <div class="kw-body">Watts & Zimmerman (1986) が体系化した「なぜ経営者はこの会計方法を選ぶのか」を経済合理性から説明する事実解明的アプローチ。「会計基準はこうあるべき」という規範的分析に対置される。TAR誌の実証論文比率1978年46%→2008年91%を牽引した。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">Watts & Zimmerman 1986</summary>
+      <div class="kw-body">PATの起点となった書籍。経営者の会計選択を<strong>報酬制度・債務契約・政治コスト</strong>の3要因で説明する枠組みを提示。会計学のパラダイムシフトを象徴する文献。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">財務会計の2機能</summary>
+      <div class="kw-body">①<strong>意思決定支援機能</strong>（投資家が株式売買等の判断に会計情報を活用）と②<strong>契約支援機能</strong>（経営者報酬を利益に連動させてエージェンシー問題を緩和）。この2機能を前提として有用性研究と利益調整研究が展開する。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">効率的市場仮説（EMH）</summary>
+      <div class="kw-body">Fama (1970)。株価が利用可能な情報を即座・完全に反映するという命題。弱度（過去株価のみ）・半強度（公表情報全て）・強度（インサイダー情報含む）の3分類。財務会計情報の有用性を論じる理論的前提。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">半強度の効率性</summary>
+      <div class="kw-body">公表情報（決算・ニュース等）が即座に株価に織り込まれる状態。日米では概ね認められる。「財務諸表が公表された瞬間に株価が動く」根拠。Ball and Brown (1968) がこれを実証した。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">Ball and Brown 1968</summary>
+      <div class="kw-body">実証会計研究の古典。決算を「期待を上回るGood News / 下回るBad News」に分け、前後12ヶ月のCARを追跡。発表12ヶ月前から株価は動き始め、発表後はフラット——会計情報の有用性と半強度EMHを同時に実証した。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">CAR（累積異常リターン）</summary>
+      <div class="kw-body">市場全体の動きを除いた「その銘柄固有のリターンの累積値」。Ball and Brownはこれを使って決算発表が株価に与える影響を測定した。有用性研究の主要な測定ツール。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">利益の質</summary>
+      <div class="kw-body">同じ「1億円の利益」でも現金の裏付け・一時性・本業由来かで将来再現性が異なる。利益はコンセプトであり、採用する会計基準・見積もり次第で変わる。「利益の数値だけ見てはいけない」という実証会計の核心。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">潜在的有用性 vs 実際的有用性</summary>
+      <div class="kw-body">理論上有用な情報（潜在的）でも投資家が実際に使えていなければ（実際的）市場への影響は限定的。会計発生高アノマリーはこの乖離を示す証拠——発生高は公表情報なのに市場は完全に反映できていない。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">会計発生高（Accruals）</summary>
+      <div class="kw-body">会計利益のうち現金の裏付けがない部分（売掛金増加・棚卸資産増加など）。「会計利益 = 営業CF + 会計発生高」が恒等式。現金の裏付けが薄い利益は将来反転するため「利益の質」の代理変数として使われる。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">裁量的発生高</summary>
+      <div class="kw-body">会計発生高のうち経営者が意図的に操作できる部分。Jonesモデルで非裁量的部分を推計し、残差を裁量的発生高とみなす。利益調整の「量」を測る実証研究の標準指標。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">Jonesモデル</summary>
+      <div class="kw-body">Jones (1991)。非裁量的発生高を「Δ売上高 + 償却性固定資産」で回帰し、残差εを裁量的発生高の代理変数とする。実証利益調整研究で最も広く使われるモデル。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">会計発生高の反転</summary>
+      <div class="kw-body">発生高は必ず将来反転する。今期に売掛金を積み増して利益を増やしても翌期以降に損失や現金収入として消える。この反転特性が会計発生高の大きい企業の将来利益が低い傾向（=アノマリー）を生む根本原因。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">利益調整（Earnings Management）</summary>
+      <div class="kw-body">特定の目的のために経営者が行う会計数値の裁量的操作。不正会計（基準違反）とは異なり基準の範囲内の合法的行動。動機は契約ベース6仮説＋株式市場ベース6仮説の計12仮説に分類される。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">エージェンシー理論</summary>
+      <div class="kw-body">株主（プリンシパル）が経営者（エージェント）に企業運営を委託する際の利害対立の理論。利益連動型報酬はエージェンシー費用を削減するが、逆に利益調整インセンティブも生む——利益調整研究の理論的基盤。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">ボーナス制度仮説</summary>
+      <div class="kw-body">Healy (1985)。利益連動型ボーナスには下限（Bogey）と上限（Cap）がある。①利益＜Bogey→ビッグ・バス、②Bogey≤利益≤Cap→利益増加型調整、③利益＞Cap→利益減少型（翌期にプール）という3パターンの行動が予測される。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">ビッグ・バス</summary>
+      <div class="kw-body">業績が極端に悪いとき、いっそ損失をさらに拡大して将来の調整余地を作る行動。「どうせボーナスが出ない」状況で合理的に起きる。新任経営者が就任初年度に業績悪化を前任者に帰責する際にも多発する。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">Healy 1985</summary>
+      <div class="kw-body">ボーナス制度仮説を実証した先駆的研究。報酬制度の構造（Bogey/Cap）から利益調整行動を予測し、会計発生高で検証した。利益調整研究の出発点となった論文。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">経営者交代仮説</summary>
+      <div class="kw-body">新任経営者は就任初年度にビッグ・バスを行い業績悪化を前任者に帰責する。実証例：当期純利益はV字回復するが営業CFはV字でない→裁量的発生高の操作（ビッグ・バス）が原因と推定できる。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">利益ベンチマーク仮説</summary>
+      <div class="kw-body">Burgstahler and Dichev (1997)。経営者は①損失回避②減益回避③アナリスト予想達成のために利益を調整する。検証は「利益分布アプローチ」——ゼロ直上が異常に多くゼロ直下が少ないというヒストグラムの不規則性を観察。米・日ともに確認。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">損失回避・減益回避</summary>
+      <div class="kw-body">利益ベンチマーク仮説の核心。「赤字になること」「前年比減益になること」を避けようとする動機が、ゼロ近傍・前年同期近傍での利益分布の歪みを生む。「ゼロ直上に企業が多すぎる」という観察がその証拠。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">会計発生高アノマリー</summary>
+      <div class="kw-body">Sloan (1996)。発生高が大きい企業を空売り・小さい企業を買う戦略で平均10.4%の超過リターンが得られる。公表情報なのに市場に反映されていない——半強度EMHへの挑戦であり「実際的有用性」の証拠。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">Sloan 1996</summary>
+      <div class="kw-body">会計発生高アノマリーを発見した論文。投資家は表面的な利益額だけを見て発生高が多い企業を過大評価・少ない企業を過小評価している（投資家の見落とし仮説）。実証会計と金融経済学を橋渡しした古典的研究。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">不正会計予測モデル</summary>
+      <div class="kw-body">Dechow et al. (2011)。財務比率から不正リスクを数値化するAIモデル。エンロンの2000年度Fスコアは2.76（平均の2倍以上のリスク）。会計研究の実務応用の最前線。EY新日本×首藤准教授の共同研究でも開発中。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">Fスコア（Dechow 2011）</summary>
+      <div class="kw-body">財務諸表から不正会計の可能性を数値化した指標。統計モデルで算出され、値が大きいほど不正リスクが高い。エンロン・ワールドコムなど実際の不正事例で高値を示したことで注目を集めた。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">テキスト分析</summary>
+      <div class="kw-body">アニュアルレポートのMD&A（経営者の分析）をNLPで分析して不正会計や業績を予測する手法。近年はChatGPTなど生成AIも活用。財務数値だけでない「言葉」の情報価値を定量化する最新潮流。</div>
+    </details>
+    <details class="kw-item">
+      <summary class="kw-summary">AI・機械学習</summary>
+      <div class="kw-body">会計研究での活用が急拡大。財務比率からの不正予測・テキスト分析・経営者写真のナルシズム分析まで非財務情報も活用される。「研究のフロンティア」として講義の締めくくりで紹介。</div>
+    </details>
+  </div>
+</div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📋</span>過去問との対応</h2>
+    <div class="exam-ref-box">
+
+      <!-- 2025 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2025年度 期末試験</span>
+          <a href="../kakomon_2025.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q17</span><span class="eq-topic">利益調整・ビッグバス</span></div>
+<div class="exam-qa-q">主に米国企業の新経営者が就任初年度の会計年度において実施する利益調整を以下から選択しなさい。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>利益平準化</li>
+<li class="opt"><span class="opt-label">(b)</span>利益増加型</li>
+<li class="opt"><span class="opt-label">(c)</span>利益減少型</li>
+<li class="opt correct"><span class="opt-label">(d)</span>ビッグバス<span class="correct-mark">正解</span></li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><em>ビッグバス（Big Bath）</em>は新CEOが就任初年度に実施する典型的な利益調整。前任者の負の遺産を一度に全て損失計上し、当期の利益を極端に圧縮する。</p>
+<p>目的：<br/>
+    ①前任者に責任を転嫁できる（「就任前の問題を引き継いだ」）。<br/>
+    ②次期以降のベースラインを低く設定 → 次期から「業績V字回復」を演出しやすい。<br/>
+    ③将来の引当金を過大計上 → 後から利益として取り崩せる（Cookie jar reserves）。</p>
+<p>(a)<em>利益平準化</em>：業績の変動を滑らかにするため、好調な年に利益を抑え（引当金積み増し）、不調な年に利益を上乗せ（引当金取り崩し）する調整。新CEOの就任初年度の行動とは異なり、長期にわたる継続的な管理が特徴。(b)<em>利益増加型</em>：利益をかさ上げする操作。融資条件クリアや株価維持などを目的に行うが、新任CEOが就任初年度に行う典型的行動ではない。(c)<em>利益減少型</em>：ビッグバスと似た方向（利益を減らす）だが、「極端な」圧縮が伴わず、節税目的など動機が異なる。ビッグバスは戦略的かつ一時的・大規模な利益圧縮が特徴。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q18</span><span class="eq-topic">会計発生高アノマリー</span></div>
+<div class="exam-qa-q">会計発生高アノマリーが示唆するものを以下から選択しなさい。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>会計情報の潜在的有用性</li>
+<li class="opt"><span class="opt-label">(b)</span>会計情報の保守性</li>
+<li class="opt correct"><span class="opt-label">(c)</span>会計情報の実際的有用性<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>会計情報の契約支援機能</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><em>会計発生高アノマリー（Accrual Anomaly）</em>：Sloan (1996)が発見。会計発生高（アクルーアル）が高い企業の株式リターンはその後低く、低い企業のリターンはその後高い傾向がある。</p>
+<p>含意：市場は会計発生高の情報を<em>完全には</em>価格に織り込んでいない → 会計情報を使って超過収益を得られる可能性がある → 会計情報には<strong>実際に使える（投資に役立つ）有用性</strong>がある。</p>
+<p>(a)「潜在的有用性」：理論的には役立ちうるが、<em>実際の市場で活用されていない</em>という含意。しかしアノマリーは「情報を活用すれば実際に超過収益を得られる」ことを示しており、潜在的にとどまらず実際的な有用性がある。(b)「保守性」：費用や損失を早期に計上し、利益や資産を控えめに報告する会計上の原則。アノマリーとは別概念。(d)「契約支援機能」：会計情報が債務契約・報酬契約などの条件設定に利用されること。アノマリーは市場価格との乖離に関するものであり、契約支援とは異なる。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2024年度 期末試験</span>
+          <a href="../kakomon_2024.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q5</span><span class="eq-topic">利益調整・ビッグバス</span></div>
+<div class="exam-qa-q">ビッグ・バスを説明しているものを選べ。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>業績改善を目的とした人員削減</li>
+<li class="opt"><span class="opt-label">(b)</span>多額の設備投資</li>
+<li class="opt"><span class="opt-label">(c)</span>優秀な経営者への経営者交代</li>
+<li class="opt correct"><span class="opt-label">(d)</span>極端な利益圧縮型の利益調整<span class="correct-mark">正解</span></li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><em>ビッグ・バス（Big Bath）</em>：経営者（特に新任CEO）が就任初年度に、将来の損失・減損などを一気に前倒し計上し、当期利益を極端に圧縮する利益調整行動。「今期をひどくしておいて、次期から好業績に見せる」戦略。前任者への責任転嫁も可能。「お風呂で一気に汚れを落とす」というメタファーから命名。</p>
+<p>(a)「業績改善目的の人員削減」：これはリストラクチャリングであり、会計上の利益調整行動ではない（ただし人員削減に伴う退職費用の計上がビッグバスの一部になることはある）。(b)「多額の設備投資」：これは資本支出（CAPEX）であり、利益調整とは別の経営判断。(c)「優秀な経営者への交代」：人事の問題であり利益調整行動ではない（ただし新経営者が就任後にビッグバスを行うことはある）。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q6</span><span class="eq-topic">効率的市場仮説・半強形態</span></div>
+<div class="exam-qa-q">効率的市場仮説において半強度の効率性について説明しているものを選べ。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>一般に公開されない内部情報について市場が効率的</li>
+<li class="opt"><span class="opt-label">(b)</span>過去の株価系列の情報に対して市場が効率的</li>
+<li class="opt correct"><span class="opt-label">(c)</span>新聞記事や財務諸表などの公開された情報に対して市場が効率的<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>まだ発生してない将来事象について市場が効率的</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>効率的市場仮説（EMH）の3段階：</p>
+<p>・<strong>弱形態</strong>：<em>過去の株価系列</em>情報に対して効率的 → テクニカル分析で超過収益不可。<br/>
+    ・<strong>半強形態</strong>：<em>公開情報（新聞・決算・アナリストレポート等）</em>に対して効率的 → ファンダメンタル分析で超過収益不可。<br/>
+    ・<strong>強形態</strong>：内部情報も含む<em>全情報</em>に対して効率的 → インサイダー取引でも超過収益不可。</p>
+<p>「半強度（半強形態）」は公開情報への効率性。</p>
+<p>(a)「一般に公開されない内部情報」は<em>強形態</em>の説明。(b)「過去の株価系列」は<em>弱形態</em>の説明。(d)「まだ発生していない将来事象」はEMHの3分類のどれにも属さない（EMHは現時点で入手可能な情報が対象であり、まだ存在しない情報は定義外）。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2023年度 期末試験</span>
+          <a href="../kakomon_2023.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q9</span><span class="eq-topic">利益調整・ビッグバス</span></div>
+<div class="exam-qa-q">極端な利益圧縮型の利益調整行動を何というか。</div>
+<ul class="options">
+<li class="opt correct"><span class="opt-label">(a)</span>ビッグ・バス<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(b)</span>アノマリー</li>
+<li class="opt"><span class="opt-label">(c)</span>アクティブ戦略</li>
+<li class="opt"><span class="opt-label">(d)</span>アクルーアル・リバース</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p><em>ビッグ・バス（Big Bath）</em>とは、経営者が業績の悪い年や経営者交代の際に、将来の損失を一気に前倒し計上して利益を極端に圧縮する利益調整行動。「今期を徹底的に悪くしておくことで、次期以降の業績を相対的に良く見せる」戦略的な会計処理。新CEOが就任初年度に実施することが多い（前任者に責任転嫁できる）。</p>
+<p>(b)<em>アノマリー</em>：市場の「異常現象」であり、例えば会計発生高アノマリー（アクルーアルが高い株のリターンが低い傾向）など。利益調整行動の名称ではない。(c)<em>アクティブ戦略</em>：市場平均（ベンチマーク）を上回る運用を目指す投資戦略のこと。会計の利益調整とは無関係。(d)<em>アクルーアル・リバース</em>：発生主義会計で計上した引当・見越しが翌期以降に逆転して利益・損失に影響する現象。特定の利益調整行動の名称ではない。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q10</span><span class="eq-topic">効率的市場仮説・強形態</span></div>
+<div class="exam-qa-q">効率的市場仮説において強度の効率性について説明しているものを選択しなさい。</div>
+<ul class="options">
+<li class="opt correct"><span class="opt-label">(a)</span>一般に公開されない内部情報について市場が効率的<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(b)</span>過去の株価系列の情報に対して市場が効率的</li>
+<li class="opt"><span class="opt-label">(c)</span>新聞記事や財務諸表などの公開された情報に対して市場が効率的</li>
+<li class="opt"><span class="opt-label">(d)</span>まだ発生してない将来事象について市場が効率的</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>効率的市場仮説（EMH）の3段階：</p>
+<p>・<strong>弱形態</strong>：<em>過去の株価系列</em>（チャート）情報に対して効率的。テクニカル分析では超過収益を得られない。<br/>
+    ・<strong>半強形態</strong>：<em>公開情報</em>（決算発表・新聞等）に対して効率的。ファンダメンタル分析では超過収益を得られない。<br/>
+    ・<strong>強形態（強度）</strong>：<em>非公開の内部情報（インサイダー情報）</em>も含む全ての情報に対して効率的。インサイダー取引でも超過収益を得られないとする（最も強い仮定）。</p>
+<p>(b)「過去の株価系列」は<em>弱形態</em>の説明。(c)「新聞記事や財務諸表などの公開情報」は<em>半強形態</em>の説明。(d)「まだ発生していない将来事象」はEMHの3分類のいずれにも該当せず、そのような「強度」は定義されていない（株価は現時点で入手可能な情報を織り込むのであって、まだ存在しない情報までは対象外）。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="lecture-nav">
+    <a href="第4回.html">← 第4回</a>
+    <a href="index.html" class="center">講義一覧</a>
+    <a href="第6回.html">第6回 →</a>
+  </div>
+
+</div>
+
+<script>
+// 押されたボタンに対応する解説欄の表示を切り替える。
+function toggleExp(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const opt = e.target.closest('.opt');
+  if (!opt) return;
+  const options = opt.closest('.options');
+  if (!options || options.classList.contains('revealed')) return;
+  options.classList.add('revealed');
+  opt.classList.add('selected');
+});
+</script>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">現代経済理論（渡辺安虎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+</body>
+</html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html><!-- 「第5章 地球の重力場と回転座標系 | 力学A 講義ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第5章 地球の重力場と回転座標系 | 力学A 講義ノート</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="n5">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A 講義ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="n1.html" data-page="n1">第1章</a>
+      <a href="n2.html" data-page="n2">第2章</a>
+      <a href="n3.html" data-page="n3">第3章</a>
+      <a href="n4.html" data-page="n4">第4章</a>
+      <a href="n5.html" data-page="n5" class="active">第5章</a>
+      <a href="n6.html" data-page="n6">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>第5章　地球の重力場と回転座標系</h1>
+  <p class="subtitle">地球内部の重力・コリオリ力・自由落下の東偏</p>
+  <p class="meta">講義ノート §7・回転座標系 にもとづく</p>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <strong>この章について</strong><br>
+    前半では，地球の内部での重力が中心からの距離に比例することを，電場と重力場の類似（ガウスの法則の
+    ようなアイデア）から示す。後半は，地球のように回転している座標系の上で運動を記述するとどうなるかを扱う。
+    見かけ上の力である「コリオリ力」「遠心力」が現れ，自由落下する物体が真下からわずかに東へずれることを，
+    逐次近似法によって具体的に計算する。
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#s1">1. 地球内部での重力</a>
+    <a href="#s2">2. 回転座標系の運動学</a>
+    <a href="#s3">3. コリオリ力と遠心力</a>
+    <a href="#s4">4. 自由落下の東偏（逐次近似法）</a>
+  </div>
+
+  <!-- =================== §1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="s1">
+    <div class="sec-header">
+      <div class="sec-tag">Section 1</div>
+      <h2>地球内部での重力</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        質量 $M$ の質点（地球）から距離 $r$ の点にはたらく重力は $F=\dfrac{GM}{r^2}m \equiv m E_G$
+        （$E_G$：重力場の強さ）。これは電荷 $q$ が電場 $E$ から受ける力 $F=qE$ と全く同じ形をしている。
+      </p>
+
+      <div class="mot">
+        <span class="box-label">アイデア — 「重力線」</span>
+        <p>
+          電場のときの電気力線と同じように，質量 $M$ から $4\pi GM$ 本の「重力線」が全方向に出ているとイメージする。
+          この線は，どこかで途切れたり，新たに湧き出したりしない（質量が途中にない限り）。そして：
+        </p>
+        $$(\text{重力場の強さ}) = \frac{\text{重力線の本数}}{\text{面積}}$$
+      </div>
+
+      <h3 id="s1-1">地球の外側（$r>R$）</h3>
+      <p>$4\pi GM$ 本の線が，半径 $r$ の球面（面積 $4\pi r^2$）を一様に通り抜けるので：</p>
+      <div class="mathblock">$$(\text{面積あたりの本数}) = \frac{4\pi GM}{4\pi r^2} = \frac{GM}{r^2}$$</div>
+      <p>これは通常の万有引力の公式そのものである（当然の確認）。</p>
+
+      <h3 id="s1-2">地球の内側（$r&lt;R$，密度 $\rho$ 一様と仮定）</h3>
+      <div class="ex">
+        <span class="box-label">(i) 内部を通る重力線</span>
+        <p>
+          半径 $r$ の球の内側に含まれる質量だけが，半径 $r$ の球面を通る重力線の本数に寄与する（外側の質量は，
+          後述の通り寄与しない）。半径 $r$ の球の質量は $\frac43\pi r^3\rho$ だから：
+        </p>
+        $$\frac{4\pi G\cdot\frac43\pi r^3\rho}{4\pi r^2} = \frac43\pi\rho G\cdot r$$
+        <p>面積あたりの本数は $r$ に<strong>比例</strong>する。</p>
+      </div>
+      <div class="note">
+        <span class="box-label">(ii) 半径 $r$ の外側にある質量の寄与はゼロ</span>
+        <p>
+          半径 $r$ より外側にある質量部分（球殻）は，重力線を半径 $r$ の球面の中に入れる分と，外に出す分とが
+          ちょうど相殺し，正味の寄与はゼロになる（電磁気学の「球殻内部の電場はゼロ」と同じ理屈）。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">結論：地球内部の重力は中心からの距離に比例</span>
+        <p>
+          地球全体を一様密度と仮定すると，内部での重力（の大きさ）は $\frac43\pi\rho G\cdot r$ で，$r$ の１次関数。
+          地表（$r=R$）での重力加速度を $g$ とすれば，重力加速度は比例配分で：
+        </p>
+        $$(\text{重力}) = mg\,\frac rR$$
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details open>
+        <summary>地球を貫くトンネルを通り抜ける物体の運動（半周期を求める）</summary>
+        <div class="proof-body">
+          <p>
+            地球の中心を通るトンネルに物体を落とすと（座標 $r$ を中心からの符号付き距離とする），運動方程式は：
+          </p>
+          <div class="mathblock">$$\ddot r = -\frac gR\,r$$</div>
+          <p>
+            これは角振動数 $k=\sqrt{g/R}$ の単振動（第1章・第3章）。半周期（地球の中心を通って反対側まで届く時間）は：
+          </p>
+          <div class="mathblock">
+            $$\frac{T}{2} = \pi\sqrt{\frac{R}{g}}$$
+          </div>
+          <p>地球の半径 $R\approx6.4\times10^6\,\mathrm m$，$g=9.8\,\mathrm{m/s^2}$ を代入すると：</p>
+          <div class="mathblock">$$\frac T2 \approx 42\ \text{分}$$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足</span>
+        <p>
+          この「地球を貫くトンネルの往復時間（約 $84$ 分，片道 $42$ 分）」は，実は近似的に人工衛星が地表すれすれの
+          軌道（第4章の円軌道，$T_{\rm circ}=2\pi\sqrt{R^3/(GM)}$，かつ地表で $GM/R^2=g$ なので $T_{\rm circ}=2\pi\sqrt{R/g}$）
+          を回る周期と一致する，という面白い性質がある（どちらも同じ「地球の平均密度」だけで決まる時間スケール）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §2 =================== -->
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <div class="sec-tag">Section 2</div>
+      <h2>慣性系に対し回転している座標系</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3 id="s2-1">回転するベクトルの時間微分</h3>
+      <p>
+        角速度ベクトル $\boldsymbol\omega$（大きさ $|\boldsymbol\omega|=\omega$，向きは回転軸）のまわりを一定の
+        角速度で回転している座標系に固定されたベクトル $\mathbf a$ を考える。微小時間 $dt$ の間の変化 $d\mathbf a$ は：
+      </p>
+      <div class="mathblock">$$|d\mathbf a| = |\mathbf a|\sin\theta\cdot\omega\,dt$$</div>
+      <p>
+        （$\theta$ は $\boldsymbol\omega$ と $\mathbf a$ のなす角。$\mathbf a$ の，回転軸のまわりの円周上の弧の長さ。）
+        向きも考えると，これは外積を使って：
+      </p>
+      <div class="mathblock">
+        $$d\mathbf a = \boldsymbol\omega\times\mathbf a\,dt \quad\Longrightarrow\quad \boxed{\dot{\mathbf a} = \boldsymbol\omega\times\mathbf a}$$
+      </div>
+
+      <h3 id="s2-2">地球上の座標系</h3>
+      <p>
+        地球上のある点（北緯 $\alpha$）に原点をとり，その点での局所的な基底ベクトル $\mathbf e_\theta$（南向き），
+        $\mathbf e_\varphi$（東向き），$\mathbf e_r$（鉛直上向き）を考える。これらは地球の自転とともに回転するので：
+      </p>
+      <div class="mathblock">$$\dot{\mathbf e}_i = \boldsymbol\omega\times\mathbf e_i \qquad (i=\theta,\varphi,r)$$</div>
+      <p>
+        地表付近の質点の座標を，地上の観測者から見て $(x(t),y(t),z(t))$（南・東・上）とすると，地球中心を
+        原点とする位置ベクトルは：
+      </p>
+      <div class="mathblock">$$\mathbf r(t) = x(t)\,\mathbf e_\theta(t) + y(t)\,\mathbf e_\varphi(t) + \big(z(t)+R\big)\mathbf e_r(t)$$</div>
+      <p>（$R$：地球の半径。地表付近では $z\ll R$。）これを２回，時間 $t$ で微分する。</p>
+
+      <details>
+        <summary>$\ddot{\mathbf r}(t)$ の計算</summary>
+        <div class="proof-body">
+          <p>積の微分法則を使って１回微分すると：</p>
+          <div class="mathblock">
+            $$\dot{\mathbf r}(t) = \dot x\mathbf e_\theta+\dot y\mathbf e_\varphi+\dot z\mathbf e_r
+            + x(\boldsymbol\omega\times\mathbf e_\theta)+y(\boldsymbol\omega\times\mathbf e_\varphi)+(z+R)(\boldsymbol\omega\times\mathbf e_r)$$
+          </div>
+          <p>
+            後半の３項は，まとめると $\boldsymbol\omega\times\mathbf r(t)$ に等しい（外積の線形性より）。もう一度微分すると：
+          </p>
+          <div class="mathblock">
+            $$\ddot{\mathbf r}(t) = \ddot x\mathbf e_\theta+\ddot y\mathbf e_\varphi+\ddot z\mathbf e_r
+            + 2\big(\dot x(\boldsymbol\omega\times\mathbf e_\theta)+\dot y(\boldsymbol\omega\times\mathbf e_\varphi)+\dot z(\boldsymbol\omega\times\mathbf e_r)\big)$$
+            $$\qquad\qquad + x\big(\boldsymbol\omega\times(\boldsymbol\omega\times\mathbf e_\theta)\big)+y\big(\boldsymbol\omega\times(\boldsymbol\omega\times\mathbf e_\varphi)\big)+z\big(\boldsymbol\omega\times(\boldsymbol\omega\times\mathbf e_r)\big)$$
+          </div>
+          <p>
+            地上の観測者から見た「速度」$\mathbf v \equiv \dot x\mathbf e_\theta+\dot y\mathbf e_\varphi+\dot z\mathbf e_r$，
+            「加速度」$\mathbf a \equiv \ddot x\mathbf e_\theta+\ddot y\mathbf e_\varphi+\ddot z\mathbf e_r$ を使って整理すると：
+          </p>
+          <div class="mathblock">
+            $$\boxed{\ddot{\mathbf r}(t) = \mathbf a + 2\boldsymbol\omega\times\mathbf v + \boldsymbol\omega\times(\boldsymbol\omega\times\mathbf r(t))}$$
+          </div>
+        </div>
+        <div class="qed">∎</div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- =================== §3 =================== -->
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <div class="sec-tag">Section 3</div>
+      <h2>コリオリ力と遠心力</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        慣性系でのニュートンの運動方程式 $m\ddot{\mathbf r}(t) = \mathbb F$（$\mathbb F$：実際にはたらく力）に，
+        §2 の関係を代入すると：
+      </p>
+      <div class="mathblock">
+        $$m\mathbf a = \mathbb F \underbrace{- 2m\,\boldsymbol\omega\times\mathbf v}_{\text{コリオリ力}}
+        \underbrace{- m\,\boldsymbol\omega\times(\boldsymbol\omega\times\mathbf r(t))}_{\text{遠心力}}$$
+      </div>
+      <p>
+        すなわち，地上の観測者（回転座標系）から見ると，実際の力 $\mathbb F$ に加えて，見かけ上の力である
+        「コリオリ力」$-2m\boldsymbol\omega\times\mathbf v$ と「遠心力」$-m\boldsymbol\omega\times(\boldsymbol\omega\times\mathbf r)$
+        が付け加わったかのように運動方程式が成り立つ。
+      </p>
+
+      <h3 id="s3-1">遠心力の大きさは無視できる</h3>
+      <p>
+        地球の自転角速度は $\omega = 7.3\times10^{-5}\,\mathrm{[s^{-1}]}$。遠心力の大きさのオーダーは
+        $\omega^2 R \approx 0.034\,\mathrm{[m/s^2]}$ であり，重力加速度 $g=9.8\,\mathrm{[m/s^2]}$ と比べて
+        $3$ 桁ほど小さいので，以下では無視する。
+      </p>
+
+      <h3 id="s3-2">$\boldsymbol\omega$ の地上成分</h3>
+      <p>北緯 $\alpha$ の地点では，自転軸方向の $\boldsymbol\omega$ を，地上の基底 $(\mathbf e_\theta,\mathbf e_\varphi,\mathbf e_r)$
+      （南・東・上）で分解すると：</p>
+      <div class="mathblock">
+        $$\boldsymbol\omega = \omega(-\cos\alpha\,\mathbf e_\theta + \sin\alpha\,\mathbf e_r)
+        = (-\omega\cos\alpha,\ 0,\ \omega\sin\alpha)$$
+      </div>
+      <p>
+        （南向きの成分が負なのは，北極方向を向く自転軸が，北半球では鉛直上向きと，北向き（$-\mathbf e_\theta$方向）の
+        中間を向くことに対応する。）$\mathbf v=(\dot x,\dot y,\dot z)$ との外積を計算すると：
+      </p>
+      <div class="mathblock">
+        $$\boldsymbol\omega\times\mathbf v = \big(-\dot y\,\omega\sin\alpha,\ \ \dot x\,\omega\sin\alpha+\dot z\,\omega\cos\alpha,\ \ -\dot y\,\omega\cos\alpha\big)$$
+      </div>
+
+      <div class="thm">
+        <span class="box-label">コリオリ力を含む運動方程式（成分表示）</span>
+        $\mathbb F=(F_x,F_y,F_z)$ とすると：
+        $$\begin{cases}
+        m\ddot x = F_x + 2m\dot y\,\omega\sin\alpha\\
+        m\ddot y = F_y - 2m\omega(\dot x\sin\alpha+\dot z\cos\alpha)\\
+        m\ddot z = F_z + 2m\dot y\,\omega\cos\alpha
+        \end{cases}$$
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §4 =================== -->
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <div class="sec-tag">Section 4</div>
+      <h2>自由落下の東偏（逐次近似法，重要）</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        高さ $h$ から自由落下する物体を考える。$\mathbb F=(0,0,-mg)$（重力のみ）を上の式に代入すると：
+      </p>
+      <div class="mathblock">
+        $$\begin{cases}
+        \ddot x = 2\omega\dot y\sin\alpha\\
+        \ddot y = -2\omega(\dot x\sin\alpha+\dot z\cos\alpha)\\
+        \ddot z = -g + 2\omega\dot y\cos\alpha
+        \end{cases}\qquad(\ast)$$
+      </div>
+      <p>
+        これは $x,y,z$ が互いに絡み合っていて，このままでは（初等関数では）解けない。そこで，$\omega$ が
+        小さいことを利用して，解を $\omega$ のべき級数として逐次的に求める（逐次近似法）：
+      </p>
+      <div class="mathblock">
+        $$x(t,\omega)=x_0+\omega x_1+\omega^2x_2+\cdots,\quad
+        y(t,\omega)=y_0+\omega y_1+\omega^2y_2+\cdots,\quad
+        z(t,\omega)=z_0+\omega z_1+\omega^2z_2+\cdots$$
+      </div>
+      <p>
+        これを $(\ast)$ に代入し，両辺を $\omega$ のべき級数とみて，同じ次数の係数どうしを比較する
+        （角速度 $\omega$ が地上のスケールに比べて十分小さいことを反映した近似）。
+      </p>
+
+      <details open>
+        <summary>$\omega^0$ 次（コリオリ力なしの，普通の自由落下）</summary>
+        <div class="proof-body">
+          <p>$(\ast)$ の右辺の $\omega$ を含む項はすべて高次に落ちるので：</p>
+          <div class="mathblock">$$\ddot x_0=0,\qquad \ddot y_0=0,\qquad \ddot z_0=-g$$</div>
+          <p>初期条件（$t=0$ で位置 $(0,0,h)$，速度 $0$）より：</p>
+          <div class="mathblock">$$x_0=0,\qquad y_0=0,\qquad z_0=h-\frac12gt^2,\qquad \dot z_0=-gt$$</div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>$\omega^1$ 次（コリオリ力の最低次の効果）</summary>
+        <div class="proof-body">
+          <p>$(\ast)$ の両辺の $\omega^1$ の係数を比較する：</p>
+          <div class="mathblock">
+            $$\ddot x_1 = 2\dot y_0\sin\alpha,\qquad
+            \ddot y_1 = -2(\dot x_0\sin\alpha+\dot z_0\cos\alpha),\qquad
+            \ddot z_1 = 2\dot y_0\cos\alpha$$
+          </div>
+          <p>$\dot x_0=\dot y_0=0$，$\dot z_0=-gt$ を代入すると：</p>
+          <div class="mathblock">
+            $$\ddot x_1 = 0,\qquad \ddot y_1 = -2(0+(-gt)\cos\alpha) = 2gt\cos\alpha,\qquad \ddot z_1=0$$
+          </div>
+          <p>初期条件（$\omega^1$次の位置・速度もゼロ）のもとで積分すると：</p>
+          <div class="mathblock">
+            $$x_1=0,\qquad \dot y_1 = gt^2\cos\alpha \ \Rightarrow\ y_1=\frac13gt^3\cos\alpha,\qquad z_1=0$$
+          </div>
+        </div>
+      </details>
+
+      <div class="sol">
+        <span class="box-label">$\omega$ の１次までの近似解</span>
+        $$x=0,\qquad y = \frac13 g\omega t^3\cos\alpha,\qquad z=h-\frac12gt^2$$
+        <p>
+          $x=0$：南北方向のずれは（この近似の範囲では）生じない。$y>0$：東向きにずれる
+          （自由落下する物体は真下よりわずかに<strong>東</strong>に着地する）。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 東偏の直感的な理由</span>
+        <p>
+          落下する物体は，地表の物体より高い位置にあった分だけ，地球の自転による接線方向の速度がわずかに
+          大きい（自転軸からの距離が同じでも，角速度 $\omega$ は同じだが，鉛直上向きの初期位置は地表よりわずかに
+          自転軸から遠いところにある）。そのため，落下する間に地表よりわずかに東へ「先回り」する形になる
+          —— というのが直感的なイメージである。
+        </p>
+      </div>
+
+      <h3 id="s4-1">数値例：東京（駒場）でのずれ</h3>
+
+      <p>
+        落下時間は $z(t)=0$，すなわち $t=\sqrt{2h/g}$（ゼロ次近似で決まる時間で十分）。よって東への変位は：
+      </p>
+      <div class="mathblock">
+        $$y = \frac13 g\omega\left(\sqrt{\frac{2h}{g}}\right)^{3}\cos\alpha$$
+      </div>
+      <p>
+        駒場（東京大学教養学部）の北緯 $\alpha = 35.6586^\circ$（$\cos\alpha=0.8125$），
+        $\omega = 7.29\times10^{-5}\,\mathrm{[s^{-1}]}$ を用いると：
+      </p>
+      <table class="axiom-table">
+        <thead><tr><th>落下する高さ $h$</th><th>東へのずれ $y$</th></tr></thead>
+        <tbody>
+          <tr><td>$50\,\mathrm m$</td><td>$6.3\,\mathrm{mm}$</td></tr>
+          <tr><td>$100\,\mathrm m$</td><td>$17.8\,\mathrm{mm}$</td></tr>
+        </tbody>
+      </table>
+      <p>
+        いずれもミリメートル単位のごくわずかなずれであり，日常的にはほぼ観測できないが，精密な実験
+        （フーコーの振り子など，回転座標系の効果を巧妙に積算する装置）を使えば，地球が自転していることの
+        直接的な証拠として検出できる。
+      </p>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="n4.html">← 第4章</a>
+    <a href="n6.html">第6章　剛体の運動 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

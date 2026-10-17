@@ -1,0 +1,275 @@
+<!DOCTYPE html><!-- 「線形代数学① 期末試験 予想問題 第1回 解説 | 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>線形代数学① 期末試験 予想問題 第1回 解説 | 線形代数学①</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    macros: { R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}', Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}', rank: '\\operatorname{rank}' }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body data-nav-page="exam-yosou-1">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>線形代数学① 期末試験 予想問題 第1回</h1>
+  <p class="subtitle">2024年度・2025年度の出題パターンをもとに作成 &nbsp;|&nbsp; 第1回（全5問）&nbsp;|&nbsp; 詳細な解答・解説つき</p>
+</div>
+
+<div class="container">
+
+<!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+  <a href="予想問題_第1回.html" class="active">第1回</a>
+  <a href="予想問題_第2回.html">第2回</a>
+  <a href="予想問題_第3回.html">第3回</a>
+  <a href="予想問題_第4回.html">第4回</a>
+</div>
+<!-- ================= セット A ================= -->
+<!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="setA">
+  <div class="sec-header"><span class="sec-tag">予想問題 第1回</span><h2>第1問〜第5問</h2></div>
+</div>
+
+<!-- A-1 -->
+<section class="section" id="A1">
+  <div class="sec-header"><span class="problem-num">1</span> &nbsp;Kernel と Image の次元</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>以下の (a)–(d) を行列表示に持つ複素縦ベクトル空間の間の $\C$-線形写像それぞれについて kernel と image の次元を求めよ。</p>
+      $$\text{(a)}\begin{pmatrix}1&0&0\\1&1&0\\0&1&1\\0&0&1\end{pmatrix},\quad
+      \text{(b)}\begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix},\quad
+      \text{(c)}\begin{pmatrix}1&2&-1\\2&-1&3\\3&1&2\end{pmatrix},\quad
+      \text{(d)}\begin{pmatrix}1&2&1&3\\2&1&3&1\\1&0&1&-1\\3&3&4&4\end{pmatrix}$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：定理4.4・定理4.7・系4.8</div>
+      <p>$m\times n$ 行列 $A$ が定める写像 $T_A:\K^n\to\K^m$ について，$\dim\Ker(T_A)=n-\rank A$（定理4.4），$\dim\Im(T_A)=\rank A$（定理4.7），$n=\dim\Ker+\dim\Im$（系4.8）。つまり $\rank A$ さえ求めれば両方の次元が同時に決まる。$3\times3$ の正方行列は行列式で「フルランクか否か」を即断でき，非正方・大きめの行列は行や列の間の明示的な一次関係を探すのが早い（2024・2025年度の第1問と同じ使い分け）。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (a) — $4\times 3$ 行列，定義域 $\C^3$</div>
+      <p>列ベクトルを $\mathbf{a}_1=(1,1,0,0)^\top,\ \mathbf{a}_2=(0,1,1,0)^\top,\ \mathbf{a}_3=(0,0,1,1)^\top$ とする。$c_1\mathbf{a}_1+c_2\mathbf{a}_2+c_3\mathbf{a}_3=\mathbf{0}$ とすると，第1成分より $c_1=0$，第4成分より $c_3=0$，第2成分 $c_1+c_2=0$ より $c_2=0$。よって独立，$\rank A=3$。</p>
+      <p>$$\dim\Ker=3-3=\boxed{0},\qquad \dim\Im=\boxed{3}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (b) — $3\times 3$ 正方行列</div>
+      $$\det\begin{pmatrix}2&1&1\\1&2&1\\1&1&2\end{pmatrix}=2(4-1)-1(2-1)+1(1-2)=6-1-1=4\neq0$$
+      <p>正則なので $\rank A=3$。$$\dim\Ker=\boxed{0},\qquad \dim\Im=\boxed{3}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (c) — $3\times 3$ 正方行列</div>
+      $$\det\begin{pmatrix}1&2&-1\\2&-1&3\\3&1&2\end{pmatrix}=1(-2-3)-2(4-9)+(-1)(2+3)=-5+10-5=0$$
+      <p>退化しているので $\rank<3$。第3行 $=(3,1,2)$ は第1行 $+$ 第2行：$(1,2,-1)+(2,-1,3)=(3,1,2)$ ✓ 。第1行・第2行は比例しないので独立。よって $\rank A=2$。</p>
+      <p>$$\dim\Ker=3-2=\boxed{1},\qquad \dim\Im=\boxed{2}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (d) — $4\times 4$ 正方行列</div>
+      <p>行を $R_1=(1,2,1,3),\,R_2=(2,1,3,1),\,R_3=(1,0,1,-1),\,R_4=(3,3,4,4)$ とすると，一目で $R_4=R_1+R_2$（実際 $(1,2,1,3)+(2,1,3,1)=(3,3,4,4)$ ✓）。残る $R_1,R_2,R_3$ が独立であることは，例えば $R_2-2R_1=(0,-3,1,-5)$，$R_3-R_1=(0,-2,0,-4)$ が比例しないことから確認できる。よって $\rank A=3$。</p>
+      <p>$$\dim\Ker=4-3=\boxed{1},\qquad \dim\Im=\boxed{3}$$</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 (a)〜(d) のrank判定：4通りの見極め方</div>
+      <p>(a) は非正方（$4\times3$）なので列ベクトルの独立性を成分ごとに直接観察するのが最速——各列がどの行で「単独の非零成分」を持つかに着目すると，行列式を使わずに一撃で分かる。(b)(c) は $3\times3$ 正方行列なので行列式が最速の判定手段（$\det\neq0\Rightarrow$ フルランク確定，$\det=0$ なら退化のみ確定）。(c) のように退化と分かった後は，どの行が他の行の一次結合かを具体的に探す一手間が必要（今回は $R_3=R_1+R_2$ が暗算で見える）。(d) は $4\times4$ の行列式計算が面倒なので，最初から行の間の明示的な関係を探す方針を取る——$R_4=R_1+R_2$ のような「一目で分かる関係」がないか，行列式に頼る前にまず成分を眺めてみる価値がある。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- A-2 -->
+<section class="section" id="A2">
+  <div class="sec-header"><span class="problem-num">2</span> &nbsp;基底の取り替えと行列表示</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$T:\R^4\to\R^3$ を行列 $A=\begin{pmatrix}1&1&2&4\\1&2&3&5\\2&2&4&7\end{pmatrix}$ により定まる $\R$-線形写像とする。</p>
+      <ol>
+        <li>$\R^4$ の基底 $\mathbf{b}_1=(1,1,0,0)^\top,\mathbf{b}_2=(0,1,0,0)^\top,\mathbf{b}_3=(0,0,0,1)^\top,\mathbf{b}_4=(0,0,-1,0)^\top$ および $\R^3$ の基底 $\mathbf{c}_1=(1,1,1)^\top,\mathbf{c}_2=(1,2,2)^\top,\mathbf{c}_3=(2,3,4)^\top$ による $T$ の行列表示を求めよ。</li>
+        <li>$\R^3$ の基底であって，$\R^4$ の標準基底と組み合わせたときの $T$ の行列表示が $A$ と行同値な行標準形（行簡約行列）になるようなものを1つ与えよ。</li>
+      </ol>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：行列表示の第$j$列 $=$ 「$T(\mathbf{b}_j)$ を新基底 $\{\mathbf{c}_i\}$ で表した座標」</div>
+      <p>行列表示とは「$T(\mathbf{b}_j)$ を目標側の基底 $\{\mathbf{c}_i\}$ の一次結合で表したときの係数を並べたもの」。基底を替えるというのは，$\R^n\cong V$ という同型（定義1.7）を作り替えることに他ならない。$T(\mathbf{b}_j)=A\mathbf{b}_j$ は標準基底の下でそのまま計算できるので，あとはそれを $\{\mathbf{c}_i\}$ の一次結合として表し直すだけ——$C=(\mathbf{c}_1\ \mathbf{c}_2\ \mathbf{c}_3)$ とおけば，座標は $C^{-1}\cdot T(\mathbf{b}_j)$ で一気に求まる。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$A$ の列を $\mathbf{a}_1=(1,1,2)^\top,\mathbf{a}_2=(1,2,2)^\top,\mathbf{a}_3=(2,3,4)^\top,\mathbf{a}_4=(4,5,7)^\top$ とする。$C=(\mathbf{c}_1\ \mathbf{c}_2\ \mathbf{c}_3)=\begin{pmatrix}1&1&2\\1&2&3\\1&2&4\end{pmatrix}$，$\det C=1$ より</p>
+      $$C^{-1}=\begin{pmatrix}2&0&-1\\-1&2&-1\\0&-1&1\end{pmatrix}$$
+      <p>$T(\mathbf{b}_1)=\mathbf{a}_1+\mathbf{a}_2=(2,3,4)^\top$。$C^{-1}(2,3,4)^\top=(4+0-4,\,-2+6-4,\,0-3+4)^\top=(0,0,1)^\top=\mathbf{c}_3$（そのまま！）</p>
+      <p>$T(\mathbf{b}_2)=\mathbf{a}_2=(1,2,2)^\top$。$C^{-1}(1,2,2)^\top=(2+0-2,\,-1+4-2,\,0-2+2)^\top=(0,1,0)^\top=\mathbf{c}_2$（そのまま！）</p>
+      <p>$T(\mathbf{b}_3)=\mathbf{a}_4=(4,5,7)^\top$。$C^{-1}(4,5,7)^\top=(8+0-7,\,-4+10-7,\,0-5+7)^\top=(1,-1,2)^\top$</p>
+      <p>$T(\mathbf{b}_4)=-\mathbf{a}_3=(-2,-3,-4)^\top$。$C^{-1}(-2,-3,-4)^\top=(-4+0+4,\,2-6+4,\,0+3-4)^\top=(0,0,-1)^\top$</p>
+      <p>各列を並べて</p>
+      $$[T]_{\gamma,\beta}=\begin{pmatrix}0&0&1&0\\0&1&-1&0\\1&0&2&-1\end{pmatrix}$$
+      <p style="font-size:.85rem;color:var(--muted)">検算：$\mathbf{b}_1+\mathbf{b}_2=(1,2,0,0)^\top$ なので $T(\mathbf{b}_1+\mathbf{b}_2)=T(\mathbf{b}_1)+T(\mathbf{b}_2)=\mathbf{a}_1+2\mathbf{a}_2=(1,1,2)+(2,4,4)=(3,5,6)$，座標は $C^{-1}(3,5,6)^\top=(6-6,\,-3+10-6,\,-5+6)=(0,1,1)$。表の列1＋列2 $=(0,0,1)+(0,1,0)=(0,1,1)$ で一致 ✓（$T$ の線形性のチェック）。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$A$ を行簡約する：$R_2-R_1=(0,1,1,1)$，$R_3-2R_1=(0,0,0,-1)$。この最後の行を $-1$ 倍して $(0,0,0,1)$ とし，これを使って $R_1,R_2'$ の第4成分を消すと $R_1-4\times(0,0,0,1)=(1,1,2,0)$，$R_2'-1\times(0,0,0,1)=(0,1,1,0)$。さらに $R_1-(0,1,1,0)=(1,0,1,0)$。</p>
+      $$\mathrm{RREF}(A)=\begin{pmatrix}1&0&1&0\\0&1&1&0\\0&0&0&1\end{pmatrix}$$
+      <p>ピボット列は第1・2・4列。<strong>ピボット列に対応する $A$ の列 $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_4$ は自動的に $\R^3$ の基底になる</strong>（$\rank A=3=\dim\R^3$ かつ独立だから）。この3本を新しい基底に選べば，$\mathbf{a}_3=(2,3,4)^\top$ は RREF の第3列 $(1,1,0)$ が示す通り $\mathbf{a}_1+\mathbf{a}_2$（実際 $(1,1,2)+(1,2,2)=(2,3,4)$ ✓）。</p>
+      <p>$$\boxed{\R^3\text{ の新しい基底}=\{(1,1,2)^\top,\ (1,2,2)^\top,\ (4,5,7)^\top\}}$$</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 「ピボット列 $=$ 新しい基底」が使える理由（再確認）</div>
+      <p>標準基底 $\mathbf{e}_j$ の下では $T(\mathbf{e}_j)=A\mathbf{e}_j=\mathbf{a}_j$（$A$ の第$j$列そのもの）なので，行列表示の各列は「新しい基底での $\mathbf{a}_j$ の座標」に過ぎない。新しい基底を独立な列そのものに取れば，独立な列は単位座標に，従属な列はその従属関係の係数（$=\mathrm{RREF}$ の該当列）がそのまま座標になる。この近道が成立するのは $\rank A=\dim(\text{値域})$，つまり $T$ が全射のとき——今回は $\rank A=3=\dim\R^3$ なのでちょうど条件を満たしている。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- A-3 -->
+<section class="section" id="A3">
+  <div class="sec-header"><span class="problem-num">3</span> &nbsp;微分作用素の kernel</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$V$ を次数が高々5であるような複素多項式のなす $\C$-ベクトル空間とする：$V=\{a_5X^5+\cdots+a_1X+a_0\mid a_i\in\C\}$（$\dim V=6$）。$\lambda\in\C$ に対して $\C$-線形写像 $D_\lambda:V\to V$ を</p>
+      $$D_\lambda(f(X))=-X^2\frac{d^2f}{dX^2}(X)+4X\frac{df}{dX}(X)-\lambda f(X)$$
+      <p>で定める。$\dim\Ker(D_\lambda)$ を求めよ。さらに $\dim\Ker(D_\lambda)>0$ となる全ての $\lambda\in\C$ に対して $\Ker(D_\lambda)$ の基底を1つ与えよ。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：単項式基底で「対角行列」に見える（2024年度第3問と同じ発想）</div>
+      <p>$V$ の基底として単項式 $\{1,X,X^2,X^3,X^4,X^5\}$（$\dim V=6$）を取ると，$D_\lambda$ はこの基底の各元をスカラー倍にしか送らない——つまり対角行列。$f=X^k$ に対し $f''=k(k-1)X^{k-2}$ なので</p>
+      $$D_\lambda(X^k)=-X^2\cdot k(k-1)X^{k-2}+4X\cdot kX^{k-1}-\lambda X^k=\bigl(-k(k-1)+4k-\lambda\bigr)X^k=\bigl(k(5-k)-\lambda\bigr)X^k$$
+      <p>対角なら $\Ker$ は「対角成分が $0$ になる基底ベクトルが張る空間」として即座に分かる。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答</div>
+      <p>$X^k\in\Ker(D_\lambda)\iff \lambda=k(5-k)$。$k=0,\ldots,5$ に対する $k(5-k)$ の値は $0,4,6,6,4,0$——$k(5-k)$ は $k=2.5$ について対称な放物線なので，和が $5$ になるペア $(k,5-k)$ は必ず同じ値を取る：$(0,5)\to0$，$(1,4)\to4$，$(2,3)\to6$。</p>
+      <table class="axiom-table">
+        <tr><th>$\lambda$</th><th>$\dim\Ker(D_\lambda)$</th><th>基底</th></tr>
+        <tr><td>$0$</td><td>$2$</td><td>$\{1,\ X^5\}$</td></tr>
+        <tr><td>$4$</td><td>$2$</td><td>$\{X,\ X^4\}$</td></tr>
+        <tr><td>$6$</td><td>$2$</td><td>$\{X^2,\ X^3\}$</td></tr>
+        <tr><td>その他</td><td>$0$</td><td>—</td></tr>
+      </table>
+      <p>一般に $$\boxed{\dim\Ker(D_\lambda)=\#\{k\in\{0,\ldots,5\}\mid k(5-k)=\lambda\}}$$（$\lambda=0,4,6$ のときだけ2個の $k$ が対応するので $\dim=2$，他は $0$）。</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 一般化：対称な固有値関数はペアで多重度を生む</div>
+      <p>2024年度第3問では $k(k-1)$（$k=0,1$ が偶然同じ値 $0$ を共有）という「非対称だが端点で衝突する」関数だったのに対し，本問の $k(5-k)$ は $k\mapsto5-k$ という反転対称性そのものに由来して<strong>3組すべてのペアが多重度2</strong>を生む，より豊かな例になっている。一般に，$k=0,\ldots,n$ の範囲で固有値関数 $\mu(k)$ が対称性 $\mu(k)=\mu(n-k)$ を持ち，かつ $n$ が奇数（中心 $n/2$ が整数でない）ならば，$k$ と $n-k$ は相異なる整数同士のペアとなり，自動的に $\dim\Ker=2$ の固有値が $\lceil(n+1)/2\rceil$ 個生まれる。$n$ が偶数なら中心 $k=n/2$ だけは対にならず $\dim\Ker=1$ のまま残る（セットCの第3問がこのケース）。「作用素が単項式基底に関して対角に見える」という性質だけで，固有値の重複度が組合せ論的に完全に決定できることがこの問題の核心である。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- A-4 -->
+<section class="section" id="A4">
+  <div class="sec-header"><span class="problem-num">4</span> &nbsp;冪零作用素（鎖の長さ4）の不変部分空間</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$T:\R^4\to\R^4$ を行列 $N=\begin{pmatrix}0&1&0&0\\0&0&1&0\\0&0&0&1\\0&0&0&0\end{pmatrix}$ により定まる $\R$-線形写像とする。$\R^4$ の部分空間 $V$ であって $T(V)\subseteq V$ を満たすものを全て求め，それぞれについて基底を1つずつ与えよ。ただし $\{\mathbf{0}\}$ の基底は与えなくてよい。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：2024年度第4問の一般則をそのまま $n=4$ に適用する</div>
+      <p>$N$ は $\mathbf{e}_4\to\mathbf{e}_3\to\mathbf{e}_2\to\mathbf{e}_1\to\mathbf{0}$ という「単一の鎖」（$T^4=O$，$T^3\neq O$：冪零，サイズ4のジョルダン細胞1本）。2024年度第4問の振り返りで述べた一般則——<strong>単一のサイズ$n$冪零ジョルダン細胞の不変部分空間は $\{0\}=\Ker(T^0)\subset\Ker(T)\subset\cdots\subset\Ker(T^n)=\R^n$ の $n+1$ 個の「鎖」しか存在しない</strong>——を $n=4$ の場合に実際に証明してみる。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 — 一般証明（帰納法）</div>
+      <p><strong>主張：</strong>$k$ 次元の $T$-不変部分空間は $\Ker(T^k)$ のみ（$k=0,1,2,3,4$）。$\Ker(T)=\langle\mathbf{e}_1\rangle$，$\Ker(T^2)=\langle\mathbf{e}_1,\mathbf{e}_2\rangle$，$\Ker(T^3)=\langle\mathbf{e}_1,\mathbf{e}_2,\mathbf{e}_3\rangle$，$\Ker(T^4)=\R^4$（$N\mathbf{v}=(v_2,v_3,v_4,0)^\top$ から直接確認できる）。</p>
+      <p><strong>証明（$k$ に関する帰納法）：</strong>$V$ を $k$ 次元不変部分空間とする（$k\ge1$）。$T|_V$ は冪零（$T$ 自体が冪零だから）なので $\Ker(T)\cap V\neq\{0\}$。$\Ker(T)=\langle\mathbf{e}_1\rangle$ は1次元なので $\mathbf{e}_1\in V$，すなわち $\Ker(T)\subseteq V$。</p>
+      <p>次に $T(V)$ を考える。「$V$ が不変 $\Rightarrow$ $T(V)$ も不変」（$y=T(x)\in T(V)$ に対し $T(y)=T(T(x))$，ここで $T(x)\in V$ なので $z:=T(x)$ とおけば $T(y)=T(z)\in T(V)$）。次元定理を $T|_V$ に適用すると $\dim T(V)=\dim V-\dim(\Ker(T)\cap V)=k-\dim\Ker(T)=k-1$（$\Ker(T)\subseteq V$ なので $\Ker(T)\cap V=\Ker(T)$，1次元）。</p>
+      <p>帰納法の仮定（$k-1$ 次元不変部分空間は $\Ker(T^{k-1})$ のみ）より $T(V)=\Ker(T^{k-1})$。任意の $v\in V$ に対し $T(v)\in T(V)=\Ker(T^{k-1})$，すなわち $T^{k-1}(T(v))=\mathbf{0}$，つまり $T^k(v)=\mathbf{0}$。よって $V\subseteq\Ker(T^k)$。$\dim V=k=\dim\Ker(T^k)$ なので $V=\Ker(T^k)$。（$k=1$ は基底段階：$V=\langle\mathbf{e}_1\rangle=\Ker(T)$ で直接成立。）$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 結論：不変部分空間は5個</div>
+      <table class="axiom-table">
+        <tr><th>次元</th><th>不変部分空間</th></tr>
+        <tr><td>0</td><td>$\{\mathbf{0}\}$</td></tr>
+        <tr><td>1</td><td>$\langle\mathbf{e}_1\rangle=\langle(1,0,0,0)^\top\rangle$</td></tr>
+        <tr><td>2</td><td>$\langle\mathbf{e}_1,\mathbf{e}_2\rangle=\langle(1,0,0,0)^\top,(0,1,0,0)^\top\rangle$</td></tr>
+        <tr><td>3</td><td>$\langle\mathbf{e}_1,\mathbf{e}_2,\mathbf{e}_3\rangle=\langle(1,0,0,0)^\top,(0,1,0,0)^\top,(0,0,1,0)^\top\rangle$</td></tr>
+        <tr><td>4</td><td>$\R^4$（標準基底 $\{\mathbf{e}_1,\mathbf{e}_2,\mathbf{e}_3,\mathbf{e}_4\}$）</td></tr>
+      </table>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 帰納法の議論はサイズによらず同じ形になる</div>
+      <p>この証明で使ったのは「①冪零作用素の非零不変部分空間は非自明な核を持つ」「②不変部分空間の像もまた不変」「③次元定理」の3つだけであり，ジョルダン細胞のサイズ $n$ に一切依存しない。だからこそ2024年度（$n=3$，不変部分空間4個）でも本問（$n=4$，不変部分空間5個）でも全く同じ論法がそのまま通用する——「$n+1$個」という結論だけを覚えるのではなく，この3ステップの帰納法自体を覚えておけば，どんなサイズのジョルダン細胞が出題されても対応できる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- A-5 -->
+<section class="section" id="A5">
+  <div class="sec-header"><span class="problem-num">5</span> &nbsp;シルベスターの階数不等式 $\rank(A)+\rank(B)-n\le\rank(AB)$</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$m,n,p$ を正整数とし $A$ を実 $m\times n$ 行列，$B$ を実 $n\times p$ 行列とする。このとき $\rank(A)+\rank(B)-n\le\rank(AB)$ を示せ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答</div>
+      <p>$T_A:\R^n\to\R^m,\ T_B:\R^p\to\R^n$ とし，$S:=T_A|_{\Im(T_B)}:\Im(T_B)\to\R^m$（$T_A$ を部分空間 $\Im(T_B)\subseteq\R^n$ に制限した写像）を考える。</p>
+      <p>$\Im(S)=T_A(\Im(T_B))=\{A(Bx)\mid x\in\R^p\}=\Im(AB)$。次元定理を $S$ に適用すると（$S$ の定義域は $\Im(T_B)$，次元 $\rank B$）</p>
+      $$\rank B=\dim\Im(T_B)=\dim\Ker(S)+\dim\Im(S)=\dim\Ker(S)+\rank(AB)$$
+      <p>ここで $\Ker(S)=\Ker(T_A)\cap\Im(T_B)\subseteq\Ker(T_A)$ なので $\dim\Ker(S)\le\dim\Ker(T_A)=n-\rank A$（定理4.4）。よって</p>
+      $$\rank B\le(n-\rank A)+\rank(AB)$$
+      <p>移項して $$\boxed{\rank(A)+\rank(B)-n\le\rank(AB)}\qquad\blacksquare$$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：第3問（部分空間への制限）と全く同じ道具立て</div>
+      <p>「$T_A$ を像空間 $\Im(T_B)$ に制限し，次元定理を当てはめる」という手筋は，本セット第3問・セットB/D第3問で使った「$T|_V$ に次元定理を適用する」テクニックの直接の応用に他ならない。この不等式（シルベスターの階数不等式）は，過去問2024年度第5問の $\rank(AB)\le\min\{\rank A,\rank B\}$（上からの評価）とペアになる<strong>下からの評価</strong>であり，両方合わせると $$\max\{0,\ \rank A+\rank B-n\}\ \le\ \rank(AB)\ \le\ \min\{\rank A,\rank B\}$$ という，$\rank(AB)$ の取りうる値の範囲を完全に挟み込む評価が得られる。</p>
+    </div>
+
+  </div>
+</section>
+
+
+<div class="toc" style="justify-content:space-between;"><span></span><a href="予想問題_第2回.html">第2回 →</a></div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

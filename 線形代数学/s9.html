@@ -1,0 +1,348 @@
+<!DOCTYPE html><!-- 「§9 座標変換 — 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>§9 座標変換 — 線形代数学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams',
+        macros: {
+          R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}',
+          Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}',
+          rank: '\\operatorname{rank}'
+        }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="s9">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>§9 座標変換</h1>
+  <p class="subtitle">講義ノート⑦ をもとに作成</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#def9-1">定義9.1 基底変換行列</a>
+    <a href="#cor9-2">系9.2 基底変換行列の性質</a>
+    <a href="#ex9-trig">例 $\sin x,\cos x$ と $e^{ix},e^{-ix}$ の基底変換</a>
+    <a href="#formula9">結論 行列表示の基底変換公式</a>
+    <a href="#ex9-ddx">例 $\dfrac{d}{dx}$ の行列表示の基底変換</a>
+    <a href="#summary">まとめ</a>
+  </div>
+
+  <!-- =================== 定義9.1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="def9-1">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 9.1</div>
+      <h2>定義 9.1 — 座標変換と基底変換行列</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">この節の目標</span>
+        <p>
+          $V$ の基底を1組固定すれば，系6.2 の同型 $T_{v_1,\ldots,v_n}^{-1}:V\xrightarrow{\ \sim\ }\mathbb{K}^n$ を通じて，
+          $V$ の各元 $v=x_1v_1+\cdots+x_nv_n$ に「座標」$(x_1,\ldots,x_n)^\top$ を与えることができる。
+          しかし $V$ の基底の取り方は1通りではない。別の基底 $w_1,\ldots,w_n$ を選べば，同じ $v$ に対して
+          別の座標 $(y_1,\ldots,y_n)^\top$ が定まる。この2つの座標表示の間にどういう関係があるかを調べるのが本節の目的で，
+          §8 の行列表示（基底を固定して線形写像を行列にする話）と表裏一体の話題になっている。
+        </p>
+      </div>
+
+      <div class="def">
+        <span class="box-label">設定</span>
+        $V$：$n$ 次元 $\mathbb{K}$-ベクトル空間，$v_1,\ldots,v_n$ と $w_1,\ldots,w_n$ を，どちらも $V$ の基底とする。
+        $$T_{v_1,\ldots,v_n}^{-1}:V\xrightarrow{\ \sim\ }\mathbb{K}^n,\qquad \sum_{i=1}^n x_iv_i\longleftrightarrow\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}$$
+        $$T_{w_1,\ldots,w_n}^{-1}:V\xrightarrow{\ \sim\ }\mathbb{K}^n,\qquad \sum_{i=1}^n y_iw_i\longleftrightarrow\begin{pmatrix}y_1\\\vdots\\y_n\end{pmatrix}$$
+        により，同じ $v\in V$ に対して2通りの座標 $(x_1,\ldots,x_n)^\top$，$(y_1,\ldots,y_n)^\top$ が定まる。
+      </div>
+
+      <div class="note">
+        <span class="box-label">2つの座標系の関係</span>
+        <div style="overflow-x:auto">
+          <pre style="font-family:monospace; line-height:1.9; font-size:.9rem; color:#333">
+                    V
+     T_{v1,…,vn}⁻¹ ↙    ↓ v    ↘ T_{w1,…,wn}⁻¹
+
+  K^n ∋ (x1,…,xn)               (y1,…,yn) ∈ K^n
+          </pre>
+        </div>
+        <p>
+          $$\begin{pmatrix}y_1\\\vdots\\y_n\end{pmatrix} = T_{w_1,\ldots,w_n}^{-1}\circ T_{v_1,\ldots,v_n}\left(\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}\right)$$
+          が2つの座標を結びつける式であり，$T_{w_1,\ldots,w_n}^{-1}\circ T_{v_1,\ldots,v_n}:\mathbb{K}^n\to\mathbb{K}^n$ の行列表示（標準基底に関するもの，つまり§1の意味での「行列」そのもの）を求めればよい。
+        </p>
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 9.1 — 基底変換行列</span>
+        $T_{v_1,\ldots,v_n}^{-1}(v_i)=\mathbf e_i$ である一方，別の基底 $w_1,\ldots,w_n$ に関しては一般に
+        $T_{w_1,\ldots,w_n}^{-1}(v_i)\in\mathbb{K}^n$ となる。$T_{w_1,\ldots,w_n}^{-1}\circ T_{v_1,\ldots,v_n}:\mathbb{K}^n\to\mathbb{K}^n$
+        の行列表示を
+        $$C_{v_1,\ldots,v_n}^{w_1,\ldots,w_n}:=\Bigl(T_{w_1,\ldots,w_n}^{-1}(v_1)\ \bigm|\ \cdots\ \bigm|\ T_{w_1,\ldots,w_n}^{-1}(v_n)\Bigr)$$
+        と書き，$v_1,\ldots,v_n$ から $w_1,\ldots,w_n$ への<strong>基底変換行列</strong>と呼ぶ（第 $i$ 列は，$v_i$ を $w_1,\ldots,w_n$
+        という基底で座標表示したもの）。このとき
+        $$\begin{pmatrix}y_1\\\vdots\\y_n\end{pmatrix}=C_{v_1,\ldots,v_n}^{w_1,\ldots,w_n}\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix}$$
+        が成り立つ。$T_{v_1,\ldots,v_n},T_{w_1,\ldots,w_n}$ はともに同型写像なので，その合成の行列表示 $C_{v_1,\ldots,v_n}^{w_1,\ldots,w_n}$ も可逆行列である。
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系9.2 =================== -->
+  <div class="section" id="cor9-2">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 9.2</div>
+      <h2>系 9.2 — 基底変換行列の性質</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="cor">
+        <span class="box-label">系 9.2</span>
+        $V$：$n$ 次元 $\mathbb{K}$-ベクトル空間，$v_1,\ldots,v_n$；$w_1,\ldots,w_n$；$p_1,\ldots,p_n$ を $V$ の基底とする。
+        <ol>
+          <li>$C_{v_1,\ldots,v_n}^{p_1,\ldots,p_n}=C_{w_1,\ldots,w_n}^{p_1,\ldots,p_n}\,C_{v_1,\ldots,v_n}^{w_1,\ldots,w_n}$</li>
+          <li>$C_{v_1,\ldots,v_n}^{v_1,\ldots,v_n}=I_n$</li>
+          <li>$\bigl(C_{v_1,\ldots,v_n}^{w_1,\ldots,w_n}\bigr)^{-1}=C_{w_1,\ldots,w_n}^{v_1,\ldots,v_n}$</li>
+        </ol>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>系 9.2 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          いずれも定義9.1 の $C_{\cdot}^{\cdot}=[T_{\cdot}^{-1}\circ T_{\cdot}]$（$[\ ]$ は行列表示）という表示と，
+          写像の合成・恒等写像・逆写像の性質から従う。<br><br>
+          (1)：$C_{v}^{p}=[T_p^{-1}\circ T_v]=[T_p^{-1}\circ T_w\circ T_w^{-1}\circ T_v]=[T_p^{-1}\circ T_w][T_w^{-1}\circ T_v]=C_w^pC_v^w$
+          （行列表示は合成に対して積になる）。<br><br>
+          (2)：$C_v^v=[T_v^{-1}\circ T_v]=[\mathrm{id}_{\mathbb{K}^n}]=I_n$。<br><br>
+          (3)：(1) で $p=v$ とすると $C_v^v=C_w^vC_v^w$，すなわち $I_n=C_w^vC_v^w$。同様に $I_n=C_v^wC_w^v$ も成り立つので，
+          $C_v^w$ と $C_w^v$ は互いに逆行列。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">意味</span>
+        <p>
+          (1) は「$v$ 座標 → $w$ 座標 → $p$ 座標」と2段階で変換しても，「$v$ 座標 → $p$ 座標」と直接変換しても結果は同じ，という
+          当たり前の事実の行列版。(2)(3) はそれぞれ「同じ基底同士の変換は恒等変換」「逆向きの基底変換は逆行列」という，
+          基底変換行列が「座標の変換」として矛盾なく振る舞うことを保証している。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 例：sin,cos と e^{ix} =================== -->
+  <div class="section" id="ex9-trig">
+    <div class="sec-header">
+      <div class="sec-tag">Example</div>
+      <h2>例 — $\sin x,\cos x$ と $e^{ix},e^{-ix}$ の基底変換</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">設定</span>
+        <p>
+          $$V=\langle \sin x,\cos x\rangle_{\mathbb{C}}\subseteq C^\infty(\mathbb{R})$$
+          とおく。$\sin x,\cos x$ は $\mathbb{C}$ 上1次独立なので $V$ の基底（$\dim V=2$）。オイラーの公式より
+          $$e^{ix}=\cos x+i\sin x,\qquad e^{-ix}=\cos x-i\sin x$$
+          であり，この2式は $\cos x,\sin x$ を係数体 $\mathbb{C}$ 上で $e^{ix},e^{-ix}$ の1次結合として書き直せることを意味するので，
+          $e^{ix},e^{-ix}$ もまた $V$ の基底になる。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">基底変換行列の計算</span>
+        <p>
+          $\cos x=\tfrac12(e^{ix}+e^{-ix})$，$\sin x=\tfrac1{2i}(e^{ix}-e^{-ix})$ に注意すると，
+          $$C_{e^{ix},e^{-ix}}^{\cos x,\sin x}=\begin{pmatrix}1&1\\i&-i\end{pmatrix}$$
+          （第1列 $=(1,i)^\top$ は「$e^{ix}=1\cdot\cos x+i\cdot\sin x$」の係数，第2列 $=(1,-i)^\top$ は「$e^{-ix}=1\cdot\cos x-i\cdot\sin x$」の係数）。
+          系9.2(3) より，逆行列を計算すれば逆向きの基底変換行列が得られる：
+          $$C_{\cos x,\sin x}^{e^{ix},e^{-ix}}=\Bigl(C_{e^{ix},e^{-ix}}^{\cos x,\sin x}\Bigr)^{-1}=\frac{1}{-2i}\begin{pmatrix}-i&-1\\-i&1\end{pmatrix}=\frac12\begin{pmatrix}1&-i\\1&i\end{pmatrix}$$
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 結論：基底変換公式 =================== -->
+  <div class="section" id="formula9">
+    <div class="sec-header">
+      <div class="sec-tag">Conclusion</div>
+      <h2>結論 — 行列表示は基底を変えるとどう変わるか</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">問い</span>
+        <p>
+          §8 の行列表示 $[L]^{w_1,\ldots,w_m}_{v_1,\ldots,v_n}$ は，$V,W$ の基底を1組ずつ固定するたびに定まるのだった。
+          $L:V\to W$ を $\mathbb{K}$-線形写像とし，$\dim V=n,\dim W=m$（ともに有限）とする。$V$ の基底 $v_1,\ldots,v_n$ と
+          $v_1',\ldots,v_n'$，$W$ の基底 $w_1,\ldots,w_m$ と $w_1',\ldots,w_m'$ を考えたとき，
+          $[L]^{w_1,\ldots,w_m}_{v_1,\ldots,v_n}$ と $[L]^{w_1',\ldots,w_m'}_{v_1',\ldots,v_n'}$ の間にはどんな関係があるか。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">結論</span>
+        $$[L]^{w_1',\ldots,w_m'}_{v_1',\ldots,v_n'}=C_{w_1,\ldots,w_m}^{w_1',\ldots,w_m'}\,[L]^{w_1,\ldots,w_m}_{v_1,\ldots,v_n}\,C_{v_1',\ldots,v_n'}^{v_1,\ldots,v_n}$$
+      </div>
+
+      <details open>
+        <summary>導出（クリックで展開）</summary>
+        <div class="proof-body">
+          定義8.1 より $[L]^{w'}_{v'}=\bigl[T_{w'}^{-1}\circ L\circ T_{v'}\bigr]$ である（$[\ ]$ は行列表示，添字は省略）。
+          $T_v\circ T_v^{-1}=\mathrm{id}_V$，$T_w\circ T_w^{-1}=\mathrm{id}_W$ を挟み込むと，
+          $$
+          \begin{aligned}
+          [L]^{w'}_{v'}
+          &=\bigl[T_{w'}^{-1}\circ T_w\circ T_w^{-1}\circ L\circ T_v\circ T_v^{-1}\circ T_{v'}\bigr]\\
+          &=\bigl[T_{w'}^{-1}\circ T_w\bigr]\,\bigl[T_w^{-1}\circ L\circ T_v\bigr]\,\bigl[T_v^{-1}\circ T_{v'}\bigr]\\
+          &=C_w^{w'}\,[L]^{w}_{v}\,C_{v'}^{v}
+          \end{aligned}
+          $$
+          （行列表示が合成に対して積になることを2回使った）。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">読み方</span>
+        <p>
+          右辺は「$v'$ 座標を $C_{v'}^{v}$ で $v$ 座標に戻し，$[L]^{w}_{v}$ で $L$ を作用させ，$C_w^{w'}$ で $w$ 座標を $w'$ 座標に送る」
+          という3段階の合成になっている——ちょうど §8 の可換図式を，定義域側・値域側それぞれで基底を取り替えて
+          継ぎ足した形。特に $V=W$ かつ $w=v$，$w'=v'$ の場合（同じ空間上の線形写像を，同じ基底の組替えで見る場合）は
+          $$[L]^{v'}_{v'}=C_v^{v'}\,[L]^{v}_{v}\,C_{v'}^{v}=\bigl(C_{v'}^{v}\bigr)^{-1}[L]^v_v\,C_{v'}^v$$
+          （系9.2(3) で $C_v^{v'}=(C_{v'}^v)^{-1}$）という，いわゆる「相似変換」の形になる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 例：d/dx の基底変換 =================== -->
+  <div class="section" id="ex9-ddx">
+    <div class="sec-header">
+      <div class="sec-tag">Example</div>
+      <h2>例 — 微分作用素 $\dfrac{d}{dx}$ の行列表示の基底変換</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">設定</span>
+        <p>
+          $$V=\langle e^{ix},e^{-ix}\rangle_{\mathbb{C}}=\langle\cos x,\sin x\rangle_{\mathbb{C}}\subseteq C^\infty(\mathbb{R})$$
+          とし，$\dfrac{d}{dx}:V\to V$（$\dfrac{d}{dx}\cos x=-\sin x$，$\dfrac{d}{dx}\sin x=\cos x$）を考える。
+          $\cos x,\sin x$ を基底にとると，行列表示は
+          $$\left[\frac{d}{dx}\right]^{\cos x,\sin x}_{\cos x,\sin x}=\begin{pmatrix}0&1\\-1&0\end{pmatrix}$$
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">$e^{ix},e^{-ix}$ を基底にとると</span>
+        <p>
+          上の結論の公式（$V=W$，$v=w=(\cos x,\sin x)$，$v'=w'=(e^{ix},e^{-ix})$ の場合）を使うと，
+          $$
+          \begin{aligned}
+          \left[\frac{d}{dx}\right]^{e^{ix},e^{-ix}}_{e^{ix},e^{-ix}}
+          &=C_{\cos x,\sin x}^{e^{ix},e^{-ix}}\left[\frac{d}{dx}\right]^{\cos x,\sin x}_{\cos x,\sin x}C_{e^{ix},e^{-ix}}^{\cos x,\sin x}\\[4pt]
+          &=\frac12\begin{pmatrix}1&-i\\1&i\end{pmatrix}\begin{pmatrix}0&1\\-1&0\end{pmatrix}\begin{pmatrix}1&1\\i&-i\end{pmatrix}
+          =\frac12\begin{pmatrix}i&1\\-i&1\end{pmatrix}\begin{pmatrix}1&1\\i&-i\end{pmatrix}
+          =\frac12\begin{pmatrix}2i&0\\0&-2i\end{pmatrix}
+          =\begin{pmatrix}i&0\\0&-i\end{pmatrix}
+          \end{aligned}
+          $$
+        </p>
+        <p>
+          実際，$\dfrac{d}{dx}e^{ix}=ie^{ix}$，$\dfrac{d}{dx}e^{-ix}=-ie^{-ix}$ なので，$e^{ix},e^{-ix}$ を基底にとると
+          $d/dx$ の行列表示はちょうど対角行列 $\mathrm{diag}(i,-i)$ になり，直接計算した結果と一致する。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">この例の意味</span>
+        <p>
+          $\cos x,\sin x$ という「実用上自然な」基底では $d/dx$ の行列表示は対角行列にならないが，
+          $e^{ix},e^{-ix}$ という基底に取り替えると対角行列 $\mathrm{diag}(i,-i)$ になる——つまり基底の選び方次第で
+          同じ線形写像でも行列表示の見た目が大きく変わり，うまく選べば非常に簡単な形（対角行列）にできる場合がある，
+          ということをこの例は示している。対角成分 $i,-i$ は，後に学ぶ固有値（$d/dx$ の固有ベクトルが $e^{ix},e^{-ix}$ で
+          固有値がそれぞれ $i,-i$）に他ならない。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== まとめ =================== -->
+  <div class="section" id="summary">
+    <div class="sec-header">
+      <div class="sec-tag">Summary</div>
+      <h2>まとめ — §9 の全体像</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">§9 の核心</span>
+        <table class="axiom-table">
+          <tr><th>結果</th><th>内容</th></tr>
+          <tr>
+            <td>定義9.1</td>
+            <td>$V$ の2つの基底 $v_1,\ldots,v_n$，$w_1,\ldots,w_n$ に対し，座標変換 $T_w^{-1}\circ T_v$ の行列表示を基底変換行列 $C_v^w$ と呼ぶ。$y=C_v^wx$，$C_v^w$ は可逆</td>
+          </tr>
+          <tr>
+            <td>系9.2</td>
+            <td>$C_v^p=C_w^pC_v^w$（合成則），$C_v^v=I_n$（恒等），$(C_v^w)^{-1}=C_w^v$（逆行列）</td>
+          </tr>
+          <tr>
+            <td>結論</td>
+            <td>$[L]^{w'}_{v'}=C_w^{w'}[L]^w_vC_{v'}^v$。基底を取り替えたときの行列表示は，基底変換行列で挟んだ形になる</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <span class="box-label">§8・§9 の繋がり</span>
+        <p>
+          §8 は「基底を1組固定すれば線形写像は行列になる」という主張，§9 は「基底の固定の仕方を変えると，行列表示は
+          基底変換行列で挟む形で変わる」という主張であり，合わせて「線形写像の行列表示は基底の選び方に依存するが，
+          その依存の仕方は基底変換行列という可逆行列による挟み込みという，きれいな形に限られる」ということを述べている。
+          この関係は<a href="s10.html">§10</a> 以降，部分空間の次元の議論でも繰り返し使われる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

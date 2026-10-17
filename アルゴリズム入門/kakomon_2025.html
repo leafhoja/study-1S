@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#164e63">
+<title>2025年度 過去問解説 | アルゴリズム入門</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+<script>
+MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams'}, options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body class="algorithm-page" data-nav-page="kakomon_2025">
+<nav class="navbar">
+<div class="navbar-inner"><a class="navbar-brand" href="index.html">アルゴリズム入門</a>
+<div class="navbar-links"><a href="../index.html" class="nav-back">← 学習ノート</a><a href="index.html">トップ</a><a href="lecture1.html" data-page="lecture1">第1回</a><a href="lecture2.html" data-page="lecture2">第2回</a><a href="index.html#exams">過去問</a>
+</div>
+</div></nav>
+<div class="hero">
+<h1>2025年度 過去問解説</h1>
+<p class="subtitle">SIRモデル・ランレングス圧縮・平均と分散</p>
+<p class="meta">1A · 共通試験 · 年度は原本の表題に準拠</p>
+</div>
+<main class="container">
+<div class="intro-box">
+<p>共通試験の解答例と解説。SIRモデル・ランレングス圧縮・平均と分散を扱う。問題番号・空欄記号は原本に対応する。<a href="https://lecture.ecc.u-tokyo.ac.jp/johzu/joho-kagaku/exam/common-exam-2025.pdf" target="_blank" rel="noopener">2025年度 共通試験問題（出典）</a>を手元で参照しながら読もう。</p>
+<p>以下は独自に作成した解答例であり、公式解答ではない。計算量は、特記がなければ基本演算を定数時間とする問題文のモデルで評価する。</p>
+</div>
+<nav class="toc" aria-label="ページ内目次"><a href="#q1">問題1 SIRモデルと同時更新</a><a href="#q2">問題2 ランレングス圧縮と復元</a><a href="#q3">問題3 平均値・分散・数値安定性</a></nav>
+<section class="section" id="q1">
+<div class="sec-header">
+<h2>問題1 SIRモデルと同時更新</h2>
+</div>
+<div class="sec-body">
+<h3>(1) 漸化式をそのまま式にする</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答</th></tr></thead>
+<tbody>
+<tr><td>A</td><td><code>s - a * s * i</code></td></tr>
+<tr><td>B</td><td><code>(1 - b) * i + a * s * i</code></td></tr></tbody></table>
+</div>
+<p>右辺の$s,i$はどちらも前日の人数である。再帰版では、先に前日の値を取り出してから右辺を計算している。</p>
+<h3>(2) 基底条件の変更</h3><ol type="a"><li><code>t &gt;= 0</code> にすると、非負の全入力で直ちにI0を返す。</li><li><code>t &lt; 0</code> にすると、t=0でも再帰して、I0ではなく <code>(1-b)*I0+a*S0*I0</code> を返す。そのため一般に元の漸化式と異なる値を返す。</li></ol>
+<h3>(3) I(10)中のSの呼び出し回数</h3>
+<p>深さ$d=1,\ldots,10$でSへの呼び出しは $2^{d-1}$ 回。各非基底のS/IはSとIをそれぞれ1回呼ぶので、合計は $1+2+\cdots+2^9=2^{10}-1=\boxed{1023}$ 回。最初のI(10)はSへの呼び出しに数えない。</p>
+<h3>(4) 更新順の誤り</h3>
+<p><strong>iの更新には更新前のsを使わなければならないのに、先に更新したsを使っているから。</strong>これが指定形式に沿った説明となる。</p>
+<h3>(5) Cの修正</h3><pre><code class="language-python">old_s = s
+s = s - a * s * i
+i = (1 - b) * i + a * old_s * i</code></pre><p>または <code>s, i = s-a*s*i, (1-b)*i+a*s*i</code> と同時代入してもよい。右辺は両方とも代入前に評価される。ループ版は時間$O(t)$、追加領域$O(1)$となり、重複再帰を避けられる。</p>
+</div>
+</section>
+<section class="section" id="q2">
+<div class="sec-header">
+<h2>問題2 ランレングス圧縮と復元</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答</th></tr></thead>
+<tbody>
+<tr><td>A</td><td><code>j &lt; len(S)</code></td></tr>
+<tr><td>B</td><td><code>S[i] == S[j]</code></td></tr>
+<tr><td>C</td><td><code>j</code></td></tr>
+<tr><td>D</td><td><code>i &lt; len(T)</code></td></tr>
+<tr><td>E</td><td><code>isdigit(T[i])</code>（実際のPythonなら <code>T[i].isdigit()</code>）</td></tr>
+<tr><td>F</td><td><code>int(T[i])</code></td></tr></tbody></table>
+</div>
+<h3>(1) 連続区間をまとめる</h3>
+<p>iは現在の連続区間の先頭、jは次に確認する位置。文字が変わったら直前の区間を出力し、<code>i=j</code> とする。最後の区間はループ終了後に出力する。</p>
+<h3>(2) 複数桁の回数</h3>
+<p><code>count = count*10 + int(T[i])</code> は、これまでの十進数の末尾に数字を1桁付け足す処理。「12」に「3」を読めば123となる。文字が変わった時点で、それまでの <code>c*count</code> を出力する。</p>
+<h3>(3) 数字を含むと曖昧になる</h3>
+<p>(a) <code>"12"</code> と、文字 <code>"1"</code> を121個並べた文字列。前者は <code>1</code>が1個、<code>2</code>が1個なので1121。後者は文字1と回数121で1121となる。</p>
+<p>(b) 元の復元関数は最初の1を文字、後続121を回数と読むため、<strong>文字1を121個並べた文字列</strong>を返す。</p>
+<h3>(4) #をエスケープ記号として扱う</h3>
+<p>指定のブロックを次のように修正する。</p><pre><code class="language-python">if T[i] == &quot;#&quot;:
+    i = i + 1
+c = T[i]
+i = i + 1</code></pre><div class="warn"><span class="box-label">先頭の数字にも注意</span>これだけで直るのは、先頭文字が英大文字の場合。入力全体に数字の先頭も許すなら、初期化も <code>i=0</code> から#を読み飛ばしてcを読む形へ修正する必要がある。例えば <code>"#11"</code> を元の <code>c=T[0], i=1</code> で始めると、#を文字と誤読する。原題の「指定ブロックのみ」の変更にはこの限界がある。</div>
+<p>元のコードは空文字列も想定していない。実用の実装では最初に空入力を処理する。問題のモデルでは走査回数は入力長に比例するが、実際のPythonの文字列連結・反復の費用は文字数に依存する。</p>
+</div>
+</section>
+<section class="section" id="q3">
+<div class="sec-header">
+<h2>問題3 平均値・分散・数値安定性</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>d</td></tr>
+<tr><td>B</td><td>len(x)</td></tr>
+<tr><td>C</td><td>0</td></tr>
+<tr><td>D</td><td>k</td></tr>
+<tr><td>E</td><td>0</td></tr>
+<tr><td>F</td><td>len(x)</td></tr></tbody></table>
+</div>
+<h3>(1) 平均の共通処理</h3>
+<p><code>averageDK(x,d,k)</code> は先頭k個をdからの差として足し、最後にdを戻す。kは1以上かつ配列長以下とする。</p>
+<h3>(2) dの選び方と誤差</h3>
+<p>単純和では加算のたびの丸めが蓄積する。d=0.5なら正負の偏差を足すため、累積和を小さく保ちやすく、この実行では最終結果が0.5へ丸められている。どんな並べ方でも厳密に0.5になる保証ではない。</p>
+<p>d=1000では各偏差が約−1000となり、加算回数が増えるほど和の丸めが蓄積する。最後は約−999.5と1000の加算で小さな平均0.5を取り出すので、近い絶対値の相殺による桁落ちが影響する。真の平均に近いdを選ぶことが有利である。</p>
+<h3>(3) 計算量</h3>
+<p><code>varianceD</code> は各反復で$O(n)$のaverageを呼ぶため $\boxed{O(n^2)}$。<code>varianceS</code> は二乗和と平均を各1回求めるため $\boxed{O(n)}$。直接偏差法でも平均をループ前に1回だけ計算すれば$O(n)$にできる。</p>
+<h3>(4) 桁落ちしやすい状況</h3>
+<p>データが大きな共通値の近くに集まり、分散が小さい場合、<code>varianceS</code> の $\overline{x^2}-\bar{x}^2$ は大きく近い値の差となる。この桁落ちにより、直接偏差を二乗する <code>varianceD</code> より大きな相対誤差を生じ得る。差が丸めで0や負になることもある。</p>
+</div>
+</section>
+<div class="page-nav"><a href="index.html">← 科目トップ</a><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">ページ上部へ ↑</a>
+</div></main>
+<footer class="site-footer">アルゴリズム入門 · 1A · 学習ノート</footer>
+<script src="../common.js"></script>
+<script src="nav.js"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html><!-- 「2011年度 | 情報 個別問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2011年度 | 情報 個別問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2011">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2011年度</h1>
+  <p class="subtitle">田中哲朗クラス（理科一類7,23,25組）｜7月28日（木）4限</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">個別問題1（電子錠のオートマトン）</a>
+    <a href="#q2">個別問題2（半加算器・全加算器）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">個別問題 1</div><h2>電子錠のオートマトン</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>以下の図のオートマトン（有限状態機械）はa〜eの文字がそれぞれ書かれた5つのボタンを持つ電子錠をモデル化したものである。初期状態は状態Sとする。矢印の上に書かれた文字a〜eはその文字の書かれた電子錠のボタンが押されることに対応する。elseは「他の文字すべて」を表す。二重丸で表される状態K,Lは終了状態である。これは電子錠が解錠されている状態に対応する。</p>
+        <div class="diagram">
+          <img src="img/2011/automaton-lock.png" alt="13状態(S,A,B,C,D,E,F,G,H,I,J,K,L)からなる、a〜eの5つのボタンを持つ電子錠のオートマトン図。初期状態S、二重丸のK,Lが終了状態(解錠状態)。" style="max-width:640px;width:100%;height:auto;">
+          <div class="diagram-cap">電子錠のオートマトン（13状態）。K,L（2重丸）が終了状態＝解錠状態。</div>
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="box-label">背景知識 — このオートマトンは何をしているか</span>
+        <p>先に構造を一望しておく。各状態からの遷移をすべてまとめると次のようになっている。</p>
+        <table class="q-table">
+          <tr><th>状態</th><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr>
+          <tr><td>S（開始）</td><td>A</td><td>A</td><td>S</td><td>S</td><td>S</td></tr>
+          <tr><td>A</td><td>B</td><td>D</td><td>E</td><td>B</td><td>B</td></tr>
+          <tr><td>B</td><td>D</td><td>C</td><td>A</td><td>B</td><td>B</td></tr>
+          <tr><td>C</td><td>B</td><td>S</td><td>E</td><td>B</td><td>B</td></tr>
+          <tr><td>D</td><td>C</td><td>C</td><td>E</td><td>D</td><td>D</td></tr>
+          <tr><td>E</td><td>F</td><td>G</td><td>S</td><td>S</td><td>G</td></tr>
+          <tr><td>F</td><td>A</td><td>A</td><td>H</td><td>A</td><td>A</td></tr>
+          <tr><td>G</td><td>C</td><td>C</td><td>H</td><td>C</td><td>C</td></tr>
+          <tr><td>H</td><td>J</td><td>S</td><td>S</td><td>I</td><td>S</td></tr>
+          <tr><td>I</td><td>J</td><td>J</td><td>J</td><td>J</td><td>K（終了）</td></tr>
+          <tr><td>J</td><td>I</td><td>I</td><td>I</td><td>I</td><td>L（終了）</td></tr>
+          <tr><td>K（終了）</td><td>K</td><td>K</td><td>K</td><td>K</td><td>K</td></tr>
+          <tr><td>L（終了）</td><td>L</td><td>L</td><td>L</td><td>L</td><td>L</td></tr>
+        </table>
+        <p>
+          H以降、Iで"d"・Jで"a"を読んでからさらに"e"を読むとそれぞれK・Lに到達して解錠する。逆にたどると、解錠に至る「本線」は S→A→E→F→H→J→L（"acbcae"に相当する経路の一部）と、S→A→D→C→E→G→H→I→K（別の経路）のように、複数の道筋が合流・分岐する構造になっている。実際にこの機械は、<strong>「acbcde」または「acbcae」のいずれかのパスワードが、途中で打ち間違いを挟んでも、最終的に正しく続けて入力されれば解錠する</strong>という、複数パスワードを同時に検出するオートマトンである。文字列検索でよく使われる「複数パターンを同時にマッチさせる」オートマトン（Aho–Corasick法などが用いる考え方）と同種の構成であり、各状態は「これまでに入力した文字列が、2つのパスワードのうちどこまで正しく先頭一致しているか」という情報を表している。
+        </p>
+      </div>
+
+      <h3>(1) チェック表の完成</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>次の入力に対して、電子錠が解錠されるかどうか（Yes/No）を答えよ。</p>
+        <table class="q-table">
+          <tr><th>入力</th><th>結果</th></tr>
+          <tr><td>（無し）</td><td>No</td></tr>
+          <tr><td>ac</td><td>No</td></tr>
+          <tr><td>acbc</td><td>No</td></tr>
+          <tr><td>acbcd</td><td>No</td></tr>
+          <tr><td>acbcde</td><td>Yes</td></tr>
+          <tr><td>acbcdea</td><td>Yes</td></tr>
+          <tr><td>(a) bcacabe</td><td>?</td></tr>
+          <tr><td>(b) bccacde</td><td>?</td></tr>
+          <tr><td>(c) acacacacac</td><td>?</td></tr>
+          <tr><td>(d) bbacbcaadec</td><td>?</td></tr>
+          <tr><td>(e) cabaaccacaee</td><td>?</td></tr>
+        </table>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>上の遷移表に従って、各入力を1文字ずつ追跡する。</p>
+          <p>(a) <code>bcacabe</code>：S \(\xrightarrow{b}\) A \(\xrightarrow{c}\) E \(\xrightarrow{a}\) F \(\xrightarrow{c}\) H \(\xrightarrow{a}\) J \(\xrightarrow{b}\) I \(\xrightarrow{e}\) K。最終状態はK（終了状態）。→ <strong>Yes</strong></p>
+          <p>(b) <code>bccacde</code>：S \(\xrightarrow{b}\) A \(\xrightarrow{c}\) E \(\xrightarrow{c}\) S \(\xrightarrow{a}\) A \(\xrightarrow{c}\) E \(\xrightarrow{d}\) S \(\xrightarrow{e}\) S。最終状態はS（開始状態のまま）。→ <strong>No</strong></p>
+          <p>(c) <code>acacacacac</code>：S \(\xrightarrow{a}\) A \(\xrightarrow{c}\) E \(\xrightarrow{a}\) F \(\xrightarrow{c}\) H \(\xrightarrow{a}\) J \(\xrightarrow{c}\) I \(\xrightarrow{a}\) J \(\xrightarrow{c}\) I \(\xrightarrow{a}\) J \(\xrightarrow{c}\) I。最終状態はI（終了状態ではない）。→ <strong>No</strong></p>
+          <p>(d) <code>bbacbcaadec</code>：S \(\xrightarrow{b}\) A \(\xrightarrow{b}\) D \(\xrightarrow{a}\) C \(\xrightarrow{c}\) E \(\xrightarrow{b}\) G \(\xrightarrow{c}\) H \(\xrightarrow{a}\) J \(\xrightarrow{a}\) I \(\xrightarrow{d}\) J \(\xrightarrow{e}\) L \(\xrightarrow{c}\) L。最終状態はL（終了状態）。→ <strong>Yes</strong></p>
+          <p>(e) <code>cabaaccacaee</code>：S \(\xrightarrow{c}\) S \(\xrightarrow{a}\) A \(\xrightarrow{b}\) D \(\xrightarrow{a}\) C \(\xrightarrow{a}\) B \(\xrightarrow{c}\) A \(\xrightarrow{c}\) E \(\xrightarrow{a}\) F \(\xrightarrow{c}\) H \(\xrightarrow{a}\) J \(\xrightarrow{e}\) L \(\xrightarrow{e}\) L。最終状態はL（終了状態）。→ <strong>Yes</strong></p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a) Yes　(b) No　(c) No　(d) Yes　(e) Yes</div>
+      </details>
+
+      <h3>(2) 打ち間違えた後の最小追加入力</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>次のように途中まで文字を入力して、途中で入力を間違えてしまった。この後、電子錠を解錠するために必要な最小の追加入力の長さと、その長さで解錠できる入力パターンをすべて挙げよ。</p>
+        <table class="q-table">
+          <tr><th>これまでの入力</th></tr>
+          <tr><td>(f) cab</td></tr>
+          <tr><td>(g) aa</td></tr>
+          <tr><td>(h) bcad</td></tr>
+          <tr><td>(i) acbb</td></tr>
+          <tr><td>(j) bb</td></tr>
+        </table>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>まず、各状態から終了状態(K/L)に至る最短距離を調べておくと見通しがよい。H以降の「本線」は、H \(\xrightarrow{d}\) I \(\xrightarrow{e}\) K、H \(\xrightarrow{a}\) J \(\xrightarrow{e}\) L の2文字であり、E以降は E \(\to\{F,G\}\)（1文字）\(\to\) H（"c"で1文字）\(\to\{I,J\}\)（1文字）\(\to\{K,L\}\)（"e"で1文字）の合計4文字で、Eから見て2文字目・4文字目の選び方に応じて<strong>{cacde, cacae, cbcde, cbcae, cecde, cecae}</strong>の6通りが最短4文字パターンとなる（Eで"a"→F、"b"または"e"→Gの3通り、Hで"d"→I、"a"→Jの2通りの組み合わせ）。</p>
+
+          <p>(f) <code>cab</code>：S \(\xrightarrow{c}\) S \(\xrightarrow{a}\) A \(\xrightarrow{b}\) D。最終状態はD。DからEへは"c"の1文字（D\(\xrightarrow{c}\)E）で到達するので、Dから解錠までは \(1+4=5\)文字。<strong>5: {cacde, cacae, cbcde, cbcae, cecde, cecae}</strong></p>
+
+          <p>(g) <code>aa</code>：S \(\xrightarrow{a}\) A \(\xrightarrow{a}\) B。最終状態はB。BからEへは2文字を要し、しかも3通りの経路がある：B\(\xrightarrow{c}\)A\(\xrightarrow{c}\)E、B\(\xrightarrow{a}\)D\(\xrightarrow{c}\)E、B\(\xrightarrow{b}\)C\(\xrightarrow{c}\)E（いずれも"?c"の形で2文字目が"c"、1文字目がa/b/cの3通り）。ここから先はEからの最短4文字（6通り）が続くので、合計\(2+4=6\)文字、パターン数は\(3\times6=18\)通り。<strong>6: ccacde, ccacae, ccbcde, ccbcae, ccecde, ccecae, acacde, acacae, acbcde, acbcae, acecde, acecae, bcacde, bcacae, bcbcde, bcbcae, bcecde, bcecae（計18通り）</strong></p>
+
+          <p>(h) <code>bcad</code>：S \(\xrightarrow{b}\) A \(\xrightarrow{c}\) E \(\xrightarrow{a}\) F \(\xrightarrow{d}\) A。最終状態はA。AからEへは"c"の1文字（A\(\xrightarrow{c}\)E）なので、Aから解錠までは\(1+4=5\)文字。<strong>5: {cacde, cacae, cbcde, cbcae, cecde, cecae}</strong></p>
+
+          <p>(i) <code>acbb</code>：S \(\xrightarrow{a}\) A \(\xrightarrow{c}\) E \(\xrightarrow{b}\) G \(\xrightarrow{b}\) C。最終状態はC。CからEへも"c"の1文字（C\(\xrightarrow{c}\)E）なので、Cから解錠までは\(1+4=5\)文字。<strong>5: {cacde, cacae, cbcde, cbcae, cecde, cecae}</strong></p>
+
+          <p>(j) <code>bb</code>：S \(\xrightarrow{b}\) A \(\xrightarrow{b}\) D。最終状態はD（(f)と同じ状態）。<strong>5: {cacde, cacae, cbcde, cbcae, cecde, cecae}</strong></p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>
+          (f) 5: {cacde, cacae, cbcde, cbcae, cecde, cecae}<br>
+          (g) 6: {ccacde, ccacae, ccbcde, ccbcae, ccecde, ccecae, acacde, acacae, acbcde, acbcae, acecde, acecae, bcacde, bcacae, bcbcde, bcbcae, bcecde, bcecae}（計18通り）<br>
+          (h) 5: {cacde, cacae, cbcde, cbcae, cecde, cecae}<br>
+          (i) 5: {cacde, cacae, cbcde, cbcae, cecde, cecae}<br>
+          (j) 5: {cacde, cacae, cbcde, cbcae, cecde, cecae}
+        </div>
+      </details>
+
+      <h3>(3) 状態数を減らす</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この電子錠は13個の状態を持つが、機能（どの入力列に対して解錠するかという振る舞い）を変えずに、もっと少ない数の状態で実現できる。何個の状態で実現できるか示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            2つの状態が「統合可能」なのは、それらが将来のどんな入力列を与えても常に同じ結果（解錠するかしないか、そしてその後の遷移の仕方）を返す場合である。状態K,Lを見ると、どちらも「a〜eのどの入力に対しても自分自身に留まる」という完全に同一の振る舞いをしており、いずれも一度到達すればそれ以降は永久に解錠状態のままである。つまりK,Lは<strong>将来のどの入力列に対しても常に同じ結果（常にYes、常に自己ループ）を返す</strong>という意味で機能的に等価であり、1つの状態に統合できる。
+          </p>
+          <p>
+            そこでK,Lを1つの吸収状態Mにまとめる。Iの"e"遷移とJの"e"遷移をともにMへの遷移とし、Mはa〜eのすべてでMに留まる自己ループとすればよい。これにより状態数は13から<strong>12</strong>に減らせる。
+          </p>
+          <table class="q-table">
+            <tr><th>状態</th><th>a</th><th>b</th><th>c</th><th>d</th><th>e</th></tr>
+            <tr><td>I</td><td>J</td><td>J</td><td>J</td><td>J</td><td>M（終了）</td></tr>
+            <tr><td>J</td><td>I</td><td>I</td><td>I</td><td>I</td><td>M（終了）</td></tr>
+            <tr><td>M（終了）</td><td>M</td><td>M</td><td>M</td><td>M</td><td>M</td></tr>
+          </table>
+          <p>
+            他の状態S〜Jについては、これ以上の統合は容易ではない。たとえば見かけの似ているAとCを統合できるか考えてみると、Aは"b"を読むとDに進むのに対しCは"b"を読むとSに戻ってしまい、その先の振る舞い（Dはさらに"c"でEへ一直線に進めるが、Sは"a","b"でAに戻るだけで解錠に近づかない）が異なる。つまりAとCは、直後に同じ"b"を入力しても解錠可能性に差が生じるため区別が必要であり、統合できない。S〜Jの各状態は、それぞれ「2つのパスワードのどこまで一致しているか」という異なる情報を保持しており、将来の入力によって異なる結果をもたらす可能性がある以上、これ以上まとめることはできない。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>K,Lを1つの吸収状態Mに統合することで、<strong>12状態</strong>で同じ機能を実現できる。</div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">個別問題 2</div><h2>半加算器・全加算器</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>下図は1ビットの2進数どうしの加算を行う半加算器（half adder）である。入力$x,y$に対して、和のビット$s$と桁上げ（キャリー）$c_{out}$を出力する。</p>
+        <div class="diagram">
+          <img src="img/2011/half-adder.png" alt="1ビット半加算器のMIL記法図。XORゲートで和sを、ANDゲートで桁上げcoutを出力する。" style="max-width:420px;width:100%;height:auto;">
+          <div class="diagram-cap">1ビット半加算器（MIL記法）。$s=\text{XOR}(x,y)$、$c_{out}=\text{AND}(x,y)$。</div>
+        </div>
+        <p>半加算器を2つとORゲート1個を組み合わせると、下位の桁からの繰り上がり$c_{in}$も考慮した1ビット全加算器（full adder）を作ることができる。</p>
+        <div class="diagram">
+          <img src="img/2011/full-adder.png" alt="半加算器2つとORゲートを組み合わせた1ビット全加算器のMIL記法図。下位からの繰り上がりcinも考慮する。" style="max-width:520px;width:100%;height:auto;">
+          <div class="diagram-cap">半加算器2つ＋ORゲートで構成した1ビット全加算器。1つ目の半加算器で$x,y$から中間値$t,c_1$を作り、2つ目の半加算器で$t,c_{in}$から$s,c_2$を作り、$c_{out}=\text{OR}(c_1,c_2)$とする。</div>
+        </div>
+      </div>
+
+      <h3>(1) 全加算器の真理値表</h3>
+      <div class="ex"><span class="box-label">問題</span><p>1ビット全加算器の真理値表を書きなさい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>図の回路構成に従うと、$t=\text{XOR}(x,y)$（1つ目の半加算器の和出力）、$s=\text{XOR}(t,c_{in})$（2つ目の半加算器の和出力）、$c_{out}=\text{OR}(\text{AND}(x,y),\ \text{AND}(t,c_{in}))$（2つの半加算器それぞれの桁上げをORで合成）である。これに従って$x,y,c_{in}$の全8通りを計算すると次の表になる。</p>
+        </div>
+        <table class="q-table">
+          <tr><th>$x$</th><th>$y$</th><th>$c_{in}$</th><th>$s$</th><th>$c_{out}$</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+        </table>
+        <div class="sol"><span class="box-label">解</span>上の真理値表の通り。$s$は「1の個数が奇数」（$x\oplus y\oplus c_{in}$）、$c_{out}$は「1の個数が2個以上」（多数決）を表している。</div>
+      </details>
+
+      <h3>(2) 加算標準形（積和標準形）</h3>
+      <div class="ex"><span class="box-label">問題</span><p>出力変数$s$と$c_{out}$をそれぞれ入力変数$x,y,c_{in}$の加算標準形（積和標準形）で表しなさい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>真理値表で出力が1になる行それぞれについて、その行を満たすミンターム（各変数を、値が1ならそのまま、0なら否定にしてANDしたもの）を作り、それらをORでつなげばよい。</p>
+          <p>$s=1$になる行は$(x,y,c_{in})=(0,0,1),(0,1,0),(1,0,0),(1,1,1)$の4つなので、</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>
+          $$s = \overline{x}\,\overline{y}\,c_{in} + \overline{x}\,y\,\overline{c_{in}} + x\,\overline{y}\,\overline{c_{in}} + x\,y\,c_{in}$$
+        </div>
+        <div class="proof-body">
+          <p>$c_{out}=1$になる行は$(x,y,c_{in})=(0,1,1),(1,0,1),(1,1,0),(1,1,1)$の4つなので、</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>
+          $$c_{out} = \overline{x}\,y\,c_{in} + x\,\overline{y}\,c_{in} + x\,y\,\overline{c_{in}} + x\,y\,c_{in}$$
+          <p>なお、後ろ2項は$xy\,\overline{c_{in}}+xy\,c_{in}=xy(\overline{c_{in}}+c_{in})=xy$とまとめられ、簡略化すると次の多数決関数の形になる（標準形としては上の4項のミンターム和が答えだが、参考として付記する）。</p>
+          $$c_{out} = xy + yc_{in} + xc_{in}$$
+        </div>
+      </details>
+
+      <h3>(3) NANDのみで全加算器を作る</h3>
+      <div class="ex"><span class="box-label">問題</span><p>NANDは単独で完備性を持つので、NANDだけから1ビット全加算器を作ることができる。なるべく少ない数のNANDを用いて1ビット全加算器を作成し、MIL記法で表しなさい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            $s=x\oplus y\oplus c_{in}$と$c_{out}=xy+yc_{in}+xc_{in}$（多数決関数）を、標準的な「9個のNANDによる全加算器」構成で実現する。XORは4個のNANDで作れる：$n_1=\text{NAND}(x,y)$、$n_2=\text{NAND}(x,n_1)$、$n_3=\text{NAND}(y,n_1)$、$t=\text{NAND}(n_2,n_3)$とすると$t=x\oplus y$になる（ここまで4個）。同じ4個のNANDの構成を$t,c_{in}$に対してもう一段適用する：$m_1=\text{NAND}(t,c_{in})$、$m_2=\text{NAND}(t,m_1)$、$m_3=\text{NAND}(c_{in},m_1)$、$s=\text{NAND}(m_2,m_3)$とすると$s=t\oplus c_{in}=x\oplus y\oplus c_{in}$になる（ここまで8個）。
+          </p>
+          <p>
+            残るは$c_{out}$。すでに使った$n_1=\overline{xy}$と$m_1=\overline{t\cdot c_{in}}$を再利用して、9個目のNANDを$c_{out}=\text{NAND}(n_1,m_1)$とすると、$c_{out}=\overline{n_1\cdot m_1}=\overline{\overline{xy}\cdot\overline{t\,c_{in}}}=xy+t\,c_{in}$（ド・モルガン）となる。ここで$t=x\oplus y$なので$c_{out}=xy+(x\oplus y)c_{in}$——これは(1)の図の回路（$c_{out}=\text{OR}(\text{AND}(x,y),\text{AND}(t,c_{in}))$）と全く同じ式であり、正しく$c_{out}$を計算している。
+          </p>
+          <div class="mathblock">n1 = NAND(x,y)
+n2 = NAND(x,n1)
+n3 = NAND(y,n1)
+t  = NAND(n2,n3)　　　（= x⊕y、ここまで4個）
+m1 = NAND(t,cin)
+m2 = NAND(t,m1)
+m3 = NAND(cin,m1)
+s  = NAND(m2,m3)　　　（= t⊕cin = x⊕y⊕cin、ここまで8個）
+cout = NAND(n1,m1)　　（9個目。= xy + (x⊕y)cin）</div>
+          <p>検算（$x=1,y=1,c_{in}=0$、真理値表より$s=0,c_{out}=1$のはず）：$n_1=\overline{1}=0$、$n_2=\text{NAND}(1,0)=1$、$n_3=\text{NAND}(1,0)=1$、$t=\text{NAND}(1,1)=0$。$m_1=\text{NAND}(0,0)=1$、$m_2=\text{NAND}(0,1)=1$、$m_3=\text{NAND}(0,1)=1$、$s=\text{NAND}(1,1)=0$ ✓。$c_{out}=\text{NAND}(n_1,m_1)=\text{NAND}(0,1)=1$ ✓。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>上の9個のNAND構成（XOR段4個×2＋$c_{out}$用1個）で実現できる。この問題は部分点方式であり、9個が最小であることを要求しているわけではないので、正しく動作する実現例を示せば十分である。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「機能を保って構成要素を減らす」という発想</span>
+        <p>
+          個別問題1(3)のオートマトンの状態統合（K,Lを1つの状態Mにまとめて13状態を12状態にする）と、個別問題2(3)の「NANDだけで全加算器を作る」というこの問題は、見た目は全く異なるが、どちらも<strong>「外から見た振る舞い（機能）を変えずに、内部の構成要素をできるだけ減らす・統一する」</strong>という、情報科学・電子工学に共通する最適化の発想に基づいている。オートマトンでは「将来のどんな入力に対しても同じ結果を返す状態」を1つにまとめ、論理回路では「複数の素子（AND,OR,NOT,XOR）を、より少ない種類（NANDのみ）の素子の組み合わせで置き換える」。
+        </p>
+        <p>
+          NANDが単独で完備性（universal gate）を持つのは、NOT,AND,ORのすべてがNANDだけから作れるからである：$\text{NOT}(x)=\text{NAND}(x,x)$、$\text{AND}(x,y)=\text{NAND}(\text{NAND}(x,y),\text{NAND}(x,y))$（NANDの出力をもう一度NOTする）、$\text{OR}(x,y)=\text{NAND}(\text{NOT}(x),\text{NOT}(y))$（ド・モルガンの法則$x+y=\overline{\overline{x}\cdot\overline{y}}$による）。この3つがあれば任意の論理関数（真理値表）が積和標準形として組めるため、NANDだけでどんな組合せ回路も——今回の全加算器も——実現できる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2012.html">← 2012年度へ</a>
+    <a href="kakomon_2010.html">2010年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲朗）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

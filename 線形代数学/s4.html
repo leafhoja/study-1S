@@ -1,0 +1,635 @@
+<!DOCTYPE html><!-- 「§4 ベクトル空間の次元 — 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>§4 ベクトル空間の次元 — 線形代数学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams',
+        macros: {
+          R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}',
+          Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}',
+          rank: '\\operatorname{rank}'
+        }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="s4">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>§4 ベクトル空間の次元</h1>
+  <p class="subtitle">講義ノート③④ をもとに作成</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#def4-1">定義4.1 有限次元</a>
+    <a href="#prop-inf">命題 無限次元</a>
+    <a href="#cor4-2">系4.2 同型条件</a>
+    <a href="#lem4-3">補題4.3 ランク</a>
+    <a href="#thm4-4">定理4.4 dim Ker</a>
+    <a href="#lem4-5">補題4.5 dim Im（行標準形）</a>
+    <a href="#lem4-6">補題4.6 同型と次元</a>
+    <a href="#elem-mat">基本行列</a>
+    <a href="#thm4-7">定理4.7 dim Im = rank</a>
+    <a href="#cor4-8">系4.8 次元定理</a>
+    <a href="#cor4-9">系4.9〜4.11 応用</a>
+    <a href="#row-echelon">行標準形と階段行列</a>
+  </div>
+
+  <!-- =================== 定義4.1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="def4-1">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 4.1</div>
+      <h2>有限次元・無限次元ベクトル空間</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 4.1</span>
+        $V$ を $\mathbb{K}$-ベクトル空間とする。
+        <ol>
+          <li>$V$ が<strong>有限次元（finite-dimensional）</strong>であるとは，ある $n\ge 0$ に対して $V\cong\mathbb{K}^n$ となることとする。有限次元でない $\mathbb{K}$-ベクトル空間を<strong>無限次元</strong>であるという。</li>
+          <li>$V$ が有限次元で $V\cong\mathbb{K}^n$ となるとき，$n$ を $V$ の<strong>次元（dimension）</strong>といい，$\dim_\mathbb{K} V$ または $\dim V$ と書く。$V$ が無限次元のときは $\dim V = +\infty$ とおく。</li>
+        </ol>
+        <div class="mathblock">$$\dim_\mathbb{K}\mathbb{K}^n = n$$</div>
+        <em>注</em>：定理 3.6（$\mathbb{K}^m\cong\mathbb{K}^n\Rightarrow m=n$）により，このように定義した $\dim V$ は $V$ に対して一意に定まる。
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例</span>
+        <table class="axiom-table">
+          <tr><th>ベクトル空間</th><th>次元</th><th>備考</th></tr>
+          <tr><td>$\mathbb{K}^n$</td><td>$n$</td><td>定義による</td></tr>
+          <tr><td>$M_{m,n}(\mathbb{K})$</td><td>$mn$</td><td>$m\times n$ 行列の空間</td></tr>
+          <tr><td>$\mathbb{C}$（$\mathbb{R}$-ベクトル空間として）</td><td>$2$</td><td>$x+iy\mapsto\binom{x}{y}$ により $\mathbb{C}\cong\mathbb{R}^2$</td></tr>
+          <tr><td>$\mathbb{C}^n$（$\mathbb{R}$-ベクトル空間として）</td><td>$2n$</td><td>$\mathbb{C}^n\cong\mathbb{R}^{2n}$</td></tr>
+          <tr><td>$C^\infty([a,b))$，$-\infty\le a < b\le+\infty$</td><td>$+\infty$</td><td>無限次元（後述）</td></tr>
+        </table>
+        <p style="margin-top:.5rem">
+          <em>注</em>：$\mathbb{C}^n$ は $\mathbb{C}$-ベクトル空間として $n$ 次元だが，$\mathbb{R}$-ベクトル空間として見ると $2n$ 次元。スカラー体を変えると次元が変わる点に注意。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 命題（無限次元） =================== -->
+  <div class="section" id="prop-inf">
+    <div class="sec-header">
+      <div class="sec-tag">Proposition</div>
+      <h2>命題 — 無限次元の同値条件</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="prop">
+        <span class="box-label">命題</span>
+        $\mathbb{K}$-ベクトル空間 $V$ に対して以下は同値：
+        <div class="equiv">
+          (1) $V$ は無限次元
+          <span class="iff">$\iff$</span>
+          (2) 任意の $n\ge 0$ に対して，$V$ の部分空間 $W$ で $\dim_\mathbb{K}W=n$ となるものが存在する
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足</span>
+        <p>
+          (2) は「$V$ の中にどんな有限次元の部分空間も収まる」という意味。$C^\infty([a,b))$ が無限次元であることは，任意の $n$ に対して次元 $n$ の部分空間（例：$n$ 次以下の多項式全体）が存在することから従う。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系4.2 =================== -->
+  <div class="section" id="cor4-2">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 4.2</div>
+      <h2>系 4.2 — 有限次元ベクトル空間の同型条件</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="cor">
+        <span class="box-label">系 4.2</span>
+        有限次元 $\mathbb{K}$-ベクトル空間 $V$，$W$ に対して以下は同値：
+        <div class="equiv">
+          (1) $V\cong W$
+          <span class="iff">$\iff$</span>
+          (2) $\dim_\mathbb{K}V = \dim_\mathbb{K}W$
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足</span>
+        <p>
+          定理 3.6 が「同型 $\Rightarrow$ 次元が等しい」（$m\ne n$ なら $\mathbb{K}^m\not\cong\mathbb{K}^n$）を与えた。系 4.2 はその逆も含む：「次元が等しい $\Rightarrow$ 同型」。つまり<strong>有限次元ベクトル空間は次元だけで同型類が決まる</strong>。
+        </p>
+        <p>
+          無限次元の場合，$\dim V$ を「濃度（cardinality）」で適切に定義すれば同様の主張が示せる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 補題4.3 =================== -->
+  <div class="section" id="lem4-3">
+    <div class="sec-header">
+      <div class="sec-tag">Lemma 4.3</div>
+      <h2>補題 4.3 — ランクの定義</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">補題 4.3（ランクの定義）</span>
+        $A\in M_{m,n}(\mathbb{K})$ とする。$A$ の行標準形 $\tilde{A}$ の leading entry（先導成分，ピボット）の個数を $A$ の<strong>ランク（rank）</strong>といい，$\operatorname{rank}A$ と書く。
+        <ul style="margin-top:.5rem">
+          <li>$A\sim B$（行基本変形で互いに移り合う）ならば $\operatorname{rank}A = \operatorname{rank}B$。</li>
+          <li>$Ax=0$ の自由変数の個数は $n - \operatorname{rank}A$ である。</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 行標準形（reduced row echelon form）の条件</span>
+        <p>行列 $A$ が<strong>行標準形（行簡約階段形）</strong>であるとは，以下の 4 条件を満たすこと：</p>
+        <table class="axiom-table">
+          <tr><th>条件</th><th>内容</th></tr>
+          <tr><td>(R1)</td><td>$0$ だけからなる行は下詰めで並んでいる</td></tr>
+          <tr><td>(R2)</td><td>leading entry はすべて $1$</td></tr>
+          <tr><td>(R3)</td><td>上の行の leading entry に比べて下の行の leading entry は右に位置する</td></tr>
+          <tr><td>(R4)</td><td>ある leading entry を含む列は，それ以外の成分がすべて $0$</td></tr>
+        </table>
+        <p style="margin-top:.5rem">(R1)(R3) のみを満たす行列を<strong>階段行列（row echelon form）</strong>という（§4 後半の注参照）。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定理4.4 =================== -->
+  <div class="section" id="thm4-4">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem 4.4</div>
+      <h2>定理 4.4 — dim Ker(T) = n − rank A</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 4.4</span>
+        $T:\mathbb{K}^n\to\mathbb{K}^m$ を $\mathbb{K}$-線形写像，$A$ を $T$ の行列表示とする。
+        $$\dim\operatorname{Ker}(T) = n - \operatorname{rank}A$$
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>定理 4.4 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $\tilde{A}$ を $A$ の行標準形とする。
+          $r = \operatorname{rank}A = \operatorname{rank}\tilde{A}$ とおく。<br><br>
+
+          <strong>Step 1. 自由変数の特定。</strong><br>
+          $n - r$ は $Ax=0$（すなわち $\tilde{A}x=0$）の自由変数の個数である。
+          $d_{k_1} < \cdots < d_{k_r}$ を $\tilde{A}$ の leading entry の列番号とし，
+          $d_{k_1'} < \cdots < d_{k_{n-r}'}$ を $\{1,\ldots,n\}\setminus\{d_{k_1},\ldots,d_{k_r}\}$ の元とする。
+          $\tilde{A}x=0$ は
+          $$x_{d_{k_i}} + \sum_{j=1}^{n-r}\tilde{a}_{ik_{j}'}x_{d_{k_j'}} = 0 \quad (1\le i\le r)$$
+          と書ける。自由変数は $x_{d_{k_1'}},\ldots,x_{d_{k_{n-r}'}}$ の $n-r$ 個。<br><br>
+
+          <strong>Step 2. 同型の構成。</strong><br>
+          $T_0:\mathbb{K}^{n-r}\to\operatorname{Ker}(T_A)$ を次で定める：
+          $(y_1,\ldots,y_{n-r})\in\mathbb{K}^{n-r}$ に対し，$T_0(y)$ の
+          $d_{k_i'}$-成分 $(1\le i\le n-r)$ を $y_i$ に，
+          $d_{k_i}$-成分 $(1\le i\le r)$ を $-\sum_{j=1}^{n-r}\tilde{a}_{ij}y_j$ に定める。
+          これは $K^{n-r}$ と $\operatorname{Ker}(T_A)$ の間の同型写像を定める。<br><br>
+
+          よって $\dim\operatorname{Ker}(T) = n-r = n-\operatorname{rank}A$。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 — dim Ker の計算</span>
+        <p>
+          $\tilde{A} = \begin{pmatrix}0&1&2&0&3&0\\0&0&0&1&2&0\\0&0&0&0&0&1\\0&0&0&0&0&0\end{pmatrix}$，$\operatorname{rank}\tilde{A}=3$，$n=6$ とする。
+        </p>
+        <p>$\tilde{A}x=0$ の解の構造：</p>
+        <ul>
+          <li>leading entry の列：$2, 4, 6$（決定変数：$x_2, x_4, x_6$）</li>
+          <li>自由変数：$x_1, x_3, x_5$（$y_1, y_2, y_3$ とおく）</li>
+          <li>連立方程式：$\begin{cases}x_2 + 2x_3 + 3x_5 = 0\\x_4 + 2x_5 = 0\\x_6 = 0\end{cases}$</li>
+        </ul>
+        <p>対応する同型 $T_0:\mathbb{K}^3\to\operatorname{Ker}(T_A)$ は</p>
+        <div class="mathblock">
+          $$T_0\!\begin{pmatrix}y_1\\y_2\\y_3\end{pmatrix} = \begin{pmatrix}y_1\\-2y_2-3y_3\\y_2\\-2y_3\\y_3\\0\end{pmatrix}$$
+        </div>
+        <p>よって $\dim\operatorname{Ker}(T) = 3 = 6-3 = n - \operatorname{rank}A$。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 補題4.5 =================== -->
+  <div class="section" id="lem4-5">
+    <div class="sec-header">
+      <div class="sec-tag">Lemma 4.5</div>
+      <h2>補題 4.5 — 行標準形のとき dim Im(T_A) = rank A</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="prop">
+        <span class="box-label">補題 4.5</span>
+        $A\in M_{m,n}(\mathbb{K})$ が行標準形であるとする。$r=\operatorname{rank}A$ とすると，
+        $$\operatorname{Im}(T_A) = \left\{\begin{pmatrix}x_1\\\vdots\\x_r\\0\\\vdots\\0\end{pmatrix}\ \middle|\ x_1,\ldots,x_r\in\mathbb{K}\right\}$$
+        となる。特に $\dim_\mathbb{K}\operatorname{Im}(T_A) = \operatorname{rank}A$。
+      </div>
+
+      <details>
+        <summary>補題 4.5 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $A$ の leading entry が第 $(r, \bar{j}_r)$ 成分 $(1\le r\le s)$ にあるとする。<br>
+          $A$ の第 $s+1$ 行以降（第 $m$ 行まで）は $0$ だけからなる行なので，
+          $$\operatorname{Im}(T_A)\subseteq\left\{\begin{pmatrix}x_1\\\vdots\\x_s\\0\\\vdots\\0\end{pmatrix}\ \middle|\ x_1,\ldots,x_s\in\mathbb{K}\right\}$$
+          が成り立つ。<br><br>
+          一方，$\begin{pmatrix}y_1\\\vdots\\y_m\end{pmatrix}$ を第 $\bar{j}_r\ (1\le r\le s)$ 成分以外が $0$ であるように定めると，
+          $$A\begin{pmatrix}y_1\\\vdots\\y_m\end{pmatrix} = \begin{pmatrix}x_1\\\vdots\\x_s\\0\\\vdots\\0\end{pmatrix}$$
+          となる。よって逆の包含も成り立ち，等号が成立する。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- =================== 補題4.6 =================== -->
+  <div class="section" id="lem4-6">
+    <div class="sec-header">
+      <div class="sec-tag">Lemma 4.6</div>
+      <h2>補題 4.6 — 同型写像は有限次元部分空間の次元を保つ</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="prop">
+        <span class="box-label">補題 4.6</span>
+        $T:V\xrightarrow{\sim}W$ を $\mathbb{K}$-ベクトル空間の同型写像，$U\subseteq V$ を $V$ の有限次元部分空間とする。
+        $$\dim U = \dim T(U)$$
+      </div>
+
+      <details>
+        <summary>補題 4.6 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          制限写像 $T|_U: U\xrightarrow{\sim}T(U)$ はベクトル空間の同型写像である
+          （全単射であることは直ちにわかる。全射であることは定義より明らか）。
+          同型写像の存在は $\dim U = \dim T(U)$（系 4.2）を意味する。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- =================== 基本行列 =================== -->
+  <div class="section" id="elem-mat">
+    <div class="sec-header">
+      <div class="sec-tag">Elementary Matrices</div>
+      <h2>基本行列（Elementary Matrices）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">動機</span>
+        <p>
+          行基本変形（型 1・型 2・型 3）は，対応する<strong>基本行列</strong>を左からかけることで行列として表せる。
+          この視点から「$A$ が正則 $\iff$ 基本行列の積で書ける」が示され，掃き出し法による逆行列計算が正当化される。
+        </p>
+      </div>
+
+      <h3>3 種類の基本行列</h3>
+
+      <div class="def">
+        <span class="box-label">Type 1 — スカラー倍 $D_i(\lambda)$</span>
+        $A$：$m\times n$ 行列，$1\le i\le m$，$\lambda\ne 0$とする。
+        <em>第 $i$ 行を $\lambda$ 倍する</em>操作に対応する基本行列：
+        $$D_i(\lambda) = \begin{pmatrix}1&&&&\\&\ddots&&&\\&&\lambda&&\\&&&\ddots&\\&&&&1\end{pmatrix} \leftarrow i\text{ 行目}$$
+        $$D_i(\lambda)A = \text{（$A$ の第 $i$ 行を $\lambda$ 倍したもの）}$$
+      </div>
+
+      <div class="def">
+        <span class="box-label">Type 2 — 行の加算 $L_{i,j}(\mu)$</span>
+        $\mu\in\mathbb{K}$，$1\le i,j\le m$，$i\ne j$とする。
+        <em>第 $i$ 行の $\mu$ 倍を第 $j$ 行に加える</em>操作に対応する基本行列：
+        $$L_{i,j}(\mu) = \begin{pmatrix}1&&&&\\&\ddots&&\mu&\\&&1&&\\&&&\ddots&\\&&&&1\end{pmatrix}\ \begin{matrix}\\j\text{ 行目} \leftarrow\\\\i\text{ 列目}\end{matrix}$$
+        （対角成分はすべて $1$，$(j,i)$ 成分が $\mu$，他の非対角成分は $0$）
+        $$L_{i,j}(\mu)A = \text{（$A$ の第 $i$ 行の $\mu$ 倍を第 $j$ 行に加えたもの）}$$
+      </div>
+
+      <div class="def">
+        <span class="box-label">Type 3 — 行の交換 $S_{i,j}$</span>
+        $i\ne j$，$1\le i,j\le m$とする。
+        <em>第 $i$ 行と第 $j$ 行を入れ替える</em>操作に対応する基本行列：
+        $$S_{i,j} = \begin{pmatrix}1&&&&&&\\&\ddots&&&&&\\&&0&&1&&\\&&&\ddots&&&\\&&1&&0&&\\&&&&&\ddots&\\&&&&&&1\end{pmatrix}$$
+        （$(i,i),(j,j)$ 成分が $0$，$(i,j),(j,i)$ 成分が $1$，他の対角成分は $1$）
+        $$S_{i,j}A = \text{（$A$ の第 $i$ 行と第 $j$ 行を入れ替えたもの）}$$
+      </div>
+
+      <div class="note">
+        <span class="box-label">例証</span>
+        基本行列は<strong>単位行列に対応する行基本操作を施したもの</strong>である。すなわち，
+        $D_i(\lambda) = D_i(\lambda)I_m$，$L_{i,j}(\mu) = L_{i,j}(\mu)I_m$，$S_{i,j} = S_{i,j}I_m$。
+      </div>
+
+      <h3>基本行列の逆行列</h3>
+
+      <div class="thm">
+        <span class="box-label">定理 — 基本行列はすべて正則</span>
+        <div class="mathblock">
+          $$D_i(\lambda)^{-1} = D_i\!\left(\tfrac{1}{\lambda}\right) \quad (1\le i\le n)$$
+          $$L_{i,j}(\mu)^{-1} = L_{i,j}(-\mu) \quad (1\le i,j\le n,\;i\ne j)$$
+          $$S_{i,j}^{-1} = S_{i,j}$$
+        </div>
+        それぞれが対応する行基本変形の<strong>逆変形</strong>になっている。
+      </div>
+
+      <h3>正則行列と基本行列の積</h3>
+
+      <div class="thm">
+        <span class="box-label">定理 — 正則行列 $\iff$ 基本行列の積</span>
+        $n\times n$ 行列 $A$ が正則であるための必要十分条件は，
+        いくつかの基本行列 $E_1,\ldots,E_\ell$ の積
+        $$A = E_1^{-1}\cdots E_{\ell-1}^{-1}E_\ell^{-1}$$
+        で書けることである。
+      </div>
+
+      <details>
+        <summary>証明の概略（クリックで展開）</summary>
+        <div class="proof-body">
+          $A$ が正則であるとする。行基本変形を繰り返して行標準形 $I_n$ に変形できる：
+          $$E_\ell\cdots E_1 A = I_n$$
+          両辺に $E_1^{-1}\cdots E_\ell^{-1}$ を右からかけると
+          $$A = E_1^{-1}\cdots E_{\ell-1}^{-1}E_\ell^{-1}$$
+          各 $E_k^{-1}$ も基本行列（上の定理より）なので，$A$ は基本行列の積。<br>
+          逆に $A$ が基本行列の積ならば，各基本行列は正則なのでその積も正則。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <h3>掃き出し法による逆行列の計算</h3>
+
+      <div class="note">
+        <span class="box-label">掃き出し法（Gauss-Jordan 法）</span>
+        <p>
+          $X(A\mid B) = (XA\mid XB)$ という性質（行基本変形はブロック行列全体に作用する）を使うと：
+        </p>
+        <div class="mathblock">
+          $$E_\ell\cdots E_1(A\mid I_n) = (I_n\mid E_\ell\cdots E_1) = (I_n\mid A^{-1})$$
+        </div>
+        <p>
+          すなわち，$(A\mid I_n)$ を行基本変形で $(I_n\mid B)$ の形にすれば，$B = A^{-1}$ が得られる。
+          $A$ が正則でなければ左半分を $I_n$ にすることはできない。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定理4.7 =================== -->
+  <div class="section" id="thm4-7">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem 4.7</div>
+      <h2>定理 4.7 — dim Im(T) = rank A</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 4.7</span>
+        $T:\mathbb{K}^n\to\mathbb{K}^m$ を $\mathbb{K}$-線形写像，$A$ を $T$ の行列表示とする。
+        $$\dim\operatorname{Im}(T) = \operatorname{rank}A$$
+      </div>
+
+      <details>
+        <summary>定理 4.7 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $\tilde{A}$ を $A$ の行標準形とする。ある基本行列 $E_1,\ldots,E_\ell$ が存在して
+          $$\tilde{A} = E_\ell E_{\ell-1}\cdots E_1 A$$
+          と書ける。$S = T_{E_\ell\cdots E_1}:\mathbb{K}^m\to\mathbb{K}^m$ とすると，
+          $E_{\ell},\ldots,E_1$ はすべて正則なので $S$ は $\mathbb{K}^m$ の自己同型（全単射な線形写像）である。<br><br>
+
+          よって
+          $$\operatorname{Im}(T_{\tilde{A}}) = \operatorname{Im}(S\circ T_A) = S\bigl(\operatorname{Im}(T_A)\bigr)$$
+          補題 4.6 より
+          $$\operatorname{rank}A = \operatorname{rank}\tilde{A} = \dim\operatorname{Im}(T_{\tilde{A}}) = \dim\operatorname{Im}(T_A)$$
+          （補題 4.5 の第 1 等号，補題 4.6 の第 2 等号）
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- =================== 系4.8 次元定理 =================== -->
+  <div class="section" id="cor4-8">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 4.8</div>
+      <h2>系 4.8 — 次元定理（rank-nullity theorem）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">系 4.8（次元定理）</span>
+        $T:\mathbb{K}^n\to\mathbb{K}^m$ を $\mathbb{K}$-線形写像とする。
+        $$n = \dim\operatorname{Ker}(T) + \dim\operatorname{Im}(T)$$
+      </div>
+
+      <details>
+        <summary>証明（クリックで展開）</summary>
+        <div class="proof-body">
+          定理 4.4 より $\dim\operatorname{Ker}(T) = n - \operatorname{rank}A$，
+          定理 4.7 より $\dim\operatorname{Im}(T) = \operatorname{rank}A$。
+          両者を足すと $n$。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 次元定理の意味</span>
+        <p>
+          入力次元 $n$ が，「潰される次元（$\dim\operatorname{Ker}(T)$，核の次元）」と
+          「残る次元（$\dim\operatorname{Im}(T)$，像の次元）」に分かれることを表す。
+        </p>
+        <table class="axiom-table">
+          <tr><th>状況</th><th>$\dim\operatorname{Ker}(T)$</th><th>$\dim\operatorname{Im}(T)$</th></tr>
+          <tr><td>$T$ が単射（$\operatorname{Ker}(T)=\{0\}$）</td><td>$0$</td><td>$n$</td></tr>
+          <tr><td>$T$ が全射（$\operatorname{Im}(T)=\mathbb{K}^m$）</td><td>$n-m$</td><td>$m$</td></tr>
+          <tr><td>$T$ が全単射（$m=n$）</td><td>$0$</td><td>$n=m$</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系4.9〜4.11 =================== -->
+  <div class="section" id="cor4-9">
+    <div class="sec-header">
+      <div class="sec-tag">Corollaries 4.9–4.11</div>
+      <h2>系 4.9〜4.11 — 一般の有限次元ベクトル空間への拡張</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="cor">
+        <span class="box-label">系 4.9</span>
+        $V$，$W$：有限次元 $\mathbb{K}$-ベクトル空間，$\dim V = n$，$\dim W = m$。
+        同型写像 $\varphi:\mathbb{K}^n\xrightarrow{\sim}V$，$\psi:\mathbb{K}^m\xrightarrow{\sim}W$ をとる。
+        $T:V\to W$ を $\mathbb{K}$-線形写像とし，
+        合成 $\psi^{-1}\circ T\circ\varphi:\mathbb{K}^n\to\mathbb{K}^m$ の行列表示を $A$ とする。
+        <div class="mathblock">
+          $$\dim\operatorname{Ker}(T) = n - \operatorname{rank}A, \qquad \dim\operatorname{Im}(T) = \operatorname{rank}A$$
+        </div>
+      </div>
+
+      <details>
+        <summary>系 4.9 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          <strong>$\dim\operatorname{Im}(T) = \operatorname{rank}A$ の証明：</strong><br>
+          $$\operatorname{Im}(\psi^{-1}\circ T\circ\varphi) = \psi^{-1}\bigl(\operatorname{Im}(T\circ\varphi)\bigr) = \psi^{-1}\bigl(\operatorname{Im}(T)\bigr)$$
+          （$\varphi$ は全射なので $\operatorname{Im}(T\circ\varphi) = \operatorname{Im}(T)$）。
+          補題 4.6 より
+          $$\operatorname{rank}A = \dim\operatorname{Im}(\psi^{-1}\circ T\circ\varphi) = \dim\operatorname{Im}(T)$$
+
+          <strong>$\dim\operatorname{Ker}(T) = n - \operatorname{rank}A$ の証明：</strong><br>
+          $$\operatorname{Ker}(\psi^{-1}\circ T\circ\varphi) = \operatorname{Ker}(T\circ\varphi)$$
+          （$\psi^{-1}$ は単射なので）
+          $$= \varphi^{-1}(\operatorname{Ker}(T))$$
+          補題 4.6 より $\dim\operatorname{Ker}(T\circ\varphi) = \dim\operatorname{Ker}(T)$ が従い，
+          定理 4.4 より
+          $$n - \operatorname{rank}A = \dim\operatorname{Ker}(\psi^{-1}\circ T\circ\varphi) = \dim\operatorname{Ker}(T)$$
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="cor">
+        <span class="box-label">系 4.10</span>
+        $T:\mathbb{K}^n\to\mathbb{K}^n$ を $\mathbb{K}$-線形写像とする。以下は同値：
+        <div class="equiv">
+          (a) $T$ は単射
+          <span class="iff">$\iff$</span>
+          (b) $T$ は全射
+          <span class="iff">$\iff$</span>
+          (c) $T$ は全単射（同型写像）
+          <span class="iff">$\iff$</span>
+          (d) $\dim\operatorname{Im}(T) = n$
+        </div>
+      </div>
+
+      <details>
+        <summary>系 4.10 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $A$ を $T$ の行列表示，$A'$ を $A$ の行標準形とする。<br>
+          <strong>Case 1：$A' = I_n$。</strong>この場合 $\operatorname{rank}A = n$ なので
+          $\dim\operatorname{Ker}(T) = 0$（単射），$\dim\operatorname{Im}(T) = n$（全射）。(a)〜(d) すべて成立。<br>
+          <strong>Case 2：$A'$ に $0$ だけからなる行がある。</strong>この場合 $\operatorname{rank}A < n$ なので
+          $\dim\operatorname{Ker}(T) > 0$（単射でない），$\dim\operatorname{Im}(T) < n$（全射でない）。(a)〜(d) すべて不成立。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="cor">
+        <span class="box-label">系 4.11</span>
+        $V_1$，$V_2$：有限次元 $\mathbb{K}$-ベクトル空間，$\dim V_1 = \dim V_2$。
+        $T:V_1\to V_2$ を $\mathbb{K}$-線形写像とする。以下は同値：
+        <div class="equiv">
+          (a) $T$ は単射
+          <span class="iff">$\iff$</span>
+          (b) $T$ は全射
+          <span class="iff">$\iff$</span>
+          (c) $T$ は全単射
+          <span class="iff">$\iff$</span>
+          (d) $\dim\operatorname{Im}(T) = \dim V_2$
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 系 4.10・4.11 の意味</span>
+        <p>
+          <strong>同じ次元のベクトル空間の間の線形写像では，単射・全射・全単射がすべて同値</strong>になる。
+          これは「次元が等しい有限集合の間の単射は全単射」という有限集合の類比の，ベクトル空間版。
+        </p>
+        <p style="margin-top:.4rem">
+          無限次元では成り立たない（例：$\mathbb{K}[x]\to\mathbb{K}[x]$，$f\mapsto xf$ は単射だが全射でない）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 行標準形と階段行列 =================== -->
+  <div class="section" id="row-echelon">
+    <div class="sec-header">
+      <div class="sec-tag">Note</div>
+      <h2>注 — 行標準形と階段行列の違い</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">行標準形 vs 階段行列</span>
+        <table class="axiom-table">
+          <tr><th></th><th>行標準形（RREF）</th><th>階段行列（REF）</th></tr>
+          <tr><td>(R1)</td><td class="ok">✓ 零行は下詰め</td><td class="ok">✓ 零行は下詰め</td></tr>
+          <tr><td>(R2)</td><td class="ok">✓ leading entry はすべて 1</td><td class="ng">× 不要</td></tr>
+          <tr><td>(R3)</td><td class="ok">✓ leading entry が右に移動</td><td class="ok">✓ leading entry が右に移動</td></tr>
+          <tr><td>(R4)</td><td class="ok">✓ leading entry の列は他が全 0</td><td class="ng">× 不要</td></tr>
+        </table>
+        <p style="margin-top:.5rem">
+          つまり<strong>行標準形 = 完全な行簡約，階段行列 = 途中の形</strong>。
+          rank（leading entry の個数）は行標準形でも階段行列でも変わらない。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例</span>
+        <p>階段行列：</p>
+        <div class="mathblock">
+          $$\begin{pmatrix}0&1&3&8\\0&0&2&4\\0&0&0&8\\0&0&0&0\end{pmatrix}$$
+        </div>
+        <p>行基本変形で行標準形にしても leading entry の個数は変わらない：</p>
+        <div class="mathblock">
+          $$\begin{pmatrix}0&1&0&2\\0&0&1&2\\0&0&0&0\\0&0&0&0\end{pmatrix}$$
+        </div>
+        <p>
+          どちらも $\operatorname{rank} = 2$。したがって，<strong>ランクを求めるだけなら，行標準形まで変形せず，
+          階段行列を一つ求めれば十分</strong>。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

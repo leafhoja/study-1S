@@ -1,0 +1,444 @@
+<!DOCTYPE html><!-- 「§5 K^n を定義域とする線形写像・1次独立 — 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>§5 K^n を定義域とする線形写像・1次独立 — 線形代数学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams',
+        macros: {
+          R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}',
+          Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}',
+          rank: '\\operatorname{rank}'
+        }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="s5">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>§5 $\mathbb{K}^n$ を定義域とする $\mathbb{K}$-線形写像</h1>
+  <p class="subtitle">講義ノート④⑤ をもとに作成</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#setup">設定</a>
+    <a href="#lem5-1">補題5.1 行き先による決定</a>
+    <a href="#thm5-2">定理5.2 Im と生成する部分空間</a>
+    <a href="#def5-3">定義5.3 生成する／span</a>
+    <a href="#def5-4">定義5.4 1次独立</a>
+    <a href="#cor5-5">系5.5 1次独立 ⟺ 単射</a>
+    <a href="#cor5-6">系5.6 dim（span）= rank</a>
+    <a href="#summary">まとめ — 同値な言い換え</a>
+  </div>
+
+  <!-- =================== 設定 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="setup">
+    <div class="sec-header">
+      <div class="sec-tag">Setup</div>
+      <h2>設定</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">この節の目標</span>
+        <p>
+          $n$ を正整数，$V$ を $\mathbb{K}$-ベクトル空間とする。
+          $T:\mathbb{K}^n\to V$ という $\mathbb{K}$-線形写像の構造を明らかにする。
+        </p>
+        <p>
+          鍵となる問い：<strong>$T:\mathbb{K}^n\to V$ を決めるには何を指定すればよいか？</strong>
+        </p>
+      </div>
+
+      <p>
+        $e_1,\ldots,e_n$ を $\mathbb{K}^n$ の基本単位ベクトルとする：
+        $$e_i = \begin{pmatrix}0\\\vdots\\0\\1\\0\\\vdots\\0\end{pmatrix} \leftarrow i\text{ 番目}$$
+        任意の $x = (x_1,\ldots,x_n)^\top\in\mathbb{K}^n$ は
+        $$x = x_1e_1 + x_2e_2 + \cdots + x_ne_n$$
+        と一意に表せる。$T$ が線形写像ならば
+        $$T(x) = x_1T(e_1) + x_2T(e_2) + \cdots + x_nT(e_n)$$
+        となる（線形性 (L1)(L2) の反復適用）。よって <strong>$T$ の値は $T(e_1),\ldots,T(e_n)$ だけで完全に決まる</strong>。
+      </p>
+
+    </div>
+  </div>
+
+  <!-- =================== 補題5.1 =================== -->
+  <div class="section" id="lem5-1">
+    <div class="sec-header">
+      <div class="sec-tag">Lemma 5.1</div>
+      <h2>補題 5.1 — 行き先 $v_1,\ldots,v_n$ による $T$ の決定</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">補題 5.1</span>
+        $v_1,\ldots,v_n\in V$ とする。写像 $T_{v_1,\ldots,v_n}:\mathbb{K}^n\to V$ を
+        $$T_{v_1,\ldots,v_n}\!\begin{pmatrix}x_1\\\vdots\\x_n\end{pmatrix} = x_1v_1 + x_2v_2 + \cdots + x_nv_n$$
+        で定める。すると：
+        <ol>
+          <li>$T_{v_1,\ldots,v_n}$ は $T_{v_1,\ldots,v_n}(e_i)=v_i\ (1\le i\le n)$ をみたす <strong>$\mathbb{K}$-線形写像</strong>である。</li>
+          <li>逆に $T:\mathbb{K}^n\to V$ を任意の $\mathbb{K}$-線形写像とすると，
+              $$T_{T(e_1),\ldots,T(e_n)} = T$$
+              が成り立つ。</li>
+        </ol>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補題 5.1 の意味（2 つのポイント）</span>
+        <ul>
+          <li>
+            <strong>$T$ は $e_1,\ldots,e_n$ の行き先で決まっている</strong>：
+            2 つの線形写像 $T,T':\mathbb{K}^n\to V$ が $T(e_i)=T'(e_i)$（$1\le i\le n$）を満たせば $T=T'$。
+          </li>
+          <li>
+            <strong>$T:\mathbb{K}^n\to V$ を与えることと，$v_1,\ldots,v_n\in V$ を与えることは等価</strong>：
+            対応 $T\mapsto(T(e_1),\ldots,T(e_n))$ は全単射。
+          </li>
+        </ul>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>補題 5.1 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          <strong>(1) $T_{v_1,\ldots,v_n}$ が線形写像であること：</strong><br>
+          $x,y\in\mathbb{K}^n$，$a\in\mathbb{K}$ に対して
+          $$T_{v_1,\ldots,v_n}(x+y) = \sum_i(x_i+y_i)v_i = \sum_i x_iv_i + \sum_i y_iv_i = T_{v_1,\ldots,v_n}(x) + T_{v_1,\ldots,v_n}(y)$$
+          $$T_{v_1,\ldots,v_n}(ax) = \sum_i(ax_i)v_i = a\sum_i x_iv_i = aT_{v_1,\ldots,v_n}(x)$$
+          (L1)(L2) をみたす。また $T_{v_1,\ldots,v_n}(e_i) = v_i$ は定義より明らか。<br><br>
+
+          <strong>(2) $T_{T(e_1),\ldots,T(e_n)} = T$ であること：</strong><br>
+          任意の $x=(x_1,\ldots,x_n)^\top\in\mathbb{K}^n$ に対して
+          $$T_{T(e_1),\ldots,T(e_n)}(x) = \sum_i x_iT(e_i) = T\!\left(\sum_i x_ie_i\right) = T(x)$$
+          （$T$ の線形性を使った）。写像として一致するので $T_{T(e_1),\ldots,T(e_n)} = T$。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 — 行列表示との関係</span>
+        <p>
+          $V = \mathbb{K}^m$，$v_j = $ $A$ の第 $j$ 列（$A\in M_{m,n}(\mathbb{K})$）とすると，
+          $$T_{v_1,\ldots,v_n}(x) = x_1v_1+\cdots+x_nv_n = Ax$$
+          これはちょうど行列 $A$ による線形写像 $T_A$ に一致する。
+        </p>
+        <p>
+          補題 5.1(2) を $V=\mathbb{K}^m$ に適用すると：
+          $$T_{T(e_1),\ldots,T(e_n)} = T \iff \text{$T$ の行列表示} = \bigl(T(e_1)\mid\cdots\mid T(e_n)\bigr)$$
+          つまり<strong>線形写像の行列表示は「基本単位ベクトルの行き先を並べたもの」</strong>（系 3.4 の設定と整合）。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 — $V$ が一般のベクトル空間の場合</span>
+        <p>
+          $V = M_2(\mathbb{K})$（$2\times 2$ 行列の空間），$n=2$ として
+          $$v_1 = \begin{pmatrix}1&0\\0&0\end{pmatrix}, \quad v_2 = \begin{pmatrix}0&1\\1&0\end{pmatrix}$$
+          とおくと，$T_{v_1,v_2}:\mathbb{K}^2\to M_2(\mathbb{K})$ は
+          $$T_{v_1,v_2}\!\begin{pmatrix}x_1\\x_2\end{pmatrix} = x_1\begin{pmatrix}1&0\\0&0\end{pmatrix} + x_2\begin{pmatrix}0&1\\1&0\end{pmatrix} = \begin{pmatrix}x_1&x_2\\x_2&0\end{pmatrix}$$
+          これは $\mathbb{K}^2$ から対称行列の部分空間への線形写像で，$T(e_1)=v_1$，$T(e_2)=v_2$。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定理5.2 =================== -->
+  <div class="section" id="thm5-2">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem 5.2</div>
+      <h2>定理 5.2 — $\operatorname{Im}T_{v_1,\ldots,v_n}$ と生成する部分空間</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 5.2</span>
+        $V$：$\mathbb{K}$-ベクトル空間とする。
+        <ol>
+          <li>$v_1,\ldots,v_n\in V$ に対して
+            $$\langle v_1,\ldots,v_n\rangle_{\mathbb{K}} = \operatorname{Im}T_{v_1,\ldots,v_n}$$
+          </li>
+          <li>$T:\mathbb{K}^n\to V$（$\mathbb{K}$-線形写像）に対して
+            $$\operatorname{Im}(T) = \langle T(e_1),\ldots,T(e_n)\rangle_{\mathbb{K}}$$
+          </li>
+          <li>$v_1,\ldots,v_n\in V$ のとき，$T_{v_1,\ldots,v_n}:\mathbb{K}^n\to V$ が<strong>全射</strong>になるための必要十分条件は
+            $$\langle v_1,\ldots,v_n\rangle_{\mathbb{K}} = V$$
+          </li>
+        </ol>
+      </div>
+
+      <details>
+        <summary>定理 5.2 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          <strong>(1)：</strong>定義を展開するだけ。
+          $$\operatorname{Im}T_{v_1,\ldots,v_n} = \{T_{v_1,\ldots,v_n}(x)\mid x\in\mathbb{K}^n\} = \{x_1v_1+\cdots+x_nv_n \mid x_1,\ldots,x_n\in\mathbb{K}\} = \langle v_1,\ldots,v_n\rangle_{\mathbb{K}}$$
+          （最後の等号は定義 2.2 の span の定義そのもの）。<br><br>
+
+          <strong>(2)：</strong>補題 5.1(2) より $T = T_{T(e_1),\ldots,T(e_n)}$。両辺の $\operatorname{Im}$ をとり (1) を適用すると
+          $$\operatorname{Im}(T) = \operatorname{Im}T_{T(e_1),\ldots,T(e_n)} = \langle T(e_1),\ldots,T(e_n)\rangle_{\mathbb{K}}$$
+          <br>
+
+          <strong>(3)：</strong>$T_{v_1,\ldots,v_n}$ が全射 $\iff$ $\operatorname{Im}T_{v_1,\ldots,v_n} = V$（全射の定義）$\iff$ $\langle v_1,\ldots,v_n\rangle_{\mathbb{K}} = V$（(1) より）。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">読み方</span>
+        <p>
+          (1)は「$T_{v_1,\ldots,v_n}$ の像 = $v_1,\ldots,v_n$ が張る部分空間」という，記号 $\operatorname{Im}$ と $\langle\ \rangle_\mathbb{K}$ の橋渡し。
+          (3)はそこから直ちに従う「全射性 = 生成すること」という言い換え。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定義5.3 =================== -->
+  <div class="section" id="def5-3">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 5.3</div>
+      <h2>定義 5.3 — 生成する（generate）／張る（span）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 5.3</span>
+        $V$：$\mathbb{K}$-ベクトル空間とする。$v_1,\ldots,v_n\in V$ が $V$ を（$\mathbb{K}$上）<strong>生成する</strong>（generate）（<strong>張る</strong>，span）とは
+        $$\langle v_1,\ldots,v_n\rangle_{\mathbb{K}} = V$$
+        となることをいう。このとき $v_1,\ldots,v_n$ を $V$ の<strong>生成系</strong>・<strong>生成元</strong>という。
+      </div>
+
+      <div class="note">
+        <span class="box-label">定理5.2(3) との関係</span>
+        <p>
+          $v_1,\ldots,v_n$ が $V$ を生成する $\iff$ $T_{v_1,\ldots,v_n}$ が全射。
+          「生成系を与える」ことと「$\mathbb{K}^n\to V$ の全射線形写像を与える」ことは同じ内容の言い換えになっている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定義5.4 =================== -->
+  <div class="section" id="def5-4">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 5.4</div>
+      <h2>定義 5.4 — 1次独立（linearly independent）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">動機</span>
+        <p>
+          生成する（＝全射）の言い換えが手に入ったので，次は
+          $T_{v_1,\ldots,v_n}:\mathbb{K}^n\to V$ が<strong>単射</strong>になるための必要十分条件を考えたい。
+        </p>
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 5.4</span>
+        $V$：$\mathbb{K}$-ベクトル空間とする。$v_1,\ldots,v_n\in V$ が（$\mathbb{K}$上）<strong>1次独立</strong>（linearly independent）であるとは，$a_1,\ldots,a_n\in\mathbb{K}$ であって
+        $$a_1v_1+\cdots+a_nv_n = 0\in V$$
+        をみたすものは $a_1=\cdots=a_n=0$ に限ることをいう。
+      </div>
+
+      <div class="note">
+        <span class="box-label">否定形（1次従属）で捉える</span>
+        <p>
+          対偶的に言えば，$v_1,\ldots,v_n$ が1次独立<strong>でない</strong>（1次従属）とは，$a_1,\ldots,a_n$ の少なくとも1つが $0$ でないのに
+          $a_1v_1+\cdots+a_nv_n=0$ となる組が存在すること。このとき，ある $v_i$ は残りの一次結合で書ける
+          （$a_i\neq0$ なら $v_i = -\tfrac{1}{a_i}\sum_{j\neq i}a_jv_j$）。
+        </p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">期末前ばらし問題候補 その1</span>
+        <p>
+          $V$：$\mathbb{C}$-ベクトル空間，$v_1,\ldots,v_n\in V$ であるとき，$v_1,\ldots,v_n$ が $\mathbb{C}$ 上1次独立であるとはどういうことか，定義を述べよ。
+        </p>
+        <p style="margin-top:.4rem">
+          <strong>解答の型</strong>：「$a_1,\ldots,a_n\in\mathbb{C}$ であって $a_1v_1+\cdots+a_nv_n=0$ をみたすものは，$a_1=\cdots=a_n=0$ に限ること」。
+          定義 5.4 の $\mathbb{K}$ を $\mathbb{C}$ に置き換えるだけだが，量化子（「任意の」「存在する」「限る」）の順序を正確に書けるかが問われる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系5.5 =================== -->
+  <div class="section" id="cor5-5">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 5.5</div>
+      <h2>系 5.5 — 1次独立 ⟺ 単射</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="cor">
+        <span class="box-label">系 5.5</span>
+        $V$：$\mathbb{K}$-ベクトル空間，$v_1,\ldots,v_n\in V$ とする。以下は同値：
+        <div class="equiv">
+          (a) $v_1,\ldots,v_n$ は $\mathbb{K}$上1次独立
+          <span class="iff">$\iff$</span>
+          (b) $T_{v_1,\ldots,v_n}:\mathbb{K}^n\to V$ は単射
+        </div>
+      </div>
+
+      <details>
+        <summary>系 5.5 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $$\operatorname{Ker}T_{v_1,\ldots,v_n} = \left\{\begin{pmatrix}a_1\\\vdots\\a_n\end{pmatrix}\in\mathbb{K}^n \;\middle|\; a_1v_1+\cdots+a_nv_n=0\right\}$$
+          なので，(a) はちょうど $\operatorname{Ker}T_{v_1,\ldots,v_n}=\{0\}$ を言い換えたものになっている。
+          定理 3.3（単射 $\iff$ $\operatorname{Ker}(T)=\{0\}$）を $T=T_{v_1,\ldots,v_n}$ に適用すれば
+          $$\text{(a)} \iff \operatorname{Ker}T_{v_1,\ldots,v_n}=\{0\} \iff \text{(b)}$$
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- =================== 系5.6 =================== -->
+  <div class="section" id="cor5-6">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 5.6</div>
+      <h2>系 5.6 — $\dim\langle v_1,\ldots,v_n\rangle_{\mathbb{K}} = \operatorname{rank}(v_1\mid\cdots\mid v_n)$</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="cor">
+        <span class="box-label">系 5.6</span>
+        $v_1,\ldots,v_n\in\mathbb{K}^m$ に対して
+        $$\dim\langle v_1,\ldots,v_n\rangle_{\mathbb{K}} = \operatorname{rank}(v_1\mid\cdots\mid v_n)$$
+        （右辺は $v_1,\ldots,v_n$ を列に並べた $m\times n$ 行列のランク）
+      </div>
+
+      <details>
+        <summary>系 5.6 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          $T_{v_1,\ldots,v_n}(e_i)=v_i$（$1\le i\le n$）なので，
+          $$T_{v_1,\ldots,v_n}:\mathbb{K}^n\longrightarrow\mathbb{K}^m$$
+          の行列表示はちょうど $(v_1\mid\cdots\mid v_n)$。よって定理 4.7（$\dim\operatorname{Im}(T)=\operatorname{rank}A$）と定理 5.2(1) より
+          $$\dim\langle v_1,\ldots,v_n\rangle_{\mathbb{K}} = \dim\operatorname{Im}T_{v_1,\ldots,v_n} = \operatorname{rank}(v_1\mid\cdots\mid v_n)$$
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例</span>
+        <p>
+          $v_1=(1,2,0)^\top$，$v_2=(2,4,0)^\top$，$v_3=(0,0,1)^\top\in\mathbb{R}^3$ とすると，
+          $\operatorname{rank}\begin{pmatrix}1&2&0\\2&4&0\\0&0&1\end{pmatrix}=2$（$v_2=2v_1$ で冗長）なので
+          $\dim\langle v_1,v_2,v_3\rangle_{\mathbb{R}}=2$。実際 $\langle v_1,v_2,v_3\rangle_{\mathbb{R}}=\langle v_1,v_3\rangle_{\mathbb{R}}$ で，これは $v_1,v_3$ が張る平面。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== まとめ =================== -->
+  <div class="section" id="summary">
+    <div class="sec-header">
+      <div class="sec-tag">Summary</div>
+      <h2>まとめ — $T:\mathbb{K}^n\to V$ に関する同値な言い換え</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">§5 の核心</span>
+        <table class="axiom-table">
+          <tr><th>言い換え</th><th>内容</th></tr>
+          <tr>
+            <td>$T:\mathbb{K}^n\to V$ を与える</td>
+            <td>$v_1=T(e_1),\ldots,v_n=T(e_n)\in V$ を与えることと等価（補題5.1）</td>
+          </tr>
+          <tr>
+            <td>$T$ の決定</td>
+            <td>$T$ は基本単位ベクトルの行き先 $(T(e_1),\ldots,T(e_n))$ で一意に決まる（補題5.1）</td>
+          </tr>
+          <tr>
+            <td>$V=\mathbb{K}^m$ のとき</td>
+            <td>行き先を並べた行列 $A=(v_1\mid\cdots\mid v_n)$ が $T$ の行列表示</td>
+          </tr>
+          <tr>
+            <td>$T_{v_1,\ldots,v_n}$ が全射</td>
+            <td>$\iff$ $v_1,\ldots,v_n$ が $V$ を生成する：$\langle v_1,\ldots,v_n\rangle_{\mathbb{K}}=V$（定理5.2(3)・定義5.3）</td>
+          </tr>
+          <tr>
+            <td>$T_{v_1,\ldots,v_n}$ が単射</td>
+            <td>$\iff$ $v_1,\ldots,v_n$ が $\mathbb{K}$上1次独立（系5.5）</td>
+          </tr>
+          <tr>
+            <td>$V=\mathbb{K}^m$ のとき次元</td>
+            <td>$\dim\langle v_1,\ldots,v_n\rangle_{\mathbb{K}}=\operatorname{rank}(v_1\mid\cdots\mid v_n)$（系5.6）</td>
+          </tr>
+        </table>
+        <p style="margin-top:.6rem">
+          <strong>直感的な言葉</strong>：
+          線形写像 $T_{v_1,\ldots,v_n}:\mathbb{K}^n\to V$ の「全射性」は生成系であることと，「単射性」は1次独立であることと，それぞれぴったり対応する。
+          §6 ではこの両方を同時にみたす場合（＝<strong>基底</strong>）を扱う。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">§4・§5 の繋がり（論理の流れ）</span>
+        <div style="overflow-x:auto">
+          <pre style="font-family:monospace; line-height:2; font-size:.87rem; color:#333">
+定義4.1（有限次元・次元 dim V）
+  └── 系4.2（有限次元 ⟺ 同型条件：dim V = dim W）
+       ├── 補題4.3（ランク rank A の定義）
+       │    └── 定理4.4（dim Ker(T) = n − rank A）
+       │         └── 補題4.5（行標準形のとき dim Im = rank）
+       │              └── 補題4.6（同型は次元を保存）
+       │                   └── 定理4.7（dim Im(T) = rank A）
+       │                        └── 系4.8（次元定理：n = dim Ker + dim Im）
+       │                             └── 系4.9（一般の有限次元空間へ拡張）
+       │                                  ├── 系4.10（K^n → K^n：単射⟺全射⟺全単射）
+       │                                  └── 系4.11（dim V₁ = dim V₂ のとき同様）
+       └── 補題5.1（T: K^n → V の決定：基本単位ベクトルの行き先）
+            └── 定理5.2（Im T = 生成する部分空間）
+                 ├── 定義5.3（生成する／span）── 定理5.2(3)：全射 ⟺ 生成する
+                 ├── 定義5.4（1次独立）── 系5.5：単射 ⟺ 1次独立
+                 └── 系5.6（dim⟨v₁,…,vₙ⟩=rank，K^m の場合）
+                      └── §6：基底（生成する ＋ 1次独立）
+          </pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html><!-- 「精選：本質問題集 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>精選：本質問題集 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="td.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    tags: 'ams',
+    macros: {
+      pd: ['\\left(\\frac{\\partial #1}{\\partial #2}\\right)_{#3}',3]
+    }
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body data-nav-page="taisaku-essence">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">熱力学ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">ホーム</a>
+      <a href="ch0.html" data-page="ch0">第0章</a>
+      <a href="ch1.html" data-page="ch1">第1章</a>
+      <a href="ch2.html" data-page="ch2">第2章</a>
+      <a href="ch3.html" data-page="ch3">第3章</a>
+      <a href="ch4.html" data-page="ch4">第4章</a>
+      <a href="ch5.html" data-page="ch5">第5章</a>
+      <a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a>
+      <a href="taisaku_essence.html" data-page="taisaku_essence" class="active">精選問題</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2014.html" data-page="kakomon_2014">2014</a>
+      <a href="kakomon_2012.html" data-page="kakomon_2012">2012</a>
+      <a href="kakomon_2011.html" data-page="kakomon_2011">2011</a>
+      <a href="kakomon_2010.html" data-page="kakomon_2010">2010</a>
+      <a href="kakomon_2009.html" data-page="kakomon_2009">2009</a>
+      <a href="kakomon_2008.html" data-page="kakomon_2008">2008</a>
+      <a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>精選：本質問題集</h1>
+  <p class="subtitle">2007〜2025年度の全過去問から、核心的な考え方だけを7問に凝縮</p>
+  <p class="meta">各問とも過去問の丸写しではなく、繰り返し問われてきた本質的な論点を抽出して独自に再構成したもの｜第2章〜第5章を横断</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#e1">精選1（第2章：エネルギー方程式と「$P=Tf(V)$型」気体）</a>
+    <a href="#e2">精選2（第3章：断熱かつ不可逆な過程は必ずエントロピーを増やす）</a>
+    <a href="#e3">精選3（第3章：Carnotの定理の証明）</a>
+    <a href="#e4">精選4（第4章：4つのMaxwell関係式と熱力学の四角形）</a>
+    <a href="#e5">精選5（第4章：完全な熱力学関数とルジャンドル変換）</a>
+    <a href="#e6">精選6（第5章：ゴムの熱力学の一般形とGough–Joule効果）</a>
+    <a href="#e7">精選7（第5章：Clausius–Clapeyronの式と蒸気圧曲線）</a>
+  </div>
+
+  <div class="source-note">
+    このページは特定の年度の過去問ではない。2007〜2025年度の全9年分の過去問（<a href="kakomon_2007.html">2007</a>〜<a href="kakomon_2025.html">2025</a>）に共通して繰り返し姿を現す「これが分かっていなければ熱力学を理解したとは言えない」という核心的なテーマを7つ選び出し、それぞれについて、特定の年度の設問をそのまま引き写すのではなく、その本質が最も鮮明に見える形に独自に再構成した問題として出題している。個々の設問がどの年度のどんな出題と関係が深いかは、各問の冒頭に「出題実績」として明記した。模範解答・解説はすべて詳細に書き下しているので、単に答えを覚えるのではなく、導出の筋道そのものを再現できるようになることを目標にしてほしい。<a href="taisaku_yosou.html">予想問題（2026年度想定）</a>とあわせて、本番直前の総仕上げに使うことを想定している。
+  </div>
+
+  <!-- ============ 精選1 ============ -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="e1">
+    <div class="sec-header">
+      <div class="sec-tag">精選 1 ／ 第2章</div>
+      <h2>エネルギー方程式と「$P=Tf(V)$型」気体</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">出題実績</span>
+        <p>2012年度大問1（$P=Tf(V)$、全19問）、2009年度大問1（同型、全12問）、2008年度大問1（$PV=f(T)$）ほか、ほぼ毎年、何らかの形で「$U$ が体積によらないことを示せ」という設問が姿を変えて出題されている。2025・2023年度のゴム・磁石の問題も、実はこの同じ論法の応用である。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          気体の内部エネルギーを $U$、エントロピーを $S$、圧力を $P$ とし、$δW=-PdV$ とする。
+        </p>
+        <ul>
+          <li>(1) 一般の気体（状態方程式の形を問わない）について、$\pd{U}{V}{T}=T\pd{P}{T}{V}-P$（エネルギー方程式）が成り立つことを示せ。</li>
+          <li>(2) ある気体の状態方程式が、体積のみの関数 $f(V)$ を用いて $P=Tf(V)$ の形に書けるとする（$f$ の具体形は問わない）。このとき、$f$ の形によらず、この気体の内部エネルギー $U$ は体積 $V$ に依存せず、温度 $T$ のみの関数になることを示せ。</li>
+          <li>(3) 一方、ファンデルワールス気体 $P=\dfrac{NkT}{V-Nb}-\dfrac{N^2a}{V^2}$（$a>0$）はこの型に当てはまらない。(1)の結果を使って $\pd{U}{V}{T}$ を求め、(2)の結果と対比せよ。</li>
+        </ul>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$\pd{U}{V}{T}=T\pd{P}{T}{V}-P,\qquad P=Tf(V)\ \text{ならば}\ \pd{U}{V}{T}=0\ (\text{$f$ によらず}),\qquad \text{vdW気体では}\ \pd{U}{V}{T}=\frac{N^2a}{V^2}\ne0$$
+      </div>
+        <div class="proof-body">
+          <p><strong>(1) エネルギー方程式：</strong>第一法則と第二法則を組み合わせた基本関係式 $dU=TdS-PdV$ を $V$ で偏微分する（$T$ 一定）。</p>
+          <div class="mathblock">$$\pd{U}{V}{T} = T\pd{S}{V}{T} - P$$</div>
+          <p>
+            Helmholtz自由エネルギー $F=U-TS$ から $dF=-SdT-PdV$ を得て、$F$ が状態量であることによる偏微分の交換可能性からMaxwell関係式 $\pd{S}{V}{T}=\pd{P}{T}{V}$ が従う。これを代入すると、
+          </p>
+          <div class="mathblock">$$\pd{U}{V}{T} = T\pd{P}{T}{V} - P$$</div>
+          <p>
+            この式は状態方程式の具体形を一切使っていない——熱力学第一法則・第二法則だけから、あらゆる流体に対して成り立つ普遍的な恒等式である。
+          </p>
+          <p><strong>(2) $P=Tf(V)$ 型の一般的な帰結：</strong>$P=Tf(V)$ を $T$ で偏微分すると（$V$ 一定なので $f(V)$ は定数扱い）、</p>
+          <div class="mathblock">$$\pd{P}{T}{V} = f(V) = \frac{P}{T}$$</div>
+          <p>これを(1)の結果に代入すると、</p>
+          <div class="mathblock">$$\pd{U}{V}{T} = T\cdot\frac{P}{T} - P = P - P = 0$$</div>
+          <p>
+            すなわち、$f(V)$ の中身が何であっても（理想気体 $f=Nk/V$ であっても、全く別の関数であっても）、状態方程式が「$T$ と $V$ の関数の積に分離できる」という構造さえ持っていれば、それだけで自動的に $U=U(T)$ が導かれる。理想気体で $\pd{U}{V}{T}=0$ となるのは、分子間力が働かないからという物理的な理由からだけでなく、より広く「$P/T$ が $T$ によらない」という<strong>数学的な構造</strong>そのものから出てくる結果なのだ、というのがこの設問最大の教訓である（2025年度のゴム $X=AT(l/l_0-(l_0/l)^2)$ で $\pd{U}{l}{T}=0$ となったのも、2023年度の磁石 $M=AH/T$ で $\pd{U}{M}{T}=0$ となったのも、$X/T$、$H/T$ がそれぞれ $T$ によらない量になっているという、全く同じ構造による）。
+          </p>
+          <p><strong>(3) ファンデルワールス気体との対比：</strong>$\pd{P}{T}{V}=\dfrac{Nk}{V-Nb}$ なので、(1)に代入すると</p>
+          <div class="mathblock">$$\pd{U}{V}{T} = T\cdot\frac{Nk}{V-Nb} - \left(\frac{NkT}{V-Nb}-\frac{N^2a}{V^2}\right) = \frac{N^2a}{V^2} \ (\ne0,\ \text{ただし }a>0\text{ のとき})$$</div>
+          <p>
+            ファンデルワールスの状態方程式は $P=\dfrac{NkT}{V-Nb}-\dfrac{N^2a}{V^2}$ であり、後者の項 $-N^2a/V^2$ が温度 $T$ を全く含まない（$T$ と $V$ の積に分離できない）ため、(2)の条件が破れ、$\pd{U}{V}{T}=N^2a/V^2\ne0$ となる——つまり<strong>体積を変えると（分子間の距離が変わり、引力によるポテンシャルエネルギーが変わるため）内部エネルギーも変わる</strong>。これがまさに、2025・2023年度大問3のファンデルワールス気体で $U=CT-N^2a/V$（$V$ に依存する項が残る）となっていたことの、一般論からの再確認になっている。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">なぜこれが本質か</span>
+        <p>
+          「理想気体は $U$ が $V$ によらない」という個別の事実を覚えるのではなく、<strong>「$P/T$ が $T$ によらない構造を持つ気体はすべて $U$ が $V$ によらない」という一般原理</strong>として理解しておくと、ゴム・磁石・一般化された気体など、初見の状態方程式が出題されても瞬時に対応できる。逆に、状態方程式に $T$ を含まない項（ファンデルワールスの $-N^2a/V^2$ のような）が混じっていれば、その瞬間に $U$ が $V$ に依存することを見抜けるようになる——これが(1)〜(3)を通じて身につけてほしい「読解力」である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 精選2 ============ -->
+  <div class="section" id="e2">
+    <div class="sec-header">
+      <div class="sec-tag">精選 2 ／ 第3章</div>
+      <h2>断熱かつ不可逆な過程は必ずエントロピーを増やす（一般証明）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">出題実績</span>
+        <p>「理想気体の真空への断熱自由膨張は不可逆であることを示せ」という設問は、2025・2023年度に（ほぼ同一の文面で）連続して出題されている。ここでは、この設問が本当に問うている、動作物質によらない一般法則の形で証明する。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          ある系が、外部と熱のやり取りを一切しない（断熱：過程の全ての瞬間で $δQ=0$）過程によって、平衡状態Aから平衡状態Bへ移ったとする。この過程が不可逆であるとき、$S_B>S_A$（断熱過程にもかかわらずエントロピーが増加する）ことを、動作物質の種類や状態方程式の具体形に一切頼らずに示せ。逆に、この過程が可逆であるときはどうなるか。
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>Clausiusの不等式 $\displaystyle\oint\frac{δQ}{T}\le0$ を、A→B（断熱・実際の過程）とB→A（可逆的な仮想の戻り経路）をつないだサイクルに適用すると $S_B\ge S_A$ が得られる。等号は可逆のときのみ。</div>
+        <div class="proof-body">
+          <p>
+            $S$ は状態量なので、平衡状態Aと平衡状態Bを結ぶ経路は（実際にどう変化したかによらず）何でもよい。そこで、次の1つのサイクルを考える：まず実際に起きた過程（A→B、断熱・不可逆）をたどり、次に、Bから出発してAへ戻る<strong>可逆な</strong>経路（そのようなものは必ず存在する——例えば、準静的に体積・温度を調整して戻せばよい）を通ってAに戻る。
+          </p>
+          <p>この1周のサイクル全体に、Clausiusの不等式（第3章3.8節）を適用する。</p>
+          <div class="mathblock">$$\oint\frac{δQ}{T} = \underbrace{\int_A^B\frac{δQ}{T}}_{\text{実際の過程（断熱）}} + \underbrace{\int_B^A\frac{δQ_{\text{rev}}}{T}}_{\text{可逆な戻り経路}} \ \le\ 0$$</div>
+          <p>
+            第1項は、実際の過程が断熱（$δQ=0$ が全ての瞬間で成り立つ）なので、不可逆であっても恒等的にゼロである（Clausiusの不等式の被積分関数 $δQ/T$ そのものがゼロなので、可逆・不可逆によらずこの項はゼロ）。第2項は、可逆経路に沿った $δQ_{\text{rev}}/T$ の積分であり、エントロピーの定義そのものにより $\displaystyle\int_B^A\frac{δQ_{\text{rev}}}{T}=S_A-S_B$ に等しい。したがって、
+          </p>
+          <div class="mathblock">$$0 + (S_A-S_B) \le 0 \quad\Longrightarrow\quad S_B \ge S_A$$</div>
+          <p>
+            すなわち、断熱過程では常に $S_B\ge S_A$——エントロピーは決して減少しない。等号が成立するのは、Clausiusの不等式で等号が成立するとき、すなわちサイクル全体（したがって特にA→Bの部分）が可逆なときに限られる。ゆえに、
+          </p>
+          <ul>
+            <li><strong>断熱かつ可逆</strong>：$S_B=S_A$（等エントロピー）。</li>
+            <li><strong>断熱かつ不可逆</strong>：$S_B>S_A$（真に増加）。</li>
+          </ul>
+          <p>
+            この証明は、系が気体であるか、ゴムであるか、磁石であるか、あるいは(1)の光子気体であるかに一切依存していない——熱力学第二法則（Clausiusの不等式）だけから出てくる、完全に普遍的な結論である。
+          </p>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">確認：理想気体の真空への自由膨張への適用</span>
+        <p>上の一般論を、理想気体を体積 $V_a$ から真空へ自由膨張させ体積 $V_b(>V_a)$ にする具体例に当てはめて確認せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            自由膨張は $δW=0$（押し返す相手がない）かつ断熱壁で囲えば $δQ=0$ なので、確かに「全ての瞬間で $δQ=0$」という上の一般論の前提を満たす。第一法則より $\Delta U=0$、理想気体は $U=U(T)$ なので $\Delta T=0$。
+          </p>
+          <p>可逆な戻り経路として、同じ $T$ での準静的等温圧縮（$V_b\to V_a$）を選べば、</p>
+          <div class="mathblock">$$S_A-S_B = \int_B^A\frac{δQ_\text{rev}}{T} = \frac1T\int_{V_b}^{V_a}PdV = nR\ln\frac{V_a}{V_b} = -nR\ln\frac{V_b}{V_a}$$</div>
+          <p>ゆえに $S_B-S_A=nR\ln(V_b/V_a)>0$（$V_b>V_a$ より）——一般論が予言する $S_B>S_A$ と正確に一致する。個別に「断熱かつ可逆ならエントロピー一定のはずなのに矛盾する」という議論をその都度繰り返す必要はなく、この一般論を知っていれば、真空への自由膨張に限らずどんな不可逆断熱過程についても瞬時に $\Delta S>0$ と結論できる。</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">なぜこれが本質か</span>
+        <p>
+          「断熱（$δQ=0$）」と「等エントロピー（$dS=0$）」は<strong>断熱かつ可逆</strong>のときにだけ一致する——このことを個々の具体例（自由膨張、摩擦を伴う断熱変化など）でその都度確認するのではなく、Clausiusの不等式から一発で導かれる一般法則として身につけておくと、見慣れない設定の問題（本問集の光子気体や、本番で出会うかもしれない未知の系）でも即座に「これは不可逆だからエントロピーは増える」と判断できる。この一般証明こそ、2025・2023年度で繰り返し問われている設問の「正体」である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 精選3 ============ -->
+  <div class="section" id="e3">
+    <div class="sec-header">
+      <div class="sec-tag">精選 3 ／ 第3章</div>
+      <h2>Carnotの定理の証明</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">出題実績</span>
+        <p>2025・2023年度いずれの大問1でも「Carnotの定理より、効率は動作物質によらず $\eta=1-T_2/T_1$」という一文が、証明ぬきの既知の事実として使われている。この定理そのものの証明は第3章3.6節の核であり、直接証明を問われる可能性が高い。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          温度 $T_1$（高温）・$T_2$（低温、$T_1>T_2$）の2つの熱源の間で働く任意の熱機関Xの熱効率を $\eta_X$ とし、同じ2つの熱源の間で働く可逆熱機関Rの熱効率を $\eta_R$ とする。
+        </p>
+        <ul>
+          <li>(1) $\eta_X>\eta_R$ と仮定すると矛盾が生じることを示し、$\eta_X\le\eta_R$（<strong>Carnotの定理・第一部</strong>：可逆機関は最も効率がよい）を結論せよ。</li>
+          <li>(2) (1)の結果を用いて、2つの可逆熱機関 $R,R'$（動作物質・機構は何でもよい）が同じ2つの熱源の間で働くとき、$\eta_R=\eta_{R'}$（<strong>Carnotの定理・第二部</strong>：可逆機関の効率は動作物質によらず一定）を示せ。</li>
+        </ul>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>Xの出力仕事でRを逆回転（冷凍機として）駆動する複合装置を作ると、$\eta_X&gt;\eta_R$ の仮定のもとでは低温熱源から高温熱源へ外部の仕事なしに熱が移動するだけの装置ができてしまい、Clausiusの原理に反する。ゆえに $\eta_X\le\eta_R$。これをRとR'の両方向に適用すると $\eta_R=\eta_{R'}$。</div>
+        <div class="proof-body">
+          <p><strong>(1) $\eta_X\le\eta_R$ の証明：</strong>背理法で示す。$\eta_X>\eta_R$ と仮定する。Rは可逆機関なので、外部から仕事を与えて<strong>逆回転</strong>させ、冷凍機（低温熱源から熱を汲み上げ、高温熱源に捨てる）として使うことができる。</p>
+          <p>
+            Xを順回転させて得られる仕事 $W$ を、そっくりそのままRの逆回転（冷凍機動作）を駆動するのに使う、という複合装置を考える。Xは高温熱源から熱 $Q_1^X=W/\eta_X$ を受け取って仕事 $W$ を出し、残り $Q_1^X-W$ を低温熱源に捨てる。Rを逆回転させるには仕事 $W$ の投入が必要で、Rは低温熱源から熱 $Q_2^R$ を汲み上げ、高温熱源へ $Q_1^R=W/\eta_R$ を送り込む（冷凍機のエネルギー収支：$Q_2^R=Q_1^R-W$）。
+          </p>
+          <p>
+            仮定より $\eta_X>\eta_R$ なので、$Q_1^X=W/\eta_X < W/\eta_R=Q_1^R$。この複合装置全体（外部との仕事の授受はゼロ——Xの出力仕事が過不足なくRの入力仕事に使われるため）について、高温熱源・低温熱源それぞれへの正味の熱の出入りを集計する。
+          </p>
+          <div class="mathblock">$$\text{高温熱源：}\ -Q_1^X+Q_1^R = W\left(\frac1{\eta_R}-\frac1{\eta_X}\right) > 0\ (\text{正味、熱を受け取る})$$</div>
+          <div class="mathblock">$$\text{低温熱源：}\ (Q_1^X-W)-Q_2^R = (Q_1^X-W)-(Q_1^R-W) = Q_1^X-Q_1^R < 0\ (\text{正味、熱を失う})$$</div>
+          <p>
+            すなわち、複合装置の正味の効果は「低温熱源から熱 $Q_1^R-Q_1^X(>0)$ を奪い、外部からの仕事の投入なしに、そのまま高温熱源へ渡す」というものになっている。これは<strong>Clausiusの原理</strong>（外部から仕事の供給なしに低温熱源から高温熱源へ熱を移すだけの過程は存在しない）に明白に反する。矛盾が生じたので、仮定 $\eta_X>\eta_R$ は誤りであり、
+          </p>
+          <div class="mathblock">$$\eta_X \le \eta_R$$</div>
+          <p>
+            でなければならない（Xが可逆機関であっても不可逆機関であっても、この議論は変わらず成立する——Rを逆回転できることだけが本質的に必要で、Xの可逆性は一切使っていない）。
+          </p>
+          <p><strong>(2) $\eta_R=\eta_{R'}$ の証明：</strong>$R,R'$ はともに可逆機関である。(1)の議論で「X」の役に $R'$、「R」の役に $R$ を当てはめれば $\eta_{R'}\le\eta_R$ が成り立つ。逆に、「X」の役に $R$、「R」の役に $R'$ を当てはめれば（$R'$ も可逆機関だから、逆回転させて基準に使ってよい）$\eta_R\le\eta_{R'}$ も成り立つ。2つの不等式を同時に満たすのは</p>
+          <div class="mathblock">$$\eta_R = \eta_{R'}$$</div>
+          <p>
+            の場合だけである。すなわち、$T_1,T_2$ の2つの熱源の間で働く可逆熱機関の効率は、動作物質が理想気体であろうとゴムであろうと光子気体であろうと、常にただ1つの値に決まる。この共通の値こそが $\eta=1-T_2/T_1$ である（この具体的な値自体は、本問集や過去問の各年度で理想気体・ゴム・磁石・光子気体それぞれについて個別に計算し、確認済みである）。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">なぜこれが本質か</span>
+        <p>
+          「Carnotサイクルの効率は動作物質によらず $\eta=1-T_2/T_1$」という結果を、毎年ゴムなり磁石なり光子気体なりで<strong>個別に計算し直して確認する</strong>ことと、この定理を一般論として<strong>証明できる</strong>ことは、全く別のレベルの理解である。この証明さえ押さえておけば、当日どんな見慣れない動作物質のCarnotサイクルが出題されても、「Carnotの定理よりこの値になるはずだ」と計算せずに答えを言い当てられ、実際の計算はその確認作業に過ぎなくなる。背理法の骨格（可逆機関は逆回転できる、それを使って第二法則の原理に反する状況を作る）は、精選2・大問2の議論とも共通する、熱力学第二法則にまつわる論証の最も基本的な「型」でもある。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 精選4 ============ -->
+  <div class="section" id="e4">
+    <div class="sec-header">
+      <div class="sec-tag">精選 4 ／ 第4章</div>
+      <h2>4つのMaxwell関係式と「熱力学の四角形」</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">出題実績</span>
+        <p>Maxwell関係式そのものの導出は、2025・2023年度の大問1(2)をはじめ、ほぼ全ての年度で（$F$ からのものだけに限っても）繰り返し要求されている。$U,F,H,G$ の4つ全てから系統的に導けるようにしておくと、どの完全な熱力学関数が与えられても対応できる。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          内部エネルギー $U(S,V)$、Helmholtz自由エネルギー $F(T,V)=U-TS$、エンタルピー $H(S,P)=U+PV$、Gibbs自由エネルギー $G(T,P)=U-TS+PV$ の4つの完全な熱力学関数それぞれについて、全微分の式とそこから導かれるMaxwell関係式を求めよ。
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$dU=TdS-PdV\to\pd{T}{V}{S}=-\pd{P}{S}{V},\quad dF=-SdT-PdV\to\pd{S}{V}{T}=\pd{P}{T}{V}$$
+        $$dH=TdS+VdP\to\pd{T}{P}{S}=\pd{V}{S}{P},\quad dG=-SdT+VdP\to\pd{S}{P}{T}=-\pd{V}{T}{P}$$
+      </div>
+        <div class="proof-body">
+          <p><strong>$U(S,V)$：</strong>基本関係式 $dU=TdS-PdV$ そのものから、$T=\pd{U}{S}{V}$、$-P=\pd{U}{V}{S}$。偏微分の交換 $\dfrac{\partial^2U}{\partial V\partial S}=\dfrac{\partial^2U}{\partial S\partial V}$ より</p>
+          <div class="mathblock">$$\pd{T}{V}{S} = -\pd{P}{S}{V}$$</div>
+          <p><strong>$F(T,V)=U-TS$：</strong>$dF=dU-TdS-SdT=(TdS-PdV)-TdS-SdT=-SdT-PdV$。ゆえに $-S=\pd{F}{T}{V}$、$-P=\pd{F}{V}{T}$。交換可能性より</p>
+          <div class="mathblock">$$\pd{S}{V}{T} = \pd{P}{T}{V}$$</div>
+          <p>（これが最もよく使う、気体の $P$–$V$ 系での標準形。ゴム・磁石の問題での $\pd{X}{T}{l}=-\pd{S}{l}{T}$ 等は、仕事の符号が $δW=+Xdl$ か $-PdV$ かで符号が反転しているだけで、導出の構造は全く同じ。）</p>
+          <p><strong>$H(S,P)=U+PV$：</strong>$dH=dU+PdV+VdP=(TdS-PdV)+PdV+VdP=TdS+VdP$。ゆえに $T=\pd{H}{S}{P}$、$V=\pd{H}{P}{S}$。交換可能性より</p>
+          <div class="mathblock">$$\pd{T}{P}{S} = \pd{V}{S}{P}$$</div>
+          <p><strong>$G(T,P)=F+PV=U-TS+PV$：</strong>$dG=dF+PdV+VdP=(-SdT-PdV)+PdV+VdP=-SdT+VdP$。ゆえに $-S=\pd{G}{T}{P}$、$V=\pd{G}{P}{T}$。交換可能性より</p>
+          <div class="mathblock">$$\pd{S}{P}{T} = -\pd{V}{T}{P}$$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">なぜこれが本質か — 記憶術「熱力学の四角形」</span>
+        <p>
+          $U,F,H,G$ と、それぞれの自然な独立変数の対応、Maxwell関係式は、次のように整理して覚えると試験本番で素早く再現できる。
+        </p>
+        <ul>
+          <li>各熱力学関数は、その「自然な変数」で微分すると、符号つきで残りの状態量（$T,S,P,V$）が出てくる：$U(S,V)$、$F(T,V)$、$H(S,P)$、$G(T,P)$。</li>
+          <li>$T,V$ を独立変数に選んだとき（$F$）と、$S,P$ を選んだとき（$H$）のように、常に「示強変数と示量変数を1つずつ」独立変数に選ぶ。</li>
+          <li>4つのMaxwell関係式はすべて、対応する熱力学関数の2階偏微分の交換可能性（$\dfrac{\partial^2\Phi}{\partial x\partial y}=\dfrac{\partial^2\Phi}{\partial y\partial x}$）という、ただ1つの数学的事実の言い換えにすぎない。</li>
+        </ul>
+        <p>
+          本番で見慣れない状態変数の組（ゴムの $X,l$、磁石の $H,M$ など）が与えられても、「$δW$ の符号を確認し、$F=U-TS$ を作り、$T$ で偏微分したものと、もう一方の変数で偏微分したものを比較する」という同じ手順を踏むだけでよい——4通りすべてを覚えるというより、この<strong>手順そのもの</strong>を体に染み込ませておくことが最も本質的な対策になる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 精選5 ============ -->
+  <div class="section" id="e5">
+    <div class="sec-header">
+      <div class="sec-tag">精選 5 ／ 第4章</div>
+      <h2>完全な熱力学関数とルジャンドル変換</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">出題実績</span>
+        <p>2025年度大問3（$S(U,V)$）、2023年度大問3（$U(S,V)$）、2011・2010年度大問（$U(S,V)$と完全な熱力学関数）など、「1つの完全な熱力学関数が与えられ、そこから状態方程式・熱力学量・他の熱力学関数のすべてを導出する」形式は最頻出パターンの一つである。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>単原子理想気体（物質量 $N$、正の定数 $k$）について、エントロピーが $U,V$ の完全な熱力学関数として次のように与えられているとする。</p>
+        <div class="mathblock">$$S(U,V) = Nk\left[\frac32\ln\frac{U}{N} + \ln\frac{V}{N}\right] + Ns_0 \qquad(s_0:\text{定数})$$</div>
+        <ul>
+          <li>(1) $T=\left(\pd{S}{U}{V}\right)^{-1}$ を用いて、$U$ を $N,k,T$ で表せ。</li>
+          <li>(2) $\dfrac PT=\pd{S}{V}{U}$ を用いて状態方程式 $P(T,V)$ を求めよ。</li>
+          <li>(3) $F=U-TS$、$H=U+PV$、$G=F+PV$ をそれぞれ $T,V$（または $T,P$）の関数として求めよ。</li>
+        </ul>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$U=\frac32NkT,\qquad P=\frac{NkT}{V},\qquad H=\frac52NkT,\qquad F=\frac32NkT-NkT\left[\frac32\ln\!\left(\frac32kT\right)+\ln\frac VN+\frac{s_0}{k}\right]$$
+      </div>
+        <div class="proof-body">
+          <p><strong>(1) 温度と内部エネルギー：</strong>$\dfrac1T=\pd{S}{U}{V}=Nk\cdot\dfrac1U\cdot\dfrac32=\dfrac{3Nk}{2U}$。これを $U$ について解くと</p>
+          <div class="mathblock">$$U = \frac32NkT$$</div>
+          <p>単原子理想気体の内部エネルギーの公式そのものが再現される（この $S(U,V)$ が実際に単原子理想気体のエントロピーであることの確認にもなっている）。</p>
+          <p><strong>(2) 状態方程式：</strong>$\dfrac PT=\pd{S}{V}{U}=\dfrac{Nk}{V}$。$U$ を固定した偏微分だが、$S$ の $V$ 依存部分は $U$ を含まないのでそのまま得られる。ゆえに</p>
+          <div class="mathblock">$$P = \frac{NkT}{V}$$</div>
+          <p>——理想気体の状態方程式（$Nk$ が $nR$ に相当）。</p>
+          <p><strong>(3) 3つのLegendre変換：</strong>まず(1)を使って $S$ を $T,V$ の関数に書き直す。$U/N=\frac32kT$ を代入すると</p>
+          <div class="mathblock">$$S(T,V) = Nk\left[\frac32\ln\left(\frac32kT\right)+\ln\frac VN\right] + Ns_0$$</div>
+          <p>Helmholtz自由エネルギー：</p>
+          <div class="mathblock">$$F = U-TS = \frac32NkT - NkT\left[\frac32\ln\left(\frac32kT\right)+\ln\frac VN + \frac{s_0}{k}\right]$$</div>
+          <p>
+            （$-NkT\ln T$ のような項が現れる構造は、大問3のファンデルワールス気体の $F(T,V)=CT-CT\ln T-\cdots$ と全く同じ形——$C_V$ が一定の気体はすべて、自由エネルギーに $T\ln T$ の項を持つ。）
+          </p>
+          <p>エンタルピー：$H=U+PV$。$PV=NkT$（状態方程式そのもの）なので、</p>
+          <div class="mathblock">$$H = \frac32NkT + NkT = \frac52NkT$$</div>
+          <p>（定圧熱容量 $C_P=\pd{H}{T}{P}=\frac52Nk$ が、$C_V=\frac32Nk$ と合わせて $C_P-C_V=Nk$——理想気体のMayerの関係式——を満たすことも確認できる。）</p>
+          <p>Gibbs自由エネルギー：$G=F+PV=F+NkT$。上の $F$ の式に $NkT$ を加えるだけでよく、</p>
+          <div class="mathblock">$$G = \frac52NkT - NkT\left[\frac32\ln\left(\frac32kT\right)+\ln\frac VN+\frac{s_0}{k}\right]$$</div>
+          <p>
+            さらに状態方程式 $V=NkT/P$ を使って $V$ を消去すれば、$G$ を $T,P$ の自然な変数だけの関数として書き直せる（$G$ は $T,P$ を自然な変数とする完全な熱力学関数なので、最終的にはこの形にしておくのが正しい）。$N$ で割った $G/N$ は、1粒子あたりのGibbs自由エネルギー（化学ポテンシャル $\mu$）に等しい。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">なぜこれが本質か</span>
+        <p>
+          $U,F,H,G$ という4つの完全な熱力学関数は、同じ1つの気体を「どの変数の組で眺めるか」が違うだけの、互いにLegendre変換で結ばれた表現に過ぎない。$S(U,V)$ で出発しても、$U(S,V)$ で出発しても、$F(T,V)$ で出発しても（本問集や2025・2023・2011・2010年度のように、出発点は年によって変わる）、たどり着く物理（この場合は理想気体、あるいは前述のファンデルワールス気体）は同じである。「どの関数が与えられても、まず $T,P$（あるいは $S,V$）を偏微分で取り出し、そこから $U=F+TS$ 等の定義式に従って残りを芋づる式に求める」という<strong>変換の手順そのもの</strong>を体得しておくことが、出発点の関数が何であっても対応できる本質的な力になる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 精選6 ============ -->
+  <div class="section" id="e6">
+    <div class="sec-header">
+      <div class="sec-tag">精選 6 ／ 第5章</div>
+      <h2>ゴムの熱力学の一般形とGough–Joule効果</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">出題実績</span>
+        <p>ゴムの熱力学（エントロピー弾性・Gough–Joule効果）は2025・2011・2010年度と繰り返し出題されている定番の題材。ここでは、いずれの年度の具体的な状態方程式にも共通する、より一般的な構造を抽出する。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          ゴムの長さを $l$、張力を $X$ とし、微小な長さ変化 $dl$ に対してゴムにされる仕事を $δW=Xdl$ とする。このゴムの状態方程式が、$l$ のみの関数 $a(l)>0$（具体形は問わない）を用いて
+        </p>
+        <div class="mathblock">$$X(T,l) = a(l)\,T$$</div>
+        <p>
+          という形（張力が温度に比例する、というだけの、きわめて緩い条件）に書けるとする。
+        </p>
+        <ul>
+          <li>(1) $a(l)$ の具体形によらず、内部エネルギー $U$ が $l$ に依存せず温度のみの関数であることを示せ。</li>
+          <li>(2) $a(l)$ の具体形によらず、等温条件下で $l$ を増やす（ゴムを伸ばす）とエントロピーが必ず減少することを示せ。</li>
+          <li>(3) (1)(2)の結果を使い、「ゴムをゆっくり伸ばしても温度は変化しないが、急激に伸ばすと発熱して温度が上がる」ことを説明せよ。</li>
+        </ul>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$\pd{U}{l}{T}=0\ (\text{任意の}a(l)\text{で成立}),\qquad \pd{S}{l}{T}=-a(l)<0$$
+      </div>
+        <div class="proof-body">
+          <p>
+            第一法則・第二法則より $dU=TdS+Xdl$。Helmholtz自由エネルギー $F=U-TS$ から $dF=-SdT+Xdl$。ゆえに $-S=\pd{F}{T}{l}$、$X=\pd{F}{l}{T}$。偏微分の交換可能性からMaxwell関係式
+          </p>
+          <div class="mathblock">$$\pd{X}{T}{l} = -\pd{S}{l}{T}$$</div>
+          <p>
+            が成り立つ（気体の $\pd{P}{T}{V}=\pd{S}{V}{T}$ と比べ、仕事の符号が $+Xdl$ であることに対応して符号が反転している）。
+          </p>
+          <p><strong>(1)：</strong>状態方程式 $X=a(l)T$ を $T$ で偏微分すると（$l$ 一定）$\pd{X}{T}{l}=a(l)$。これをMaxwell関係式に代入すると $\pd{S}{l}{T}=-a(l)$。</p>
+          <p>次に、$dU=TdS+Xdl$ を $l$ で偏微分する（$T$ 一定、エネルギー方程式）。</p>
+          <div class="mathblock">$$\pd{U}{l}{T} = T\pd{S}{l}{T} + X = T\cdot\bigl(-a(l)\bigr) + a(l)T = 0$$</div>
+          <p>
+            $a(l)$ がどんな（正の値をとる）関数であっても、この打ち消し合いは必ず起こる。すなわち、<strong>「張力が温度に比例する」という構造さえ満たしていれば</strong>、ゴムの内部エネルギーは長さによらず温度のみで決まる——2025年度の具体的な $a(l)=A(l/l_0-(l_0/l)^2)/T\cdot T$（整理すれば $a(l)=A(l/l_0-(l_0/l)^2)$）でも、2011年度の $a(l)$ でも、この結論は変わらない。精選1で見た「$P=Tf(V)$ 型なら $U$ は $V$ によらない」と全く同じ構造の帰結である。
+          </p>
+          <p><strong>(2)：</strong>上で求めた $\pd{S}{l}{T}=-a(l)$ は、$a(l)>0$ という仮定（問題文で与えられている）から常に負である。すなわち、温度を一定に保ったまま $l$ を増やす（ゴムを伸ばす）と、$a(l)$ の具体形によらず<strong>必ずエントロピーは減少する</strong>。物理的には、ゴムを構成する高分子鎖が引き伸ばされることで取りうる配置（丸まり方）の数が減る——という<strong>エントロピー弾性</strong>の効果は、$a(l)$ の詳しい形に依存しない、ゴムという物質のクラス全体に共通する普遍的な性質である。</p>
+          <p><strong>(3) 定性的な説明：</strong></p>
+          <ul>
+            <li><strong>ゆっくり伸ばす（準静的＝ほぼ等温）：</strong>各瞬間、周囲（大気や手）と熱平衡を保つ時間的余裕があるので、ゴム自身の温度は周囲の温度のまま変化しない。(2)よりエントロピーは減少するが、その分の熱 $TdS(<0)$ はその都度周囲に放出され（等温発熱過程、2025年度大問1(6)と同じ結論）、ゴム自身の温度自体は上がらない。</li>
+            <li><strong>急激に伸ばす（断熱に近い）：</strong>周囲と熱をやり取りする時間がなく、実質的に $δQ=0$（断熱）とみなせる。伸ばす過程自体は準静的（可逆）と考えてよいので、断熱かつ可逆 ⟹ 等エントロピー（$dS=0$）である。これを $dU=TdS+Xdl$ に代入すると $dU=Xdl>0$——ゆっくり伸ばす場合と違って熱を外に逃がす経路がないため、外からされた仕事がそのまま内部エネルギーの増加になる。ところが(1)より $U$ は $l$ によらず $T$ のみで決まるので、$U$ が増加するということは、それはそのまま温度の上昇を意味する（$T$ が変化しなければ $U$ も変化しようがない）。ゆえに、ゴム自身の温度が実際に上昇し、「急に伸ばすと熱くなる」という体感につながる（2025年度大問1(8)で断熱曲線 $T=C\exp[\cdots]$ が $l$ の増加関数として求まったのは、まさにこの関係を具体的な $a(l)$ について積分した結果である）。</li>
+          </ul>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">なぜこれが本質か</span>
+        <p>
+          「ゴムを伸ばすと発熱する」という現象そのものよりも、<strong>「ゆっくり」と「急激に」の違いが、そのまま等温過程と断熱過程の違いに対応している</strong>という理解の方がずっと汎用性が高い。この対応関係は、ゴムに限らず気体の圧縮（ゆっくり圧縮すれば等温、急激に圧縮すれば断熱的に温度が上がる——ディーゼルエンジンの原理）や、精選1で見た一般の気体にもそのまま当てはまる、熱力学全体を貫く見方である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 精選7 ============ -->
+  <div class="section" id="e7">
+    <div class="sec-header">
+      <div class="sec-tag">精選 7 ／ 第5章</div>
+      <h2>Clausius–Clapeyronの式と蒸気圧曲線</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">出題実績</span>
+        <p>2009年度大問2(5)で、氷–水の共存曲線への応用として出題されている。相共存（第5章5.1節）は本問集の他の6問とは異なる、独立した重要テーマなので、単独で1問確保しておく。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          ある物質の液相と気相（蒸気）が共存している状態を考える。共存曲線 $P=P(T)$ 上では、単位物質量あたりのGibbs自由エネルギー（化学ポテンシャル）$g_L(T,P)$（液相）と $g_G(T,P)$（気相）が等しい：$g_L=g_G$。
+        </p>
+        <ul>
+          <li>(1) このことから、Clausius–Clapeyronの式 $\dfrac{dP}{dT}=\dfrac{L}{T(v_G-v_L)}$（$L$：単位物質量あたりの蒸発熱、$v_G,v_L$：気相・液相の単位物質量あたりの体積）を導け。</li>
+          <li>(2) $L$ がほぼ温度によらず一定とみなせ、気相は理想気体（単位物質量あたり $Pv_G=k'T$、$k'$ は定数）とみなせ、さらに $v_G\gg v_L$（液相の体積は無視できる）と近似できるとき、共存曲線 $P(T)$ の具体形を求めよ。</li>
+        </ul>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$\frac{dP}{dT} = \frac{L}{T(v_G-v_L)},\qquad P(T) = P_0\exp\left[-\frac{L}{k'}\left(\frac1T-\frac1{T_0}\right)\right]$$
+      </div>
+        <div class="proof-body">
+          <p><strong>(1) 導出：</strong>比Gibbs自由エネルギーの全微分は $dg=-s\,dT+v\,dP$（$s,v$ は単位物質量あたりのエントロピー・体積）。共存曲線に沿って両相の $g$ が常に等しいという条件 $g_L=g_G$ を微分すると、</p>
+          <div class="mathblock">$$dg_L = dg_G \quad\Longrightarrow\quad -s_L dT+v_LdP = -s_GdT+v_GdP$$</div>
+          <p>整理すると</p>
+          <div class="mathblock">$$(v_G-v_L)dP = (s_G-s_L)dT \quad\Longrightarrow\quad \frac{dP}{dT} = \frac{s_G-s_L}{v_G-v_L}$$</div>
+          <p>
+            液体から気体への蒸発は、一定温度・一定圧力での可逆な相転移なので、蒸発熱 $L$（吸熱）は $L=T(s_G-s_L)$（$δQ_\text{rev}=Tds$ を積分しただけ）と表せる。代入すると
+          </p>
+          <div class="mathblock">$$\frac{dP}{dT} = \frac{L}{T(v_G-v_L)}$$</div>
+          <p><strong>(2) 蒸気圧曲線の具体形：</strong>$v_G\gg v_L$ の近似で $v_G-v_L\approx v_G$、さらに気相を理想気体とみなすと $v_G=k'T/P$。これらを(1)の結果に代入すると</p>
+          <div class="mathblock">$$\frac{dP}{dT} = \frac{L}{Tv_G} = \frac{LP}{k'T^2}$$</div>
+          <p>変数分離形なので、両辺を $P$ と $T$ で積分する。</p>
+          <div class="mathblock">$$\frac{dP}{P} = \frac{L}{k'}\frac{dT}{T^2} \quad\Longrightarrow\quad \ln P = -\frac{L}{k'T}+\text{const.}$$</div>
+          <p>基準点 $(T_0,P_0)$ を通るという条件で積分定数を決めると、</p>
+          <div class="mathblock">$$P(T) = P_0\exp\left[-\frac{L}{k'}\left(\frac1T-\frac1{T_0}\right)\right]$$</div>
+          <p>
+            これがいわゆる<strong>Clausius–Clapeyronの近似式（蒸気圧曲線の指数関数形）</strong>である。温度が上がるにつれて蒸気圧が急激に（指数関数的に）増大することを表しており、標高が高い場所（気圧 $P$ が低い場所）ほど水の沸点（$P(T)=$大気圧 となる$T$）が低くなること、湿度や蒸発の議論など、気象学・化学工学まで広く使われる基本式である。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">なぜこれが本質か</span>
+        <p>
+          この問題は、精選5で扱った「Legendre変換で複数の熱力学関数を行き来する」力と、精選1・6で繰り返し使った「Maxwell関係式・状態方程式を組み合わせて微分方程式を作り、積分して具体形を求める」力の、総合的な応用になっている。相平衡という、これまでの6問（すべて単一相の気体・ゴム・光子気体）とは異なる新しい状況設定に、同じ道具（Gibbs自由エネルギーの全微分、可逆過程での $δQ_\text{rev}=Tds$）を応用できるかどうかを試す、良い仕上げの問題である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2007.html">← 2007年度へ</a>
+    <a href="taisaku_yosou.html">予想問題（2026）へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター・精選問題集</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

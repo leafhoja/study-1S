@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="theme-color" content="#0a4f5c"><title>第6章　問題解決のための情報表現 | 情報 講義ノート</title><link rel="stylesheet" href="../../common.css"><link rel="stylesheet" href="../style.css"><script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],tags:'ams'},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script></head><body data-nav-page="lecture-第6章"><nav class="navbar"><div class="navbar-inner"><a class="navbar-brand" href="../index.html">情報</a><div class="navbar-links"><a href="../../index.html" class="nav-back">← 学習ノート</a><a href="../index.html">トップ</a><a href="index.html" class="active">講義ノート</a></div></div></nav><div class="hero"><h1>第6章　問題解決のための情報表現</h1><p class="subtitle">情報｜田中哲郎クラス講義ノート</p><p class="meta">行列・グラフ・木・シミュレーション</p></div><div class="container"><div class="mot"><span class="box-label">概要</span><p>このページは講義スライドの流れを節単位に組み直し、用語の関係と学習上の要点を説明する。行列・グラフ・木・シミュレーションを中心に、定義だけでなく、なぜ必要か、どのように使うかまで確認する。</p></div><div class="page-toc"><strong>章内目次</strong><ol>
+<li><a href="#ch6-matrix">1. 行列によるデータの表現</a></li>
+<li><a href="#ch6-graph">2. グラフによるネットワークの表現</a></li>
+<li><a href="#ch6-tree">3. 木による階層構造の表現</a></li>
+<li><a href="#ch6-simulation">4. モデル化とシミュレーション</a></li>
+<li><a href="#ch6-deterministic">5. 決定的モデル — マルサスモデルとロジスティック写像</a></li>
+<li><a href="#ch6-stochastic">6. 確率的モデル — ベルヌーイ分布とランダムウォーク</a></li>
+<li><a href="#ch6-inverse">7. 順問題・逆問題と最適化</a></li>
+</ol></div>
+
+<div class="section" id="ch6-matrix"><div class="sec-header"><div class="sec-tag">Data Structure</div><h2>表形式のデータを、なぜ2次元配列として扱うのか</h2></div><div class="sec-body">
+<p>アンケートの回答一覧、生徒ごとの成績表、商品ごとの売上記録——これらは分野が違っても、共通の構造を持つ。「対象ごとに、決まった種類の数値がいくつか並ぶ」という構造である。これを計算機で扱いやすい形にしたものが<strong>行列（matrix）</strong>である。</p>
+<div class="def"><span class="box-label">定義　行・列・行列</span><ul><li><strong>行（row）：</strong>1個の対象についてのデータ。d個の数値からなる場合、これを<strong>d次元データ</strong>と呼ぶ。典型的には1件のレコードに対応する。</li><li><strong>列（column）：</strong>行を横断して並ぶ、同じ種類の数値。典型的には測定した尺度（項目）に対応する。</li><li><strong>行列（matrix）：</strong>行を要素とする配列——すなわち「配列を要素とする配列」であり、2次元配列として実装できる。</li></ul></div>
+<p>n件のデータをまとめて扱うときは、行列全体を1つの変数（たとえば<code>X</code>）で表す。第五章で扱った配列の考え方をそのまま2段重ねにすればよく、<strong>i行目・d次元データのj番目の値</strong>を<strong>(i,j)要素</strong>と呼ぶ。添字は0から始まる（0-indexed）ことに注意する。</p>
+<div class="ex"><span class="box-label">計算例　4×4行列への添字アクセス</span><p>4件のデータ、各データが4個の数値からなる4×4行列<code>X</code>があり、0行目が <code>X[0] = [0, 150, 145, 233]</code> であるとする。行列の(0,0)要素と(0,3)要素は、それぞれどう書けるか。</p><details><summary>解答を見る</summary><div class="proof-body"><p>(0,0)要素は0行目の0番目の値なので <code>X[0][0]</code>（値は0）。(0,3)要素は0行目の3番目の値なので <code>X[0][3]</code>（値は233）。「行列の(i,j)要素」は「配列の配列」の外側の添字iで行を選び、内側の添字jで列を選ぶという、2段階の添字アクセスに対応することを確認する。</p></div></details></div>
+<p>行列によるデータ表現は、次に扱うグラフの隣接行列にもそのまま応用される、この章全体を支える最も基本的な道具である。</p>
+</div></div>
+
+<div class="section" id="ch6-graph"><div class="sec-header"><div class="sec-tag">Network</div><h2>「関係」を点と線に還元して表現する——グラフ</h2></div><div class="sec-body">
+<h3>ノードとエッジ、無向と有向</h3>
+<p>路線図、友人関係、組織の指揮系統——これらはいずれも「対象」と「対象どうしの関係」からなる。この構造を抽象化したものが<strong>グラフ（graph）</strong>である。</p>
+<div class="def"><span class="box-label">定義　グラフ</span><p>グラフは<strong>ノード（node、節点）</strong>と<strong>エッジ（edge、枝）</strong>からなる。ノードは関係を持つ対象を点で表し、エッジはノード間の関係を線で表す。エッジに向きを付けない場合を<strong>無向（undirected）グラフ</strong>、向きを付ける場合を<strong>有向（directed）グラフ</strong>という。有向エッジでは、矢印が指す先を<strong>終点</strong>、そうでない側を<strong>始点</strong>と呼ぶ。</p></div>
+<div class="diagram"><img src="img/第6章/graph.png" alt="ノードとエッジからなる無向・有向グラフの例" style="max-width:640px;width:100%;height:auto;"><div class="diagram-cap">図：ノードとエッジからなるグラフ構造（講義スライドより）</div></div>
+<h3>有向グラフの中の特別な関係——親子・経路・閉路</h3>
+<p>有向グラフでは、エッジの向きに応じて次の関係を定義できる。</p>
+<div class="def"><span class="box-label">定義　親子・経路・閉路・DAG</span><ul><li><strong>親子関係：</strong>ノードAを始点、ノードBを終点とする有向エッジが存在するとき、AはBの<strong>親</strong>、BはAの<strong>子</strong>であるという。</li><li><strong>経路（path）：</strong>ノードAを始点、ノードBを終点とする有向エッジの列がたどれるとき、AからBへの経路が存在するという。</li><li><strong>閉路（cycle）：</strong>始点と終点が同一ノードになる有向経路。</li><li><strong>非巡回有向グラフ（DAG, directed acyclic graph）：</strong>閉路が存在しない有向グラフ。</li></ul></div>
+<p>木構造（次節）は、DAGにさらに強い制約を課した特別な場合として位置づけられる。</p>
+<h3>計算機上での表現——隣接行列</h3>
+<p>グラフも<a href="#ch6-matrix">前節の行列表現</a>にそのまま乗せられる。ノードにあらかじめ番号を振っておき、ノードiからノードjへ有向エッジがある場合は(i,j)要素を1、それ以外を0とする2次元配列を作れば、グラフの構造をまるごと行列で表現できる。この行列を<strong>隣接行列（adjacency matrix）</strong>という。「グラフを絵として描く」ことと「グラフを行列として計算機に持たせる」ことが、同じ情報の2通りの表現であることを押さえておく。</p>
+<h3>応用例——路線図・組織図・オートマトン</h3>
+<p>グラフによるモデル化は、具体的な題材へ次のように対応する。</p>
+<div class="note"><span class="box-label">ネットワークモデルの具体例</span><ul><li><strong>路線図：</strong>駅をノード、隣駅どうしの関係をエッジとする。最短経路問題などに使える。</li><li><strong>組織図：</strong>各組織をノード、組織間の上下関係をエッジとする。</li><li><strong>有限オートマトン（有限状態機械）：</strong>「状態」をノード、ある状態で1文字入力されたときの遷移を有向エッジで表す。始状態から文字列を1文字ずつ入力して状態遷移を繰り返し、文字列全体を入力し終えた状態が終了状態なら真（True）、そうでなければ偽（False）と判定する。単純な文字列検索だけでなく、<code>(a|b)*c</code>（aまたはbが何回か続いた後にcが入力された直後だけ終了状態となる）のような<strong>正規表現</strong>で書かれた条件も、この仕組みで判定できる。</li></ul></div>
+</div></div>
+
+<div class="section" id="ch6-tree"><div class="sec-header"><div class="sec-tag">Hierarchy</div><h2>循環のない特別なグラフ——木構造で階層を表す</h2></div><div class="sec-body">
+<h3>木の定義——根・親・葉・部分木</h3>
+<div class="def"><span class="box-label">定義　木（tree）構造</span><p>次を満たす有向グラフを<strong>木（tree）</strong>構造という。</p><ul><li><strong>根（root）</strong>と呼ばれるノードがちょうど1つ存在する。</li><li>根以外のすべてのノードは、親がちょうど1つだけある。</li></ul><p>子を持たないノードを<strong>葉（leaf）</strong>と呼ぶ。</p></div>
+<p>木は「根以外は親が1つだけ」という強い制約を持つ点で、一般の有向グラフ（DAG）よりもさらに特殊な構造である。この制約のおかげで、次の2つの便利な性質が成り立つ。</p>
+<div class="thm"><span class="box-label">木構造の特徴</span><ul><li>各節点は、根からその節点までの経路（パス）によって特徴づけられる。</li><li>あるノードを選べば、その下にぶら下がる部分全体を1つのまとまり——<strong>部分木（subtree）</strong>——として代表させることができる。</li></ul></div>
+<div class="diagram"><img src="img/第6章/tree.png" alt="根と親子関係を持つ木構造" style="max-width:560px;width:100%;height:auto;"><div class="diagram-cap">図：根・親・葉からなる木構造（講義スライドより）</div></div>
+<h3>応用例——住所の階層性とファイルシステム</h3>
+<div class="ex"><span class="box-label">具体例1　住所の階層性</span><p>ノードを地区、有向エッジを「ある地区が別の地区に含まれる」関係とすると、住所は木構造をなす。日本には「駒場」という地名が4つ以上ある（東京都目黒区駒場、埼玉県さいたま市浦和区駒場、長野県下伊那郡阿智村駒場、北海道網走市駒場、……）が、都道府県から書き始めたパス名によって一意に区別できる。これは「各節点が根からのパスで特徴づけられる」という木構造の性質そのものである。</p></div>
+<div class="ex"><span class="box-label">具体例2　ファイルシステム</span><p>ノードをファイル・ディレクトリ（フォルダ）、有向エッジを「あるディレクトリが、あるファイル・ディレクトリを含む」関係とすると、ファイルシステムも木構造をなす。フォルダを開いてさらに中のフォルダを開くという操作は、根からのパスをたどる操作にほかならない。</p></div>
+<p><a href="../過去問/共通問題/kakomon_2022.html#q2">2022年度共通問題 大問2</a>では、DNSのドメイン名を題材に階層モデル（木構造）と一般のネットワークモデル（グラフ）の使い分けが問われ、<a href="../過去問/共通問題/kakomon_2025.html#q2">2025年度共通問題 大問2</a>では、生物の親子関係を有向グラフで表し、祖父母・きょうだい・親等を求めるアルゴリズムが出題された。木構造・グラフは「知っていれば解ける」というより、<strong>与えられた関係をどちらのモデルで捉えるべきかを見抜く</strong>ことが問われている。</p>
+</div></div>
+
+<div class="section" id="ch6-simulation"><div class="sec-header"><div class="sec-tag">Simulation</div><h2>モデルから疑似データを生み出す——シミュレーションという方法</h2></div><div class="sec-body">
+<p>行列・グラフ・木は、既に存在する（観測された）データを計算機上でどう「持たせるか」という表現の話だった。ここからは視点を変え、<strong>現象そのものを模した仕組み（モデル）を計算機上に作り、そこから疑似的にデータを生成する</strong>という使い方を扱う。これを<strong>シミュレーション</strong>という。</p>
+<div class="def"><span class="box-label">定義　モデル化とシミュレーション</span><p>現実の現象をよく見て、その振る舞いを再現する数理的な仕組みを作ることを<strong>モデル化</strong>という。できあがった<strong>モデル</strong>に計算機上で入力を与えて動かし、（疑似）データを生成する手続きを<strong>シミュレーション</strong>という。モデルは現象を完全に再現する必要はなく、目的に必要な性質だけを抽出したものでよい。</p></div>
+<p>モデルは大きく2種類に分かれる。同じ入力に対して常に同じ結果を返す<strong>決定的なモデル</strong>と、乱数を用いて実行のたびに結果が変わりうる<strong>確率的なモデル</strong>である。次の2節で、それぞれの代表例を見る。</p>
+</div></div>
+
+<div class="section" id="ch6-deterministic"><div class="sec-header"><div class="sec-tag">Deterministic</div><h2>決定的モデル——単純な数式が生み出す多様な振る舞い</h2></div><div class="sec-body">
+<h3>マルサスモデル——比例による増減</h3>
+<div class="def"><span class="box-label">定義　マルサスモデル</span><p>各年の人口が、前年の人口に比例して変化するという最も単純な人口モデルを、マルサスモデルという。</p></div>
+<div class="mathblock">$$x_t = m\,x_{t-1}$$</div>
+<p>$m$は<strong>パラメータ</strong>と呼ばれ、この値によって生成されるデータの振る舞いは大きく変わる。$m\gt1$なら増大、$m=1$なら一定、$m\lt1$なら減少する。初期値$x_0$とデータのサイズ（何年分生成するか）を与えれば、このモデルからデータ列を生成できる。計算機上では、サイズ$T$・パラメータ$m$・初期値$x_0$を入力とし、$x_1,x_2,\ldots,x_T$を要素に持つ配列を出力する関数として、このモデルを実装できる。</p>
+<h3>線形モデル——比例関係の一般化</h3>
+<p>マルサスモデルは「1個の変数が、別の1個の変数に比例する」という線形モデルの特別な場合である。線形モデルはパラメータの個数に応じて次のように一般化できる。</p>
+<div class="def"><span class="box-label">線形モデルの一般形</span><ul><li><strong>パラメータが1個の線形モデル：</strong>$y_t = w\,x_t$。例：ある国の人口に、その国のGDP（国内総生産）が比例するというモデル。</li><li><strong>パラメータが$d$個の線形モデル：</strong>$y_t=\sum_{i=1}^{d}w_i x_{it}$。例：$d$個の地域からなる国で、各地域の生産性がその地域の人口に比例するというモデル。</li></ul></div>
+<h3>ロジスティック写像——増大の逓減をパラメータで表す</h3>
+<p>マルサスモデルは$m>1$なら際限なく増大し続けてしまい、資源制約のある現実の人口動態を表すには単純すぎる。そこで「増える勢いが次第に鈍っていく」性質を、パラメータを1つ追加して表現したのが<strong>ロジスティック写像</strong>である。</p>
+<div class="mathblock">$$x_t = m(1-b\,x_{t-1})\,x_{t-1}$$</div>
+<p>$m$のほかに$b$というパラメータを追加で持つ。$b=0$のときは$x_t=m\,x_{t-1}$となり、マルサスモデルに一致する。$b=0.05$にすると、増大の途中でほぼ増加が止まる。$b$をさらに大きくすると、より早い段階で増大が止まる。</p>
+<div class="note"><span class="box-label">複雑なモデルと単純なモデルの関係</span><p>ロジスティック写像は、マルサスモデルよりも<strong>複雑なモデル</strong>である——というのは、マルサスモデルのパラメータをどのように定めても、ロジスティック写像で単に$b=0$とすれば同じデータ生成を再現できるからである（モデルの集合が包含関係にある）。一般に、複雑なモデルほどより正確なシミュレーションが可能で、適用できる現象の範囲も広いが、その分パラメータを適切に決定するのは難しくなる。パラメータを1つ追加するだけで表現力が上がる代わりに、決めるべきものも増える、という設計上のトレードオフを押さえておく。</p></div>
+<div class="diagram"><img src="img/第6章/logistic-map.png" alt="ロジスティック写像の挙動を示すグラフ" style="max-width:640px;width:100%;height:auto;"><div class="diagram-cap">図：パラメータ$b$の値によって増大の止まり方が変わるロジスティック写像（講義スライドより）</div></div>
+<div class="ex"><span class="box-label">計算例　ロジスティック写像を2ステップ計算する</span><p>$m=1.5$、$b=0.05$、$x_0=10$としてロジスティック写像 $x_t=m(1-bx_{t-1})x_{t-1}$ を計算し、$x_1$、$x_2$を求めよ。</p><details><summary>解答を見る</summary><div class="proof-body"><p>$x_1=1.5\times(1-0.05\times10)\times10=1.5\times0.5\times10=7.5$。<br>$x_2=1.5\times(1-0.05\times7.5)\times7.5=1.5\times0.625\times7.5\approx7.03$。<br>マルサスモデル（$b=0$）ならこの同じ$m,x_0$で$x_1=15$、$x_2=22.5$と増え続けるのに対し、$b>0$を入れると増加の勢いがわずか2ステップで鈍り始めることが確認できる。</p></div></details></div>
+</div></div>
+
+<div class="section" id="ch6-stochastic"><div class="sec-header"><div class="sec-tag">Stochastic</div><h2>確率的モデル——乱数によって不確実性を表現する</h2></div><div class="sec-body">
+<h3>ベルヌーイ分布——0か1かの二値</h3>
+<div class="def"><span class="box-label">定義　ベルヌーイ分布</span><p>確率変数が0か1のいずれかをとるとき、その分布を<strong>ベルヌーイ分布</strong>という。（非負の）パラメータ$\theta$によって、次のようにサンプリングされる確率が決まる。</p><div class="mathblock">$$P(X=1)=\theta,\qquad P(X=0)=1-\theta$$</div></div>
+<p>計算機上では、パラメータ$\theta$を持つベルヌーイ分布からサンプリングする関数があらかじめ用意されているものとして利用する。現代の計算機の多くは、実際には<strong>疑似乱数列</strong>を用いてこれをシミュレートしている。サンプリングによって得られた個々のデータを<strong>サンプル</strong>あるいは<strong>標本値</strong>と呼び、同じ関数を呼び出しても、呼び出すごとに結果は変わりうる。</p>
+<h3>カテゴリカル分布——3択以上への一般化</h3>
+<div class="def"><span class="box-label">定義　カテゴリカル分布</span><p>$d$個の（非負の）パラメータ$\theta_1,\theta_2,\ldots,\theta_d$を持ち、それぞれ$1,\ldots,d$のいずれかがサンプリングされる確率を表す分布を<strong>カテゴリカル分布</strong>という。ベルヌーイ分布は$d=2$の特別な場合にあたる。</p></div>
+<div class="ex"><span class="box-label">具体例　じゃんけんのシミュレーション</span><p>$d=3$のカテゴリカル分布からサンプリングする関数を使えば、じゃんけんをシミュレートできる。$\theta_1,\theta_2,\theta_3$を、それぞれグー・チョキ・パーを出す確率とすればよい。この考え方は、本章より前の章で扱われた「定常無記憶情報源」（各記号が互いに独立に、決まった確率分布に従って生成されるという情報源のモデル）のシミュレーションにも応用できる、とスライドは述べている。</p></div>
+<h3>ランダムウォーク——賭けの収支の変動</h3>
+<p>ベルヌーイ分布は、二択の結果を繰り返し積み重ねる場面のモデル化にも使える。</p>
+<div class="def"><span class="box-label">定義　ランダムウォーク</span><p>賭けを$T$回行い、確率$\theta$で収支が1増え、確率$1-\theta$で収支が1減るとする。この収支の時間変動を<strong>ランダムウォーク</strong>という。</p></div>
+<div class="ex"><span class="box-label">具体例　破産のシミュレーション</span><p>所持金10から出発し、賭けを繰り返して所持金が0になる（破産する）かどうかをシミュレーションできる。$\theta=0.5$なら勝ち負けは五分五分だが、それでも有限回の試行では偶然に負けが込んで破産に至ることがある——「平均的には五分五分」であることと「実際の1回の試行がどう転ぶか」は別問題であることを、乱数を使ったシミュレーションは具体的に確認させてくれる。</p></div>
+</div></div>
+
+<div class="section" id="ch6-inverse"><div class="sec-header"><div class="sec-tag">Inverse Problem</div><h2>「モデルから答えを出す」のか、「答えからモデルを決める」のか</h2></div><div class="sec-body">
+<h3>順問題——モデルが分かっているとき、結果を求める</h3>
+<div class="def"><span class="box-label">定義　順問題</span><p>ある数理モデルが正しいと分かっているときに、そのモデルから得られるデータが、求めたい結果そのものになるような問題を<strong>順問題</strong>という。</p></div>
+<div class="ex"><span class="box-label">具体例　試験対策モデル</span><p>「$i$番目の科目の対策を行うには時間$t_i$が必要であり、得点が$v_i$増加する」というモデルを考える。1番目・2番目・3番目の科目の対策を行うとき、どれくらい時間がかかるか、得点がどれくらい増加するかを求める問題は順問題である——モデル（各科目の$t_i,v_i$）が既知で、そこから結果（合計時間・合計得点）を計算するだけだからである。</p></div>
+<h3>逆問題——結果から、モデルの入力やパラメータを決める</h3>
+<div class="def"><span class="box-label">定義　逆問題</span><p>現実からの要請や観測データを利用して、数理モデルの入力やパラメータなどを決定する問題を<strong>逆問題</strong>という。</p></div>
+<div class="ex"><span class="box-label">具体例　同じ試験対策モデルの逆問題</span><p>先ほどと同じ試験対策モデルで、「25点以上得点を増加させるには、どの科目の組み合わせで対策すればよいか」「15時間以内の対策で得点増加を最大化するには、どの科目を対策すべきか」という問いは逆問題である——欲しい結果（得点条件・時間制約）から、逆に入力（対策する科目の組み合わせ）を決めなければならない。この種の「限られた資源（時間）の中で価値（得点）を最大化する組み合わせを選ぶ」問題は<strong>ナップサック問題</strong>と呼ばれる、計算機科学で古くから研究されている代表的な問題である。</p></div>
+<h3>最適化問題としての定式化</h3>
+<p>逆問題は、しばしば<strong>最適化問題</strong>として定式化できる。最適化問題は、次の2つの要素で構成される。</p>
+<div class="def"><span class="box-label">定義　目的関数と制約条件</span><ul><li><strong>目的関数：</strong>最大化したい関数$f(x)$。最小化したい場合は「最大化」の代わりに「最小化」と明記する。目的関数は複数設定することも可能である。</li><li><strong>制約条件：</strong>変数$x$が満たすべき条件。不等式で書く場合を<strong>不等式制約</strong>（$g(x)\le0$）、等式で書く場合を<strong>等式制約</strong>という。$x\in S$（変数$x$が集合$S$に属する）という制約も考えられ、この集合$S$が連続的か離散的かによって、問題の性質は大きく変わる。</li></ul></div>
+<div class="ex"><span class="box-label">演習　試験対策問題を最適化問題として書く</span><p>「15時間以内の対策で得点増加を最大化する」という先ほどの逆問題を、$i$番目の科目を対策するかどうかを表す変数$x_i\in\{0,1\}$（対策するなら1、しないなら0）を使って、目的関数と制約条件の形に定式化せよ。</p><details><summary>解答を見る</summary><div class="proof-body"><p>目的関数：$\sum_i v_i x_i$ を最大化する。制約条件：$\sum_i t_i x_i \le 15$（不等式制約）、および$x_i\in\{0,1\}$（各科目を対策するかしないかの二択であるという、離散的な集合への制約）。このように書き下すと、ナップサック問題が「目的関数を最大化しつつ不等式制約を満たす、離散的な変数の組み合わせを選ぶ最適化問題」の一種であることが確認できる。</p></div></details></div>
+</div></div>
+
+<div class="warn exam-focus"><span class="box-label">過去問との接続 — 試験で何が問われるか</span><ul><li><a href="../過去問/共通問題/kakomon_2022.html"><strong>2022共通 大問2</strong></a>：ネットワークモデルと木構造を、経路と共通祖先の問題へ適用する。</li><li><a href="../過去問/共通問題/kakomon_2025.html"><strong>2025共通 大問2</strong></a>：親子関係の有向グラフから祖父母・きょうだい・親等を求めるアルゴリズムが出題された。</li></ul><p>用語を単独で暗記するのでなく、題材のどこにその概念が現れ、どの条件を根拠に判断するかを説明できるようにする。</p></div><div class="note"><span class="box-label">この章のまとめ</span><p>行列・グラフ・木・シミュレーションは独立した暗記事項ではなく、情報を表現し、処理し、伝え、社会で安全に利用するための一連の考え方としてつながっている。各節の太字語を自分の言葉で説明できるか確認しよう。</p></div><div class="page-nav"><a href="第5章.html">← 前へ</a><a href="第7章.html">次へ →</a></div></div><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer><script src="../nav.js"></script><script src="../../common.js?v=20260718-texcopy"></script><script src="../../access-ui.js"></script></body></html>

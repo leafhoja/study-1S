@@ -1,0 +1,419 @@
+<!DOCTYPE html><!-- 「2022年度 | 情報 共通問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2022年度 | 情報 共通問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kyotsu-2022">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>共通問題 2022年度</h1>
+  <p class="subtitle">7月28日（木）3限｜大問3（うち大問3は選択）</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（暗号とディジタル署名・PKI／ネットワークモデルと木構造）</a>
+    <a href="#q2">大問2（反復処理と2分法の計算手順）</a>
+    <a href="#q3">大問3（選択：情報量の推理／情報社会と法）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">共通問題 1</div><h2>暗号・ディジタル署名・PKI／ネットワークモデルと階層モデル</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>問1-1 — 暗号とディジタル署名・PKI</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          次の文章の空欄を、以下の語群から最も適切な語を選んで埋めよ。同じ記号の空欄には同じ語が入るものとする。基本的に各語は高々1回の利用とするが、(*)のついた語に限っては2回まで用いて良いものとする。<br>
+          盗聴を防ぐための技術として暗号がある。元のデータを<span class="blank">A</span>、暗号化したデータを暗号文といい、暗号文からもとの<span class="blank">A</span>に戻すことを<span class="blank">B</span>という。<span class="blank">C</span>暗号方式では、暗号化と<span class="blank">B</span>のための鍵ペアを作成する。暗号化用の鍵を<span class="blank">C</span>と呼び、<span class="blank">B</span>のための鍵を<span class="blank">D</span>と呼んで自分だけが所有する。<span class="blank">C</span>を知っている人は誰でも暗号化できるが、それを<span class="blank">B</span>できるのは<span class="blank">D</span>の所有者のみである。データの改ざん検知に利用できる技術として<span class="blank">E</span>がある。データに<span class="blank">E</span>を適用して得られた計算結果を、データの<span class="blank">F</span>と呼ぶ。送信者が作成したデータの<span class="blank">F</span>を送信者の<span class="blank">G</span>を用いて暗号化したものが<span class="blank">H</span>となる。受信者はデータと<span class="blank">H</span>の双方を受信して、データから作った<span class="blank">F</span>と<span class="blank">H</span>を<span class="blank">I</span>によって<span class="blank">B</span>した<span class="blank">F</span>とを比較する。一致すれば改ざんされていないことが確認できる。<span class="blank">C</span>暗号方式の重要な点は、本当に意図した相手の<span class="blank">C</span>であることの保証にある。<span class="blank">C</span>が信頼できる人によって<span class="blank">H</span>されることで<span class="blank">C</span>が保証される。ユーザの個人的な共通の知り合いなどを介して<span class="blank">C</span>を保証するモデルを<span class="blank">J</span>と呼ぶ。
+        </p>
+      </div>
+      <div class="note"><span class="box-label">語群</span><p>共通鍵(*)・公開鍵(*)・電子鍵(*)・秘密鍵(*)・圧縮・一方向ハッシュ関数・構文・信頼の輪・ディジタル署名・電子印鑑・電子指紋・認証局・パスワード・平文・標本化・復号・符号化・DRM・HTTPS・P2P・PKI</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>語群のうち共通鍵・公開鍵・電子鍵・秘密鍵の4語には「*」が付き2回まで使える——公開鍵（C）と秘密鍵（D,G）がそれぞれ2度ずつ登場するのはこのため。</p>
+          <p><span class="blank">A=平文</span>／<span class="blank">B=復号</span>／<span class="blank">C=公開鍵</span>／<span class="blank">D=秘密鍵</span></p>
+          <p><span class="blank">E=一方向ハッシュ関数</span>／<span class="blank">F=電子指紋</span>（ハッシュ値のこと）</p>
+          <p><span class="blank">G=秘密鍵</span>（送信者自身の秘密鍵でハッシュ値を暗号化）／<span class="blank">H=ディジタル署名</span></p>
+          <p><span class="blank">I=公開鍵</span>（送信者の公開鍵でHを復号し、届いたデータから計算した電子指紋Fと突き合わせる）</p>
+          <p><span class="blank">J=信頼の輪</span>（Web of Trust。認証局を頂点とする階層的なPKIモデルに対して、知人同士の相互署名で信頼を広げる分散型モデル）</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>A=平文, B=復号, C=公開鍵, D=秘密鍵, E=一方向ハッシュ関数, F=電子指紋, G=秘密鍵, H=ディジタル署名, I=公開鍵, J=信頼の輪</div>
+        <div class="note">
+          <span class="box-label">語群の全用語</span>
+          <p><strong>共通鍵</strong>：暗号化と復号に同じ秘密の鍵を使う方式、またはその鍵。／<strong>公開鍵</strong>：公開鍵暗号の鍵ペアのうち他者へ公開する鍵。受信者の公開鍵による暗号化や、署名者の署名検証に使う。／<strong>電子鍵</strong>：暗号鍵を指す一般的な表現だが、この設問で必要な公開鍵・秘密鍵の正式な区別にはならない。／<strong>秘密鍵</strong>：鍵ペアのうち所有者だけが秘密に保持し、復号や署名生成に使う鍵。</p>
+          <p><strong>圧縮</strong>：情報の表現量を減らす処理。／<strong>一方向ハッシュ関数</strong>：入力から固定長の値を計算できる一方、その値から元入力を求めることが困難な関数。／<strong>構文</strong>：記号や文を組み立てる形式上の規則。／<strong>信頼の輪</strong>：利用者同士が公開鍵へ署名し、分散的に信頼を広げるモデル。／<strong>ディジタル署名</strong>：秘密鍵で生成し公開鍵で検証することで、作成者と改ざんの有無を確かめる仕組み。</p>
+          <p><strong>電子印鑑</strong>：文書に付す印影データやサービスの通称で、暗号学的なディジタル署名と同義とは限らない。／<strong>電子指紋</strong>：データから得たハッシュ値を指す呼び名。／<strong>認証局</strong>：公開鍵と所有者の対応を審査し電子証明書を発行する主体。／<strong>パスワード</strong>：本人確認などに使う秘密の文字列。／<strong>平文</strong>：暗号化前、または復号後の元データ。／<strong>標本化</strong>：連続信号を一定間隔で測り離散的な値にする処理。／<strong>復号</strong>：暗号文を平文へ戻す処理。／<strong>符号化</strong>：情報を所定の符号表現へ変換する処理で、秘密性を目的とする暗号化とは別概念。</p>
+          <p><strong>DRM</strong>：デジタル著作物の利用条件を技術的に管理する仕組み。／<strong>HTTPS</strong>：HTTP通信をTLSで暗号化・認証する方式。／<strong>P2P</strong>：端末同士が対等な立場で直接資源やデータを交換する構成。／<strong>PKI</strong>：認証局・電子証明書などにより公開鍵の正当性を保証する基盤。</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 署名は「秘密鍵で作り公開鍵で確かめる」</span>
+        <p>公開鍵暗号の2つの使い道を混同しないこと：<strong>機密性</strong>の確保には「公開鍵で暗号化→秘密鍵で復号」（受け手だけが読める）を使い、<strong>署名（真正性・完全性）</strong>の確保には「秘密鍵で暗号化＝署名→公開鍵で復号＝検証」（送り手本人にしか作れない）を使う——向きが逆であることを押さえる。PKI（公開鍵基盤）は「認証局が公開鍵に署名する」ことでCの真正性を保証する階層的な仕組み、信頼の輪はそれを個人間の相互保証で代替する仕組み。</p>
+      </div>
+
+      <h3>問1-2 — ネットワークモデルと階層モデル（木構造）</h3>
+      <div class="ex">
+        <span class="box-label">問題（導入・定義）</span>
+        <p>次の文章を読み、続く問に答えよ。ネットワークモデルでは、順にたどっていけるエッジの列を<strong>経路</strong>という。特に、2ノードを繋ぐ経路の中でエッジ数が最も少ないものを2ノード間の<strong>最短経路</strong>という。また、階層モデルをネットワークモデルの一種だとみなしたとき、ノードAから根までの最短経路上にあるA以外のノードを、ノードAの<strong>祖先</strong>という。2つのノードA，Bのどちらの祖先でもあるノードをノードA，Bの<strong>共通祖先</strong>という。</p>
+      </div>
+
+      <div class="ex"><span class="box-label">問題（設問1・導入）</span><p>インターネット上での、あるホストPから別のホストQへの通信を考える。以下の問にそれぞれ2〜3行程度で答えよ。</p></div>
+
+      <h3>問1-2-1a — ホスト名の階層構造と共通祖先</h3>
+      <div class="ex"><span class="box-label">問題</span><p>ホスト名の具体例を挙げ、それがもつ階層構造を説明せよ。さらに、この階層構造のもとで、PとQの共通祖先が何に対応するか述べよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>例：www.u-tokyo.ac.jp。ピリオドで区切り右から読むと「jp（国）→ac（学術）→u-tokyo（大学）→www（ホスト）」という木構造をなす。ホストP,Qの共通祖先は、両者のホスト名が階層構造上で共有する最も下位（両者が枝分かれする直前）のドメインに対応する。たとえばPがa.u-tokyo.ac.jp、Qがb.u-tokyo.ac.jpなら、共通祖先はu-tokyo.ac.jpに対応するノードになる。</p></div>
+      </details>
+
+      <h3>問1-2-1b — ルータのネットワークモデルと最短経路</h3>
+      <div class="ex"><span class="box-label">問題</span><p>IPパケットの配送は、ルータをノードとしたネットワークモデルとしてモデル化できる。このモデル化におけるエッジが何に対応するか述べよ。さらに、このモデル化のもとで、PとQに対応するノード間の最短経路が何に対応するか述べよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>ノードをルータと決めたので、エッジは「2台のルータ間でパケットを直接受け渡せる通信回線（リンク）」に対応する。経路上のエッジを1本進むことが1ホップに当たり、P側のルータからQ側のルータまでの最短経路は、経由するリンク数、すなわちホップ数が最小の配送経路を表す。なお、現実のルーティングは回線速度や混雑などを重みに含める場合もあるが、この設問の無重みグラフではエッジ数だけを比較する。</p></div>
+      </details>
+
+      <div class="ex"><span class="box-label">問題（設問2・導入）</span><p>ある国における、ある郵便局Aから別の郵便局Bへの郵便物の配送方法を考える。なお、各郵便局にはそれぞれ担当地域が決まっているものとする。</p></div>
+
+      <h3>問1-2-2a — 集配郵便局を介した階層モデル</h3>
+      <div class="ex"><span class="box-label">問題</span><p>配送にあたって、郵便局A，B双方の担当地域を含む広い範囲を担当地域とする集配郵便局を介して、郵便物を集約・分配することを考える。様々な郵便局の間のこのような配送方法を階層モデルでモデル化したい。このモデル化におけるノードとエッジはそれぞれ何に対応するか述べよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>ノードは各郵便局（および、それらを束ねる広域の集配郵便局）に対応する。エッジは、下位の郵便局と、その担当地域を包含する一段上位の集配郵便局との親子関係を表す。郵便物は下位局から上位局へ集約され、宛先側では上位局から下位局へ分配される。このモデルが階層構造になるのは、地理的な近さではなく「どの集配局の管轄に属するか」で局を段階的に束ねるからである。</p></div>
+      </details>
+
+      <h3>問1-2-2b — 隣接局配送のネットワークモデル</h3>
+      <div class="ex"><span class="box-label">問題</span><p>適切な集配郵便局がない場合には、担当地域が隣接する郵便局に送ることにする。このとき、配送方法が経路に対応するように、ネットワークモデルでモデル化したい。このモデル化におけるノードとエッジはそれぞれ何に対応するか述べよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>ノードは各郵便局に対応し、エッジは、隣接する2局の間で郵便物を直接送れる配送路に対応する。先の階層モデルと違い、上位・下位という親子関係は置かず、局どうしの直接接続だけを表す一般のネットワークである。このとき2局間の最短経路は、郵便物が通る直接配送路の本数が最少となる経路を意味する。</p></div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 階層モデルとネットワークモデルの使い分け</span>
+        <p>階層モデル（木構造）は「上位から下位へ管理・委譲される」関係（DNS、組織図、郵便の集配ルートなど）を表すのに向いており、一般のネットワークモデル（グラフ）は「対等なもの同士が直接つながる」関係（ルータ間のリンク、隣接局同士のやり取りなど）を表すのに向いている。同じ「郵便配送」という題材でも、集配局経由なら階層モデル、隣接局経由ならネットワークモデルが自然に対応する、という対比が本問の核心。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">共通問題 2</div><h2>反復処理と2分法の計算手順</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>反復処理と2分法の計算手順に関連して、以下の問い全てに答えよ。空欄には数、変数、配列、算術式やそれらの組合せなどが入りうる。</p>
+      </div>
+
+      <h3>問2-1 — 88夜が何月かを求める反復処理</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>教科書（図5.5）のように、配列 daymonth<sub>m</sub> は、m月（$1\le m\le 12$）の日数を表す。</p>
+        <table class="q-table">
+          <tr><th>添字値 m</th><td>1</td><td>2</td><td>3</td><td>…</td><td>12</td></tr>
+          <tr><th>要素値 daymonth<sub>m</sub></th><td>31</td><td>28</td><td>31</td><td>…</td><td>31</td></tr>
+        </table>
+        <p>春分を2月4日とし、88夜（87日後）が何月かを求めたい。2月から順に調べる反復処理の計算手順を、空欄を埋めて完成させよ。</p>
+        <p>
+          <span class="mathblock">&lt;残り日数&gt; ← <span class="blank">11</span>
+m ← <span class="blank">12</span>
+while &lt;残り日数&gt; &gt; <span class="blank">13</span> do
+&nbsp;&nbsp;&lt;残り日数&gt; ← &lt;残り日数&gt; − daymonth<sub>m</sub>
+&nbsp;&nbsp;m ← <span class="blank">14</span>
+done</span>
+        </p>
+        <p>&lt;答&gt;は m月</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>2月4日を基準に、2月1日からの通し日数で数えると、2月4日は4日目にあたる。88夜（＝2月4日の87日後）は通し日数 $4+87=91$ 日目にあたるので、初期値は<span class="blank">11=91</span>。2月から調べ始めるので<span class="blank">12=2</span>。</p>
+          <p>ループは「現在の月mの日数を使い切ってもまだ残り日数が余っているか」を判定しながら、残り日数から daymonth<sub>m</sub> を引いて次の月へ進める、という繰り上げ処理：<span class="blank">13=daymonth<sub>m</sub></span>（現在の月の日数と比較）、<span class="blank">14=m+1</span>（月を1つ進める）。</p>
+          <p>実際にたどると：91−daymonth<sub>2</sub>(28)=63, m=3／63−daymonth<sub>3</sub>(31)=32, m=4／32−daymonth<sub>4</sub>(30)=2, m=5／ここで残り日数2はdaymonth<sub>5</sub>(31)以下なのでループ終了。よってm=5（5月2日）。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>11=91（=4+87）, 12=2, 13=daymonth<sub>m</sub>, 14=m+1　（答＝5月）</div>
+      </details>
+
+      <h3>問2-2 — 平方根を求める2分法</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>正の実数 $x$（$x>1$）の平方根を精度 $\delta$ で求めたい。区間 $(a,b)$ を解が存在する範囲、$c$ を区間の中央として、2分法による計算手順を、空欄を埋めて完成させよ。</p>
+        <p>
+          <span class="mathblock">a ← 0
+b ← x
+while <span class="blank">21</span> &gt; δ do
+&nbsp;&nbsp;c ← (a+b)/2
+&nbsp;&nbsp;if <span class="blank">22</span> &gt; x then
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="blank">23</span> ← c
+&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="blank">24</span> ← <span class="blank">25</span>
+&nbsp;&nbsp;endif
+done</span>
+        </p>
+        <p>&lt;答&gt;は a</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>区間の幅が精度δ以下になるまで繰り返すので、ループ条件は<span class="blank">21=b−a</span>。$c=(a+b)/2$ が真の平方根より大きいかどうかは $c^2$ と $x$ を比べればよいので<span class="blank">22=c²</span>（$c\times c$）。$c^2>x$ ならcは大きすぎるので上限bをcに更新：<span class="blank">23=b</span>。そうでなければ（$c^2\le x$）cは下限として使えるのでaをcに更新：<span class="blank">24=a</span>, <span class="blank">25=c</span>。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>21=b−a, 22=c²（c×c）, 23=b, 24=a, 25=c</div>
+      </details>
+
+      <h3>問2-3 — 所持金内で行ける駅数（反復処理）</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>配列 nedan<sub>s</sub> が始発駅から s 駅（$1\le s\le 100$）遠くまで行くのに必要な料金を表す。料金は駅数に対して単調に増加する。</p>
+        <table class="q-table">
+          <tr><th>添字値 s</th><td>1</td><td>2</td><td>…</td><td>100</td></tr>
+          <tr><th>要素値 nedan<sub>s</sub></th><td>100</td><td>120</td><td>…</td><td>100000</td></tr>
+        </table>
+        <p>所持金を1000円としたときに、何駅先まで行けるかを求めたい。1駅目から順に調べる反復処理の計算手順を、空欄を埋めて完成させよ。</p>
+        <p>
+          <span class="mathblock">yosan ← 1000
+s ← 0
+while <span class="blank">31</span> ≥ <span class="blank">32</span> do
+&nbsp;&nbsp;s ← <span class="blank">33</span>
+done</span>
+        </p>
+        <p>&lt;答&gt;は s駅先</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>所持金 yosan が「もう1駅先に行くのに必要な料金」以上ある限り、1駅ずつ先へ進める素朴な反復。ループ条件の左辺は<span class="blank">31=yosan</span>、右辺は次の駅（s+1駅目）までの料金<span class="blank">32=nedan<sub>s+1</sub></span>、駅数の更新は<span class="blank">33=s+1</span>。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>31=yosan, 32=nedan<sub>s+1</sub>, 33=s+1</div>
+      </details>
+
+      <h3>問2-4 — 同じ問いを2分法で解く</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>2分法の考え方を参考に、前問の答えを求める計算手順を、空欄を埋めて完成させよ。ただし、平方根の計算過程で $\sqrt{x}$ の解を区間 $(a,b)$ 内に保ちながら区間を狭めたように、今回は半開区間 $[a,b)$ が a 駅先までは必ず行け、b 駅には行けないとなるように区間を狭める。また $\lfloor x\rfloor$ は x を越えない最大の整数とする。</p>
+        <p>
+          <span class="mathblock">yosan ← 1000
+a ← 1
+b ← 101
+while <span class="blank">41</span> &gt; 1 do
+&nbsp;&nbsp;c ← ⌊(a+b)/2⌋
+&nbsp;&nbsp;if yosan ≥ <span class="blank">42</span> then
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="blank">43</span> ← c
+&nbsp;&nbsp;else
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="blank">44</span> ← <span class="blank">45</span>
+&nbsp;&nbsp;endif
+done</span>
+        </p>
+        <p>&lt;答&gt;は a駅先</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>不変条件「a駅までは必ず行け、b駅には行けない」を保ちながら幅 $b-a$ を狭めていく整数版2分探索。ループはこの幅が1（すなわちb=a+1）になるまで続けるので<span class="blank">41=b−a</span>。予算 yosan が c駅までの料金 <span class="blank">42=nedan<sub>c</sub></span> 以上あれば c駅まで行けることが確定するので下限を更新：<span class="blank">43=a</span>。そうでなければ c駅には行けないので上限を更新：<span class="blank">44=b</span>, <span class="blank">45=c</span>。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>41=b−a, 42=nedan<sub>c</sub>, 43=a, 44=b, 45=c</div>
+      </details>
+
+      <h3>問2-5 — 反復回数の上限</h3>
+      <div class="ex"><span class="box-label">問題</span><p>前問の計算手順は、yosan の金額で反復回数が変わりうる。ただし、$\mathrm{yosan}\ge \mathrm{nedan}_1$ とする。反復が最大何回行われるかを回答せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>初期の区間幅は $b-a=101-1=100$。2分法は1回の反復ごとに区間幅をおよそ半分（切り上げ）にしていくので、幅が100→50→25→13→7→4→2→1と縮む最悪ケースを数えると7回で幅1（$b=a+1$）に達し、ループを抜ける。これは $2^6=64<100\le128=2^7$ より $\lceil\log_2 100\rceil=7$ という一般式とも整合する。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>最大7回</div>
+      </details>
+
+      <h3>問2-6 — 計算量のオーダー</h3>
+      <div class="ex"><span class="box-label">問題</span><p>実行時間を見積もるために計算量のオーダーが有用である。(1) オーダーの考え方を前問の事例を題材に説明せよ。(2) 実際の計算時間はハードウェアの性能などさまざまな条件に依存する。それにもかかわらずオーダーという考え方が実行時間の予想に役立つ典型的な状況を簡潔に説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(1) 前問の2分法では、探索範囲の駅数 $N$（ここでは100）に対し反復回数はおよそ $\log_2 N$ 回で収まる。つまり入力サイズNが2倍・4倍…と増えても、反復回数は1回・2回…としか増えない。この「入力サイズに対して計算量がどのような速さで増えるか」という関係を定数倍や下位の項を無視して大まかに捉えたものが計算量のオーダー（この場合 $O(\log N)$）である。</p>
+          <p>(2) オーダーは1回の実行に何秒かかるかという絶対的な時間そのものは教えてくれない（それはCPU性能や実装の細部に依存する）が、「入力サイズを大きくしたときに実行時間がどれだけ増えるか」という増加傾向は、ハードウェアや細かい実装によらずオーダーだけでほぼ決まる。そのため、たとえば駅数Nを100から100万に増やしたときに、線形探索（$O(N)$）では反復回数が1万倍に増えるのに対し2分法（$O(\log N)$）では反復回数が2倍程度にしか増えない、といった「入力が大きくなったときの実行時間の伸び方の違い」を予測するのにオーダーの考え方が役立つ。</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 線形探索と2分探索の対比</span>
+        <p>問2-1・問2-3は「先頭から1つずつ条件を確かめて進む」線形の反復処理（$O(N)$）、問2-2・問2-4は「範囲を半分に絞り込む」2分法（$O(\log N)$）であり、同じ問い（何月か／何駅先まで行けるか）を2通りのアルゴリズムで解かせることで、探索対象が単調（daymonthの累積・nedanの単調増加）であれば2分法が使え、反復回数を大きく減らせることを対比的に学ばせる構成になっている。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q3">
+    <div class="sec-header"><div class="sec-tag">共通問題 3（選択）</div><h2>問題A：情報量の推理／問題B：情報社会と法</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="note"><span class="box-label">出題形式</span><p>問題A・Bのいずれか一方を選択。ここでは両方を掲載する。問題Aは本セット中で最も高度な情報理論の問題。</p></div>
+
+      <h3>問題A — 設定</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          16問の○×二択からなるリテラシー試験（合格には全問正解が必要）。何度でも再送信でき、そのたびに「正解数」のみが通知される（どこが誤りかは分からない）。A氏は無作為に○×を選び1回目の解答を送信し「正解数が14であった」と通知された。以降もA氏は問題本文からは一切メッセージを受け取らないとする。
+        </p>
+      </div>
+
+      <h3>問題A(1) — 「正解数が14」の情報量に関する真偽判定</h3>
+      <div class="ex"><span class="box-label">問題</span><p>次の(あ)〜(か)のうち正しいものをすべて選べ（ない場合は「なし」）。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            重要な前提：正解キーはA氏にとって完全に未知・一様ランダムなので、A氏がどんな解答パターンで解答しても、各問題の正誤は独立に確率1/2で決まる。したがって「正解数」は解答パターンによらず常に<strong>二項分布 Binomial(16, 1/2)</strong>に従う。
+          </p>
+          <p><strong>(あ) 正しい。</strong>二項分布は8を中心に左右対称なので $P(\text{正解}=14)=P(\text{正解}=2)$（$\binom{16}{14}=\binom{16}{2}$）。情報量は確率だけで決まるので、両者の情報量は等しい。</p>
+          <p><strong>(い) 誤り。</strong>「メッセージの情報量」は $-\log_2 P(\text{そのメッセージ})$ という、確率だけで決まる量であり、解答パターン（全て○か、10問○+6問×か）によっては変わらない——どちらの場合も正解数の分布は同じBinomial(16,1/2)だからである。（「正解の内訳がどこまで確定するか」は情報量とは別の話で、これを混同させる選択肢。）</p>
+          <p><strong>(う) 誤り。</strong>正解数は0〜16の17通りだが、二項分布であって一様分布ではないので、情報量は $\log_2 17$ ではない（実際は $-\log_2\bigl(\binom{16}{14}/2^{16}\bigr)$）。</p>
+          <p><strong>(え) 誤り。</strong>全問○解答のとき、「正解数14」と「誤りの2問の番号」が分かれば全問正解の答えが確定するのは事実だが、「16個から2個を選ぶ」情報量は $\log_2\binom{16}{2}=\log_2120\approx6.9$ビットであり、$2m$（$m=\log_2 16=4$、$2m=8$）とは一致しない（同じ数を2回独立に選ぶ方式は、順序や重複を含むぶん過大評価になる）。</p>
+          <p><strong>(お) 誤り。</strong>16問全体の対称性（交換可能性）から、「正解数14」を知った後は、A氏自身の解答と正解が一致している確率は各問について $14/16=7/8$ に更新される（元は$1/2$）。したがって第一問の正解に関するエントロピーは $1$ ビットから $-\frac78\log_2\frac78-\frac18\log_2\frac18\approx0.54$ ビットへと<strong>減少</strong>し、「変化しない」は誤り。</p>
+          <p><strong>(か) 誤り。</strong>16問全部の答えの組合せに関するエントロピーは、事前は$16$ビット（$2^{16}$通り一様）だが、「正解数14」を知った後は、それと矛盾しない$\binom{16}{14}=120$通りに絞られ $\log_2120\approx6.9$ビットに<strong>減少</strong>する。情報を受け取ってエントロピー（不確実性）が増えることはあり得ない。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>正しいのは <strong>(あ)のみ</strong>。</div>
+      </details>
+
+      <h3>問題A(2) — 2回目の試行の情報量</h3>
+      <div class="ex"><span class="box-label">問題</span><p>2回目、最初の4問だけ選択肢を変更して送信し「正解数は12」との通知を受けた。この情報量は何ビットか（整数部のみ）。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            1回目に間違えた2問のうち、最初の4問に含まれる数を$j$とすると、最初の4問を反転させたことで正解数は $14-2j$ に変わる（反転前に合っていた問題は間違いに、間違っていた問題は正解に変わるため）。$14-2j=12$ より $j=1$。
+          </p>
+          <p>
+            「正解数14」という条件のもとでは、間違っている2問は16問の中から一様ランダムに選ばれた2問とみなせる（対称性）。その2問のうち<em>ちょうど1問</em>が最初の4問に含まれる確率は超幾何分布で：
+          </p>
+          <div class="mathblock">$$P(j=1)=\frac{\binom{4}{1}\binom{12}{1}}{\binom{16}{2}}=\frac{4\times12}{120}=0.4$$</div>
+          <p>情報量は $-\log_2 0.4 = \log_2 2.5 \approx 1.32$ ビット。小数点以下切り捨てで整数部は1。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>1（ビット）</div>
+      </details>
+
+      <h3>問題A(3) — 3回目の試行の平均情報量</h3>
+      <div class="ex"><span class="box-label">問題</span><p>3回目、最初の4問のうち無作為に選んだ3問を1回目の選択肢に戻し、残り12問のうち無作為に選んだ1問を選択肢変更した。受け取りうるメッセージ「12」「14」「16」の平均情報量$I=W+X\log_23+Y\log_27+Z\log_211$の有理数$W,X,Y,Z$を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>2回目の時点で、最初の4問のうち1回目に正解していた3問(仮に$p_1,p_2,p_3$)は2回目で不正解に、1回目に不正解だった1問($p_4$)は2回目で正解になっている。3回目は最初の4問のうち無作為に3問を1回目の状態に戻す＝「戻されない1問」が等確率(各1/4)で$p_1,p_2,p_3,p_4$のいずれかになる：</p>
+          <ul>
+            <li>戻されないのが$p_4$（確率1/4）：$p_1,p_2,p_3$は1回目の状態(正解)に戻り、$p_4$も2回目の状態(正解)のまま→最初の4問は<strong>4問とも正解</strong>。</li>
+            <li>戻されないのが$p_1,p_2,p_3$のいずれか（確率3/4）：戻された2問は正解、戻されなかった1問は2回目の状態(不正解)のまま、$p_4$も1回目の状態(不正解)に戻る→最初の4問は<strong>2問正解</strong>。</li>
+          </ul>
+          <p>残り12問（1回目から不変、11正解・1不正解）のうち無作為に1問を反転：不正解の1問を反転（確率1/12）→12問正解、正解の1問を反転（確率11/12）→10問正解。</p>
+          <p>2つの独立な操作を組み合わせて合計点の分布を求める：</p>
+          <div class="mathblock">P(16) = (1/4)(1/12) = 1/48
+P(14) = (1/4)(11/12) + (3/4)(1/12) = 11/48 + 3/48 = 14/48
+P(12) = (3/4)(11/12) = 33/48</div>
+          <p>平均情報量（エントロピー）を計算する：</p>
+          <div class="mathblock">$$I=\frac1{48}\log_2 48+\frac{14}{48}\log_2\frac{48}{14}+\frac{33}{48}\log_2\frac{48}{33}$$</div>
+          <p>$\log_248=4+\log_23$、$\log_2(48/14)=\log_2(24/7)=3+\log_23-\log_27$、$\log_2(48/33)=\log_2(16/11)=4-\log_211$ を代入して整理すると：</p>
+          <div class="mathblock">定数項：1/12 + 7/8 + 11/4 = 89/24
+log2 3 の係数：1/48 + 7/24 = 5/16
+log2 7 の係数：−7/24
+log2 11 の係数：−11/16</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$$W=\frac{89}{24},\quad X=\frac{5}{16},\quad Y=-\frac{7}{24},\quad Z=-\frac{11}{16}\qquad(I\approx1.006\text{ ビット})$$</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「対称性」で確率を数える</span>
+        <p>この一連の問題の急所は、正解キーがA氏にとって完全にランダム・未知であるため、「どの2問が間違っているか」は（正解数が分かった後は）16問の中から一様ランダムに選ばれた2問とみなせる、という<strong>対称性（交換可能性）</strong>の発想である。これにより、具体的にどれが間違っているかを気にせず、超幾何分布や二項分布の公式だけで条件付き確率を計算できる。また、情報を受け取るとエントロピー（平均情報量）は決して増加しない、という原則も(あ)〜(か)の判定で繰り返し使われている。</p>
+      </div>
+
+      <h3>問題B(1) — インターネットと民主主義</h3>
+      <div class="ex"><span class="box-label">問題</span><p>インターネット・ソーシャルメディアが民主主義を(a)加速しうる側面(b)阻害しうる側面をそれぞれ3つ挙げよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>(a) 加速：</strong>①誰もが低コストで情報発信でき多様な意見が可視化される。②市民同士が容易に組織化・連帯でき、政治参加や社会運動を起こしやすくなる。③政治家・政府の活動を市民が監視し、説明責任を追及しやすくなる。</p>
+          <p><strong>(b) 阻害：</strong>①フェイクニュース・誤情報が検証されないまま急速に拡散し、誤った判断に基づく世論形成が起こる。②フィルターバブル・エコーチェンバーにより意見が分断・先鋭化する。③偽アカウントやボットを用いた組織的な世論操作（外国勢力等による干渉を含む）が起こりうる。</p>
+        </div>
+      </details>
+
+      <h3>問題B(2) — 著作権法とプログラム</h3>
+      <div class="ex"><span class="box-label">問題</span><p>(a) 著作権法上、プログラムの著作物として保護されているものをすべて挙げよ。(b) DRMの略称の意味は？</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>(a) <strong>アプリケーションプログラム・オブジェクトプログラム・ソースプログラム</strong>が保護対象。一方「解法（アルゴリズム）」「規約（プロトコル）」「プログラミング言語」そのものは著作権法上、保護対象外と明記されている（著作権法10条3項）。<br>(b) DRM = <strong>Digital Rights Management</strong>（デジタル著作権管理）。</p></div>
+      </details>
+
+      <h3>問題B(3) — 情報セキュリティの3要素</h3>
+      <div class="ex"><span class="box-label">問題</span><p>confidentiality, integrity, availabilityの日本語名と30字以内の説明を示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>機密性（confidentiality）：</strong>許可された者だけが情報にアクセスできること。<br><strong>完全性（integrity）：</strong>情報が改ざん・破壊されず正確な状態に保たれていること。<br><strong>可用性（availability）：</strong>必要なときに正当な利用者が支障なく利用できること。</p>
+        </div>
+      </details>
+
+      <h3>問題B(4) — 個人情報保護と国家セキュリティ</h3>
+      <div class="ex"><span class="box-label">問題</span><p>2015年米国カリフォルニア州銃乱射事件の捜査を例に、個人情報保護を優先する主張と国家・社会セキュリティを優先する主張を説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>（FBIが容疑者のiPhoneのロック解除をAppleに要求した事件を指す。）個人情報保護優先の主張：暗号解除の手段（バックドア）を一度作ってしまうと、それが悪用されたり流出したりして、全ユーザーのプライバシー・セキュリティを危険にさらす。国家・社会セキュリティ優先の主張：テロ関連の重要な証拠が端末内にある可能性が高く、更なるテロを防止し公共の安全を守るためには、捜査機関の要請に応じて解除に協力すべきである。</p></div>
+      </details>
+
+      <h3>問題B(5) — 改正個人情報保護法と個人関連情報</h3>
+      <div class="ex"><span class="box-label">問題</span><p>(a) 個人と結びつかない情報の売買が盛んになる背景 (b) 規制した方がよい理由（情報の性質の観点から） (c) 不利益となりうる具体例</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(a) 氏名と結びつかない閲覧履歴・位置情報等でも、広告のターゲティングやマーケティングにおいて高い経済的価値を持つため。</p>
+          <p>(b) これらの情報は他の情報と組み合わせることで容易に個人が特定されうる性質（準識別性）を持ち、規制なしに流通すると事実上、個人情報と同等のプライバシーリスクを生じるから。</p>
+          <p>(c) 本人の知らないところで信用力や採用可否の判断材料に使われたり、位置情報の蓄積から行動パターンや思想信条が推測され、ストーカー行為や差別的な取り扱いに悪用されたりする恐れがある。</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2023.html">← 2023年度へ</a>
+    <a href="kakomon_2021.html">2021年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

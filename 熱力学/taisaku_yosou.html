@@ -1,0 +1,620 @@
+<!DOCTYPE html><!-- 「予想問題（2026年度想定）— 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>予想問題（2026年度想定）— 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="td.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    tags: 'ams',
+    macros: {
+      pd: ['\\left(\\frac{\\partial #1}{\\partial #2}\\right)_{#3}',3]
+    }
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body data-nav-page="taisaku-yosou">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">熱力学ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">ホーム</a>
+      <a href="ch0.html" data-page="ch0">第0章</a>
+      <a href="ch1.html" data-page="ch1">第1章</a>
+      <a href="ch2.html" data-page="ch2">第2章</a>
+      <a href="ch3.html" data-page="ch3">第3章</a>
+      <a href="ch4.html" data-page="ch4">第4章</a>
+      <a href="ch5.html" data-page="ch5">第5章</a>
+      <a href="taisaku_yosou.html" data-page="taisaku_yosou" class="active">予想問題</a>
+      <a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2014.html" data-page="kakomon_2014">2014</a>
+      <a href="kakomon_2012.html" data-page="kakomon_2012">2012</a>
+      <a href="kakomon_2011.html" data-page="kakomon_2011">2011</a>
+      <a href="kakomon_2010.html" data-page="kakomon_2010">2010</a>
+      <a href="kakomon_2009.html" data-page="kakomon_2009">2009</a>
+      <a href="kakomon_2008.html" data-page="kakomon_2008">2008</a>
+      <a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>熱力学 予想問題</h1>
+  <p class="subtitle">2026年度期末試験 対策模試（自主作成の予想問題）</p>
+  <p class="meta">想定：福島孝治｜Sセメスター期末試験｜想定試験時間90分｜2025・2023年度の出題形式に基づく完全自作問題</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（光子気体の熱力学＝黒体輻射とStefan–Boltzmannの法則）</a>
+    <a href="#q2">大問2（熱力学第二法則）</a>
+    <a href="#q3">大問3（$F(T,V)$ で与えられた気体＝ファンデルワールス気体）</a>
+    <a href="#q4">大問4（感想）</a>
+  </div>
+
+  <div class="source-note">
+    このページは実際の過去問ではない。<a href="kakomon_2025.html">2025年度</a>・<a href="kakomon_2023.html">2023年度</a>の実際の出題形式（大問1＝状態方程式が与えられた見慣れない系の熱力学、大問2＝熱力学第二法則に関する3設問、大問3＝完全な熱力学関数から出発するファンデルワールス気体、大問4＝感想）を忠実になぞりつつ、題材はすべて新規に作成したオリジナルの模擬試験である。難易度・分量・要求される計算量は本番相当を意識しているが、実際に出題される保証は当然ない。2026年度本番前の最終確認・実戦演習として使うことを想定している。
+  </div>
+
+  <!-- ============ 大問1 ============ -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header">
+      <div class="sec-tag">大問 1</div>
+      <h2>光子気体の熱力学（黒体輻射とStefan–Boltzmannの法則）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>
+          断熱壁で囲まれた空洞（キャビティ）内に閉じ込められた電磁波（光子気体・黒体輻射）の熱平衡状態を考える。体積 $V$、温度 $T$ の熱平衡にあるこの輻射場は圧力 $P$（放射圧）を及ぼし、気体と同様に、体積を準静的に $dV$ だけ変化させるときに輻射場にされる微小仕事は $δW=-PdV$ と表される。内部エネルギーを $U$、エントロピーを $S$ とする。
+        </p>
+        <p>次の事実を認めてよい。</p>
+        <ul>
+          <li>(i) 平衡状態にある空洞輻射の圧力 $P$ は温度 $T$ のみの関数であり、体積 $V$ にはよらない：$P=P(T)$。</li>
+          <li>(ii) 輻射場は空間的に一様であるため、内部エネルギーはエネルギー密度 $u(T)\equiv U/V$（これも温度のみの関数）を用いて $U=Vu(T)$ と書ける。</li>
+          <li>(iii) 電磁気学（あるいは光子気体の運動論）により、放射圧とエネルギー密度の間には $P=\dfrac13u$ という関係が成り立つ。</li>
+        </ul>
+        <p>以下、これらの事実だけから熱力学的に $u(T)$、$P(T)$、$S(T,V)$ の具体形を導出せよ。</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">この問題の位置づけ</span>
+        <p>
+          この大問は、2025年度のゴム（<a href="kakomon_2025.html#q1">大問1</a>）・2023年度の磁石（<a href="kakomon_2023.html#q1">大問1</a>）と同じ「与えられた状態方程式から出発して、Maxwell関係式・エネルギー方程式・熱容量・断熱曲線・Carnotサイクルを次々に導く」という定番の骨格を踏襲しているが、今回は状態方程式そのものを与えず、より根源的な事実（i）〜（iii）だけから状態方程式 $P(T)$ を<strong>導出させる</strong>点が異なる。実際にBoltzmannが1884年に行った、Stefan–Boltzmannの法則（1879年にStefanが実験的に見出した $u\propto T^4$）の熱力学的導出そのものをなぞる問題になっている。
+        </p>
+      </div>
+
+      <h3 id="qy1-1">(1) 熱力学関係式とMaxwell関係式</h3>
+      <div class="ex"><span class="box-label">問題</span><p>熱力学関係式を $dU=\Box\,dS+\Box\,dV$ の形で書け。また、Helmholtz自由エネルギー $F(T,V)=U-TS$ から導かれるMaxwell関係式を求めよ。</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$dU = T\,dS - P\,dV,\qquad \pd{P}{T}{V} = \pd{S}{V}{T}$$
+      </div>
+        <div class="proof-body">
+          <p>第一法則 $dU=δQ+δW$ に、可逆変化での $δQ=TdS$ と、与えられた $δW=-PdV$ を代入すると</p>
+          <div class="mathblock">$$dU = T\,dS - P\,dV$$</div>
+          <p>Helmholtz自由エネルギー $F=U-TS$ の微小変化は</p>
+          <div class="mathblock">$$dF = dU - TdS - SdT = (TdS-PdV)-TdS-SdT = -SdT-PdV$$</div>
+          <p>ゆえに $\pd{F}{T}{V}=-S$、$\pd{F}{V}{T}=-P$。$F$ が状態量であることから偏微分の順序を交換できて（$\dfrac{\partial^2F}{\partial T\partial V}=\dfrac{\partial^2F}{\partial V\partial T}$）、</p>
+          <div class="mathblock">$$-\pd{P}{T}{V} = \pd{}{T}{}\!\left(\pd{F}{V}{T}\right)\cdot(-1)\ \Longrightarrow\ \pd{P}{T}{V} = \pd{S}{V}{T}$$</div>
+          <p>これが気体の標準的なMaxwell関係式である（気体の $P$–$V$ 系ではおなじみの形。以降ではこれを使う）。</p>
+        </div>
+      </details>
+
+      <h3 id="qy1-2">(2) エネルギー方程式</h3>
+      <div class="ex"><span class="box-label">問題</span><p>$\pd{U}{V}{T}$ を $P$ とその温度微分だけを用いて表せ（いわゆる「エネルギー方程式」）。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$\pd{U}{V}{T} = T\pd{P}{T}{V} - P$$</div>
+        <div class="proof-body">
+          <p>(1)の関係式 $dU=TdS-PdV$ を $V$ で偏微分する（$T$ 一定）。</p>
+          <div class="mathblock">$$\pd{U}{V}{T} = T\pd{S}{V}{T} - P$$</div>
+          <p>ここに(1)のMaxwell関係式 $\pd{S}{V}{T}=\pd{P}{T}{V}$ を代入すると</p>
+          <div class="mathblock">$$\pd{U}{V}{T} = T\pd{P}{T}{V} - P$$</div>
+          <p>
+            この式は動作物質の種類によらず、$dU=TdS-PdV$ という熱力学の基本関係式だけから常に成り立つ普遍的な関係である（理想気体で $\pd{U}{V}{T}=0$ となることを示すときにも全く同じ式を使う）。以降ではこれを輻射場に適用する。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="qy1-3">(3) Stefan–Boltzmannの法則の導出</h3>
+      <div class="ex"><span class="box-label">問題</span><p>導入の(i)〜(iii)と(2)の結果を用いて、$u(T)$ および $P(T)$ の具体形を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$u(T) = \alpha T^4,\qquad P(T) = \frac{\alpha}{3}T^4\qquad(\alpha:\text{正の積分定数})$$
+      </div>
+        <div class="proof-body">
+          <p>
+            (i)より $P=P(T)$ は $V$ によらないから、$\pd{P}{T}{V}$ は単なる常微分 $P'(T)$ に等しい。また(ii)より $U=Vu(T)$ なので $\pd{U}{V}{T}=u(T)$。これらを(2)の結果に代入すると
+          </p>
+          <div class="mathblock">$$u(T) = TP'(T) - P(T)$$</div>
+          <p>ここに(iii)の $P=\dfrac13u$、すなわち $u=3P$ を代入すると、$P(T)$ だけの微分方程式になる。</p>
+          <div class="mathblock">$$3P = TP' - P \quad\Longrightarrow\quad TP' = 4P \quad\Longrightarrow\quad \frac{dP}{P} = \frac{4\,dT}{T}$$</div>
+          <p>両辺を積分すると $\ln P = 4\ln T + \text{const.}$、すなわち $P\propto T^4$。比例定数を $\alpha/3$（$\alpha>0$）と書けば</p>
+          <div class="mathblock">$$P(T) = \frac{\alpha}{3}T^4,\qquad u(T)=3P(T)=\alpha T^4,\qquad U=Vu(T)=\alpha VT^4$$</div>
+          <p>
+            これが<strong>Stefan–Boltzmannの法則</strong>である。実験的に見出された「エネルギー密度は温度の4乗に比例する」という法則が、熱力学の基本法則と電磁気学的な一関係式（$P=u/3$）だけから完全に導かれたことになる。$\alpha$ の値そのもの（$\alpha=4\sigma/c$、$\sigma$：Stefan–Boltzmann定数）を決めるには、量子統計力学（プランク分布）が必要であり、熱力学だけでは決まらない——ちょうど、これまでの問題で状態方程式中の定数（$A$、$C$ など）が最後まで未定のまま残ったのと同じ構造である。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="qy1-4">(4) エントロピー</h3>
+      <div class="ex"><span class="box-label">問題</span><p>エントロピー $S(T,V)$ を求めよ（積分定数は温度 $T\to0$ で $S\to0$ となるように決めよ）。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$S(T,V) = \frac{4}{3}\alpha VT^3$$</div>
+        <div class="proof-body">
+          <p>(1)のMaxwell関係式に(3)の結果を代入すると</p>
+          <div class="mathblock">$$\pd{S}{V}{T} = \pd{P}{T}{V} = \frac{4\alpha}{3}T^3$$</div>
+          <p>右辺は $V$ を含まないので、$T$ を固定して $V$ で積分すればよい。</p>
+          <div class="mathblock">$$S(T,V) = \frac{4\alpha}{3}T^3V + h(T)$$</div>
+          <p>
+            積分「定数」$h(T)$ を決めるため、熱容量 $C_V=\pd{U}{T}{V}$ を2通りに計算して比較する。まず(3)の $U=\alpha VT^4$ から直接、
+          </p>
+          <div class="mathblock">$$C_V = \pd{U}{T}{V} = 4\alpha VT^3$$</div>
+          <p>一方、$C_V=T\pd{S}{T}{V}$（これも動作物質によらない一般公式）を上のエントロピーの式に適用すると</p>
+          <div class="mathblock">$$C_V = T\left(4\alpha VT^2 + h'(T)\right) = 4\alpha VT^3 + Th'(T)$$</div>
+          <p>2つの表式を比較すると $Th'(T)=0$、すなわち $h'(T)=0$ で $h$ は定数。$T\to0$ で $S\to0$（絶対零度でエントロピーが消える、いわゆる熱力学第三法則の要請）を課すと $h=0$。したがって</p>
+          <div class="mathblock">$$S(T,V) = \frac{4}{3}\alpha VT^3$$</div>
+        </div>
+      </details>
+
+      <h3 id="qy1-5">(5) 断熱曲線</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この光子気体を準静的・断熱的に変化させるときに成り立つ、$T$ と $V$ の関係式（断熱曲線）を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$VT^3 = \text{const.}$$</div>
+        <div class="proof-body">
+          <p>準静的断熱過程は可逆断熱＝等エントロピー（$dS=0$）過程である。(4)の結果 $S=\frac43\alpha VT^3$ が一定であることから、直ちに</p>
+          <div class="mathblock">$$VT^3 = \text{const.}$$</div>
+          <p>
+            これが光子気体の断熱曲線である。理想気体の断熱曲線 $VT^{1/(\gamma-1)}=\text{const.}$（単原子分子なら $\gamma=5/3$ で $VT^{3/2}=\text{const.}$）と比較すると、光子気体は指数が異なり、$VT^3=\text{const.}$ はちょうど断熱指数 $\gamma=4/3$ の気体の関係式に一致する（実際、光子気体は「超相対論的な粒子から成る気体」の代表例であり、$\gamma=4/3$ という値は特殊相対論的な理想気体に共通する結果である）。断熱的に体積を増やす（膨張させる）と $T$ は必ず下がる。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="qy1-6">(6) $T$–$S$ 平面でのCarnotサイクルと熱効率</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この光子気体を動作物質としてCarnotサイクル（高温 $T_1$・低温 $T_2$、$T_1>T_2$）を作るとき、$T$–$S$ 平面上でのサイクルの概形を図示し、熱効率を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$\eta = 1-\frac{T_2}{T_1}$$
+      </div>
+        <div class="diagram">
+        <svg viewBox="0 0 360 220" width="360">
+          <defs><marker id="arTSy" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#1a2b4a"/></marker></defs>
+          <g stroke="#1a2b4a" stroke-width="1.6" fill="none">
+            <line x1="55" y1="180" x2="55" y2="20" marker-end="url(#arTSy)"/>
+            <line x1="55" y1="180" x2="330" y2="180" marker-end="url(#arTSy)"/>
+          </g>
+          <g font-size="13" fill="#1a2b4a">
+            <text x="32" y="30">T</text>
+            <text x="320" y="200">S</text>
+            <text x="30" y="70">T₁</text>
+            <text x="30" y="145">T₂</text>
+          </g>
+          <g stroke="#0b6e6e" stroke-width="2.4" fill="none">
+            <line x1="120" y1="65" x2="240" y2="65" marker-end="url(#arTSy)"/>
+            <line x1="240" y1="65" x2="240" y2="140" marker-end="url(#arTSy)"/>
+            <line x1="240" y1="140" x2="120" y2="140" marker-end="url(#arTSy)"/>
+            <line x1="120" y1="140" x2="120" y2="65" marker-end="url(#arTSy)"/>
+          </g>
+          <g stroke-dasharray="3,3" stroke="#999">
+            <line x1="120" y1="65" x2="120" y2="180"/>
+            <line x1="240" y1="65" x2="240" y2="180"/>
+            <line x1="55" y1="65" x2="120" y2="65"/>
+            <line x1="55" y1="140" x2="120" y2="140"/>
+          </g>
+          <g font-size="12" fill="#555">
+            <text x="150" y="58">等温 T₁（吸熱）</text>
+            <text x="245" y="105">断熱</text>
+            <text x="150" y="158">等温 T₂（放熱）</text>
+            <text x="65" y="105">断熱</text>
+          </g>
+        </svg>
+        <div class="diagram-cap">$T$–$S$ 平面での光子気体のCarnotサイクル。断熱過程は(5)より $S=$一定の垂直線になるので、気体・ゴム・磁石のときと全く同じ「長方形」になる。</div>
+      </div>
+        <div class="proof-body">
+          <p>
+            (5)で見たように、この系の可逆断熱変化は必ず $S=$一定（$T$–$S$ 平面で垂直線）になる。したがって高温 $T_1$・低温 $T_2$ の等温線（水平線）2本と、それらをつなぐ断熱線（垂直線）2本からなるサイクルは、動作物質によらず常に同じ「長方形」の形になる。
+          </p>
+          <p>
+            Carnotの定理（可逆機関の効率は動作物質によらず、2つの温度だけで決まる）より、熱効率は普遍公式
+          </p>
+          <div class="mathblock">$$\eta = 1-\frac{T_2}{T_1}$$</div>
+          <p>
+            で与えられる。光子気体という、理想気体ともゴム・磁石とも全く異なる物理的実体（電磁波）を動作物質にしても、この結果は寸分違わず成り立つ——これこそがCarnotの定理の主張の強さである。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="qy1-7">(7) $P$–$V$ 平面でのCarnotサイクル</h3>
+      <div class="ex"><span class="box-label">問題</span><p>同じCarnotサイクルを $P$–$V$ 平面に図示せよ。等温線・断熱線の形状の特徴、吸熱過程・放熱過程、サイクルの回る向きをそれぞれ述べよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="diagram">
+        <svg viewBox="0 0 520 320" width="520" data-thermo-plot="photon-carnot" role="img" aria-labelledby="pvy-title pvy-desc">
+          <title id="pvy-title">数式から描いた光子気体のCarnotサイクル</title>
+          <desc id="pvy-desc">P=T^4形の水平な等温線とV T^3=const形の断熱線から生成した時計回りの閉曲線</desc>
+          <defs>
+            <marker id="arPVy-axis" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#1a2b4a"/></marker>
+            <marker id="arPVy-iso" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#b07820"/></marker>
+            <marker id="arPVy-adi" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#0b6e6e"/></marker>
+          </defs>
+          <g stroke="#1a2b4a" stroke-width="1.7" fill="none"><line x1="65" y1="280" x2="65" y2="20" marker-end="url(#arPVy-axis)"/><line x1="65" y1="280" x2="490" y2="280" marker-end="url(#arPVy-axis)"/></g>
+          <g font-size="15" font-style="italic" fill="#1a2b4a"><text x="42" y="28">P</text><text x="480" y="302">V</text></g>
+          <g fill="none" stroke-width="3">
+            <path data-curve="hot" data-equation="P=16" stroke="#b07820"/><path data-curve="expand-adiabatic" data-equation="PV^4/3=const" stroke="#0b6e6e"/>
+            <path data-curve="cold" data-equation="P=3.84" stroke="#b07820"/><path data-curve="compress-adiabatic" data-equation="PV^4/3=const" stroke="#0b6e6e"/>
+            <path data-arrow="hot" stroke="#b07820" marker-end="url(#arPVy-iso)"/><path data-arrow="expand-adiabatic" stroke="#0b6e6e" marker-end="url(#arPVy-adi)"/>
+            <path data-arrow="cold" stroke="#b07820" marker-end="url(#arPVy-iso)"/><path data-arrow="compress-adiabatic" stroke="#0b6e6e" marker-end="url(#arPVy-adi)"/>
+          </g>
+          <g fill="#fff" stroke="#1a2b4a" stroke-width="2"><circle data-state="1" r="5"/><circle data-state="2" r="5"/><circle data-state="3" r="5"/><circle data-state="4" r="5"/></g>
+          <g font-size="13" font-weight="700" fill="#1a2b4a">
+            <text data-state-label="1" data-dx="-18" data-dy="10">1</text>
+            <text data-state-label="2" data-dx="7" data-dy="-7">2</text>
+            <text data-state-label="3" data-dx="7" data-dy="-7">3</text>
+            <text data-state-label="4" data-dx="-18" data-dy="10">4</text>
+          </g>
+          <g font-size="12.5">
+            <text x="150" y="32" fill="#8b5b13">T₁：等温膨張・吸熱</text>
+            <text x="300" y="150" fill="#075d5d">断熱膨張</text>
+            <text x="240" y="245" fill="#8b5b13">T₂：等温圧縮・放熱</text>
+            <text x="120" y="150" fill="#075d5d">断熱圧縮</text>
+          </g>
+        </svg>
+        <div class="diagram-cap">
+          $\alpha/3=1$ に規格化（$P=T^4$）し、$T_1=2,\,T_2=1.4$、$V_1=1,\,V_2=1.5$ とした。等温線は $P=T^4$ より $V$ によらない<strong>水平線</strong>になる点が理想気体（双曲線 $P=NkT/V$）と大きく異なる。断熱線は $VT^3=\text{const.}$ すなわち $PV^{4/3}=\text{const.}$（$\gamma=4/3$ の気体と同じ形）。1→2：高温等温膨張・吸熱、2→3：断熱膨張、3→4：低温等温圧縮・放熱、4→1：断熱圧縮——理想気体と同じ「時計回り」になる。
+        </div>
+      </div>
+        <div class="proof-body">
+          <p>
+            等温線は $P=P(T)=\frac{\alpha}{3}T^4$ そのものであり、$V$ を含まないから $P$–$V$ 平面では<strong>水平な直線</strong>になる（同じ温度ならどれだけ体積を変えても放射圧は変わらない、という(i)の性質がそのまま図形に表れている）。断熱線は(5)の $VT^3=\text{const.}$ に $T=(3P/\alpha)^{1/4}$ を代入して $V(3P/\alpha)^{3/4}=\text{const.}$、すなわち $PV^{4/3}=\text{const.}$ という、理想気体の断熱線 $PV^\gamma=\text{const.}$ と同じ形の曲線になる。
+          </p>
+          <p>
+            吸熱・放熱の向きは、$δQ=TdS$ と(4)の $\pd{S}{V}{T}=\frac{4\alpha}{3}T^3>0$ から直接わかる：等温（$T$ 一定）で体積を増やす（$dV>0$）と $dS>0$ より $δQ>0$（吸熱）。すなわち<strong>高温での等温膨張は吸熱、低温での等温圧縮は放熱</strong>——理想気体と全く同じ符号関係である。
+          </p>
+          <p>
+            これは2025年度のゴム・2023年度の磁石とは対照的な点である。ゴムや磁石では $\pd{S}{l}{T}<0$、$\pd{S}{M}{T}<0$（エントロピー弾性のため、変数を増やすとエントロピーが<em>減る</em>）だったのに対し、光子気体では通常の気体と同じく $\pd{S}{V}{T}>0$（体積を増やすとエントロピーが<em>増える</em>）。そのため、Carnotサイクルの回転方向も理想気体と同じ「時計回り」になる——エントロピー弾性を持つ系（ゴム・磁石）だけが例外的に逆回りになるのであって、光子気体は「体積が増えるほど自由度（とりうる配置の数）が増えてエントロピーが増す」という、ごく普通の気体的直感に従う系である。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="qy1-8">(8) 宇宙背景放射への応用</h3>
+      <div class="ex"><span class="box-label">問題</span><p>宇宙は（十分よい近似で）光子気体で満たされた断熱的に膨張する系とみなせる。宇宙の体積 $V$ が、宇宙のスケール因子（大きさの目安）$R$ を用いて $V\propto R^3$ と表されるとして、(5)の結果から、宇宙膨張に伴って背景放射の温度 $T$ が $R$ にどう依存するかを求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$T \propto \frac1R$$</div>
+        <div class="proof-body">
+          <p>(5)の断熱曲線 $VT^3=\text{const.}$ に $V\propto R^3$ を代入すると</p>
+          <div class="mathblock">$$R^3T^3 = \text{const.} \quad\Longrightarrow\quad RT=\text{const.} \quad\Longrightarrow\quad T\propto\frac1R$$</div>
+          <p>
+            すなわち、宇宙が膨張して $R$ が大きくなるほど、光子気体（宇宙背景放射）の温度は $1/R$ に比例して下がっていく。これは現実の宇宙背景放射（CMB）の冷却（現在の観測値 $\simeq2.725\,\mathrm{K}$）を支配している関係式そのものであり、本問で単に「熱力学だけから」導いた結果が、そのまま現代宇宙論の基礎方程式の一部になっている。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — Stefan–Boltzmannの法則とCMBの発見</span>
+        <p>
+          $u\propto T^4$ という関係は、1879年にJosef Stefanが黒体放射の実験データから経験的に見出した（Stefanの法則）。その5年後の1884年、Ludwig Boltzmannが本問と全く同じ論法——「$P=u/3$」という電磁気学的な一事実と、熱力学の基本法則だけ——を用いてこの法則を理論的に導出し、以来<strong>Stefan–Boltzmannの法則</strong>と呼ばれている（量子論以前に、純粋に古典熱力学の枠組みだけでここまで到達できた、という点で歴史的に重要な例である。比例定数 $\alpha$ の値そのものを決めるにはPlanckの量子仮説を待つ必要があった）。(8)で見た「膨張する光子気体の温度は $1/R$ で下がる」という関係は、1965年にPenzias と Wilson が発見した宇宙背景放射（CMB、絶対温度約2.7K）の温度進化を支配する式であり、2人はこの発見で1978年のノーベル物理学賞を受賞した。19世紀の実験室の黒体炉から、20世紀の宇宙論まで、同じ1本の熱力学的関係式が貫いている、というのがこの大問全体を通じて伝えたい大きな流れである。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問2 ============ -->
+  <div class="section" id="q2">
+    <div class="sec-header">
+      <div class="sec-tag">大問 2</div>
+      <h2>熱力学第二法則に関する3つの設問</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3 id="qy2-1">(1) Clausiusの原理とKelvinの原理の同値性</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          熱力学第二法則には様々な等価な表現がある。そのうち2つを挙げる。
+        </p>
+        <ul>
+          <li><strong>Clausiusの原理</strong>：外部から仕事の供給を受けることなく、低温の熱源から高温の熱源へ熱を移す以外に何の変化も残さないサイクル（循環過程）は存在しない。</li>
+          <li><strong>Kelvin（トムソン）の原理</strong>：一つの熱源から熱を受け取り、それを全部仕事に変える以外に何の変化も残さないサイクルは存在しない。</li>
+        </ul>
+        <p>いま、Clausiusの原理が破れる、すなわち「外部から仕事の供給なしに低温熱源から高温熱源へ熱を移すだけのサイクルを実現する装置Cが存在する」と仮定する。このとき、通常のCarnotサイクル（可逆機関）をCと組み合わせることで、Kelvinの原理にも反する状況を作れることを示せ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>装置Cと、$T_1,T_2$間で働く可逆機関Eを、Eが低温熱源$T_2$へ捨てる熱量とCが$T_2$から$T_1$へ運ぶ熱量が等しくなるように組み合わせると、複合装置は低温熱源$T_2$には正味何もせず、高温熱源$T_1$から正味の熱を受け取ってそれを全部仕事に変えるだけの装置になる——これはKelvinの原理に反する。</div>
+        <div class="proof-body">
+          <p>
+            高温熱源 $T_1$・低温熱源 $T_2$（$T_1>T_2$）の間で働く、通常の（Clausiusの原理にもKelvinの原理にも反しない）可逆熱機関Eを用意する。Eは $T_1$ から熱 $Q_1$ を受け取り、外部に仕事 $W$ をし、残りの熱 $Q_1-W$ を $T_2$ に捨てる。
+          </p>
+          <p>
+            一方、仮定した装置Cは、外部の仕事なしに $T_2$ から $T_1$ へ熱を移すだけの装置である。Cが1サイクルで $T_2$ から $T_1$ へ移す熱量を、ちょうどEが $T_2$ に捨てる熱量と同じ $Q_1-W$ になるように、CとEのサイクルの回転数（規模）を調整する。
+          </p>
+          <p>E とC をまとめて1つの複合サイクルとみなし、$T_2$ における熱の出入りを集計すると、</p>
+          <div class="mathblock">$$-(Q_1-W)\ [\text{Eから}T_2\text{へ}] \ +\ (Q_1-W)\ [\text{Cが}T_2\text{から吸い出す}] \ =\ 0$$</div>
+          <p>
+            すなわち<strong>低温熱源 $T_2$ には正味何の変化も残らない</strong>（Eからもらった熱を、Cがそっくりそのまま吸い出して $T_1$ へ戻すため）。一方、高温熱源 $T_1$ については、Eに $Q_1$ を渡し、Cから $Q_1-W$ を受け取るので、正味
+          </p>
+          <div class="mathblock">$$-Q_1 + (Q_1-W) = -W$$</div>
+          <p>
+            だけ失う（$W$ だけの熱を失う）。そして複合装置全体としては、Eの仕事 $W$ がそのまま外部への正味の仕事として取り出される（Cは仕事のやり取りをしない）。
+          </p>
+          <p>
+            まとめると、この複合サイクルの正味の効果は「高温熱源 $T_1$ からのみ熱 $W$ を受け取り、それを全部外部への仕事 $W$ に変え、他には何の変化も残さない（$T_2$ は変化なし）」というものになっている。これはまさに<strong>Kelvinの原理が禁じている過程そのもの</strong>である。ゆえに、Clausiusの原理が破れるとKelvinの原理も破れる。対偶を取れば「Kelvinの原理が成り立つならばClausiusの原理も成り立つ」。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 同値性のもう半分と、Carnotの定理</span>
+        <p>
+          逆方向（Kelvinの原理が破れるとClausiusの原理も破れること）も、全く同様の組み合わせ論法で示せる：Kelvinの原理を破る装置K（1つの熱源 $T_1$ から熱を全部仕事に変える）が存在すると仮定し、その仕事を使って通常の冷凍機（逆Carnotサイクル）を動かし、低温熱源から熱を汲み上げて高温熱源に戻す複合装置を作ると、正味「低温熱源から高温熱源へ、外部の仕事なしに熱が移動する」というClausiusの原理違反になる。2つの原理が論理的に同値であることを示すこの手法（可逆機関と仮想的な違反装置を組み合わせ、矛盾を作る）は、Carnotの定理（2つの熱源の間で働くいかなる熱機関も、可逆機関の効率 $\eta=1-T_2/T_1$ を超えられないこと）の証明にも使われる、熱力学第二法則にまつわる議論の最も基本的な「型」である。
+        </p>
+      </div>
+
+      <h3 id="qy2-2">(2) 有限温度差での熱伝導によるエントロピー生成</h3>
+      <div class="ex"><span class="box-label">問題</span><p>温度 $T_1$ の高温熱源と温度 $T_2$（$<T_1$）の低温熱源を、細い金属棒で直接接触させたところ、熱量 $Q(>0)$ が高温熱源から低温熱源へ直接伝導した（この間、外部との仕事のやり取りは一切ない）。2つの熱源をあわせた全体のエントロピー変化 $\Delta S$ を求め、それが非負であることを確認せよ。また、$T_1\to T_2$ の極限でどうなるかを説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$\Delta S = Q\left(\frac1{T_2}-\frac1{T_1}\right) = \frac{Q(T_1-T_2)}{T_1T_2}\ \ge 0$$
+      </div>
+        <div class="proof-body">
+          <p>
+            熱源は十分大きく、熱を出し入れしてもそれ自身の温度は変化しない（理想的な熱浴）と考えてよい。このとき、熱源自身にとっては熱の出入りは準静的（熱源内部は常に一様な平衡状態を保つ）とみなせるので、各熱源のエントロピー変化はそれぞれ $δQ_{\text{rev}}/T$ の形で計算できる。
+          </p>
+          <p>高温熱源は熱 $Q$ を失うので $\Delta S_1=-Q/T_1$、低温熱源は熱 $Q$ を受け取るので $\Delta S_2=+Q/T_2$。全体では</p>
+          <div class="mathblock">$$\Delta S = \Delta S_1+\Delta S_2 = -\frac{Q}{T_1}+\frac{Q}{T_2} = Q\left(\frac1{T_2}-\frac1{T_1}\right) = \frac{Q(T_1-T_2)}{T_1T_2}$$</div>
+          <p>
+            $T_1>T_2>0$ より分子・分母とも正なので $\Delta S>0$。金属棒を通した熱伝導は、外部と孤立した（棒を含めた2熱源の全体は断熱的に外部から隔離されているとしてよい）系の中で起こる不可逆過程なので、エントロピー増大則 $\Delta S\ge0$ に矛盾なく、しかも実際に厳密に正であることが確認できる。
+          </p>
+          <p>
+            $T_1\to T_2$ の極限を考えると、温度差が無限小になるにつれて $\Delta S=Q(T_1-T_2)/(T_1T_2)\to0$ に近づく。これは、温度差が無限小の極限での熱移動（準静的な熱伝導）は可逆過程に近づき、エントロピー生成がゼロに近づくという一般的な事実の具体例になっている——不可逆性の「度合い」は、まさにこの温度差（driving force）の大きさに比例するという直感を、定量的に裏付けている。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="qy2-3">(3) 真空への断熱自由膨張の不可逆性</h3>
+      <div class="ex"><span class="box-label">問題</span><p>理想気体の真空への断熱自由膨張は不可逆過程であることを示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$\Delta S=nR\ln(V_b/V_a)>0$ にもかかわらず断熱（$δQ=0$）——可逆断熱過程なら $\Delta S=0$ のはずなので矛盾。よって不可逆。</div>
+        <div class="proof-body">
+          <p>
+            真空への自由膨張では、外部に何も押し返すものがないので仕事はゼロ（$δW=0$）。容器全体を断熱壁で囲めば熱の出入りもない（$δQ=0$）。第一法則より $\Delta U=0$。理想気体は $U=U(T)$（体積に依存しない）ので、$\Delta U=0$ は $\Delta T=0$ を意味する。
+          </p>
+          <p>
+            エントロピーは状態量なので、始状態 $(T,V_a)$ と終状態 $(T,V_b)$ を結ぶ別の（可逆な）経路——同じ $T$ での準静的等温膨張——に沿って計算してよい。
+          </p>
+          <div class="mathblock">$$\Delta S = \int\frac{δQ_{\text{rev}}}{T} = \frac1T\int_{V_a}^{V_b}PdV = nR\ln\frac{V_b}{V_a} > 0$$</div>
+          <p>
+            もし自由膨張が可逆過程だったなら、断熱（$δQ=0$）かつ可逆な過程は定義から等エントロピー（$\Delta S=0$）のはずである。しかし実際には $\Delta S>0\ne0$——矛盾する。したがって、真空への断熱自由膨張は<strong>不可逆</strong>過程でなければならない。□
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — この設問が繰り返し出題される理由</span>
+        <p>
+          この設問（あるいはこれと本質的に同じ問い）は、2025年度・2023年度いずれの大問2にも、ほぼ同じ文面で出題されている。「断熱（$δQ=0$）」と「可逆断熱＝等エントロピー（$dS=0$）」を安易に同一視してはいけない、という熱力学第二法則の理解度を測るのに最も効率のよい設問だからだと考えられる。$T$ と $V$ の関数として $S=nR\ln V+nc_V\ln T+\text{const.}$ という具体形をすぐに書き下せるかどうかが最初の関門であり、今年度も出題される可能性が高い、最優先で押さえるべき設問である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問3 ============ -->
+  <div class="section" id="q3">
+    <div class="sec-header">
+      <div class="sec-tag">大問 3</div>
+      <h2>$F(T,V)$ で与えられた気体（正体はファンデルワールス気体）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>ある気体について、温度 $T$ と体積 $V$ の関数として、完全な熱力学関数の一つであるHelmholtz自由エネルギー $F(T,V)$ が次のように与えられる。</p>
+        <div class="mathblock">$$F(T,V) = CT - CT\ln T - NkT\ln(V-Nb) - \frac{N^2a}{V}$$</div>
+        <p>ここで、$N$ は物質量、$C$、$k$、$a$、$b$ は正の定数である。</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">2025・2023年度との関係</span>
+        <p>
+          2025年度大問3では $S(U,V)$、2023年度大問3では $U(S,V)$ が与えられたのに対し、この問題ではHelmholtz自由エネルギー $F(T,V)$（第4章で学ぶ、$T,V$ を自然な独立変数とする完全な熱力学関数）から出発する。与えられる関数の顔ぶれが違うだけで、最終的に得られる気体は結局同じ<strong>ファンデルワールス気体</strong>であり、要求される計算の骨格（偏微分して状態方程式・エントロピー・内部エネルギーを求める）も共通している。
+        </p>
+      </div>
+
+      <h3 id="qy3-1">(1) エントロピー</h3>
+      <div class="ex"><span class="box-label">問題</span><p>$F=U-TS$ から $S=-\pd{F}{T}{V}$ であることを確認し、この気体のエントロピー $S(T,V)$ を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$S(T,V) = C\ln T + Nk\ln(V-Nb)$$</div>
+        <div class="proof-body">
+          <p>$F=U-TS$ の微小変化は $dF=dU-TdS-SdT$。ここに $dU=TdS-PdV$（大問1(1)と同じ導出）を代入すると $dF=-SdT-PdV$。ゆえに $S=-\pd{F}{T}{V}$。</p>
+          <p>
+            与えられた $F$ を $T$ で偏微分する（$V$ 一定）。$\dfrac{d}{dT}(T\ln T)=\ln T+1$ に注意すると、
+          </p>
+          <div class="mathblock">$$\pd{F}{T}{V} = C - C(\ln T+1) - Nk\ln(V-Nb) = -C\ln T - Nk\ln(V-Nb)$$</div>
+          <p>したがって</p>
+          <div class="mathblock">$$S = -\pd{F}{T}{V} = C\ln T + Nk\ln(V-Nb)$$</div>
+        </div>
+      </details>
+
+      <h3 id="qy3-2">(2) 状態方程式</h3>
+      <div class="ex"><span class="box-label">問題</span><p>$P=-\pd{F}{V}{T}$ であることを確認し、この気体の状態方程式を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$P = \frac{NkT}{V-Nb} - \frac{N^2a}{V^2}$$
+      </div>
+        <div class="proof-body">
+          <p>$dF=-SdT-PdV$ より $P=-\pd{F}{V}{T}$。$F$ を $V$ で偏微分する（$T$ 一定）。</p>
+          <div class="mathblock">$$\pd{F}{V}{T} = -\frac{NkT}{V-Nb} + \frac{N^2a}{V^2}$$</div>
+          <p>したがって</p>
+          <div class="mathblock">$$P = -\pd{F}{V}{T} = \frac{NkT}{V-Nb} - \frac{N^2a}{V^2}$$</div>
+          <p>体積の排除効果（$V\to V-Nb$）と分子間引力による圧力減少（$-N^2a/V^2$）を含む、標準的な<strong>ファンデルワールス方程式</strong>である。</p>
+        </div>
+      </details>
+
+      <h3 id="qy3-3">(3) 内部エネルギーと熱容量</h3>
+      <div class="ex"><span class="box-label">問題</span><p>$U=F+TS$ を用いて内部エネルギー $U(T,V)$ を求め、定積熱容量 $C_V$ を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$U = CT - \frac{N^2a}{V},\qquad C_V=C\ (\text{一定})$$</div>
+        <div class="proof-body">
+          <p>(1)(2)の結果を $U=F+TS$ に代入する。</p>
+          <div class="mathblock">$$U = \left[CT-CT\ln T-NkT\ln(V-Nb)-\frac{N^2a}{V}\right] + T\left[C\ln T+Nk\ln(V-Nb)\right]$$</div>
+          <p>$-CT\ln T$ と $+CT\ln T$、$-NkT\ln(V-Nb)$ と $+NkT\ln(V-Nb)$ がそれぞれ打ち消し合い、</p>
+          <div class="mathblock">$$U = CT - \frac{N^2a}{V}$$</div>
+          <p>だけが残る。定積熱容量は定義よりただちに</p>
+          <div class="mathblock">$$C_V = \pd{U}{T}{V} = C$$</div>
+          <p>すなわち、$F$ の式に現れていた定数 $C$ は、実はそのまま定積熱容量に等しい（2025・2023年度大問3と同じ結末）。</p>
+        </div>
+      </details>
+
+      <h3 id="qy3-4">(4) 可逆断熱膨張：$T_A/T_B$</h3>
+      <div class="ex"><span class="box-label">問題</span><p>体積 $V_A$，温度 $T_A$ の平衡状態の気体を断熱壁で囲ったまま体積を $V_B(>V_A)$ へゆっくりと準静的に膨張させる。最終状態の温度を $T_B$ とする。$T_A/T_B$ を求めよ。またこの過程によるエントロピー変化を答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$\frac{T_A}{T_B} = \left(\frac{V_B-Nb}{V_A-Nb}\right)^{Nk/C},\qquad \Delta S=0$$
+      </div>
+        <div class="proof-body">
+          <p>準静的かつ断熱＝可逆断熱＝等エントロピー（$\Delta S=0$）。(1)の $S=C\ln T+Nk\ln(V-Nb)$ が変化前後で等しいという条件を課す。</p>
+          <div class="mathblock">$$C\ln T_A+Nk\ln(V_A-Nb) = C\ln T_B+Nk\ln(V_B-Nb)$$</div>
+          <p>整理すると</p>
+          <div class="mathblock">$$\frac{T_A}{T_B} = \left(\frac{V_B-Nb}{V_A-Nb}\right)^{Nk/C}$$</div>
+          <p>$V_B>V_A$ より右辺は $1$ より大きく $T_A>T_B$（断熱膨張で冷える）。エントロピー変化は可逆断熱の定義よりそのまま $\Delta S=0$。</p>
+        </div>
+      </details>
+
+      <h3 id="qy3-5">(5) 真空への断熱膨張（Joule膨張）：$T_A/T_C$</h3>
+      <div class="ex"><span class="box-label">問題</span><p>体積 $V_A$，温度 $T_A$ の気体を真空へ断熱膨張させ、体積を $V_C(>V_A)$ とした。その後の平衡温度を $T_C$ とすると、$T_A/T_C$ を求めよ。また、この過程によるエントロピー変化を求め、その符号を確認せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$T_A-T_C = \frac{N^2a}{C}\left(\frac1{V_A}-\frac1{V_C}\right),\qquad \Delta S = C\ln\frac{T_C}{T_A}+Nk\ln\frac{V_C-Nb}{V_A-Nb}\ (>0)$$
+      </div>
+        <div class="proof-body">
+          <p>真空への自由膨張なので $δW=0$、断熱なので $δQ=0$。ゆえに $\Delta U=0$。(3)の $U=CT-N^2a/V$ を使うと</p>
+          <div class="mathblock">$$CT_A-\frac{N^2a}{V_A} = CT_C-\frac{N^2a}{V_C} \quad\Longrightarrow\quad T_A-T_C = \frac{N^2a}{C}\left(\frac1{V_A}-\frac1{V_C}\right)\ (>0)$$</div>
+          <p>
+            $V_C>V_A$ より $T_A>T_C$（分子間引力に逆らって分子を引き離す分だけ内部エネルギーが使われ、気体は冷える——Joule効果）。エントロピーは状態量なので、(1)の表式に始状態・終状態を代入するだけでよい。
+          </p>
+          <div class="mathblock">$$\Delta S = C\ln\frac{T_C}{T_A} + Nk\ln\frac{V_C-Nb}{V_A-Nb}$$</div>
+          <p>
+            この過程は断熱・不可逆（自由膨張）なので、大問2(3)と同じ論法により全体として必ず $\Delta S>0$ でなければならない（$T_C<T_A$ による負の寄与よりも $V_C>V_A$ による正の寄与の方が上回る）。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="qy3-6">(6) $C_P-C_V$ の一般公式と安定性</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          任意の気体（動作物質を問わない一般論）に対して、定圧熱容量 $C_P$ と定積熱容量 $C_V$ の間に成り立つ一般公式
+          $$C_P-C_V = -T\pd{P}{T}{V}^{2}\Big/\pd{P}{V}{T}$$
+          を導け。また、力学的安定性の条件 $\pd{P}{V}{T}<0$（体積を圧縮すれば圧力は必ず上がる）を用いて、常に $C_P\ge C_V$ が成り立つことを示せ。最後に、この一般公式を(2)の状態方程式に適用し、$C_P-C_V$ を具体的に求めよ。
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$C_P-C_V = T\pd{P}{T}{V}\pd{V}{T}{P} = -T\pd{P}{T}{V}^{2}\Big/\pd{P}{V}{T}\ \ge0,\qquad C_P-C_V = \dfrac{Nk}{1-\dfrac{2Na(V-Nb)^2}{kTV^3}}$$
+      </div>
+        <div class="proof-body">
+          <p><strong>一般公式の導出：</strong> $S(T,V)$ を $S(T,P)$ に変数変換して比較する方法が最も見通しがよい。$V=V(T,P)$ とみて $S(T,V(T,P))$ を $T$ で偏微分すると（連鎖律）</p>
+          <div class="mathblock">$$\pd{S}{T}{P} = \pd{S}{T}{V} + \pd{S}{V}{T}\pd{V}{T}{P}$$</div>
+          <p>両辺に $T$ を掛け、$C_P=T\pd{S}{T}{P}$、$C_V=T\pd{S}{T}{V}$、およびMaxwell関係式 $\pd{S}{V}{T}=\pd{P}{T}{V}$（大問1(1)と全く同じ導出）を使うと</p>
+          <div class="mathblock">$$C_P = C_V + T\pd{P}{T}{V}\pd{V}{T}{P}$$</div>
+          <p>さらに、$P(T,V)$ を一定値に保つ条件（陰関数定理／三重積の関係）から $\pd{V}{T}{P}=-\pd{P}{T}{V}\Big/\pd{P}{V}{T}$ が成り立つので、これを代入すると</p>
+          <div class="mathblock">$$C_P-C_V = -T\pd{P}{T}{V}^{2}\Big/\pd{P}{V}{T}$$</div>
+          <p><strong>符号：</strong> $\pd{P}{T}{V}^2\ge0$（実数の2乗）、$T>0$ は常に成り立つ。力学的安定性（体積を減らせば圧力は上がるという、平衡状態が実現するための必要条件——第4章4.4節）より $\pd{P}{V}{T}<0$ なので、分母の符号を反転させた $-1\big/\pd{P}{V}{T}>0$。したがって右辺全体は非負であり、</p>
+          <div class="mathblock">$$C_P-C_V\ge0 \qquad(\text{常に }C_P\ge C_V)$$</div>
+          <p><strong>この気体への適用：</strong> (2)の状態方程式 $P=\dfrac{NkT}{V-Nb}-\dfrac{N^2a}{V^2}$ から</p>
+          <div class="mathblock">$$\pd{P}{T}{V} = \frac{Nk}{V-Nb},\qquad \pd{P}{V}{T} = -\frac{NkT}{(V-Nb)^2}+\frac{2N^2a}{V^3}$$</div>
+          <p>これらを一般公式に代入し、分母・分子を $(V-Nb)^2$ で整理すると</p>
+          <div class="mathblock">$$C_P-C_V = \frac{T\left(\dfrac{Nk}{V-Nb}\right)^2}{\dfrac{NkT}{(V-Nb)^2}-\dfrac{2N^2a}{V^3}} = \frac{Nk}{1-\dfrac{2Na(V-Nb)^2}{kTV^3}}$$</div>
+          <p>
+            $a\to0$（分子間引力なし）または希薄極限（$b\to0$、$V\to\infty$）では分母が $1$ に近づき、$C_P-C_V\to Nk$——理想気体のMayerの関係式に正しく帰着する。分子間引力 $a>0$ があるぶん、ファンデルワールス気体では $C_P-C_V$ が理想気体よりわずかに大きくなることが、この式から読み取れる。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — なぜ安定性条件が式に効いてくるのか</span>
+        <p>
+          $\pd{P}{V}{T}<0$ という条件は、単なる数学的な仮定ではなく、その物質が実際に一様な平衡状態として存在できるための物理的な必要条件である。もしある領域で $\pd{P}{V}{T}>0$ になってしまうと、体積をわずかに増やしただけで圧力がさらに上がってしまい、系はますます体積を増やそうとする（正のフィードバック）——これは力学的に不安定であり、実際には相分離（気液共存など）が起こって均一な状態は実現しない。ファンデルワールスの状態方程式は、臨界温度以下では実際にこの不安定領域（$\pd{P}{V}{T}>0$ となる領域）を持つことで知られており、その不安定領域を挟んで気相と液相が共存する、というのが気液相転移の熱力学的な描像である（第5章5.1節「2相共存系」の内容につながる）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問4 ============ -->
+  <div class="section" id="q4">
+    <div class="sec-header">
+      <div class="sec-tag">大問 4</div>
+      <h2>感想</h2>
+    </div>
+    <div class="sec-body">
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>講義および試験に関して、良かった点、悪かった点等の感想を自由に述べよ。また、講義あるいは自習を通じて、物理学・熱力学から学んだことを述べよ。</p>
+      </div>
+      <div class="note">
+        <span class="box-label">補足</span>
+        <p>この設問は採点対象の知識問題ではなく、受講者自身の感想・学びを問う自由記述式の設問であるため、模範解答は存在しない。ただし2025・2023年度いずれの本番でも大問4として出題されているため、本番でも配点の一部を占める可能性が高い。空欄で出さず、必ず何か書くこと。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="taisaku_essence.html">← 精選：本質問題集へ</a>
+    <a href="kakomon_2025.html">2025年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター・予想問題</footer>
+
+<script src="thermo-plots.js"></script>
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html><!-- 「コンピュータの仕組みと論理回路 — 押さえておきたい事項｜情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>コンピュータの仕組みと論理回路 — 押さえておきたい事項｜情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-04-kp">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>コンピュータの仕組みと論理回路 — 押さえておきたい事項</h1>
+  <p class="subtitle">公式・手順・典型的な考え方のまとめ</p>
+</div>
+
+<div class="container">
+
+  <div class="page-toc">
+    <strong>この分野の要点</strong>
+    <ol>
+      <li><a href="#kp-1">CPU4部品の役割分担</a></li>
+      <li><a href="#kp-2">CPUの動作4段階</a></li>
+      <li><a href="#kp-3">フォン・ノイマンボトルネック</a></li>
+      <li><a href="#kp-4">真理値表から論理式を機械的に組み立てる手順</a></li>
+      <li><a href="#kp-5">NAND-NAND／NOR-NORの2段構成</a></li>
+      <li><a href="#kp-6">NAND単体による基本演算の最小構成</a></li>
+      <li><a href="#kp-7">カルノー図による簡単化</a></li>
+      <li><a href="#kp-8">NAND/NORの完備性の実用上の意義</a></li>
+      <li><a href="#kp-9">半加算器・全加算器のゲート構成</a></li>
+      <li><a href="#kp-10">桁上がりの扱い方</a></li>
+      <li><a href="#kp-11">減算は「反転して+1」で加算器から作れる</a></li>
+      <li><a href="#kp-12">多数決関数＝全加算器の桁上げ出力</a></li>
+      <li><a href="#kp-13">機械語トレースの追い方</a></li>
+      <li><a href="#kp-14">2の補数表現が表現可能かつ一意である理由</a></li>
+    </ol>
+  </div>
+
+  <h2 class="word-cat-title">CPUの構成と動作</h2>
+
+  <div class="mot" id="kp-1">
+    <span class="box-label">CPU4部品の役割分担</span>
+    <p>
+      プログラムカウンタ（次命令のアドレスを保持）→命令レジスタ（命令を保持・解析）→
+      演算レジスタ（AC、データを保持）→ALU（実際の演算）という流れで役割が分担されている。
+    </p>
+  </div>
+
+  <div class="thm" id="kp-2">
+    <span class="box-label">CPUの動作4段階</span>
+    <p>
+      フェッチ・デコード・実行・書出しの4段階を1命令ごとに繰り返すのがCPUの基本動作。
+      load命令なら①プログラムカウンタの指すアドレスから命令を読込み②命令を解析
+      ③データを読み出して演算レジスタへ格納④結果を保持しプログラムカウンタを更新、という流れになる。
+    </p>
+  </div>
+
+  <div class="note" id="kp-3">
+    <span class="box-label">フォン・ノイマンボトルネック</span>
+    <p>
+      主記憶がCPUより遅いことがボトルネックになる、というプログラム内蔵方式の必然的な弱点。
+      キャッシュのヒット・ミスの意味とセットで覚えておく。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">論理式の標準形とNAND/NORによる実現</h2>
+
+  <div class="thm" id="kp-4">
+    <span class="box-label">真理値表から論理式を機械的に組み立てる手順</span>
+    <p>
+      1を返す行から主加法標準形（積の項をORで結ぶ）、0を返す行から主乗法標準形（和の項をANDで結ぶ）
+      が機械的に作れる。XORの主加法標準形の具体例：$x_1\oplus x_2=(x_1\cdot\lnot x_2)+(\lnot x_1\cdot x_2)$。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-5">
+    <span class="box-label">NAND-NAND／NOR-NORの2段構成</span>
+    <p>
+      SOP形（積和標準形）の式は各積項を1個のNANDで作り、それらをもう一度NANDすると否定が
+      打ち消し合ってORが得られる（ド・モルガンの法則の帰結）という機械的な実現方法。
+      POS形（和積標準形）ではNORで対称的に同型の構成ができる。
+    </p>
+  </div>
+
+  <div class="thm" id="kp-6">
+    <span class="box-label">NAND単体による基本演算の最小構成（暗記推奨）</span>
+    <p>
+      NOT(x)=NAND(x,x)（自己NANDトリック）／AND(x,y)=NAND(NAND(x,y),NAND(x,y))（NAND2個）／
+      OR(x,y)=NAND(NAND(x,x),NAND(y,y))（NAND3個）／
+      XOR(x,y)：$n_1=\mathrm{NAND}(x,y)$、$n_2=\mathrm{NAND}(x,n_1)$、$n_3=\mathrm{NAND}(y,n_1)$、
+      出力$=\mathrm{NAND}(n_2,n_3)$（NAND4個、理論上の最小）。NORでも対称的に同型の構成が可能。
+    </p>
+  </div>
+
+  <div class="note" id="kp-7">
+    <span class="box-label">カルノー図による簡単化</span>
+    <p>
+      カルノー図で簡単化してから変換すると、真理値表から機械的に作った標準形よりも
+      少ないゲート数の回路が得られる。
+    </p>
+  </div>
+
+  <div class="note" id="kp-8">
+    <span class="box-label">NAND/NORの完備性の実用上の意義</span>
+    <p>
+      1種類のゲートだけを大量に規則的に並べれば任意の論理回路が実現できるため、
+      製造工程の単純化・標準化という実用上のメリットが生まれる。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">加算器・減算器の設計</h2>
+
+  <div class="mot" id="kp-9">
+    <span class="box-label">半加算器・全加算器のゲート構成</span>
+    <p>
+      半加算器＝XORゲート1個＋ANDゲート1個。全加算器＝半加算器2つ＋ORゲート1個
+      （2つの繰り上がり信号をORで合成）。全加算器をNAND9個で構成する場合、
+      中間信号を複数出力の計算に再利用してゲート数を削減する工夫が定番。
+    </p>
+  </div>
+
+  <div class="note" id="kp-10">
+    <span class="box-label">桁上がりの扱い方</span>
+    <p>
+      全加算器の$c_{\text{out}}$を1つ上の桁の$c_{\text{in}}$に接続すれば、全加算器を横に並べるだけで
+      任意ビット数の加算器（桁上げ伝播加算器）になる。最下位桁だけ$c_{\text{in}}=0$とする。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-11">
+    <span class="box-label">減算は「反転して+1」で加算器から作れる</span>
+    <p>
+      $x-y=x+\lnot y+1$。4ビット加算器の各段の$y$入力をNOTで反転し、最下位段の$c_{\text{in}}$を1に
+      するだけで減算器になる。追加素子はNOTゲートのみ。
+    </p>
+  </div>
+
+  <div class="thm" id="kp-12">
+    <span class="box-label">多数決関数＝全加算器の桁上げ出力</span>
+    <p>
+      $XY+YZ+ZX$。$XY+Z(X+Y)$と書き換えるとAND2個＋OR2個の計4ゲートで実現でき、
+      素朴な5ゲート構成より少ない。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">機械語トレースと数値表現</h2>
+
+  <div class="thm" id="kp-13">
+    <span class="box-label">機械語トレースの追い方</span>
+    <p>
+      ①各番地の役割（定数／変数／カウンタ）を先に特定する②アキュムレータ(AC)を1命令ずつ
+      更新しながらトレースし、分岐命令ではACの値で場合分けする③ループ構造を見つけたら
+      1回あたりの変化と回数を求める④実行ステップ数＝直線部分のステップ数＋ループ本体の
+      ステップ数×回数（最終回は他と命令数が異なるので分けて数える）⑤同じ計算でも書き方次第で
+      ステップ数は大きく変わる（ループ→倍々計算→演算順序の工夫）。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-14">
+    <span class="box-label">2の補数表現が表現可能かつ一意である理由</span>
+    <p>
+      非負数の範囲がちょうど$2^{n-1}$通り、負数の範囲（$x+2^n$）が残り$2^{n-1}$通りを重複なく埋め、
+      n桁で表せる$2^n$通りすべてを1対1に使い切るため。
+    </p>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="04-コンピュータの仕組みと論理回路-word.html">← 単語一覧</a>
+    <a href="04-コンピュータの仕組みと論理回路-descriptive.html">記述式で狙われる内容 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

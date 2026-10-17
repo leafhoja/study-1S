@@ -1,0 +1,554 @@
+<!DOCTYPE html><!-- 「2016年度| 情報 共通問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2016年度| 情報 共通問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kyotsu-2016">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>共通問題 2016年度</h1>
+  <p class="subtitle">7月28日（木）4限｜大問3（うち大問3は選択）</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（情報システム・データベースとネットワークモデル）</a>
+    <a href="#q2">大問2（フォルダ階層とコマンド操作）</a>
+    <a href="#q3">大問3（選択：ネット選挙運動とGUI／未知容量の袋のアルゴリズム）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>クライアント・サーバ型システム、データベースのトランザクション処理、ネットワークモデル</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題文</span>
+        <p>インターネットで出発地から目的地までの経路を気軽に検索したり、乗車券を購入したりできる時代である。このような情報システムの動作原理について考えてみよう。このようなシステムの多くは<span class="blank">A</span>／<span class="blank">B</span>型の構成である。<span class="blank">A</span>は<span class="blank">B</span>に対しサービスを要求する。<span class="blank">B</span>は<span class="blank">A</span>からの要求に従い、実際に適切な乗換や道順を発見し、返送する。このようなシステムでは情報を適切に管理するデータベースが必要となる。データの破壊等を防ぐため、データベースは通常<span class="blank">C</span>によって不正アクセスから守られている。さらに、ネットワークの切断などによって処理が中断した場合にも一貫性を確保する必要がある。データベースへのデータ更新を含む一連の処理を<span class="blank">D</span>処理と呼び、1つの目的を達成するために必要な作業の開始から終了までを<span class="blank">E</span>と呼ぶ。ひとつの<span class="blank">E</span>の中に複数の<span class="blank">D</span>処理が含まれる場合もある。<span class="blank">D</span>の途中で処理が中断した場合には、<span class="blank">F</span>と呼ばれる処理を起動し、<span class="blank">D</span>が開始される前の状態にデータベースの内容を戻す。<u>①排他制御</u>や<u>②サービス停止攻撃</u>や<u>③盗聴</u>などにも注意が必要である。データベースに格納するデータの表現形式も重要である。例えば一般的な都市地図では図や図記号を用いた表現となっている。この形式は人間にとっては便利であるが、情報システムではコンピュータにとってより扱いやすい表現を用いる場合が多い。例えば、路線図であれば<u>④ネットワークモデル</u>で表現するのが普通である。</p>
+      </div>
+      <div class="note">
+        <span class="box-label">語群</span>
+        <p>クライアント・コンパイラ・サーバ・スループット・セッション・トランザクション・パケット・ファイアウォール・ブラウザ・プロトコル・ロールバック・CCD・TCP</p>
+      </div>
+
+      <h3>問1-1 — 空欄A〜F（クライアント・サーバ型システムの基本用語）</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(1) 上の文章の空欄A〜Fに当てはまる語句を、上の語群から選んで入れよ。</p>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>文章全体は「サービスを要求する側／要求に応じる側」という2者構成（クライアント・サーバ）から始まり、データベースを不正アクセスから守る仕組み（ファイアウォール）、データ更新を含む一連の処理（トランザクション）、それを束ねる作業単位（セッション）、中断時に元の状態へ戻す処理（ロールバック）という順に、データベースシステムの基本用語を並べている。</p>
+          <p><span class="blank">A=クライアント</span>／<span class="blank">B=サーバ</span>／<span class="blank">C=ファイアウォール</span>／<span class="blank">D=トランザクション</span>／<span class="blank">E=セッション</span>／<span class="blank">F=ロールバック</span></p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>A=クライアント、B=サーバ、C=ファイアウォール、D=トランザクション、E=セッション、F=ロールバック</div>
+        <div class="note">
+          <span class="box-label">語群の全用語</span>
+          <p><strong>クライアント</strong>：サーバにサービスを要求する側の主体・機器。／<strong>コンパイラ</strong>：高水準言語のプログラムを機械語に変換するソフトウェア（本文とは無関係の紛らわしい選択肢）。／<strong>サーバ</strong>：クライアントからの要求に応じてサービスを提供する側の主体・機器。／<strong>スループット</strong>：単位時間あたりに処理できるデータ量・処理量（同じく紛らわしい選択肢）。／<strong>セッション</strong>：1つの目的の達成のために開始から終了まで続く一連のやり取りの単位。</p>
+          <p><strong>トランザクション</strong>：データベースへのデータ更新を含む、一貫性を保ったまま実行されるべき一連の処理のまとまり。／<strong>パケット</strong>：ネットワーク上でデータを送る際に分割された小さな単位（本文には登場しない）。／<strong>ファイアウォール</strong>：規則に基づいて通信を許可・遮断し、不正アクセスからシステムを守る仕組み。／<strong>ブラウザ</strong>：Webページを閲覧するためのクライアント側ソフトウェア（本文の空欄には対応しない）。／<strong>プロトコル</strong>：通信の際に従うべき手順・規約（本文の空欄には使われていない）。</p>
+          <p><strong>ロールバック</strong>：トランザクションが中断した際に、そのトランザクションが開始される前の状態にデータベースを戻す処理。／<strong>CCD</strong>：光を電気信号に変換する撮像素子（本文とは無関係）。／<strong>TCP</strong>：信頼性のあるデータ転送を実現する通信プロトコルの一種（本文の空欄には使われていない）。</p>
+        </div>
+      </details>
+
+      <h3>問1-2 — 下線部①「排他制御」の目的</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(2) 下線部①「排他制御」はどのような目的で行われるか、2行程度で説明せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>複数のトランザクションが同時に同じデータへアクセス・更新しようとすると、一方の更新結果が他方に上書きされて失われてしまう（ロストアップデート）など、データの不整合が発生しうる。排他制御は、あるトランザクションがデータを操作している間、他のトランザクションからの同時アクセスを制限することで、こうした競合によるデータの不整合を防ぐために行われる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>複数のトランザクションが同じデータに同時アクセス・更新することで生じる不整合（更新の競合・ロストアップデート等）を防ぐため、あるトランザクションがデータを操作している間は他のトランザクションからの同時アクセスを制限する。</div>
+      </details>
+
+      <h3>問1-3 — 下線部②「サービス停止攻撃」とは</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(3) 下線部②「サービス停止攻撃」とはどのような攻撃か、2行程度で説明せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>サービス停止攻撃（DoS攻撃、Denial of Service攻撃）は、大量のリクエストを送りつけるなどしてサーバやネットワークに処理しきれないほどの過大な負荷をかけ、システムの応答を極端に遅くしたり停止させたりすることで、正当な利用者がサービスを利用できない状態にする攻撃である。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>大量のリクエスト等でサーバ・ネットワークに過大な負荷をかけ、正当な利用者がサービスを利用できない状態にする攻撃。</div>
+      </details>
+
+      <h3>問1-4 — 公開鍵暗号方式によるメッセージの伝達（下線部③「盗聴」への対策）</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(4) Aさんが、Bさんに向けてメッセージMを、盗聴を防ぎながら伝達したい。公開鍵暗号方式を用いてこれを実現する手順を、「生成する・公開する・暗号化する・復号する」という4つの語をすべて使い、3行程度で説明せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>まずBさんが、対になる公開鍵と秘密鍵の組を<strong>生成する</strong>。Bさんは公開鍵を（誰でも入手できる形で）<strong>公開する</strong>が、秘密鍵は自分だけが持ち、外部には一切明かさない。Aさんは公開されているBさんの公開鍵を用いてメッセージMを<strong>暗号化する</strong>と、その暗号文を通信路に送り出す。通信路上で暗号文が盗聴されても、対応する秘密鍵を持たない第三者には元のメッセージMを取り出すことはできない。Bさんは受け取った暗号文を、自分だけが持つ秘密鍵を用いて<strong>復号する</strong>ことで、初めてメッセージMを読むことができる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>Bが公開鍵・秘密鍵の組を生成する→Bが公開鍵を公開する→Aが公開鍵でMを暗号化して送る→Bが自分の秘密鍵で復号してMを得る（この間、秘密鍵を知らない者はMを読めないので盗聴に対して安全）。</div>
+      </details>
+
+      <h3>問1-5 — 路線図とネットワークモデル（下線部④）</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(5)(a) 駅をノード、路線をエッジとして路線図を捉えるとき、これを木構造として表すのは不適切である。その理由を1行程度で述べよ。<br>
+        (5)(b) サーチエンジンが、ウェブページ間のリンク関係というネットワークモデルを基に行っている解析について、2行程度で説明せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(5)(a) 実際の路線図では、乗り換え駅などで複数の路線が交わり合い、ある駅から別の駅へ至る経路が複数存在する場合がある。すなわちノード間に閉路（ループ）が存在しうる。木構造はどのノードも親がただ1つで閉路を一切持たないという特別な構造なので、閉路を持つ路線図全体を木構造として正確に表すことはできない。</p>
+          <p>(5)(b) サーチエンジンは、各ウェブページをノード、ページ間のリンクをエッジとするネットワーク（グラフ）とみなし、この構造を解析することで検索結果の重要度を決めている。具体的には、より多くの（あるいはより重要度の高い）ページからリンクされているページほど重要度が高いとみなし、被リンク数やリンク元ページ自身の重要度を再帰的に評価することで、各ページの重要度を算出し、検索結果の順位付けに用いている。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(5)(a) 乗換駅で複数路線が交わり閉路が生じうるため、閉路を持たない木構造では表現できない。　(5)(b) ページをノード、リンクをエッジとみなし、多くの（重要な）ページからリンクされているページほど重要度が高いと再帰的に評価することで、検索結果の順位付けを行う。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — トランザクションの「元に戻せる」性質とグラフ・木構造の関係</span>
+        <p>問1のD〜Fで扱われているトランザクション処理は、一般に<strong>ACID性</strong>（原子性 Atomicity・一貫性 Consistency・独立性 Isolation・耐久性 Durability）という4つの性質を満たすように設計される。本問で扱われた排他制御（①）は独立性を保つための仕組みであり、ロールバック（F）は、トランザクションが中断した場合に「全部成功」か「全部失敗（開始前の状態に戻す）」のどちらかしか許さないことで原子性を保つための仕組みである。中途半端に更新が反映された状態を残さないことが、データベースの一貫性を守るうえで本質的に重要になる。<br>
+        また問1-5で見たように、路線図やウェブのリンク構造は一般に<strong>ネットワークモデル（グラフ）</strong>で表されるが、木構造はその中でも「閉路を持たない」という特別な性質を満たすグラフの一種にすぎない。大問2で扱うフォルダ階層はまさにこの木構造の典型例であり、「どのノードも親はただ1つ」という制約があるからこそ、後述するように単純な規則で全体を体系的に辿ることができる。これに対し路線図やウェブのように閉路を許すネットワークモデルでは、ノード間の経路は一意に定まらず、より複雑な解析（PageRankのような重要度の再帰的評価など）が必要になる。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>フォルダ階層構造とコマンド操作</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題設定</span>
+        <p>ファイルシステムのフォルダ（ディレクトリ）を操作する、次の5種類のコマンドを考える。</p>
+        <ul>
+          <li><code>pwd</code> — 現在の位置（カレントディレクトリ）を表示する。</li>
+          <li><code>ls</code> — 現在の位置にあるフォルダ・ファイルの一覧を表示する。</li>
+          <li><code>ls x</code> — フォルダxの中にあるフォルダ・ファイルの一覧を表示する（現在の位置は変わらない）。</li>
+          <li><code>cd x</code> — フォルダxに移動する（現在の位置が変わる）。「<code>..</code>」は1つ上のフォルダを表す。</li>
+          <li><code>mv x y</code> — フォルダxを、フォルダyの中に移動する（現在の位置は変わらない）。</li>
+        </ul>
+        <p>下図は、ある時点⓪における、ホームディレクトリ以下のフォルダ階層構造である（Aの下にB、Cがある）。この状態から始めて、以下の3つの端末パネルを、左上→右上→右下の順に続けて実行していく。</p>
+        <div style="text-align:center;margin:1em 0;">
+          <img src="img/2016/dir-tree.png" alt="⓪の時点のフォルダ階層構造：/の下にhome、homeの下にA、Aの下にBとCがある木構造。" style="max-width:220px;width:100%;height:auto;">
+        </div>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">パネル1（現在位置：/home/A）</span>
+        <pre class="shell-block"><code>$ pwd
+/home/A
+$ ls
+B&nbsp;&nbsp;C&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（⓪の状態）
+$ cd B
+$ pwd
+/home/A/B
+$ ls
+D&nbsp;&nbsp;E
+$ cd D
+$ pwd
+<span class="blank">1</span>
+$ ls
+（何も表示されない）
+$ cd ..
+$ pwd
+/home/A/B
+$ ls E
+（何も表示されない）
+$ cd ../C</code></pre>
+        <p><em>→ 続けて右上のパネル2を実行する（<code>cd ../C</code>により現在位置は /home/A/C になる）。</em></p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">パネル2（現在位置：/home/A/C）</span>
+        <pre class="shell-block"><code>$ pwd
+<span class="blank">2</span>
+$ ls
+F&nbsp;&nbsp;G
+$ ls F
+H&nbsp;&nbsp;I
+$ ls F/H
+（表示なし）
+$ ls F/I
+（表示なし）
+$ ls G
+J
+$ ls G/J
+（表示なし）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（①の時点）
+$ mv F ..
+$ cd ..
+$ ls
+B&nbsp;&nbsp;C&nbsp;&nbsp;F&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（②の時点）
+$ ls F
+H&nbsp;&nbsp;I
+$ mv B C/G/J</code></pre>
+        <p><em>→ 続けて右下のパネル3を実行する（<code>mv</code>は現在位置を変えないので、現在位置は依然 /home/A のまま）。</em></p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">パネル3（現在位置：/home/A のまま）</span>
+        <pre class="shell-block"><code>$ ls
+<span class="blank">3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;（③の時点）
+$ cd C
+$ ls
+<span class="blank">4</span>
+$ cd <span class="blank">4</span>
+$ pwd
+<span class="blank">5</span>
+$ ls
+J
+$ cd J
+$ ls
+<span class="blank">6</span>
+$ cd <span class="blank">6</span>
+$ ls
+<span class="blank">7</span>
+$ pwd
+<span class="blank">8</span></code></pre>
+      </div>
+
+      <h3>問2-1 — ①・②・③の時点のフォルダ階層構造</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(1) ⓪の時点の木構造は上図で与えられている。①、②、③それぞれの時点で判明しているフォルダ階層構造全体を、⓪の図と同じ形式（ボックスと矢印）で示せ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>①の時点までに、パネル1・パネル2の <code>ls</code> によってB,C,D,E,F,G,H,I,Jの存在と親子関係がすべて判明している。まだ<code>mv</code>は実行されていないので、⓪の構造がそのまま枝を伸ばした形になる。</p>
+          <p><strong>①の時点</strong>：</p>
+          <ul>
+            <li>home
+              <ul>
+                <li>A
+                  <ul>
+                    <li>B
+                      <ul><li>D</li><li>E</li></ul>
+                    </li>
+                    <li>C
+                      <ul>
+                        <li>F
+                          <ul><li>H</li><li>I</li></ul>
+                        </li>
+                        <li>G
+                          <ul><li>J</li></ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <p>②の時点では、<code>mv F ..</code>によってFが「1つ上」＝Cの親であるA自身の直下に移動している。これによりFはCの子ではなくAの子になり、Cの子はGだけが残る。Fの内部構造（H,I）自体はmvによって変化しない。</p>
+          <p><strong>②の時点</strong>：</p>
+          <ul>
+            <li>home
+              <ul>
+                <li>A
+                  <ul>
+                    <li>B
+                      <ul><li>D</li><li>E</li></ul>
+                    </li>
+                    <li>C
+                      <ul>
+                        <li>G
+                          <ul><li>J</li></ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>F
+                      <ul><li>H</li><li>I</li></ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <p>③の時点では、<code>mv B C/G/J</code>によってBが「C/G/Jの中」に移動している。したがってBはAの子ではなくJの子になる（Aの子はC,Fの2つに減る）。Bの内部構造（D,E）自体はmvによって変化しない。</p>
+          <p><strong>③の時点</strong>：</p>
+          <ul>
+            <li>home
+              <ul>
+                <li>A
+                  <ul>
+                    <li>C
+                      <ul>
+                        <li>G
+                          <ul>
+                            <li>J
+                              <ul>
+                                <li>B
+                                  <ul><li>D</li><li>E</li></ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>F
+                      <ul><li>H</li><li>I</li></ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="sol"><span class="box-label">解</span>①：home→A→{B,C}／B→{D,E}／C→{F,G}／F→{H,I}／G→{J}。　②：home→A→{B,C,F}／B→{D,E}／C→{G}／F→{H,I}／G→{J}（Fが抜けた）。　③：home→A→{C,F}／C→{G}／G→{J}／J→{B}／B→{D,E}／F→{H,I}（Bが抜けてJの下に入った）</div>
+      </details>
+
+      <h3>問2-2 — 空欄1〜8</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(2) 上の3つの端末パネルの空欄1〜8を埋めよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p><strong>空欄1</strong>：<code>cd B</code>のあとの現在位置は/home/A/B、続けて<code>cd D</code>を実行しているので、現在位置は<span class="blank">1=/home/A/B/D</span>になる。</p>
+          <p><strong>空欄2</strong>：パネル1の最後の<code>cd ../C</code>は、/home/A/Bから1つ上（/home/A）に戻り、さらにCへ入る操作なので、現在位置は<span class="blank">2=/home/A/C</span>になる。</p>
+          <p><strong>空欄3</strong>：③の時点で判明している通り、Bは<code>mv B C/G/J</code>によってすでに/home/Aの外（C/G/Jの中）に移動済みである。したがって現在位置/home/Aの直下に残っているのはCとFの2つだけであり、<span class="blank">3=C F</span>となる。</p>
+          <p><strong>空欄4</strong>：<code>cd C</code>のあと/home/A/Cで<code>ls</code>する。Cの子はもともとF,Gだったが、Fは②の時点で1つ上（A）に移動済みで抜けているので、Cの直下に残っているのはGだけであり、<span class="blank">4=G</span>となる。</p>
+          <p><strong>空欄5</strong>：直後の<code>cd G</code>（空欄4の値）により、/home/A/Cから1つ下のGへ移動するので、現在位置は<span class="blank">5=/home/A/C/G</span>になる。</p>
+          <p><strong>空欄6</strong>：<code>cd J</code>のあと/home/A/C/G/Jで<code>ls</code>する。JはもともとJ自身の子を持っていなかったが、<code>mv B C/G/J</code>によってBがJの中に移動してきているので、Jの直下にはBが1つだけあり、<span class="blank">6=B</span>となる。</p>
+          <p><strong>空欄7</strong>：直後の<code>cd B</code>（空欄6の値）により、/home/A/C/G/JからBへ移動する。Bの内部構造（D,E）はmvによる移動の影響を受けず、そのまま保たれているので、<span class="blank">7=D E</span>となる。</p>
+          <p><strong>空欄8</strong>：ここまでの移動をたどると、現在位置は/home/A/C/G/Jのさらに下のBなので、<span class="blank">8=/home/A/C/G/J/B</span>になる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>1=/home/A/B/D、2=/home/A/C、3=C F、4=G、5=/home/A/C/G、6=B、7=D E、8=/home/A/C/G/J/B</div>
+      </details>
+
+      <h3>問2-3 — 木構造だからこそ迷わず辿れる理由</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(3) このように、「1つ下のフォルダXに降りる（<code>cd X</code>）」と「1つ上に戻る（<code>cd ..</code>）」という2種類の操作だけで、フォルダ・ファイルの全構成を重複なく体系的に辿ることができた。この理由を述べよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>フォルダ・ファイルの構成は、どの項目もその親がただ1つに定まり、かつ閉路（ある項目から出発して自分自身に戻ってくるような経路）を持たない構造、すなわち<strong>木構造</strong>になっている。この性質があるため、「現在いる場所から子に降りる」「親に戻る」という2つの操作を、深さ優先の順序で繰り返すだけで、迷うことなく（同じ場所を何度も経由することなく）木全体のすべての項目に、重複なく到達することができる。もし途中で複数の親を持つ項目や閉路が存在すれば、同じ場所に複数回到達したり、堂々巡りになって全体を体系的に辿り切れなくなる可能性があるが、木構造ではそのような曖昧さが原理的に生じない。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>フォルダ・ファイルの構成が、どの項目も親がただ1つで閉路を持たない木構造になっているため、「子に降りる」「親に戻る」を繰り返す深さ優先の操作だけで、すべての項目に重複なく体系的に到達できる。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「木構造だから迷わずたどれる」ことの一般性</span>
+        <p>本問で扱った深さ優先の「↓（子へ降りる）／↑（親へ戻る）」という2操作の組は、木構造をもつデータ全般（フォルダ階層に限らず、組織図や分類階層など）を体系的に走査する<strong>深さ優先探索（DFS）</strong>の考え方そのものである。木構造では、任意のノードに到達する経路がただ1つしかないため、どの経路を辿ってきたかによって迷うことがなく、上記の2操作だけで全体を無駄なく（各ノードをちょうど1回ずつ）巡ることができる。これは大問1の背景知識で述べたネットワークモデル（グラフ）との対比でもあり、木構造は「探索や管理が特に簡単になる」という理由から、ファイルシステムに限らず様々な場面（構文木、意思決定木など）で好んで採用される構造である。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q3">
+    <div class="sec-header"><div class="sec-tag">大問 3（選択）</div><h2>問題A：インターネット選挙運動とGUIのデスクトップメタファ／問題B：未知容量の袋を測るアルゴリズム</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="note"><span class="box-label">出題形式</span><p>問題A・Bのいずれか一方を選択。ここでは両方を掲載する。</p></div>
+
+      <h3>問題A-1 — インターネット選挙運動と誹謗中傷・セキュリティ・メリット</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>平成25年の公職選挙法改正により、インターネットを利用した選挙運動が可能になった。これに関して以下に答えよ。<br>
+        (1) インターネット選挙運動において誹謗中傷が特に問題となるのは、情報技術のどのような性質によるものか、2行程度で述べよ。<br>
+        (2) 情報セキュリティの観点からどのような技術的な懸念が考えられるか、4行程度で述べよ。<br>
+        (3) 従来の選挙運動が抱えていた制約からの解放という観点で、インターネット選挙運動のメリットを4行程度で述べよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(1) SNS等のインターネットメディアは、発言が瞬時に、かつ広範囲・不特定多数へと伝播していく「多対多の通信」の性質を持つ。さらに匿名での発信が容易であるため、対面でのやり取りや従来のマスメディアに比べて発言の責任の所在が不明確なまま、誹謗中傷が急速に拡散・助長されやすい。</p>
+          <p>(2) 候補者本人や有権者になりすました偽アカウントによる虚偽情報の発信、選挙関連ウェブサイトの改ざんやDoS攻撃（大問1の②で扱ったサービス停止攻撃）による選挙活動の妨害、フィッシング等による有権者の個人情報の窃取、組織的な投稿・拡散（いわゆる「なりすまし」や「サクラ」）による情報操作といったリスクが考えられ、これらへの対策が課題となる。</p>
+          <p>(3) 従来の選挙運動には、掲示・配布できるビラの枚数や、候補者が実際に訪問できる時間・場所などの物理的・時間的・資金的な制約があり、資金力に乏しい候補者ほど不利になりやすかった。インターネットを利用すれば、低コストで、時間や場所を問わず有権者に政策や活動内容を届けることができ、候補者側だけでなく有権者側も、自分の都合のよい時間・場所で情報を収集・比較検討できるようになる。これにより、従来の制約によって発言力を持ちにくかった候補者・有権者も、比較的対等な条件で情報発信・情報収集に参加できるようになった。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) SNSの多対多通信と匿名性の容易さにより発言の責任の所在が不明確なまま誹謗中傷が拡散しやすい。　(2) なりすまし、サイト改ざん・DoS攻撃、フィッシングによる情報窃取、組織的な情報操作などのリスク。　(3) 低コスト・時間や場所を問わない情報発信・収集が可能になり、資金力等の制約に関わらず候補者・有権者が対等に参加しやすくなる。</div>
+      </details>
+
+      <h3>問題A-2 — デスクトップメタファとアイコンの図記号</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(1) ファイルのアイコンをゴミ箱にドラッグして削除する操作を例に、GUIにおけるデスクトップメタファの利点を、「直接操作・現実世界・類推」の3つの語を用いて3行程度で説明せよ。<br>
+        (2) 下図のように、アプリケーションのアイコンにはⒶそのアプリの作業内容を表す図記号（Numbers、mi、iTuneの例）が、ファイル・フォルダ・デバイスのアイコンにはⒷ実物を模した図（ゴミ箱、フォルダ、CDの例）が使われることが多い。このような使い分けが効果的な理由を、図記号による情報の表現とデスクトップメタファの両面から4行程度で考察せよ。</p>
+        <div style="text-align:center;margin:1em 0;">
+          <img src="img/2016/icon-examples.png" alt="アイコン例：左はNumbers（表計算ソフト）、mi（テキストエディタ）、iTune（音楽再生ソフト）という作業内容を表すⒶの例。右はゴミ箱、フォルダ、CDという実物を模したⒷの例。" style="max-width:640px;width:100%;height:auto;">
+        </div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(1) 「ゴミ箱にゴミを捨てる」という現実世界での行為との<strong>類推</strong>によって、ファイルを削除するという本来抽象的な操作を、ファイルのアイコンをゴミ箱のアイコンまで<strong>直接操作</strong>（ドラッグ&ドロップ）するという直感的な動作として表現できる。これにより、ユーザは特別な削除コマンドを覚える必要がなく、<strong>現実世界</strong>での経験をそのまま応用して操作方法を理解できる。</p>
+          <p>(2) アプリケーションは「何をする道具か」という機能・作業内容そのものが重要な情報であり、それ自体に対応する具体的な実物は存在しない。そのため、その機能を象徴する図記号（グラフの絵・ペンの絵・音符の絵など）による記号的な表現、すなわちⒶの方式が適している。一方、ファイルやフォルダ、CDなどには、書類・書類入れ・円盤といった実世界の対応物が存在するため、その実物の見た目を模したアイコン（Ⓑの方式）を使うことで、デスクトップメタファとしての「現実世界の道具・物との類推」がそのまま働き、ユーザは特別な説明なしにその対象が何であるかを直感的に理解できる。作業内容の抽象性・実物の有無という対象の性質の違いに応じて、図記号の表現方法を使い分けることで、それぞれの場合に最も自然な類推が働くようにしているといえる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) ゴミ箱に捨てるという現実世界との類推により、削除という抽象操作をドラッグという直接操作で表現でき、現実世界の経験を応用して理解できる。　(2) アプリは実物のない抽象的な機能を象徴する図記号（Ⓐ）で、ファイル等は実物を模した図（Ⓑ）で表すことで、それぞれの対象に最も自然な類推（デスクトップメタファ）が働き直感的に理解できる。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識A — 「炎上」的リスクとデスクトップメタファの共通点</span>
+        <p>問題A-1で見たインターネット選挙運動の課題（誹謗中傷・なりすまし等）は、SNSという「多対多の通信」と匿名性の組み合わせがもたらす負の側面であり、他年度の共通問題（2017年度・2018年度）で扱われる「炎上」の議論とも根は同じである。一方、問題A-2のデスクトップメタファは、GUIというユーザインタフェースが「現実世界との類推」を利用してユーザの認知的な負担を減らす仕組みであり、情報技術の恩恵を安全かつ直感的に享受するための工夫といえる。同じ情報技術でも、開放性・匿名性が使われ方によってリスクにも利便性にもなりうる、という視点を両問から読み取ることができる。</p>
+      </div>
+
+      <h3>問題B — 未知容量の袋を測るアルゴリズム</h3>
+      <div class="ex">
+        <span class="box-label">問題設定</span>
+        <p>未知の容量$C$（正の実数）をもつ袋がある。大きさ$1,2,4,\dots,2^{n-1}$の商品がそれぞれ複数個ずつある。袋に商品を入れると、袋の容量はその商品の大きさだけ減少し、残り容量を超える大きさの商品は袋に入れられない。次の2種類の指示のみを用いて、$C$を超えない最大の整数$\lfloor C\rfloor$を求めたい。</p>
+        <ul>
+          <li>質問 <code>A(大きさ)</code> — 指定した大きさの商品が（残り容量に）入れられるかどうかを調べる（袋の状態は変化しない）。</li>
+          <li>操作 <code>B(大きさ)</code> — 指定した大きさの商品を実際に袋に入れる（残り容量がその分減少する）。</li>
+        </ul>
+        <p>以下の3種類の手順を考える。手順3では、大きさを重い順に並べた配列$X=(X_1,X_2,\dots,X_n)=(2^{n-1},2^{n-2},\dots,4,2,1)$を用いる。</p>
+        <p><strong>手順1</strong></p>
+        <div class="mathblock">合計 ← 0
+while A(1) が可能 do
+&nbsp;&nbsp;B(1)
+&nbsp;&nbsp;合計 ← 合計 + 1
+done
+return 合計</div>
+        <p><strong>手順2</strong></p>
+        <div class="mathblock">合計 ← 0
+while A(2) が可能 do
+&nbsp;&nbsp;B(2)
+&nbsp;&nbsp;合計 ← 合計 + 2
+done
+return 合計</div>
+        <p><strong>手順3</strong></p>
+        <div class="mathblock">合計 ← 0
+i ← 1
+while i ≤ n do
+&nbsp;&nbsp;if A(Xi) が可能 then
+&nbsp;&nbsp;&nbsp;&nbsp;B(Xi)
+&nbsp;&nbsp;&nbsp;&nbsp;合計 ← 合計 + Xi
+&nbsp;&nbsp;endif
+&nbsp;&nbsp;i ← i + 1
+done
+return 合計</div>
+      </div>
+
+      <h3>問題B-1 — $C=5$のときの手順1・手順2の動作</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(1) $C=5$のとき、手順1・手順2はそれぞれ何回の質問（<code>A</code>の呼び出し）を行い、どのような値を返すか、動作の様子とともに答えよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>手順1</strong>：<code>A(1)</code>を繰り返し試し、可能な限り大きさ1の商品を入れ続ける。$C=5$のとき、1回目から5回目までの<code>A(1)</code>はいずれも「可能」と判定され、そのたびに<code>B(1)</code>が実行されて合計は$0\to1\to2\to3\to4\to5$と増えていく。5個入れた時点で残り容量は0になっているので、6回目の<code>A(1)</code>では残り容量0<1となり「不可能」と判定されてループが終了する。したがって<strong>質問回数は6回</strong>、返り値（合計）は<strong>5</strong>。</p>
+          <p><strong>手順2</strong>：同様に<code>A(2)</code>を繰り返し試す。$5\div2=2$余り$1$なので、1回目・2回目の<code>A(2)</code>は「可能」と判定され、合計は$0\to2\to4$と増える。残り容量は$5-4=1$となり、3回目の<code>A(2)</code>では残り容量1<2となり「不可能」と判定されてループが終了する。したがって<strong>質問回数は3回</strong>、返り値（合計）は<strong>4</strong>。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>手順1：質問6回、合計5。　手順2：質問3回、合計4。</div>
+      </details>
+
+      <h3>問題B-2 — 手順2終了時の合計（一般の$C$）</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(2) 一般の$C$に対して、手順2が終了した時点での合計はどのような値になるか答えよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>手順2は、大きさ2の商品を、残り容量が2未満になるまで入れ続ける手順である。すなわち終了時の合計は、$C$の整数部分のうち2の倍数として表せる最大の値、すなわち$C$を2で割った商（整数部分）の2倍になる。問題B-1で確認した$C=5$の場合も、$2\lfloor 5/2\rfloor=2\times2=4$となり、実際の答え（4）と一致している。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>合計 $=2\left\lfloor \dfrac{C}{2}\right\rfloor$</div>
+      </details>
+
+      <h3>問題B-3 — 手順3の実行例（$n=7$、$C=100$）</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(3) $n=7$、$C=100$のとき、手順3の動作を、質問回数と最終的な合計の値とともに答えよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>$n=7$なので$X=(64,32,16,8,4,2,1)$である。$i=1$から$i=7$まで、各回で必ず1回の<code>A(Xi)</code>質問を行いながら動作を追う。</p>
+          <div class="mathblock">i=1：A(64)？ 64≤100 → 可能 → B(64)、合計=64
+i=2：A(32)？ 64+32=96≤100 → 可能 → B(32)、合計=96
+i=3：A(16)？ 96+16=112&gt;100 → 不可能（スキップ）
+i=4：A(8)？ 96+8=104&gt;100 → 不可能（スキップ）
+i=5：A(4)？ 96+4=100≤100 → 可能 → B(4)、合計=100
+i=6：A(2)？ 100+2=102&gt;100 → 不可能（スキップ）
+i=7：A(1)？ 100+1=101&gt;100 → 不可能（スキップ）</div>
+          <p>ループはi=1からi=7までの7回すべてで実行され、そのたびに必ず1回の<code>A</code>質問を行っている（可能・不可能どちらの場合も質問自体は行う）ので、<strong>質問回数は7回</strong>。最終的な合計は$64+32+4=100$となり、これは$\lfloor 100\rfloor=100$と正しく一致している。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>質問回数7回（i=1〜7の各回で1回ずつ）。最終合計＝100（＝⌊100⌋）。</div>
+      </details>
+
+      <h3>問題B-4 — 質問回数の比較：手順1 vs 手順3</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(4) 一般の$C$、$n$に対して、手順1と手順3の質問回数を比較せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>手順1は、大きさ1の商品を1個ずつ入れ続けるため、$C$個の商品を入れ終えたあとにもう1回「不可能」の判定を受けるまで、およそ$\lfloor C\rfloor+1$回の質問を必要とする。すなわち質問回数は<strong>$C$に比例（$O(C)$、線形）</strong>して増えていき、$C$が大きくなるほど質問回数が際限なく増えていく。</p>
+          <p>一方、手順3は配列$X$の長さ、すなわち$n$回だけループが回り、各回でちょうど1回の質問を行うので、質問回数はつねに<strong>$n$回（$O(n)=O(\log C)$、対数的）</strong>で済む。$X_1=2^{n-1}$が扱える最大の大きさに対応するので、$n$は$C$のとりうる大きさをおおよそ二進数で表したときの桁数に相当する。したがって手順3は、手順1よりも指数的に少ない質問回数——いわば二分探索的な効率——で同じ$\lfloor C\rfloor$を求めることができる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>手順1の質問回数はおよそ$C$に比例（$O(C)$、線形）。手順3の質問回数はつねに$n$回（$O(n)=O(\log C)$、対数的）。手順3は手順1に比べ指数的に少ない質問回数で済む。</div>
+      </details>
+
+      <h3>問題B-5 — 追加情報$P_j$・$Q_k$による質問回数の削減</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(5) $1\lt j\leq n$のとき、情報$P_j$「$C\lt2^j$である」をあらかじめ知っている場合、手順3の質問回数はどれだけ減少するか、$n,j$を用いて答えよ。<br>
+        (6) $0\lt k\lt j\leq n$のとき、$P_j$とは異なる情報$Q_k$であって、これを知っていれば質問回数が$k$回減少するものを1つ挙げ、「$P_j$のみを知った場合の減少分」と「$Q_k$のみを知った場合の減少分」の和が、「$P_j$と$Q_k$の両方を知った場合の減少分」に一致することを示せ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>(5)</strong> $P_j$（$C\lt2^j$）を知っていれば、$2^j$以上の大きさの商品、すなわち$X_1=2^{n-1}$から$X_{n-j}=2^{j}$までの商品は、どのみち容量を超えて絶対に入らないと最初から分かる。したがってこれら$n-j$個の商品については<code>A</code>の質問自体を省略でき、質問回数は<strong>$n-j$回</strong>減少する。</p>
+          <p><strong>(6)</strong> $Q_k$として「$C$は$2^k$の倍数である（$C\equiv0\pmod{2^k}$）」を考える。手順3が貪欲に選ぶ商品は、$X_1$から$X_{n-k}$まで（サイズ$2^{n-1}$から$2^k$まで）はいずれも$2^k$の倍数であり、これらの中から選ばれた商品の合計も必ず$2^k$の倍数になる。$C$が$2^k$の倍数であれば、この時点での残り容量（スラック）$=C-（$それまでの合計$）$も$2^k$の倍数である。一方、手順3の貪欲な選び方の性質上、この残りスラックはつねに次に試す商品のサイズより小さい値、つまり$2^k$未満に留まる。$2^k$未満で、かつ$2^k$の倍数である非負整数は$0$しかないので、この時点での残りスラックは必ち$0$になる。したがって、それより小さい$X_{n-k+1}$から$X_n$まで（サイズ$2^{k-1}$から$1$までの、最も小さい$k$個の商品）は、容量ちょうど0が残っている状態からはどれも入る余地がなく、絶対に選ばれないと分かる。よってこれら$k$個については質問を省略でき、質問回数は<strong>$k$回</strong>減少する。</p>
+          <p>$0\lt k\lt j\leq n$のとき、$P_j$によって省略できる質問は配列の<strong>先頭</strong>$n-j$個（$X_1$から$X_{n-j}$まで）、$Q_k$によって省略できる質問は配列の<strong>末尾</strong>$k$個（$X_{n-k+1}$から$X_n$まで）である。$k\lt j$より、この先頭$n-j$個と末尾$k$個の範囲は重なり合わない（互いに素な区間）。したがって、両方の情報を知った場合に省略できる質問数は、両者を単純に足し合わせた$(n-j)+k$回に一致し、これは「$P_j$のみを知った場合の減少分$(n-j)$」と「$Q_k$のみを知った場合の減少分$k$」の和とちょうど等しい。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(5) $n-j$回減少。　(6) $Q_k$＝「$C$は$2^k$の倍数である」とすればよい。手順3の貪欲選択の性質上、$P_j$は配列先頭の$n-j$個、$Q_k$は配列末尾の$k$個の質問をそれぞれ省略でき、$k\lt j$のときこの2つの範囲は重ならないので、両方を知った場合の減少分は単純な和$(n-j)+k$に一致する。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識B — 二進表現による効率的な探索というテーマ</span>
+        <p>問題Bの全体は、「二進表現を使えば、線形な探索（手順1）を対数的な探索（手順3）に高速化できる」という、二分探索の考え方を一般化したテーマになっている。手順3が使う配列$X=(2^{n-1},\dots,2,1)$は、まさに$C$の整数部分を二進法で桁ごとに求めていく操作に対応しており、(5)(6)で見た情報$P_j$・$Q_k$は、それぞれ「上位の桁（大きい商品）」と「下位の桁（小さい商品）」に関する事前知識をどれだけ持っているかに対応する。この「階層的に絞り込んでいく」という発想は、大問2で扱ったフォルダの木構造（深さ優先で子・親をたどることで全体を体系的に探索できる）とも、根底で通じるものがある——どちらも、対象の構造（二進表現の桁、あるいは木構造の階層）を利用することで、無駄な確認（線形な総当たりや、閉路を持つグラフでの探索）を避け、効率よく目的の情報にたどり着ける、という共通の発想に基づいている。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2017.html">← 2017年度へ</a>
+    <a href="kakomon_2015.html">2015年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

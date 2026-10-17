@@ -1,0 +1,394 @@
+<!DOCTYPE html><!-- 「線形代数 第1回 線形写像と行列表現 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>線形代数 第1回 線形写像と行列表現 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="lin_02.html" data-page="linear/lin_02">次の回 →</a>
+    </div>
+  </div>
+</nav>
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-linear">
+  <h1>線形代数学演習　第1回</h1>
+  <p class="subtitle">線形写像の定義・行列表現・写像の合成・単射・全射</p>
+</div>
+
+<div class="container">
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 この回のテーマ</div>
+  <div class="section-card-body">
+    <p>線形代数の核心は「<strong>線形写像</strong>」だ。行列の計算ではなく，写像としての構造を理解することが目標。行列は線形写像を記述するための道具に過ぎない。</p>
+    <div class="def-box">
+      <div class="def-title">定義：線形写像</div>
+      <p>$\mathbb{R}$-ベクトル空間 $V, W$ の間の写像 $f : V \to W$ が<strong>線形写像</strong>（$\mathbb{R}$-線形写像）であるとは：</p>
+      <ul>
+        <li><strong>加法性：</strong>任意の $v_1, v_2 \in V$ に対して $f(v_1 + v_2) = f(v_1) + f(v_2)$</li>
+        <li><strong>スカラー倍性：</strong>任意の $v \in V$，$\alpha \in \mathbb{R}$ に対して $f(\alpha v) = \alpha f(v)$</li>
+      </ul>
+      <p>2条件は $f(av_1 + bv_2) = af(v_1) + bf(v_2)$（<strong>線形結合を保存する</strong>）という1条件にまとめられる。</p>
+    </div>
+    <div class="insight-box">
+      <div class="insight-title">💡 線形写像の基本性質（必ず成立）</div>
+      <p>$f$ が線形写像ならば $f(\mathbf{0}) = \mathbf{0}$（ゼロベクトルはゼロベクトルに写る）。</p>
+      <p>証明：$f(\mathbf{0}) = f(0 \cdot \mathbf{0}) = 0 \cdot f(\mathbf{0}) = \mathbf{0}$。</p>
+      <p>この性質を使うと「$f(\mathbf{0}) \ne \mathbf{0}$ ならば $f$ は線形写像でない」という反例の作り方がわかる。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 問題1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">1</span> $f_A$ が線形写像であること，写像の等しさ
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$，$f_A : \mathbb{R}^2 \to \mathbb{R}^2$ を $f_A(x) = Ax$ で定義する。</p>
+      <ol>
+        <li>$f_A$ が線形写像であることを示せ。</li>
+        <li>線形写像 $f : \mathbb{R}^2 \to \mathbb{R}^2$ が $f((1,0)^T) = (a, c)^T$，$f((0,1)^T) = (b,d)^T$ を満たすとき，$f = f_A$ であることを示せ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>(1) $f_A$ が線形写像であることの証明</strong></p>
+      <p>任意の $x = (i,j)^T$，$y = (k,l)^T \in \mathbb{R}^2$，$\alpha \in \mathbb{R}$ に対して：</p>
+      <p><strong>加法性：</strong>$x + y = (i+k, j+l)^T$ なので
+      $$f_A(x+y) = A(x+y) = \begin{pmatrix}a(i+k)+b(j+l)\\c(i+k)+d(j+l)\end{pmatrix} = \begin{pmatrix}ai+bj\\ci+dj\end{pmatrix} + \begin{pmatrix}ak+bl\\ck+dl\end{pmatrix} = f_A(x) + f_A(y)$$
+      </p>
+      <p><strong>スカラー倍性：</strong>$\alpha x = (\alpha i, \alpha j)^T$ なので $f_A(\alpha x) = A(\alpha x) = \alpha Ax = \alpha f_A(x)$。</p>
+      <p>よって $f_A$ は線形写像。$\blacksquare$</p>
+      <hr style="margin:1rem 0; border-color:#cbd5e1;">
+      <p><strong>(2) $f = f_A$ の証明</strong></p>
+      <p>任意の $(x,y)^T \in \mathbb{R}^2$ を固定する。$(x,y)^T = x(1,0)^T + y(0,1)^T$ と書けるから $f$ の線形性より</p>
+      $$f\binom{x}{y} = xf\binom{1}{0} + yf\binom{0}{1} = x\binom{a}{c} + y\binom{b}{d} = \binom{ax+by}{cx+dy} = A\binom{x}{y} = f_A\binom{x}{y}$$
+      <p>$(x,y)^T$ は任意だったから $f = f_A$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>(1) について：</strong>「$f_A(x) = Ax$ という形の写像を見たら，成分計算に入る前に，行列とベクトルの積そのものが分配則・スカラー倍と両立するように定義されている，ということを思い出す」のがパターン認識の第一歩。行列積の線形写像はほとんど自動的に線形性を満たす（この事実を裏付けるためだけに証明が必要）。</p>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 別解：index を使わない構造的な証明</div>
+        <p>成分 $(i,j)$ を書き出す代わりに，「$Ax$ は $A$ の列ベクトルの線形結合」という見方をすると計算なしで証明できる：$x=(i,j)^T=ie_1+je_2$ に対し $Ax = iAe_1+jAe_2$（$Ae_1,Ae_2$ は $A$ の列）。よって
+        $$A(x+y) = A\bigl((i+k)e_1+(j+l)e_2\bigr) = (i+k)Ae_1+(j+l)Ae_2 = (iAe_1+jAe_2)+(kAe_1+lAe_2) = Ax+Ay$$
+        スカラー倍も同様。この見方は「$A(\cdot)$ は基底ベクトルの線形結合を保つ」という一段抽象的な理由に基づくため，$n\times n$ 行列や一般の $\mathbb{R}^n\to\mathbb{R}^m$ でもそのまま通用する（成分の数が増えても議論を書き換える必要がない点が強み）。</p>
+      </div>
+
+      <div class="warn-box">
+        <div class="warn-title">⚠️ 具体的な数値で確かめただけでは証明にならない</div>
+        <p>$x=(1,2)^T,\,y=(3,4)^T$ のような具体的なベクトルで $f_A(x+y)=f_A(x)+f_A(y)$ を確認しても，それは「線形写像らしいという感触」を得る手段にはなるが証明ではない。証明では $x=(i,j)^T,\,y=(k,l)^T$ のように<strong>任意の</strong>成分を文字で置いて計算しなければならない。</p>
+      </div>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 線形写像は基底での値で決まる</div>
+        <p><strong>(2) の着想：</strong>任意の $(x, y)^T \in \mathbb{R}^2$ は標準基底で分解できる：$(x, y)^T = x(1,0)^T + y(0,1)^T$。</p>
+        <p>$f$ の線形性を使うと：$f((x,y)^T) = xf((1,0)^T) + yf((0,1)^T)$。</p>
+        <p>仮定より $f((1,0)^T) = (a,c)^T$，$f((0,1)^T) = (b,d)^T$ だから値が完全に決まる。</p>
+        <p><strong>なぜこの発想に至るか：</strong>$\mathbb{R}^2$ の元は無限個あるので「1点ずつ $f(v)=f_A(v)$ を確かめる」というアプローチは不可能だ，という壁に最初に気づくことが重要。線形性は「有限個の情報（基底での値）から無限個の情報（全ての点での値）を一意に復元できる」という圧縮装置であり，この性質を使えば無限個のチェックが2個のチェックに落ちる。困ったら「基底に分解できないか」を疑うのが定石。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 写像の等しさの定義</div>
+        <p>写像 $f, g : V \to W$ が等しい（$f = g$）とは：
+        定義域と値域が等しく，かつ任意の $v \in V$ に対して $f(v) = g(v)$。
+        </p>
+        <p>$\mathbb{R}^2$ の場合，任意の $(x,y)^T$ で値が一致すること。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 重要な一般原理：線形写像は基底での値で一意に決まる</div>
+        <p>$\mathbb{R}^n$ から $\mathbb{R}^m$ への任意の線形写像 $f$ は，$n$ 本の基底ベクトルの行き先を指定することで一意に決まる。この基底ベクトルの行き先を並べたものが表現行列だ。</p>
+        <p>$f(e_j) = $ （行列の第 $j$ 列）という対応関係が成立する。</p>
+        <p><strong>一般化：</strong>これは「線形写像の一意拡張定理」と呼ぶべき，線形代数全体を支える定理の $\mathbb{R}^2$ での具体例。$V$ の基底 $\{v_1,\ldots,v_n\}$ 上で値 $w_1,\ldots,w_n\in W$ を<em>自由に</em>指定すれば，それを拡張する線形写像 $f:V\to W$ がただ一つ存在する（基底でない生成系だと，値の指定に整合性条件が必要になる点が問題2との違い）。表現行列・基底変換・後の問題での議論はすべてこの原理の上に成り立っている。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">2</span> 線形写像の表現行列を求める
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>線形写像 $f : \mathbb{R}^2 \to \mathbb{R}^2$ が $f\!\left(\begin{pmatrix}2\\1\end{pmatrix}\right) = \begin{pmatrix}1\\3\end{pmatrix}$，$f\!\left(\begin{pmatrix}3\\4\end{pmatrix}\right) = \begin{pmatrix}2\\5\end{pmatrix}$ を満たすとき，$f = f_A$ と表すときの $2\times 2$ 行列 $A$ を求めよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$A = \begin{pmatrix}a&b\\c&d\end{pmatrix}$ とおく。$f_A\!\left(\begin{pmatrix}2\\1\end{pmatrix}\right) = (2a+b, 2c+d)^T = (1,3)^T$ より $2a+b=1,\ 2c+d=3$。$f_A\!\left(\begin{pmatrix}3\\4\end{pmatrix}\right) = (3a+4b, 3c+4d)^T = (2,5)^T$ より $3a+4b=2,\ 3c+4d=5$。</p>
+      <p>第一組：$2a+b=1$，$3a+4b=2$。前者の 4 倍から後者を引くと $5a = 2$，$a = 2/5$，$b = 1 - 2(2/5) = 1/5$。</p>
+      <p>第二組：$2c+d=3$，$3c+4d=5$。同様に $5c = 7$，$c = 7/5$，$d = 3 - 2(7/5) = 1/5$。</p>
+      $$A = \frac{1}{5}\begin{pmatrix}2 & 1 \\ 7 & 1\end{pmatrix} \quad \blacksquare$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>パターン認識：</strong>「線形写像 $f$ の，標準基底<em>ではない</em>2点での値が与えられている → 表現行列 $A$ を求めよ」という設定を見たら，本質は問題1(2)と同じ（$f(e_1), f(e_2)$ が分かれば $A$ の列が決まる）。ただし今回は $e_1,e_2$ での値が直接与えられていないので，一段階の変換が余分に必要になる。</p>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 解法1：未知数 $a,b,c,d$ を立てて連立方程式（模範解答の方法）</div>
+        <p>問題1(2) より，$A$ の第 $j$ 列は $f$ の標準基底での値。$(2,1)^T$ と $(3,4)^T$ で値がわかっているので，まず $f(e_1)$ と $f(e_2)$ を求める。</p>
+        <p>$(2,1)^T$ と $(3,4)^T$ を標準基底で表す連立方程式：$\alpha(2,1)^T + \beta(3,4)^T = (1,0)^T$ を解いて $f(1,0)^T = \alpha f(2,1)^T + \beta f(3,4)^T$。</p>
+        <p>あるいは模範解答のように，$A$ の成分 $a,b,c,d$ を未知数として「$A(2,1)^T=(1,3)^T$」「$A(3,4)^T=(2,5)^T$」という4本の1次方程式を直接立てて解く方法も素直で有効（今回はこちらを採用）。</p>
+      </div>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 解法2：行列方程式 $AP=Q$ を使う方法（別解）</div>
+        <p>与えられた2つの入力ベクトルを列に並べた行列 $P$，対応する出力を列に並べた行列 $Q$ を作る（kakomon「問1」と同じ考え方）：</p>
+        $$P = \begin{pmatrix}2&3\\1&4\end{pmatrix},\qquad Q = \begin{pmatrix}1&2\\3&5\end{pmatrix}$$
+        <p>条件は $AP=Q$（各列がそれぞれ $A(2,1)^T=(1,3)^T$，$A(3,4)^T=(2,5)^T$ を表す）。$\det P = 2\cdot4-3\cdot1=5\ne0$ なので $P$ は正則。</p>
+        $$P^{-1}=\frac{1}{5}\begin{pmatrix}4&-3\\-1&2\end{pmatrix},\qquad A=QP^{-1}=\frac{1}{5}\begin{pmatrix}1&2\\3&5\end{pmatrix}\begin{pmatrix}4&-3\\-1&2\end{pmatrix}=\frac{1}{5}\begin{pmatrix}2&1\\7&1\end{pmatrix}$$
+        <p>模範解答と同じ結果が得られる。連立方程式を4本立てるより，行列の演算にまとめる方が計算ミスを減らせることが多い（成分が3個以上に増える高次元では特にこちらが体系的）。</p>
+      </div>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 解法3：標準基底を与えられたベクトルの線形結合で表す方法</div>
+        <p>$(1,0)^T = \alpha(2,1)^T+\beta(3,4)^T$ を解く：$2\alpha+3\beta=1,\ \alpha+4\beta=0$ より $\alpha=4/5,\ \beta=-1/5$。線形性より</p>
+        $$f(1,0)^T = \tfrac{4}{5}f(2,1)^T - \tfrac{1}{5}f(3,4)^T = \tfrac{4}{5}\binom{1}{3}-\tfrac{1}{5}\binom{2}{5} = \binom{2/5}{7/5}$$
+        <p>これが $A$ の第1列と一致する。同様に $(0,1)^T=-\tfrac{3}{5}(2,1)^T+\tfrac{2}{5}(3,4)^T$ から第2列 $(1/5,1/5)^T$ も得られる。3つの解法がすべて同じ答えに収束することを確認しておくと理解が深まる。</p>
+      </div>
+
+      <div class="warn-box">
+        <div class="warn-title">⚠️ 見落としやすい前提：$(2,1)^T,(3,4)^T$ が1次独立であること</div>
+        <p>どの解法も，$(2,1)^T$ と $(3,4)^T$ が $\mathbb{R}^2$ の基底をなす（＝1次独立，＝$P$ が正則）ことに依存している。この2つが平行だったら，$A$ は一意に決まらない（情報不足）か，与えられた条件同士が矛盾する可能性がある。計算を始める前に $\det P\ne0$（ここでは $5\ne0$）を確認する癖をつけておくと安全。</p>
+      </div>
+
+      <p><strong>一般化：</strong>「基底以外の点での値から表現行列を求める」問題は，(i) 未知数を立てて連立方程式を解く，(ii) $A=QP^{-1}$ という行列方程式を解く，(iii) 与えられたベクトルの線形結合で標準基底を表す，という3つの同値なアプローチに整理できる。次元が大きくなるほど (ii) の行列演算にまとめる方が見通しがよくなる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">3</span> 写像の合成と行列の積
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$A, B$ がともに $2\times 2$ 行列で，$f_A, f_B : \mathbb{R}^2 \to \mathbb{R}^2$ を対応する線形写像とする。$f_A \circ f_B = f_{AB}$ を示せ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>任意の $x \in \mathbb{R}^2$ に対して</p>
+      $$(f_A \circ f_B)(x) = f_A(f_B(x)) = f_A(Bx) = A(Bx) = (AB)x = f_{AB}(x)$$
+      <p>定義域・値域ともに $\mathbb{R}^2$ で一致しており，任意の $x$ で値が等しいから $f_A \circ f_B = f_{AB}$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="insight-box">
+        <div class="insight-title">💡 写像の合成と行列の積の「一致」</div>
+        <p>$f_A \circ f_B$ は「先に $f_B$，次に $f_A$」という操作。行列の積 $AB$ も「先に $B$ を掛け，次に $A$ を掛ける」操作だ。これらが一致することを示す。</p>
+        <p><strong>注意：順番！</strong>写像の合成では $(f_A \circ f_B)(x) = f_A(f_B(x))$。行列積は右から掛ける。$(AB)x = A(Bx)$。</p>
+      </div>
+      <p>証明の流れは非常にシンプルで，結合律 $A(Bx) = (AB)x$ を使うだけ。これは行列積の定義から従う。</p>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 逆算：行列の積の定義はどこから来るのか</div>
+        <p>「行列の積の定義 $(AB)_{ij}=\sum_k A_{ik}B_{kj}$ はなぜあの形なのか」を，「合成と一致してほしい」という要求から逆算してみる。</p>
+        <p>$f_B(e_j)$ は $B$ の第 $j$ 列，つまり $f_B(e_j)=\sum_k B_{kj}e_k$。これに $f_A$ を作用させると，線形性より</p>
+        $$f_A(f_B(e_j)) = f_A\Bigl(\sum_k B_{kj}e_k\Bigr) = \sum_k B_{kj}f_A(e_k) = \sum_k B_{kj}\sum_i A_{ik}e_i = \sum_i\Bigl(\sum_k A_{ik}B_{kj}\Bigr)e_i$$
+        <p>これは「$f_A\circ f_B$ の表現行列の第 $(i,j)$ 成分は $\sum_k A_{ik}B_{kj}$」であることを意味する。行列積の定義 $(AB)_{ij}=\sum_k A_{ik}B_{kj}$ はまさにこれに一致するよう<strong>設計された</strong>もの。つまり「行列の積」は最初から「線形写像の合成を成分で表す道具」として定義されている，という経緯が見える。</p>
+      </div>
+
+      <div class="warn-box">
+        <div class="warn-title">⚠️ よくある間違い：合成の順序と行列の積の順序を逆にする</div>
+        <p>$f_A\circ f_B$（$B$ を先に適用）に対応する行列は $AB$（$A$ が左）であって $BA$ ではない。「合成記号 $\circ$ も行列の積も，右側にあるものを先に処理する」という共通のルールを持つ，と覚えると混同しにくい。行列の積は一般に非可換（$AB\ne BA$ が普通）なので，順序を取り違えると全く別の写像になってしまう。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 「無料の定理」：行列の積の結合律</div>
+        <p>行列の積が結合律 $(AB)C=A(BC)$ を満たすことを成分で愚直に検証すると煩雑だが，写像の合成との対応を使えば一瞬でわかる：関数の合成は常に結合的（$(f\circ g)\circ h = f\circ(g\circ h)$，写像の定義から自明）。$A\leftrightarrow f_A$ という対応が積と合成を保つ全単射（環同型）であれば，合成の結合律がそのまま行列の積の結合律に翻訳される。「成分計算をせずに，構造の対応だけから定理が手に入る」という好例。</p>
+      </div>
+
+      <p><strong>一般化：</strong>$f:\mathbb{R}^n\to\mathbb{R}^m$，$g:\mathbb{R}^m\to\mathbb{R}^p$ が線形写像で，それぞれの表現行列を $A$（$m\times n$），$B$（$p\times m$）とすると，$g\circ f$ の表現行列は $BA$（$p\times n$）。この事実は「$n$次正方行列の全体 $M_n(\mathbb{R})$ と，線形変換の合成でなす環 $\mathrm{End}(\mathbb{R}^n)$ が環として同型である」という代数的な言明の具体例であり，後の「表現行列の基底変換」の議論の土台になる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">4</span> 単射・全射と $\det A \ne 0$
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$A = \begin{pmatrix}a&b\\c&d\end{pmatrix}$ を実数係数の $2\times 2$ 行列とする．</p>
+      <ol>
+        <li>$f_A : \mathbb{R}^2 \to \mathbb{R}^2$ が単射・全射となるための必要十分条件を $a, b, c, d$ を用いてそれぞれ求めよ．</li>
+        <li>$a, b, c, d \in \mathbb{Z}$ とし，$f_A : \mathbb{Z}^2 \to \mathbb{Z}^2$ とみなす．これが単射・全射となるための必要十分条件を $a, b, c, d$ を用いてそれぞれ求めよ．</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>(1) 単射 $\Leftrightarrow$ $ad - bc \ne 0$</strong></p>
+      <p><strong>（$\Leftarrow$）$ad-bc \ne 0$ ならば単射：</strong></p>
+      <p>$f_A\binom{w}{x} = f_A\binom{y}{z}$ を仮定。$aw+bx = ay+bz$，$cw+dx = cy+dz$。</p>
+      <p>第1式を $d$ 倍し第2式を $b$ 倍して引くと $(ad-bc)w = (ad-bc)y$。$ad-bc \ne 0$ より $w = y$。同様に $x = z$。よって単射。</p>
+      <p><strong>（$\Rightarrow$）$ad-bc = 0$ ならば単射でない：</strong></p>
+      <p>$f_A$ が単射でないことを示す（$f_A(v) = 0$ を $v = 0$ 以外で解く）。$ad = bc$ のとき，$A\binom{-b}{a} = \binom{-ab+ba}{-cb+da} = \binom{0}{ad-bc} = \binom{0}{0}$（$ad=bc$ を用いた）。$a, b$ が両方 $0$ でなければ $(-b,a)^T \ne 0$ は核の元。一方 $a = b = 0$ なら $A\binom{d}{-c} = \binom{0 \cdot d + 0 \cdot(-c)}{cd + d(-c)} = \binom{0}{0}$ であり，$(c,d) \ne (0,0)$ のとき $(d,-c)^T \ne 0$ が核の元（$c = d = 0$ なら $A = O$ なので任意の非零ベクトルが核の元）。よって単射でない。</p>
+      <p><strong>全射の証明も同様：</strong>任意の $(\alpha,\beta)^T$ に対して $ax+by = \alpha, cx+dy = \beta$ の解の存在性が $ad-bc \ne 0$ と等価（Cramer の公式）。</p>
+      <hr style="margin:1rem 0; border-color:#cbd5e1;">
+      <p><strong>(2) $f_A : \mathbb{Z}^2 \to \mathbb{Z}^2$ が単射・全射の条件</strong></p>
+      <p>まず $a, b, c, d \in \mathbb{Z}$ が必要（$(1,0)^T$ や $(0,1)^T$ の行き先が $\mathbb{Z}^2$ に入るため）。以下 $a,b,c,d \in \mathbb{Z}$ を前提とする。</p>
+      <p><strong>単射 $\Leftrightarrow$ $\det A \ne 0$：</strong>(1) の議論は $\mathbb{R}$ 上の連立方程式の話なので $\mathbb{Z}^2$ 上でも同じ条件が成り立つ。</p>
+      <p><strong>全射 $\Leftrightarrow$ $\det A = \pm 1$：</strong>任意の $(\alpha,\beta)^T \in \mathbb{Z}^2$ に対して整数解 $x, y$ が存在することが必要十分。Cramer の公式 $x = \frac{\alpha d - \beta b}{\det A},\ y = \frac{\alpha (-c) + \beta a}{\det A}$ より，分子は整数だから $\det A \mid 1$，すなわち $\det A = \pm 1$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+
+      <div class="def-box">
+        <div class="def-title">定義：単射・全射・全単射</div>
+        <ul>
+          <li><strong>単射（injective）：</strong>$f(v_1) = f(v_2) \Rightarrow v_1 = v_2$（異なる入力からは必ず異なる出力）</li>
+          <li><strong>全射（surjective）：</strong>任意の $w \in W$ に対してある $v \in V$ があって $f(v) = w$（値域が $W$ 全体）</li>
+          <li><strong>全単射（bijective）：</strong>単射かつ全射（逆写像が存在）</li>
+        </ul>
+      </div>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 単射の証明の標準的手順</div>
+        <p>$f_A(v_1) = f_A(v_2)$ を仮定して $v_1 = v_2$ を示す（または $f_A(v) = 0 \Rightarrow v = 0$，核が自明であることを示す同値な方法）。</p>
+        <p>逆向き（$\det A = 0$ ならば単射でない）は，核に非自明な元を具体的に構成して見せる。</p>
+      </div>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 核の非自明な元 $(-b,a)^T$ はどこから来るか（アドジュゲート行列の視点）</div>
+        <p>模範解答は $ad=bc$ のとき $A(-b,a)^T=\binom{0}{ad-bc}=\binom{0}{0}$ という計算を「いきなり」示しているが，このベクトルはどうやって思いつくのか。答えは<strong>逆行列の公式（アドジュゲート行列）</strong>に隠れている。</p>
+        <p>$2\times2$ 行列 $A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ に対し，アドジュゲート（余因子行列）$\mathrm{adj}(A)=\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$ は，$\det A$ の値に関係なく常に</p>
+        $$A\cdot\mathrm{adj}(A) = \mathrm{adj}(A)\cdot A = (\det A)\,E$$
+        <p>を満たす恒等式である。$\det A=ad-bc=0$ のときは右辺が零行列になるので $A\cdot\mathrm{adj}(A)=O$。これは $\mathrm{adj}(A)$ の<strong>各列</strong>が $A$ の核に入っていることを意味する。$\mathrm{adj}(A)$ の第1列は $(d,-c)^T$，第2列は $(-b,a)^T$ — まさに模範解答が使ったベクトルたちだ。</p>
+        <p>つまり「$\det A=0$ のときに核の非自明な元をどう見つけるか」は，アドジュゲート行列の列を見るという機械的な手順に帰着できる。$a=b=0$ の場合に $(-b,a)^T=(0,0)^T$ となって使えなくなるのも，「もう一方の列 $(d,-c)^T$ を使えばよい」と自然に説明がつく（模範解答が2つのベクトルを使い分けている理由）。</p>
+      </div>
+
+      <div class="warn-box">
+        <div class="warn-title">⚠️ 見落としやすい場合分け：$a=b=0$ かつ $A=O$ のケース</div>
+        <p>模範解答は「$a,b$ が両方 $0$ でなければ $(-b,a)^T$」「$a=b=0$ なら $(d,-c)^T$」の2ケースに分けているが，さらに $c=d=0$（つまり $A=O$）のときは $(d,-c)^T=(0,0)^T$ も自明ベクトルになってしまう。この最後の場合は個別に「$A=O$ なら任意の非零ベクトルが核の元」と述べる必要がある（模範解答の最後の一文がこれを補っている）。<strong>$\det A=0$ の証明で場合分けを一つ忘れると証明に穴が空く</strong>典型例なので要注意。</p>
+      </div>
+
+      <p><strong>別の見方（次元定理から）：</strong>$\det A=0$ かつ $A\ne O$ なら $\mathrm{rank}(A)=1$（$2\times2$ でランクが $0$ でも $2$ でもない）。次元定理 $\dim\mathrm{Ker}+\dim\mathrm{Im}=2$ より $\dim\mathrm{Ker}=1$。よって「核が自明でない」ことは，具体的なベクトルを構成せずとも階数だけから即座にわかる（ただし非自明な元を<em>具体的に</em>与えるにはやはり方程式 $ax+by=0$ を解く必要がある — この2つのアプローチは補い合う関係にある）。</p>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 整数係数行列の逆行列が整数係数になる条件</div>
+        <p>逆行列の公式 $A^{-1} = \frac{1}{\det A}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$ において，$\det A$ が整数のとき逆行列の係数が整数になるには $\det A = \pm 1$ が必要十分。</p>
+        <p>これは整数論の言葉では $A \in \mathrm{GL}(2,\mathbb{Z})$ という条件に対応する。</p>
+      </div>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 (2)の全射の証明を「十分性」と「必要性」に分けて整理する</div>
+        <p>模範解答はCramerの公式を使って全射の証明を一気に書いているが，論理は2方向に分けて理解するとよい。</p>
+        <p><strong>十分性（$\det A=\pm1 \Rightarrow$ 全射）：</strong>$A^{-1}=\dfrac{1}{\det A}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$ の係数はすべて整数（$\det A=\pm1$ で割っても整数のまま）。よって任意の $(\alpha,\beta)^T\in\mathbb{Z}^2$ に対し $A^{-1}(\alpha,\beta)^T\in\mathbb{Z}^2$ が存在し，これが原像になる。</p>
+        <p><strong>必要性（全射 $\Rightarrow$ $\det A=\pm1$）：</strong>特に $(\alpha,\beta)=(1,0)^T$ が整数の原像 $(x,y)^T$ を持つなら，Cramerの公式より $x=d/\det A\in\mathbb{Z}$，$y=-c/\det A\in\mathbb{Z}$。同様に $(\alpha,\beta)=(0,1)^T$ から $-b/\det A\in\mathbb{Z}$，$a/\det A\in\mathbb{Z}$。したがって $a,b,c,d$ はすべて $\det A$ の倍数であり，特に $\dfrac{ad}{(\det A)^2}\in\mathbb{Z}$，$\dfrac{bc}{(\det A)^2}\in\mathbb{Z}$。よって
+        $$\frac{1}{\det A} = \frac{ad-bc}{(\det A)^2} \in \mathbb{Z}$$
+        すなわち $\det A \mid 1$，よって $\det A=\pm1$ が強制される。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 一般化：$\mathbb{R}$ と $\mathbb{Z}$ の違いは「単位元（unit）」の違い</div>
+        <p>$\mathbb{R}^2\to\mathbb{R}^2$ では全射条件が $\det A\ne0$（$\mathbb{R}$ の非零元はすべて逆元を持つ＝体）。$\mathbb{Z}^2\to\mathbb{Z}^2$ では条件が $\det A=\pm1$ に狭まる理由は，$\mathbb{Z}$ が体ではなく環であり，乗法逆元を持つ元（単位元，unit）が $\pm1$ の2つしかないからだ。この現象は一般の可換環 $R$ 上でも同様に成立する：$n$ 次正方行列 $A$（成分が $R$）が $R^n\to R^n$ の全単射を与える $\Leftrightarrow$ $\det A \in R^\times$（$R$ の単位群）。線形代数を後で「$R$-加群論」として学ぶとき，この問題がその最初の具体例になっている。</p>
+      </div>
+
+      <div class="thm-box">
+        <div class="thm-title">定理（$n$ 次正方行列の場合）</div>
+        <p>$n$ 次正方行列 $A$ に対し，次の3条件は同値：</p>
+        <ol>
+          <li>$\det A \ne 0$</li>
+          <li>$f_A : \mathbb{R}^n \to \mathbb{R}^n$ が全射</li>
+          <li>$f_A : \mathbb{R}^n \to \mathbb{R}^n$ が単射（よって全単射）</li>
+        </ol>
+        <p>有限次元の場合，単射 $\Leftrightarrow$ 全射（次元定理による）。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第1回を理解できているかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>線形写像の定義を「$f(av_1 + bv_2) = af(v_1) + bf(v_2)$」という1条件に圧縮して言えるか</li>
+          <li>$f(\mathbf{0}) = \mathbf{0}$ が必ず成立することを，スカラー倍性から導けるか</li>
+          <li>$f = f_A$ の証明で「定義域・値域が等しい + 任意の $x$ で値が等しい」という2点を示すことを意識しているか</li>
+          <li>$f(e_1) = $ (行列の第1列)，$f(e_2) = $ (行列の第2列) という対応を言えるか</li>
+          <li>与えられた2点の入出力ペアから行列 $A$ を求める方法（$A \cdot P = Q$ → $A = QP^{-1}$）を使えるか</li>
+          <li>$f_A \circ f_B = f_{AB}$（合成と行列積の順番が一致）を証明できるか</li>
+          <li>$f_A : \mathbb{R}^2 \to \mathbb{R}^2$ で「単射 $\Leftrightarrow$ 全射 $\Leftrightarrow$ $\det A \ne 0$」という同値を各方向で示せるか</li>
+          <li>$f_A : \mathbb{Z}^2 \to \mathbb{Z}^2$ の全単射条件が $\det A = \pm 1$（整数係数かつ det が ±1）になる理由を，逆行列の公式から説明できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- まとめ -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📌 第1回のまとめ</div>
+  <div class="section-card-body">
+    <ul>
+      <li><strong>線形写像の証明：</strong>加法性とスカラー倍性を定義から確認する（行列積の場合はほぼ自動）</li>
+      <li><strong>写像の等しさ：</strong>定義域・値域が一致し，任意の点で値が等しい</li>
+      <li><strong>線形写像は基底での値で決まる：</strong>$f(e_j)$ を並べた行列が表現行列</li>
+      <li><strong>合成と積：</strong>$f_A \circ f_B = f_{AB}$（順番に注意！）</li>
+      <li><strong>単射・全射と行列式：</strong>$\mathbb{R}^n \to \mathbb{R}^n$ では $\det A \ne 0 \Leftrightarrow$ 単射 $\Leftrightarrow$ 全射</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

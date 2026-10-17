@@ -1,0 +1,407 @@
+<!DOCTYPE html><!-- 「第6章 剛体の運動 | 力学A 講義ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第6章 剛体の運動 | 力学A 講義ノート</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="n6">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A 講義ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="n1.html" data-page="n1">第1章</a>
+      <a href="n2.html" data-page="n2">第2章</a>
+      <a href="n3.html" data-page="n3">第3章</a>
+      <a href="n4.html" data-page="n4">第4章</a>
+      <a href="n5.html" data-page="n5">第5章</a>
+      <a href="n6.html" data-page="n6" class="active">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>第6章　剛体の運動</h1>
+  <p class="subtitle">重心・運動量・角運動量・慣性モーメント，そしてカーリング</p>
+  <p class="meta">講義ノート「剛体」にもとづく</p>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <strong>この章について</strong><br>
+    多数の質点からなる系（剛体はその特別な場合）の運動を，重心の運動・全運動量・全運動エネルギー・
+    角運動量という「全体としての量」に注目してまとめる。最後に，剛体の回転運動を特徴づける
+    「慣性モーメント」を導入し，衝突と摩擦をともなうカーリングのストーン同士の衝突問題を解く
+    （ノートで途中まで立式されていた連立方程式を，最後まで解ききる）。
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#s1">1. 重心の運動</a>
+    <a href="#s2">2. 質点系の運動量</a>
+    <a href="#s3">3. 運動エネルギーの分解</a>
+    <a href="#s4">4. 角運動量</a>
+    <a href="#s5">5. 剛体の慣性モーメント</a>
+    <a href="#s6">6. 円板の慣性モーメント</a>
+    <a href="#s7">7. 例題：カーリングの衝突</a>
+  </div>
+
+  <!-- =================== §1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="s1">
+    <div class="sec-header">
+      <div class="sec-tag">Section 1</div>
+      <h2>重心の運動</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        $N$ 個の質点 $m_i$（$i=1,\dots,N$，位置ベクトル $\mathbf r_i$）からなる系を考える。質点 $i$ には，
+        外部からの力 $\mathbb F_i$（外力）と，他の質点 $j$ から受ける力 $\mathbb F_{ij}$（内力，相互作用）がはたらく：
+      </p>
+      <div class="mathblock">$$m_i\ddot{\mathbf r}_i = \mathbb F_i + \sum_{j=1}^N \mathbb F_{ij}$$</div>
+      <p>すべての質点についてこれを足し合わせる：</p>
+      <div class="mathblock">
+        $$\sum_i m_i\ddot{\mathbf r}_i = \sum_i\mathbb F_i + \underbrace{\sum_{i=1}^N\sum_{j=1}^N\mathbb F_{ij}}_{=\ 0\ (\text{作用反作用})}
+        \qquad\cdots(1)$$
+      </div>
+      <p>
+        （$\mathbb F_{ij}=-\mathbb F_{ji}$（ニュートンの第３法則）より，二重和は $i,j$ を入れ替えたペアどうしが
+        完全に打ち消し合ってゼロになる。）
+      </p>
+
+      <div class="def">
+        <span class="box-label">定義 6.1　重心</span>
+        $$\mathbf r_G \equiv \frac{1}{\sum_i m_i}\sum_i m_i\mathbf r_i = \frac1M\sum_i m_i\mathbf r_i \qquad(M:\text{全質量})$$
+      </div>
+
+      <p>これを使うと，(1)式の左辺は：</p>
+      <div class="mathblock">$$(1)\text{の左辺} = M\cdot\frac1M\sum_im_i\ddot{\mathbf r}_i = M\ddot{\mathbf r}_G$$</div>
+
+      <div class="thm">
+        <span class="box-label">重心の運動方程式</span>
+        $$\boxed{M\ddot{\mathbf r}_G = \mathbb F}\qquad(\mathbb F\equiv\textstyle\sum_i\mathbb F_i:\text{全外力})$$
+        <p>
+          重心の運動は，あたかも全質量 $M$ が重心の一点に集まり，そこに全外力 $\mathbb F$ が作用したときの
+          運動と同じである。内力は（どんなに複雑でも）重心の運動には一切影響しない。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §2 =================== -->
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <div class="sec-tag">Section 2</div>
+      <h2>質点系の運動量</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>各質点の位置を，重心からの相対位置 $\mathbf r_i'$ を使って $\mathbf r_i=\mathbf r_G+\mathbf r_i'$ と書く。全運動量は：</p>
+      <div class="mathblock">
+        $$\mathbb P \equiv \sum_i \mathbb p_i = \sum_i m_i\dot{\mathbf r}_i = \sum_i m_i(\dot{\mathbf r}_G+\dot{\mathbf r}_i')$$
+      </div>
+      <p>
+        定義から $M\mathbf r_G=\sum_im_i\mathbf r_i=\sum_im_i(\mathbf r_G+\mathbf r_i')=M\mathbf r_G+\sum_im_i\mathbf r_i'$ なので，
+        $\sum_im_i\mathbf r_i'=0$（重心から見た「質量で重み付けした位置」の総和は常にゼロ）。これを時間微分すれば
+        $\sum_im_i\dot{\mathbf r}_i'=0$ も成り立つ。よって：
+      </p>
+      <div class="mathblock">$$\mathbb P = \sum_im_i\dot{\mathbf r}_G = M\dot{\mathbf r}_G$$</div>
+      <div class="thm">
+        <span class="box-label">結論</span>
+        $$\boxed{\dot{\mathbb P} = \mathbb F}$$
+        <p>全運動量は「重心の速度 $\times$ 全質量」に等しく，その時間変化は全外力に等しい（§1 と同内容を運動量の言葉で言い換えたもの）。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §3 =================== -->
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <div class="sec-tag">Section 3</div>
+      <h2>運動エネルギーの分解</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>全運動エネルギーも同様に，重心の運動と相対運動に分解できる：</p>
+      <div class="mathblock">
+        $$T = \sum_i\frac12m_i(\dot{\mathbf r}_i)^2 = \frac12\sum_im_i(\dot{\mathbf r}_G+\dot{\mathbf r}_i')^2
+        = \frac12\sum_im_i\left((\dot{\mathbf r}_G)^2+2\dot{\mathbf r}_G\cdot\dot{\mathbf r}_i'+(\dot{\mathbf r}_i')^2\right)$$
+      </div>
+      <p>中央の交差項は $\dot{\mathbf r}_G\cdot\sum_im_i\dot{\mathbf r}_i'=\dot{\mathbf r}_G\cdot 0=0$（§2 の結果）となって消えるので：</p>
+      <div class="thm">
+        <span class="box-label">運動エネルギーの分解</span>
+        $$\boxed{T = \frac12M(\dot{\mathbf r}_G)^2 + \frac12\sum_im_i(\dot{\mathbf r}_i')^2}$$
+        <p>全体の運動エネルギーは，重心の運動エネルギーと，重心から見た相対運動エネルギーの和に等しい。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §4 =================== -->
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <div class="sec-tag">Section 4</div>
+      <h2>角運動量</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 6.2　全角運動量</span>
+        $$\mathbb L \equiv \sum_i \mathbf r_i\times m_i\dot{\mathbf r}_i$$
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details open>
+        <summary>導出：$\dot{\mathbb L}$ が外力のモーメントの和に等しいこと</summary>
+        <div class="proof-body">
+          <p>時間微分すると，積の微分法則から：</p>
+          <div class="mathblock">
+            $$\dot{\mathbb L} = \underbrace{\sum_i\dot{\mathbf r}_i\times m_i\dot{\mathbf r}_i}_{=0\ (\text{同じベクトル同士の外積})}
+            + \sum_i\mathbf r_i\times m_i\ddot{\mathbf r}_i
+            = \sum_i\mathbf r_i\times\left(\mathbb F_i+\sum_j\mathbb F_{ij}\right)
+            = \sum_i\mathbf r_i\times\mathbb F_i + \sum_{i}\sum_j\mathbf r_i\times\mathbb F_{ij}$$
+          </div>
+          <p>
+            後半の二重和がゼロになることを示す。まず，添字 $i\leftrightarrow j$ を入れ替え，
+            $\mathbb F_{ji}=-\mathbb F_{ij}$（作用反作用）を使うと：
+          </p>
+          <div class="mathblock">
+            $$\sum_i\sum_j\mathbf r_i\times\mathbb F_{ij} = \sum_j\sum_i \mathbf r_j\times\mathbb F_{ji} = \sum_i\sum_j\mathbf r_j\times(-\mathbb F_{ij})
+            = -\sum_i\sum_j\mathbf r_j\times\mathbb F_{ij}$$
+          </div>
+          <p>よって $\displaystyle\sum_i\sum_j(\mathbf r_i+\mathbf r_j)\times\mathbb F_{ij}=0$。一方，内力 $\mathbb F_{ij}$ が
+          常に２質点を結ぶ直線方向を向く「中心力」であると仮定すると（$\mathbf r_i-\mathbf r_j$ と平行なので），</p>
+          <div class="mathblock">$$\sum_i\sum_j(\mathbf r_i-\mathbf r_j)\times\mathbb F_{ij} = 0 \qquad(\text{平行な外積はゼロ})$$</div>
+          <p>２つの式を足し合わせると：</p>
+          <div class="mathblock">$$2\sum_i\sum_j\mathbf r_i\times\mathbb F_{ij}=0 \quad\Longrightarrow\quad \sum_i\sum_j\mathbf r_i\times\mathbb F_{ij}=0$$</div>
+        </div>
+        <div class="qed">∎</div>
+      </details>
+
+      <div class="thm">
+        <span class="box-label">結論</span>
+        $$\boxed{\dot{\mathbb L} = \sum_i\mathbf r_i\times\mathbb F_i}$$
+        <p>（角運動量の時間変化）＝（外力のモーメントの和）。内力（相互作用）は，作用反作用の法則と，
+        それが中心力（結ぶ直線方向）であるという２つの性質のおかげで，全角運動量には寄与しない。
+        同様に，「重心まわりの角運動量の時間変化」＝「重心まわりの外力のモーメントの和」も成り立つ。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §5 =================== -->
+  <div class="section" id="s5">
+    <div class="sec-header">
+      <div class="sec-tag">Section 5</div>
+      <h2>剛体の慣性モーメント（$xy$平面内の回転）</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        重心から見た（２次元・$xy$平面内の）質点系の運動を考える。質点 $i$ の重心系での位置を極座標で
+        $\mathbf r_i=(r_i\cos\varphi_i, r_i\sin\varphi_i, 0)$ とすると，第3章 §1 の結果より
+        $\dot{\mathbf r}_i = (\dot r_i\cos\varphi_i-r_i\dot\varphi_i\sin\varphi_i,\ \dot r_i\sin\varphi_i+r_i\dot\varphi_i\cos\varphi_i,\ 0)$。
+        外積 $\mathbf r_i\times\dot{\mathbf r}_i$ の $z$ 成分を計算すると（$x_i\dot y_i - y_i\dot x_i$）：
+      </p>
+      <div class="mathblock">
+        $$(\mathbf r_i\times\dot{\mathbf r}_i)_z = r_i^2\dot\varphi_i$$
+      </div>
+      <p>したがって，角運動量の $z$ 成分は：</p>
+      <div class="mathblock">$$L_z = \sum_i m_i r_i^2 \dot\varphi_i$$</div>
+
+      <div class="def">
+        <span class="box-label">剛体の定義</span>
+        「剛体」とは，任意の２点間の距離が変化しない質点系のことをいう。これより，重心系から見ると，
+        剛体を構成するすべての質点は，同じ角速度で（１つの剛体として）回転する：$\dot\varphi_i = \dot\varphi$
+        （$i$ に依らない）。
+      </div>
+
+      <p>よって：</p>
+      <div class="mathblock">$$L_z = \dot\varphi\underbrace{\sum_i m_ir_i^2}_{\displaystyle I\ (\text{時間変化しない})}$$</div>
+
+      <div class="def">
+        <span class="box-label">定義 6.3　慣性モーメント</span>
+        $$I \equiv \sum_i m_i r_i^2 \qquad\Longrightarrow\qquad L_z = I\dot\varphi, \qquad \dot L_z = I\ddot\varphi$$
+        <p>
+          剛体では各質点間の距離 $r_i$（重心からの距離）が変化しないので，$I$ は運動中ずっと一定値であり，
+          回転運動の「（質量の）回転しにくさ」を表す量になっている。並進運動の質量 $m$ に対応する量である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §6 =================== -->
+  <div class="section" id="s6">
+    <div class="sec-header">
+      <div class="sec-tag">Section 6</div>
+      <h2>円板の慣性モーメント</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        半径 $a$，質量 $M$，一様な面密度 $\sigma$（$=M/(\pi a^2)$）の円板が，中心を通り面に垂直な軸のまわりに
+        回転する場合の慣性モーメントを求める。半径 $r$，厚み $dr$ の細い輪（質量 $2\pi r\,dr\,\sigma$）に分割して積分する：
+      </p>
+      <div class="mathblock">
+        $$I = \int_0^a (2\pi r\,dr)\,\sigma\cdot r^2 = 2\pi\sigma\int_0^a r^3\,dr = 2\pi\sigma\cdot\frac{a^4}{4} = \frac\pi2\sigma a^4$$
+      </div>
+      <p>$\pi a^2\sigma = M$（円板の全質量）を使って $\sigma$ を消去すると：</p>
+      <div class="sol">
+        <span class="box-label">円板の慣性モーメント</span>
+        $$I_{\text{円板}} = \frac12 M a^2$$
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §7 =================== -->
+  <div class="section" id="s7">
+    <div class="sec-header">
+      <div class="sec-tag">Section 7</div>
+      <h2>例題：カーリングのストーン同士の衝突</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">設定</span>
+        <p>
+          同じ質量 $m$，半径 $a$，慣性モーメント $I=\frac12ma^2$（円板とみなす）の２つのカーリングストーンが，
+          中心を結ぶ直線（$x$方向とする）上で正面衝突する。ストーン１は，衝突前に速度 $(u_0,v_0)$，角速度
+          $\omega_0$ を持ち，ストーン２は静止（速度 $0$，角速度 $0$）していた。衝突後，ストーン１の速度は
+          $(u_1,v_1)$・角速度 $\omega_1$，ストーン２の速度は $(u_2,v_2)$・角速度 $\omega_2$ になったとする。
+        </p>
+      </div>
+
+      <h3 id="s7-1">$x$方向（線を結ぶ方向）：通常の反発係数の問題</h3>
+      <div class="mathblock">
+        $$m u_0 = mu_1+mu_2 \quad(\text{運動量保存}),\qquad e = \frac{u_2-u_1}{u_0}\quad(\text{反発係数})$$
+      </div>
+      <details>
+        <summary>解く</summary>
+        <div class="proof-body">
+          <p>２式から $u_1,u_2$ を求める（連立１次方程式）：</p>
+          <div class="mathblock">$$u_1 = \frac{u_0(1-e)}{2}, \qquad u_2 = \frac{u_0(1+e)}{2}$$</div>
+        </div>
+      </details>
+
+      <h3 id="s7-2">$y$方向（線を結ぶ方向に垂直）と回転：摩擦をともなう連立方程式</h3>
+      <p>
+        接触点での摩擦により，$y$方向の力積 $F$（大きさ未知）が両ストーンに反対向きにはたらき，
+        同時に接触点のまわりの回転（半径 $a$ が腕の長さ）にも影響する。以下の関係が成り立つ：
+      </p>
+      <div class="mathblock">
+        $$\begin{cases}
+        m v_0 = mv_1+mv_2 & (y\text{方向の運動量保存})\\
+        I(\omega_1-\omega_0) = -Fa & (\text{ストーン1の角運動量変化})\\
+        I\,\omega_2 = -Fa & (\text{ストーン2の角運動量変化})\\
+        v_2 - a\omega_2 = v_1+a\omega_1 & (\text{接触点で滑らない条件})
+        \end{cases}$$
+      </div>
+      <p>
+        $R \equiv I/(ma^2)$ とおく（円板なので $R=\frac12$）。ノートはここで，$v_1,v_2$ の式を導いたところで
+        時間切れになっている。以下，$\omega_1,\omega_2$ まで含めて最後まで解く。
+      </p>
+
+      <details open>
+        <summary>導出：連立方程式を最後まで解く</summary>
+        <div class="proof-body">
+          <p>
+            $y$方向の力積と運動量の関係を，ストーン２について個別に見ると，静止状態から力積 $F$ を受けて
+            $v_2$ になったので $mv_2=F$，つまり $F=mv_2$。これを使って，角運動量の式から $\omega_1,\omega_2$ を
+            $v_2$ で表す：
+          </p>
+          <div class="mathblock">
+            $$\omega_2 = -\frac{Fa}{I} = -\frac{v_2}{Ra}, \qquad
+            \omega_1 = \omega_0 - \frac{Fa}{I} = \omega_0 - \frac{v_2}{Ra}$$
+          </div>
+          <p>これを「滑らない条件」$v_2-a\omega_2=v_1+a\omega_1$ に代入する：</p>
+          <div class="mathblock">
+            $$v_2 - a\left(-\frac{v_2}{Ra}\right) = v_2\left(1+\frac1R\right) = \frac{v_2(R+1)}{R}$$
+          </div>
+          <div class="mathblock">
+            $$v_1+a\left(\omega_0-\frac{v_2}{Ra}\right) = v_1+a\omega_0-\frac{v_2}{R}$$
+          </div>
+          <p>両辺を等しいとおいて整理すると：</p>
+          <div class="mathblock">
+            $$\frac{v_2(R+1)}{R}+\frac{v_2}{R} = v_1+a\omega_0
+            \quad\Longrightarrow\quad \frac{v_2(R+2)}{R} = v_1+a\omega_0
+            \quad\Longrightarrow\quad v_1 = \frac{v_2(R+2)}{R}-a\omega_0$$
+          </div>
+          <p>これを運動量保存則 $v_1+v_2=v_0$ に代入すると：</p>
+          <div class="mathblock">
+            $$\frac{v_2(R+2)}{R}-a\omega_0+v_2 = v_0 \quad\Longrightarrow\quad v_2\cdot\frac{2(R+1)}{R} = v_0+a\omega_0$$
+          </div>
+        </div>
+      </details>
+
+      <div class="sol">
+        <span class="box-label">結論（一般の $R$）</span>
+        $$v_2 = \frac{R(v_0+a\omega_0)}{2(1+R)}, \qquad
+        v_1 = v_0-v_2 = \frac{(2+R)v_0 - Ra\omega_0}{2(1+R)}$$
+        $$\omega_2 = -\frac{v_2}{Ra} = -\frac{v_0+a\omega_0}{2a(1+R)}, \qquad
+        \omega_1 = \omega_0+\omega_2 = \omega_0-\frac{v_0+a\omega_0}{2a(1+R)}$$
+      </div>
+
+      <div class="note">
+        <span class="box-label">円板の場合（$R=\frac12$）の数値</span>
+        <p>$R=\frac12$ を代入すると：</p>
+        <div class="mathblock">
+          $$v_1 = \frac{5v_0-a\omega_0}{6}, \qquad v_2 = \frac{v_0+a\omega_0}{6}$$
+        </div>
+        <div class="mathblock">
+          $$\omega_1 = \frac{2}{3}\omega_0 - \frac{v_0}{3a}, \qquad \omega_2 = -\frac{v_0}{3a}-\frac{\omega_0}{3}$$
+        </div>
+        <p>
+          注目すべきは，衝突前は静止していたストーン２が，衝突後には $v_2\ne0$ の並進速度<strong>と</strong>
+          $\omega_2\ne0$ の回転をともに得ている点である。これは，衝突前のストーン１の回転 $\omega_0$ と
+          横方向の速度 $v_0$ が，接触点での摩擦を介して結合し，両方のストーンの並進運動と回転運動を
+          互いに移し合うことを意味している。ノートに $v_1$（負になりうる，と注記あり）とある通り，
+          $\omega_0$ が大きく $v_0$ が小さい場合には $v_1<0$（衝突後にストーン１が逆向きに跳ね返る）ことも起こりうる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="n5.html">← 第5章</a>
+    <a href="index.html">トップへ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

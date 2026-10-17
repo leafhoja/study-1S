@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="theme-color" content="#0a4f5c"><title>第4章　情報の伝達と通信 | 情報 講義ノート</title><link rel="stylesheet" href="../../common.css"><link rel="stylesheet" href="../style.css"><script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']],tags:'ams'},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script></head><body data-nav-page="lecture-第4章"><nav class="navbar"><div class="navbar-inner"><a class="navbar-brand" href="../index.html">情報</a><div class="navbar-links"><a href="../../index.html" class="nav-back">← 学習ノート</a><a href="../index.html">トップ</a><a href="index.html" class="active">講義ノート</a></div></div></nav><div class="hero"><h1>第4章　情報の伝達と通信</h1><p class="subtitle">情報｜田中哲郎クラス講義ノート</p><p class="meta">プロトコル・ネットワーク・暗号</p></div><div class="container"><div class="mot"><span class="box-label">概要</span><p>このページは講義スライドの流れを節単位に組み直し、用語の関係と学習上の要点を説明する。プロトコル・ネットワーク・暗号を中心に、定義だけでなく、なぜ必要か、どのように使うかまで確認する。</p></div><div class="page-toc"><strong>章内目次</strong><ol><li><a href="#ch4-protocol">1. 通信を支える「決め事」— プロトコルと階層化</a></li><li><a href="#ch4-identify">2. 通信相手をどう特定するか — 名前とID</a></li><li><a href="#ch4-address">3. IPアドレスとルーティング</a></li><li><a href="#ch4-dns">4. DNSによる名前解決</a></li><li><a href="#ch4-relay">5. URLの構造とネットワークの中継・制御</a></li><li><a href="#ch4-web">6. ウェブの通信 — HTTP・Cookie・通信相手の確認</a></li><li><a href="#ch4-crypto">7. 共通鍵暗号と公開鍵暗号</a></li><li><a href="#ch4-signature">8. 電子署名 — 改ざん検知と本人性の確認</a></li><li><a href="#ch4-pki">9. 公開鍵の信頼をどう確保するか — 証明書とPKI</a></li></ol></div>
+<div class="section" id="ch4-protocol"><div class="sec-header"><div class="sec-tag">Protocol</div><h2>通信は「決め事の積み重ね」でできている</h2></div><div class="sec-body">
+<p>LINEでメッセージを送る、ウェブページを開く、といった操作の裏側では、物理的に離れた、メーカーも設計も異なる機器同士がデータをやり取りしている。これが成立するのは、送り手と受け手が<strong>あらかじめ共有した約束事</strong>に従っているからである。第2章で見た「情報システムを構成要素へ分解する」という見方を、ここでは通信という一つの機能そのものに向ける。</p>
+<div class="def"><span class="box-label">定義　プロトコル（通信規約）</span><p><strong>プロトコル</strong>とは、データの表現形式、通信の開始・終了の合図、誤りが起きたときの扱いなど、通信に関わる決め事の集合である。プロトコルが共有されているからこそ、異なるメーカーの機器・異なるOSのソフトウェア同士でも、送ったデータを受け手が正しく解釈できる。</p></div>
+<p>実際の通信は、単一の巨大なプロトコルではなく、役割ごとに積み重ねられた<strong>階層</strong>として設計されている。これは第2章のアプリ・OS・ハードウェアの分離と同じ発想で、各層は一つ下の層が提供する機能だけを使い、自分より上の層には自分の役割だけを提供する。こうすることで、無線LANが有線イーサネットに置き換わっても、その上で動くアプリケーションやウェブサービスに手を加える必要がない。</p>
+<div class="diagram"><img src="img/第4章/tcpip-layers.png" alt="TCP/IPモデルの4階層と、各層の主なプロトコル・宛先の指定方法" style="max-width:720px;width:100%;height:auto;"><div class="diagram-cap">TCP/IPモデルの4階層と、各層の主なプロトコル・宛先の指定方法（講義スライドより）</div></div>
+<div class="note"><span class="box-label">TCP/IPの4層と宛先の指定方法</span><ul><li><strong>アプリケーション層：</strong>HTTP・SMTP・DNS・DHCPなど。宛先はURLなど、人間が扱いやすい形で指定する。</li><li><strong>トランスポート層：</strong>TCP・UDP。宛先はIPアドレスとポート番号——同じ機器上で動く複数のアプリを区別するのがポート番号の役割である。</li><li><strong>インターネット層：</strong>IP。宛先はIPアドレスそのもので、機器を一意に識別する。</li><li><strong>ネットワークインタフェース層：</strong>イーサネットなど。宛先はMACアドレスで、同じ物理的な線・電波が届く範囲での機器識別に使う。</li></ul></div>
+<p>上位層に行くほど人間にとって扱いやすい名前（URL）になり、下位層に行くほど機械が直接処理しやすい固定長の番号（IPアドレス、MACアドレス）になる、という対応を意識すると、この後の節で扱うアドレス・DNS・URLの関係が整理しやすくなる。</p>
+</div></div>
+
+<div class="section" id="ch4-identify"><div class="sec-header"><div class="sec-tag">Naming</div><h2>通信相手をどう特定するか — 人のための名前と機械のためのID</h2></div><div class="sec-body">
+<p>通信を始めるには、まず相手を指定しなければならない。ここで区別すべきなのは、<strong>人間が読んで選ぶための名前</strong>と、<strong>機械が機器を一意に識別するためのID</strong>という、性質の異なる2種類の識別子が使われているという点である。</p>
+<div class="ex"><span class="box-label">具体例で見る名前とIDの違い</span><ul><li><strong>Bluetooth：</strong>利用者が変更できる「人が読むための名前」とは別に、機器ごとに固定された48ビットのBluetooth Device Addressが存在する。名前を変更しても、PC等はこの固有IDで機器を認識しているため、過去に接続した機器へ問題なく再接続できる。</li><li><strong>無線LAN：</strong>人間が接続先を選ぶ際に見るESSID（例：0000UTokyo）と、アクセスポイントごとに決まる48ビットのBSSIDの2つがある。同じESSIDを複数のAPが名乗っていても、BSSIDで個々のAPを区別できる。</li></ul></div>
+<p>通信相手そのものの識別だけでなく、<strong>通信相手以外の対象へIDを与える発想</strong>も広く使われている。たとえば出版済みの論文に与えられるDOI（Digital Object Identifier）は、<code>10.15083/00043124</code>のような恒久的な識別子であり、<code>https://doi.org/10.15083/00043124</code>という形でその論文の所在地を取得できる。論文自体の保存場所が将来変わっても、DOIという識別子は変わらないという設計である。</p>
+<p>ここまでの例が示すのは、<strong>IDを知っているだけでは通信はできない</strong>ということである。実際に通信するには、IDから「今どこに、どうやって到達すればよいか」という具体的な通信手段を得る仕組みが別途必要になる。次節以降で扱うIPアドレスとDNSは、まさにこの「IDから通信手段を得る」役割を担っている。</p>
+</div></div>
+
+<div class="section" id="ch4-address"><div class="sec-header"><div class="sec-tag">Addressing</div><h2>IPアドレスの構造とルーティング</h2></div><div class="sec-body">
+<h3>IPアドレスは階層構造を持つ</h3>
+<div class="def"><span class="box-label">定義　IPアドレス</span><p>インターネット層で機器を識別する番号。現在は32ビットの<strong>IPv4</strong>と128ビットの<strong>IPv6</strong>の2種類が使われている（本章の例示は主にIPv4）。IPアドレスは一続きの番号ではなく、<strong>ネットワークアドレス</strong>と<strong>ホスト番号</strong>から成る階層構造を持つ。ネットワークをひとまとめにして扱うことで、経路表の規模や管理の手間を抑えている。</p></div>
+<div class="diagram"><img src="img/第4章/ip-address.png" alt="IPアドレスの階層構造（ネットワークアドレス＋ホスト番号）とサブネットマスクによる2進数計算" style="max-width:760px;width:100%;height:auto;"><div class="diagram-cap">IPアドレスの階層構造とサブネットマスクの計算（講義スライドより）</div></div>
+<p>「ネットワーク172.16.0.0/16の中のホスト172.16.2.10」のように、<strong>/16</strong>や<strong>/22</strong>という表記（CIDR表記）は、先頭何ビットまでがネットワークアドレスかを表す。残りのビットがそのネットワーク内でのホスト番号になる。ネットワークアドレスとホスト番号を分離する計算には、各ビットを掛け合わせるAND演算（<code>x&amp;0=0</code>、<code>x&amp;1=x</code>）を使い、IPアドレスとサブネットマスクをビットごとにANDすればネットワークアドレスが取り出せる。</p>
+<div class="ex"><span class="box-label">計算例</span><p>ネットワーク172.16.36.0/22に属するホスト172.16.39.4について、ネットワークアドレスを求めよ。</p><details><summary>解答を見る</summary><div class="proof-body"><p>172.16.39.4を2進数にすると<code>10101100 00010000 00100111 00000100</code>。/22はサブネットマスクの先頭22ビットが1であることを意味するので、マスクは<code>11111111 11111111 11111100 00000000</code>。両者をビットごとにANDすると<code>10101100 00010000 00100100 00000000</code>、すなわち172.16.36.0が得られる。残りの10ビットがこのネットワーク内でのホスト番号にあたる。</p></div></details></div>
+<h3>パケット交換とルーティング</h3>
+<p>インターネットでは、データを<strong>IPパケット</strong>という単位に分割して送る。各パケットには通信元と宛先のIPアドレスが含まれており、経路上の複数のルータがこれを中継しながら宛先まで届ける。</p>
+<div class="diagram"><img src="img/第4章/routing.png" alt="クライアントとウェブサーバの間で、複数のルータ・ファイアウォールを経由してTCP・HTTPSの通信が行われる様子" style="max-width:720px;width:100%;height:auto;"><div class="diagram-cap">クライアント〜ウェブサーバ間の通信経路（IPアドレス・ポート番号・ルータ・ファイアウォールを経由する）（講義スライドより）</div></div>
+<div class="thm"><span class="box-label">経路制御（ルーティング）</span><p>ルータは、パケットの宛先IPアドレスを見て、自身が持つ<strong>経路表</strong>にしたがって次にどのルータへ転送するかを決定する。経路表は動的に更新されることもあり、特定の1台が全経路を把握しているわけではない。各ルータが自分の知っている範囲だけを判断して中継をリレーしていくことで、インターネット全体としては特定の管理者を必要とせずに、規模の拡大や一部の障害に対して柔軟に対応できる。</p></div>
+</div></div>
+
+<div class="section" id="ch4-dns"><div class="sec-header"><div class="sec-tag">Resolution</div><h2>DNSによる名前解決</h2></div><div class="sec-body">
+<p>IPアドレスは機械にとって扱いやすい反面、人間が覚えて入力するには不向きである。<strong>DNS（Domain Name System）</strong>は、<code>www.u-tokyo.ac.jp</code>のような人間に読みやすいドメイン名と、実際の通信に使うIPアドレスとの対応をとる仕組みである。</p>
+<div class="diagram"><img src="img/第4章/dns.png" alt="ドメイン名の木構造（ルート、jp、ac.jp、u-tokyo.ac.jpのように後ろから辺をたどる）とDNSサーバーの種類" style="max-width:720px;width:100%;height:auto;"><div class="diagram-cap">ドメイン名の木構造とDNSサーバーの役割分担（講義スライドより）</div></div>
+<div class="def"><span class="box-label">ドメイン名の構造</span><p>ドメイン名は<strong>後ろから読み、ピリオドで区切って木構造</strong>をなす。全ドメインを全体集合とみなすと、辺を1本降りるごとに部分集合が絞り込まれていく——たとえば<code>jp</code>の中の<code>ac.jp</code>、その中の<code>u-tokyo.ac.jp</code>、さらにその中の<code>www.u-tokyo.ac.jp</code>という具合である。</p></div>
+<p>この木構造を実際に管理・応答するサーバーにも役割分担がある。</p>
+<div class="note"><span class="box-label">DNSサーバーの3つの役割</span><ul><li><strong>権威サーバー：</strong>ドメインの階層ごとに、その部分木の情報を管理するサーバー。</li><li><strong>リゾルバ：</strong>DNSの利用者からの問い合わせを受け取り、権威サーバーをたどって解答するサーバー。</li><li><strong>ルートサーバー：</strong>トップレベルドメイン（jp、com等）の権威サーバー。世界に13クラスタしか存在しない、木構造の根にあたる特別なサーバーである。</li></ul></div>
+<p>毎回すべての問い合わせでルートサーバーからたどり直すのは非効率なので、<strong>キャッシュ</strong>を使う。一度得たドメイン名とIPアドレスの対応は、<strong>TTL（有効期間）</strong>の間だけ保持して再利用し、権威サーバーへの問い合わせ回数と応答の遅延を減らす。ただし、TTLの間はドメイン側でIPアドレスを変更しても利用者側にすぐには反映されない、というキャッシュ特有の遅延も生じる。</p>
+</div></div>
+
+<div class="section" id="ch4-relay"><div class="sec-header"><div class="sec-tag">Relay</div><h2>URLの構造とネットワークの中継・制御</h2></div><div class="sec-body">
+<h3>URLの基本構造</h3>
+<p>World Wide Web上のドキュメントは<strong>URL</strong>で指定する。URLは<strong>プロトコル・ドメイン名・パス・（変数）</strong>という4つの部分から構成される。</p>
+<div class="diagram"><img src="img/第4章/url-structure.png" alt="URLの基本構造の例：https://www.bing.com/search?q=computer をプロトコル・ドメイン名・パス・変数に分解" style="max-width:720px;width:100%;height:auto;"><div class="diagram-cap">URLの基本構造（講義スライドより）</div></div>
+<p>たとえば<code>https://www.bing.com/search?q=computer</code>では、<code>https</code>が通信に使うプロトコルを指定し、<code>www.bing.com</code>がDNSでIPアドレスに変換されるドメイン名、<code>search</code>がサーバ内のパス、<code>q=computer</code>が変数（オプションのキーと値）にあたる。この構造を知っていれば、初めて見るURLでも「通信先」「その中のどの資源か」「どんな条件を渡しているか」を切り分けて読める。</p>
+<h3>通信の中継と制御</h3>
+<p>組織のネットワークの出入り口では、通信を無条件に素通りさせるのではなく、監視・制御する仕組みが置かれる。</p>
+<div class="def"><span class="box-label">ファイアウォール</span><p>組織等の出入り口のルータで通信を監視・遮断する仕組み。マルウェア配布などでブラックリストに掲載されたIPアドレスとの通信を遮断する運用が代表例である。<strong>OP25B（Outbound Port 25 Blocking）</strong>は、迷惑メール（SPAM）送信によく使われる25番ポートでの外向き通信を、多くのファイアウォールがブロックする対策である。</p></div>
+<div class="warn"><span class="box-label">ブラックリスト運用の副作用</span><p>日本中央競馬会（JRA）のサイトがgamblingのジャンルに分類され、東京大学のファイアウォールで遮断された結果、たまたま共同研究をしていた農学部の通信まで巻き添えで止まってしまったことがある。ブラックリストによる遮断は、対象を大きなカテゴリで括るほど、無関係な正当な通信まで止めてしまう副作用を伴う。</p></div>
+<div class="def"><span class="box-label">アドレス変換（NAT）とVPN・プロキシ</span><p>IPv4は32ビットしかなく、世界中の機器に直接グローバルなIPアドレスを割り当てるのは難しい。そこで組織内部では<strong>プライベートアドレス</strong>（192.168.0.0/16、172.16.0.0/12、10.0.0.0/8）を使い、外部と通信するときだけIPアドレスとポート番号を変換して代理通信する（UTokyo WiFiやECCS端末のIPアドレスなどがこの例にあたる）。<strong>VPN（Virtual Private Network）</strong>は組織外からの通信をあたかも組織内からの通信であるかのように扱う技術であり、<strong>プロキシサーバー</strong>は主にウェブについての代理通信を提供する仕組みである。</p></div>
+</div></div>
+
+<div class="section" id="ch4-web"><div class="sec-header"><div class="sec-tag">Web</div><h2>ウェブの通信 — HTTP・Cookie・通信相手の確認</h2></div><div class="sec-body">
+<h3>要求と応答、そして複数ファイルからなるページ</h3>
+<p>古典的なウェブの表示は単純である。ウェブブラウザがウェブサーバー上のHTMLファイルを<strong>要求（request）</strong>し、サーバーはそれに対する<strong>応答（response）</strong>としてファイルを送り返し、ブラウザがそれを表示する。このやり取りの決め事が<strong>HTTP（HyperText Transfer Protocol）</strong>である。ただし、実際のウェブページは1つのHTMLファイルだけで完結せず、画像ファイルやブラウザ上で動くJavaScriptファイルなど、しばしば別のウェブサーバー上にある複数の別ファイルを組み合わせて構成されている。第2章でGoogle Mapsを題材にNetworkタブを観察したのと同じように、一見一枚に見える画面の裏側で多数の要求・応答が発生している。</p>
+<h3>Cookie — 状態を持たないHTTPの上に連続性を作る</h3>
+<div class="def"><span class="box-label">Cookie</span><p>HTTPの通信は1回の要求＋応答で完結してしまうため、ログイン状態のように複数回の通信にまたがってサービスを受け続ける仕組みが別途必要になる。そこで、サーバは<strong>クライアントを識別する符号（Cookie）</strong>をランダムに生成し、最初の応答（<code>Set-Cookie</code>ヘッダ）でブラウザに渡す。以降、ブラウザはこの符号を自分からサーバへの通信に付け加えることで、サーバは同じ利用者からの通信であると識別できる。</p></div>
+<p>Cookieの活用例には、同じURLでも個人ごとに異なる内容を見せる（ログイン時など）ことや、閲覧履歴に合わせた広告を表示することが挙げられる。自サイト以外のドメインが発行する<strong>サードパーティークッキー</strong>は、複数サイトをまたいだ行動追跡に使われるため、プライバシー保護の観点から規制が進んでいる（GDPRについては第10章で扱う）。</p>
+<h3>通信相手の確認</h3>
+<div class="warn"><span class="box-label">なぜ「見た目」だけでは確認できないのか</span><p>パスワードを盗む目的の偽サイトは数多く存在する。URLを目で見て確認する対策には限界があり、<code>g00gle.com</code>のように紛らわしいURLを使われたり、公衆の無料Wi-Fiで改ざんされたDNSサーバーへ誘導されたりすると、正しく見えるURL・IPアドレスを指定していても、実際には偽のサーバーに接続してしまう。途中の通信経路自体が信用できない場合でも、<strong>接続先のウェブサーバーそのものが正しい</strong>ことを確認できるようにするのが、電子署名と電子証明書を用いた<strong>HTTPS</strong>である（仕組みは§7〜§9で扱う）。</p></div>
+<p>電子メールでも、送信者のドメイン全体を詐称される問題がある。<strong>SPF（Sender Policy Framework）</strong>はドメインの正規の送信サーバーのIPアドレスをDNSに指定しておき、それ以外のIPアドレスから送られたメールを信用しない、という対策である。<strong>DKIM（DomainKeys Identified Mail）</strong>は送信サーバーがメールに電子署名を付与し、DNSに登録された証明書で検証できない署名のメールを信用しない、という対策である。どちらも、DNSという信頼できる名前解決の仕組みを土台にして、なりすましを防いでいる点が共通する。</p>
+</div></div>
+
+<div class="section" id="ch4-crypto"><div class="sec-header"><div class="sec-tag">Cryptography</div><h2>共通鍵暗号と公開鍵暗号 — なぜ鍵を分けるのか</h2></div><div class="sec-body">
+<div class="def"><span class="box-label">共通鍵暗号と公開鍵暗号</span><ul><li><strong>共通鍵暗号：</strong>暗号化と復号に同じ鍵を使う方式。処理は高速だが、通信相手とその1つの鍵をあらかじめ安全に共有しておく必要がある（鍵配送の問題）。</li><li><strong>公開鍵暗号：</strong>ある鍵（公開鍵）で暗号化した文は、対になる別の鍵（秘密鍵）でなければ復号できない方式。公開鍵は誰にでも渡してよく、秘密鍵だけを本人が厳重に管理すればよい。</li></ul></div>
+<div class="diagram"><img src="img/第4章/encryption.png" alt="共通鍵暗号（暗号化した鍵で復号可能）と公開鍵暗号（暗号化した鍵では復号不可能）の比較" style="max-width:600px;width:100%;height:auto;"><div class="diagram-cap">共通鍵暗号と公開鍵暗号の違い（講義スライドより）</div></div>
+<p>公開鍵暗号の代表例が<strong>RSA</strong>や<strong>楕円曲線暗号</strong>である。これらは、大きな数の<strong>素因数分解</strong>や<strong>離散対数問題</strong>のように、計算量的に解くことが極めて困難な数学的問題を安全性の基礎に置いている——公開鍵から秘密鍵を計算で求めようとしても、現実的な時間では終わらない、という前提である。</p>
+<div class="warn"><span class="box-label">「難しさ」は計算資源に対する相対的な性質である</span><p>素因数分解や離散対数問題が「難しい」というのは、現在使われているコンピュータを前提にした話であり、絶対的に解けないという意味ではない。量子コンピュータが実用化されれば、同じ問題が効率的に解けるようになる可能性が指摘されている。暗号方式の安全性は固定的な性質ではなく、その時代の計算資源との相対関係で評価すべきものである。</p></div>
+<p>公開鍵暗号は機密通信だけでなく、<strong>認証</strong>——アクセスしている相手が主張どおりの本人・機器であるかの確認——にも使われる。認証で防ぎたい問題は、<strong>なりすまし・改ざん・否認</strong>の3つに整理できる。ここで公開鍵と秘密鍵の非対称性が重要になる。公開鍵は複製されて複数の人が持ってよいが、秘密鍵は常にただ1人（1台）が運用する。したがって「誰の秘密鍵か」「誰の（その秘密鍵に対応する）公開鍵か」「その公開鍵を誰が利用するか」という3つを混同しないことが、次節以降の署名・証明書の仕組みを理解する鍵になる。</p>
+</div></div>
+
+<div class="section" id="ch4-signature"><div class="sec-header"><div class="sec-tag">Signature</div><h2>電子署名 — 改ざん検知と本人性の確認</h2></div><div class="sec-body">
+<div class="def"><span class="box-label">一方向ハッシュ関数と電子指紋</span><p><strong>一方向ハッシュ関数</strong>（例：SHA-256）は、任意の長さのメッセージから固定長の「電子指紋」（メッセージダイジェスト）を計算する関数である。求められる性質は<strong>衝突耐性</strong>——元のメッセージがほんの一部でも変われば、得られるハッシュ値も別のものになり、後から偶然同じハッシュ値を持つ別の文書を作ることが事実上できない、という性質である。この性質のおかげで、ハッシュ値を比較するだけで改ざんの有無を検知できる。</p></div>
+<div class="diagram"><img src="img/第4章/digital-signature.png" alt="一方向ハッシュ関数SHA-256でメッセージから電子指紋を計算し、改ざんされた文は別の電子指紋になることを示す図（教科書図4.7）と、秘密鍵を用いて署名を付与する手順（教科書図4.8）" style="max-width:720px;width:100%;height:auto;"><div class="diagram-cap">一方向ハッシュ関数による電子指紋の計算と、秘密鍵による署名の付与（教科書図4.7・図4.8、講義スライドより）</div></div>
+<div class="def"><span class="box-label">署名と検証の手順</span><p><strong>署名：</strong>署名者はメッセージのハッシュ値を計算し、それを自分の秘密鍵で処理する（RSA・ECDSAなどの署名手順）ことで署名を作る。<strong>検証：</strong>受信者は受け取ったメッセージから同じハッシュ関数で改めてハッシュ値を計算し、署名者の公開鍵を使ってその署名が正しいかを検証する。両者が一致すれば、メッセージが改ざんされておらず、かつ対応する秘密鍵の持ち主が確かに署名したことが確認できる——なりすましと改ざんの両方を1つの仕組みで検出できる点が電子署名の強みである。</p></div>
+<div class="diagram"><img src="img/第4章/signature-flow.png" alt="署名者がメッセージのハッシュ値を秘密鍵で署名する流れ（教科書図4.8）と、受信者が公開鍵でハッシュ値を再計算・検証する流れ（教科書図4.9）" style="max-width:720px;width:100%;height:auto;"><div class="diagram-cap">署名の作成（送信側）と検証（受信側）の流れ（教科書図4.8・図4.9、講義スライドより）</div></div>
+<div class="note"><span class="box-label">マイナンバーカードの例（試験範囲外）</span><p>マイナンバーカードには2種類の電子証明書が搭載されている。署名用電子証明書は氏名・住所・生年月日・性別の基本4情報を含むが、利用者証明用電子証明書は基本4情報を含まない。同じ「本人であることを示す」証明書でも、用途によって開示する情報の範囲を変える設計になっている。</p></div>
+<p>なお、実際に手を動かして確認したい場合は、gpgコマンドを使って鍵の生成・暗号化・署名の検証を試す演習（はいぱーワークブック「26.8. GPG」）が用意されている。</p>
+</div></div>
+
+<div class="section" id="ch4-pki"><div class="sec-header"><div class="sec-tag">Trust</div><h2>公開鍵の信頼をどう確保するか — 証明書とPKI</h2></div><div class="sec-body">
+<p>前節までの署名・検証は、「正しい公開鍵を最初から持っている」ことを前提にしていた。しかし、<strong>偽の公開鍵を本物だと思って受け取ってしまえば</strong>、それ以降の検証はすべて意味を失う——攻撃者は自分の秘密鍵とペアになった偽の公開鍵を本人のものだと偽って渡し、あたかも正しい署名であるかのように見せかけることができてしまう。</p>
+<div class="ex"><span class="box-label">具体例で考える — 公開鍵への署名</span><p>aさんから公開鍵aを受け取ったカラスは、それが本当にaさん本人のものか確信が持てない。ここで、bさんが公開鍵aに対して署名しているとする。カラスがすでにbさんの公開鍵bを信頼して持っていれば、公開鍵aに付与された署名を公開鍵bで検証することで、「aさんの公開鍵a」であることを、bさんへの信頼を通じて確認できる。これは<strong>信頼の拡張</strong>——直接は知らない相手を、すでに信頼している別の相手の保証によって信頼する、という考え方である。ウェブの文脈では、人物a＝ウェブサーバー、カラス＝ウェブブラウザに対応する。</p></div>
+<div class="def"><span class="box-label">電子証明書とPKI（公開鍵基盤）</span><p><strong>電子証明書</strong>は、公開鍵・ドメイン名や所在地などの補足情報・署名（発行者による）をひとまとめにしたものである。ウェブサーバーは自分の電子証明書を保持し、その署名者は<strong>認証局（CA）</strong>である。認証局が組織の身元を審査したうえで証明書を発行・署名する、この一連の仕組みを<strong>PKI（公開鍵基盤）</strong>と呼ぶ。</p></div>
+<div class="diagram"><img src="img/第4章/pki.png" alt="組織が持つ公開鍵と証明書に対して認証局が発行・署名を行い、ルート認証局から中間認証局を経てウェブサーバに至る信頼の連鎖（教科書図4.11）" style="max-width:720px;width:100%;height:auto;"><div class="diagram-cap">認証局による証明書の発行と、ルート認証局から中間認証局を経てウェブサーバへ至る信頼の連鎖（教科書図4.11、講義スライドより）</div></div>
+<p>認証局自身の証明書も、さらに上位の認証局によって署名されうる。<strong>ルート認証局→中間認証局→……→ウェブサーバー</strong>という署名の連鎖が、木構造をなす形で「信頼」を末端まで拡張していく。</p>
+<div class="diagram"><img src="img/第4章/certificate-chain.png" alt="ブラウザがあらかじめ保持する証明書リストと照合して、ウェブサーバの証明書が信頼できるかを検証する図（教科書図4.12）" style="max-width:720px;width:100%;height:auto;"><div class="diagram-cap">ブラウザが保持する証明書リストとの照合によるウェブサーバ証明書の検証（教科書図4.12、講義スライドより）</div></div>
+<p>ブラウザはあらかじめ多数の<strong>ルート証明書</strong>を信頼できるものとして保持している（証明書リスト）。ウェブサーバーが提示する証明書から、署名をたどって中間認証局の証明書、さらにルート証明書へとさかのぼり、ブラウザが持つ証明書リストのどれかに行き着けば、そのウェブサーバーは信頼できると判断する。これにより、途中の通信経路（公衆Wi-Fiや改ざんされたDNSなど）を信用できない状況でも、<strong>接続先のウェブサーバー自体が正当である</strong>ことをHTTPSとして確認できる——これが§6で触れた「通信相手の確認」の技術的な裏付けである。</p>
+</div></div><div class="warn exam-focus"><span class="box-label">過去問との接続 — 試験で何が問われるか</span><ul><li><a href="../過去問/共通問題/kakomon_2021.html"><strong>2021共通 大問1</strong></a>：DNSとIP通信の役割分担が問われた。</li><li><a href="../過去問/共通問題/kakomon_2022.html"><strong>2022共通 大問1</strong></a>：暗号、電子署名、証明書、PKIを手順として説明させる。</li><li><a href="../過去問/共通問題/kakomon_2023.html"><strong>2023共通 大問1</strong></a>：DNSの階層構造とキャッシュの更新を追う。</li><li><a href="../過去問/共通問題/kakomon_2024.html"><strong>2024共通 大問1</strong></a>：公開鍵暗号によるチャレンジ・レスポンス認証が出題された。</li></ul><p>用語を単独で暗記するのでなく、題材のどこにその概念が現れ、どの条件を根拠に判断するかを説明できるようにする。</p></div><div class="note"><span class="box-label">この章のまとめ</span><p>プロトコル・ネットワーク・暗号は独立した暗記事項ではなく、情報を表現し、処理し、伝え、社会で安全に利用するための一連の考え方としてつながっている。各節の太字語を自分の言葉で説明できるか確認しよう。</p></div><div class="page-nav"><a href="第3章.html">← 前へ</a><a href="第5章.html">次へ →</a></div></div><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer><script src="../nav.js"></script><script src="../../common.js?v=20260718-texcopy"></script><script src="../../access-ui.js"></script></body></html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#164e63">
+<title>2015年度 過去問解説 | アルゴリズム入門</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+<script>
+MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams'}, options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body class="algorithm-page" data-nav-page="kakomon_2015">
+<nav class="navbar">
+<div class="navbar-inner"><a class="navbar-brand" href="index.html">アルゴリズム入門</a>
+<div class="navbar-links"><a href="../index.html" class="nav-back">← 学習ノート</a><a href="index.html">トップ</a><a href="lecture1.html" data-page="lecture1">第1回</a><a href="lecture2.html" data-page="lecture2">第2回</a><a href="index.html#exams">過去問</a>
+</div>
+</div></nav>
+<div class="hero">
+<h1>2015年度 過去問解説</h1>
+<p class="subtitle">トリボナッチ数列・数値誤差・道路網の経路数</p>
+<p class="meta">1A · 共通試験 · 年度は原本の表題に準拠</p>
+</div>
+<main class="container">
+<div class="intro-box">
+<p>共通試験の解答例と解説。トリボナッチ数列・数値誤差・道路網の経路数を扱う。問題番号・空欄記号は原本に対応する。<a href="https://lecture.ecc.u-tokyo.ac.jp/johzu/joho-kagaku/exam/common-exam-2015.pdf" target="_blank" rel="noopener">2015年度 共通試験問題（出典）</a>を手元で参照しながら読もう。</p>
+<p>以下は独自に作成した解答例であり、公式解答ではない。原題のコードはRuby。空欄解答はRubyの記法に合わせ、Pythonで示す実装にはその旨を明記する。計算量は、特記がなければ基本演算を定数時間とする問題文のモデルで評価する。</p>
+</div>
+<nav class="toc" aria-label="ページ内目次"><a href="#q1">問題1 トリボナッチ数列の3通りの計算</a><a href="#q2">問題2 解の公式と数値積分</a><a href="#q3">問題3 道路網の経路数</a></nav>
+<section class="section" id="q1">
+<div class="sec-header">
+<h2>問題1 トリボナッチ数列の3通りの計算</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答（Ruby）</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>n &lt;= 1</td></tr>
+<tr><td>B</td><td>n == 2</td></tr>
+<tr><td>C</td><td>tri_rec(n-1) + tri_rec(n-2) + tri_rec(n-3)</td></tr>
+<tr><td>D</td><td>p1</td></tr>
+<tr><td>E</td><td>c</td></tr>
+<tr><td>F</td><td>p1 + p2 + p3</td></tr>
+<tr><td>G</td><td>i == 0 || i == j + 1</td></tr>
+<tr><td>H</td><td>n - 2</td></tr></tbody></table>
+</div>
+<p>(1) 基底T₀=T₁=0,T₂=1を先に処理する。(2) ループに入る前は(p3,p2,p1,c)=(T₀,T₁,T₂,T₃)。各反復で古い値を左へ送り、最後に新しいcを計算する。</p>
+<p>(3) 状態ベクトルを$(T_k,T_{k-1},T_{k-2})^\top$とすると、遷移行列は</p>
+<div class="mathblock">$$A=\begin{pmatrix}1&amp;1&amp;1\\1&amp;0&amp;0\\0&amp;1&amp;0\end{pmatrix},\qquad (T_n,T_{n-1},T_{n-2})^\top=A^{n-2}(1,0,0)^\top.$$</div>
+<p>したがってb[0][0]がTₙになる。</p>
+<p>(4) 素朴な再帰は同じ項を繰り返し求め、指数時間（例えば上界$O(3^n)$）。ループ版は$O(n)$時間、追加領域$O(1)$。行列版は<strong>matpowerを二分法で実装すれば</strong>$O(\log n)$時間。matpowerの実装が未指定なので、単純にn回掛けるなら行列版も$O(n)$であり、高速化は無条件ではない。</p>
+</div>
+</section>
+<section class="section" id="q2">
+<div class="sec-header">
+<h2>問題2 解の公式と数値積分</h2>
+</div>
+<div class="sec-body">
+<h3>(1) 二次方程式</h3><ol><li>0.1,−0.4,0.3は有限の二進数で表せず、表現・演算の丸めがある。整数的に正確な係数の場合と末尾が違う。</li><li>判別式 $b^2-4ac$ が非常に小さく、大きく近い値の差により桁落ちする。ほぼ重根なので根も係数の微小変化に敏感になる。</li><li>b²に比べ4acが極端に小さく、減算で情報落ちして判別式がb²と同じになり得る。その平方根とbが打ち消し合い、片方の分子が0になる。</li></ol>
+<h3>(2) 四半円の台形積分</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答（Ruby）</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>i * delta</td></tr>
+<tr><td>B</td><td>s * delta</td></tr></tbody></table>
+</div>
+<p>端点f(0)=1の重みが1/2、f(1)=0なので終点項は省略できる。残りは $f(i\delta)=\sqrt{1-(i\delta)^2}$ を加える。</p>
+<p>(2-2) 台形で曲線を近似する離散化誤差がある。関数は下に凸ではなく上に凸（凹）なので、台形の面積は真の面積を過小評価する。分割を細かくすると近似が改善する。</p>
+<p>(2-3) nを無限に大きくすれば実際のfloat計算も単調に改善するとは限らない。丸めの累積・情報落ちが目立つためである。また端点1で導関数が発散するので、滑らかな関数に対する台形法の$O(n^{-2})$評価をそのまま適用しない。</p>
+</div>
+</section>
+<section class="section" id="q3">
+<div class="sec-header">
+<h2>問題3 道路網の経路数</h2>
+</div>
+<div class="sec-body">
+<p>(1) 原図のNS,WEを用いて小さい座標から表を埋めると、(0,0)→(3,3)は $\boxed{5}$ 通り。</p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>y＼x</th><th>0</th><th>1</th><th>2</th><th>3</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+<tr><td>1</td><td>1</td><td>2</td><td>3</td><td>3</td></tr>
+<tr><td>2</td><td>1</td><td>1</td><td>1</td><td>3</td></tr>
+<tr><td>3</td><td>1</td><td>1</td><td>2</td><td>5</td></tr></tbody></table>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答（Ruby）</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>WE[0][x-1]</td></tr>
+<tr><td>B</td><td>NS[y-1][0]</td></tr>
+<tr><td>C</td><td>WE[y][x-1]</td></tr>
+<tr><td>D</td><td>NS[y-1][x]</td></tr>
+<tr><td>E</td><td>1</td></tr>
+<tr><td>F</td><td>cp1(0,x-1) * WE[0][x-1]</td></tr>
+<tr><td>G</td><td>cp1(y-1,0) * NS[y-1][0]</td></tr>
+<tr><td>H</td><td>cp1(y,x-1)*WE[y][x-1] + cp1(y-1,x)*NS[y-1][x]</td></tr>
+<tr><td>I</td><td>0..y</td></tr>
+<tr><td>J</td><td>0..x</td></tr>
+<tr><td>K</td><td>1</td></tr>
+<tr><td>L</td><td>count[0][x-1] * WE[0][x-1]</td></tr>
+<tr><td>M</td><td>count[y-1][0] * NS[y-1][0]</td></tr>
+<tr><td>N</td><td>count[y][x-1]*WE[y][x-1] + count[y-1][x]*NS[y-1][x]</td></tr></tbody></table>
+</div>
+<p>(2) 到着点から見て西側・北側の道を使うので、道の有無を調べる添字も1つ手前になる。(3) 再帰では同じ座標を何度も求める。(4) 表では左と上の値が既に分かる順に埋める。(5) 各セルを1回ずつ定数時間で計算するため $O((x+1)(y+1))$、x,y≥1なら$O(xy)$。領域も同じオーダー。</p>
+</div>
+</section>
+<div class="page-nav"><a href="index.html">← 科目トップ</a><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">ページ上部へ ↑</a>
+</div></main>
+<footer class="site-footer">アルゴリズム入門 · 1A · 学習ノート</footer>
+<script src="../common.js"></script>
+<script src="nav.js"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html><!-- 「微分積分 予想問題 第5回 凸関数・縮小写像・方程式の根 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>微分積分 予想問題 第5回 凸関数・縮小写像・方程式の根 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="yosou_calc_04.html" data-page="yosou/yosou_calc_04">← 前のテーマ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-calc">
+  <h1>微分積分学演習　予想問題　第5回</h1>
+  <p class="subtitle">凸関数と不等式・縮小写像・方程式の根の存在（全4問）</p>
+</div>
+
+<div class="container">
+
+<!-- 免責 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#fff5f5; color:#c53030;">⚠️ この問題セットについて</div>
+  <div class="section-card-body">
+    <div class="warn-box">
+      <div class="warn-title">AIが作成した予想問題です（実際の試験問題ではありません）</div>
+      <p>演習第5回（<a href="../calculus/calc_05.html">凸関数・縮小写像・方程式の根</a>）と同程度〜少し発展した難易度で構成した学習用オリジナル問題です。中間試験（45分・範囲が狭く易しめ）とは異なり，期末試験は90分・より広い範囲を対象とするため，本セットでは一般論（凸性の判定，Banachの不動点定理，中間値の定理と単調性）を初見の具体例に適用する力・複数の道具を組み合わせて構成する力を問う問題を中心に据えている。全5回20問構成の<strong>最終・第5回</strong>であり，この回をもって微分積分学の予想問題セット（全20問）は完結する。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 このテーマの要点</div>
+  <div class="section-card-body">
+    <p>第5回は演習第5回で学んだ3つの一般論——<strong>凸関数の2階微分による判定と接線の性質</strong>，<strong>縮小写像とBanachの不動点定理</strong>，<strong>中間値の定理と単調性による方程式の根の存在・一意性</strong>——を，演習では扱わなかった別の具体例に適用する練習をする。手法そのものは既に学んだものだが，「どの関数・どの区間にどう適用するか」を自分で見極める力が問われる，期末に向けた総仕上げの回である。</p>
+    <div class="def-box">
+      <div class="def-title">この4問で使う道具</div>
+      <ul>
+        <li><strong>凸性の判定：</strong>$f''\ge0$（区間上）$\Rightarrow$ $f$ は凸。Taylorの定理（Lagrangeの剰余項）を使えば，中点凸性 $f\!\left(\frac{a+b}2\right)\le\frac{f(a)+f(b)}2$ や接線の不等式 $f(x)\ge f(a)+f'(a)(x-a)$ を厳密に証明できる</li>
+        <li><strong>縮小写像・Banachの不動点定理：</strong>ある区間 $I$ で $g(I)\subset I$（自己写像）かつ $|g'(x)|\le k<1$（$x\in I$）ならば，$g$ は $I$ 上でLipschitz定数 $k$ の縮小写像となり，$I$ 内にただ1つの不動点を持ち，任意の初期値から始めた反復 $x_{n+1}=g(x_n)$ はその不動点に収束する（誤差評価 $|x_n-x^*|\le k^n|x_0-x^*|$ 付き）</li>
+        <li><strong>中間値の定理（IVT）と単調性：</strong>$h(a)$ と $h(b)$ の符号が異なれば $(a,b)$ に解が存在し（IVT），$h$ が狭義単調ならばその解はただ1つ</li>
+        <li><strong>平均値の定理によるLipschitz評価：</strong>$|g(x)-g(y)|=|g'(\xi)||x-y|$（$\xi$ は $x,y$ の間）を使えば，$|g'|$ の上界がそのままLipschitz定数になる</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">1</span> $x^p$ の凸性とべき平均不等式
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★☆☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$p\ge1$ を定数とし，$f(x)=x^p$（$x>0$）とする。</p>
+      <ol>
+        <li>$f$ が凸関数であることを2階微分を用いて示せ。</li>
+        <li>(1)を用いて，任意の $a,b>0$ に対し $\left(\dfrac{a+b}2\right)^p\le\dfrac{a^p+b^p}2$ が成り立つことを示せ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$f(x)=x^p$ を2回微分すると</p>
+      $$f'(x)=px^{p-1},\qquad f''(x)=p(p-1)x^{p-2}$$
+      <p>$x>0$ より $x^{p-2}>0$。また $p\ge1$ より $p-1\ge0$，$p\ge0$ なので $p(p-1)\ge0$。よって</p>
+      $$f''(x)=p(p-1)x^{p-2}\ge0\qquad(x>0)$$
+      <p>すなわち $f$ は $(0,\infty)$ 上で凸関数である。$\blacksquare$</p>
+      <div class="proof-box">
+        <div class="proof-title">補足：$f''\ge0$ から中点凸性を導く（(2)で使う一般論）</div>
+        <p>$m:=\dfrac{a+b}2$ とおく。Taylorの定理（Lagrangeの剰余項）より，$a$ と $m$ の間のある値 $\xi_1$，$b$ と $m$ の間のある値 $\xi_2$ が存在して</p>
+        $$f(a)=f(m)+f'(m)(a-m)+\frac{f''(\xi_1)}{2}(a-m)^2,\qquad f(b)=f(m)+f'(m)(b-m)+\frac{f''(\xi_2)}{2}(b-m)^2$$
+        <p>$f''(\xi_1)\ge0$，$f''(\xi_2)\ge0$ かつ $(a-m)^2\ge0$，$(b-m)^2\ge0$ なので，それぞれの剰余項は $0$ 以上。よって</p>
+        $$f(a)\ge f(m)+f'(m)(a-m),\qquad f(b)\ge f(m)+f'(m)(b-m)$$
+        <p>辺々加えると</p>
+        $$f(a)+f(b)\ge2f(m)+f'(m)\bigl[(a-m)+(b-m)\bigr]$$
+        <p>ここで $(a-m)+(b-m)=a+b-2m=a+b-(a+b)=0$ であるから，右辺第2項は消えて</p>
+        $$f(a)+f(b)\ge2f(m)\quad\Longleftrightarrow\quad f(m)\le\frac{f(a)+f(b)}2$$
+        <p>が得られる。これが「$f''\ge0$ ならば中点凸性が成り立つ」という一般論の証明である。</p>
+      </div>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>(1)の補足で示した中点凸性 $f\!\left(\dfrac{a+b}2\right)\le\dfrac{f(a)+f(b)}2$ を，$f(x)=x^p$ にそのまま適用すればよい。$m=\dfrac{a+b}2$ とおくと</p>
+      $$\left(\frac{a+b}2\right)^p=f(m)\le\frac{f(a)+f(b)}2=\frac{a^p+b^p}2$$
+      <p>よって</p>
+      $$\boxed{\left(\frac{a+b}2\right)^p\le\frac{a^p+b^p}2}\qquad\blacksquare$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>この問題は「$f''\ge0\Rightarrow$ 凸」という判定と，「凸性から中点の不等式を作る」という2段階の議論を，具体的な関数 $x^p$ で練習するもの。<strong>凸関数の問題を見たら，まず2階微分の符号を調べ，符号が確定したら中点凸性（あるいは接線の不等式）の一般論に直結させる</strong>，という流れは第5回全体を通しての基本パターンであり，本問はその最も素朴な適用例にあたる。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ Taylor の定理を使うのか</div>
+        <p>「$f''\ge0$ ならばグラフが下に凸だから中点での値は両端の平均以下」というのは直感的には明らかに見えるが，答案としてこれをそのまま書くと（演習第5回の概観でも注意されている通り）「グラフより明らか」という説明不足の答案になってしまう。Taylorの定理を使えば，この「直感」を「剰余項の符号」という代数的な事実に変換でき，厳密な証明になる。この手順（Taylor展開 $\to$ 剰余項の符号評価 $\to$ 中点や接線の不等式）は，本回の問1・問4に共通する基本ツールなので，ここで型として身につけておく価値が高い。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 べき平均不等式（power mean inequality）の一部としての位置づけ</div>
+        <p>本問の不等式 $\left(\frac{a+b}2\right)^p\le\frac{a^p+b^p}2$（$p\ge1$）は，一般に「べき平均不等式」と呼ばれる不等式族の一部である。$n$ 個の正の実数 $x_1,\ldots,x_n$ と実数 $r\ne0$ に対して定義される<strong>$r$次べき平均</strong> $M_r:=\left(\frac1n\sum x_i^r\right)^{1/r}$ は，$r$ について単調非減少（$r$ が大きいほど $M_r$ も大きい）という性質を持つ。本問はこの一般論の中の「算術平均（$r=1$ に相当する側）と $r=p$ 側の比較」に対応する特殊ケースになっている。演習第5回で既に学んだ相加相乗平均不等式（$\sqrt[n]{x_1\cdots x_n}\le\frac{x_1+\cdots+x_n}n$）は，$f(x)=e^x$ の凸性（対数を経由）から従う別バージョンであり，「凸性から不等式を作る」という同じ方針を，今回は $x^p$ という別の凸関数に適用しただけ，という関係にある。</p>
+        <p><strong>$p<1$ のときはどうなるか：</strong>もし $p<1$（例えば $p=1/2$，つまり $f(x)=\sqrt x$）ならば，$f''(x)=p(p-1)x^{p-2}$ において $p-1<0$ なので $f''(x)<0$，すなわち $f$ は<strong>凹関数</strong>になる。この場合は不等号の向きがすべて逆転し，$\left(\frac{a+b}2\right)^p\ge\frac{a^p+b^p}2$（$0<p\le1$）が成り立つ。「指数 $p$ が $1$ を境に凸・凹が切り替わり，不等号の向きも切り替わる」という対応関係を押さえておくと，類題への応用が効く。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①$p\ge1$ という仮定を使わずに「$p(p-1)\ge0$」だけを主張してしまい，$p-1\ge0$ がどこから来るか（$p\ge1$ の仮定）を答案に明示しない，②中点凸性の証明で剰余項の符号評価をせず「Taylor展開すれば明らか」で済ませてしまう，③$(a-m)+(b-m)=0$ の計算を省略し，なぜ $f'(m)$ の項が消えるのかを説明しない答案を書いてしまう。</p>
+      <p><strong>別解（$n=2$ のJensen不等式として直接引用する）：</strong>演習第5回の問1で証明済みの一般のJensen不等式（$n$ 点版）$f\!\left(\frac{x_1+\cdots+x_n}n\right)\le\frac{f(x_1)+\cdots+f(x_n)}n$（$f''>0$ の場合）を，$n=2$，$x_1=a$，$x_2=b$ として直接適用すれば，(1)の補足のような個別の証明を省略して即座に(2)の結論が得られる。ただし本問の $f''\ge0$ は等号を許す（狭義の $f''>0$ ではない）ので，演習第5回の証明を流用する場合は「等号を含む場合にも同じ議論がそのまま通用するか」を一言確認しておくのが丁寧な答案。実際，剰余項の評価は $f''\ge0$ だけで（等号でも）$\ge0$ が保証されるので問題なく通用する。</p>
+      <p><strong>一般化・本番での対応：</strong>「$f''\ge0$ を示し，中点凸性またはJensen不等式に帰着させる」という型は，凸関数がらみの不等式証明でほぼ必ず使う定石である。本番で未見の関数について不等式を問われたら，まず2階微分を計算して符号を確認する，という反射を持っておくこと。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">2</span> 縮小写像による $\sqrt3$ の近似
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$g(x)=\dfrac12\left(x+\dfrac3x\right)$ とし，閉区間 $I=\left[\dfrac32,2\right]$ を考える。</p>
+      <ol>
+        <li>$g$ が $I$ を $I$ 自身に写す（$g(I)\subset I$）ことを示せ。</li>
+        <li>$g$ が $I$ 上で縮小写像であることを示し，縮小率（Lipschitz定数）を求めよ。</li>
+        <li>$g$ の不動点を求め，初期値 $x_0=2$ から始めた反復 $x_{n+1}=g(x_n)$ の誤差 $|x_n-\sqrt3|$ の評価式を書け。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$g$ を微分すると</p>
+      $$g'(x)=\frac12-\frac3{2x^2},\qquad g''(x)=\frac3{x^3}$$
+      <p>$x>0$ なので $g''(x)=\dfrac3{x^3}>0$，すなわち $g$ は $(0,\infty)$ 上で凸関数である。</p>
+      <p>凸関数の臨界点（$g'=0$ となる点）は，その関数の（区間内での）最小点になる。$g'(x)=0$ を解くと</p>
+      $$\frac12-\frac3{2x^2}=0\ \Longleftrightarrow\ x^2=3\ \Longleftrightarrow\ x=\sqrt3\quad(x>0)$$
+      <p>$\sqrt3\approx1.732$ は $I=[1.5,2]$ に含まれる。よって $g$ は $I$ 上で $x=\sqrt3$ において最小値を取り，最大値は凸関数の性質より区間の端点のいずれかで取る。</p>
+      $$g(\sqrt3)=\frac12\left(\sqrt3+\frac3{\sqrt3}\right)=\frac12(\sqrt3+\sqrt3)=\sqrt3,\qquad
+        g\!\left(\frac32\right)=\frac12\left(\frac32+2\right)=\frac74,\qquad
+        g(2)=\frac12\left(2+\frac32\right)=\frac74$$
+      <p>したがって $g$ の $I$ 上での値域は $\left[\sqrt3,\dfrac74\right]$ である。$\sqrt3\approx1.732\ge1.5$，$\dfrac74=1.75\le2$ なので $\left[\sqrt3,\dfrac74\right]\subset\left[\dfrac32,2\right]=I$。よって</p>
+      $$\boxed{g(I)\subset I}\qquad\blacksquare$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$g'(x)=\dfrac12-\dfrac3{2x^2}$ は $g''(x)=\dfrac3{x^3}>0$（$x>0$）より単調増加関数である。よって $I=\left[\dfrac32,2\right]$ 上での $g'$ の値域は，端点での値で決まる。</p>
+      $$g'\!\left(\frac32\right)=\frac12-\frac3{2\cdot\frac94}=\frac12-\frac23=-\frac16,\qquad
+        g'(2)=\frac12-\frac3{2\cdot4}=\frac12-\frac38=\frac18$$
+      <p>$g'$ は単調増加なので，$x\in I$ に対し $-\dfrac16\le g'(x)\le\dfrac18$。よって</p>
+      $$|g'(x)|\le\frac16\qquad(x\in I)$$
+      <p>（$\left|-\frac16\right|=\frac16>\frac18$ なので，絶対値の最大値は左端点 $x=3/2$ で決まる。）任意の $x,y\in I$ に対し，平均値の定理より $x$ と $y$ の間のある値 $\xi\in I$ が存在して</p>
+      $$g(x)-g(y)=g'(\xi)(x-y)$$
+      <p>よって</p>
+      $$|g(x)-g(y)|=|g'(\xi)||x-y|\le\frac16|x-y|$$
+      <p>すなわち $g$ は $I$ 上でLipschitz定数 $\dfrac16$ の縮小写像である。$\blacksquare$　<strong>縮小率 $k=\dfrac16$</strong>。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (3)</div>
+      <p>不動点は $g(x)=x$ を解けばよい。</p>
+      $$\frac12\left(x+\frac3x\right)=x\ \Longleftrightarrow\ x+\frac3x=2x\ \Longleftrightarrow\ \frac3x=x\ \Longleftrightarrow\ x^2=3\ \Longleftrightarrow\ x=\sqrt3\quad(x>0)$$
+      <p>(1)(2)より $g$ は $I$ 上で自己写像かつ縮小率 $k=1/6<1$ の縮小写像なので，Banachの不動点定理より，$I$ 内にただ1つの不動点 $\sqrt3$ が存在し，任意の初期値 $x_0\in I$ から始めた反復 $x_{n+1}=g(x_n)$ は $\sqrt3$ に収束する。誤差の評価は，縮小写像の一般論（$|x_n-x^*|\le k^n|x_0-x^*|$）より</p>
+      $$\boxed{|x_n-\sqrt3|\le\left(\frac16\right)^n|x_0-\sqrt3|=\left(\frac16\right)^n(2-\sqrt3)}\qquad\blacksquare$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>この $g(x)=\dfrac12\left(x+\dfrac3x\right)$ は，実は「$\sqrt3$ を求めるNewton法」そのものである。一般に $\sqrt k$（$k>0$）を求めるNewton法の反復式は $x_{n+1}=\dfrac12\left(x_n+\dfrac k{x_n}\right)$ であり，本問はその $k=3$ の場合になっている。Newton法が2次収束（誤差が2乗のオーダーで縮む）するのに対し，本問で示した評価は縮小写像の一般論による1次収束（誤差が定数倍ずつ縮む）の評価であり，実際にはより速く収束することが知られているが，本問では演習第5回の枠組み（縮小写像・Banachの不動点定理）の適用を練習することが目的である。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ区間を $[3/2,\,2]$ に絞ったのか</div>
+        <p>もし区間を例えば $[1,2]$ のように広く取ってしまうとどうなるか確認してみる。$g'(1)=\dfrac12-\dfrac32=-1$ となり，$|g'(1)|=1$ で縮小写像の条件（$|g'|<1$）が破れてしまう。実際 $x=1$ に近づくほど $g'(x)=\frac12-\frac3{2x^2}$ は $-\infty$ に近い大きな負の値を取りうる（$x\to0^+$ で $g'(x)\to-\infty$）ため，$0$ に近い点を含む広い区間では縮小写像にならない。</p>
+        <p>本問のように「$\sqrt3$ を含み，かつ $g'$ の絶対値が $1$未満に収まるちょうどよい区間を見つける」という作業自体が，縮小写像を使った不動点の議論では重要な一手間になる。$I=[3/2,2]$ という区間は，$\sqrt3\approx1.732$ を内部に含みつつ，端点での $|g'|$ の値（$1/6$，$1/8$）がともに十分小さくなるように選ばれている。本番でこの型の問題（区間が与えられていない，あるいは自分で選ぶ必要がある場合）に対応するには，まず不動点の近くで $g'$ がどう振る舞うかを調べ，$|g'|$ が小さく保たれる範囲を探す，という発想を持っておくとよい。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 凸関数の性質を使って値域を評価する視点</div>
+        <p>(1)で使った「凸関数は臨界点で最小，端点のいずれかで最大を取る」という性質は，問1で学んだ凸性の一般論の直接的な応用になっている。$g$ の値域を求める際，$g'(x)=0$ を素朴に解くだけでなく，$g$ が凸であることを先に確認しておけば，「最小値は臨界点，最大値は両端点のうち大きい方」という構造が保証され，値域の評価が機械的に行える。この視点は，今回のように自己写像性（$g(I)\subset I$）を確認する場面で特に効果的である。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①区間の端点だけ調べて，$|g'|$ の最大値を確認したつもりになり，区間内部の臨界点での値を見落とす——本問では $g'$ が単調増加だったため<strong>たまたま</strong>端点で絶対値が最大になったが，一般には $g'$ が区間内部で極値を持つ場合もあり，その場合は内部の臨界点も必ず確認する必要がある（本問はこの確認を「$g'$ 自身が単調増加である」ことを示すことで正当化している点に注意），②$g(I)\subset I$ を確認する際，$g$ の値域の計算を省略して「$g(3/2)$ と $g(2)$ を比べれば十分」と誤解してしまう（本問のように内部に最小点がある場合は，端点の値だけでは値域の下限が分からない），③縮小率を $\max\{|g'(3/2)|,|g'(2)|\}$ のように端点の絶対値だけを比較して求め，途中に極値がないかの確認を省略してしまう。</p>
+      <p><strong>別解（$g'$ の値域を凸性から直接評価する）：</strong>$g'(x)=\frac12-\frac3{2x^2}$ 自身も $x$ の関数として単調増加であることは，$g''(x)=3/x^3>0$（$g$ が凸）から直接従う（凸関数の導関数は単調増加，という一般的な事実）。この観点に立てば，「$g'$ が単調増加である」という(2)の主張は，実は(1)で確認した凸性そのものの言い換えに過ぎないことが分かる。(1)と(2)の議論は別々に見えて，実は同じ「$g''>0$」という1つの事実から両方が同時に従っている。</p>
+      <p><strong>一般化・本番での対応：</strong>一般に $\sqrt k$（$k>0$）を求める反復 $x_{n+1}=\frac12(x_n+k/x_n)$ に対しては，本問と全く同じ手順（凸性の確認 $\to$ 適切な区間を選んで自己写像性を確認 $\to$ $g'$ の評価から縮小率を求める）が適用できる。本番で類似の反復写像（例えば $\sqrt5$ や $\sqrt2$ を求める設定）が出題された場合も，まず不動点の候補（$x=\sqrt k$）を求め，その近くで $|g'|$ が小さく保たれる区間を探す，という同じ流れで対応するとよい。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">3</span> $\cos x=x$ の解の存在・一意性と逐次近似
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★★☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <ol>
+        <li>方程式 $\cos x=x$ が区間 $[0,1]$ にただ1つの実数解を持つことを示せ。</li>
+        <li>$g(x)=\cos x$ が $[0,1]$ 上の縮小写像であることを示し，反復 $x_{n+1}=\cos x_n$（$x_0\in[0,1]$ 任意）がこの解に収束することを説明せよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$h(x):=\cos x-x$ とおく。</p>
+      <p><strong>存在：</strong>$h(0)=\cos0-0=1>0$，$h(1)=\cos1-1\approx0.540-1=-0.460<0$。$h$ は連続なので，中間値の定理より $h(c)=0$，すなわち $\cos c=c$ を満たす $c\in(0,1)$ が存在する。</p>
+      <p><strong>一意性：</strong>$h'(x)=-\sin x-1$。$0\le x\le1$ の範囲で $\sin x\ge0$ なので $h'(x)=-\sin x-1\le-1<0$。よって $h$ は $[0,1]$ 上で狭義単調減少である。狭義単調な関数は同じ値を2度取らないので，$h(x)=0$ を満たす $x$ は高々1つ。</p>
+      <p>存在と一意性を合わせて，$\cos x=x$ は $[0,1]$ にただ1つの解を持つ。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p><strong>自己写像性：</strong>$\cos x$ は $[0,1]$ 上で単調減少（$x\ge0$ の範囲で $(\cos x)'=-\sin x\le0$）なので，$[0,1]$ 上での値域は $[\cos1,\cos0]=[\cos1,1]$。$\cos1\approx0.540>0$ なので $[\cos1,1]\subset[0,1]$。よって $g([0,1])\subset[0,1]$。</p>
+      <p><strong>縮小写像であること：</strong>$g'(x)=-\sin x$ より $|g'(x)|=\sin x$。$\sin x$ は $[0,1]$ 上で単調増加なので，最大値は $x=1$ で取る：</p>
+      $$|g'(x)|=\sin x\le\sin1\approx0.841<1\qquad(x\in[0,1])$$
+      <p>平均値の定理より，任意の $x,y\in[0,1]$ に対し $x,y$ の間のある $\xi$ が存在して $g(x)-g(y)=g'(\xi)(x-y)$，よって</p>
+      $$|g(x)-g(y)|\le(\sin1)|x-y|$$
+      <p>すなわち $g$ は $[0,1]$ 上でLipschitz定数 $k=\sin1<1$ の縮小写像である。$\blacksquare$</p>
+      <p><strong>収束の説明：</strong>$g$ は $[0,1]$ 上の自己写像かつ縮小率 $k=\sin1<1$ の縮小写像なので，Banachの不動点定理より，$[0,1]$ 内にただ1つの不動点が存在し（これは $g(x^*)=x^*$，すなわち $\cos x^*=x^*$ を満たす点であり，(1)で存在・一意性を示した解 $c$ と一致する），任意の初期値 $x_0\in[0,1]$ から始めた反復 $x_{n+1}=g(x_n)=\cos x_n$ はこの不動点 $c$ に収束する。誤差評価は $|x_n-c|\le(\sin1)^n|x_0-c|\to0$（$n\to\infty$）である。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>この方程式 $\cos x=x$ の解は，<strong>ドッティ数（Dottie number）</strong>と呼ばれる有名な定数（$x^*\approx0.739085\ldots$）である。「電卓の $\cos$ ボタンをどんな数から始めても連打し続けると，最終的にこの値に収束する」という小ネタで知られており，本問(2)の反復 $x_{n+1}=\cos x_n$ が縮小写像であることの帰結として，この現象が数学的に正当化される。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 (1)と(2)の議論の関係——似た微分の評価だが目的が違う</div>
+        <p>(1)の一意性の議論では $h'(x)=-\sin x-1\le-1<0$ を使い，(2)の縮小写像の議論では $g'(x)=-\sin x$，$|g'(x)|\le\sin1<1$ を使っている。どちらも「$\cos x$ の導関数 $-\sin x$」に関する評価という点で似ているが，使う目的がまったく異なる：(1)の $h'(x)<0$ は「$h(x)=\cos x-x$ が単調減少 $\Rightarrow$ 解が高々1つ」という<strong>一意性の証明</strong>に使われ，(2)の $|g'(x)|<1$ は「$g(x)=\cos x$ 自身がLipschitz定数 $1$ 未満 $\Rightarrow$ 縮小写像 $\Rightarrow$ 反復が収束する」という<strong>収束する反復法の構成</strong>に使われている。同じ関数の同じ微分を，異なる不等式（$h'<0$ か $|g'|<1$ か）に加工することで，異なる結論（一意性 vs 収束性）を引き出している点に注目すると，この問題の構造がよく見える。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 IVT＋単調性の一般論をそのまま適用する練習</div>
+        <p>(1)の議論は，演習第5回で学んだ「IVTと単調性を組み合わせて根の存在と一意性を示す」という一般論を，$x^n+x-1=0$ という具体例から $\cos x=x$ という別の具体例に置き換えただけである。同様に(2)の議論も，演習第5回で学んだ「縮小写像とBanachの不動点定理」の一般論を，$|f'|\le k$（線形写像的な仮定）を満たす別の具体的な関数（今回は $\cos x$）に適用したものである。<strong>本問は，第5回で学んだ2つの一般論を，1つの方程式に対して同時に適用する</strong>という総合的な位置づけを持ち，期末試験に向けて「習った一般論を初見の関数に当てはめる」練習として最適な題材になっている。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①$[0,1]$ 全体で $g$ が自己写像になることの確認を怠り，いきなり $|g'|<1$ だけを示して「縮小写像である」と結論してしまう（自己写像性と縮小性は独立に確認すべき別々の条件）,②$\sin1$ の評価で，度数法とラジアンを混同してしまう（本問の $\sin1$ は「$1$ ラジアン」の正弦であり，$\sin1^\circ$ ではない。$\sin1\approx0.841$ に対し $\sin1^\circ\approx0.0175$ で全く異なる値になるので，単位の取り違えは致命的），③(1)の一意性の証明で $h'(x)\le-1<0$ の代わりに $h'(x)\ne0$ とだけ確認して「だから単調」と結論してしまう（$h'$ が符号を変えずに $0$ でないことまで確認しないと，単調性の結論に飛躍がある。本問では実際に $h'(x)<0$ が全域で成り立っているので問題ないが，一般には $h'\neq0$ だけでは単調性は保証されず，連結な区間で符号が一定であることを確認する必要がある）。</p>
+      <p><strong>別解（(1)を(2)から導く）：</strong>実は(2)を先に示せば，Banachの不動点定理の主張（不動点の一意存在）から(1)の存在・一意性も自動的に従う。すなわち出題の順序を入れ替えて，先に自己写像性と縮小性（(2)の内容）を示し，「ゆえにただ1つの不動点が存在する」と結論すれば，(1)を独立に証明する手間が省ける。ただし，Banachの不動点定理を経由せず，IVTと単調性という初等的な道具だけで(1)を独立に示す本解答の構成は，Banachの不動点定理を「知らない」段階でも通用する，より基本に忠実な証明になっている。答案の状況（(1)(2)が独立小問として問われているか，(2)が(1)を包含する形で問われているか）に応じて使い分けるとよい。</p>
+      <p><strong>一般化・本番での対応：</strong>「$\cos x=x$ のように，$g(x)=x$ の形の方程式が与えられ，解の存在・一意性と，反復法による近似の両方を問う」形式の問題は，Banachの不動点定理が絡む定番の出題パターンである。本番でこの型の問題に遭遇したら，(i) IVT+単調性で解の存在と一意性を押さえる，(ii) 候補となる区間で $|g'|$ の上界を評価して縮小率を求める，という2段構えの手順を思い出すこと。特に(ii)では，三角関数がらみの評価（$\sin x$，$\cos x$ の単調性）を使いこなせるかが計算の速さを左右する。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">4</span> 凸関数の接線による評価と一般化Bernoulli不等式
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★★★</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <ol>
+        <li>$f$ が2階微分可能で $f''\ge0$（凸関数）ならば，任意の点 $a$ において $f(x)\ge f(a)+f'(a)(x-a)$（グラフが接線の上側にある）ことを示せ。</li>
+        <li>(1)を用いて，$r\ge1$，$x>-1$ に対し一般化Bernoulli不等式 $(1+x)^r\ge1+rx$ が成り立つことを示せ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>Taylorの定理（Lagrangeの剰余項）より，任意の $x$ に対し，$a$ と $x$ の間のある値 $\xi$ が存在して</p>
+      $$f(x)=f(a)+f'(a)(x-a)+\frac{f''(\xi)}2(x-a)^2$$
+      <p>が成り立つ。仮定より $f''(\xi)\ge0$，かつ $(x-a)^2\ge0$ であるから，剰余項について</p>
+      $$\frac{f''(\xi)}2(x-a)^2\ge0$$
+      <p>したがって</p>
+      $$\boxed{f(x)\ge f(a)+f'(a)(x-a)}\qquad\blacksquare$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$f(t):=t^r$（$t>0$）とおく。</p>
+      $$f'(t)=rt^{r-1},\qquad f''(t)=r(r-1)t^{r-2}$$
+      <p>$t>0$ かつ $r\ge1$（すなわち $r-1\ge0$）より $f''(t)=r(r-1)t^{r-2}\ge0$。よって $f$ は $(0,\infty)$ 上で凸関数であり，(1)が適用できる。</p>
+      <p>(1)を $a=1$ で適用する。</p>
+      $$f(1)=1^r=1,\qquad f'(1)=r\cdot1^{r-1}=r$$
+      <p>より，任意の $t>0$ に対して</p>
+      $$f(t)\ge f(1)+f'(1)(t-1)\ \Longleftrightarrow\ t^r\ge1+r(t-1)$$
+      <p>ここで $t=1+x$ とおく。$x>-1$ ならば $t=1+x>0$ なので，上の不等式がそのまま適用できる。</p>
+      $$(1+x)^r\ge1+r\bigl((1+x)-1\bigr)=1+rx$$
+      <p>よって</p>
+      $$\boxed{(1+x)^r\ge1+rx\qquad(r\ge1,\ x>-1)}\qquad\blacksquare$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>(1)は「凸関数はどの接線よりも上にある」という，グラフを思い浮かべれば幾何学的に自明に見える事実を，Taylorの定理を使って厳密に証明する，第5回全体を象徴する標準的な手法である。問1で使った中点凸性の証明（2点 $a,b$ の中点 $m$ で展開）と，本問の接線不等式の証明（任意の点 $a$ で展開し，$x$ 自体を動かす）は，どちらも「Taylor展開して剰余項の符号を評価する」という同じエンジンから出てきている——中点凸性は「2点を固定して中点で展開」，接線不等式は「1点を固定して展開先を動かす」という違いだけで，本質的な仕組みは共通している。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜこの1つの補題が「不等式生成マシン」なのか</div>
+        <p>(1)の結果 $f(x)\ge f(a)+f'(a)(x-a)$ は，$f$ が凸関数でありさえすれば，$a$ をどこに固定するか・$f$ を何に選ぶかによって無数の異なる不等式を生み出す，非常に汎用性の高い枠組みである。例えば</p>
+        <ul>
+          <li>$f(x)=e^x$，$a=0$ とすれば $e^x\ge1+x$（指数関数の基本不等式）が得られる。</li>
+          <li>$f(x)=-\log x$（$x>0$，これも凸：$f''(x)=1/x^2>0$），$a=1$ とすれば $-\log x\ge-(x-1)$，すなわち $\log x\le x-1$（対数の基本不等式）が得られる。</li>
+          <li>本問のように $f(x)=x^r$，$a=1$ とすれば一般化Bernoulli不等式が得られる。</li>
+        </ul>
+        <p>このように，「$f$ を色々な凸関数に取り替えるだけで，同じ枠組みから多くの有名な不等式が導ける」という点が，(1)の補題が単なる1問の答えではなく，<strong>不等式を作るための一般的な機械</strong>であることを示している。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 高校数学のBernoulli不等式の実数指数への拡張</div>
+        <p>高校数学で習う（あるいは数学的帰納法・二項定理で証明される）Bernoulli不等式は，$n$ を自然数として $(1+x)^n\ge1+nx$（$x\ge-1$）という形をしている。これは二項定理 $(1+x)^n=\sum_{k=0}^n\binom nk x^k$ を展開し，$k=0,1$ の項（$1+nx$）以外がすべて特定の符号を持つことを使う証明が典型的である。本問の一般化Bernoulli不等式 $(1+x)^r\ge1+rx$（$r\ge1$）は，指数を自然数 $n$ から実数 $r\ge1$ にまで拡張したものであり，二項定理がそのままの形では使えない（$r$ が整数でなければ二項展開が有限和にならない）ため，代わりに凸関数の接線評価という別の道具立てが必要になる，という点で本問は「高校数学の結果を大学の道具で本質的に一般化する」典型例になっている。</p>
+        <p><strong>$0\le r\le1$ の場合：</strong>この範囲では $f(t)=t^r$ に対し $f''(t)=r(r-1)t^{r-2}$ において $r-1\le0$ なので $f''(t)\le0$，すなわち $f$ は<strong>凹関数</strong>になる。凹関数では接線がグラフの上側ではなく下側に来る（不等号が反転する）ので，同じ議論を辿ると $(1+x)^r\le1+rx$（$0\le r\le1$，$x>-1$）が成り立つ。問1でも「$p<1$ で凸・凹が切り替わり不等号が反転する」現象を扱ったが，本問でも全く同じ構造（指数がある値を境に凸凹が入れ替わり，それに応じて不等号の向きが反転する）が現れている点は，この回全体を通した重要な観察である。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①$t=1+x$ という変数変換をした際に，定義域の対応（$t>0\Leftrightarrow x>-1$）を確認せず，$x$ がどんな実数でも(1)の不等式がそのまま使えると誤解してしまう（$f(t)=t^r$ は $t\le0$ では非整数乗が定義されない場合があるため，$t>0$，すなわち $x>-1$ の制約は本質的），②$r=1$ のとき，両辺が $1+x=1+x$ と完全に一致し等号になる（自明な境界ケース）ことを意識せず，「常に狭義の不等号が成り立つ」と誤って一般化してしまう，③(1)の証明で，剰余項の符号評価をせず「凸関数だから接線より上」とだけ書いて済ませてしまう（演習第5回の概観で注意されている典型的な減点ポイント）。</p>
+      <p><strong>別解（$r$ が自然数のときは二項定理で直接示せることの確認）：</strong>$r=n$（自然数）の場合に限れば，$(1+x)^n=\sum_{k=0}^n\binom nk x^k=1+nx+\sum_{k=2}^n\binom nk x^k$ と展開し，$x\ge0$ なら残りの和がすべて非負であることから直接 $(1+x)^n\ge1+nx$ を示すこともできる（ただし $-1<x<0$ の場合は各項の符号が入り組むため，この素朴な議論だけでは不十分になる）。本問の(1)(2)による証明は，$x$ の符号によらず，かつ $r$ が整数でなくても通用する統一的な議論になっている点で，二項定理による初等的な証明より適用範囲が広い。</p>
+      <p><strong>一般化・本番での対応：</strong>この問題は，本回全体（そして演習全体）を締めくくるにふさわしい，微分（Taylorの定理）・凸性・不等式という一連のテーマを統合した総合問題である。本番で「凸関数を使って不等式を示せ」という問題に出会ったら，まず(1)のような接線の不等式（あるいは問1のような中点凸性）を一般形として押さえた上で，どの関数・どの基準点を選べば目標の不等式が再現できるかを逆算する，という思考の流れを身につけておくとよい。この「$f$ と基準点 $a$ を選んで既知の一般論に当てはめる」という発想は，本セット全4問（そして演習第5回の全3問）に共通する，凸性・縮小写像・IVTという道具立て全体を貫く中心的な考え方である。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第5回（凸関数と不等式・縮小写像・方程式の根）を自力で解けるかセルフチェック</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$f''\ge0$ から，Taylorの定理を使って中点凸性 $f\!\left(\frac{a+b}2\right)\le\frac{f(a)+f(b)}2$ を（剰余項の符号評価まで込めて）自力で証明できるか</li>
+          <li>べき平均不等式が，指数 $p$ の値（$p\ge1$ か $0\le p\le1$ か）によって凸・凹，不等号の向きが切り替わることを説明できるか</li>
+          <li>与えられた関数の凸性・臨界点を使って値域を評価し，ある区間での自己写像性（$g(I)\subset I$）を示せるか</li>
+          <li>平均値の定理を使って $|g'|$ の上界からLipschitz定数（縮小率）を導けるか，またその際に区間内部の極値も含めて $|g'|$ の最大値を確認できるか</li>
+          <li>Banachの不動点定理（自己写像性＋縮小率 $k<1$ ⇒ 一意な不動点の存在と反復の収束）を，具体的な関数に適用して結論（不動点・収束・誤差評価）を書き下せるか</li>
+          <li>IVTと単調性を組み合わせて方程式の解の存在・一意性を示す議論と，縮小写像・Banachの不動点定理による収束の議論の，それぞれの役割の違いを説明できるか</li>
+          <li>凸関数の接線の不等式 $f(x)\ge f(a)+f'(a)(x-a)$ をTaylorの定理から証明し，基準点 $a$ と関数 $f$ を選ぶことで様々な有名不等式（一般化Bernoulli不等式，$e^x\ge1+x$ など）が同じ枠組みから導けることを理解しているか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- 全体のまとめ -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📌 予想問題セット（全20問）のまとめ</div>
+  <div class="section-card-body">
+    <ul>
+      <li><a href="yosou_calc_01.html">第1回：ε-N論法・はさみうちの原理・部分列・Cesàro平均</a> — 数列の収束の厳密な定義と，収束・発散を判定する各種の道具</li>
+      <li><a href="yosou_calc_02.html">第2回</a></li>
+      <li><a href="yosou_calc_03.html">第3回</a></li>
+      <li><a href="yosou_calc_04.html">第4回</a></li>
+      <li><a href="yosou_calc_05.html">第5回：凸関数と不等式・縮小写像・方程式の根の存在</a> — Taylorの定理による凸性の厳密な扱い，Banachの不動点定理，IVTと単調性による根の存在と一意性</li>
+    </ul>
+    <div class="insight-box">
+      <div class="insight-title">💡 これで微分積分学予想問題は完結</div>
+      <p>全5回20問を通して繰り返し使われたのは，「ε-N論法や中間値の定理・平均値の定理・Taylorの定理といった<strong>厳密な定義や一般論を，まず正しく述べられるようにし</strong>，その上で個々の具体例にそれを<strong>丁寧に適用する</strong>」という姿勢だった。個々の計算やテクニックはばらばらに見えても，根底にある「定義に戻って議論を組み立てる」という態度は共通している。この態度が身についていれば，期末で見慣れない関数・見慣れない設定に出会っても，落ち着いて対応できるはずである。線形代数学の予想問題（全5回20問）と合わせて，これで数理科学基礎演習の期末予想問題セット（全40問）は完結する。お疲れ様でした。</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

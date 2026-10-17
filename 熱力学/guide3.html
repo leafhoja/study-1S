@@ -1,0 +1,35 @@
+<!DOCTYPE html><!-- 「第3章ナビ 第二法則 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja"><!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head><meta charset="UTF-8"><script src="../access_control.js"></script><script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#1a365d"><title>第3章ナビ 第二法則 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"><link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="td.css"><link rel="stylesheet" href="guide.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script></head>
+<body data-nav-page="ch3"><!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar"><div class="navbar-inner"><a class="navbar-brand" href="index.html">熱力学ノート</a><div class="navbar-links">
+<a href="../index.html" class="nav-back">← 学習ノート</a><a href="index.html">ホーム</a><a href="ch0.html" data-page="ch0">第0章</a><a href="ch1.html" data-page="ch1">第1章</a><a href="ch2.html" data-page="ch2">第2章</a><a href="ch3.html" data-page="ch3" class="active">第3章</a><a href="ch4.html" data-page="ch4">第4章</a><a href="ch5.html" data-page="ch5">第5章</a><a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a><a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a><a href="kakomon_2025.html" data-page="kakomon_2025">2025</a><a href="kakomon_2023.html" data-page="kakomon_2023">2023</a><a href="kakomon_2014.html" data-page="kakomon_2014">2014</a><a href="kakomon_2012.html" data-page="kakomon_2012">2012</a><a href="kakomon_2011.html" data-page="kakomon_2011">2011</a><a href="kakomon_2010.html" data-page="kakomon_2010">2010</a><a href="kakomon_2009.html" data-page="kakomon_2009">2009</a><a href="kakomon_2008.html" data-page="kakomon_2008">2008</a><a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+</div></div></nav>
+<main class="guide-main">
+<!-- 学習ガイドの題名と導入文を、冒頭の目立つ領域にまとめる。 --><header class="guide-hero"><p class="guide-kicker">CHAPTER 3 READING GUIDE</p><h1>第3章ナビ｜自然に起こる変化の向きを知る</h1><p class="guide-lead">一言でいうと、<strong>第一法則では区別できない「起こる変化」と「起こらない変化」を、熱機関の限界から出発してエントロピーで判定できるようにする</strong>章です。</p></header>
+<p class="guide-usage">Carnotサイクル、熱力学温度、Clausiusの不等式、エントロピーは別々の話ではありません。「経験的な禁止則を、任意の過程に使える状態量の判定へ変換する」一本の流れです。</p>
+
+<section class="guide-section"><h2>この章が解決したいこと</h2><div class="guide-card"><span class="guide-card-label">中心の問い</span><h3>エネルギー保存に反しない変化が、なぜすべては起こらないのか</h3><p>熱が高温から低温へ流れる逆向きも、熱をすべて仕事へ変える装置も、収支だけなら第一法則と矛盾しない場合があります。そこで自然界に固有の方向性を表す第二の原理が必要になります。</p><div class="guide-keyline">方向性を観察する → 不可能な操作を定める → 可逆機関を基準にする → 不等式へ一般化する → エントロピーで判定する</div></div></section>
+
+<section class="guide-section"><h2>全体の流れ</h2><!-- 学習の手順を、順番に読む項目と矢印で示す。 --><div class="route">
+<article class="route-step"><span class="route-num">1</span><h3>可逆・不可逆という「向き」の違いを認識する</h3><p>自然な熱伝導や摩擦には一方向性があります。外界も含めて痕跡を残さず元へ戻せる理想過程を可逆過程、戻せない現実の過程を不可逆過程と呼びます。</p><p class="route-point">目的：エネルギー量だけでなく、変化の質を区別する。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">2</span><h3>ClausiusとKelvinの原理で「できないこと」を定める</h3><p>熱は他に変化を残さず低温から高温へ移らず、一つの熱源から得た熱をすべて仕事へ変える周期機関も作れません。二つの表現は互いに導け、同じ第二法則を述べています。</p><p class="route-point">目的：方向性を、装置の不可能性として明確に定式化する。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">3</span><h3>Carnotサイクルを理想的な比較基準にする</h3><p>二つの熱源の間で可逆に動くCarnot機関は、同じ熱源温度なら作業物質によらず最大効率を持ちます。逆運転すれば冷凍機・熱ポンプとなり、仕事を使って自然な熱流を逆向きにできます。</p><p class="route-point">目的：現実の熱機関が越えられない性能の上限を作る。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">4</span><h3>最大効率から熱力学温度を定める</h3><p>Carnot機関の熱の比は熱源だけで決まり、その普遍性を使って物質の性質に依存しない温度目盛りを定義します。ここで温度は、単なる温度計の目盛りから第二法則に根差す量になります。</p><p class="route-point">目的：第1章の経験温度を、普遍的な絶対温度へ高める。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">5</span><h3>Clausiusの不等式で任意のサイクルへ一般化する</h3><p>可逆サイクルでは $\oint\delta Q/T=0$、不可逆サイクルでは $\oint\delta Q/T<0$。熱機関という具体例から離れ、任意の周期過程の可逆性を判定できる形になります。</p><p class="route-point">目的：第二法則を、特定の装置によらない数式へ変える。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">6</span><h3>エントロピーを状態量として取り出す</h3><p>可逆過程では $\delta Q_{\rm rev}/T$ の積分が経路によらないため、$dS=\delta Q_{\rm rev}/T$ と定義できます。不可逆過程では $dS\ge\delta Q/T$ となり、孤立系では $\Delta S\ge0$ です。</p><p class="route-point">目的：自発変化の方向を、始状態と終状態の比較で判定する。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">7</span><h3>具体的な変化でエントロピー収支を確かめる</h3><p>熱容量からの測定、理想気体、断熱自由膨張、異なる温度の物体間の熱移動を通して、系だけでなく周囲を含む総エントロピーの増加を計算します。</p><p class="route-point">目的：「乱雑さ」という比喩を越え、実際に計算できる状態量として使う。</p></article>
+</div></section>
+
+<section class="guide-section"><h2>全体をつなぐ見方</h2><!-- 学習ガイドの要点や注意をカードの一覧にまとめる。 --><div class="guide-cards">
+<article class="guide-card"><span class="guide-card-label">第一法則との違い</span><h3>保存則と方向則は別の仕事をする</h3><p>第一法則は候補をエネルギー収支でふるい、第二法則はその中から自然に進める向きを選びます。どちらか一方だけでは熱力学的に可能か判断できません。</p></article>
+<article class="guide-card"><span class="guide-card-label">可逆の意味</span><h3>可逆過程は遅いだけではない</h3><p>準静的でも摩擦などがあれば不可逆です。可逆とは、系と外界の両方を痕跡なく戻せる理想限界であり、最大仕事や最小仕事の基準になります。</p></article>
+<article class="guide-card"><span class="guide-card-label">注意</span><h3>「系の $S$」と「全体の $S$」を区別する</h3><p>冷却される系のエントロピーは減りえます。増大則を使うときは孤立系か、対象系と周囲を合わせた全体で収支を取っているかを確認します。</p></article>
+</div></section>
+
+<section class="guide-section"><h2>本文と併用する</h2><div class="guide-links"><a href="ch3.html#s3-1">方向性と可逆性</a><a href="ch3.html#s3-2">Clausius・Kelvinの原理</a><a href="ch3.html#s3-3">Carnotサイクル</a><a href="ch3.html#s3-6">最大効率</a><a href="ch3.html#s3-7">熱力学温度</a><a href="ch3.html#s3-8">Clausiusの不等式</a><a href="ch3.html#s3-9">エントロピーと具体例</a><a class="guide-open" href="ch3.html">第3章本文を開く →</a></div></section>
+<section class="guide-section"><div class="guide-card"><span class="guide-card-label">読後チェック</span><h3>この章の到達点</h3><ul><li>第一法則だけでは変化の向きを決められない理由を説明できる</li><li>Carnot機関が現実の機関の上限になる理由が分かる</li><li>Clausiusの不等式からエントロピーへ進む流れを説明できる</li><li>系と周囲を含めたエントロピー収支を判断できる</li></ul></div></section>
+<!-- ガイドを読み終えた後に、前後のページへ移動するリンクを置く。 --><nav class="guide-page-nav"><a href="guide2.html">← 第2章ナビ</a><a href="guide4.html">第4章ナビ →</a></nav></main>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer><script src="nav.js"></script><script src="../common.js?v=20260718-texcopy"></script><script src="../access-ui.js"></script></body></html>

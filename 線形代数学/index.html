@@ -1,0 +1,558 @@
+<!DOCTYPE html><!-- 「線形代数学① 解説ノート」の一覧ページ。掲載されたページへ移動する入口をまとめる。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>線形代数学① 解説ノート</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../subject-home.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        macros: {
+          R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}',
+          Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}'
+        }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body class="subject-home home-linear" data-nav-page="note-index">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html" class="active">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>線形代数学①</h1>
+  <p class="subtitle">解説ノート — 講義ノート①〜⑦（S2ターム）をもとに作成</p>
+</div>
+
+<!-- この科目のノートを探す入力欄と検索結果欄。検索の動作は共通のsearch.jsが担当する。 --><div class="search-box" data-search>
+  <div class="search-input-row">
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input type="search" class="search-input" placeholder="線形代数学① のノート内を検索（用語・キーワード）…" autocomplete="off" aria-label="線形代数学① 内を検索">
+  </div>
+  <div class="search-results" hidden></div>
+</div>
+
+<div class="container">
+
+  <!-- 授業解説 -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section">
+    <div class="sec-header">
+      <div class="sec-tag">Lecture Notes</div>
+      <h2>講義解説</h2>
+    </div>
+    <div class="sec-body">
+      <!-- 見出し・説明文・リンクを持つカードを、まとまった一覧として並べる。 --><div class="card-grid">
+        <a class="card" href="s1.html" data-page="s1">
+          <div class="card-tag">§ 1</div>
+          <h3>ベクトル空間・線形写像</h3>
+          <p>ベクトル空間の定義（V1〜V11）、線形写像の定義と具体例、同型写像。確認例・非例つき。</p>
+        </a>
+        <a class="card" href="s2.html" data-page="s2">
+          <div class="card-tag">§ 2</div>
+          <h3>部分空間</h3>
+          <p>部分空間の定義（S1〜S3）、確認手順、直線・平面・解空間などの具体例、span（生成される部分空間）。</p>
+        </a>
+        <a class="card" href="s3.html" data-page="s3">
+          <div class="card-tag">§ 3</div>
+          <h3>Kernel と Image</h3>
+          <p>核・像の定義と部分空間性、単射の特徴付け（Ker = {0}）、行列表示との関係、次元の不変性。</p>
+        </a>
+        <a class="card" href="s4.html" data-page="s4">
+          <div class="card-tag">§ 4</div>
+          <h3>ベクトル空間の次元</h3>
+          <p>有限次元・無限次元の定義、ランク、dim Ker = n − rank A、次元定理（rank-nullity）、基本行列と逆行列計算。</p>
+        </a>
+        <a class="card" href="s5.html" data-page="s5">
+          <div class="card-tag">§ 5</div>
+          <h3>K^n を定義域とする線形写像</h3>
+          <p>T: K^n → V は基本単位ベクトルの行き先 v₁,…,vₙ だけで一意に決まる（補題 5.1）。全射⟺生成する（定理5.2）、単射⟺1次独立（系5.5）、dim⟨v₁,…,vₙ⟩=rank（系5.6）。</p>
+        </a>
+        <a class="card" href="s6.html" data-page="s6">
+          <div class="card-tag">§ 6</div>
+          <h3>ベクトル空間の基底</h3>
+          <p>基底 = 生成する＋1次独立（定義6.1）。dim V=n ⟺ n個の基底が存在（系6.3）。独立な元は最大n個、はみ出す元を足せば基底へ延長できる（定理6.5・6.7）。</p>
+        </a>
+        <a class="card" href="s7.html" data-page="s7">
+          <div class="card-tag">§ 7</div>
+          <h3>有限次元ベクトル空間</h3>
+          <p>生成系は間引いて基底に到達できる（補題7.1・定理7.2）。有限次元⟺有限生成（系7.3）。無限次元の3条件同値（定理7.4）。部分空間の次元 dim W≦dim V（定理7.5）。</p>
+        </a>
+        <a class="card" href="s8.html" data-page="s8">
+          <div class="card-tag">§ 8</div>
+          <h3>線形写像の行列表示・ランク</h3>
+          <p>基底を固定して L:V→W を K^n→K^m とみなし，行列表示 [L] を定義（定義8.1）。Im(T) の次元として線形写像のランクを定義（定義8.2）、§4のrankとの関係。</p>
+        </a>
+        <a class="card" href="s9.html" data-page="s9">
+          <div class="card-tag">§ 9</div>
+          <h3>座標変換</h3>
+          <p>基底変換行列 C の定義（定義9.1）と合成則・逆行列（系9.2）。sin x,cos x と e^{ix},e^{-ix} の基底変換、行列表示が基底を変えるとどう変わるか（結論の公式）、d/dxの対角化の例。</p>
+        </a>
+        <a class="card" href="s10.html" data-page="s10">
+          <div class="card-tag">§ 10</div>
+          <h3>基底延長定理の応用</h3>
+          <p>独立な組を分割すると span は{0}でしか交わらない（補題10.1）、部分空間の和W1+W2（定義10.2）、dim(V1+V2)≤n1+n2 かつ dim(V1∩V2)=n1+n2−dim(V1+V2)（定理10.3）。rank(A+B)不等式への応用。</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 過去問 -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-tag">Past Exams</div>
+      <h2>過去問</h2>
+    </div>
+    <div class="sec-body">
+      <div class="card-grid">
+        <a class="card" href="過去問/最終確認.html" data-page="過去問/最終確認" style="border-color:#b7791f;">
+          <div class="card-tag">🔥 直前チェック</div>
+          <h3>最終確認予想問題</h3>
+          <p>本番形式5問（過去問より少し難易度高め）＋覚えておきたい知識事項の総まとめ。試験直前の最終チェックに。</p>
+        </a>
+        <a class="card" href="過去問/kakomon_2025.html" data-page="過去問/kakomon_2025">
+          <div class="card-tag">2025年度</div>
+          <h3>期末試験（7月31日実施）</h3>
+          <p>第1問 Kernel/Image の次元／第2問 基底変換／第3問 部分空間の像と次元定理／第4問 パラメータ付き不変部分空間の個数／第5問 rank(A+B)</p>
+        </a>
+        <a class="card" href="過去問/kakomon_2024.html" data-page="過去問/kakomon_2024">
+          <div class="card-tag">2024年度</div>
+          <h3>期末試験（7月30日実施）</h3>
+          <p>第1問 Kernel/Image の次元／第2問 基底変換／第3問 微分作用素の kernel／第4問 冪零作用素の不変部分空間／第5問 rank(AB)</p>
+        </a>
+        <a class="card" href="過去問/予想問題.html" data-page="過去問/予想問題" style="border-color:#805ad5;">
+          <div class="card-tag">予想問題</div>
+          <h3>予想問題 全4回（各5問）</h3>
+          <p>2024・2025年度の出題パターンをもとに作成したオリジナル問題。Kernel/Image・基底変換・応用問題・不変部分空間・rank不等式の証明を，詳細な解答・解説つきで4セット分収録。</p>
+        </a>
+        <a class="card" href="過去問/ばらし問題.html" data-page="過去問/ばらし問題" style="border-color:#c0392b;">
+          <div class="card-tag">期末前ばらし問題</div>
+          <h3>教員言及の証明問題 3選</h3>
+          <p>試験前に教員が「証明問題として出題する」と言及した3題——一次独立の定義，補題7.1の証明，rank(A+B)の不等式の証明。模範解答・詳細な解説はクリックで展開。</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- 重要定義クイックリファレンス -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-tag">Quick Reference</div>
+      <h2>重要定義・定理 一覧</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3 id="ref-s1">§1 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>定義 1.1</td>
+          <td>$\mathbb{K}$-ベクトル空間</td>
+          <td>$(V,+,0,\cdot)$ が (V1)〜(V11) を満たす。加法群の公理 (V4)〜(V7)、スカラー倍の公理 (V8)〜(V11)。</td>
+        </tr>
+        <tr>
+          <td>系 1.2</td>
+          <td>ベクトル空間の基本性質</td>
+          <td>逆元の一意性（$\Rightarrow -x$ が well-defined）、$0\cdot x=0$、$(-1)\cdot x = -x$。</td>
+        </tr>
+        <tr>
+          <td>定例 1.3</td>
+          <td>一次結合</td>
+          <td>$n$ 個の和はカッコのつけ方によらない（結合律の反復）。$a_1x_1+\cdots+a_nx_n$ が意味を持つ。</td>
+        </tr>
+        <tr>
+          <td>定義 1.4</td>
+          <td>$\mathbb{K}$-線形写像</td>
+          <td>$T(x+y)=T(x)+T(y)$ (L1) かつ $T(ax)=aT(x)$ (L2) を満たす写像。</td>
+        </tr>
+        <tr>
+          <td>系 1.5</td>
+          <td>線形写像の基本性質</td>
+          <td>$T(0)=0$、$T(-x)=-T(x)$、$T(\sum a_ix_i)=\sum a_iT(x_i)$。</td>
+        </tr>
+        <tr>
+          <td>定義 1.7</td>
+          <td>同型写像・同型</td>
+          <td>全単射な線形写像 $T:V\xrightarrow{\sim}W$。$V\cong W$ は同値関係（反射・対称・推移律）。</td>
+        </tr>
+      </table>
+
+      <h3 id="ref-s2">§2 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>定義 2.1</td>
+          <td>部分空間</td>
+          <td>$W\subseteq V$ が (S1) $0\in W$、(S2) 加法に閉、(S3) スカラー倍に閉 を満たす。</td>
+        </tr>
+        <tr>
+          <td>定義 2.2</td>
+          <td>生成される部分空間</td>
+          <td>$\langle v_1,\ldots,v_k\rangle_\mathbb{K} = \{a_1v_1+\cdots+a_kv_k\mid a_i\in\mathbb{K}\}$（$v_1,\ldots,v_k$ の span）。</td>
+        </tr>
+      </table>
+
+      <h3 id="ref-s3">§3 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>定義 3.1</td>
+          <td>核・像</td>
+          <td>$\Ker(T)=\{v\in V\mid T(v)=0\}$（$V$ の部分空間）、$\Im(T)=\{T(v)\mid v\in V\}$（$W$ の部分空間）。</td>
+        </tr>
+        <tr>
+          <td>系 3.2</td>
+          <td>Ker, Im の部分空間性</td>
+          <td>$\Ker(T)\subseteq V$, $\Im(T)\subseteq W$ はどちらも部分空間（線形性から (S1)〜(S3) を確認）。</td>
+        </tr>
+        <tr>
+          <td>定理 3.3</td>
+          <td>単射の特徴付け</td>
+          <td>$T$ が単射 $\iff$ $\Ker(T)=\{0\}$。</td>
+        </tr>
+        <tr>
+          <td>系 3.4</td>
+          <td>行列表示との関係</td>
+          <td>$x\in\Ker(T)$ $\iff$ $Ax=0$（斉次連立一次方程式の解）。</td>
+        </tr>
+        <tr>
+          <td>系 3.5</td>
+          <td>$m < n$ なら単射でない</td>
+          <td>$T:\mathbb{K}^n\to\mathbb{K}^m$ で $m&lt;n$ ならば $T$ は単射になれない。</td>
+        </tr>
+        <tr>
+          <td>定理 3.6</td>
+          <td>次元の同型不変性</td>
+          <td>$\mathbb{K}^m\cong\mathbb{K}^n$ $\Rightarrow$ $m=n$。次元はベクトル空間の本質的な指標。</td>
+        </tr>
+      </table>
+
+      <h3 id="ref-s4">§4 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>定義 4.1</td>
+          <td>有限次元・次元</td>
+          <td>$V\cong\mathbb{K}^n$ となる $n$ を $\dim V$ と定義。定理 3.6 より一意に定まる。無限次元のとき $\dim V=+\infty$。</td>
+        </tr>
+        <tr>
+          <td>系 4.2</td>
+          <td>次元による同型判定</td>
+          <td>有限次元空間 $V,W$ について $V\cong W\iff\dim V=\dim W$。</td>
+        </tr>
+        <tr>
+          <td>補題 4.3</td>
+          <td>ランクの定義</td>
+          <td>$\operatorname{rank}A$ = 行標準形の leading entry の個数。自由変数の個数 $= n - \operatorname{rank}A$。</td>
+        </tr>
+        <tr>
+          <td>定理 4.4</td>
+          <td>核の次元</td>
+          <td>$\dim\operatorname{Ker}(T) = n - \operatorname{rank}A$（$T:\mathbb{K}^n\to\mathbb{K}^m$，$A$ は行列表示）。</td>
+        </tr>
+        <tr>
+          <td>定理 4.7</td>
+          <td>像の次元</td>
+          <td>$\dim\operatorname{Im}(T) = \operatorname{rank}A$。</td>
+        </tr>
+        <tr>
+          <td>系 4.8</td>
+          <td>次元定理</td>
+          <td>$n = \dim\operatorname{Ker}(T) + \dim\operatorname{Im}(T)$（rank-nullity theorem）。</td>
+        </tr>
+        <tr>
+          <td>系 4.10</td>
+          <td>正方の場合の同値</td>
+          <td>$T:\mathbb{K}^n\to\mathbb{K}^n$ で「単射 $\iff$ 全射 $\iff$ 全単射 $\iff$ $\dim\operatorname{Im}(T)=n$」。</td>
+        </tr>
+      </table>
+
+      <h3 id="ref-s5">§5 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>補題 5.1</td>
+          <td>行き先による決定</td>
+          <td>$T:\mathbb{K}^n\to V$ は $v_i=T(e_i)$ を指定すれば一意に定まる。$T=T_{v_1,\ldots,v_n}$（$v_i$ の一次結合として定義）。</td>
+        </tr>
+        <tr>
+          <td>定理 5.2</td>
+          <td>$\operatorname{Im}$ と span</td>
+          <td>$\langle v_1,\ldots,v_n\rangle_\mathbb{K}=\operatorname{Im}T_{v_1,\ldots,v_n}$。$T_{v_1,\ldots,v_n}$ が全射 $\iff$ $\langle v_1,\ldots,v_n\rangle_\mathbb{K}=V$。</td>
+        </tr>
+        <tr>
+          <td>定義 5.3</td>
+          <td>生成する／span</td>
+          <td>$\langle v_1,\ldots,v_n\rangle_\mathbb{K}=V$ となること。$v_1,\ldots,v_n$ を $V$ の生成系という。</td>
+        </tr>
+        <tr>
+          <td>定義 5.4</td>
+          <td>1次独立</td>
+          <td>$a_1v_1+\cdots+a_nv_n=0 \Rightarrow a_1=\cdots=a_n=0$ が成り立つこと。</td>
+        </tr>
+        <tr>
+          <td>系 5.5</td>
+          <td>1次独立 ⟺ 単射</td>
+          <td>$v_1,\ldots,v_n$ が1次独立 $\iff$ $T_{v_1,\ldots,v_n}$ は単射（$\operatorname{Ker}T_{v_1,\ldots,v_n}=\{0\}$ の言い換え）。</td>
+        </tr>
+        <tr>
+          <td>系 5.6</td>
+          <td>span の次元</td>
+          <td>$v_1,\ldots,v_n\in\mathbb{K}^m$ に対して $\dim\langle v_1,\ldots,v_n\rangle_\mathbb{K}=\operatorname{rank}(v_1\mid\cdots\mid v_n)$。</td>
+        </tr>
+      </table>
+
+      <h3 id="ref-s6">§6 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>定義 6.1</td>
+          <td>基底</td>
+          <td>$v_1,\ldots,v_n$ が $V$ を生成し，かつ 1次独立であること。</td>
+        </tr>
+        <tr>
+          <td>系 6.2</td>
+          <td>基底 ⟺ 同型写像</td>
+          <td>$v_1,\ldots,v_n$ が基底 $\iff$ $T_{v_1,\ldots,v_n}:\mathbb{K}^n\to V$ が同型写像。</td>
+        </tr>
+        <tr>
+          <td>系 6.3</td>
+          <td>次元 ⟺ 基底の存在</td>
+          <td>$\dim V=n$ $\iff$ $n$ 個の元からなる $V$ の基底が存在する。</td>
+        </tr>
+        <tr>
+          <td>系 6.4</td>
+          <td>個数一致時の同値性</td>
+          <td>$\dim V=n$ かつ個数が $n$ のとき，1次独立／生成する／基底はすべて同値。</td>
+        </tr>
+        <tr>
+          <td>定理 6.5</td>
+          <td>独立な元の上限</td>
+          <td>1次独立な元は $\ell\le n=\dim V$ 個。$\ell=n$ なら自動的に基底。</td>
+        </tr>
+        <tr>
+          <td>補題 6.6</td>
+          <td>1個追加しても独立</td>
+          <td>$v_1,\ldots,v_n$ が独立のとき，$w\notin\langle v_1,\ldots,v_n\rangle_\mathbb{K}$ $\iff$ $v_1,\ldots,v_n,w$ が独立。</td>
+        </tr>
+        <tr>
+          <td>定理 6.7</td>
+          <td>基底への延長</td>
+          <td>独立な $v_1,\ldots,v_\ell$（$\ell&lt;n$）に $v_{\ell+1},\ldots,v_n$ を追加して基底にできる（帰納法による構成）。</td>
+        </tr>
+      </table>
+
+      <h3 id="ref-s7">§7 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>補題 7.1</td>
+          <td>生成系の間引き</td>
+          <td>$v_1,\ldots,v_s$ が $V$ を生成し1次従属なら，ある1本を除いても残りが $V$ を生成する（補題6.6の対偶）。</td>
+        </tr>
+        <tr>
+          <td>定理 7.2</td>
+          <td>生成系からの基底の抽出</td>
+          <td>有限生成系は間引きを繰り返すと基底の部分列に到達する。$\dim V=n\le$ 生成系の個数 $s$。</td>
+        </tr>
+        <tr>
+          <td>系 7.3</td>
+          <td>有限次元 ⟺ 有限生成</td>
+          <td>$V$ が有限次元 $\iff$ $V$ が有限個の元で生成される。</td>
+        </tr>
+        <tr>
+          <td>定理 7.4</td>
+          <td>無限次元の特徴づけ</td>
+          <td>無限次元 $\iff$ 任意の長さの1次独立列が存在 $\iff$ 任意の $n$ に対し $n$ 次元部分空間が存在。</td>
+        </tr>
+        <tr>
+          <td>定理 7.5</td>
+          <td>部分空間の次元</td>
+          <td>$\dim V=n<+\infty$ の部分空間 $W$ は自動的に有限次元で $\dim W\le\dim V$。等号 $\iff$ $W=V$。</td>
+        </tr>
+      </table>
+
+      <h3 id="ref-s8">§8 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>定義 8.1</td>
+          <td>線形写像の行列表示</td>
+          <td>$V,W$ の基底 $v_1,\ldots,v_n$，$w_1,\ldots,w_m$ を固定し，$L:V\to W$ を $T_w^{-1}\circ L\circ T_v:\mathbb{K}^n\to\mathbb{K}^m$ とみなして行列表示 $[L]^{w_1,\ldots,w_m}_{v_1,\ldots,v_n}$ を定める。</td>
+        </tr>
+        <tr>
+          <td>定義 8.2</td>
+          <td>線形写像のランク</td>
+          <td>$\operatorname{Im}(T)$ が有限次元のとき $T$ は有限ランクを持つといい，$\operatorname{rank}T=\dim\operatorname{Im}(T)$ で定める。$V,W$ が有限次元なら行列表示のランク（§4）に一致。</td>
+        </tr>
+      </table>
+
+      <h3 id="ref-s9">§9 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>定義 9.1</td>
+          <td>基底変換行列</td>
+          <td>$V$ の2つの基底 $v_1,\ldots,v_n$，$w_1,\ldots,w_n$ に対し，$T_w^{-1}\circ T_v:\mathbb{K}^n\to\mathbb{K}^n$ の行列表示を基底変換行列 $C_{v_1,\ldots,v_n}^{w_1,\ldots,w_n}$ と呼ぶ。$y=Cx$，$C$ は可逆行列。</td>
+        </tr>
+        <tr>
+          <td>系 9.2</td>
+          <td>基底変換行列の性質</td>
+          <td>$C_v^p=C_w^pC_v^w$（合成則），$C_v^v=I_n$（恒等），$(C_v^w)^{-1}=C_w^v$（逆行列）。</td>
+        </tr>
+        <tr>
+          <td>結論</td>
+          <td>行列表示の基底変換公式</td>
+          <td>$[L]^{w'}_{v'}=C_w^{w'}[L]^w_vC_{v'}^v$。基底を取り替えたときの行列表示は，基底変換行列で挟んだ形に変わる。</td>
+        </tr>
+      </table>
+
+      <h3 id="ref-s10">§10 の主要事項</h3>
+      <table class="axiom-table">
+        <tr><th>番号</th><th>名称</th><th>内容（要約）</th></tr>
+        <tr>
+          <td>補題 10.1</td>
+          <td>独立な組の分割</td>
+          <td>$v_1,\ldots,v_n$ が1次独立なら，任意の $1\le\ell\le n$ で $\langle v_1,\ldots,v_\ell\rangle_\mathbb{K}\cap\langle v_{\ell+1},\ldots,v_n\rangle_\mathbb{K}=\{0\}$。</td>
+        </tr>
+        <tr>
+          <td>定義 10.2</td>
+          <td>部分空間の和</td>
+          <td>$W_1+W_2=\{w_1+w_2\mid w_1\in W_1,w_2\in W_2\}$ は $V$ の部分空間になる。</td>
+        </tr>
+        <tr>
+          <td>定理 10.3</td>
+          <td>和・共通部分の次元公式</td>
+          <td>$\dim(V_1+V_2)\le n_1+n_2$ かつ $\dim(V_1\cap V_2)=n_1+n_2-\dim(V_1+V_2)$（$n_1=\dim V_1,n_2=\dim V_2$）。</td>
+        </tr>
+      </table>
+
+      <h3>論理の流れ（依存関係）</h3>
+      <div class="note" style="font-size:.9rem">
+        <span class="box-label">定理・系の依存関係</span>
+        <div style="overflow-x:auto">
+          <pre style="font-family:monospace; line-height:2; font-size:.88rem; color:#333">
+定義1.1（ベクトル空間）
+  └── 系1.2（基本性質：逆元一意性・0倍・-1倍）
+       └── 定義1.4（線形写像）
+            ├── 系1.5（T(0)=0, T(-x)=-T(x), 一次結合保存）
+            ├── 定義1.7（同型写像）
+            └── 定義2.1（部分空間）
+                 ├── 定義2.2（span は部分空間）
+                 └── 定義3.1（Ker, Im） ── 系3.2（Ker, Im は部分空間）
+                      └── 定理3.3（単射 ⟺ Ker={0}）
+                           ├── 系3.4（Ker = 斉次方程式の解）
+                           ├── 系3.5（m &lt; n なら単射でない）
+                           └── 定理3.6（同型 ⟹ m=n）
+                                └── 定義4.1（有限次元・次元 dim V）
+                                     ├── 系4.2（V≅W ⟺ dim V=dim W）
+                                     ├── 補題4.3（ランク）── 定理4.4（dim Ker=n−rank A）
+                                     │    └── 補題4.5 ── 補題4.6 ── 定理4.7（dim Im=rank A）
+                                     │              └── 系4.8（次元定理）── 系4.9〜4.11
+                                     └── 補題5.1（T: K^n→V は行き先 v₁,…,vₙ で決まる）
+                                          └── 定理5.2（Im T = 生成する部分空間）
+                                               ├── 定義5.3（生成する／span）── 全射 ⟺ 生成する
+                                               ├── 定義5.4（1次独立）── 系5.5：単射 ⟺ 1次独立
+                                               └── 系5.6（K^m の場合：dim⟨v₁,…,vₙ⟩=rank）
+                                                    └── 定義6.1（基底＝生成する＋1次独立）
+                                                         ├── 系6.2（基底 ⟺ 同型写像）
+                                                         │    └── 系6.3（dim V=n ⟺ n個の基底が存在）
+                                                         │         └── 系6.4（個数=dim Vなら独立/生成/基底が同値）
+                                                         │              └── 定理6.5（独立な元は最大dim V個）
+                                                         │                   └── 補題6.6（はみ出す元を足しても独立）
+                                                         │                        ├── 定理6.7（独立な組は基底へ延長できる）
+                                                         │                        └── 補題7.1（生成系が従属なら1本間引ける：6.6の対偶）
+                                                         │                             └── 定理7.2（生成系は間引いて基底に到達／dim V≦生成系の個数）
+                                                         │                                  ├── 系7.3（有限次元 ⟺ 有限生成）
+                                                         │                                  ├── 定理7.4（無限次元の3条件同値）
+                                                         │                                  └── 定理7.5（部分空間はdim W≦dim V・等号⟺W=V）
+                                                         └── 系4.11（dim V₁=dim V₂ の同値条件を再利用）
+
+定義1.4（線形写像）・定理6.5・定理6.7・§7 のすべて
+  └── 定義8.1（基底を固定して L:V→W を K^n→K^m とみなし，行列表示 [L] を定義）
+       ├── 定義8.2（Im(T)の次元としてrank Tを定義／定理4.7のrankと一致）
+       └── 定義9.1（基底変換行列 C＝T_w⁻¹∘T_v の行列表示）
+            ├── 系9.2（C_v^p=C_w^pC_v^w／C_v^v=I_n／(C_v^w)⁻¹=C_w^v）
+            └── 結論（[L]_v'^w'=C_w^w'[L]_v^wC_v'^v：基底を変えたときの行列表示）
+
+定理6.7（基底への延長）・定理7.2・定理7.5
+  └── 補題10.1（独立な組を分割するとspanは{0}でしか交わらない）
+       └── 定義10.2（部分空間の和 W1+W2）
+            └── 定理10.3（dim(V1+V2)≤n1+n2／dim(V1∩V2)=n1+n2−dim(V1+V2)）
+                 └── 応用：rank(A+B)≤rankA+rankB（期末前ばらし問題 候補3）
+          </pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 記号一覧 -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-tag">Notation</div>
+      <h2>記号・用語一覧</h2>
+    </div>
+    <div class="sec-body">
+      <table class="axiom-table">
+        <tr><th>記号</th><th>意味</th><th>初出</th></tr>
+        <tr><td>$\mathbb{K}$</td><td>$\mathbb{R}$ または $\mathbb{C}$（スカラー体）</td><td>§1 基本設定</td></tr>
+        <tr><td>$V, W$</td><td>$\mathbb{K}$-ベクトル空間</td><td>定義 1.1</td></tr>
+        <tr><td>$0\in V$</td><td>ゼロベクトル（零元）</td><td>定義 1.1 (V2)</td></tr>
+        <tr><td>$-x$</td><td>$x$ の逆元（$x+(-x)=0$）</td><td>系 1.2(1)</td></tr>
+        <tr><td>$x-y$</td><td>$x+(-y)$ の略記</td><td>系 1.2</td></tr>
+        <tr><td>$T: V\to W$</td><td>$V$ から $W$ への写像</td><td>定義 1.4</td></tr>
+        <tr><td>$T: V\xrightarrow{\sim} W$</td><td>同型写像</td><td>定義 1.7</td></tr>
+        <tr><td>$V\cong W$</td><td>$V$ と $W$ は同型</td><td>定義 1.7</td></tr>
+        <tr><td>$W\subseteq V$</td><td>$W$ は $V$ の部分集合</td><td>定義 2.1</td></tr>
+        <tr><td>$\langle v_1,\ldots,v_k\rangle_\mathbb{K}$</td><td>$v_1,\ldots,v_k$ が生成する部分空間（span）</td><td>定義 2.2</td></tr>
+        <tr><td>$\operatorname{Ker}(T)$</td><td>$T$ の核 $= \{v\in V\mid T(v)=0\}$</td><td>定義 3.1</td></tr>
+        <tr><td>$\operatorname{Im}(T)$</td><td>$T$ の像 $= \{T(v)\mid v\in V\}$</td><td>定義 3.1</td></tr>
+        <tr><td>$T_A$</td><td>行列 $A$ による線形写像 $v\mapsto Av$</td><td>§1 例 1</td></tr>
+        <tr><td>$e_j$</td><td>$\mathbb{K}^n$ の第 $j$ 基本単位ベクトル</td><td>§1 例 1</td></tr>
+        <tr><td>$M_{m,n}(\mathbb{K})$</td><td>$m\times n$ 行列の空間</td><td>§1 基本設定</td></tr>
+        <tr><td>$C^\infty((a,b))$</td><td>$(a,b)$ 上の $C^\infty$ 級（無限回微分可能）複素数値関数全体</td><td>§1 例</td></tr>
+        <tr><td>$\dim_\mathbb{K}V$，$\dim V$</td><td>$V$ の次元（$V\cong\mathbb{K}^n$ となる $n$）</td><td>定義 4.1</td></tr>
+        <tr><td>$\operatorname{rank}A$</td><td>$A$ のランク（行標準形の leading entry の個数）</td><td>補題 4.3</td></tr>
+        <tr><td>$D_i(\lambda)$</td><td>第 $i$ 行を $\lambda$ 倍する基本行列（Type 1）</td><td>§4 基本行列</td></tr>
+        <tr><td>$L_{i,j}(\mu)$</td><td>第 $i$ 行の $\mu$ 倍を第 $j$ 行に加える基本行列（Type 2）</td><td>§4 基本行列</td></tr>
+        <tr><td>$S_{i,j}$</td><td>第 $i$ 行と第 $j$ 行を交換する基本行列（Type 3）</td><td>§4 基本行列</td></tr>
+        <tr><td>$T_{v_1,\ldots,v_n}$</td><td>$\mathbb{K}^n\to V$ の線形写像 $x\mapsto\sum x_iv_i$</td><td>補題 5.1</td></tr>
+        <tr><td>生成する／span</td><td>$\langle v_1,\ldots,v_n\rangle_\mathbb{K}=V$ となること（$v_1,\ldots,v_n$ は生成系）</td><td>定義 5.3</td></tr>
+        <tr><td>1次独立</td><td>$a_1v_1+\cdots+a_nv_n=0 \Rightarrow a_1=\cdots=a_n=0$（linearly independent）</td><td>定義 5.4</td></tr>
+        <tr><td>基底（basis）</td><td>生成する ＋ 1次独立 をみたす $v_1,\ldots,v_n\in V$</td><td>定義 6.1</td></tr>
+        <tr><td>有限次元／無限次元</td><td>有限個の元で生成される（⟺有限次元） か，そうでないか（⟺無限次元）</td><td>系 7.3・定理 7.4</td></tr>
+        <tr><td>$[L]^{w_1,\ldots,w_m}_{v_1,\ldots,v_n}$</td><td>基底 $v_1,\ldots,v_n$（$V$）・$w_1,\ldots,w_m$（$W$）に関する線形写像 $L:V\to W$ の行列表示</td><td>定義 8.1</td></tr>
+      </table>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+<script src="../search.js"></script>
+</body>
+</html>

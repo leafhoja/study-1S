@@ -1,0 +1,662 @@
+<!DOCTYPE html><!-- 「2025年度 過去問 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>2025年度 過去問 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="td.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$','$']],
+    displayMath: [['$$','$$']],
+    tags: 'ams',
+    macros: {
+      pd: ['\\left(\\frac{\\partial #1}{\\partial #2}\\right)_{#3}',3]
+    }
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+</head>
+<body data-nav-page="exam-2025">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">熱力学ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">ホーム</a>
+      <a href="ch0.html" data-page="ch0">第0章</a>
+      <a href="ch1.html" data-page="ch1">第1章</a>
+      <a href="ch2.html" data-page="ch2">第2章</a>
+      <a href="ch3.html" data-page="ch3">第3章</a>
+      <a href="ch4.html" data-page="ch4">第4章</a>
+      <a href="ch5.html" data-page="ch5">第5章</a>
+      <a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a>
+      <a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025" class="active">2025</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2014.html" data-page="kakomon_2014">2014</a>
+      <a href="kakomon_2012.html" data-page="kakomon_2012">2012</a>
+      <a href="kakomon_2011.html" data-page="kakomon_2011">2011</a>
+      <a href="kakomon_2010.html" data-page="kakomon_2010">2010</a>
+      <a href="kakomon_2009.html" data-page="kakomon_2009">2009</a>
+      <a href="kakomon_2008.html" data-page="kakomon_2008">2008</a>
+      <a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>熱力学 過去問解説</h1>
+  <p class="subtitle">2025年度期末試験</p>
+  <p class="meta">担当：福島孝治｜2025年7月31日 3時限｜試験時間90分｜前期課程 Sセメスター</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（ゴムの状態方程式と熱力学）</a>
+    <a href="#q2">大問2（熱力学第二法則）</a>
+    <a href="#q3">大問3（$S(U,V)$ で与えられた気体＝ファンデルワールス気体）</a>
+    <a href="#q4">大問4（感想）</a>
+  </div>
+
+  <div class="source-note">
+    大問1は、原本の答案末尾に添付されていた手書きの模範解答（採点者作成と思われる解答例）を書き起こし、行間を補って詳細化したもの。大問2・3には模範解答の添付がなかったため、標準的な熱力学の議論に基づいて独自に作成した。
+  </div>
+
+  <!-- ============ 大問1 ============ -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header">
+      <div class="sec-tag">大問 1</div>
+      <h2>ゴムの状態方程式と熱力学関係式</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>
+          長さ $l$ のゴムを準静的に微小長さ $dl$ だけ引っ張るときのゴムにされる微小仕事 $δW$ は、張力を $X$ として、$δW=Xdl$ と表される。
+          ここで考えるゴムの張力 $X$ は温度 $T$ と長さ $l$ の関数として次の状態方程式に従う：
+        </p>
+        <div class="mathblock">$$X(T,l) = AT\left(\frac{l}{l_0}-\left(\frac{l_0}{l}\right)^2\right)$$</div>
+        <p>
+          ただし、$A$、$l_0$ は正の定数として、ゴムの長さ $l$ は $l>l_0$ を満たすとする。また、長さ一定の条件での熱容量 $C_l$ は温度に依存しない定数とする。エントロピーを $S$、内部エネルギーを $U$ として、以下の問いに答えよ。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">気体の $PV$ 系との対応</span>
+        <p>
+          この問題全体は、気体の $(P,V)$ 系における $\{$内部エネルギー・エントロピー・自由エネルギー・熱容量$\}$ の議論を、ゴムの $(X,l)$ 系にそのまま置き換えたものになっている。対応関係は
+          $$-P \longleftrightarrow X,\qquad V\longleftrightarrow l,\qquad δW=-PdV\longleftrightarrow δW=Xdl$$
+          であり、気体の断熱曲線・Carnotサイクル・$C_P-C_V$ の議論などがすべて同じ論法で $C_X - C_l$、$X$–$l$ 面のサイクルへと横滑りする。以下の各設問で「気体だったらどうだったか」を思い出しながら読むと見通しがよい。
+        </p>
+      </div>
+
+      <h3 id="q1-1">(1) 熱力学関係式 $dU = \Box\,dS + \Box\,dl$</h3>
+      <div class="ex"><span class="box-label">問題</span><p>熱力学関係式を $dU = \Box\,dS + \Box\,dl$ と表すとき、空欄を答えよ。</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$dU = T\,dS + X\,dl$$</div>
+        <div class="proof-body">
+          <p>
+            熱力学第一法則 $dU=δQ+δW$ と、可逆変化における第二法則の表現 $δQ=TdS$、および与えられた微小仕事 $δW=Xdl$ を組み合わせるだけでよい。
+          </p>
+          <div class="mathblock">$$dU = δQ + δW = T\,dS + X\,dl$$</div>
+          <p>
+            気体の $dU=TdS-PdV$ と全く同じ構造で、$-P$ の代わりに「引っ張ると仕事をされる」ことを反映して $+X$ が来ている（気体は膨張すると仕事をする側、ゴムは引っ張られると仕事をされる側、という符号の違いに対応）。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-2">(2) Helmholtz自由エネルギーとMaxwell関係式</h3>
+      <div class="ex"><span class="box-label">問題</span><p>Helmholtz自由エネルギー $F(T,l)$ から導かれるMaxwell関係式を答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$F=U-TS,\qquad dF=-S\,dT+X\,dl,\qquad \pd{X}{T}{l} = -\pd{S}{l}{T}$$
+      </div>
+        <div class="proof-body">
+          <p>Legendre変換 $F=U-TS$ の微小変化を計算する。</p>
+          <div class="mathblock">$$dF = dU - TdS - SdT = (TdS+Xdl) - TdS - SdT = -SdT + Xdl$$</div>
+          <p>したがって $F(T,l)$ を独立変数 $T,l$ の関数とみて比較すると</p>
+          <div class="mathblock">$$\pd{F}{T}{l} = -S,\qquad \pd{F}{l}{T} = X$$</div>
+          <p>
+            $F$ は状態量なので偏微分の順序を交換してよく（$\dfrac{\partial^2F}{\partial T\partial l}=\dfrac{\partial^2F}{\partial l\partial T}$）、
+          </p>
+          <div class="mathblock">$$\pd{X}{T}{l} = \frac{\partial^2F}{\partial T\partial l} = \frac{\partial^2F}{\partial l\partial T} = -\pd{S}{l}{T}$$</div>
+          <p>
+            これがMaxwell関係式である。状態方程式に代入すると、右辺に使う形として
+          </p>
+          <div class="mathblock">$$\pd{S}{l}{T} = -\pd{X}{T}{l} = -A\left(\frac{l}{l_0}-\left(\frac{l_0}{l}\right)^2\right)$$</div>
+          <p>が(4)以降で繰り返し使う具体形になる。</p>
+        </div>
+      </details>
+
+      <h3 id="q1-3">(3) 熱容量 $C_l$ と内部エネルギー $U$ の関係</h3>
+      <div class="ex"><span class="box-label">問題</span><p>熱容量 $C_l$ と内部エネルギー $U$ との関係を答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$C_l = \pd{U}{T}{l}$$</div>
+        <div class="proof-body">
+          <p>$U(T,l)$ の全微分を書き、そこから $δQ$ を取り出す。</p>
+          <div class="mathblock">$$dU = \pd{U}{T}{l}dT + \pd{U}{l}{T}dl$$</div>
+          <p>第一法則 $δQ=dU-δW=dU-Xdl$ に代入すると</p>
+          <div class="mathblock">$$δQ = \pd{U}{T}{l}dT + \left[\pd{U}{l}{T}-X\right]dl$$</div>
+          <p>長さ一定（$dl=0$）の条件での熱容量 $C_l$ は、定義よりこの式の $dT$ 係数そのもの：</p>
+          <div class="mathblock">$$C_l \equiv \left.\frac{δQ}{dT}\right|_l = \pd{U}{T}{l}$$</div>
+        </div>
+      </details>
+
+      <h3 id="q1-4">(4) $U$ が $l$ に依存せず温度のみに依存することを示す</h3>
+      <div class="ex"><span class="box-label">問題</span><p>このゴムの内部エネルギーは $l$ に依存せずに、温度のみに依存することを示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$\pd{U}{l}{T} = 0$$</div>
+        <div class="proof-body">
+          <p>
+            示すべきは $\pd{U}{l}{T}=0$。(1)の関係式 $dU=TdS+Xdl$ を $l$ で偏微分する（$T$ 一定）と、いわゆる「エネルギー方程式」が得られる：
+          </p>
+          <div class="mathblock">$$\pd{U}{l}{T} = T\pd{S}{l}{T} + X$$</div>
+          <p>ここに(2)のMaxwell関係式 $\pd{S}{l}{T}=-\pd{X}{T}{l}$ を代入すると</p>
+          <div class="mathblock">$$\pd{U}{l}{T} = -T\pd{X}{T}{l} + X$$</div>
+          <p>状態方程式より $\pd{X}{T}{l}=A\left(\dfrac{l}{l_0}-\left(\dfrac{l_0}{l}\right)^2\right)=\dfrac{X}{T}$（$X=AT(\cdots)$ の形から、$T$ で割ると $T$ が落ちることに注意）。したがって</p>
+          <div class="mathblock">$$\pd{U}{l}{T} = -T\cdot\frac{X}{T} + X = -X+X = 0$$</div>
+          <p>
+            ゆえに $U=U(T)$（$l$ に依存しない）。この結果は理想気体の $\pd{U}{V}{T}=0$ と全く同じ構造で成り立っており、原因も同じ：状態方程式が「$X/T$ が $T$ によらない」という形（理想気体なら $P/T=nR/V$ が $T$ によらない形）をしているために、エネルギー方程式の右辺がきれいに打ち消し合う。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-5">(5) $C_l$ と $C_X$ の関係・大小</h3>
+      <div class="ex"><span class="box-label">問題</span><p>張力一定の条件での熱容量を $C_X$ とすると、$C_l$ との関係を示せ。また、$C_l$ と $C_X$ のどちらが大きいかを理由とともに説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$C_X = C_l - X\pd{l}{T}{X},\qquad C_X \ge C_l$$</div>
+        <div class="proof-body">
+          <p>(3)で導いた $δQ=\pd{U}{T}{l}dT+\left[\pd{U}{l}{T}-X\right]dl$ に、(4)の結果 $\pd{U}{l}{T}=0$ を使うと、この系では</p>
+          <div class="mathblock">$$δQ = C_l\,dT - X\,dl$$</div>
+          <p>という非常に簡単な形になる。張力 $X$ 一定の条件で温度を $dT$ だけ変えたときの熱容量 $C_X$ は、この式を $X$ 一定のもとで $dT$ で割ればよい：</p>
+          <div class="mathblock">$$C_X = \left.\frac{δQ}{dT}\right|_X = C_l - X\pd{l}{T}{X}$$</div>
+          <p>
+            $\pd{l}{T}{X}$ を状態方程式から求める。$X=AT\!\left(\dfrac{l}{l_0}-\left(\dfrac{l_0}{l}\right)^2\right)$ を $X$ 一定のまま $T$ について解くと $T=\dfrac{X}{A\left(\frac{l}{l_0}-\left(\frac{l_0}{l}\right)^2\right)}$ で、これを $l$ で微分すると
+          </p>
+          <div class="mathblock">$$\pd{T}{l}{X} = -\frac{X}{A}\cdot\frac{\frac{1}{l_0}+\frac{2l_0^2}{l^3}}{\left(\frac{l}{l_0}-\left(\frac{l_0}{l}\right)^2\right)^2} < 0 \qquad(\because\ l>l_0,\ X>0)$$</div>
+          <p>逆数をとって $\pd{l}{T}{X}=1\big/\pd{T}{l}{X}<0$ も同じ符号（負）になる。したがって</p>
+          <div class="mathblock">$$-X\pd{l}{T}{X} = (\text{正})\times(\text{負の逆数の}-1\text{倍}) > 0$$</div>
+          <p>
+            より厳密には $-X\pd{l}{T}{X}>0$（$X>0$ かつ $\pd{l}{T}{X}<0$ だから）。ゆえに
+          </p>
+          <div class="mathblock">$$C_X = C_l + \underbrace{\left(-X\pd{l}{T}{X}\right)}_{>0} \ \ge\ C_l$$</div>
+          <p>
+            気体の $C_P\ge C_V$ と全く同じ構造の不等式である。気体では「圧一定で温めると膨張し、その膨張のぶん余分に外へ仕事をする分だけ多く熱を要する」と説明されるが、ここでは符号が入れ替わっており「張力一定で温めるとゴムは縮む（(11)参照）が、それでも $C_X\ge C_l$ は成り立つ」という、単純な体積膨張の直感だけでは説明しきれない、より一般的な熱力学的安定性に由来する不等式であることが分かる。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-6">(6) 等温過程での熱 $Q_{1\to2}$</h3>
+      <div class="ex"><span class="box-label">問題</span><p>このゴムを温度 $T_1$ に保ちながら、ゆっくりと長さ $l_1$ から $l_2>l_1$ に変化させるとき（準静的等温過程）にゴムに与えられる熱 $Q_{1\to2}$ を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$Q_{1\to2} = -AT_1(l_2-l_1)\left\{\frac{l_1+l_2}{2l_0}-\frac{l_0^2}{l_1l_2}\right\} \;(<0)$$
+      </div>
+        <div class="proof-body">
+          <p>(5)で得た $δQ=C_ldT-Xdl$ を、等温（$dT=0$）の条件で積分すればよい。</p>
+          <div class="mathblock">$$Q_{1\to2} = \int_{l_1}^{l_2} (-X)\,dl = -AT_1\int_{l_1}^{l_2}\left(\frac{l}{l_0}-\frac{l_0^2}{l^2}\right)dl = -AT_1\left[\frac{l^2}{2l_0}+\frac{l_0^2}{l}\right]_{l_1}^{l_2}$$</div>
+          <p>これを整理する。</p>
+          <div class="mathblock">$$Q_{1\to2} = -AT_1\left\{\frac{l_2^2-l_1^2}{2l_0} + l_0^2\left(\frac1{l_2}-\frac1{l_1}\right)\right\} = -AT_1(l_2-l_1)\left\{\frac{l_1+l_2}{2l_0} - \frac{l_0^2}{l_1l_2}\right\}$$</div>
+          <p>
+            $l_1,l_2>l_0$ なので $\dfrac{l_1+l_2}{2l_0}>1>\dfrac{l_0^2}{l_1l_2}$（後者は $l_1,l_2>l_0$ より $1$ 未満）となり、中括弧の中身は正。また $l_2-l_1>0$。よって $Q_{1\to2}<0$：
+          </p>
+          <p><strong>等温でゴムを引っ張る過程は発熱過程である。</strong>実際にゴムを急に伸ばすと少し温かくなる、という日常的な体感（輪ゴムを引っ張って唇に当てると温かい）の準静的版に対応する。</p>
+        </div>
+      </details>
+
+      <h3 id="q1-7">(7) (6)の過程でのエントロピー変化</h3>
+      <div class="ex"><span class="box-label">問題</span><p>前問の過程でエントロピーは増えるか減るかを理由とともに答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>エントロピーは<strong>減少</strong>する。</div>
+        <div class="proof-body">
+          <p>(2)のMaxwell関係式の具体形を使う。</p>
+          <div class="mathblock">$$\pd{S}{l}{T} = -\pd{X}{T}{l} = -A\left(\frac{l}{l_0}-\left(\frac{l_0}{l}\right)^2\right) < 0 \qquad (l>l_0)$$</div>
+          <p>
+            等温（$T$ 一定）のまま $l$ を増やす（$dl>0$）と、この式より $dS<0$。したがってエントロピーは減少する。
+          </p>
+          <p>
+            物理的には、ゴムはミクロには絡み合った高分子鎖の集合であり、そのエントロピーの大部分は「鎖がどれだけ多くの丸まり方（配置）を取れるか」に由来する（気体の体積エントロピーとは起源が違う、いわゆる<strong>エントロピー弾性</strong>）。引っ張って鎖を伸ばすと、鎖が取りうる配置の数（丸まり方の自由度）が減るため、配置エントロピーが減少する——これが(6)で見た「等温で伸ばすと発熱する」ことの分子論的な理由でもある（$T\,dS<0$ の分だけ熱を系外に捨てないと等温を保てない）。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-8">(8) 断熱曲線</h3>
+      <div class="ex"><span class="box-label">問題</span><p>このゴムの断熱曲線を求め、断熱過程でゴムを伸ばすときの温度の増減を答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$T = C\cdot\exp\!\left[\frac{A}{C_l}\left(\frac{l^2}{2l_0}+\frac{l_0^2}{l}\right)\right]\quad(C:\text{積分定数）。断熱的に伸ばすと温度は上昇する。}$$
+      </div>
+        <div class="proof-body">
+          <p>断熱条件 $δQ=0$ を(5)の $δQ=C_ldT-Xdl$ に課すと</p>
+          <div class="mathblock">$$C_l\,dT = X\,dl = AT\left(\frac{l}{l_0}-\frac{l_0^2}{l^2}\right)dl \quad\Longrightarrow\quad \frac{dT}{T} = \frac{A}{C_l}\left(\frac{l}{l_0}-\frac{l_0^2}{l^2}\right)dl$$</div>
+          <p>変数分離形なので両辺を積分する。</p>
+          <div class="mathblock">$$\ln T = \frac{A}{C_l}\left(\frac{l^2}{2l_0}+\frac{l_0^2}{l}\right) + \text{const.}$$</div>
+          <p>すなわち</p>
+          <div class="mathblock">$$T = C\exp\!\left[\frac{A}{C_l}\left(\frac{l^2}{2l_0}+\frac{l_0^2}{l}\right)\right]$$</div>
+          <p>
+            指数の中身 $f(l)=\dfrac{l^2}{2l_0}+\dfrac{l_0^2}{l}$ を $l$ で微分すると $f'(l)=\dfrac{l}{l_0}-\dfrac{l_0^2}{l^2}$ で、$l>l_0$ では $\dfrac{l}{l_0}>1>\dfrac{l_0^2}{l^2}$ なので $f'(l)>0$。つまり $l$ を大きくすると指数が単調に増加し、$T$ も単調に増加する。
+          </p>
+          <p><strong>断熱的にゴムを伸ばすと温度は上がる。</strong>これは(6)(7)の結果（等温で伸ばすと発熱・エントロピー減少）と表裏一体で、断熱（熱を逃がせない）なら、その代わりに系内の温度が上がってエントロピー一定を保つ、という関係になっている。</p>
+        </div>
+      </details>
+
+      <h3 id="q1-9">(9) Carnotサイクル：$T$–$S$ 平面</h3>
+      <div class="ex"><span class="box-label">問題</span><p>このゴムでCarnotサイクルを作るときのサイクルの様子を $T-S$ 平面で図示し、熱効率を答えよ。ただし、答えのみでよい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$\eta = 1-\frac{T_2}{T_1}$$
+      </div>
+        <div class="diagram">
+        <svg viewBox="0 0 360 220" width="360">
+          <defs><marker id="arTS" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#1a2b4a"/></marker></defs>
+          <g stroke="#1a2b4a" stroke-width="1.6" fill="none">
+            <line x1="55" y1="180" x2="55" y2="20" marker-end="url(#arTS)"/>
+            <line x1="55" y1="180" x2="330" y2="180" marker-end="url(#arTS)"/>
+          </g>
+          <g font-size="13" fill="#1a2b4a">
+            <text x="32" y="30">T</text>
+            <text x="320" y="200">S</text>
+            <text x="30" y="70">T₁</text>
+            <text x="30" y="145">T₂</text>
+          </g>
+          <g stroke="#0b6e6e" stroke-width="2.4" fill="none">
+            <line x1="120" y1="65" x2="240" y2="65" marker-end="url(#arTS)"/>
+            <line x1="240" y1="65" x2="240" y2="140" marker-end="url(#arTS)"/>
+            <line x1="240" y1="140" x2="120" y2="140" marker-end="url(#arTS)"/>
+            <line x1="120" y1="140" x2="120" y2="65" marker-end="url(#arTS)"/>
+          </g>
+          <g stroke-dasharray="3,3" stroke="#999">
+            <line x1="120" y1="65" x2="120" y2="180"/>
+            <line x1="240" y1="65" x2="240" y2="180"/>
+            <line x1="55" y1="65" x2="120" y2="65"/>
+            <line x1="55" y1="140" x2="120" y2="140"/>
+          </g>
+          <g font-size="12" fill="#555">
+            <text x="150" y="58">等温 T₁（吸熱）</text>
+            <text x="245" y="105">断熱</text>
+            <text x="150" y="158">等温 T₂（放熱）</text>
+            <text x="65" y="105">断熱</text>
+          </g>
+        </svg>
+        <div class="diagram-cap">$T$–$S$ 平面での（このゴムの）Carnotサイクル。断熱過程は $S=$一定の垂直線になるので、気体のCarnotサイクルと全く同じ「長方形」になる。</div>
+      </div>
+        <div class="proof-body">
+          <p>
+            (7)(8)で見たように、断熱（かつ準静的＝可逆）な変化は必ずエントロピー一定（$S=$一定）の変化になる。したがって、高温 $T_1$・低温 $T_2$ の2つの等温過程（$T$–$S$ 平面上で水平線）と、それらをつなぐ2本の断熱過程（$S=$一定の垂直線）からなるサイクルは、気体の場合と全く同じ「長方形」になる。
+          </p>
+          <p>
+            Carnotの定理（動作物質によらず、2つの温度 $T_1>T_2$ の間で働く可逆熱機関の効率はすべて等しい）はこのゴムのサイクルにも変わらず適用できるので、効率は気体のCarnotサイクルと同じ普遍公式
+          </p>
+          <div class="mathblock">$$\eta = 1 - \frac{T_2}{T_1}$$</div>
+          <p>で与えられる（この結果は動作物質の具体的な状態方程式 $X(T,l)$ の中身に一切依存しない——それがCarnotの定理の主張そのものである）。</p>
+        </div>
+      </details>
+
+      <h3 id="q1-10">(10) Carnotサイクル：$X$–$l$ 平面</h3>
+      <div class="ex"><span class="box-label">問題</span><p>ゴムのCarnotサイクルを $X-l$ 平面に図示せよ。ただし、吸熱過程、発熱過程を明記し、サイクルの方向も示すこと。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="diagram">
+        <svg viewBox="0 0 520 320" width="520" data-thermo-plot="rubber-carnot" role="img" aria-labelledby="xl25-title xl25-desc">
+          <title id="xl25-title">数式から描いたゴムのCarnotサイクル</title>
+          <desc id="xl25-desc">ゴムの状態方程式と断熱式から生成した反時計回りの閉曲線</desc>
+          <defs>
+            <marker id="arXl-axis" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#1a2b4a"/></marker>
+            <marker id="arXl-iso" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#b07820"/></marker>
+            <marker id="arXl-adi" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L7,3L0,6z" fill="#0b6e6e"/></marker>
+          </defs>
+          <g stroke="#1a2b4a" stroke-width="1.7" fill="none"><line x1="65" y1="280" x2="65" y2="20" marker-end="url(#arXl-axis)"/><line x1="65" y1="280" x2="490" y2="280" marker-end="url(#arXl-axis)"/></g>
+          <g font-size="15" font-style="italic" fill="#1a2b4a"><text x="38" y="28">X</text><text x="480" y="302">l</text></g>
+          <g fill="none" stroke-width="3">
+            <path data-curve="hot" data-equation="X=2(q-q^-2)" stroke="#b07820"/><path data-curve="cool-adiabatic" data-equation="T=C exp[(q^2/2+1/q)/2]" stroke="#0b6e6e"/>
+            <path data-curve="cold" data-equation="X=1.4(q-q^-2)" stroke="#b07820"/><path data-curve="warm-adiabatic" data-equation="T=C exp[(q^2/2+1/q)/2]" stroke="#0b6e6e"/>
+            <path data-arrow="hot" stroke="#b07820" marker-end="url(#arXl-iso)"/><path data-arrow="cool-adiabatic" stroke="#0b6e6e" marker-end="url(#arXl-adi)"/>
+            <path data-arrow="cold" stroke="#b07820" marker-end="url(#arXl-iso)"/><path data-arrow="warm-adiabatic" stroke="#0b6e6e" marker-end="url(#arXl-adi)"/>
+          </g>
+          <g fill="#fff" stroke="#1a2b4a" stroke-width="2"><circle data-state="1" r="5"/><circle data-state="2" r="5"/><circle data-state="3" r="5"/><circle data-state="4" r="5"/></g>
+          <g font-size="13" font-weight="700" fill="#1a2b4a"><text data-state-label="1">1</text><text data-state-label="2" data-dx="-17" data-dy="-7">2</text><text data-state-label="3" data-dx="-17" data-dy="10">3</text><text data-state-label="4">4</text></g>
+          <g font-size="12.5"><text x="326" y="91" fill="#8b5b13">T₁：縮む・吸熱</text><text x="185" y="165" fill="#075d5d">断熱冷却</text><text x="205" y="239" fill="#8b5b13">T₂：伸びる・放熱</text><text x="385" y="124" fill="#075d5d">断熱昇温</text></g>
+        </svg>
+        <div class="diagram-cap">
+          $q=l/l_0$ とし、$A=l_0=1$、$A l_0/C_l=1/2$、$T_1=2,T_2=1.4$ に規格化した。等温式 $X=T(q-q^{-2})$ と断熱式 $T=C\exp[\frac12(q^2/2+1/q)]$ から全座標を生成し、断熱線と等温線の交点も同式から求めている。等温線は $dX/dq=T(1+2q^{-3})&gt;0$、$d^2X/dq^2=-6Tq^{-4}&lt;0$。1→2：高温で縮んで吸熱、2→3：断熱冷却、3→4：低温で伸びて放熱、4→1：断熱昇温。
+        </div>
+      </div>
+        <div class="proof-body">
+          <p>
+            気体の $P$–$V$ Carnotサイクルでは「高温での等温<strong>膨張</strong>が吸熱」「低温での等温<strong>圧縮</strong>が放熱」だが、このゴムでは(6)(7)で見た通り事情が逆転する：
+          </p>
+          <ul>
+            <li>等温で<strong>伸ばす</strong>（$l$ 増加）→ $Q<0$（放熱）</li>
+            <li>等温で<strong>縮める</strong>（$l$ 減少）→ $Q>0$（吸熱）</li>
+          </ul>
+          <p>
+            したがって熱機関として正味の仕事を取り出すサイクル（高温で吸熱・低温で放熱、の順）を組むには：<strong>高温 $T_1$ で縮めて吸熱</strong>→断熱的にさらに縮めながら温度を $T_2$ まで下げる→<strong>低温 $T_2$ で伸ばして放熱</strong>→断熱的に伸ばしながら温度を $T_1$ まで戻す、という順にサイクルを回す必要がある。
+          </p>
+          <p>
+            この「気体とは逆回り」になる理由は、ゴムの弾性がエントロピー弾性（(7)の補足参照）であり、$\pd{S}{l}{T}<0$（気体の $\pd{S}{V}{T}=\pd{P}{T}{V}>0$ と符号が逆）だからである。$X$ を「圧力」、$l$ を「体積」に見立てたとき、この符号の反転がサイクルの回転方向をそのまま反転させる。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q1-11">(11) 張力一定下での温度上昇と長さの増減</h3>
+      <div class="ex"><span class="box-label">問題</span><p>張力一定の条件で、温度を上昇するとゴムは伸びるか縮むかを理由とともに答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>張力一定で温度を上げると、ゴムは<strong>縮む</strong>。</div>
+        <div class="proof-body">
+          <p>問うているのは $\pd{l}{T}{X}$ の符号。(5)の計算で既に</p>
+          <div class="mathblock">$$\pd{T}{l}{X} < 0 \quad\Longrightarrow\quad \pd{l}{T}{X} < 0$$</div>
+          <p>
+            を示した。すなわち $X$ 一定のまま $T$ を上げると $l$ は減少する——輪ゴムに一定のおもりをぶら下げたまま加熱すると、輪ゴムは伸びるのではなく<strong>縮んで</strong>おもりを持ち上げる、という現象になる。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — Gough–Joule効果とエントロピー弾性</span>
+        <p>
+          「荷重をかけたゴムを温めると縮む」という現象は、実際のゴムでも観測される現象で<strong>Gough–Joule効果</strong>として知られる（1805年 J. Gough、1859年 J.P. Joule）。通常の金属棒などの固体は温めると膨張する（熱膨張率が正）のに対し、ゴムはミクロには絡み合った高分子鎖の集合体であり、そのエントロピーの大部分は鎖の丸まり方（コンフォメーション）の場合の数に由来する。鎖を引き伸ばすと配置エントロピーが下がるため、伸びたゴムは「エントロピーを増やそう（＝丸まろう）とする」方向に常に張力を持つ——これが（気体の圧力のような「エネルギー的な」斥力ではなく）<strong>エントロピー弾性</strong>と呼ばれる所以である。本問の状態方程式 $X\propto T$（$T$ に比例）という形自体が、まさにこのエントロピー弾性の特徴（張力が温度に比例し、エネルギーではなくエントロピーに由来する）を表現しており、通常のGough–Joule効果の議論のように追加の実験事実に頼らずとも、与えられた状態方程式だけから(5)(11)の結果が直接導かれる、という点が本問の面白いところである。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問2 ============ -->
+  <div class="section" id="q2">
+    <div class="sec-header">
+      <div class="sec-tag">大問 2</div>
+      <h2>熱力学第二法則に関する3つの設問</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3 id="q2-1">(1) 定積冷却でのエントロピー減少は一般的か</h3>
+      <div class="ex"><span class="box-label">問題</span><p>ある気体は体積一定の条件で温度を下げると、エントロピーは減少した。このことは一般の気体について成り立つかどうかを理由とともに説明せよ。また、エントロピー増大則に反しないかどうかを説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>一般の気体で常に成り立つ。エントロピー増大則にも反しない（この過程は孤立系の断熱過程ではないため）。</div>
+        <div class="proof-body">
+          <p>体積一定でのエントロピーの温度依存性は、定積熱容量 $C_V$ を使って</p>
+          <div class="mathblock">$$\pd{S}{T}{V} = \frac{C_V}{T}$$</div>
+          <p>
+            と表される（$δQ=TdS=C_VdT$（定積）より）。熱的な安定性条件（第4章で学ぶ、揺らぎのない平衡状態が実現するための条件）から $C_V>0$ は任意の物質で常に要求される。したがって $T>0$ である限り $\pd{S}{T}{V}>0$ は<strong>すべての気体（というより、あらゆる安定な物質）で普遍的に成り立つ</strong>。ゆえに、体積一定で温度を下げれば（$dT<0$）必ず $dS<0$——これは特殊な気体の性質ではなく、熱力学的安定性そのものの帰結である。
+          </p>
+          <p>
+            エントロピー増大則（$\Delta S\ge0$）は、<strong>断熱的に孤立した系</strong>が不可逆過程を経るときに限って主張される法則である。本問の気体は「体積一定で温度を下げる」＝外部の低温熱源に熱を捨てながら冷える過程であり、系は熱的に孤立していない（外部と熱のやりとりをしている）。したがって、この気体（系）単独のエントロピーが減っても、エントロピー増大則には全く抵触しない。実際には、気体が失った熱を受け取る側の熱源（周囲）のエントロピーが、気体の減少分以上に増加しており、<strong>気体＋熱源を合わせた孤立系全体</strong>ではエントロピーの合計は減少しない（可逆的に準静的に冷やしたのであれば等号、不可逆に急冷したのであれば真に増加）。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q2-2">(2) 熱を全部仕事に変える等温膨張は第二法則に反するか</h3>
+      <div class="ex"><span class="box-label">問題</span><p>理想気体の入っているピストンに温度 $T$ の熱源を接触して、準静的等温過程で体積を膨張させた。理想気体の内部エネルギーは体積に依存しないため、温度が一定なら不変である。この等温膨張過程では、熱源から熱をもらってそのまま外に仕事に変換している。これは熱力学第二法則に反しないかどうかを説明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>反しない。Kelvinの原理が禁じるのは「サイクル」で熱を全部仕事に変えることであり、この等温膨張は状態が変化する非循環過程だから。</div>
+        <div class="proof-body">
+          <p>
+            熱力学第二法則のKelvin（トムソン）の原理は、正確には次のように述べられる：<strong>「一つの熱源から熱を受け取り、それを全部仕事に変える以外に何の変化も残さないようなサイクル（循環過程）は存在しない」</strong>。
+          </p>
+          <p>
+            本問の等温膨張は、確かに $\Delta U=0$ より受け取った熱 $Q$ をそっくりそのまま仕事 $W=Q$ として取り出している。しかし、これは<strong>サイクルではない</strong>——気体の体積は $V_A$ から $V_B(>V_A)$ へ変化し、圧力も下がっており、始めの状態には戻っていない。「何の変化も残さない」という条件が満たされていないので、Kelvinの原理はこの過程には何の制約も課さない。
+          </p>
+          <p>
+            もしこの気体を再び元の状態（体積 $V_A$）に戻そうとすれば、外部から圧縮の仕事を加える必要があり、しかも等温で圧縮する限り、その圧縮に要する仕事はちょうど膨張で得た仕事と等しくなる（等温可逆過程は経路に依らずエネルギー収支が対称）。つまり、これを1サイクルとして繰り返しても正味の仕事は取り出せず、熱を仕事に変換し続ける永久機関（第二種永久機関）にはならない。ゆえに矛盾は生じない。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q2-3">(3) 真空への断熱自由膨張が不可逆であることを示す</h3>
+      <div class="ex"><span class="box-label">問題</span><p>理想気体の真空への断熱自由膨張は不可逆過程であることを示せ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$\Delta S = nR\ln(V_b/V_a) > 0$ にもかかわらず断熱（$δQ=0$）であり、可逆であれば断熱過程は等エントロピーのはずだから矛盾。よって不可逆。</div>
+        <div class="proof-body">
+          <p>
+            真空への自由膨張では、外部に何も押し返すものがないので仕事はゼロ（$δW=0$）。また容器全体を断熱壁で囲めば熱の出入りもない（$δQ=0$）。第一法則より $\Delta U=0$。理想気体は $U=U(T)$（体積に依存しない）ので、$\Delta U=0$ は $\Delta T=0$（温度不変）を意味する。
+          </p>
+          <p>
+            一方、エントロピーは状態量なので、始状態 $(T,V_a)$ と終状態 $(T,V_b)$ を結ぶ<strong>別の（可逆な）経路</strong>——例えば同じ $T,V_a\to V_b$ を結ぶ準静的等温膨張——に沿って計算してよい。この経路では
+          </p>
+          <div class="mathblock">$$\Delta S = \int \frac{δQ_{\text{rev}}}{T} = \frac{1}{T}\int_{V_a}^{V_b} P\,dV = nR\ln\frac{V_b}{V_a} > 0 \qquad(\because\,V_b>V_a)$$</div>
+          <p>
+            さて、もし自由膨張が可逆過程だったとすれば、断熱（$δQ=0$）かつ可逆な過程は定義から $dS=δQ_{\text{rev}}/T=0$、つまり等エントロピー過程のはずである。しかし実際には $\Delta S=nR\ln(V_b/V_a)>0\neq0$ が成り立ってしまう——これは「断熱かつ可逆」という仮定と矛盾する。
+          </p>
+          <p>
+            したがって、真空への断熱自由膨張は<strong>不可逆</strong>過程でなければならない。□
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 「断熱」と「等エントロピー」は同じではない</span>
+        <p>
+          この設問は、「断熱過程（$δQ=0$）」と「等エントロピー過程（$dS=0$）」を安易に同一視してはいけない、という典型的な注意喚起になっている。両者が一致するのは<strong>断熱かつ可逆</strong>な場合に限られる。断熱だが不可逆な過程（自由膨張、断熱自由膨張、摩擦を伴う断熱変化など）では、$δQ=0$ であっても $dS>0$ となるのが一般的であり、これはむしろ「不可逆な断熱過程ではエントロピーが増加する」というエントロピー増大則そのものの典型例になっている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問3 ============ -->
+  <div class="section" id="q3">
+    <div class="sec-header">
+      <div class="sec-tag">大問 3</div>
+      <h2>$S(U,V)$ で与えられた気体（正体はファンデルワールス気体）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>ある気体について、体積 $V$ と内部エネルギー $U$ の関数として、完全な熱力学関数であるエントロピー $S(U,V)$ が次のように与えられる。</p>
+        <div class="mathblock">$$S(U,V) = \log\!\left(\left(U+\frac{N^2a}{V}\right)^{C}(V-Nb)^{Nk}\right)$$</div>
+        <p>ここで、$N$ は物質量、$C$、$a$、$b$、$k$ は正の定数である。</p>
+      </div>
+
+      <h3 id="q3-1">(1) 熱力学関係式 $dS=\Box\,dU+\Box\,dV$</h3>
+      <div class="ex"><span class="box-label">問題</span><p>熱力学関係式を $dS=\Box\,dU+\Box\,dV$ と表すとき、空欄を答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$dS = \frac{1}{T}dU + \frac{P}{T}dV,\qquad \frac1T = \frac{C}{U+N^2a/V}$$
+      </div>
+        <div class="proof-body">
+          <p>
+            完全な熱力学関数 $S(U,V)$ の全微分は、定義から $dS=\dfrac1T dU+\dfrac PT dV$ となる（$\dfrac1T=\pd{S}{U}{V}$、$\dfrac PT=\pd{S}{V}{U}$ が $T,P$ の定義）。与式を $U$ で偏微分すると
+          </p>
+          <div class="mathblock">$$\pd{S}{U}{V} = \frac{\partial}{\partial U}\Bigl[C\ln\Bigl(U+\frac{N^2a}{V}\Bigr)\Bigr] = \frac{C}{U+N^2a/V}$$</div>
+          <p>（第2項 $Nk\ln(V-Nb)$ は $U$ を含まないので消える）。よって</p>
+          <div class="mathblock">$$\frac1T = \frac{C}{U+N^2a/V} \quad\Longleftrightarrow\quad U+\frac{N^2a}{V} = CT \quad\Longleftrightarrow\quad U = CT-\frac{N^2a}{V}$$</div>
+          <p>この $U=CT-N^2a/V$ の関係が、以降の設問すべての土台になる。</p>
+        </div>
+      </details>
+
+      <h3 id="q3-2">(2) 状態方程式</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この気体の状態方程式を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$P = \frac{NkT}{V-Nb} - \frac{N^2a}{V^2}$$
+      </div>
+        <div class="proof-body">
+          <p>今度は $S$ を $V$ で偏微分する。</p>
+          <div class="mathblock">$$\pd{S}{V}{U} = C\cdot\frac{-N^2a/V^2}{U+N^2a/V} + \frac{Nk}{V-Nb}$$</div>
+          <p>
+            第1項の分母 $U+N^2a/V=CT$（(1)の結果）を使うと、第1項 $=-\dfrac{CN^2a/V^2}{CT}=-\dfrac{N^2a}{TV^2}$。したがって
+          </p>
+          <div class="mathblock">$$\frac PT = \pd{S}{V}{U} = -\frac{N^2a}{TV^2} + \frac{Nk}{V-Nb}$$</div>
+          <p>両辺に $T$ を掛けると状態方程式が得られる：</p>
+          <div class="mathblock">$$P = \frac{NkT}{V-Nb} - \frac{N^2a}{V^2}$$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — これはファンデルワールス気体である</span>
+        <p>
+          この状態方程式は、分子の大きさによる体積の排除（$V\to V-Nb$）と、分子間引力による圧力の減少（$-N^2a/V^2$ の項）を取り入れた<strong>ファンデルワールス方程式</strong>そのものである（通常 $Nk$ の部分は理想気体の $nR$ に対応し、$a,b$ がそれぞれ分子間引力・排除体積に関する定数）。次の(3)以降の設問は、実質的に「ファンデルワールス気体の熱容量」「ファンデルワールス気体の断熱変化」「ファンデルワールス気体のJoule膨張」を順に問うものになっている。
+        </p>
+      </div>
+
+      <h3 id="q3-3">(3) 熱容量</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この気体の熱容量を求めよ。定積熱容量でも定圧熱容量でもどちらでもよい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>$$C_V = C\quad(\text{一定})$$</div>
+        <div class="proof-body">
+          <p>(1)で $U=CT-\dfrac{N^2a}{V}$ を得た。定積熱容量は定義から</p>
+          <div class="mathblock">$$C_V = \pd{U}{T}{V} = C$$</div>
+          <p>
+            すなわち、問題文中に定数として与えられていた文字 $C$ は、実はそのまま定積熱容量に等しい（$V$ にも $T$ にもよらない定数）。理想気体と同様、このファンデルワールス気体も $C_V$ 自体は理想気体のときと変わらず一定のままである、というのがよく知られたファンデルワールス気体の性質。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q3-4">(4) 断熱準静的膨張：$T_a/T_b$ とエントロピー変化</h3>
+      <div class="ex"><span class="box-label">問題</span><p>体積 $V_a$，温度 $T_a$ の平衡状態にある気体を断熱壁で囲ったまま体積を $V_b(>V_a)$ へゆっくりと膨張させる。最終状態の温度を $T_b$ とする。$T_a/T_b$ を求めよ。また、この操作によるエントロピー変化を答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$\frac{T_a}{T_b} = \left(\frac{V_b-Nb}{V_a-Nb}\right)^{Nk/C},\qquad \Delta S = 0$$
+      </div>
+        <div class="proof-body">
+          <p>
+            「ゆっくりと」＝準静的、かつ断熱壁で囲われている＝断熱、なので、この過程は<strong>可逆断熱＝等エントロピー</strong>過程である。$S=C\ln(U+N^2a/V)+Nk\ln(V-Nb)$ に $U+N^2a/V=CT$（(1)）を代入すると
+          </p>
+          <div class="mathblock">$$S = C\ln(CT) + Nk\ln(V-Nb) = C\ln T + Nk\ln(V-Nb) + (\text{$T,V$によらない定数})$$</div>
+          <p>これが変化前後で等しい（$\Delta S=0$）という条件を課す。</p>
+          <div class="mathblock">$$C\ln T_a + Nk\ln(V_a-Nb) = C\ln T_b + Nk\ln(V_b-Nb)$$</div>
+          <div class="mathblock">$$C\ln\frac{T_a}{T_b} = Nk\ln\frac{V_b-Nb}{V_a-Nb} \quad\Longrightarrow\quad \frac{T_a}{T_b} = \left(\frac{V_b-Nb}{V_a-Nb}\right)^{Nk/C}$$</div>
+          <p>
+            $V_b>V_a$ なので右辺の底は $1$ より大きく、指数 $Nk/C>0$ なので $T_a/T_b>1$、つまり $T_a>T_b$——断熱膨張で気体は冷える（理想気体の断熱膨張と同様の振る舞い）。エントロピー変化は、可逆断熱過程の定義よりそのまま $\Delta S=0$。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q3-5">(5) 真空への断熱膨張（Joule膨張）：$T_a/T_c$ とエントロピー変化</h3>
+      <div class="ex"><span class="box-label">問題</span><p>体積 $V_a$，温度 $T_a$ の平衡状態にある気体を真空へ断熱膨張をさせて、体積が $V_c>V_a$ になったときの温度を $T_c$ とすると、$T_a/T_c$ を求めよ。また、この操作によるエントロピー変化を答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol">
+        <span class="box-label">模範解答</span>
+        $$\frac{T_a}{T_c} = \frac{T_a}{T_a-\dfrac{N^2a}{C}\left(\dfrac1{V_a}-\dfrac1{V_c}\right)},\qquad \Delta S = C\ln\frac{T_c}{T_a}+Nk\ln\frac{V_c-Nb}{V_a-Nb} \;(>0)$$
+      </div>
+        <div class="proof-body">
+          <p>
+            真空への自由膨張なので $δW=0$（押し返すものがない）、断熱壁で囲まれているので $δQ=0$。ゆえに $\Delta U=0$：$U(T_a,V_a)=U(T_c,V_c)$。(1)の $U=CT-N^2a/V$ を使うと
+          </p>
+          <div class="mathblock">$$CT_a - \frac{N^2a}{V_a} = CT_c - \frac{N^2a}{V_c} \quad\Longrightarrow\quad C(T_a-T_c) = N^2a\left(\frac1{V_a}-\frac1{V_c}\right)$$</div>
+          <div class="mathblock">$$\therefore\ T_a - T_c = \frac{N^2a}{C}\left(\frac1{V_a}-\frac1{V_c}\right) \;(>0,\ \because V_c>V_a) \quad\Longrightarrow\quad T_c = T_a - \frac{N^2a}{C}\left(\frac1{V_a}-\frac1{V_c}\right)$$</div>
+          <p>
+            $V_c>V_a$ より $T_c<T_a$：<strong>真空への自由膨張でこの気体は冷える。</strong>理想気体（$a=0$ に相当）ではこの効果はゼロで温度不変だったが、分子間引力 $a>0$ があるファンデルワールス気体では、分子どうしが引き合う力に逆らって互いの距離を引き離すのに内部エネルギーの一部が使われるため、実際に温度が下がる（これが現実の気体で観測される<strong>Joule効果</strong>である）。$T_a/T_c$ は上式から直接
+          </p>
+          <div class="mathblock">$$\frac{T_a}{T_c} = \frac{T_a}{T_a - \dfrac{N^2a}{C}\left(\dfrac1{V_a}-\dfrac1{V_c}\right)}$$</div>
+          <p>
+            エントロピー変化は、$S$ が状態量であることを使い、(4)と同じ表式 $S=C\ln T+Nk\ln(V-Nb)+\text{const}$ に始状態・終状態を代入するだけでよい（実際の不可逆経路に沿って積分する必要はない）：
+          </p>
+          <div class="mathblock">$$\Delta S = C\ln\frac{T_c}{T_a} + Nk\ln\frac{V_c-Nb}{V_a-Nb}$$</div>
+          <p>
+            第1項は $T_c<T_a$ より負、第2項は $V_c>V_a$ より正——今度は2つの効果が競合するが、この過程は断熱かつ不可逆（自由膨張）なので、大問2(3)と同じ論法により全体としては必ず $\Delta S>0$ になっていなければならない（実際、ファンデルワールス気体のエントロピーの凹性から、この不等式は常に成立することが示せる）。
+          </p>
+        </div>
+      </details>
+
+      <h3 id="q3-6">(6) 断熱可動仕切板：どちらに動くか</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>下図のように断熱壁に囲まれた箱を可動な仕切板で二つの部分に分けた。最初、二つの部分は同じ体積 $V_0$ であり、それぞれの部分に同じ物質量の気体をいれ、仕切板を固定して温度をそれぞれ $T_1$ と $T_2$ の平衡状態とした（$T_1>T_2$）。その後、仕切板を可動できるようにすると仕切板はどちらに移動するかを理由とともに答えよ。仕切板も断熱壁であるとする。</p>
+        <div class="diagram">
+          <img src="img/2025/fig-partition.png" alt="断熱壁に囲まれた箱を可動な仕切板で二つに分けた図。左がT1・V0、右がT2・V0、可動後は仕切板が移動してT'1・T'2となる" style="max-width:520px;width:100%;height:auto;">
+          <div class="diagram-cap">左右とも同じ体積 $V_0$・同じ物質量から出発し（左：温度 $T_1$、右：温度 $T_2$、$T_1>T_2$）、仕切板を可動にした後の温度をそれぞれ $T_1',T_2'$ とする（原本PDFより切り出し）。</div>
+        </div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="sol"><span class="box-label">模範解答</span>仕切板は温度の低い側（$T_2$ 側）へ移動する——高温側（$T_1$）の気体が膨張し、低温側（$T_2$）の気体が圧縮される。</div>
+        <div class="proof-body">
+          <p>
+            仕切板は断熱壁でもあるので、両側の気体は直接熱をやり取りできない。仕切板の運動を決めるのは、両側の気体が仕切板に及ぼす圧力の差である（仕切板自身は質量を無視できる・摩擦もないとすれば、正味の力を受けた瞬間に加速するので、力学的なつり合い——圧力が等しくなる状態——に向かって動く）。
+          </p>
+          <p>
+            (2)で求めた状態方程式 $P=\dfrac{NkT}{V-Nb}-\dfrac{N^2a}{V^2}$ を、両側とも同じ $N,V=V_0$ の初期状態に適用すると、
+          </p>
+          <div class="mathblock">$$\pd{P}{T}{V} = \frac{Nk}{V-Nb} > 0$$</div>
+          <p>
+            が常に成り立つ（$V>Nb$ が物理的に意味のある領域なので分母は正）。つまり、同じ体積・同じ物質量であれば、<strong>温度が高いほど圧力も高い</strong>。したがって最初の時点で $T_1>T_2$ であることから、左側（$T_1$）の圧力 $P_1$ の方が右側（$T_2$）の圧力 $P_2$ より高い（$P_1>P_2$）。
+          </p>
+          <p>
+            圧力の高い側が仕切板を押すので、仕切板は<strong>圧力の低い側＝低温側（$T_2$側）に向かって</strong>移動する。すなわち高温側の気体が膨張し、低温側の気体が圧縮されながら、最終的に両側の圧力が等しくなったところ（力学的平衡）で仕切板は静止する。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「断熱ピストン問題」の奥深さ</span>
+        <p>
+          この設問で問われている「どちらに動くか」という<strong>方向</strong>は、上記の圧力比較だけで明快に答えられる。しかし、この系が<strong>最終的にどんな平衡状態に落ち着くか</strong>（最終的な $T_1',T_2',V_1',V_2'$ がどうなるか）を完全に決定しようとすると、実は古典熱力学だけでは足りない、というやや踏み込んだ事実が知られている。これは<strong>断熱ピストン問題（adiabatic piston problem）</strong>と呼ばれる有名な問題で、仕切板が断熱的かつ両側と熱交換をしないという設定では、力学的平衡（圧力が等しい）に達した後も、統計力学的なゆらぎ（仕切板の熱運動を介したエネルギーのやり取り）を通じてさらにゆっくりと温度差が解消していく——という、通常の熱力学の範囲を超えた（分子論的な時間スケールに関わる）議論が必要になることが Callen や Lieb らによって指摘されている。本問はその入口にあたる「向きだけを問う」設問になっている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ 大問4 ============ -->
+  <div class="section" id="q4">
+    <div class="sec-header">
+      <div class="sec-tag">大問 4</div>
+      <h2>感想</h2>
+    </div>
+    <div class="sec-body">
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>講義および試験に関して、良かった点、悪かった点等の感想を自由に述べよ。また、講義あるいは自習を通じて、物理学・熱力学から学んだことを述べよ。</p>
+      </div>
+      <div class="note">
+        <span class="box-label">補足</span>
+        <p>この設問は採点対象の知識問題ではなく、受講者自身の感想・学びを問う自由記述式の設問であるため、模範解答は存在しない。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2023.html">← 2023年度へ</a>
+    <a href="taisaku_yosou.html">予想問題（2026）へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer>
+
+<script src="thermo-plots.js"></script>
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html><!-- 「第4章ナビ 熱力学関数 — 熱力学ノート」の内容を表示する学習ページ。 -->
+<html lang="ja"><!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head><meta charset="UTF-8"><script src="../access_control.js"></script><script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#1a365d"><title>第4章ナビ 熱力学関数 — 熱力学ノート</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet"><link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="td.css"><link rel="stylesheet" href="guide.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']]}};</script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script></head>
+<body data-nav-page="ch4"><!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar"><div class="navbar-inner"><a class="navbar-brand" href="index.html">熱力学ノート</a><div class="navbar-links">
+<a href="../index.html" class="nav-back">← 学習ノート</a><a href="index.html">ホーム</a><a href="ch0.html" data-page="ch0">第0章</a><a href="ch1.html" data-page="ch1">第1章</a><a href="ch2.html" data-page="ch2">第2章</a><a href="ch3.html" data-page="ch3">第3章</a><a href="ch4.html" data-page="ch4" class="active">第4章</a><a href="ch5.html" data-page="ch5">第5章</a><a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a><a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a><a href="kakomon_2025.html" data-page="kakomon_2025">2025</a><a href="kakomon_2023.html" data-page="kakomon_2023">2023</a><a href="kakomon_2014.html" data-page="kakomon_2014">2014</a><a href="kakomon_2012.html" data-page="kakomon_2012">2012</a><a href="kakomon_2011.html" data-page="kakomon_2011">2011</a><a href="kakomon_2010.html" data-page="kakomon_2010">2010</a><a href="kakomon_2009.html" data-page="kakomon_2009">2009</a><a href="kakomon_2008.html" data-page="kakomon_2008">2008</a><a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+</div></div></nav>
+<main class="guide-main">
+<!-- 学習ガイドの題名と導入文を、冒頭の目立つ領域にまとめる。 --><header class="guide-hero"><p class="guide-kicker">CHAPTER 4 READING GUIDE</p><h1>第4章ナビ｜実験条件に合う「判定関数」を作る</h1><p class="guide-lead">一言でいうと、<strong>内部エネルギーの自然変数を実験で固定しやすい変数へ交換し、測定・自発変化・最大仕事・安定性を一つの枠組みで扱う</strong>章です。</p></header>
+<p class="guide-usage">この章には多くの関数と公式が現れますが、中心は一つです。$dU=T\,dS-P\,dV$ から不要な微分項を消し、外部条件に合う熱力学関数を選びます。その微分形から、章の残りが順に出てきます。</p>
+
+<section class="guide-section"><h2>この章が解決したいこと</h2><div class="guide-card"><span class="guide-card-label">中心の問い</span><h3>固定しにくい $S,V$ の代わりに、実験条件 $T,P,V$ で平衡を判定できないか</h3><p>$U(S,V)$ は熱力学的情報を十分に持ちますが、エントロピー一定の実験は扱いにくいものです。温度一定・圧力一定など、実験で実現しやすい条件に合わせて同じ情報を持つ関数へ表現を変えます。</p><div class="guide-keyline">$U(S,V)$ を出発点にする → 自然変数を交換する → 微分から関係式を読む → 固定条件ごとの極値で判定する</div></div></section>
+
+<section class="guide-section"><h2>全体の流れ</h2><!-- 学習の手順を、順番に読む項目と矢印で示す。 --><div class="route">
+<article class="route-step"><span class="route-num">1</span><h3>$U(S,V)$ がなぜ「完全」なのかを確認する</h3><p>$dU=T\,dS-P\,dV$ なので、$U(S,V)$ の傾きから $T$ と $P$ が得られ、熱容量や状態方程式へ進めます。一方、単に $U(T,V)$ を知るだけでは圧力の情報が不足します。</p><p class="route-point">目的：関数名ではなく、「どの変数の関数として知るか」が情報量を決めると理解する。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">2</span><h3>ルジャンドル変換で必要な自然変数へ交換する</h3><p>$d(TS)=T\,dS+S\,dT$ を引けば $dS$ が消え、$d(PV)=P\,dV+V\,dP$ を足せば $dV$ が消えます。これにより $F,H,G$ をまとめて作れます。</p>
+<div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>関数</th><th>自然変数</th><th>微分形</th></tr></thead><tbody><tr><td>$U$</td><td>$S,V$</td><td>$dU=T\,dS-P\,dV$</td></tr><tr><td>$F=U-TS$</td><td>$T,V$</td><td>$dF=-S\,dT-P\,dV$</td></tr><tr><td>$H=U+PV$</td><td>$S,P$</td><td>$dH=T\,dS+V\,dP$</td></tr><tr><td>$G=U-TS+PV$</td><td>$T,P$</td><td>$dG=-S\,dT+V\,dP$</td></tr></tbody></table></div>
+<p class="route-point">目的：4関数を別々に暗記せず、消したい微分項から一貫して導く。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">3</span><h3>微分形から状態量とMaxwell関係式を読む</h3><p>各微分形の係数は $S,P,T,V$ を与えます。さらに混合偏微分の順序を交換するとMaxwell関係式が得られ、測りにくいエントロピー変化を圧力・温度・体積の応答へ置き換えられます。</p><p class="route-point">目的：熱力学関数を、測定可能な量同士を結ぶ「情報の発生源」として使う。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">4</span><h3>派生式でエネルギーやエンタルピーの温度依存を求める</h3><p>Maxwell関係式を基本式へ戻すとエネルギー方程式が得られ、$U$ の体積依存を状態方程式から評価できます。Gibbs–Helmholtz方程式は $F,G$ の温度依存と $U,H$ を結びます。</p><p class="route-point">目的：直接測りにくいエネルギー変化を、状態方程式や自由エネルギーから求める。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">5</span><h3>第二法則を固定条件ごとの減少則へ翻訳する</h3><p>孤立系では $S$ が最大へ向かいますが、熱浴や圧力浴と接する系では周囲も含める必要があります。その効果を組み込んだ $F,G$ を使えば、系だけの変化で判定できます。</p>
+<div class="guide-table-wrap"><table class="guide-table"><thead><tr><th>外部条件</th><th>自発変化</th><th>平衡</th></tr></thead><tbody><tr><td>孤立系</td><td>$S$ が増加</td><td>$S$ が最大</td></tr><tr><td>$T,V$ 一定</td><td>$F$ が減少</td><td>$F$ が最小</td></tr><tr><td>$T,P$ 一定</td><td>$G$ が減少</td><td>$G$ が最小</td></tr></tbody></table></div>
+<p class="route-point">目的：外部条件を見れば、変化の方向を判定する関数を選べるようにする。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">6</span><h3>自由エネルギー減少を「取り出せる仕事」と結ぶ</h3><p>等温過程で自由エネルギーが減る分は、理想的には外へ取り出せる最大仕事に対応します。不可逆性がある現実の過程では、その一部が散逸して取り出せる仕事は小さくなります。</p><p class="route-point">目的：「自由」という言葉を、利用可能な仕事の上限として理解する。</p></article><div class="route-arrow">→</div>
+<article class="route-step"><span class="route-num">7</span><h3>極小が本当に安定かを二階の変化で調べる</h3><p>一階の変化がゼロでも、極大や鞍点なら安定ではありません。二階の条件を物理量へ翻訳すると $C_V>0$、$K_T>0$ が得られ、さらに $C_P-C_V$ や断熱・等温圧縮率の関係へつながります。van der Waals気体は、不安定領域が実際にどう現れるかを示す例です。</p><p class="route-point">目的：変化の向きだけでなく、ずれた状態が平衡へ戻るかを判定する。</p></article>
+</div></section>
+
+<section class="guide-section"><h2>この章を読むときの焦点</h2><!-- 学習ガイドの要点や注意をカードの一覧にまとめる。 --><div class="guide-cards">
+<article class="guide-card"><span class="guide-card-label">選び方</span><h3>関数は固定条件とセットにする</h3><p>$F$ や $G$ がいつでも減るのではありません。まず実験で一定に保たれる量を確認し、その変数を自然変数に持つ関数を選びます。</p></article>
+<article class="guide-card"><span class="guide-card-label">順序</span><h3>定義 → 微分形 → 応用の順で読む</h3><p>各関数の定義だけを暗記しても使えません。微分形まで作れば、係数、Maxwell関係式、減少則が同じ式から読めます。</p></article>
+<article class="guide-card"><span class="guide-card-label">二つの判定</span><h3>一階と二階の役割を分ける</h3><p>減少則は「どちらへ進むか」、安定条件は「平衡から少しずれたら戻るか」を扱います。章の後半で問題が切り替わる点を意識します。</p></article>
+</div></section>
+
+<section class="guide-section"><h2>本文と併用する</h2><div class="guide-links"><a href="ch4.html#s4-1">完全な熱力学関数</a><a href="ch4.html#s4-2-leg">ルジャンドル変換と4関数</a><a href="ch4.html#s4-2-max">Maxwell関係式・派生式</a><a href="ch4.html#s4-3">自発変化・最大仕事</a><a href="ch4.html#s4-4">安定性・熱容量・圧縮率</a><a class="guide-open" href="ch4.html">第4章本文を開く →</a></div></section>
+<section class="guide-section"><div class="guide-card"><span class="guide-card-label">読後チェック</span><h3>この章の到達点</h3><ul><li>$F,H,G$ を、消したい微分項からまとめて導ける</li><li>自然変数から微分形とMaxwell関係式を読める</li><li>固定条件から $S,F,G$ のどれで平衡を判定するか選べる</li><li>減少則、最大仕事、安定条件の役割を区別できる</li></ul></div></section>
+<!-- ガイドを読み終えた後に、前後のページへ移動するリンクを置く。 --><nav class="guide-page-nav"><a href="guide3.html">← 第3章ナビ</a><a href="guide5.html">第5章ナビ →</a></nav></main>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer><script src="nav.js"></script><script src="../common.js?v=20260718-texcopy"></script><script src="../access-ui.js"></script></body></html>

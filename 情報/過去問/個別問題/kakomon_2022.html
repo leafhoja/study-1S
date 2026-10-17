@@ -1,0 +1,364 @@
+<!DOCTYPE html><!-- 「2022年度 | 情報 個別問題（田中哲郎クラス）」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2022年度 | 情報 個別問題（田中哲郎クラス）</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2022">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2022年度</h1>
+  <p class="subtitle">田中哲郎クラス｜7月28日 3限｜大問3</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（LMCシミュレータ）</a>
+    <a href="#q2">大問2（3の倍数判定オートマトン）</a>
+    <a href="#q3">大問3（XORとNAND回路）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>Little Man Computer（LMC）シミュレータ</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>Little Man Computer シミュレータ（LMC）の機械語の命令集合の一部は以下の通り。</p>
+        <ul>
+          <li><code>LDA n</code>：n番地の内容をアキュムレータにコピーする</li>
+          <li><code>ADD n</code>：n番地の値をアキュムレータの値に加える</li>
+          <li><code>STA n</code>：アキュムレータの値をn番地に格納する</li>
+          <li><code>HLT</code>：プログラムを終了する</li>
+          <li><code>SUB n</code>：アキュムレータの値からn番地の値を引く</li>
+          <li><code>BRA n</code>：無条件でn番地にジャンプ</li>
+          <li><code>BRP n</code>：アキュムレータの値が非負（0または正）のときにn番地にジャンプ</li>
+          <li><code>BRZ n</code>：アキュムレータの値がゼロのときにn番地にジャンプ</li>
+          <li><code>OUT</code>：アキュムレータの値をシミュレータのOUTPUTに出力する</li>
+        </ul>
+        <p>たとえば、以下のプログラム（$n$は$1\le n\le20$の数字に置き換える）を考える。</p>
+        <table class="q-table">
+          <tr><th colspan="2">ラベル付き</th><th colspan="2">アドレス付き</th></tr>
+          <tr><td>LOOP</td><td>LDA RESULT</td><td>00</td><td>LDA 11</td></tr>
+          <tr><td></td><td>ADD i</td><td>01</td><td>ADD 12</td></tr>
+          <tr><td></td><td>STA RESULT</td><td>02</td><td>STA 11</td></tr>
+          <tr><td></td><td>LDA i</td><td>03</td><td>LDA 12</td></tr>
+          <tr><td></td><td>SUB ONE</td><td>04</td><td>SUB 13</td></tr>
+          <tr><td></td><td>STA i</td><td>05</td><td>STA 12</td></tr>
+          <tr><td></td><td>BRZ POS</td><td>06</td><td>BRZ 08</td></tr>
+          <tr><td></td><td>BRA LOOP</td><td>07</td><td>BRA 00</td></tr>
+          <tr><td>POS</td><td>LDA RESULT</td><td>08</td><td>LDA 11</td></tr>
+          <tr><td></td><td>OUT</td><td>09</td><td>OUT</td></tr>
+          <tr><td></td><td>HLT</td><td>10</td><td>HLT</td></tr>
+          <tr><td>RESULT</td><td>DAT 0</td><td>11</td><td>DAT 00</td></tr>
+          <tr><td>i</td><td>DAT n</td><td>12</td><td>DAT n</td></tr>
+          <tr><td>ONE</td><td>DAT 1</td><td>13</td><td>DAT 01</td></tr>
+        </table>
+        <p>これは「1から$n$までの和をシミュレータのOUTPUTに出力する」プログラムであり、その実行ステップ数は<strong>$8n+2$</strong>となる（最後のHLT命令も実行ステップに数える）。</p>
+        <p>同様に後ろにつけるプログラム(1)（$x,y,z$は$1\le x\le50,\ 1\le y\le50,\ 1\le z\le50$の数字に置き換える）と、プログラム(1)と同じ計算をより少ないステップ数で行うプログラム(2)が与えられる（いずれも下記）。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">プログラム(1)・プログラム(2)</span>
+        <p>プログラム(1)：</p>
+        <table class="q-table">
+          <tr><th colspan="2">ラベル付き</th><th colspan="2">アドレス付き</th></tr>
+          <tr><td>LOOP</td><td>LDA Y</td><td>00</td><td>LDA 19</td></tr>
+          <tr><td></td><td>SUB Z</td><td>01</td><td>SUB 20</td></tr>
+          <tr><td></td><td>BRP POS</td><td>02</td><td>BRP 07</td></tr>
+          <tr><td></td><td>LDA Y</td><td>03</td><td>LDA 19</td></tr>
+          <tr><td></td><td>ADD ONE</td><td>04</td><td>ADD 21</td></tr>
+          <tr><td></td><td>STA Y</td><td>05</td><td>STA 19</td></tr>
+          <tr><td></td><td>BRA UP</td><td>06</td><td>BRA 11</td></tr>
+          <tr><td>POS</td><td>BRZ END</td><td>07</td><td>BRZ 15</td></tr>
+          <tr><td></td><td>LDA Y</td><td>08</td><td>LDA 19</td></tr>
+          <tr><td></td><td>SUB ONE</td><td>09</td><td>SUB 21</td></tr>
+          <tr><td></td><td>STA Y</td><td>10</td><td>STA 19</td></tr>
+          <tr><td>UP</td><td>LDA X</td><td>11</td><td>LDA 18</td></tr>
+          <tr><td></td><td>ADD ONE</td><td>12</td><td>ADD 21</td></tr>
+          <tr><td></td><td>STA X</td><td>13</td><td>STA 18</td></tr>
+          <tr><td></td><td>BRA LOOP</td><td>14</td><td>BRA 00</td></tr>
+          <tr><td>END</td><td>LDA X</td><td>15</td><td>LDA 18</td></tr>
+          <tr><td></td><td>OUT</td><td>16</td><td>OUT</td></tr>
+          <tr><td></td><td>HLT</td><td>17</td><td>HLT</td></tr>
+          <tr><td>X</td><td>DAT x</td><td>18</td><td>DAT x</td></tr>
+          <tr><td>Y</td><td>DAT y</td><td>19</td><td>DAT y</td></tr>
+          <tr><td>Z</td><td>DAT z</td><td>20</td><td>DAT z</td></tr>
+          <tr><td>ONE</td><td>DAT 1</td><td>21</td><td>DAT 01</td></tr>
+        </table>
+        <p>プログラム(2)：</p>
+        <table class="q-table">
+          <tr><th colspan="2">ラベル付き</th><th colspan="2">アドレス付き</th></tr>
+          <tr><td></td><td>LDA Y</td><td>00</td><td>LDA 16</td></tr>
+          <tr><td></td><td>SUB Z</td><td>01</td><td>SUB 17</td></tr>
+          <tr><td></td><td>ADD X</td><td>02</td><td>ADD 15</td></tr>
+          <tr><td></td><td>STA T1</td><td>03</td><td>STA 18</td></tr>
+          <tr><td></td><td>LDA Z</td><td>04</td><td>LDA 17</td></tr>
+          <tr><td></td><td>SUB Y</td><td>05</td><td>SUB 16</td></tr>
+          <tr><td></td><td>ADD X</td><td>06</td><td>ADD 15</td></tr>
+          <tr><td></td><td>STA T2</td><td>07</td><td>STA 19</td></tr>
+          <tr><td></td><td>SUB T1</td><td>08</td><td>SUB 18</td></tr>
+          <tr><td></td><td>BRP POS</td><td>09</td><td>BRP 12</td></tr>
+          <tr><td></td><td>LDA T1</td><td>10</td><td>LDA 18</td></tr>
+          <tr><td></td><td>BRA END</td><td>11</td><td>BRA 13</td></tr>
+          <tr><td>POS</td><td>LDA T2</td><td>12</td><td>LDA 19</td></tr>
+          <tr><td>END</td><td>OUT</td><td>13</td><td>OUT</td></tr>
+          <tr><td></td><td>HLT</td><td>14</td><td>HLT</td></tr>
+          <tr><td>X</td><td>DAT x</td><td>15</td><td>DAT x</td></tr>
+          <tr><td>Y</td><td>DAT y</td><td>16</td><td>DAT y</td></tr>
+          <tr><td>Z</td><td>DAT z</td><td>17</td><td>DAT z</td></tr>
+          <tr><td>T1</td><td>DAT 0</td><td>18</td><td>DAT 00</td></tr>
+          <tr><td>T2</td><td>DAT 0</td><td>19</td><td>DAT 00</td></tr>
+        </table>
+      </div>
+
+      <h3>(a)(b) — プログラム(1)の動作とステップ数</h3>
+      <div class="ex"><span class="box-label">問題</span><p>プログラム(1)は何をするプログラムか。実行ステップ数はいくつか。</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            プログラムをトレースすると：LOOPで$AC=Y-Z$を計算し、$AC\ge0$（$Y\ge Z$）ならPOSへ、$AC&lt;0$（$Y&lt;Z$）ならYを1増やしてUPへ。POSでは$AC=0$（$Y=Z$）ならENDへ抜け、そうでなければ（$Y&gt;Z$）Yを1減らしてUPへ。UPでは必ずXを1増やしてLOOPに戻る。
+          </p>
+          <p>
+            つまり毎回のループで「YをZに1ずつ近づけ、YがZに一致するまでの回数だけXを1ずつ増やす」処理になっており、$Y=Z$になった時点のXの値を出力する。結果として <strong>$X+|Y-Z|$ を計算して出力する</strong>プログラムである。
+          </p>
+          <p>
+            $d=|y-z|$とすると、最後の1回（$Y=Z$になった回）はLOOP→POS→ENDの7ステップ、それ以外の$d$回は各11ステップ（LOOP〜UPを一巡）かかる。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a) $X+|Y-Z|$を出力するプログラム　(b) $11d+7$ ステップ（$d=|y-z|$）</div>
+      </details>
+
+      <h3>(c)(d) — プログラム(2)の仕組みとステップ数</h3>
+      <div class="ex"><span class="box-label">問題</span><p>プログラム(2)が同じ計算をしていることを説明し、実行ステップ数を求めよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            プログラム(2)は $T_1=X+(Y-Z)$、$T_2=X+(Z-Y)$ をあらかじめ計算しておき、$T_2-T_1=2(Z-Y)$ の符号（$Z\ge Y$か否か）で大小を判定して、大きい方（$=X+|Y-Z|$）を出力する。$Y\ge Z$なら$T_1=X+(Y-Z)=X+|Y-Z|$が正しい答え、$Y&lt;Z$なら$T_2=X+(Z-Y)=X+|Y-Z|$が正しい答えになっており、いずれにせよプログラム(1)と同じ$X+|Y-Z|$を出力する。
+          </p>
+          <p>
+            ループを一切使わない直線的な処理なので、$Z\ge Y$（分岐が取られる）なら13ステップ、$Z&lt;Y$（分岐が取られない）なら14ステップで終わる——$d=|y-z|$が大きいときプログラム(1)よりずっと少ないステップ数で済む。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>13ステップ（$Z\ge Y$のとき）または14ステップ（$Z&lt;Y$のとき）</div>
+      </details>
+
+      <h3>(e) — さらに少ないステップ数のプログラム</h3>
+      <div class="ex"><span class="box-label">問題</span><p>プログラム(1)(2)と同じ計算をおこない、実行ステップ数がプログラム(2)よりも小さいプログラムを作成しなさい（ラベル付き、アドレス付きのどちらかの形式を用いること）。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>プログラム(2)は$T_1,T_2$の両方を計算する無駄がある。差$D=Y-Z$を1回だけ求め、その符号だけで「$X+D$」か「$X-D$」のどちらを出力するか分岐すれば、計算量は半分近くで済む：</p>
+        </div>
+        <table class="q-table">
+          <tr><th colspan="2">ラベル付き</th></tr>
+          <tr><td colspan="2">LDA Y</td></tr>
+          <tr><td colspan="2">SUB Z</td></tr>
+          <tr><td colspan="2">STA D</td></tr>
+          <tr><td colspan="2">BRP POS</td></tr>
+          <tr><td colspan="2">LDA X</td></tr>
+          <tr><td colspan="2">SUB D</td></tr>
+          <tr><td colspan="2">BRA END</td></tr>
+          <tr><td>POS</td><td>LDA X</td></tr>
+          <tr><td></td><td>ADD D</td></tr>
+          <tr><td>END</td><td>OUT</td></tr>
+          <tr><td></td><td>HLT</td></tr>
+          <tr><td>D</td><td>DAT 0</td></tr>
+        </table>
+        <div class="proof-body"><p>$D=Y-Z$を求め（3ステップ）、$D\ge0$なら$X+D$（$=X+(Y-Z)=X+|Y-Z|$、$Y\ge Z$なので正しい）を、$D&lt;0$なら$X-D$（$=X-(Y-Z)=X+(Z-Y)=X+|Y-Z|$、$Y&lt;Z$なので正しい）を出力する。</p></div>
+        <div class="sol"><span class="box-label">解</span>上記プログラムで8ステップ（$Y\ge Z$のとき）または9ステップ（$Y&lt;Z$のとき）——プログラム(2)の13〜14ステップより少ない。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — ループの畳み込みと無駄の除去</span>
+        <p>プログラム(1)→(2)→(e)という流れは、「ループで1つずつ数え上げる」計算を「一度の引き算」に置き換えることでステップ数を劇的に減らせる、というアルゴリズム改善の典型例。(2)から(e)へはさらに、「両方の場合を計算してから選ぶ」のではなく「差を1回だけ求めて符号で分岐する」ことで、計算の重複を取り除いている——LMC/ED21のようなアキュムレータ型の機械語でも、通常のプログラミングと同じ計算量削減の発想がそのまま活きる。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>2進数・上位桁から・3の倍数判定オートマトン</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>(A) チェック表と状態遷移の完成</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>2進数（0をa、1をbで表現）で上位の桁から与えていき（最上位に0が来る入力も扱う）、3の倍数だと受理し（終了状態になり）、3の倍数でない時は拒否する（非終了状態になる）オートマトンを作成した。下表左のチェック表の(a)〜(e)に「受理」または「拒否」のどちらが入るかを回答しなさい。また、下図右の(1)〜(6)の状態遷移の規則の文字の部分にaかbを入れると「3の倍数だと受理するオートマトン」が完成するが、(1)〜(6)のそれぞれにa,bのどちらが入るかを答えなさい。</p>
+        <table class="q-table">
+          <tr><th>入力</th><th>停止時の状態</th></tr>
+          <tr><td>ab</td><td>拒否</td></tr>
+          <tr><td>ba</td><td>拒否</td></tr>
+          <tr><td>bb</td><td>受理</td></tr>
+          <tr><td>bba</td><td>受理</td></tr>
+          <tr><td>bbb</td><td>拒否</td></tr>
+          <tr><td>baaa</td><td>(a)</td></tr>
+          <tr><td>baab</td><td>(b)</td></tr>
+          <tr><td>bbaa</td><td>(c)</td></tr>
+          <tr><td>bbbab</td><td>(d)</td></tr>
+          <tr><td>baabb</td><td>(e)</td></tr>
+        </table>
+        <div class="diagram">
+          <img src="img/2022/automaton-mod3.png" alt="3状態のオートマトン。左が受理状態（2重丸）で、6本の遷移に(1)から(6)の番号が付いている" style="max-width:520px;width:100%;height:auto;">
+          <div class="diagram-cap">設問の3状態オートマトン（原本PDFより切り出し）</div>
+        </div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>上位桁から読むので、状態は「これまで読んだ数の3を法とした余り」だけで表せる（新しい桁$d$を読むと新しい余り$=(2r+d)\bmod3$、$d=0$がa、$d=1$がb）。左（2重丸）＝余0（受理）、中＝余1、右＝余2 とすると、図の6本の遷移はすべてこの式から一意に決まる。</p>
+          <div class="mathblock">余0：a→余0（自己ループ、図(6)）　　b→余1（図(5)）
+余1：a→余2（2×1+0=2、図(3)）　　b→余0（2×1+1=3≡0、図(4)）
+余2：a→余1（2×2+0=4≡1、図(2)）　　b→余2（2×2+1=5≡2、自己ループ、図(1)）</div>
+          <p>よって (1)=b、(2)=a、(3)=a、(4)=b、(5)=b、(6)=a。各状態からa・bの2本の遷移がちょうど1本ずつ出ている（余0：(6)a・(5)b／余1：(3)a・(4)b／余2：(2)a・(1)b）ことでも整合性を確認できる。</p>
+          <p>チェック表（値を2進数として求め3で割った余りで判定）：</p>
+          <ul>
+            <li>baaa：1000<sub>2</sub>=8、8mod3=2 → <strong>拒否</strong>(a)</li>
+            <li>baab：1001<sub>2</sub>=9、9mod3=0 → <strong>受理</strong>(b)</li>
+            <li>bbaa：1100<sub>2</sub>=12、12mod3=0 → <strong>受理</strong>(c)</li>
+            <li>bbbab：11101<sub>2</sub>=29、29mod3=2 → <strong>拒否</strong>(d)</li>
+            <li>baabb：10011<sub>2</sub>=19、19mod3=1 → <strong>拒否</strong>(e)</li>
+          </ul>
+        </div>
+        <div class="sol"><span class="box-label">解</span>状態=「余りmod3」の3状態オートマトン。(1)=b (2)=a (3)=a (4)=b (5)=b (6)=a。チェック表：(a)拒否 (b)受理 (c)受理 (d)拒否 (e)拒否</div>
+      </details>
+
+      <h3>(B) 3進法・4の倍数判定（最小状態数）</h3>
+      <div class="ex"><span class="box-label">問題</span><p>3進法（0をa,1をb,2をcで表現）で上位の桁から与えていき、4の倍数だと受理するオートマトンを、なるべく少ない状態数で実現し、(A)の状態遷移図と同じような図を書きなさい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>上位桁から読む場合、状態は「これまでの値を4で割った余り」（0,1,2,3の4通り）だけで表せる。新しい桁$d\in\{0,1,2\}$（a,b,cに対応）を読むと、新しい余り$=(3r+d)\bmod4$。余り0が受理状態。</p>
+        </div>
+        <table class="q-table">
+          <tr><th>状態（余り）</th><th>a（0）</th><th>b（1）</th><th>c（2）</th></tr>
+          <tr><td>0（受理・開始）</td><td>0</td><td>1</td><td>2</td></tr>
+          <tr><td>1</td><td>3</td><td>0</td><td>1</td></tr>
+          <tr><td>2</td><td>2</td><td>3</td><td>0</td></tr>
+          <tr><td>3</td><td>1</td><td>2</td><td>3</td></tr>
+        </table>
+        <div class="proof-body"><p>（例：$3r+d\bmod4$で、状態1でaを読む場合 $3\times1+0=3$。）4状態が必要かつ十分（4で割った余りは4通りしかなく、それぞれ区別する必要があるため、これより少なくはできない）。</p></div>
+        <div class="sol"><span class="box-label">解</span>「余りmod4」を状態とする4状態オートマトン（表の通り）。余り0のみ受理。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 上位桁から読む場合はシンプル</span>
+        <p>個別問題2024(B)で見たように、<strong>下位桁から</strong>読む倍数判定オートマトンは「桁の重みの巡回」を状態に含める必要があり状態数が増えがちだが、<strong>上位桁から</strong>読む場合は「これまでの値をmで割った余り」だけで状態が決まり、必要な状態数はちょうど$m$個（$m$を法とする剰余類の数）で済む、というシンプルな対比がある。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q3">
+    <div class="sec-header"><div class="sec-tag">大問 3</div><h2>XORとNANDによる論理関数の実現</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>$x,y$の排他的論理和$XOR(x,y)$（exclusive or、EOR、EXOR等とも書かれる）の真理値表は以下のように書かれる。</p>
+        <table class="q-table">
+          <tr><th>x</th><th>y</th><th>XOR(x, y)</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td></tr>
+        </table>
+        <p>この関数のブール代数表現を主加法標準形（積和標準形）で書くと$\bar xy+x\bar y$となる。また、$XOR(x,y)$は下図のように4個のNANDで実現できる。これを踏まえ、下の真理値表を持つ$f(x,y,z)$について答えよ。</p>
+        <div class="diagram">
+          <img src="img/2022/xor-4nand.png" alt="XOR(x,y)を4個のNANDで実現するMIL記法の回路図" style="max-width:560px;width:100%;height:auto;">
+          <div class="diagram-cap">$XOR(x,y)$の4-NAND実現（原本PDFより切り出し）</div>
+        </div>
+        <table class="q-table">
+          <tr><th>x</th><th>y</th><th>z</th><th>f</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+        </table>
+      </div>
+
+      <h3>(A) 主加法標準形</h3>
+      <div class="ex"><span class="box-label">問題</span><p>$f(x,y,z)$の主加法標準形（積和標準形）を書け。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>主加法標準形では、真理値表で$f=1$となる各行につき1個の最小項を作る。入力が0の変数には否定を、1の変数にはそのままの記号を付けるので、011→$\bar xyz$、100→$x\bar y\bar z$、110→$xy\bar z$、111→$xyz$。これらをORで結べばよい：</p></div>
+        <div class="sol"><span class="box-label">解</span>$$f(x,y,z)=\bar x y z + x\bar y\bar z + xy\bar z + xyz$$</div>
+      </details>
+
+      <h3>(B) 4個以下のNANDでの実現</h3>
+      <div class="ex"><span class="box-label">問題</span><p>$f(x,y,z)$を4個以下のNANDのみを使ってMIL記法で書け。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            主加法標準形をそのまま4項使うと素子数が多くなりすぎるので、まず簡単化する。カルノー図で見ると、実は$xy$の項は他の2項に完全に吸収されて<strong>不要</strong>であることが分かる（$x\bar y\bar z$と$xy\bar z$から$x\bar z$、$\bar xyz$と$xyz$から$yz$がそれぞれ導け、この2項だけで4つの1をすべて覆える）：
+          </p>
+          <div class="mathblock">$$f(x,y,z)=x\bar z+yz$$</div>
+          <p>
+            全行で検算すると一致することが確かめられる。これは「$z=0$なら$x$を、$z=1$なら$y$を選ぶ」<strong>2:1マルチプレクサ</strong>そのもの（個別問題2024の大問2と同型）。ド・モルガンの法則を使ってNAND-NANDネットワークに変換すると：
+          </p>
+          <div class="mathblock">N1 = NAND(z,z) = z̄
+N2 = NAND(x,N1) = ￢(xz̄)
+N3 = NAND(y,z) = ￢(yz)
+N4 = NAND(N2,N3) = xz̄+yz = f</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$f=x\bar z+yz$。N1=NAND(z,z)、N2=NAND(x,N1)、N3=NAND(y,z)、f=NAND(N2,N3)（NAND4個）</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 主加法標準形は「そのまま」では最小回路にならない</span>
+        <p>真理値表から機械的に作った主加法標準形（積和標準形）は、必ず正しい関数を表すが、素子数が最小とは限らない。カルノー図やブール代数の簡単化（不要項の除去、隣接する項のくくり出し）を行って初めて、少ないゲート数（ここでは2項・4NAND）で実現できる回路にたどり着ける、という点が本問と個別問題2024・2025の論理設計問題に共通するポイント。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2024.html">← 2024年度へ</a>
+    <a href="kakomon_2019.html">2019年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

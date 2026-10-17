@@ -1,0 +1,320 @@
+<!DOCTYPE html><!-- 「2014年度 | 情報 個別問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2014年度 | 情報 個別問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2014">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2014年度</h1>
+  <p class="subtitle">田中哲郎クラス（理科一類24,26,34組）｜7月29日（火）5限</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（DNA配列の符号化と情報量）</a>
+    <a href="#q2">大問2（オートマトン）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>DNA配列の符号化と情報量</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>4つの記号A,T,C,Gから構成される記号列を、0と1のビット列に符号化することを考える。以下の文の空白部分(a)-(f)を埋めなさい。</p>
+      </div>
+
+      <h3>(1) 固定長符号（2ビット/記号） — (a)(b)</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>$A\to00,T\to01,C\to10,G\to11$と符号化する時、記号列「CGCTGCGTAG」を符号化したビット列は (a) となる。また、符号化したビット列が「0001101101」となるような記号列は (b) である。</p>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            (a) 記号列「CGCTGCGTAG」を1文字ずつ符号に置き換える：
+          </p>
+          <table class="q-table">
+            <tr><th>記号</th><td>C</td><td>G</td><td>C</td><td>T</td><td>G</td><td>C</td><td>G</td><td>T</td><td>A</td><td>G</td></tr>
+            <tr><th>符号</th><td>10</td><td>11</td><td>10</td><td>01</td><td>11</td><td>10</td><td>11</td><td>01</td><td>00</td><td>11</td></tr>
+          </table>
+          <p>
+            これを左から順につなげると、$10\,11\,10\,01\,11\,10\,11\,01\,00\,11$、すなわち<strong>10111001111011010011</strong>（10記号×2ビット＝20ビット）というビット列になる。
+          </p>
+          <p>
+            (b) この符号は1記号がつねに2ビットに対応する固定長符号なので、復号はビット列を先頭から2ビットずつ機械的に切り分けるだけでよい。「0001101101」（10ビット）を2ビットずつ区切ると、
+          </p>
+          <table class="q-table">
+            <tr><th>ビット列</th><td>00</td><td>01</td><td>10</td><td>11</td><td>01</td></tr>
+            <tr><th>記号</th><td>A</td><td>T</td><td>C</td><td>G</td><td>T</td></tr>
+          </table>
+          <p>となり、元の記号列は<strong>ATCGT</strong>と分かる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a) 10111001111011010011（20ビット）　(b) ATCGT</div>
+      </details>
+
+      <h3>(2) 出現確率に応じた可変長符号 — (c)(d)</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>4つの記号A,T,C,Gの出現確率はそれぞれ、10%,20%,30%,40%であるとする。この時、$A\to000,T\to001,C\to01,G\to1$と符号化すると、記号列「GGCTGCGTAG」を符号化したビット列は (c) となり、(1)の符号化よりも短くなる。また、符号化したビット列が「0001101101」となるような記号列は (d) である。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            この符号は、出現確率が高い記号ほど短い符号語を割り当てる<strong>可変長符号</strong>である（G=40%に1ビット、C=30%に2ビット、T=20%とA=10%に3ビット）。$000,001,01,1$はどの符号語も他の符号語の先頭部分（接頭辞）になっていない——たとえば「1」（G）は「01」（C）や「000」（A）の先頭とは一致しない——ため、これは<strong>接頭符号（prefix code）</strong>であり、ビット列を先頭から貪欲に読んで「どの符号語に一致するか」を確定していけば、区切り記号なしで一意に復号できる。
+          </p>
+          <p>
+            (c) 記号列「GGCTGCGTAG」を1文字ずつ符号に置き換える：
+          </p>
+          <table class="q-table">
+            <tr><th>記号</th><td>G</td><td>G</td><td>C</td><td>T</td><td>G</td><td>C</td><td>G</td><td>T</td><td>A</td><td>G</td></tr>
+            <tr><th>符号</th><td>1</td><td>1</td><td>01</td><td>001</td><td>1</td><td>01</td><td>1</td><td>001</td><td>000</td><td>1</td></tr>
+          </table>
+          <p>
+            つなげると $1\,1\,01\,001\,1\,01\,1\,001\,000\,1$、すなわち<strong>110100110110010001</strong>というビット列になる。符号語の長さの合計は$1+1+2+3+1+2+1+3+3+1=18$ビットであり、(1)の固定長符号（常に20ビット）よりも短い——出現頻度が高いG（この記号列に4回出現）に一番短い符号語（1ビット）を割り当てたことで、全体の符号長が縮んでいる。
+          </p>
+          <p>
+            (d) 「0001101101」を先頭から貪欲に読み、接頭符号の性質（000,001,01,1のどれかに一致した時点で確定してよい）を使って区切っていく：
+          </p>
+          <ul>
+            <li>先頭「000」→ A に一致。残り「1101101」</li>
+            <li>先頭「1」→ G に一致（他の符号語は「1」から始まらない）。残り「101101」</li>
+            <li>先頭「1」→ G。残り「01101」</li>
+            <li>先頭「01」→ C。残り「101」</li>
+            <li>先頭「1」→ G。残り「01」</li>
+            <li>先頭「01」→ C。残り「」（消費完了）</li>
+          </ul>
+          <p>消費ビット数は$3+1+1+2+1+2=10$で元のビット列の長さと一致する。よって復号される記号列は<strong>A,G,G,C,G,C</strong>（AGGCGC）である。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(c) 110100110110010001（18ビット、(1)より短い）　(d) AGGCGC</div>
+      </details>
+
+      <h3>(3) エントロピーと平均符号長 — (e)(f)</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>4つの記号A,T,C,Gの出現確率がそれぞれ、1%,1%,3%,95%の時に、1記号あたりの平均情報量を有効数字2桁で計算すると (e) ビットとなる。また、(2)と同じように符号化した時の1記号あたりの平均符号長は (f) ビットとなる。なお、計算の際には以下の値を必要な桁数だけ使うこと：$\log_2 100 \fallingdotseq 6.643856189774725$、$\log_2 3 \fallingdotseq 1.5849625007211563$、$\log_2 95 \fallingdotseq 6.569855608330948$。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            (e) 1記号あたりの平均情報量とは、確率分布のエントロピー$H=-\sum_i p_i\log_2 p_i$である。$p_A=p_T=0.01,\ p_C=0.03,\ p_G=0.95$として、まず各記号の$\log_2 p_i$を与えられた値から求める：
+          </p>
+          <p>
+            $\log_2 0.01=\log_2\dfrac{1}{100}=-\log_2100=-6.643856189774725$
+          </p>
+          <p>
+            $\log_2 0.03=\log_2\dfrac{3}{100}=\log_23-\log_2100=1.5849625007211563-6.643856189774725=-5.058893689053569$
+          </p>
+          <p>
+            $\log_2 0.95=\log_2\dfrac{95}{100}=\log_295-\log_2100=6.569855608330948-6.643856189774725=-0.074000581443777$
+          </p>
+          <p>これらを使ってエントロピーを計算する：</p>
+          <p>
+            $$H=-\bigl(2\times0.01\times\log_20.01+0.03\times\log_20.03+0.95\times\log_20.95\bigr)$$
+            $$=0.01\times6.643856\times2+0.03\times5.058894+0.95\times0.074001$$
+            $$=0.132877+0.151767+0.070301=0.354945$$
+          </p>
+          <p>有効数字2桁で表すと$H\approx$<strong>0.35</strong>ビットとなる。</p>
+          <p>
+            (f) (2)と同じ符号（$A\to000$（3ビット）,$T\to001$（3ビット）,$C\to01$（2ビット）,$G\to1$（1ビット）)を、この新しい確率分布$(1\%,1\%,3\%,95\%)$に適用したときの1記号あたりの平均符号長$L$は、各記号の符号長にその出現確率を掛けて足し合わせたものである：
+          </p>
+          <p>
+            $$L=0.01\times3+0.01\times3+0.03\times2+0.95\times1=0.03+0.03+0.06+0.95=1.07$$
+          </p>
+          <p>したがって平均符号長は<strong>1.07</strong>ビットとなる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(e) 0.35ビット　(f) 1.07ビット</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 符号は「想定した分布」に対して最適化されている</span>
+        <p>
+          (2)の符号$A\to000,T\to001,C\to01,G\to1$は、出現確率が$(10\%,20\%,30\%,40\%)$という分布を想定して設計されたものである。この分布のもとでは、この符号の平均符号長はエントロピーに近い、効率のよい符号になっている。しかし(3)のように実際の分布が$(1\%,1\%,3\%,95\%)$のようにGへ極端に偏っていた場合、この符号を使い続けると平均符号長は$1.07$ビットになる一方、この分布そのもののエントロピーは$0.35$ビットしかない——つまり本来なら1記号あたり0.35ビット程度まで圧縮できる情報を、想定とずれた符号のせいで1.07ビットも使ってしまっている。これは情報源符号化における基本的な教訓で、「符号語の長さは、その記号が実際にどれだけ頻繁に現れるかに合わせて設計しなければ効率が悪くなる」ということを表している。実際にはGが95%も出現するのだから、Gにこそ最短の符号語を割り当てるのが理にかなっている（この場合はもともとGに1ビットを割り当てているため方向性は正しいが、A・Tにも3ビットずつ使っているぶん、Gの支配的な出現頻度に対しては依然として非効率である）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>オートマトン（mod判定・暗証番号錠）</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>(1) 6の倍数判定オートマトン</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>以下の図はあるオートマトンを表している。</p>
+        <div class="diagram">
+          <img src="img/2014/automaton.png" alt="6状態からなるオートマトン。左に開始・受理状態（2重丸、aの自己ループ）があり、そこからbの矢印で上の状態P1へ、P1からaの矢印で右上の状態P2へ進む。下側には自己ループbを持つ状態R1があり、aでR2へ、R2からbでR3へ進む。さらにP1とR3がbで相互に接続、P2とR2がaで相互に接続しており、R3からaで開始状態へ戻る長い矢印がある。" style="max-width:640px;width:100%;height:auto;">
+          <div class="diagram-cap">6状態のオートマトン（原本PDFより切り出し）。左端の状態（2重丸）が開始・受理状態。</div>
+        </div>
+        <p>以下はこのオートマトンの動作を説明するチェック表である。(a)-(e)を埋めて、チェック表を完成させなさい：</p>
+        <table class="q-table">
+          <tr><th>入力</th><th>終了状態</th></tr>
+          <tr><td>無し</td><td>Yes</td></tr>
+          <tr><td>b</td><td>No</td></tr>
+          <tr><td>bb</td><td>No</td></tr>
+          <tr><td>bba</td><td>Yes</td></tr>
+          <tr><td>baab</td><td>(a)</td></tr>
+          <tr><td>bbaa</td><td>(b)</td></tr>
+          <tr><td>bababa</td><td>(c)</td></tr>
+          <tr><td>baaba</td><td>(d)</td></tr>
+          <tr><td>bbaab</td><td>(e)</td></tr>
+        </table>
+        <p>また、以下はこのオートマトンの動作を説明したものである。(f)を埋めて、説明を完成させなさい：「aとbだけからなる入力を、「a」が0、「b」が1に対応した2進数だと読みかえる。このとき、入力された数が (f) の時に終了状態となるオートマトン。」</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            図の6つの状態は、「aを0、bを1と読みかえた2進数の値を6で割った余り」に対応している。開始・受理状態が余り0、P1が余り1、P2が余り2、R3が余り3、R2が余り4、R1が余り5である。新しい文字（0または1）を1つ読むごとに、値は「2倍して新しい桁を足す」ので、状態（余り）の更新規則は
+          </p>
+          <p>$$\text{新しい余り}=(2\times\text{現在の余り}+d)\bmod 6\qquad(d=0\text{：aを読んだ},\ d=1\text{：bを読んだ})$$</p>
+          <p>
+            となる。これは図の遷移とすべて一致する：P1（余り1）はaで$2\times1+0=2$（P2）、bで$2\times1+1=3$（R3）に進み、P2（余り2）はaで$4$（R2）、bで$5$（R1）に進む。R1（余り5）はaで$2\times5+0=10\equiv4$（R2）、bで$2\times5+1=11\equiv5$（R1自身、自己ループ）に進み、R2（余り4）はaで$2\times4+0=8\equiv2$（P2）、bで$2\times4+1=9\equiv3$（R3）に進み、R3（余り3）はaで$2\times3+0=6\equiv0$（開始状態、長い矢印）、bで$2\times3+1=7\equiv1$（P1）に進む。開始状態（余り0）は自己ループのaでそのまま余り0を保つ。
+          </p>
+          <p>この規則で与えられた4例を確認すると：b（値1、$1\bmod6=1$）→No、bb（値$11_2=3$、$3\bmod6=3$）→No、bba（値$110_2=6$、$6\bmod6=0$）→Yesとなり、すべて問題文の例と一致する。これに基づいて残りを計算する。</p>
+          <ul>
+            <li>
+              baab：$b,a,a,b$と1文字ずつ状態を追うと、開始(余り0)$\xrightarrow{b}$余り1(P1)$\xrightarrow{a}$余り2(P2)$\xrightarrow{a}$余り4(R2)$\xrightarrow{b}$余り3(R3)。2進数で読めば$1001_2=9$、$9\bmod6=3$。余り3（R3）は非受理なので<strong>No</strong>(a)
+            </li>
+            <li>
+              bbaa：開始(0)$\xrightarrow{b}$1(P1)$\xrightarrow{b}$3(R3)$\xrightarrow{a}$0(開始)$\xrightarrow{a}$0(開始)。$1100_2=12$、$12\bmod6=0$。余り0で受理、<strong>Yes</strong>(b)
+            </li>
+            <li>
+              bababa：開始(0)$\xrightarrow{b}$1(P1)$\xrightarrow{a}$2(P2)$\xrightarrow{b}$5(R1)$\xrightarrow{a}$4(R2)$\xrightarrow{b}$3(R3)$\xrightarrow{a}$0(開始)。$101010_2=42$、$42\bmod6=0$。<strong>Yes</strong>(c)
+            </li>
+            <li>
+              baaba：開始(0)$\xrightarrow{b}$1(P1)$\xrightarrow{a}$2(P2)$\xrightarrow{a}$4(R2)$\xrightarrow{b}$3(R3)$\xrightarrow{a}$0(開始)。$10010_2=18$、$18\bmod6=0$。<strong>Yes</strong>(d)
+            </li>
+            <li>
+              bbaab：開始(0)$\xrightarrow{b}$1(P1)$\xrightarrow{b}$3(R3)$\xrightarrow{a}$0(開始)$\xrightarrow{a}$0(開始)$\xrightarrow{b}$1(P1)。$11001_2=25$、$25\bmod6=1$。余り1（P1）は非受理、<strong>No</strong>(e)
+            </li>
+          </ul>
+          <p>(f) 以上より、この機械が受理するのはちょうど値が<strong>6の倍数</strong>（6で割り切れる数）であるときである。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a)No (b)Yes (c)Yes (d)Yes (e)No　(f) 6の倍数（6で割り切れる）</div>
+      </details>
+
+      <h3>(2) 暗証番号オートマトン（abb または ababc）</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>暗証番号「abb」または「ababc」が入力されたときに解錠する（終了状態になる）電子錠をオートマトンとしてモデル化することを試みる。ただし、途中間違った暗証番号を押しても後からどちらかの暗証番号を入力すれば解錠するものとする。また一度解錠した後は何を入力し続けても解錠状態となる。以下はこのオートマトンの動作を説明するチェック表である。(g)-(j)を埋めて、チェック表を完成させなさい：</p>
+        <table class="q-table">
+          <tr><th>入力</th><th>終了状態</th></tr>
+          <tr><td>無し</td><td>No</td></tr>
+          <tr><td>acabb</td><td>Yes</td></tr>
+          <tr><td>aababca</td><td>Yes</td></tr>
+          <tr><td>abaca</td><td>(g)</td></tr>
+          <tr><td>ababba</td><td>(h)</td></tr>
+          <tr><td>aabc</td><td>(i)</td></tr>
+          <tr><td>acababc</td><td>(j)</td></tr>
+        </table>
+        <p>また、この条件を満たすオートマトンを作成して図にしなさい。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            「abb」と「ababc」の2つのパターンを同時に監視するので、個別問題2018(2)・2019(2)と同じ考え方（Aho-Corasick法：複数パターンの部分一致状況をひとつの状態としてまとめる構成）で組み立てる。各状態は「これまでに読んだ文字列の末尾が、2つのパターンのどこまでと一致しているか」を表す。必要な状態は次の6つである：
+          </p>
+          <ul>
+            <li>$s_0$：無一致（開始状態）</li>
+            <li>$s_1$：末尾が「a」に一致</li>
+            <li>$s_2$：末尾が「ab」に一致</li>
+            <li>$s_3$：末尾が「aba」に一致</li>
+            <li>$s_4$：末尾が「abab」に一致</li>
+            <li>$U$：「abb」または「ababc」が完成した解錠状態（吸収状態）</li>
+          </ul>
+          <p>
+            遷移は、「今の一致状況に新しい文字を1つ加えた文字列」の末尾が、2つのパターンのどの接頭辞に最長で一致するかで決める：
+          </p>
+          <table class="q-table">
+            <tr><th>状態</th><th>a</th><th>b</th><th>c</th></tr>
+            <tr><td>$s_0$（開始）</td><td>$s_1$</td><td>$s_0$</td><td>$s_0$</td></tr>
+            <tr><td>$s_1$（"a"）</td><td>$s_1$</td><td>$s_2$</td><td>$s_0$</td></tr>
+            <tr><td>$s_2$（"ab"）</td><td>$s_3$</td><td>$U$</td><td>$s_0$</td></tr>
+            <tr><td>$s_3$（"aba"）</td><td>$s_1$</td><td>$s_4$</td><td>$s_0$</td></tr>
+            <tr><td>$s_4$（"abab"）</td><td>$s_3$</td><td>$U$</td><td>$U$</td></tr>
+            <tr><td>$U$（解錠）</td><td>$U$</td><td>$U$</td><td>$U$</td></tr>
+          </table>
+          <p>
+            各遷移の根拠を確認する。$s_2$（"ab"に一致）で"b"を読むと末尾が"abb"となり「abb」が完成するので$U$へ（解錠）。$s_2$で"a"を読むと末尾は"aba"となり「ababc」の先頭3文字に一致するので$s_3$へ。$s_3$（"aba"に一致）で"b"を読むと末尾が"abab"となり「ababc」の先頭4文字に一致するので$s_4$へ。$s_3$で"a"を読むと末尾は"abaa"だが、これは末尾を短く見ても"a"としか一致しないので$s_1$へ戻る。$s_4$（"abab"に一致）で"b"を読むと末尾は"ababb"となるが、これは全体としては「ababc」に一致しないものの、末尾の3文字"abb"を見れば「abb」が完成しているので$U$へ（解錠）。$s_4$で"c"を読むと「ababc」がちょうど完成するので$U$へ。$s_4$で"a"を読むと末尾は"ababa"で、これは"aba"の部分にしか一致しないので$s_3$へ。どの状態でも"c"を読んで一致が続かない場合は無一致の$s_0$に戻る（"c"はどちらのパターンの先頭文字にもならないため）。
+          </p>
+          <p>
+            この構成が問題文中の例と合うことを確認する。acabb：$s_0\xrightarrow{a}s_1\xrightarrow{c}s_0\xrightarrow{a}s_1\xrightarrow{b}s_2\xrightarrow{b}U$（解錠、Yes）。aababca：$s_0\xrightarrow{a}s_1\xrightarrow{a}s_1\xrightarrow{b}s_2\xrightarrow{a}s_3\xrightarrow{b}s_4\xrightarrow{c}U\xrightarrow{a}U$（解錠、Yes）。いずれも問題文の指定と一致する。この確認の上で残りを計算する。
+          </p>
+          <ul>
+            <li>
+              abaca：$s_0\xrightarrow{a}s_1\xrightarrow{b}s_2\xrightarrow{a}s_3\xrightarrow{c}s_0\xrightarrow{a}s_1$。最終状態$s_1$は非受理、<strong>No</strong>(g)
+            </li>
+            <li>
+              ababba：$s_0\xrightarrow{a}s_1\xrightarrow{b}s_2\xrightarrow{a}s_3\xrightarrow{b}s_4\xrightarrow{b}U\xrightarrow{a}U$。最終状態$U$は受理、<strong>Yes</strong>(h)
+            </li>
+            <li>
+              aabc：$s_0\xrightarrow{a}s_1\xrightarrow{a}s_1\xrightarrow{b}s_2\xrightarrow{c}s_0$。最終状態$s_0$は非受理、<strong>No</strong>(i)
+            </li>
+            <li>
+              acababc：$s_0\xrightarrow{a}s_1\xrightarrow{c}s_0\xrightarrow{a}s_1\xrightarrow{b}s_2\xrightarrow{a}s_3\xrightarrow{b}s_4\xrightarrow{c}U$。最終状態$U$は受理、<strong>Yes</strong>(j)
+            </li>
+          </ul>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(g)No (h)Yes (i)No (j)Yes。オートマトンは上表の6状態$s_0,s_1,s_2,s_3,s_4,U$で、$U$のみが受理状態（吸収状態）。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 複数パターン同時検索と「有限個の状態への要約」</span>
+        <p>
+          (2)の暗証番号錠は、複数のキーワード（ここでは「abb」と「ababc」）を同時に監視する検索オートマトン（Aho-Corasick法の考え方）の小さな例である。各状態は「これまで読んだ文字列の末尾が、探しているパターンのどこまでに一致しているか」だけを覚えており、それ以外の情報（もっと前にどんな文字が来たか）はいっさい保持しない。(1)のmod 6判定オートマトンも、状態は「これまでの値を6で割った余り」だけを覚えており、実際の値そのもの（どんどん大きくなる可能性がある2進数）は覚えていない。見た目も応用の文脈も全く異なる2つのオートマトンだが、どちらも「無限に長くなりうる入力履歴のうち、その先の判定に必要な情報だけを、有限個の状態に要約する」という有限状態機械の本質的なアイデアを共有している。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2015.html">← 2015年度へ</a>
+    <a href="kakomon_2013.html">2013年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

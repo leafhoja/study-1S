@@ -1,0 +1,627 @@
+<!DOCTYPE html><!-- 「UIと情報社会 単語帳｜情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>UIと情報社会 単語帳｜情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-06-word">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>UIと情報社会</h1>
+  <p class="subtitle">ユーザインタフェース・情報システムの信頼性・情報技術と社会</p>
+</div>
+
+<div class="container">
+
+  <!-- 単語のチェック件数と、一覧の絞り込み・チェック解除の操作をまとめる。 --><div class="word-toolbar">
+    <div class="word-progress">
+      <span class="wp-text">チェック済み 0 / 0</span>
+      <span class="wp-bar"><span class="wp-fill"></span></span>
+    </div>
+    <div class="word-filter-group">
+      <button type="button" class="word-filter-btn active" data-filter="all">すべて</button>
+      <button type="button" class="word-filter-btn" data-filter="unchecked">未チェック</button>
+      <button type="button" class="word-filter-btn" data-filter="checked">チェック済み</button>
+    </div>
+    <button type="button" class="word-reset-btn">リセット</button>
+  </div>
+  <p class="word-hint">チェックはこのブラウザだけに保存されます（他の端末・ブラウザとは同期しません）。</p>
+
+  <h2 class="word-cat-title" id="sub-1">情報の学び方（総論）</h2>
+  <div class="word-list">
+    <!-- 用語の説明とチェック欄をひとまとまりにし、単語帳のひとつの項目として表示する。 --><div class="word-item" data-term-id="soc-001">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">情報システム<span class="word-tag">頻出</span></div>
+        <div class="word-def">情報通信技術（ICT）に基づく複合システムであり、コンピュータ（情報処理）や情報ネットワーク（情報伝達）などによって構成される。片方だけでは機能しない。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-002">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">2進符号<span class="word-tag">講義ノート</span></div>
+        <div class="word-def">0と1の組合せで情報を表す方式。コンピュータでの処理や情報ネットワークでの伝達に適しており、文字・画像・音声などあらゆる情報が最終的にこの形式に変換される。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-003">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">情報理論<span class="word-tag">講義ノート</span></div>
+        <div class="word-def">送信者から受信者へ情報を伝達する際に生じる正誤の度合いをもとに定式化された理論。符号化の効率や誤り訂正の限界を考える枠組みを与える。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-004">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">通信規約（プロトコル）<span class="word-tag">講義ノート</span></div>
+        <div class="word-def">情報伝達の送り手と受け手の間での共通理解・取り決め。通信実現の基盤レベルからアプリケーションごとの応用依存レベルまでの階層をもつ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-005">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">暗号／署名／認証<span class="word-tag">頻出</span></div>
+        <div class="word-def">暗号＝通信内容の秘匿（第三者に読まれないようにする）。署名＝内容の保証（改ざんされていないこと・送信者が本人であることを示す）。認証＝通信相手の保証（主張どおりの本人・機器であることを確かめる）。いずれも公開鍵暗号方式が基礎。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-006">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">プログラム／アルゴリズム／計算量<span class="word-tag">講義ノート</span></div>
+        <div class="word-def">プログラム＝情報処理のための計算手順の表現（プログラミング言語で記述）。アルゴリズム＝計算手順そのもの。計算量＝アルゴリズムによって定まる計算の手間（計算時間・必要メモリ）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-007">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">モデル／モデル化<span class="word-tag">講義ノート</span></div>
+        <div class="word-def">モデル＝対象の性質・特徴を反映した代替物で問題解決に利用される。モデル化＝対象の性質を表すデータの記述と、対象の振舞いを表すモデルの記述によってモデルを作ること。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-008">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">順問題／逆問題<span class="word-tag">頻出</span></div>
+        <div class="word-def">順問題＝入力データを与えて出力値を計算する（内部パラメータが既知の前提で結果を予測）。逆問題＝出力データを与えて入力値を計算する（入出力データの組から内部パラメータを求めることを特に学習と呼ぶ）。逆問題は順問題より解くのが難しい。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-009">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">機械学習／人工知能／学習／推論<span class="word-tag">講義ノート</span></div>
+        <div class="word-def">機械学習＝大量データの統計的性質を解析し対象の振舞いを予測する手法。人工知能＝人間の知能と同じような処理を可能にする知的なプログラム。学習＝入出力データのペアから内部パラメータを決定すること（逆問題を解く）。推論＝入力から出力を推定すること（順問題を解く）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-010">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">汎用コンピュータ／プログラム内蔵方式<span class="word-tag">講義ノート</span></div>
+        <div class="word-def">汎用コンピュータ＝様々な問題解決に利用できる自動機械。プログラム内蔵方式＝プログラムもデータと同じ2進符号として同じ記憶装置に格納し、回路そのものを変更せず記憶されたプログラムの差替えだけで計算内容を変更できる方式。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-011">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ユニバーサルデザイン<span class="word-tag">講義ノート</span></div>
+        <div class="word-def">特定の利用者だけを想定するのではなく、年齢・言語・身体的な条件など広い範囲の知識や能力に対応できるシステムのデザイン。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-012">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">情報リテラシー<span class="word-tag">講義ノート</span></div>
+        <div class="word-def">情報システムが日々変化し固定的な解決手段があらかじめ得られない中で、情報に対する系統的な知識・経験をもとに利用者自身が状況に応じて判断すること。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-2">情報システムの性能</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="soc-013">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">抽象化／モジュール化<span class="word-tag">講義ノート</span></div>
+        <div class="word-def">抽象化＝下位層の細部を一旦隠し、上位層から必要な機能だけを見ること。モジュール化＝まとまった機能を交換可能な単位へ分けること。故障箇所の切り分け・部品交換・並行開発を可能にする。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-014">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">サーバ／クライアント<span class="word-tag">頻出</span></div>
+        <div class="word-def">サーバ＝サービスを提供するプログラム、またはそれを動かすコンピュータ。クライアント＝サービスを要求する側。役割の名称であり「サーバは必ず一台の大きな箱」ではない。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-015">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">P2P（peer-to-peer）<span class="word-tag">講義ノート</span></div>
+        <div class="word-def">各要素が対等な立場で連携する構成。ブロックチェーンが代表例で、中央の一台だけを信頼の根拠にしない。合意形成・更新規則・参加者の識別といった別の課題が生じる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-016">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">スループット／レスポンスタイム／ターンアラウンドタイム<span class="word-tag">頻出</span></div>
+        <div class="word-def">スループット＝単位時間内に完了できる処理量。レスポンスタイム＝指示を出してから最初の応答が返るまでの時間。ターンアラウンドタイム＝指示から処理全体が完了するまでの時間。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-017">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ベンチマーク<span class="word-tag">講義ノート</span></div>
+        <div class="word-def">共通のプログラムやデータを実行して性能を比較する仕組み。TOP500（連立一次方程式を解く計算性能）、Graph500（グラフ探索性能）が代表例。数値はその課題に対する性能であり絶対的な速さではない。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-3">情報システムの信頼性設計</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="soc-018">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">稼働率（可用性）<span class="word-tag">頻出</span></div>
+        <div class="word-def">正常動作時間を全観測時間で割った割合。$A=\dfrac{MTBF}{MTBF+MTTR}$。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-019">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">MTBF（平均故障間隔）<span class="word-tag">頻出</span></div>
+        <div class="word-def">正常動作時間を故障回数で割った値。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-020">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">MTTR（平均復旧時間）<span class="word-tag">頻出</span></div>
+        <div class="word-def">復旧作業時間を故障回数で割った値。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-021">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">共通原因故障</div>
+        <div class="word-def">同じ電源・同じネットワーク・同じソフトウェア欠陥などを共有することで、独立故障の仮定が崩れる要因。並列化の稼働率式 $1-(1-a)^N$ を使う前に、これがないことを確認する必要がある。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-022">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">Fault Avoidance<span class="word-tag">頻出</span></div>
+        <div class="word-def">実績ある部品、十分な試験・検証によって、故障や欠陥の発生自体を避ける設計方針。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-023">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">Fault Tolerant（フォールトトレラント）<span class="word-tag">頻出</span></div>
+        <div class="word-def">一部が故障しても、冗長化や切替えによって故障前と同等の機能を維持する設計方針。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-024">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">Fail Safe（フェイルセーフ）<span class="word-tag">頻出</span></div>
+        <div class="word-def">異常を検知したら、機能継続より安全を優先して停止または安全側へ移る設計方針。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-025">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">Fail Soft（フェイルソフト）</div>
+        <div class="word-def">全機能を保てなくても、機能や性能を縮小して可能な範囲で運転を続ける設計方針。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-026">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">Fool Proof（フールプルーフ）<span class="word-tag">頻出</span></div>
+        <div class="word-def">人間が誤操作しても重大事故になりにくい入力制約や確認手順を設ける設計方針。みずほ証券誤発注事件（「1株61万円」のつもりが「1円で61万株」と入力され巨額損失）はこの設計の必要性を示す典型例。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-027">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">DoS<span class="word-tag">頻出</span></div>
+        <div class="word-def">大量の要求を送りつけてサービス提供能力を使い切らせる攻撃。主に可用性を損なう。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-028">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ランサムウェア</div>
+        <div class="word-def">データを暗号化して利用不能にし、金銭を要求する攻撃。情報を窃取して公開を脅す場合には機密性も同時に侵害する。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-029">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">SQL注入</div>
+        <div class="word-def">入力欄などから意図しない命令をデータベースへ実行させ、本来読めない情報を取得・改変する攻撃。機密性・完全性を侵害する。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-030">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">フィッシング</div>
+        <div class="word-def">偽サイトや偽メッセージで利用者を誘導し、認証情報を渡させる攻撃。技術的な脆弱性ではなく人間の判断を突く。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-031">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">テンペスト攻撃</div>
+        <div class="word-def">機器から漏れる電磁波を傍受して情報を推定する攻撃。通常のネットワーク通信だけを監視しても防げない。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-032">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">多要素認証<span class="word-tag">頻出</span></div>
+        <div class="word-def">知識要素・所有要素・生体要素のうち、異なる種類を2つ以上組み合わせる認証。暗証番号を2回入力するような同じ種類の繰り返しは「多段階」であって「多要素」ではない点が試験で狙われやすい。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-033">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">認証の三要素<span class="word-tag">頻出</span></div>
+        <div class="word-def">知識要素（パスワード・暗証番号など本人が知っているもの）、所有要素（スマートフォン・ICカードなど本人が持っているもの）、生体要素（指紋・顔・虹彩など本人の身体的特徴）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-034">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">認証評価軸</div>
+        <div class="word-def">安全性・利便性・秘匿性・交換可能性の4つ。「突破されにくさ」だけでなく、日常的に正しく使えるか、情報自体を秘密に保てるか、漏洩後に失効・再発行できるかで評価する。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-035">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">機能要件／非機能要件<span class="word-tag">頻出</span></div>
+        <div class="word-def">機能要件＝システムが直接提供すべき業務上の機能（例：チケット予約システムの照会・予約・決済）。非機能要件＝セキュリティ・同時アクセス制御・可用性・個人情報保護など「どのように動作すべきか」という品質面の要求。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-4">ユーザインタフェース</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="soc-036">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ユーザインタフェース</div>
+        <div class="word-def">人工物と人間の境界・接点。人間は道具の内部構造を直接操作するのではなく、必ずこの境界面を経由して道具とやり取りする。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-037">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">入力デバイス／出力デバイス</div>
+        <div class="word-def">入力デバイス＝コンピュータにデータや文字を入力する機器。出力デバイス＝コンピュータの処理結果や状態を人間に表示する機器。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-038">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">直接入力型／間接入力型</div>
+        <div class="word-def">直接入力型＝画面上の指し示したい位置に指やペン先を直接触れさせる（ライトペン、タッチスクリーン）。間接入力型＝手元の動きを画面上のポインタの動きへ変換して伝える（マウス、デジタイザ、トラックボール、ジョイスティック）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-039">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">CRT／FPD</div>
+        <div class="word-def">CRT（ブラウン管）は真空管の一種で原理上薄型化が難しい。FPD（平板ディスプレイ）にはLCD（液晶）、OLED（有機EL）、PDP（プラズマ）などの方式があり、薄型・軽量化を実現した。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-040">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">GUI（Graphical User Interface）<span class="word-tag">頻出</span></div>
+        <div class="word-def">ウィンドウやアイコンなどのグラフィカルなオブジェクトを多用し、ポインティング・デバイスでオブジェクトを直接操作する方式。初心者には直感的だが熟達者には煩わしい場合があり、操作の自動化には不向き。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-041">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">CUI（Character User Interface）<span class="word-tag">頻出</span></div>
+        <div class="word-def">情報の表示を文字によって行い、プロンプトに続けてコマンドを入力してすべての操作を行う方式。習得コストは高いが、操作の自動化（スクリプト化）が容易。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-042">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">WIMPシステム<span class="word-tag">頻出</span></div>
+        <div class="word-def">ウィンドウ(Window)・アイコン(Icon)・メニュー(Menu)・ポインティングデバイス(Pointing device)を主な要素として構成される操作体系。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-043">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">デスクトップメタファ<span class="word-tag">頻出</span></div>
+        <div class="word-def">机上（デスクトップ）に書類を広げるという、利用者が既に知っている行為の感覚で画面上の操作を行わせる考え方。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-044">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">アフォーダンス<span class="word-tag">頻出</span></div>
+        <div class="word-def">下界の環境や事物が生体の活動に供するべくもっている情報（ジェームズ・ギブソンの概念）。事物そのものに内在する機能の名前ではなく、事物とそれを利用する生体との関係として定義される。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-045">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">直接操作</div>
+        <div class="word-def">アフォーダンスの概念を拡張したもので、その装置あるいは表示を見れば、どのように実行可能かが即座に分かることを目指す設計原理。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-046">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">プロンプト／コマンド</div>
+        <div class="word-def">CUIにおいて、入力を促す表示（プロンプト）に続けて入力する文字列による命令（コマンド）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-047">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">QWERTY配列</div>
+        <div class="word-def">キーボードで最も普及している配列。一度広く普及した配列は身体で覚えた操作の蓄積があるため、より効率のよい配列が提案されても置き換わりにくい。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-048">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">二重接面性／第一接面／第二接面<span class="word-tag">頻出</span></div>
+        <div class="word-def">インタフェースを、ユーザが人工物と関わりあう第一接面と、人工物が物理的なタスク（ネジを締める等）と関わりあう第二接面の二層で説明する考え方。ユーザが本来実行したいのは第二接面の物理的タスクだが実際に操作できるのは第一接面である、というずれが操作の困難さの一因となる（二重接面性）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-049">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">メンタルモデル<span class="word-tag">2019年度に登場</span></div>
+        <div class="word-def">ユーザがシステムの振る舞いについて心の中に思い描く理解・予想の枠組み。2019年度共通問題の語群に挙げられたが、その設問では実際には使われない語だった。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-050">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">テレイグジスタンス<span class="word-tag">2019年度に登場</span></div>
+        <div class="word-def">遠隔地にあるロボットなどを通じて、あたかもその場にいるかのように知覚・操作できる技術。2019年度共通問題の語群に挙げられたが、その設問では実際には使われない語だった。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-051">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">プレグナンツの法則<span class="word-tag">2019年度に登場</span></div>
+        <div class="word-def">人はできるだけ単純で規則的な形として視覚情報を知覚する傾向があるという法則（ゲシュタルト心理学）。2019年度共通問題の語群に挙げられたが、その設問では実際には使われない語だった。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-052">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">適応インタフェース<span class="word-tag">2019年度に登場</span></div>
+        <div class="word-def">利用者の習熟度や状況に応じて、表示や操作方法を自動的に変化させるインタフェース。2019年度共通問題の語群に挙げられたが、その設問では実際には使われない語だった。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-053">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">タンジブルインタフェース<span class="word-tag">2019年度に登場</span></div>
+        <div class="word-def">物理的なモノを直接操作することでコンピュータへ情報を入力する方式のインタフェース。2019年度共通問題の語群に挙げられたが、その設問では実際には使われない語だった。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-054">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">明喩・隠喩・提喩<span class="word-tag">頻出</span></div>
+        <div class="word-def">ピクトグラムなど図記号の表現技法。明喩＝「〜のようだ」などたとえることを明示する比喩。隠喩＝たとえの標識を使わず、あるものを別のものとして表す比喩（削除操作を「ごみを捨てる」で表す等）。提喩＝種で類を、部分で全体を表すなど包含関係を利用する表現（動物一般を鹿のピクトグラムで表す等）。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-5">ユーザビリティ評価</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="soc-055">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ユーザビリティテストの4手法<span class="word-tag">頻出</span></div>
+        <div class="word-def">パフォーマンステスト（動作情報と操作履歴という事実で評価）、ガイドライン法（既定の基準への適合度で評価）、モデル法（行動モデルという理論的予測で評価）、インスペクション法（専門家が画面例やモックアップから経験に基づき評価）。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-056">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">GOMS／GOMS-KLM<span class="word-tag">頻出</span></div>
+        <div class="word-def">GOMS＝Goal, Operator, Method, Selection Rulesから成る、モデル法の代表的な枠組み。GOMS-KLM（キーストローク・レベル・モデル）＝作業をコンピュータの基本操作（K, T(n), P, B, H, M, W(t)）へ分解し、各操作の所要時間を足し合わせて作業全体の所要時間を予測する手法。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-057">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">フィッツの法則<span class="word-tag">頻出</span></div>
+        <div class="word-def">ポインタを始点から目標物まで動かすのにかかる時間についての法則。$T=a+b\log_2\left(1+\dfrac{D}{W}\right)$（$D$は始点から目標物中心までの距離、$W$は目標物の幅）。距離が大きく目標物が小さいほど所要時間は長くなる。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-6">著作権・法律</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="soc-058">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">無形性と複製可能性<span class="word-tag">頻出</span></div>
+        <div class="word-def">ジョンソン（2002）の整理による、コンピュータと情報技術の特徴の一つ。ソフトウェアやデジタルコンテンツが従来の「モノ」概念と異なる性質をもち、所有と権利をめぐる法制度・倫理との軋轢を生む。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-059">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">グローバルな通信射程と匿名性</div>
+        <div class="word-def">ジョンソン（2002）の整理によるもう一つの特徴。自由で規制のない議論空間・公共空間の構築として電子民主主義への展望を開く一方、プライバシーやセキュリティの軋轢も生む。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-060">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">著作権<span class="word-tag">頻出</span></div>
+        <div class="word-def">本・映画・音楽などを作った人を複製から守る権利。目的は文化の発展であり、創作者の保護と誰もが安心して二次利用できることの両立が必要。過ぎたる保護はかえって文化の発展を阻害するというジレンマを抱える。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-061">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">著作物の9種類</div>
+        <div class="word-def">言語、音楽、舞踏または無言劇、美術、建築、図形（地図・図面等）、映画、写真、プログラムの著作物。1985年の著作権法改正でプログラムが含まれることが明確になった。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-062">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">DRM（Digital Rights Management）<span class="word-tag">頻出</span></div>
+        <div class="word-def">デジタルコンテンツの不正コピーや違法配布を防ぎ著作権を保護するための技術。購入した人だけ、一定期間だけといった許可の範囲内で利用できるようにコントロールする。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-063">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">クリエイティブ・コモンズ（CC）</div>
+        <div class="word-def">著作者みずからが著作物の再利用を許可する意思表示を手軽に行えるようにする国際的プロジェクト。「表示（BY）」「非営利（NC）」「継承（SA）」「改変禁止（ND）」の4条件の組合せでライセンスを示す。DRMが技術による制限であるのに対し、CCは意思表示による許可という対照的アプローチ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-064">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">個人情報保護法<span class="word-tag">頻出</span></div>
+        <div class="word-def">2003年5月成立・2005年4月施行。個人情報の有用性に配慮しながら個人の権利利益を保護する。2015年・2020年・2021年に大きく見直されている。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-065">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">CIA（機密性・完全性・可用性）<span class="word-tag">頻出</span></div>
+        <div class="word-def">情報セキュリティの三要素。機密性＝認可された者のみが情報にアクセスできること。完全性＝情報が正確で完全であること。可用性＝必要なときに必要な情報資源にアクセスできること。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-066">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">PKI（Public Key Infrastructure）</div>
+        <div class="word-def">公開鍵暗号方式を利用したセキュリティインフラストラクチャー。マイナンバーカードのユーザ認証などに使われる。電子署名と組み合わせて、なりすましや改ざんへの対策とする。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-067">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">不正アクセス禁止法</div>
+        <div class="word-def">1998年成立、2000年施行。他人のID・パスワード等を無断で使用してアクセス制御機能を回避する行為等を禁止する法律。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-068">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">GDPR（General Data Protection Regulation）</div>
+        <div class="word-def">EUの一般データ保護規則。2018年5月施行。個人情報を含むデータの取り扱いが世界的に厳しくなる流れの一例。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-069">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">知的財産権／工業所有権（産業財産権）</div>
+        <div class="word-def">知的財産権＝知的な創作活動によって何かを作り出した人に、他人に無断で利用されない権利を付与する制度で、著作権と工業所有権（産業財産権）などを含む、より大きな概念。著作権法はこのうち著作権の保護を目的とする。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-070">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">送信可能化権</div>
+        <div class="word-def">1997年の著作権法改正で追加された権利。webサーバなどで公衆からの求めに応じて自動的に著作物を送信できるようにする権利。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-7">情報社会論</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="soc-071">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">サイバースペース（バーチャルスペース）</div>
+        <div class="word-def">ネット上の自由で規制のない議論空間。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-072">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">公共空間 vs 共同体<span class="word-tag">頻出</span></div>
+        <div class="word-def">インターネット上の議論空間を捉える2つの見方。公共空間＝誰もがアクセスしうる、成員が互いに異質、共通の関心で統合される。共同体＝閉じた領域、同じ価値を共有、内面の情念で統合されアイデンティティをもつ。どちらに転ぶかは技術ではなく制度・慣習次第という両義性をもつ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-073">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">バイアス／ブラックボックス<span class="word-tag">頻出</span></div>
+        <div class="word-def">バイアス＝機械学習で用いる学習データに組み込まれた過去・現在までの歴史的・社会的な偏り。公平性の観点から問題を引き起こす。ブラックボックス＝機械学習が膨大なデータを学習し自律的に答えを出す性質上、その判断過程のすべてを人間が理解できるとは限らない性質。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-074">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ハルシネーション（幻覚）</div>
+        <div class="word-def">生成AIが事実に基づかない情報をもっともらしく生成してしまう現象。生成過程が人間に完全には見通せないブラックボックス問題と深く関連する。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-075">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">フィルターバブル／エコーチェンバー<span class="word-tag">頻出</span></div>
+        <div class="word-def">推薦アルゴリズムや人間の選択によって似た意見ばかりに触れるようになる現象。反対意見や共通の事実認識に接する機会が減り、意見の分断・先鋭化につながる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="soc-076">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">サイバーカスケード<span class="word-tag">頻出</span></div>
+        <div class="word-def">インターネット上で自分の意見に近い情報・コミュニティばかりを選択的に閲覧した結果、同じ立場の人同士の議論が繰り返され、集団としての意見がより極端な方向へと雪崩のように増幅されていく現象。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="index.html">← 単語帳トップ</a>
+    <a href="06-UIと情報社会-keypoints.html">押さえておきたい事項 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+<script src="checklist.js"></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html><!-- 「微分積分 第5回 凸関数・縮小写像・方程式の根 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>微分積分 第5回 凸関数・縮小写像・方程式の根 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>/* このページ内の要素に適用する、色・文字サイズ・配置などの指定。 */
+.lemma-box { background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1.25rem 1.5rem; margin: 1rem 0; }
+.lemma-box .lemma-title { font-weight: 700; color: #166534; font-size: 0.88rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.5rem; letter-spacing: 0.03em; }
+.proof-block { background: #f8fafc; border-left: 3px solid #94a3b8; padding: 0.75rem 1.25rem; margin: 0.75rem 0; border-radius: 0 6px 6px 0; font-family: 'Noto Sans JP', sans-serif; font-size: 0.9rem; }
+.proof-block .proof-title { font-weight: 700; color: #334155; font-size: 0.82rem; margin-bottom: 0.4rem; letter-spacing: 0.03em; }
+.mistake-box { background: #fff7ed; border: 1.5px solid #fb923c; border-radius: 8px; padding: 1rem 1.25rem; margin: 0.75rem 0; }
+.mistake-box .mistake-title { font-weight: 700; color: #c2410c; font-size: 0.82rem; font-family: 'Noto Sans JP', sans-serif; margin-bottom: 0.4rem; }
+.step-num { display: inline-block; background: #334155; color: white; border-radius: 50%; width: 1.4em; height: 1.4em; text-align: center; line-height: 1.4em; font-size: 0.8em; font-weight: 700; margin-right: 0.3em; font-family: 'Noto Sans JP', sans-serif; }
+</style>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="calc_04.html" data-page="calculus/calc_04">← 前の回</a>
+    </div>
+  </div>
+</nav>
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-calc">
+  <h1>微分積分学演習　第5回</h1>
+  <p class="subtitle">凸関数とJensen不等式・縮小写像と不動点・方程式の根の極限</p>
+</div>
+
+<div class="container">
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 第5回のテーマと核心</div>
+  <div class="section-card-body">
+    <p>第5回は3つの独立した大テーマを扱う。</p>
+    <ul>
+      <li><strong>問1：凸関数とJensen不等式</strong>──$f'' > 0$ という条件が「接線より関数の方が上にある」という形で不等式を与える。これを $n$ 点に一斉に適用するのが Jensen 不等式。相加相乗平均不等式はその特殊例。</li>
+      <li><strong>問2：縮小写像と不動点定理</strong>──$|f'| \leq k < 1$ という条件は、$f$ が「距離を縮める（Lipschitz 定数が 1 未満）」ことを意味する。繰り返し適用するとコーシー列が現れ、極限が方程式 $f(L) = L$ を満たす不動点になる。</li>
+      <li><strong>問3：方程式の根の極限</strong>──中間値の定理・単調性・挟み撃ちを組み合わせて $a_n \to 1$ を示す。</li>
+    </ul>
+    <div class="insight-box">
+      <div class="insight-title">💡 答案で満点を取るためのポイント</div>
+      <ul>
+        <li>問1：補題（接線の不等式）を明示的に証明してから Jensen に帰着させる。「凸なのでグラフより明らか」では減点される。</li>
+        <li>問2：「$|a_{n+1} - a_n| \to 0$ だから収束する」は誤り（$\sum 1/n$ の例）。コーシー列であることを $|a_n - a_m|$ の評価で示すこと。</li>
+        <li>問3：「$0 < a_n < 1$ だから $a_n^n \to 1$」は誤り（$b_n = \sqrt[n]{1/2}$ の例に注意）。挟み撃ちで直接 $a_n \to 1$ を示す。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問題1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">1</span> 凸関数と Jensen 不等式、相加相乗平均不等式
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>(1) 区間 $I$ 上 2 回微分可能な関数 $f(x)$ は，任意の $x \in I$ に対し $f''(x) > 0$ を満たすとする．このとき，任意の $x_1, \ldots, x_n \in I$ に対し，</p>
+      $$f\!\left(\frac{x_1 + \cdots + x_n}{n}\right) \leq \frac{f(x_1) + \cdots + f(x_n)}{n}$$
+      <p>を満たすことを示せ．また，等号が成立する必要十分条件を求めよ．</p>
+      <p>(2) (1) を用いて，正の実数 $x_1, \ldots, x_n$ に対し</p>
+      $$\sqrt[n]{x_1 \cdots x_n} \leq \frac{x_1 + \cdots + x_n}{n}$$
+      <p>を満たすことを示せ（相加相乗平均の公式）．</p>
+    </div>
+
+    <h3>(1) Jensen 不等式の証明</h3>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+
+      <p>まず次の補題を証明する。</p>
+
+      <div class="lemma-box">
+        <div class="lemma-title">補題（支持超平面不等式）</div>
+        <p>問題の状況のもとで，任意の $x, y \in I$ に対して</p>
+        $$f(x) \geq f(y) + (x - y)f'(y)$$
+        <p>が成立する。等号が成立するための必要十分条件は $x = y$ である。</p>
+      </div>
+
+      <div class="proof-block">
+        <div class="proof-title">証明</div>
+        <p>Taylor の定理より，$x$ と $y$ の間（$x \leq z \leq y$ または $y \leq z \leq x$ を満たす）$z$ が存在して</p>
+        $$f(x) = f(y) + (x - y)f'(y) + \frac{1}{2}(x-y)^2 f''(z)$$
+        <p>が成り立つ。仮定 $f''(z) > 0$ より $\dfrac{1}{2}(x-y)^2 f''(z) \geq 0$ であるから</p>
+        $$f(x) \geq f(y) + (x - y)f'(y)$$
+        <p>が成立する。等号が成立する条件は $\dfrac{1}{2}(x-y)^2 f''(z) = 0$ であるが，$f''(z) > 0$ より $(x-y)^2 = 0$，すなわち $x = y$ と同値である。$\blacksquare$</p>
+      </div>
+
+      <p>問題に戻る。</p>
+      $$\bar{x} := \frac{x_1 + \cdots + x_n}{n}$$
+      <p>とおく。$\bar{x} \in I$ に補題を $n$ 回適用すると，各 $i = 1, \ldots, n$ に対して</p>
+      $$f(x_i) \geq f(\bar{x}) + (x_i - \bar{x})f'(\bar{x})$$
+      <p>が成立する。この $n$ 個の不等式を辺々加えると</p>
+      $$\sum_{i=1}^n f(x_i) \geq n f(\bar{x}) + f'(\bar{x}) \sum_{i=1}^n (x_i - \bar{x})$$
+      <p>ここで $\displaystyle\sum_{i=1}^n (x_i - \bar{x}) = \sum_{i=1}^n x_i - n\bar{x} = 0$ であるから</p>
+      $$\sum_{i=1}^n f(x_i) \geq n f(\bar{x})$$
+      <p>両辺を $n$ で割ると</p>
+      $$\boxed{\frac{f(x_1) + \cdots + f(x_n)}{n} \geq f\!\left(\frac{x_1 + \cdots + x_n}{n}\right)}$$
+      <p>が得られる。</p>
+      <p><strong>等号成立条件：</strong>等号が成立するのは，上の $n$ 個の補題の不等式すべてで等号が成立するときである。各 $i$ について等号成立条件は $x_i = \bar{x}$ であるから，$x_1 = x_2 = \cdots = x_n = \bar{x}$，すなわち $x_1 = x_2 = \cdots = x_n$ であることが必要十分条件である。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 補題の意味：接線より凸関数の方が上にある</div>
+        <p>$f'' > 0$ は「$f$ が下に凸（下凸）」であることを意味する。下凸関数の特徴的な性質は，「グラフ上の任意の点における接線は，グラフ全体よりも下に位置する」ことである。補題はこれを数式で表したものだ。すなわち，点 $y$ での接線（直線 $\ell(x) = f(y) + (x-y)f'(y)$）は $f(x)$ を常に超えない。</p>
+      </div>
+      <p>証明の構造をまとめると：</p>
+      <ol>
+        <li><span class="step-num">1</span>補題（支持超平面不等式）を Taylor 展開 + $f'' > 0$ で示す。</li>
+        <li><span class="step-num">2</span>平均 $\bar{x}$ を固定し，補題を $n$ 個の点 $x_1, \ldots, x_n$ に適用して辺々加える。</li>
+        <li><span class="step-num">3</span>$\sum(x_i - \bar{x}) = 0$ というキャンセルが起きて，右辺の $f'(\bar{x})$ の項が消える。</li>
+      </ol>
+      <div class="insight-box">
+        <div class="insight-title">💡 $\sum(x_i - \bar{x}) = 0$ が鍵</div>
+        <p>このキャンセルが起きるのは $\bar{x}$ を <em>算術平均</em> と定義したからである。もし別の値を使えばキャンセルが起きず証明できない。平均という選択がいかに本質的かがわかる。</p>
+      </div>
+    </div>
+
+    <h3>(2) 相加相乗平均の不等式の証明</h3>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$I = \mathbb{R}$，$f(x) = e^x$ とおく。$f''(x) = e^x > 0$ であるから，$f$ は (1) の条件を満たす。</p>
+      <p>正の実数 $x_1, \ldots, x_n$ に対し，$y_i = \log x_i \in \mathbb{R}$（$i = 1, \ldots, n$）とおく。(1) を $y_1, \ldots, y_n \in I = \mathbb{R}$ に適用すると</p>
+      $$f\!\left(\frac{y_1 + \cdots + y_n}{n}\right) \leq \frac{f(y_1) + \cdots + f(y_n)}{n}$$
+      <p>左辺：</p>
+      $$f\!\left(\frac{\log x_1 + \cdots + \log x_n}{n}\right) = e^{(\log x_1 \cdots x_n)/n} = (x_1 \cdots x_n)^{1/n} = \sqrt[n]{x_1 \cdots x_n}$$
+      <p>右辺：</p>
+      $$\frac{e^{\log x_1} + \cdots + e^{\log x_n}}{n} = \frac{x_1 + \cdots + x_n}{n}$$
+      <p>よって</p>
+      $$\boxed{\sqrt[n]{x_1 \cdots x_n} \leq \frac{x_1 + \cdots + x_n}{n}}$$
+      <p>等号成立条件は $y_1 = \cdots = y_n$，すなわち $x_1 = \cdots = x_n$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ $f(x) = e^x$，$y_i = \log x_i$ と選ぶのか</div>
+        <p>相加相乗平均不等式の「相乗平均（幾何平均）$\sqrt[n]{x_1 \cdots x_n}$」を Jensen 不等式の左辺 $f(\text{平均})$ の形に変形したい。$f$ が指数関数なら $f(y_1 + \cdots + y_n) = \prod e^{y_i}$，すなわち積が「指数の和」に変換される。そこで $y_i = \log x_i$ と置き換えると，$f(\text{算術平均}) = \text{幾何平均}$ という美しい対応が生まれる。</p>
+      </div>
+      <p>この証明の核心は「対数を取って加法に直す」という変換だ。対数変換は乗算を加算に変換する（$\log(x_1 \cdots x_n) = \log x_1 + \cdots + \log x_n$），という対数の基本性質を活用している。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">2</span> 縮小写像と不動点定理
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$f(x)$ は $C^1$ 級の関数で，ある実数 $0 < k < 1$ が存在して任意の $x \in \mathbb{R}$ に対し $|f'(x)| \leq k$ を満たすとする．実数 $a$ に対し，数列 $\{a_n\}$ を $a_0 := a$，$a_{n+1} := f(a_n)$ と帰納的に定める．このとき，この数列は収束し，$f\!\bigl(\lim_{n \to \infty} a_n\bigr) = \lim_{n \to \infty} a_n$ を満たすことを示せ．</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+
+      <p><strong>Step 1：Lipschitz 条件の確立。</strong></p>
+      <p>任意の $x, y \in \mathbb{R}$ に対し，$f$ は $C^1$ 級であるから微積分学の基本定理より（$x \geq y$ としてよい）</p>
+      $$f(x) - f(y) = \int_y^x f'(t)\,dt$$
+      <p>よって</p>
+      $$|f(x) - f(y)| \leq \int_y^x |f'(t)|\,dt \leq k(x - y) = k|x - y|$$
+      <p>すなわち，任意の $x, y \in \mathbb{R}$ に対して</p>
+      $$|f(x) - f(y)| \leq k|x - y| \tag{$*$}$$
+      <p>が成立する（$f$ は Lipschitz 定数 $k$ の Lipschitz 連続写像である）。</p>
+
+      <p><strong>Step 2：隣接項の差の評価。</strong></p>
+      <p>$(*)$ を繰り返し用いると，任意の非負整数 $n$ に対して</p>
+      $$|a_{n+1} - a_n| = |f(a_n) - f(a_{n-1})| \leq k|a_n - a_{n-1}| \leq \cdots \leq k^n|a_1 - a_0|$$
+      <p>が成立する。</p>
+
+      <p><strong>Step 3：コーシー列であることの証明。</strong></p>
+      <p>任意の正整数 $n > m$ に対して，三角不等式を繰り返し適用すると</p>
+      $$|a_n - a_m| \leq \sum_{j=m}^{n-1}|a_{j+1} - a_j| \leq \sum_{j=m}^{n-1} k^j|a_1 - a_0|$$
+      $$= k^m(1 + k + \cdots + k^{n-m-1})|a_1 - a_0| \leq \frac{k^m}{1 - k}|a_1 - a_0|$$
+      <p style="margin-left:1rem; color:#374151; font-size:0.93em;"><strong>等比級数の評価：</strong>$k^m(1 + k + \cdots + k^{n-m-1}) \le k^m \displaystyle\sum_{j=0}^{\infty} k^j = \dfrac{k^m}{1-k}$（$0 < k < 1$ のとき等比級数 $\sum k^j = \frac{1}{1-k}$）。有限和を無限和で上から抑えることで，$n$ に依存しない上界 $\dfrac{k^m}{1-k}|a_1 - a_0|$ が得られる点が重要。</p>
+      <p>$0 < k < 1$ より $k^m \to 0$（$m \to \infty$），したがって任意の $\varepsilon > 0$ に対して $\dfrac{k^m}{1-k}|a_1 - a_0| < \varepsilon$ を満たす $M$ をとれば，$n > m \geq M$ ならば $|a_n - a_m| < \varepsilon$ となる。よって $\{a_n\}$ はコーシー列である。</p>
+      <p>実数の完備性（コーシー列は収束する）より，$L := \lim_{n \to \infty} a_n$ が存在する。</p>
+
+      <p><strong>Step 4：$f(L) = L$ の確認。</strong></p>
+      <p>$f$ は連続（$C^1$ 級のため）であるから</p>
+      $$f(L) = f\!\left(\lim_{n \to \infty} a_n\right) = \lim_{n \to \infty} f(a_n) = \lim_{n \to \infty} a_{n+1} = L$$
+      <p>よって $\{a_n\}$ は収束し，その極限 $L$ は $f(L) = L$ を満たす。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 収束の証明の流れを逆算する</div>
+        <p>「$\{a_n\}$ が収束する」ことを示したい。実数の収束定理の使い方は複数あるが，この問題では「コーシー列であることを示して完備性を使う」が自然だ。コーシー列の条件は $|a_n - a_m| \to 0$（$n, m \to \infty$）。そのためには $|a_{n+1} - a_n|$ が幾何級数的に小さくなることを示し，三角不等式でまとめて評価する。</p>
+      </div>
+      <div class="mistake-box">
+        <div class="mistake-title">⚠ 典型的誤り：「差が 0 に収束すれば収束する」は間違い</div>
+        <p>「$|a_{n+1} - a_n| \leq k^n |a_1 - a_0| \to 0$ だから $\{a_n\}$ は収束する」という議論は<strong>誤り</strong>である。反例：$b_n = 1 + \frac{1}{2} + \frac{1}{3} + \cdots + \frac{1}{n}$ は $|b_{n+1} - b_n| = \frac{1}{n+1} \to 0$ だが発散する（調和級数の発散）。</p>
+        <p>今回は差が <strong>等比数列</strong>（$k^n$ のオーダー）で減少するため，$\sum_{j=m}^{\infty} k^j = \frac{k^m}{1-k} \to 0$ という等比級数の収束が使えてコーシー列が言える。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 縮小写像定理（Banach の不動点定理）</div>
+        <p>この証明が示していることの本質は「縮小写像は一意的な不動点を持つ」という Banach の不動点定理である。$f$ が距離を縮める（$|f(x) - f(y)| \leq k|x - y|$，$0 < k < 1$）ならば，$f(L) = L$ を満たす点 $L$（不動点）が一意的に存在し，任意の初期値 $a_0$ から出発した反復列 $a_{n+1} = f(a_n)$ が $L$ に収束する。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">3</span> $x^n + x - 1 = 0$ の解の極限
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>方程式 $x^n + x - 1 = 0$ は開区間 $(0,1)$ にただ一つの解 $a_n$ を持ち，$\displaystyle\lim_{n \to \infty} a_n = 1$ を示せ．</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+
+      <p>$f_n(x) := x^n + x - 1$ とおく。</p>
+
+      <p><strong>Step 1：$(0,1)$ に解がただ一つ存在することの証明。</strong></p>
+      <p>$f_n(0) = -1 < 0$，$f_n(1) = 1 > 0$ であるから，中間値の定理より $f_n(a_n) = 0$ を満たす $a_n \in (0, 1)$ が存在する。</p>
+      <p>一意性：$x > 0$ に対して $f_n'(x) = nx^{n-1} + 1 > 0$ であるから，$f_n$ は $(0, 1)$ 上で狭義単調増加である。よって $f_n(a_n) = 0$ を満たす $a_n \in (0, 1)$ はただ一つである。</p>
+
+      <p><strong>Step 2：$\{a_n\}$ が狭義単調増加であることの証明。</strong></p>
+      <p>$a_n \in (0, 1)$ より $a_n < 1$，したがって $a_n^{n+1} < a_n^n$ であることに注意すると</p>
+      $$f_{n+1}(a_n) = a_n^{n+1} + a_n - 1 < a_n^n + a_n - 1 = f_n(a_n) = 0$$
+      <p>すなわち $f_{n+1}(a_n) < 0 = f_{n+1}(a_{n+1})$ である。$f_{n+1}$ は狭義単調増加であるから，$a_n < a_{n+1}$ が得られる。</p>
+
+      <p><strong>Step 3：$\displaystyle\lim_{n \to \infty} a_n = 1$ の証明。</strong></p>
+      <p>$\{a_n\}$ は狭義単調増加かつ $a_n < 1$ で上に有界であるから，Weierstrass の定理より $L := \lim_{n \to \infty} a_n$ が存在し $L \leq 1$。</p>
+      <p>任意の $\varepsilon \in (0, 1)$ をとる。このとき $0 < 1 - \varepsilon < 1$ であるから $\lim_{n \to \infty}(1-\varepsilon)^n = 0$ が成立し，</p>
+      $$\lim_{n \to \infty} f_n(1-\varepsilon) = \lim_{n \to \infty}\bigl((1-\varepsilon)^n + (1-\varepsilon) - 1\bigr) = 0 + (-\varepsilon) = -\varepsilon < 0$$
+      <p>よって十分大きな $N$ をとれば $n \geq N$ ならば $f_n(1-\varepsilon) < 0$ が成立する。$f_n(a_n) = 0$ かつ $f_n$ は狭義単調増加であるから，$f_n(1-\varepsilon) < 0 = f_n(a_n)$ より</p>
+      $$1 - \varepsilon < a_n \quad (n \geq N)$$
+      <p>$a_n < 1$ も成立しているので，$n \geq N$ ならば $0 < 1 - a_n < \varepsilon$，すなわち $|1 - a_n| < \varepsilon$。</p>
+      <p>$\varepsilon > 0$ は任意であったから $L = \lim_{n \to \infty} a_n = 1$ が得られた。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p>証明の構造は：存在と一意性（IVT + 単調性）→ 数列の単調性 → 上界（$a_n < 1$）による有界性 → Weierstrass で極限の存在 → 挟み撃ちで極限値を特定，という流れだ。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ「$1 - \varepsilon$ での符号を調べる」のか，そしてなぜ $a_n > 1-\varepsilon$ が言えるのか</div>
+        <p>極限 $L = 1$ を示すためには「$a_n$ が 1 に近い」ことを言いたい。$a_n < 1$ は常に成立しているので，「下から $1 - \varepsilon$ より大きい」ことを示せば，$1 - \varepsilon < a_n < 1$ から $|a_n - 1| < \varepsilon$ が言える。</p>
+        <p><strong>$a_n > 1 - \varepsilon$ の導き方：</strong></p>
+        <ol>
+          <li>$f_n(1-\varepsilon) = (1-\varepsilon)^n + (1-\varepsilon) - 1 = (1-\varepsilon)^n - \varepsilon \to -\varepsilon < 0$（$n$ が十分大きいとき）</li>
+          <li>$f_n(a_n) = a_n^n + a_n - 1 = 0$（$a_n$ の定義）</li>
+          <li>よって $f_n(1-\varepsilon) < 0 = f_n(a_n)$</li>
+          <li>$f_n$ は $(0,1)$ 上で<strong>狭義単調増加</strong>（$f_n'(x) = nx^{n-1}+1 > 0$）なので，$f_n(u) < f_n(v) \Rightarrow u < v$（単調性の逆向き）</li>
+          <li>したがって $1-\varepsilon < a_n$</li>
+        </ol>
+      </div>
+      <div class="mistake-box">
+        <div class="mistake-title">⚠ 典型的誤り：「$0 < a_n < 1$ だから $a_n^n \to 1$」は間違い</div>
+        <p>$0 < a_n < 1$ であっても $a_n^n \to 1$ とは限らない。反例：$b_n = \sqrt[n]{1/2}$ に対して $b_n^n = 1/2 \not\to 1$。$a_n \to 1$ を先に証明せずに $a_n^n \to 1$ を使うことはできない（循環論法になる）。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 極限値の直感的理解</div>
+        <p>$x \in (0, 1)$ を固定すると，$n \to \infty$ で $x^n \to 0$ であるから $f_n(x) = x^n + x - 1 \to x - 1 < 0$。すなわち $x \in (0,1)$ では大きな $n$ に対して $f_n(x) < 0$ となり，$f_n(a_n) = 0$ を満たす根 $a_n$ は $x = 1$ に「追い出される」。このことが $a_n \to 1$ の背景にある。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第5回を理解できているかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li><strong>問1：</strong>Jensen不等式の証明で，補題（接線不等式）を Taylor 展開 + $f'' > 0$ から導けるか</li>
+          <li><strong>問1：</strong>$\sum_{i=1}^n (x_i - \bar x) = 0$ というキャンセルが，$\bar x$ を算術平均と定義したことから来ることを理解しているか</li>
+          <li><strong>問1：</strong>等号成立条件「$x_1 = \cdots = x_n$」を，各補題の等号条件 ($x_i = \bar x$) から導けるか</li>
+          <li><strong>問1：</strong>相加相乗平均不等式の証明で $f(x) = e^x$，$y_i = \log x_i$ と選ぶ理由を説明できるか</li>
+          <li><strong>問2：</strong>$|f'| \le k < 1$ から Lipschitz 条件 $|f(x)-f(y)| \le k|x-y|$ を，積分を使って導けるか</li>
+          <li><strong>問2：</strong>隣接差 $|a_{n+1}-a_n| \le k^n|a_1-a_0|$ から，$|a_n - a_m|$ の評価（コーシー列の条件）に進める。等比級数 $\frac{k^m}{1-k}$ が登場する部分を追えるか</li>
+          <li><strong>問2：</strong>「$|a_{n+1}-a_n| \to 0$ なら収束する」が誤りであり（調和級数の反例），コーシー列であることを示す必要がある点を認識しているか</li>
+          <li><strong>問3：</strong>$f_n(a_n) = 0$ かつ $f_{n+1}(a_n) < 0$ から $a_n < a_{n+1}$ を，$f_{n+1}$ の単調増加性を使って導けるか</li>
+          <li><strong>問3：</strong>$1 - \varepsilon < a_n$ の証明で「$f_n(1-\varepsilon) < 0 = f_n(a_n)$ → 単調増加性の逆 → $1-\varepsilon < a_n$」という論法を使えるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- まとめ -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📌 第5回のまとめ：三つの手法</div>
+  <div class="section-card-body">
+    <ul>
+      <li><strong>凸関数・Jensen不等式：</strong>$f'' > 0$ → 接線より関数が上 → Taylorで補題 → 平均点で補題を $n$ 回適用して和をとる → $\sum(x_i - \bar{x}) = 0$ でキャンセル</li>
+      <li><strong>縮小写像・不動点：</strong>$|f'| \leq k < 1$ → Lipschitz → 隣接差の等比評価 → コーシー列 → 完備性 → 極限の連続性で不動点方程式</li>
+      <li><strong>方程式の根の極限：</strong>IVT + 単調性で一意的な根 → 根の単調性（$f_{n+1}(a_n) < 0$）→ 有界性 → Weierstrass で極限存在 → 挟み撃ちで $L = 1$</li>
+    </ul>
+    <div class="warn-box">
+      <div class="warn-title">⚠ 答案で注意すること</div>
+      <ul>
+        <li>「グラフより明らか」「凸なので明らか」は認められない。補題の不等式を Taylor 展開で丁寧に証明する。</li>
+        <li>コーシー列の証明では必ず $|a_n - a_m|$（非連続項の差）を評価する。連続項の差 $|a_{n+1} - a_n| \to 0$ だけでは不十分。</li>
+        <li>$a_n^n$ の極限は $a_n$ の収束先が確定してから初めて論じられる。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

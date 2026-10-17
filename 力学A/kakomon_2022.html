@@ -1,0 +1,497 @@
+<!DOCTYPE html><!-- 「2022年度 | 力学A 過去問解説」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>2022年度 | 力学A 過去問解説</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kakomon_2022">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A 講義ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="n1.html" data-page="n1">第1章</a>
+      <a href="n2.html" data-page="n2">第2章</a>
+      <a href="n3.html" data-page="n3">第3章</a>
+      <a href="n4.html" data-page="n4">第4章</a>
+      <a href="n5.html" data-page="n5">第5章</a>
+      <a href="n6.html" data-page="n6">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022" class="active">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>力学A 過去問解説</h1>
+  <p class="subtitle">2022年度期末試験</p>
+  <p class="meta">担当：溝口俊弥｜前期課程 Sセメスター</p>
+</div>
+
+<div class="container">
+
+  <div class="note">
+    <span class="box-label">この年度の解答について</span>
+    この年度は伊丹さんの手書き解説に該当ページが含まれておらず、公式解答も手元にないため、以下の解答はすべて力学の標準的な手法に基づき独自に導出したものである。
+    問題4はテーマとしては2025年度 問題4と同じ「薄い球殻の転がり運動」であり、結果も一致する。
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#problem1">問題1｜粘性流体中のバネ振動子</a>
+    <a href="#problem2">問題2｜極座標での万有引力運動</a>
+    <a href="#problem3">問題3｜コリオリの力と東西偏向</a>
+    <a href="#problem4">問題4｜中空球殻の転がり運動</a>
+  </div>
+
+  <!-- =================== 問題1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="problem1">
+    <div class="sec-header">
+      <div class="sec-tag">Problem 1</div>
+      <h2>粘性流体中で加速される金属球</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          図のように、底が滑らかで水平な容器が粘性流体で満たされており、その上に弾性定数 $k$ の軽いバネがあって、その左端が容器の壁面に固定されている。
+          バネをそのつりあいの位置より $\Delta x$ 縮め、そのバネの右端に質量 $m$ の金属球を置いて外力で静止させておく（つまり手などで押さえておく）。
+          時間変数を $t$ とし、時刻 $t=0$ で外力を解き（つまり手をはなして）金属球をバネの弾性力によって（ピンボールのように）右方向に運動させる。
+          金属球の運動やバネの伸び縮みは１次元的なものとし、また金属球はバネがつりあいの位置にまで戻った以後はバネから弾性力を受けないものとするとき、次の問いに答えよ。
+        </p>
+        <p><strong>(1)</strong> 水平右向きを正の向きに $x$ 軸をとり、バネがつりあいの位置にあるときの金属球の中心位置を $x=0$ とすると、上の仮定により時刻 $t=0$ において金属球の中心は $x=-\Delta x$ にある。外力を解いた（手をはなした）後、バネがつりあいの位置に戻るまでの金属球の中心の $x$ 座標 $x(t)$ に関する運動方程式を書き下せ。ただし、金属球はバネの弾性力と粘性抵抗力のみを受けて運動するものとし、また粘性抵抗力の大きさは速度に比例しその比例定数は $\kappa$ であるとせよ。</p>
+        <p><strong>(2)</strong> 粘性抵抗力の比例定数 $\kappa$ が
+          $$\kappa = \sqrt{mk}$$
+          をみたすとき、(1) の運動方程式を解いて、初期条件 $x(0)=-\Delta x$, $\dot x(0)=0$ をみたす $x(t)$ を求めよ。</p>
+        <p><strong>(3)</strong> (2) のとき、金属球の中心が $x=0$ にきたときの時刻 $t=t_0$ を求めよ。また、そのときの金属球の速度 $v_0$ を求めよ。</p>
+        <p><strong>(4)</strong> (3) の時刻 $t=t_0$ 以後、金属球は粘性抵抗力のみを受けて運動する。金属球が止まる位置を求めよ。ただし $v_0$ を用いた式で解答してもよい。（止まるまでに無限の時間を要するが、極限値を答えればよい。）</p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+
+          <h4>(1) 運動方程式</h4>
+          <p>
+            バネがつりあいの位置（$x=0$）にまで戻るまでは、球はバネの弾性力とバネの伸び縮みによらない
+            粘性抵抗力の両方を受ける。バネの弾性力は自然長からの伸び（ここでは球の位置 $x$ そのもの）に比例する復元力
+            $-kx$、粘性抵抗力は速度に比例し運動を妨げる向きにはたらくので $-\kappa\dot x$。よって運動方程式は
+          </p>
+          <div class="mathblock">$$m\ddot x = -kx - \kappa\dot x \qquad\text{すなわち}\qquad m\ddot x + \kappa\dot x + kx = 0$$</div>
+
+          <h4>(2) 初期条件下での解</h4>
+          <p>
+            標準形 $\ddot x + 2\gamma\dot x + \omega_0^2 x = 0$（$\gamma \equiv \dfrac{\kappa}{2m}$, $\omega_0 \equiv \sqrt{\dfrac{k}{m}}$）に直して特性方程式 $\lambda^2+2\gamma\lambda+\omega_0^2=0$ を考える。
+          </p>
+          <div class="note">
+            <span class="box-label">注意 — この設定は「臨界減衰」ではない</span>
+            <p>
+              一般に $m\ddot x+\kappa\dot x+kx=0$ が臨界減衰（$\gamma=\omega_0$）になるのは $\kappa = 2\sqrt{mk}$ のときである。
+              本問の設定 $\kappa=\sqrt{mk}$ はこの半分の大きさで、
+              $$\gamma = \frac{\kappa}{2m} = \frac{\sqrt{mk}}{2m} = \frac{1}{2}\sqrt{\frac{k}{m}} = \frac{\omega_0}{2}$$
+              となり $\gamma<\omega_0$（不足減衰）である。したがって解は指数的に減衰しながら振動する形になる。以下ではこの正しい場合分けに基づいて解く。
+            </p>
+          </div>
+          <p>特性方程式の解は</p>
+          <div class="mathblock">$$\lambda = -\gamma \pm i\omega,\qquad \omega \equiv \sqrt{\omega_0^2-\gamma^2} = \sqrt{\omega_0^2-\frac{\omega_0^2}{4}} = \frac{\sqrt3}{2}\,\omega_0$$</div>
+          <p>よって一般解は</p>
+          <div class="mathblock">$$x(t) = e^{-\gamma t}\left(A\cos\omega t + B\sin\omega t\right)$$</div>
+          <p>初期条件 $x(0)=-\Delta x$ より $A=-\Delta x$。また</p>
+          <div class="mathblock">$$\dot x(t) = e^{-\gamma t}\Big[(-\gamma A+\omega B)\cos\omega t + (-\gamma B-\omega A)\sin\omega t\Big]$$</div>
+          <p>
+            $\dot x(0) = -\gamma A + \omega B = 0$ より $B = \dfrac{\gamma}{\omega}A = \dfrac{1}{\sqrt3}\,(-\Delta x) = -\dfrac{\Delta x}{\sqrt3}$
+            （$\gamma/\omega = (\omega_0/2)/(\sqrt3\omega_0/2) = 1/\sqrt3$ を用いた）。
+          </p>
+          <p>したがって</p>
+          <div class="mathblock">$$x(t) = -\Delta x\, e^{-\gamma t}\left(\cos\omega t + \frac{1}{\sqrt3}\sin\omega t\right) = -\frac{2\Delta x}{\sqrt3}\,e^{-\gamma t}\cos\!\left(\omega t - \frac{\pi}{6}\right)$$</div>
+          <p>（後半の等号は合成公式 $\cos\theta + \frac{1}{\sqrt3}\sin\theta = \frac{2}{\sqrt3}\cos(\theta-\pi/6)$ による。）
+          ここで $\gamma=\dfrac{\omega_0}{2}$, $\omega=\dfrac{\sqrt3}{2}\omega_0$, $\omega_0=\sqrt{k/m}$。</p>
+
+          <h4>(3) $t_0$ と $v_0$</h4>
+          <p>
+            上の合成形から速度は
+            $$\dot x(t) = \frac{4}{3}\,\omega\Delta x\, e^{-\gamma t}\sin\omega t$$
+            と整理できる（$-\gamma A+\omega B=0$ を使うと $\cos$ 項が消えることを利用）。
+          </p>
+          <p>
+            $x(t_0)=0$ より $\cos(\omega t_0-\pi/6)=0$、すなわち $\omega t_0-\pi/6=\pi/2$（最初にゼロを通過する時刻）。よって
+          </p>
+          <div class="mathblock">$$\omega t_0 = \frac{2\pi}{3} \quad\Longrightarrow\quad t_0 = \frac{2\pi}{3\omega} = \frac{4\pi}{3\sqrt3\,\omega_0} = \frac{4\sqrt3\,\pi}{9}\sqrt{\frac{m}{k}}$$</div>
+          <p>このとき $\sin\omega t_0=\sin\dfrac{2\pi}{3}=\dfrac{\sqrt3}{2}$ なので</p>
+          <div class="mathblock">$$v_0 = \dot x(t_0) = \frac{4}{3}\omega\Delta x\,e^{-\gamma t_0}\cdot\frac{\sqrt3}{2} = \omega_0\,\Delta x\, e^{-\gamma t_0}
+          = \Delta x\sqrt{\frac{k}{m}}\; e^{-\frac{2\pi}{3\sqrt3}}$$</div>
+          <p>数値的には $e^{-2\pi/(3\sqrt3)} = e^{-1.209\ldots}\approx 0.298$ なので $v_0 \approx 0.298\,\Delta x\sqrt{k/m}$（正の値＝右向き）。</p>
+
+          <h4>(4) 静止位置</h4>
+          <p>
+            $t_0$ 以後はバネの力がなくなり、粘性抵抗力のみが働く：$m\dot v = -\kappa v$（$v=\dot x$）。これは1階の線形微分方程式で、
+          </p>
+          <div class="mathblock">$$v(t') = v_0\, e^{-\frac{\kappa}{m}t'} \qquad (t' \equiv t-t_0 \ge 0)$$</div>
+          <p>位置の増分は</p>
+          <div class="mathblock">$$\Delta x_{\text{after}} = \int_0^\infty v(t')\,dt' = v_0\cdot\frac{m}{\kappa}$$</div>
+          <p>
+            $\kappa=\sqrt{mk}=m\omega_0$（$\because\ \omega_0=\sqrt{k/m}$）なので $m/\kappa = 1/\omega_0$。よって
+          </p>
+          <div class="mathblock">$$\Delta x_{\text{after}} = \frac{v_0}{\omega_0} = \Delta x\, e^{-\frac{2\pi}{3\sqrt3}}$$</div>
+          <p>
+            $t_0$ の時点で $x(t_0)=0$ だったから、球が最終的に止まる位置は
+          </p>
+          <div class="mathblock">$$x_{\text{stop}} = 0 + \Delta x_{\text{after}} = \Delta x\, e^{-\frac{2\pi}{3\sqrt3}} = \Delta x\, e^{-\frac{2\sqrt3\,\pi}{9}} \approx 0.298\,\Delta x$$</div>
+
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <p>(1) $m\ddot x + \kappa\dot x + kx = 0$</p>
+          <p>(2) $x(t) = -\dfrac{2\Delta x}{\sqrt3}\,e^{-\gamma t}\cos\left(\omega t-\dfrac{\pi}{6}\right)$，$\ \gamma=\dfrac12\sqrt{\dfrac{k}{m}}$, $\omega=\dfrac{\sqrt3}{2}\sqrt{\dfrac{k}{m}}$</p>
+          <p>(3) $t_0 = \dfrac{4\sqrt3\,\pi}{9}\sqrt{\dfrac{m}{k}}$，$\ v_0 = \Delta x\sqrt{\dfrac{k}{m}}\,e^{-2\pi/(3\sqrt3)} \approx 0.298\,\Delta x\sqrt{k/m}$</p>
+          <p>(4) $x_{\text{stop}} = \Delta x\, e^{-2\pi/(3\sqrt3)} \approx 0.298\,\Delta x$（つりあい位置よりわずかに右で静止する）</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題2 =================== -->
+  <div class="section" id="problem2">
+    <div class="sec-header">
+      <div class="sec-tag">Problem 2</div>
+      <h2>極座標での万有引力運動と実効ポテンシャル</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          ２次元平面上において、時刻 $t$ における質量 $m$ の質点の位置を、原点からのその点までの距離 $r(t)$ と、
+          原点を通るある決められた直線（例えば「$x$ 軸」）とその位置ベクトルがなす角 $\varphi(t)$ で表す。
+          位置ベクトルが $\mathbf r(t)$ の位置における、動径方向および動径と垂直反時計回り方向を向く大きさ１のベクトル（「基本ベクトル」）
+          $\mathbf e_r(\mathbf r(t))$, $\mathbf e_\varphi(\mathbf r(t))$ をそれぞれ単に $\mathbf e_r$, $\mathbf e_\varphi$ と書くと、位置ベクトル $\mathbf r(t)$ 自身は
+          $$\mathbf r(t) = r(t)\,\mathbf e_r,$$
+          速度ベクトル $\mathbf v(t)\equiv\dot{\mathbf r}(t)$ は
+          $$\mathbf v(t) = \dot r(t)\,\mathbf e_r + r(t)\dot\varphi(t)\,\mathbf e_\varphi,$$
+          加速度ベクトル $\mathbf a(t)\equiv\ddot{\mathbf r}(t)$ は
+          $$\mathbf a(t) = \left(\ddot r(t)-r(t)\dot\varphi(t)^2\right)\mathbf e_r + \left(2\dot r(t)\dot\varphi(t)+r(t)\ddot\varphi(t)\right)\mathbf e_\varphi$$
+          である。（以下、$t$ の関数であることを示す $\cdots(t)$ を省略する。）
+        </p>
+        <p><strong>(1)</strong> この質点が、原点に固定された別の質点 $M$ による万有引力を受けてこの平面内を運動するときの運動方程式を、$\mathbf e_r$, $\mathbf e_\varphi$ それぞれの成分の方程式として（つまり２本）書き下せ。また、原点のまわりの質点の角運動量 $mr^2\dot\varphi$ が保存することを示せ。ただし、万有引力定数を $G$ とせよ。</p>
+        <p><strong>(2)</strong> 角運動量が保存するから $\dot\varphi$ は $r$ の関数として表され、したがってこの質点の２次元平面内の運動のエネルギー保存則は、質量 $m$ の質点が別の１次元ポテンシャル $V(r)$ の中で運動するときの１次元的な運動のエネルギー保存則
+          $$\frac12 m\dot r^2 + V(r) = E\quad(E\ \text{は全エネルギーを表す定数})$$
+          と同じになる。保存する角運動量の大きさの $\frac1m$ である $r^2\dot\varphi$ の値を $h$ として、この１次元ポテンシャル $V(r)$ を表せ。</p>
+        <p><strong>(3)</strong> $V(r)$ を最小とする $r$ の値 $r_c$ と、そのときの $V(r)$ の最小値 $V_{\min}$ を求めよ。</p>
+        <p><strong>(4)</strong> この１次元ポテンシャル $V(r)$ 中 $r=r_c$ 近傍でこの質点が微小振動するとき、その周期を求めよ。</p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+
+          <h4>(1) 運動方程式と角運動量保存</h4>
+          <p>
+            原点の質点 $M$ からの万有引力は常に原点向き（中心力）で、大きさ $GMm/r^2$ だから
+            $\mathbf F = -\dfrac{GMm}{r^2}\mathbf e_r$（$\mathbf e_\varphi$ 成分は $0$）。ニュートンの運動方程式 $m\mathbf a=\mathbf F$ を成分ごとに書くと
+          </p>
+          <div class="mathblock">$$e_r\text{成分：}\quad m\left(\ddot r - r\dot\varphi^2\right) = -\frac{GMm}{r^2}\qquad\cdots①$$</div>
+          <div class="mathblock">$$e_\varphi\text{成分：}\quad m\left(2\dot r\dot\varphi + r\ddot\varphi\right) = 0\qquad\cdots②$$</div>
+          <p>
+            ②に着目すると、$\dfrac{1}{r}\dfrac{d}{dt}\!\left(r^2\dot\varphi\right) = 2\dot r\dot\varphi+r\ddot\varphi$ であるから、②は
+            $$\frac{d}{dt}\left(r^2\dot\varphi\right) = 0$$
+            を意味する。よって $r^2\dot\varphi$ は時間によらず一定であり、角運動量 $L=mr^2\dot\varphi$ は保存する。
+          </p>
+
+          <h4>(2) 実効ポテンシャル $V(r)$</h4>
+          <p>
+            $h\equiv r^2\dot\varphi$（一定）とおくと $\dot\varphi = h/r^2$。運動エネルギーは
+            $$\frac12 m\left(\dot r^2+r^2\dot\varphi^2\right) = \frac12 m\dot r^2 + \frac12 m\,r^2\left(\frac{h}{r^2}\right)^2 = \frac12 m\dot r^2 + \frac{mh^2}{2r^2}$$
+          </p>
+          <p>
+            万有引力のポテンシャルエネルギーは $U(r)=-\dfrac{GMm}{r}$（$-dU/dr=-GMm/r^2$ が①の右辺と一致することで検算できる）。
+            全エネルギー保存則 $\frac12 m(\dot r^2+r^2\dot\varphi^2) + U(r) = E$ を書き直すと
+          </p>
+          <div class="mathblock">$$\frac12 m\dot r^2 + \underbrace{\left(\frac{mh^2}{2r^2}-\frac{GMm}{r}\right)}_{V(r)} = E$$</div>
+          <div class="mathblock">$$\therefore\quad V(r) = \frac{mh^2}{2r^2} - \frac{GMm}{r}$$</div>
+
+          <h4>(3) $V(r)$ の最小値</h4>
+          <div class="mathblock">$$V'(r) = -\frac{mh^2}{r^3} + \frac{GMm}{r^2} = 0 \quad\Longrightarrow\quad GM = \frac{h^2}{r} \quad\Longrightarrow\quad r_c = \frac{h^2}{GM}$$</div>
+          <p>これを $V(r)$ に代入して</p>
+          <div class="mathblock">$$V_{\min} = V(r_c) = \frac{mh^2}{2r_c^2} - \frac{GMm}{r_c} = \frac{mG^2M^2}{2h^2} - \frac{G^2M^2m}{h^2} = -\frac{G^2M^2m}{2h^2}$$</div>
+          <p>（$r_c$ は円軌道の半径に等しく、$V_{\min}$ は円軌道のエネルギーそのものである。）</p>
+
+          <h4>(4) 微小振動の周期</h4>
+          <p>$V(r)$ を $r_c$ の周りで振動する質点は $m\ddot r = -V'(r)$ に従う。$V''(r_c)$ を求める：</p>
+          <div class="mathblock">$$V''(r) = \frac{3mh^2}{r^4} - \frac{2GMm}{r^3}$$</div>
+          <p>$r=r_c$ で $GM=h^2/r_c$ を用いると $\dfrac{2GMm}{r_c^3} = \dfrac{2mh^2}{r_c^4}$ なので</p>
+          <div class="mathblock">$$V''(r_c) = \frac{3mh^2}{r_c^4} - \frac{2mh^2}{r_c^4} = \frac{mh^2}{r_c^4}$$</div>
+          <p>
+            微小変位 $\delta r=r-r_c$ に対して $m\ddot{\delta r} = -V''(r_c)\,\delta r$（単振動）となるので、角振動数は
+          </p>
+          <div class="mathblock">$$\omega_{\text{osc}} = \sqrt{\frac{V''(r_c)}{m}} = \frac{h}{r_c^2} = \frac{h}{\left(h^2/GM\right)^2} = \frac{(GM)^2}{h^3}$$</div>
+          <p>したがって周期は</p>
+          <div class="mathblock">$$T = \frac{2\pi}{\omega_{\text{osc}}} = \frac{2\pi h^3}{(GM)^2}$$</div>
+          <div class="note">
+            <span class="box-label">補足 — 円軌道の公転周期と一致すること</span>
+            <p>
+              円軌道（半径 $r_c$）の面積速度は $\frac{h}{2}$ 一定だから、公転周期は $T_{\text{orbit}} = \dfrac{\pi r_c^2}{h/2} = \dfrac{2\pi r_c^2}{h}$。
+              $r_c=h^2/GM$ を代入すると $T_{\text{orbit}} = \dfrac{2\pi h^3}{(GM)^2}$ となり、上で求めた微小振動の周期 $T$ と完全に一致する。
+              これは逆２乗力（ケプラー問題）に特有の性質（アプシス角が常に $\pi$ になること）の反映であり、結果の検算になっている。
+            </p>
+            <p>
+              さらに、$V_{\min}$ の値そのものにも意味がある。円軌道での位置エネルギーは $U(r_c)=-GMm/r_c$ であり、
+              $$V_{\min} = -\frac{G^2M^2m}{2h^2} = -\frac{GMm}{2r_c} = \frac12\,U(r_c)$$
+              が成り立つ（$r_c=h^2/GM$ を代入すれば確認できる）。つまり円軌道の全エネルギーは位置エネルギーのちょうど半分——逆２乗力に対する
+              ビリアル定理（円軌道では運動エネルギーの平均が位置エネルギーの $-\frac12$ 倍になる）そのものである。
+              しかも「束縛された中心力のもとで、任意のエネルギー・角運動量に対して軌道が必ず閉じる」という性質を持つ力の法則は、
+              逆２乗力（本問の万有引力）と調和振動力 $\propto r$ の２種類しか存在しないことが知られている（ベルトランの定理）。
+              本問で見た「微小振動の周期＝公転周期」という一致は、この閉軌道性のいわば局所的な現れにすぎない。
+            </p>
+          </div>
+
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <p>(1) $m(\ddot r-r\dot\varphi^2)=-\dfrac{GMm}{r^2}$，$\ m(2\dot r\dot\varphi+r\ddot\varphi)=0$ ⟹ $\dfrac{d}{dt}(r^2\dot\varphi)=0$ より角運動量保存</p>
+          <p>(2) $V(r) = \dfrac{mh^2}{2r^2} - \dfrac{GMm}{r}$</p>
+          <p>(3) $r_c = \dfrac{h^2}{GM}$，$\ V_{\min} = -\dfrac{G^2M^2m}{2h^2}$</p>
+          <p>(4) $T = \dfrac{2\pi h^3}{(GM)^2}$（円軌道の公転周期に一致）</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題3 =================== -->
+  <div class="section" id="problem3">
+    <div class="sec-header">
+      <div class="sec-tag">Problem 3</div>
+      <h2>コリオリの力による東西偏向</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          北緯 $\alpha$ のところで、質点を南に向かって水平から仰角 $\theta$ で初速度 $V_0$ で射出する。
+          地球の重力加速度を $g=9.8\,[\mathrm{m\,s^{-2}}]$、自転の角速度を $\omega=7.3\times10^{-5}\,[\mathrm{s^{-1}}]$、
+          $\theta=\alpha=45\,[^\circ]$, $V_0=500\,[\mathrm{m\,s^{-1}}]$ として落下地点を求めよ。
+          ただし、自転の影響は遠心力は無視してコリオリの力のみ考慮するものとし、$\omega$ １次までの近似で求めればよい。
+          また空気による抵抗力は無視する。
+        </p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+
+          <h4>座標系の設定</h4>
+          <p>
+            発射点に局所直交座標をとる：$x$＝東向き、$y$＝北向き、$z$＝鉛直上向き（右手系）。
+            地球の自転角速度ベクトルはこの座標で
+            $$\boldsymbol\omega = \omega(0,\ \cos\alpha,\ \sin\alpha)$$
+            と表される（北向き成分 $\omega\cos\alpha$、鉛直成分 $\omega\sin\alpha$、東向き成分は $0$）。
+          </p>
+          <p>
+            初速度は南向き（$-y$ 方向）に水平から仰角 $\theta$ なので
+            $$\mathbf v(0) = (0,\ -V_0\cos\theta,\ V_0\sin\theta)$$
+          </p>
+
+          <h4>0次（自転を無視した）運動</h4>
+          <p>
+            コリオリの力を無視すると、運動は南北・鉛直面内の放物運動（$x_0(t)\equiv0$）：
+          </p>
+          <div class="mathblock">$$y_0(t) = -V_0\cos\theta\, t,\qquad z_0(t) = V_0\sin\theta\, t - \frac12 g t^2$$</div>
+          <p>
+            地面 $z_0=0$ に戻る時刻（飛行時間）は
+            $$T_0 = \frac{2V_0\sin\theta}{g}$$
+          </p>
+          <p>
+            このときの南向き到達距離（水平到達距離、通常の放物運動の公式）は
+            $$R = -y_0(T_0) = \frac{V_0^2\sin2\theta}{g}$$
+          </p>
+
+          <h4>コリオリ加速度</h4>
+          <p>
+            コリオリ加速度は $\mathbf a_{\text{cor}} = -2\boldsymbol\omega\times\mathbf v$。
+            $\omega$ の1次までの近似では、右辺の $\mathbf v$ に0次の速度 $\mathbf v_0(t)=(0,\dot y_0,\dot z_0)$ を代入すればよい。
+          </p>
+          <div class="mathblock">$$\boldsymbol\omega\times\mathbf v_0 = \big(\omega\cos\alpha\cdot\dot z_0 - \omega\sin\alpha\cdot\dot y_0,\ 0,\ 0\big)$$</div>
+          <p>
+            （$x$ 成分以外は $v_{0,x}=\omega_x=0$ のため恒等的に $0$ になる。すなわち、南北鉛直面内で発射した弾道に対するコリオリの効果は、
+            １次近似では東西方向にしか働かない。）
+          </p>
+          <p>$\dot y_0=-V_0\cos\theta$（定数）、$\dot z_0 = V_0\sin\theta-gt$ を代入すると</p>
+          <div class="mathblock">$$a_{\text{cor},x}(t) = -2\left(\omega\cos\alpha\,\dot z_0 - \omega\sin\alpha\,\dot y_0\right)
+          = -2\omega V_0\sin(\theta+\alpha) + 2\omega g\cos\alpha\; t$$</div>
+          <p>（$\cos\alpha\sin\theta+\sin\alpha\cos\theta=\sin(\theta+\alpha)$ を用いた。）</p>
+
+          <h4>東西方向のずれ $x(T_0)$</h4>
+          <p>$x(0)=\dot x(0)=0$ として2回積分すると</p>
+          <div class="mathblock">$$\dot x(t) = -2\omega V_0\sin(\theta+\alpha)\,t + \omega g\cos\alpha\, t^2$$</div>
+          <div class="mathblock">$$x(t) = -\omega V_0\sin(\theta+\alpha)\,t^2 + \frac{\omega g\cos\alpha}{3}\,t^3$$</div>
+          <p>
+            なお、$a_{\text{cor},z}=0$（１次近似）なので落下時刻は $T_0$ のまま変わらず（$\omega$ の1次補正はない）、
+            同様に $y$ 方向の補正も生じない。したがって $t=T_0$ を代入すればよい：
+          </p>
+          <div class="mathblock">$$x(T_0) = -\omega V_0\sin(\theta+\alpha)\,T_0^2 + \frac{\omega g\cos\alpha}{3}\,T_0^3$$</div>
+
+          <h4>数値の代入（$\theta=\alpha=45^\circ$）</h4>
+          <p>
+            $\sin(\theta+\alpha)=\sin90^\circ=1$、$\sin\theta=\cos\alpha=\dfrac{\sqrt2}{2}$、$T_0 = \dfrac{2V_0\cdot\frac{\sqrt2}{2}}{g}=\dfrac{\sqrt2\,V_0}{g}$ を用いると
+          </p>
+          <div class="mathblock">$$T_0^2 = \frac{2V_0^2}{g^2},\qquad T_0^3 = \frac{2\sqrt2\,V_0^3}{g^3}$$</div>
+          <div class="mathblock">$$x(T_0) = -\omega V_0\cdot\frac{2V_0^2}{g^2} + \frac{\omega g\cdot\frac{\sqrt2}{2}}{3}\cdot\frac{2\sqrt2\,V_0^3}{g^3}
+          = -\frac{2\omega V_0^3}{g^2} + \frac{2\omega V_0^3}{3g^2} = -\frac{4\omega V_0^3}{3g^2}$$</div>
+          <p>符号が負（＝$x$ 軸の負方向＝西向き）であることに注意する。数値を代入すると</p>
+          <div class="mathblock">$$x(T_0) = -\frac{4\times7.3\times10^{-5}\times500^3}{3\times9.8^2}\ \mathrm{m}
+          = -\frac{4\times7.3\times10^{-5}\times1.25\times10^8}{288.12}\ \mathrm{m} \approx -127\ \mathrm{m}$$</div>
+          <p>また南向き距離は $R = V_0^2\sin90^\circ/g = V_0^2/g = 500^2/9.8 \approx 2.551\times10^4\ \mathrm{m} = 25.5\ \mathrm{km}$。</p>
+
+          <div class="note">
+            <span class="box-label">補足 — 西にずれることの物理的な理由</span>
+            <p>
+              北半球でのコリオリの力は「運動方向に向かって右向き」に働く（南半球では左向き）。
+              南に向かって進む物体にとって「進行方向右向き」は西である。よって北半球で南向きに発射された物体は西にずれる、
+              という定性的な結果と、上の計算の符号（$x(T_0)<0$）は一致している。
+            </p>
+          </div>
+
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <p>東西方向のずれ：$\displaystyle x(T_0) = -\frac{4\omega V_0^3}{3g^2} \approx -1.27\times10^2\ \mathrm{m}$（西に約127 m）</p>
+          <p>南北方向の到達距離：$\displaystyle R = \frac{V_0^2}{g} \approx 2.55\times10^4\ \mathrm{m}$（南に約25.5 km）</p>
+          <p>したがって落下地点は、発射点から<strong>南へ約25.5 km、西へ約127 m</strong> ずれた地点である。</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 「自由落下は東にずれる」現象がここにも隠れている</span>
+        <p>
+          求めた $x(T_0)$ の式をよく見ると、$t^2$ の項 $-\omega V_0\sin(\theta+\alpha)$ と $t^3$ の項 $\dfrac{\omega g\cos\alpha}{3}$
+          という、由来の異なる２つの寄与の和になっている。前者は初速 $V_0$（南向きの水平運動）に起因する項だが、
+          後者は $V_0$ を一切含まず、高度が時間とともに変化すること（鉛直方向の運動）だけから生じる項である。
+          実際、この設定で仮に $V_0=0$ として真上からただ静かに手を離す自由落下にすると、$x(t)$ の式は $t^3$ の項だけが残り、
+          $$x(t) = \frac{\omega g\cos\alpha}{3}\,t^3$$
+          という、教科書でおなじみの「自由落下する物体は地球の自転により東にわずかにずれる」現象の公式そのものに一致する
+          （高さ $h$ から落とすとき $t=\sqrt{2h/g}$ を代入すればよい）。つまり本問の東西偏向は、南向きに射出したことによる
+          偏向と、物体が高度を変えながら自由落下しているために生じる偏向とが単純に重ね合わさったものになっている。
+          ちなみに数値を入れると、東西のずれ（約127 m）は南北到達距離（約25.5 km）のわずか0.5%程度に過ぎない——
+          コリオリの効果は長距離の弾道でようやく無視できなくなる程度の小さな補正であることが、この数値からも見て取れる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題4 =================== -->
+  <div class="section" id="problem4">
+    <div class="sec-header">
+      <div class="sec-tag">Problem 4</div>
+      <h2>中空球殻の慣性モーメントと転がり運動</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p><strong>(1)</strong> 半径 $a$、質量 $M$ の中空の球の、中心を通る直線のまわりの慣性モーメントを求めよ。（注意：一様な球ではありません！ピンポンの球のように、薄い球殻表面にのみ質量が分布しているものを考えます。）</p>
+        <p><strong>(2)</strong> 表面がゴムでできた、水平方向と角度 $\theta$ をなす斜面を、(1) の球が滑らずに初速 0 で転がるとき、斜面方向長さ $x$ だけ転がるまでの時間を求めよ。</p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+
+          <h4>(1) 慣性モーメント</h4>
+          <p>
+            質量は半径 $a$ の球面上に一様に分布するので、面密度は $\rho = \dfrac{M}{4\pi a^2}$。
+            回転軸から極角 $\varphi$（軸方向を $\varphi=0$ とする）だけ離れた球面上の点は、軸からの距離 $r_\perp = a\sin\varphi$ をもつ。
+            方位角 $\theta_{\text{az}}$（$0\le\theta_{\text{az}}<2\pi$）とあわせて面積要素は $dS = a^2\sin\varphi\,d\varphi\,d\theta_{\text{az}}$ なので
+          </p>
+          <div class="mathblock">$$I = \int \rho\, r_\perp^2\, dS = \rho a^4\int_0^{2\pi}d\theta_{\text{az}}\int_0^\pi \sin^3\varphi\, d\varphi
+          = 2\pi\rho a^4\int_0^\pi\sin^3\varphi\,d\varphi$$</div>
+          <p>ここで $\displaystyle\int_0^\pi\sin^3\varphi\,d\varphi = \int_0^\pi(1-\cos^2\varphi)\sin\varphi\,d\varphi = \left[-\cos\varphi+\frac{\cos^3\varphi}{3}\right]_0^\pi = \frac{4}{3}$ なので</p>
+          <div class="mathblock">$$I = 2\pi\rho a^4\cdot\frac43 = \frac{8\pi}{3}\rho a^4 = \frac{8\pi}{3}\cdot\frac{M}{4\pi a^2}\cdot a^4 = \frac{2}{3}Ma^2$$</div>
+
+          <h4>(2) 転がり運動の時間</h4>
+          <p>
+            斜面方向に座標 $x$（下向き正）、球の回転角を $\phi$、接触点にはたらく静止摩擦力を $F$（斜面上向きにとる）とすると、
+            重心の並進運動と中心まわりの回転運動の方程式は
+          </p>
+          <div class="mathblock">$$M\ddot x = Mg\sin\theta - F \qquad\cdots①$$</div>
+          <div class="mathblock">$$I\ddot\phi = Fa \qquad\cdots②$$</div>
+          <p>
+            「表面がゴムでできた」という設定は、静止摩擦係数が十分大きく<strong>滑らずに転がる</strong>ことを保証するだけの意味であり、
+            力学的には通常の転がり運動と同じである。滑らない条件（束縛条件）は
+            $$x = a\phi \quad\Longrightarrow\quad \ddot x = a\ddot\phi \qquad\cdots③$$
+          </p>
+          <p>②に③、(1)の結果 $I=\frac23 Ma^2$ を用いて $F$ を消去する：②より $F = \dfrac{I\ddot\phi}{a} = \dfrac{I\ddot x}{a^2} = \dfrac23 M\ddot x$。これを①に代入すると</p>
+          <div class="mathblock">$$M\ddot x = Mg\sin\theta - \frac23 M\ddot x \quad\Longrightarrow\quad \frac53 M\ddot x = Mg\sin\theta \quad\Longrightarrow\quad \ddot x = \frac35 g\sin\theta$$</div>
+          <p>
+            これは球の質量 $M$ や半径 $a$ によらない一定の加速度である。初速 $0$ からの等加速度運動なので、斜面方向に距離 $x$ だけ進むのにかかる時間 $t$ は
+            $\frac12\ddot x\, t^2 = x$ より
+          </p>
+          <div class="mathblock">$$t = \sqrt{\frac{2x}{\ddot x}} = \sqrt{\frac{2x}{\frac35 g\sin\theta}} = \sqrt{\frac{10x}{3g\sin\theta}}$$</div>
+          <p>
+            これは2025年度 問題4（同一テーマ、ただし斜面が「ゴム」であるという設定なしの一般の転がり問題）の結果と完全に一致する。
+          </p>
+
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <p>(1) $I = \dfrac{2}{3}Ma^2$</p>
+          <p>(2) 加速度 $\ddot x = \dfrac35 g\sin\theta$（$M,a$ によらない）、よって $t = \sqrt{\dfrac{10x}{3g\sin\theta}}$</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 転がることで何%遅くなるか</span>
+        <p>
+          もし同じ斜面が完全に滑らかで、球が転がらずに（摩擦なしで）ただ滑り落ちるだけなら、加速度は単純に $g\sin\theta$ であり、
+          転がる場合の加速度 $\frac35 g\sin\theta$ より大きい。同じ距離 $x$ を進むのにかかる時間の比は
+          $$\frac{t_{\text{roll}}}{t_{\text{slide}}} = \sqrt{\frac{g\sin\theta}{\frac35 g\sin\theta}} = \sqrt{\frac53} \approx 1.29$$
+          となり、中空球殻は「回転させられる」ことで、同じ距離を滑り落ちる場合よりおよそ29%多く時間がかかる。
+          これは、重心の並進運動エネルギー $\frac12 M\dot x^2$ に対して回転運動エネルギーが $\frac12 I\dot\phi^2 = \frac13 M\dot x^2$
+          （$I=\frac23Ma^2$, $\dot\phi=\dot x/a$ を用いた）だけ余分に必要になるためであり、この球殻では全運動エネルギーのうち
+          $\frac{1/3}{1/2+1/3} = \frac25$（40%）が並進ではなく回転につぎ込まれている計算になる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2021.html">← 2021年度へ</a>
+    <a href="kakomon_2023.html">2023年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

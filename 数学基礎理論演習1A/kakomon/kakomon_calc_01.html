@@ -1,0 +1,376 @@
+<!DOCTYPE html><!-- 「微分積分学演習 小テスト 2025年12月16日 | 数学基礎理論演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1e3a8a">
+<title>微分積分学演習 小テスト 2025年12月16日 | 数学基礎理論演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>/* このページ内の要素に適用する、色・文字サイズ・配置などの指定。 */
+.case-table { border-collapse: collapse; width: 100%; font-family: var(--font-sans); font-size: 0.88rem; margin: 1rem 0; }
+.case-table th { background: #dbeafe; color: #1e3a8a; padding: 0.5rem 0.75rem; text-align: center; border: 1px solid #93c5fd; }
+.case-table td { padding: 0.5rem 0.75rem; border: 1px solid #bfdbfe; text-align: center; }
+.case-table tr:nth-child(even) td { background: #f0f7ff; }
+</style>
+</head>
+<body data-nav-page="kakomon-calc">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数学基礎理論演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-calc">
+  <h1>微分積分学演習　小テスト</h1>
+  <p class="subtitle">数学基礎理論演習 &nbsp;|&nbsp; 2025年12月16日（火）実施　担当：榎園誠</p>
+</div>
+
+<div class="container">
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">1</span> $f(x)=x^2$ の一様連続性
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>一変数関数 $f(x) = x^2$ を考える。定義域 $D$ が以下の場合に，$f$ が $D$ 上一様連続かどうかを（証明を付けて）答えよ。</p>
+      <ol>
+        <li>$D = \mathbb{R}$</li>
+        <li>$D = \{x \in \mathbb{R} \mid x > 0\}$</li>
+        <li>$D = (0,1)$</li>
+      </ol>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">一様連続性の定義</div>
+      <p>$f$ が $D$ 上一様連続とは：任意の $\varepsilon>0$ に対しある $\delta>0$ が存在して，$x,y\in D$，$|x-y|<\delta$ を満たす<strong>すべての</strong> $x,y$ に対し $|f(x)-f(y)|<\varepsilon$ となること。$\delta$ が点の位置によらず一様に取れる点が，各点での連続性との違い。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 方針を立てる前に</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 非一様連続性の見抜き方</div>
+        <p>$f(x)-f(y) = (x-y)(x+y)$ なので，$x-y$ が小さくても $x+y$ がいくらでも大きくなれる定義域では，$|f(x)-f(y)|$ を大きくできてしまう。$D$ が非有界（$\mathbb{R}$ や $(0,\infty)$）なら，$x,y$ を無限遠に飛ばしつつ差 $x-y$ を固定的に小さく保てば反例が作れる。逆に $D$ が有界なら $x+y$ 自体が押さえられるので，一様連続性が期待できる。</p>
+      </div>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1) — $D=\mathbb{R}$：一様連続で<u>ない</u></div>
+      <p>背理法で示す。$f$ が $\mathbb{R}$ 上一様連続と仮定する。$\varepsilon = 1$ に対し，ある $\delta>0$ が存在して</p>
+      $$|x-y|<\delta \implies |f(x)-f(y)|<1.$$
+      <p>$n > 1/\delta$ を満たす自然数 $n$ をとり，$x_n = n,\ y_n = n+\dfrac{1}{n}$ とおく。このとき</p>
+      $$|x_n-y_n| = \frac{1}{n} < \delta$$
+      <p>であるにもかかわらず，</p>
+      $$|f(x_n)-f(y_n)| = |x_n-y_n|\,|x_n+y_n| = \frac{1}{n}\left(2n+\frac{1}{n}\right) = 2+\frac{1}{n^2} > 2 > 1.$$
+      <p>これは仮定に矛盾する。よって $f$ は $\mathbb{R}$ 上一様連続で<strong>ない</strong>。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2) — $D=\{x>0\}$：一様連続で<u>ない</u></div>
+      <p>(1) と全く同じ $x_n=n,\ y_n=n+\dfrac{1}{n}$ はいずれも $D$ に属するので，同じ議論がそのまま使える。よって $f$ は $D$ 上一様連続で<strong>ない</strong>。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (3) — $D=(0,1)$：一様連続で<u>ある</u></div>
+      <p>$\varepsilon>0$ を任意に与える。$\delta := \dfrac{\varepsilon}{2}$ とおく。$x,y\in(0,1)$ が $|x-y|<\delta$ を満たすとする。$0&lt;x,y<1$ より $x+y<2$ なので，</p>
+      $$|f(x)-f(y)| = |x-y|\,|x+y| < \delta \cdot 2 = \varepsilon.$$
+      <p>$\delta$ は $\varepsilon$ のみから決まり，$x,y$ の位置に依存しないので，$f$ は $(0,1)$ 上一様連続である。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🔑 ポイントまとめ</div>
+      <ul>
+        <li><strong>因数分解 $x^2-y^2=(x-y)(x+y)$ が全ての鍵。</strong>非有界な定義域では $x+y$ を大きくして差を稼ぐ反例が作れ，有界な定義域では $x+y$ 自体に一様な上限があるので直接評価できる。</li>
+        <li><strong>反例の作り方：</strong>「差が一定に小さいまま，和がいくらでも大きくなる」ような2点列 $x_n,y_n$ を探す。$x_n=n,\,y_n=n+1/n$ は差 $1/n\to0$ でありながら積 $|x_n-y_n||x_n+y_n|\to 2$ に収束する典型例。</li>
+        <li><strong>有界区間では「一様連続性の $\delta$ が $\varepsilon$ だけで決まる」ことを直接示すのが最短。</strong>Heine–Cantor の定理（$[0,1]$ でのコンパクト性）を援用してもよいが，この問題では直接評価の方が速い。</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">2</span> $\displaystyle\int_0^1 x\,dx$ をリーマン積分の定義から計算
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>定積分 $\displaystyle\int_0^1 x\,dx$ をリーマン積分の定義に従って計算せよ。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 方針</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 上下和で挟み撃ちにする</div>
+        <p>「定義に従って」とあるので，区分求積の上和・下和を計算し，両者が同じ極限値に収束することを示す必要がある。$f(x)=x$ は単調増加だから，各小区間での下限・上限はそれぞれ左端・右端の値になる——これが計算を単純にする。</p>
+      </div>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答</div>
+      <p>区間 $[0,1]$ を $n$ 等分する分割 $\Delta_n : 0=x_0&lt;x_1<\cdots&lt;x_n=1$，$x_k = \dfrac{k}{n}$ を考える。$f(x)=x$ は単調増加なので，各小区間 $[x_{k-1},x_k]$ での下限・上限は</p>
+      $$\inf_{[x_{k-1},x_k]} f = x_{k-1} = \frac{k-1}{n}, \qquad \sup_{[x_{k-1},x_k]} f = x_k = \frac{k}{n}.$$
+      <p><strong>下和：</strong></p>
+      $$L(\Delta_n) = \sum_{k=1}^n \frac{k-1}{n}\cdot\frac{1}{n} = \frac{1}{n^2}\sum_{k=0}^{n-1}k = \frac{1}{n^2}\cdot\frac{(n-1)n}{2} = \frac{n-1}{2n}.$$
+      <p><strong>上和：</strong></p>
+      $$U(\Delta_n) = \sum_{k=1}^n \frac{k}{n}\cdot\frac{1}{n} = \frac{1}{n^2}\sum_{k=1}^{n}k = \frac{1}{n^2}\cdot\frac{n(n+1)}{2} = \frac{n+1}{2n}.$$
+      <p>$n\to\infty$ のとき</p>
+      $$L(\Delta_n) = \frac{1}{2}-\frac{1}{2n} \to \frac{1}{2}, \qquad U(\Delta_n) = \frac{1}{2}+\frac{1}{2n} \to \frac{1}{2}.$$
+      <p>下積分 $\underline{\int_0^1} f \geq L(\Delta_n)$，上積分 $\overline{\int_0^1} f \leq U(\Delta_n)$ が任意の $n$ で成り立ち，両辺とも $\dfrac12$ に収束するので，はさみうちより</p>
+      $$\underline{\int_0^1} f = \overline{\int_0^1} f = \frac{1}{2}.$$
+      <p>下積分と上積分が一致するので $f$ はリーマン積分可能であり，</p>
+      $$\int_0^1 x\,dx = \boxed{\frac{1}{2}}.$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🔑 ポイントまとめ</div>
+      <ul>
+        <li><strong>単調関数では上下和の計算が簡単：</strong>各小区間の inf/sup がそれぞれ左端・右端の値そのものになるので，$\varepsilon$-論法を経由せず直接和の公式 $\sum k$ に帰着できる。</li>
+        <li><strong>「定義に従って」の意味：</strong>単に $\dfrac{x^2}{2}$ を代入するのではなく，上和と下和がともに同じ極限に収束することを示して初めてリーマン可積分性と積分値が確定する，という論理の骨格を書く。</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">3</span> 積分方程式 $f(x) = e^x + \displaystyle\int_1^2 x f(x)\,dx$
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$f(x) = e^x + \displaystyle\int_1^2 x f(x)\,dx$ を満たす一変数関数 $f(x)$ を求めよ。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 方針を立てる前に</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 積分項は実は「ただの定数」</div>
+        <p>右辺の $\displaystyle\int_1^2 x f(x)\,dx$ は積分区間が $1$ から $2$ までの定積分なので，積分してしまえば $x$ に依存しない<strong>数</strong>になる（積分変数の $x$ と外側の $f(x)$ の $x$ が同じ文字を使っているが，紛らわしいだけで別物——積分変数は $t$ に置き換えて考えるとよい）。この定数を $C$ とおけば $f(x)=e^x+C$ という形が先に決まり，あとは $C$ の自己無撞着な方程式を解けばよい。</p>
+      </div>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答</div>
+      <p>積分変数を $t$ に取り替えて $\displaystyle C := \int_1^2 t f(t)\,dt$（$x$ に依らない定数）とおく。このとき与式は</p>
+      $$f(x) = e^x + C \qquad \text{（$C$ は未知定数）}$$
+      <p>の形をしている。この $f$ を $C$ の定義式に代入すると，$C$ 自身が満たすべき方程式が得られる：</p>
+      $$C = \int_1^2 t\bigl(e^t+C\bigr)\,dt = \int_1^2 t e^t\,dt + C\int_1^2 t\,dt.$$
+      <p><strong>各項を計算する。</strong>部分積分（または $\frac{d}{dt}[(t-1)e^t] = e^t+(t-1)e^t = te^t$ に注意）より</p>
+      $$\int_1^2 t e^t\,dt = \Bigl[(t-1)e^t\Bigr]_1^2 = 1\cdot e^2 - 0\cdot e^1 = e^2.$$
+      $$\int_1^2 t\,dt = \left[\frac{t^2}{2}\right]_1^2 = 2-\frac12 = \frac32.$$
+      <p>よって</p>
+      $$C = e^2 + \frac{3}{2}C \iff -\frac{1}{2}C = e^2 \iff C = -2e^2.$$
+      <p>ゆえに</p>
+      $$f(x) = \boxed{e^x - 2e^2}.$$
+      <p><strong>検算：</strong>$\displaystyle\int_1^2 t f(t)\,dt = \int_1^2 te^t\,dt - 2e^2\int_1^2 t\,dt = e^2 - 2e^2\cdot\frac32 = e^2-3e^2=-2e^2=C$ ✓</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🔑 ポイントまとめ</div>
+      <ul>
+        <li><strong>積分方程式の定石：</strong>定積分（区間が定数）が式の中に現れたら，それは未知の定数として名前を付けてしまう（$C:=\int_1^2 tf(t)\,dt$）。これにより $f$ の形が先に決まり，あとは $C$ についての通常の方程式に帰着する。</li>
+        <li><strong>変数の衝突に注意：</strong>問題文では積分変数も外側の変数も同じ $x$ で書かれているが，これは実質的に束縛変数（ダミー変数）なので $t$ などに置き換えて考えると混乱しない。</li>
+        <li><strong>検算の習慣：</strong>求めた $f$ を $C$ の定義式に戻して同じ値が出るか確認するのが，このタイプの問題での必須チェック。</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">4</span> 重積分の計算（$a$ は正の定数）
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>次の重積分を計算せよ。ただし $a$ は正の定数とする。</p>
+      <ol>
+        <li>$\displaystyle\iint_D (x+y)^a\,dxdy,\quad D=\{(x,y)\mid 0\le x\le 1,\ 0\le y\le 1\}$</li>
+        <li>$\displaystyle\iint_D x^2y^2\,dxdy,\quad D=\{(x,y)\mid |x|+|y|\le a\}$</li>
+        <li>$\displaystyle\iint_D e^{y/x}\,dxdy,\quad D=\{(x,y)\mid 0&lt;x\le a,\ 0\le y\le x\}$</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$D$ は長方形領域なので累次積分に直せる。$x$ について先に積分する：</p>
+      $$\int_0^1 (x+y)^a\,dx = \left[\frac{(x+y)^{a+1}}{a+1}\right]_{x=0}^{1} = \frac{(1+y)^{a+1}-y^{a+1}}{a+1}.$$
+      <p>これを $y$ について $0$ から $1$ まで積分する：</p>
+      $$\iint_D (x+y)^a\,dxdy = \frac{1}{a+1}\int_0^1\Bigl[(1+y)^{a+1}-y^{a+1}\Bigr]dy.$$
+      $$\int_0^1(1+y)^{a+1}dy = \left[\frac{(1+y)^{a+2}}{a+2}\right]_0^1 = \frac{2^{a+2}-1}{a+2}, \qquad \int_0^1 y^{a+1}dy = \frac{1}{a+2}.$$
+      <p>したがって</p>
+      $$\iint_D (x+y)^a\,dxdy = \frac{1}{a+1}\cdot\frac{2^{a+2}-2}{a+2} = \boxed{\frac{2\bigl(2^{a+1}-1\bigr)}{(a+1)(a+2)}}.$$
+      <p><strong>検算（$a=1$）：</strong>公式値 $\dfrac{2(4-1)}{2\cdot3}=1$。一方 $\iint_D(x+y)\,dxdy = \int_0^1\left(x+\frac12\right)dx = \frac12+\frac12=1$ ✓</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$D=\{|x|+|y|\le a\}$ は原点対称な菱形で，被積分関数 $x^2y^2$ は $x,y$ それぞれについて偶関数だから，第1象限部分の4倍として計算できる：</p>
+      $$\iint_D x^2y^2\,dxdy = 4\iint_{\substack{x,y\ge 0\\ x+y\le a}} x^2y^2\,dxdy.$$
+      <p>第1象限部分では $0\le x\le a$，$0\le y\le a-x$ なので，$y$ について先に積分する：</p>
+      $$\int_0^{a-x} y^2\,dy = \frac{(a-x)^3}{3}.$$
+      <p>続いて $x$ について積分する。$(a-x)^3 = a^3-3a^2x+3ax^2-x^3$ に注意して展開すると</p>
+      $$\int_0^a x^2(a-x)^3\,dx = \int_0^a\left(a^3x^2-3a^2x^3+3ax^4-x^5\right)dx = \frac{a^6}{3}-\frac{3a^6}{4}+\frac{3a^6}{5}-\frac{a^6}{6}.$$
+      <p>通分（分母60）すると $\dfrac{20-45+36-10}{60}a^6 = \dfrac{1}{60}a^6$。よって</p>
+      $$\iint_{\substack{x,y\ge0\\x+y\le a}} x^2y^2\,dxdy = \frac13\cdot\frac{a^6}{60}=\frac{a^6}{180}, \qquad \iint_D x^2y^2\,dxdy = 4\cdot\frac{a^6}{180} = \boxed{\frac{a^6}{45}}.$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (3)</div>
+      <p>$x$ を固定して $y$ について先に積分する。$u=y/x$（$x$ は定数なので $dy=x\,du$）と置換すると，$y:0\to x$ に対し $u:0\to1$：</p>
+      $$\int_0^x e^{y/x}\,dy = \int_0^1 e^{u}\,x\,du = x\bigl[e^u\bigr]_0^1 = x(e-1).$$
+      <p>続いて $x$ について $0$ から $a$ まで積分する：</p>
+      $$\iint_D e^{y/x}\,dxdy = \int_0^a x(e-1)\,dx = (e-1)\left[\frac{x^2}{2}\right]_0^a = \boxed{\frac{(e-1)a^2}{2}}.$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🔑 ポイントまとめ</div>
+      <ul>
+        <li><strong>(1)：</strong>長方形領域では累次積分にそのまま直せる。指数 $a$ が文字でも，$\int (x+y)^a dx = (x+y)^{a+1}/(a+1)$ の公式がそのまま使える（$a\ne -1$，今回は $a>0$ なので問題なし）。</li>
+        <li><strong>(2)：</strong>領域と被積分関数の対称性（菱形の4分の1対称，$x^2y^2$ の偶関数性）を使って計算量を $\frac14$ に減らすのが定石。最後の1変数積分は多項式に展開すれば機械的に処理できる。</li>
+        <li><strong>(3)：</strong>$D$ が「$x$ を固定すると $y$ が $0$ から $x$ まで動く」三角形領域なので，$y$ の積分を先に行い，$u=y/x$ の置換で $x$ を外に出すのが自然な流れ。</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問5 -->
+<section class="section-card" id="problem5">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">5</span> 広義積分 $\displaystyle\int_0^\infty \frac{\sin x}{x}dx$ と $\displaystyle\int_0^\infty \frac{|\sin x|}{x}dx$
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>次の広義積分は収束するかどうかを（証明を付けて）答えよ。収束するならばその値を求めよ。</p>
+      <ol>
+        <li>$\displaystyle\int_0^\infty \frac{\sin x}{x}\,dx$</li>
+        <li>$\displaystyle\int_0^\infty \frac{|\sin x|}{x}\,dx$</li>
+      </ol>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">Dirichlet の判定法</div>
+      <p>$g$ の原始関数 $F(x)=\int_a^x g(t)\,dt$ が有界，かつ $\varphi$ が単調に $0$ へ減少するならば，$\displaystyle\int_a^\infty g(x)\varphi(x)\,dx$ は収束する。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1) — 収束することの証明</div>
+      <p><strong>原点付近：</strong>$\dfrac{\sin x}{x}$ は $x=0$ で $1$ に収束する（$\lim_{x\to0}\sin x/x=1$）ので，$f(0):=1$ と定めれば $f$ は $[0,1]$ 上連続。よって $\displaystyle\int_0^1 \frac{\sin x}{x}dx$ は通常のリーマン積分として存在する（広義性なし）。</p>
+      <p><strong>無限遠側：</strong>$g(x)=\sin x$，$\varphi(x)=1/x$ に Dirichlet の判定法を適用する。$F(X)=\displaystyle\int_1^X \sin x\,dx = \cos1-\cos X$ は $|F(X)|\le 2$ で有界，$\varphi(x)=1/x$ は単調減少で $x\to\infty$ で $0$ に収束する。よって</p>
+      $$\int_1^\infty \frac{\sin x}{x}\,dx \ \text{は収束する。}$$
+      <p>以上より $\displaystyle\int_0^\infty \frac{\sin x}{x}dx = \int_0^1+\int_1^\infty$ は収束する。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 値を求める方針</div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 パラメータを1つ増やして微分する（Feynman のトリック）</div>
+        <p>$\sin x/x$ 単体では初等的な原始関数が存在しない。そこで $s\ge0$ をパラメータとして $I(s):=\displaystyle\int_0^\infty e^{-sx}\frac{\sin x}{x}dx$ を導入し，$s>0$ では絶対収束するので $s$ で微分できる。微分すると $\sin x/x$ の $x$ が消えて，初等的なラプラス変換 $\int_0^\infty e^{-sx}\sin x\,dx = \dfrac{1}{1+s^2}$ に帰着する。あとは $s$ について積分し戻し，$s\to\infty$ と $s\to0^+$ の極限から定数と目的の値を確定させる。</p>
+      </div>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 値の計算</div>
+      <p>$s>0$ に対し $I(s):=\displaystyle\int_0^\infty e^{-sx}\frac{\sin x}{x}dx$ とおく（$s>0$ では $|e^{-sx}\sin x/x|\le e^{-sx}$ より絶対収束し，$s$ について微分可能）。</p>
+      $$I'(s) = -\int_0^\infty e^{-sx}\sin x\,dx = -\frac{1}{1+s^2}$$
+      <p>（$\int_0^\infty e^{-sx}\sin x\,dx=\frac{1}{1+s^2}$ は部分積分2回，またはラプラス変換の公式）。両辺を $s$ で積分すると</p>
+      $$I(s) = -\arctan s + C \qquad (s>0).$$
+      <p>$s\to\infty$ のとき $I(s)\to 0$（優収束定理，または直接評価 $|I(s)|\le\int_0^\infty e^{-sx}dx=1/s\to0$）。一方 $-\arctan s+C\to -\pi/2+C$。よって $C=\pi/2$：</p>
+      $$I(s) = \frac{\pi}{2}-\arctan s \qquad (s>0).$$
+      <p>もとの積分は $\displaystyle\int_0^\infty\frac{\sin x}{x}dx = \lim_{s\to0^+}I(s)$ に等しいことが知られている（(1) で示した収束性のもと，$s\to0^+$ の極限操作が正当化される：Abel の連続性定理）。したがって</p>
+      $$\int_0^\infty \frac{\sin x}{x}\,dx = \lim_{s\to0^+}\left(\frac{\pi}{2}-\arctan s\right) = \boxed{\frac{\pi}{2}}.$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2) — $\displaystyle\int_0^\infty\frac{|\sin x|}{x}dx$ は<u>発散</u>する</div>
+      <p>各 $n=1,2,\ldots$ に対し，区間 $[n\pi,(n+1)\pi]$ 上では $x\le(n+1)\pi$ なので</p>
+      $$\frac{|\sin x|}{x} \geq \frac{|\sin x|}{(n+1)\pi}.$$
+      <p>また $|\sin x|$ は周期 $\pi$ ごとに同じ形を繰り返すので，$\displaystyle\int_{n\pi}^{(n+1)\pi}|\sin x|\,dx = \int_0^\pi|\sin x|\,dx = 2$（符号を無視すれば $\sin$ の半周期分の面積）。したがって</p>
+      $$\int_{n\pi}^{(n+1)\pi}\frac{|\sin x|}{x}\,dx \geq \frac{1}{(n+1)\pi}\int_{n\pi}^{(n+1)\pi}|\sin x|\,dx = \frac{2}{(n+1)\pi}.$$
+      <p>これを $n=1$ から $N$ まで足し合わせると</p>
+      $$\int_{\pi}^{(N+1)\pi}\frac{|\sin x|}{x}\,dx \geq \sum_{n=1}^{N}\frac{2}{(n+1)\pi} = \frac{2}{\pi}\sum_{n=1}^{N}\frac{1}{n+1}.$$
+      <p>右辺は調和級数の部分和なので $N\to\infty$ で $+\infty$ に発散する。よって左辺，すなわち $\displaystyle\int_0^\infty\frac{|\sin x|}{x}dx$ も発散する（$+\infty$ に発散）。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🔑 ポイントまとめ</div>
+      <ul>
+        <li><strong>(1) は条件収束の典型例：</strong>符号が交互に振動する $\sin x$ と，単調に $0$ へ減衰する $1/x$ の組み合わせで Dirichlet の判定法が使える。絶対収束はしない（(2) がまさにそれを示している）。</li>
+        <li><strong>値の計算のテクニック：</strong>パラメータ付きの積分 $I(s)=\int e^{-sx}\frac{\sin x}{x}dx$ を導入して微分すると，扱いにくい $\sin x/x$ が扱いやすい $e^{-sx}\sin x$ に化ける。これは Feynman のパラメータ微分法（Leibniz の積分則）の代表例。</li>
+        <li><strong>(2) は「各周期での面積を harmonic に足し合わせる」のが定石：</strong>$|\sin x|$ の1周期分の面積が定数（$=2$）である一方，分母 $x$ が線形に増えるので，各項が $1/n$ のオーダーで減衰する調和級数型の和になり発散する。</li>
+        <li><strong>条件収束 vs 絶対収束：</strong>(1)(2) を合わせると，$\int_0^\infty \sin x/x\,dx$ は収束するが絶対収束はしない，すなわち条件収束であることが分かる。</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 小テスト自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>小テストの問題を自力で解けるかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li><strong>問1：</strong>$x^2-y^2=(x-y)(x+y)$ という因数分解から，非有界な定義域での反例 $x_n=n,\,y_n=n+1/n$ を自力で構成できるか</li>
+          <li><strong>問1：</strong>有界区間 $(0,1)$ では $x+y<2$ を使って $\delta=\varepsilon/2$ を直接決める議論を書けるか</li>
+          <li><strong>問2：</strong>単調関数の上和・下和が各小区間の右端・左端の値そのものになる理由を説明できるか</li>
+          <li><strong>問2：</strong>$\sum k$ の公式を使って上下和を計算し，両方が $1/2$ に収束することを示せるか</li>
+          <li><strong>問3：</strong>定積分 $\int_1^2 tf(t)dt$ が定数であることに気づき，$C$ とおいて自己無撞着方程式を立てられるか</li>
+          <li><strong>問3：</strong>$\int te^t dt=(t-1)e^t$ の計算を暗算レベルでできるか</li>
+          <li><strong>問4(1)：</strong>文字指数 $a$ のままでも $\int(x+y)^a dx$ の公式を適用できるか</li>
+          <li><strong>問4(2)：</strong>菱形領域の対称性を使って第1象限の4倍に帰着させ，Beta関数型の多項式積分を計算できるか</li>
+          <li><strong>問4(3)：</strong>$u=y/x$ の置換で $x$ を積分の外に出す変形を自力で書けるか</li>
+          <li><strong>問5(1)：</strong>原点近くは連続関数として広義積分でないことを指摘し，無限遠側は Dirichlet の判定法を適用できるか</li>
+          <li><strong>問5(1)：</strong>$I(s)=\int_0^\infty e^{-sx}\sin x/x\,dx$ を $s$ で微分してラプラス変換 $1/(1+s^2)$ に帰着させる流れを再現できるか</li>
+          <li><strong>問5(2)：</strong>区間 $[n\pi,(n+1)\pi]$ ごとに $|\sin x|/x \ge 2/((n+1)\pi)$ と評価し，調和級数の発散に帰着できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数学基礎理論演習（榎園誠）ー2026前期課程S2ターム</footer>
+
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../nav.js"></script>
+</body>
+</html>

@@ -1,0 +1,529 @@
+<!DOCTYPE html><!-- 「コンピュータの仕組みと論理回路 単語帳｜情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>コンピュータの仕組みと論理回路 単語帳｜情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-04-word">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>コンピュータの仕組みと論理回路</h1>
+  <p class="subtitle">機械語・CPU・OS・論理回路とブール代数</p>
+</div>
+
+<div class="container">
+
+  <!-- 単語のチェック件数と、一覧の絞り込み・チェック解除の操作をまとめる。 --><div class="word-toolbar">
+    <div class="word-progress">
+      <span class="wp-text">チェック済み 0 / 0</span>
+      <span class="wp-bar"><span class="wp-fill"></span></span>
+    </div>
+    <div class="word-filter-group">
+      <button type="button" class="word-filter-btn active" data-filter="all">すべて</button>
+      <button type="button" class="word-filter-btn" data-filter="unchecked">未チェック</button>
+      <button type="button" class="word-filter-btn" data-filter="checked">チェック済み</button>
+    </div>
+    <button type="button" class="word-reset-btn">リセット</button>
+  </div>
+  <p class="word-hint">チェックはこのブラウザだけに保存されます（他の端末・ブラウザとは同期しません）。</p>
+
+  <h2 class="word-cat-title" id="sub-1">CPU・主記憶の構成</h2>
+  <div class="word-list">
+    <!-- 用語の説明とチェック欄をひとまとまりにし、単語帳のひとつの項目として表示する。 --><div class="word-item" data-term-id="cpu-001">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">プログラム内蔵方式（フォン・ノイマン型）<span class="word-tag">頻出</span></div>
+        <div class="word-def">プログラムとデータをともに主記憶上に保持する方式。配線を変更しなくても主記憶の内容を変えるだけで別の処理を実行できる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-002">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">中央処理装置(CPU)</div>
+        <div class="word-def">制御装置と演算装置からなる、プログラムの実行を担う中心的な装置。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-003">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">制御装置</div>
+        <div class="word-def">命令を読み込み・解析し、CPU内外の各部を制御する装置。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-004">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">演算装置</div>
+        <div class="word-def">実際の計算（演算）を行う装置。中心にALUを持つ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-005">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">プログラムカウンタ<span class="word-tag">頻出</span></div>
+        <div class="word-def">次に読み込むべき命令のアドレスを保持するレジスタ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-006">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">命令レジスタ</div>
+        <div class="word-def">読み込んだ命令を保持するレジスタ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-007">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">演算レジスタ（AC／アキュムレータ）</div>
+        <div class="word-def">計算対象・計算結果を保持するレジスタ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-008">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ALU（算術・論理演算器）</div>
+        <div class="word-def">実際の演算を行う演算装置の中心部分。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-009">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">命令コード／オペランド</div>
+        <div class="word-def">命令コード＝どの操作を行うかを表す部分。オペランド＝その操作の対象（アドレス等）を表す部分。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-010">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">バイナリプログラム</div>
+        <div class="word-def">機械語（2進数）で直接書かれたプログラム。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-011">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">フェッチ・デコード・実行・書出し（CPUの動作4段階）<span class="word-tag">頻出</span></div>
+        <div class="word-def">CPUが1命令ごとに繰り返す基本動作。フェッチ（命令読込み）→デコード（命令解析）→実行（演算）→書出し（結果保持・PC更新）の4段階。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-012">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">フォン・ノイマンボトルネック<span class="word-tag">頻出</span></div>
+        <div class="word-def">主記憶がCPUより遅いことが原因で生じる速度上のボトルネック。プログラム内蔵方式の必然的な弱点。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-013">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">キャッシュメモリ／ヒット・ミス</div>
+        <div class="word-def">主記憶より高速な小容量メモリ。目的のデータがキャッシュにある状態をヒット、ない状態をミスという。フォン・ノイマンボトルネックへの対策のひとつ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-014">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">GPGPU／NPU</div>
+        <div class="word-def">CPU以外の演算専用装置。GPGPU＝画像処理用GPUを汎用計算に転用したもの、NPU＝ニューラルネットワーク処理向けの専用装置。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-015">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">周辺装置</div>
+        <div class="word-def">補助記憶装置・入力装置・出力装置・通信装置など、CPU・主記憶以外の装置。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-016">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">バス接続（内部バス／外部バス）</div>
+        <div class="word-def">CPU内部の各装置を結ぶ内部バスと、CPU・主記憶・周辺装置を結ぶ外部バス。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-017">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">割込処理</div>
+        <div class="word-def">周辺装置からの要求などにより、実行中の処理を一時中断して別の処理を行う仕組み。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-018">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ED21／Little Man Computer(LMC)</div>
+        <div class="word-def">アキュムレータ型の仮想機械語シミュレータ。load／add／store／sub／jump／jumpzero等の命令セットを持つ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-019">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">命令の自己書き換え<span class="word-tag">頻出</span></div>
+        <div class="word-def">プログラム内蔵方式では命令もデータと同じメモリ上にあるため、命令をデータとして読み込んだり書き換えたりできる。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-2">機械語・言語処理系</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="cpu-020">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">アセンブリ言語／アセンブラ</div>
+        <div class="word-def">機械語命令を人間に読みやすい記号で表した言語がアセンブリ言語、それを機械語に変換する処理系がアセンブラ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-021">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">言語処理系</div>
+        <div class="word-def">人間が書いたプログラムを機械語（あるいは実行可能な形）に変換・実行する仕組みの総称。コンパイラ・インタプリタ・中間言語方式などがある。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-022">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">コンパイラ<span class="word-tag">頻出</span></div>
+        <div class="word-def">プログラム全体を一括で機械語に翻訳する言語処理系。翻訳自体は遅いが、翻訳後の実行は速い。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-023">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">インタプリタ<span class="word-tag">頻出</span></div>
+        <div class="word-def">プログラムを1行ずつ解釈しながら実行する言語処理系。翻訳待ちがない一方、実行そのものは遅い。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-024">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">中間言語方式（VM）</div>
+        <div class="word-def">プログラムを一旦中間言語（例：Javaのバイトコード）に変換し、仮想機械（例：JVM）上で実行する方式。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-025">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ループ（機械語）</div>
+        <div class="word-def">分岐命令を使って同じ命令列を繰り返し実行させる機械語プログラムの構造。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-3">OS</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="cpu-026">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">OS（オペレーティングシステム）</div>
+        <div class="word-def">ハードウェアとアプリケーションの間に立ち、プロセス管理・メモリ管理・ファイル管理・ユーザ管理などを行う基本ソフトウェア。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-027">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">プロセス／マルチプロセス管理／タイムスライシング</div>
+        <div class="word-def">プロセス＝実行中のプログラムの単位。マルチプロセス管理＝複数プロセスを並行して管理すること。タイムスライシング＝CPU時間を細かく区切って複数プロセスに割り当てる方式。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-028">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">メモリ管理／仮想記憶方式</div>
+        <div class="word-def">メモリ管理＝主記憶の割り当てを管理すること。仮想記憶方式＝実際の主記憶容量を超えるアドレス空間を補助記憶と組み合わせて提供する方式。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-029">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ファイル管理／ファイルシステム</div>
+        <div class="word-def">補助記憶上のデータをファイルという単位で管理する仕組み。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-030">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ユーザ管理／スーパーユーザ</div>
+        <div class="word-def">利用者ごとにアクセス権限等を管理する仕組み。スーパーユーザ＝すべての権限を持つ特別な管理者アカウント。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-031">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">API／システムコール</div>
+        <div class="word-def">API＝アプリケーションからOSやライブラリの機能を呼び出すための窓口。システムコール＝アプリケーションがOSの機能を直接呼び出す仕組み。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-4">論理関数の基本7種</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="cpu-032">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">論理関数</div>
+        <div class="word-def">0・1（真・偽）を入力とし0・1を出力する関数。真理値表で表せる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-033">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">真理値表</div>
+        <div class="word-def">論理関数の入力の全組合せと、それに対応する出力を一覧にした表。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-034">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">AND（論理積）</div>
+        <div class="word-def">入力がすべて1のときだけ1を出力する論理関数。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-035">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">OR（論理和）</div>
+        <div class="word-def">入力のいずれかが1なら1を出力する論理関数。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-036">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">NOT（論理否定）</div>
+        <div class="word-def">入力を反転して出力する論理関数。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-037">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">XOR（排他的論理和）</div>
+        <div class="word-def">入力が異なるときだけ1を出力する論理関数。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-038">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">XNOR／EQ（等値）</div>
+        <div class="word-def">XORの否定。入力が一致するときだけ1を出力する論理関数。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-039">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">NAND（否定論理積）<span class="word-tag">頻出</span></div>
+        <div class="word-def">ANDの否定。入力がすべて1のときだけ0を出力する論理関数。単体で完備性を持つ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-040">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">NOR（否定論理和）<span class="word-tag">頻出</span></div>
+        <div class="word-def">ORの否定。入力がすべて0のときだけ1を出力する論理関数。単体で完備性を持つ。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-5">完備性とブール代数</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="cpu-041">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ブール代数</div>
+        <div class="word-def">論理関数を代数的に扱う体系。AND・OR・NOTなどの演算とその性質（結合律・分配律・ド・モルガンの法則など）からなる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-042">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">リテラル</div>
+        <div class="word-def">変数、またはその否定（$x$、$\lnot x$）のこと。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-043">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ド・モルガンの法則<span class="word-tag">頻出</span></div>
+        <div class="word-def">$\lnot(x_1\cdot x_2)=\lnot x_1+\lnot x_2$、$\lnot(x_1+x_2)=\lnot x_1\cdot\lnot x_2$。ANDとORの否定を入れ替える法則。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-044">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">完備性（万能ゲート／universal gate）<span class="word-tag">頻出</span></div>
+        <div class="word-def">1種類のゲートだけで任意の論理関数を作れる性質。NAND単体、NOR単体はそれぞれ完備性を持つ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-045">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">主加法標準形（積和標準形）<span class="word-tag">頻出</span></div>
+        <div class="word-def">真理値表で1を返す各入力パターンに対応する積の項（ミンターム）を、ORで結んだ形。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-046">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">主乗法標準形（和積標準形）</div>
+        <div class="word-def">真理値表で0を返す各入力パターンに対応する和の項（マクスターム）を、ANDで結んだ形。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-047">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">ミンターム／マクスターム</div>
+        <div class="word-def">ミンターム＝主加法標準形を構成する積の項。マクスターム＝主乗法標準形を構成する和の項。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-048">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">MIL記法</div>
+        <div class="word-def">論理回路をゲートの図記号で表す表記法。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-049">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">NAND-NAND論理／NOR-NOR論理<span class="word-tag">頻出</span></div>
+        <div class="word-def">積和標準形（SOP形）をNANDゲートのみ2段構成で、和積標準形（POS形）をNORゲートのみ2段構成で実現する方式。ド・モルガンの法則の帰結。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-050">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">カルノー図</div>
+        <div class="word-def">真理値表を格子状に並べて隣接パターンをまとめ、論理式を簡単化するための図。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-6">加算器・回路設計</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="cpu-051">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">2:1マルチプレクサ(MUX)</div>
+        <div class="word-def">選択信号$S$によって2つの入力のどちらを出力するか切り替える回路。$O=XS+Y\lnot S$。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-052">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">多数決関数<span class="word-tag">頻出</span></div>
+        <div class="word-def">3入力のうち2つ以上が1なら1を出力する関数。$XY+YZ+ZX$。全加算器の桁上げ出力と同一式。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-053">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">半加算器<span class="word-tag">頻出</span></div>
+        <div class="word-def">2つの1ビットを加算する回路。和$s=\mathrm{XOR}(x,y)$、桁上げ$c_{\text{out}}=\mathrm{AND}(x,y)$。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-054">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">全加算器<span class="word-tag">頻出</span></div>
+        <div class="word-def">半加算器2つとORゲート1個からなり、下位桁からの繰り上がりも加算できる回路。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-055">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">桁上げ伝播加算器</div>
+        <div class="word-def">全加算器の桁上げ出力を1つ上の桁の桁上げ入力に接続し、横に並べることで任意ビット数の加算器を構成したもの。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-056">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">2の補数表現<span class="word-tag">頻出</span></div>
+        <div class="word-def">各ビットを反転して1を加えることで負数を表す方式。</div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="word-cat-title" id="sub-7">順序回路</h2>
+  <div class="word-list">
+    <div class="word-item" data-term-id="cpu-057">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">順序回路</div>
+        <div class="word-def">現在の出力が過去の入力（内部状態）にも依存する回路。フリップフロップなどで状態を保持する。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-058">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">双安定ループ回路</div>
+        <div class="word-def">ゲートを互いにフィードバック接続し、2つの安定状態のどちらかを保持できるようにした回路。フリップフロップの基本構造。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-059">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">RSフリップフロップ</div>
+        <div class="word-def">セット(S)・リセット(R)の2入力で1ビットの状態を保持・書き換えられる基本的なフリップフロップ。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-060">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">MS(マスタースレーブ型)フリップフロップ</div>
+        <div class="word-def">2段のフリップフロップをマスター・スレーブとして直列に組み合わせ、タイミングの問題を解消した構成。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-061">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">Dフリップフロップ／nビットレジスタ</div>
+        <div class="word-def">Dフリップフロップ＝入力Dの値をそのまま保持するフリップフロップ。これをn個並べるとnビットのレジスタになる。</div>
+      </div>
+    </div>
+    <div class="word-item" data-term-id="cpu-062">
+      <label class="word-check"><input type="checkbox" class="term-checkbox"></label>
+      <div class="word-body">
+        <div class="word-term">グレイ符号</div>
+        <div class="word-def">隣接する符号間で1桁だけが異なるように設計された符号化方式。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="index.html">← 単語帳トップ</a>
+    <a href="04-コンピュータの仕組みと論理回路-keypoints.html">押さえておきたい事項 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+<script src="checklist.js"></script>
+</body>
+</html>

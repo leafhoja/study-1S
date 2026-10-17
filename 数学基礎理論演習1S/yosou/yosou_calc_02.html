@@ -1,0 +1,355 @@
+<!DOCTYPE html><!-- 「微分積分 予想問題 第2回 上界・下限とWeierstrass定理 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>微分積分 予想問題 第2回 上界・下限とWeierstrass定理 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="yosou_calc_01.html" data-page="yosou/yosou_calc_01">← 前のテーマ</a>
+      <a href="yosou_calc_03.html" data-page="yosou/yosou_calc_03">次のテーマ →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-calc">
+  <h1>微分積分学演習　予想問題　第2回</h1>
+  <p class="subtitle">上限・下限・Cauchy列・Weierstrassの定理・上極限下極限（全4問）</p>
+</div>
+
+<div class="container">
+
+<!-- 免責 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#fff5f5; color:#c53030;">⚠️ この問題セットについて</div>
+  <div class="section-card-body">
+    <div class="warn-box">
+      <div class="warn-title">AIが作成した予想問題です（実際の試験問題ではありません）</div>
+      <p>演習第2回（<a href="../calculus/calc_02.html">上界・下限とWeierstrass定理</a>）と同程度〜少し発展した難易度で構成した学習用オリジナル問題です。全5回20問構成（微分積分学版）の第2回（上限・下限・Cauchy列・Weierstrassの定理・上極限下極限）です。中間試験は45分・出題範囲も狭めでしたが，期末試験は90分・出題範囲も広くなるため，本セットは中間よりやや難易度を上げて作成しています。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 このテーマの要点</div>
+  <div class="section-card-body">
+    <p>演習第2回で学んだ「実数の連続性（完備性）」まわりの道具を，具体的な集合・数列に対して実際に運用する練習をする。$\sup/\inf$ の定義から出発し，収束数列やCauchy列の有界性，Weierstrassの定理を使った単調収束の証明（Newton法による $\sqrt2$ の近似），そして $\limsup/\liminf$ の性質（劣加法性）まで，扱う道具を一段深める。</p>
+    <div class="def-box">
+      <div class="def-title">この4問で使う道具</div>
+      <ul>
+        <li>$\sup A=\alpha \Leftrightarrow$（i）任意の $a\in A$ に対し $\alpha\ge a$，かつ（ii）任意の $\varepsilon>0$ に対し $\alpha-\varepsilon<a$ を満たす $a\in A$ が存在する（$\inf$ は向きを逆に）</li>
+        <li>Cauchy列の定義：$\forall\varepsilon>0,\ \exists N,\ \forall m,n\ge N,\ |a_m-a_n|<\varepsilon$</li>
+        <li>Weierstrassの定理（演習第2回・問3）：上に有界な単調増加数列は収束する（下に有界な単調減少数列も同様に収束する）</li>
+        <li>$\limsup/\liminf$ の定義（演習第2回・問4）：$b_n=\sup_{m\ge n}a_m$（単調減少），$c_n=\inf_{m\ge n}a_m$（単調増加）の極限</li>
+        <li>相加相乗平均，有理数の稠密性，$\varepsilon=1$ を固定して有界性を作るテクニック</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">1</span> 具体的な集合の上限・下限
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★☆☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>次の集合の上限・下限を求めよ（最大値・最小値が存在するかも含めて答えよ）。</p>
+      <ol>
+        <li>$A=\left\{\dfrac{n-1}{n+1}\ \middle|\ n\in\mathbb{N},\,n\ge1\right\}$</li>
+        <li>$B=\{x\in\mathbb{Q}\mid x^2<3\}$</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$a_n=\dfrac{n-1}{n+1}$ を変形すると</p>
+      $$a_n=\frac{n-1}{n+1}=\frac{(n+1)-2}{n+1}=1-\frac{2}{n+1}$$
+      <p><strong>単調増加性：</strong>$n$ が大きくなると $n+1$ は大きくなるので $\dfrac{2}{n+1}$ は単調に減少し，したがって $-\dfrac{2}{n+1}$ は単調に増加する。よって $a_n=1-\dfrac{2}{n+1}$ は $n$ について狭義単調増加。</p>
+      <p><strong>下限・最小値：</strong>単調増加なので最小の項は $n=1$ のとき，$a_1=\dfrac{0}{2}=0$。これが $A$ の最小値であり，最小値は下限に一致するので $\boxed{\inf A=0}$（達成される，最小値として存在）。</p>
+      <p><strong>上限：</strong>すべての $n$ で $\dfrac{2}{n+1}>0$ だから $a_n<1$。よって $1$ は $A$ の上界。任意の $\varepsilon>0$ に対し，$\dfrac{2}{n+1}<\varepsilon$ を満たす $n$，すなわち $n>\dfrac{2}{\varepsilon}-1$ を満たす自然数 $n$ が（Archimedesの性質より）存在するので，$a_n=1-\dfrac{2}{n+1}>1-\varepsilon$。よって $1-\varepsilon$ は上界でない。ゆえに</p>
+      $$\boxed{\sup A=1}\quad(\text{達成されない，最大値は存在しない})$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$x^2<3 \Leftrightarrow -\sqrt3<x<\sqrt3$ なので $B=\mathbb{Q}\cap(-\sqrt3,\sqrt3)$。</p>
+      <p><strong>$\sup B=\sqrt3$ の証明：</strong>任意の $x\in B$ に対し $x<\sqrt3$ だから $\sqrt3$ は $B$ の上界。任意の $\varepsilon>0$（$\varepsilon<2\sqrt3$ としてよい，大きい $\varepsilon$ ではより弱い主張になるだけなので一般性を失わない）に対し，有理数の稠密性より $\sqrt3-\varepsilon<q<\sqrt3$ を満たす有理数 $q$ が存在する。このとき $q<\sqrt3$ かつ $q>\sqrt3-\varepsilon>-\sqrt3$（$\varepsilon<2\sqrt3$ より）なので $q\in(-\sqrt3,\sqrt3)\cap\mathbb{Q}=B$。よって $\sqrt3-\varepsilon$ は $B$ の上界でない。ゆえに</p>
+      $$\boxed{\sup B=\sqrt3}$$
+      <p><strong>$\inf B=-\sqrt3$ も同様：</strong>任意の $x\in B$ に対し $x>-\sqrt3$ だから $-\sqrt3$ は下界。任意の $\varepsilon>0$ に対し，稠密性より $-\sqrt3<q<-\sqrt3+\varepsilon$ を満たす有理数 $q\in B$ が存在するので，$-\sqrt3+\varepsilon$ は下界でない。ゆえに $\boxed{\inf B=-\sqrt3}$。</p>
+      <p>$\sqrt3,-\sqrt3$ はいずれも無理数なので $B$ 自身には属さない。したがって<strong>最大値・最小値はともに存在しない</strong>。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>この問題の面白さは，(1) と (2) が「上限・下限が達成されるかどうか」について全く対照的な組み合わせを見せてくれる点にある。(1) は下限が達成され上限は達成されない（片方だけ最大・最小が存在）。(2) は上限も下限もどちらも達成されない。「$\sup A$ は必ずしも $A$ の元とは限らない」という事実を，具体例を通して身体で覚えるのがこの問題の狙い。</p>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 sup を証明する「2段階構造」をどう当てはめるか</div>
+        <p>演習第2回・問1で確立した通り，$\sup A=\alpha$ の証明は常に次の2段階を踏む。①$\alpha$ が上界であること（すべての元が $\alpha$ 以下）。②$\alpha$ より小さい数はどれも上界でないこと（$\alpha-\varepsilon<a$ を満たす $a\in A$ が存在する）。(1) では①が「$a_n<1$（常に成立）」，②が「Archimedesの性質から $n>2/\varepsilon-1$ を満たす $n$ が存在する」という数列特有の議論に対応する。(2) では①が「$x<\sqrt3$（$x^2<3$ の定義から直接）」，②が「有理数の稠密性」に対応する。同じ骨格でも，②を支える道具が「Archimedesの性質」か「稠密性」かで問題ごとに使い分ける必要がある点に注意。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 なぜ実数の連続性公理がなければ $\sup B=\sqrt3$ の存在すら怪しくなるのか</div>
+        <p>$B=\{x\in\mathbb{Q}\mid x^2<3\}$ は「有理数だけの集合」であり，その上限 $\sqrt3$ は無理数。もし私たちの数の世界が $\mathbb{Q}$ だけしかない（実数を知らない）としたら，$B$ の上界の中に「最小のもの」が存在するかどうかは全く自明ではない——実際，$\mathbb{Q}$ の中だけで話を進めると，$B$ には最小の上界が存在しない（$\mathbb{Q}$ 自身の中には $\sqrt3$ にあたる元がないため，どの有理数の上界を持ってきても，それより小さい有理数の上界が必ず見つかってしまう）。これがまさに演習第2回冒頭で扱った「$\{a\in\mathbb{Q}\mid a\le\sqrt2\}$ の上限が無理数になる」という現象と同じ構造で，「$\mathbb{Q}$ は完備でない（連続性公理を満たさない）」ことの具体的な現れである。実数の連続性公理（上に有界な空でない実数の部分集合は上限をもつ）があってはじめて，$B$ を実数全体の中で見たときに $\sup B=\sqrt3$ という実数が保証される。</p>
+      </div>
+
+      <p><strong>よくある間違い：</strong>①(1) で $a_n$ が単調増加であることを確かめずに「$n\to\infty$ で $1$ に近づくから $\sup=1$」とだけ書いてしまう（極限の存在と上限であることは論理的に別の主張であり，答案では②の $\varepsilon$ の議論まで書く必要がある）。②(1) の下限を「$0$ に近づくが達成されない」と誤解する（実際には $n=1$ で達成される最小値であり，むしろ(1)は下限の方が易しい）。③(2) で $\sqrt3\in B$ だと誤って判定し，最大値が存在すると書いてしまう（$\sqrt3$ は無理数なので $B=\{x\in\mathbb{Q}\mid\cdots\}$ には属さない）。④(2) で $\varepsilon$ を大きく取りすぎて $\sqrt3-\varepsilon<-\sqrt3$ となり，議論が破綻するのに気づかない（$\varepsilon<2\sqrt3$ に限定するか，$\varepsilon$ が小さい場合のみ考えれば十分であることを断る）。</p>
+
+      <p><strong>別解（(1) を数列の収束から間接的に導く）：</strong>$a_n\to1$（$n\to\infty$）であることを先に示し（$1-a_n=\frac{2}{n+1}\to0$），かつすべての $n$ で $a_n<1$（単調増加なので上に有界）であることを使えば，「単調増加で収束する数列の極限は，その数列全体の上限に一致する」（演習第2回・問3の証明そのもの）という事実から $\sup A=\lim a_n=1$ と結論してもよい。ただしこの別解は演習第2回・問3の定理を「既知」として引用する形になるので，本問のように定義から直接示す方が答案としては安全（定理の適用条件——単調増加であること——を確認する手間は結局同じだけかかる）。</p>
+
+      <p><strong>一般化・本番での対応：</strong>「$\sup/\inf$ を求めよ」という問題は，本番では必ず①上界（下界）であることの確認，②$\varepsilon$ を使った最小性（最大性）の証明，の両方をセットで書く。片方だけでは減点対象になりやすい。また，最大値・最小値の有無を問われたら，「その値が集合自身に属しているかどうか」を必ず明示すること（属していれば sup=max，属していなければ max は存在しない，という対応関係を毎回確認する癖をつける）。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">2</span> Cauchy列は有界
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>数列 $\{a_n\}$ がCauchy列（$\forall\varepsilon>0,\ \exists N,\ \forall m,n\ge N,\ |a_m-a_n|<\varepsilon$）であるとする。<strong>収束することを仮定せずに</strong>，定義から直接 $\{a_n\}$ が有界であることを示せ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>Cauchy列の定義に $\varepsilon=1$ を代入する。すると，ある正整数 $N_0$ が存在して，任意の $m,n\ge N_0$ に対して $|a_m-a_n|<1$ が成り立つ。</p>
+      <p>特に $n\ge N_0$ のとき，$m=N_0$ を代入すれば $|a_n-a_{N_0}|<1$。三角不等式より</p>
+      $$|a_n| = |a_n-a_{N_0}+a_{N_0}| \le |a_n-a_{N_0}|+|a_{N_0}| < 1+|a_{N_0}|$$
+      <p>すなわち $n\ge N_0$ のとき $|a_n|<|a_{N_0}|+1$。</p>
+      <p>一方，有限個の項 $a_1,a_2,\ldots,a_{N_0-1}$ はそれぞれ実数として個別に有限の値をとるので，個々に有界。そこで</p>
+      $$M := \max\bigl(|a_1|,|a_2|,\ldots,|a_{N_0-1}|,\ |a_{N_0}|+1\bigr)$$
+      <p>とおく（有限個の実数の最大値なので $M$ は存在する）。このとき，$n<N_0$ の項は定義から $|a_n|\le M$，$n\ge N_0$ の項も上の評価から $|a_n|<|a_{N_0}|+1\le M$。よって任意の正整数 $n$ に対して $|a_n|\le M$ が成り立ち，$\{a_n\}$ は有界。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>演習第2回・問2で「収束する数列は有界」であることを学んだが，本問はそれとよく似ているようで本質的に異なる。あちらは「極限 $\alpha$ が存在する」という情報を先に使って $|a_n-\alpha|<1$ から議論を始めた。本問では収束するかどうかは（まだ）分からず，使えるのは「項同士がどれだけ近いか」というCauchy列の定義（項同士の関係）だけ。つまり<strong>「基準点」が存在しない状態から有界性を作り出す</strong>必要がある。</p>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 「$\varepsilon=1$ を固定する」という発想はどこから来るか</div>
+        <p>Cauchy列の定義は「任意の $\varepsilon>0$ に対して」という形をしているので，$\varepsilon$ にどんな正の値を代入してもよい。有界性を示すには「ある定数以内に収まる」ことさえ言えればよいので，$\varepsilon$ の値そのものにはこだわる必要がない——だから最も扱いやすい $\varepsilon=1$ を選ぶ。$\varepsilon=1$ を代入すると「十分先（$m,n\ge N_0$）では，どの2項も距離1未満に集まっている」という状況が手に入る。これは「$a_{N_0}$ を基準点として，$a_{N_0}$ から距離1未満のところに，$N_0$ 番目以降の項が<em>全部</em>集まっている」と読み替えられる。つまり，収束先の代わりに「$a_{N_0}$ という具体的な1つの項」を仮の基準点として使う，という発想の転換がこの証明の核心。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 「有限個の例外は最大値で吸収する」という定石</div>
+        <p>$n\ge N_0$ の範囲では基準点 $a_{N_0}$ からの距離で有界性が保証されるが，$n<N_0$ の有限個の項（$a_1,\ldots,a_{N_0-1}$）についてはこの評価が使えない。しかし「有限個の実数」は当然ながら全部具体的な値を持つので，個別に有界（というより，そもそも有限集合には常に最大値・最小値が存在する）。この「無限個の項は共通の評価式で抑え，残りの有限個は最大値を取ることで一挙に吸収する」というテクニックは，数列の有界性・収束性に関する証明で繰り返し登場する定石（演習第2回・問2の証明とも共通する型）。「$\forall\varepsilon>0,\exists N$」の形の定義を使うときは，常に「$N$ より前の有限個」と「$N$ 以降の無限個」を分けて考えるとよい。</p>
+      </div>
+
+      <p><strong>よくある間違い：</strong>①$\varepsilon=1$ を代入した後，$|a_n-a_{N_0}|<1$ から $|a_n|<1$ と結論してしまう（三角不等式で $|a_{N_0}|$ の分を足す必要がある：$|a_n|\le|a_n-a_{N_0}|+|a_{N_0}|$）。②$N_0$ 未満の有限個の項の有界性を「明らか」と流してしまい，最終的な $M$ の定義にこれらの項の絶対値を含め忘れる（$\{a_n\}$ 全体が有界であることを言うには，全ての $n$ をカバーしなければならない）。③本問を「収束する数列は有界」の証明と同一視し，「極限 $\alpha$ に対して」のように存在が未証明の対象を答案の中で先に使ってしまう（本問の設定では収束性は仮定されていない）。</p>
+
+      <p><strong>別解（$m,n$ の対称性を使わず，直接 $n,n+1$ の関係だけで議論しようとする誤答パターンとの対比）：</strong>Cauchy列の定義は「任意の $m,n\ge N$」に対して成り立つ全称命題であって，「隣り合う項 $a_n,a_{n+1}$ の差が小さい」という主張（これだけでは有界性は出ない：例えば $a_n=\sqrt{n}$ は隣接差 $\sqrt{n+1}-\sqrt n\to0$ だが有界でない）とは全く別物である点に注意。Cauchy列の定義の強さ（$m,n$ を独立に $N$ 以上で自由に選べる）を正しく使うことが本問のポイントであり，「隣接項だけ近ければよい」という誤解に陥らないようにする。</p>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 一般化・本番での対応：完備性の証明の部品として</div>
+        <p>実は本問の結果（Cauchy列 $\Rightarrow$ 有界）は，「$\mathbb{R}$ において Cauchy列は収束する（$\mathbb{R}$ の完備性）」という，微分積分学の基礎を支える大定理の証明の最初のステップにあたる（完備性の証明自体は，本問の結果に加えて Bolzano–Weierstrassの定理（有界数列は収束する部分列をもつ）を組み合わせる必要があり，本演習の範囲を超えるため立ち入らない）。「Cauchy列は有界」という事実単体は，本番で単独の証明問題として出されることもあれば，別の問題（例えば「Cauchy列 $\{a_n\}$ に対し $\{a_n^2\}$ もCauchy列であることを示せ」のような発展問題）の中で「まず有界性を確保してから議論を進める」という一段階目として使われることもある。$\varepsilon=1$ を固定して基準点を作るテクニックとセットで覚えておくとよい。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">3</span> Newton法による $\sqrt2$ の近似（単調有界数列の収束）
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★★☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$a_1=2$，$a_{n+1}=\dfrac12\left(a_n+\dfrac2{a_n}\right)$ で定義される数列を考える。</p>
+      <ol>
+        <li>全ての $n$ で $a_n>0$ かつ $a_n^2\ge2$ であることを示せ。</li>
+        <li>$\{a_n\}$ が単調減少であることを示し，Weierstrassの定理（演習第2回・問3）を用いて収束することを示せ。</li>
+        <li>極限値を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p><strong>$a_n>0$（帰納法）：</strong>$a_1=2>0$。$a_n>0$ を仮定すると，$a_{n+1}=\dfrac12\left(a_n+\dfrac2{a_n}\right)$ は正の数同士の和を正の数で割った形なので $a_{n+1}>0$。よって全ての $n$ で $a_n>0$。</p>
+      <p><strong>$a_n^2\ge2$：</strong>$n=1$ のとき $a_1^2=4\ge2$。$n\ge2$ のとき，$a_n=a_{(n-1)+1}=\dfrac12\left(a_{n-1}+\dfrac{2}{a_{n-1}}\right)$ は正の数 $a_{n-1}$ と $\dfrac{2}{a_{n-1}}$ の相加平均であり，相加相乗平均の不等式より</p>
+      $$a_n=\frac12\left(a_{n-1}+\frac{2}{a_{n-1}}\right) \ge \sqrt{a_{n-1}\cdot\frac{2}{a_{n-1}}} = \sqrt2$$
+      <p>（等号は $a_{n-1}=\dfrac{2}{a_{n-1}}$，すなわち $a_{n-1}=\sqrt2$ のときのみ）。よって $n\ge2$ で $a_n\ge\sqrt2>0$ より $a_n^2\ge2$。$n=1$ の場合と合わせて，全ての $n$ で $a_n^2\ge2$。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>差 $a_{n+1}-a_n$ を計算する。</p>
+      $$a_{n+1}-a_n = \frac12\left(a_n+\frac{2}{a_n}\right)-a_n = \frac12\left(\frac{2}{a_n}-a_n\right) = \frac{2-a_n^2}{2a_n}$$
+      <p>(1) より $a_n^2\ge2$ かつ $a_n>0$ なので，分子 $2-a_n^2\le0$，分母 $2a_n>0$。よって</p>
+      $$a_{n+1}-a_n = \frac{2-a_n^2}{2a_n} \le 0$$
+      <p>すなわち $\{a_n\}$ は単調減少（広義）。また (1) より全ての $n$ で $a_n\ge\sqrt2$ だから，$\{a_n\}$ は下に有界。単調<em>減少</em>かつ下に有界な数列は，$\{-a_n\}$ が単調増加かつ上に有界（$-a_n\le-\sqrt2$）であることに読み替えれば，演習第2回・問3のWeierstrassの定理（上に有界な単調増加数列は収束する）がそのまま適用でき，$\{-a_n\}$ は収束する。よって $\{a_n\}$ も収束する。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (3)</div>
+      <p>(2) より極限が存在するので $L:=\lim_{n\to\infty}a_n$ とおく。$a_n\ge\sqrt2>0$（全ての $n$ で）だったので，極限においても $L\ge\sqrt2>0$。漸化式 $a_{n+1}=\dfrac12\left(a_n+\dfrac2{a_n}\right)$ の両辺で $n\to\infty$ とすると（$a_{n+1}\to L$，$a_n\to L$，$L\ne0$ なので $\dfrac{2}{a_n}\to\dfrac2L$ も使える），</p>
+      $$L = \frac12\left(L+\frac2L\right) \quad\Longrightarrow\quad 2L = L+\frac2L \quad\Longrightarrow\quad L = \frac2L \quad\Longrightarrow\quad L^2=2$$
+      <p>$L\ge\sqrt2>0$ なので $L=-\sqrt2$ は不適。よって</p>
+      $$\boxed{\lim_{n\to\infty}a_n=\sqrt2}$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>この漸化式を初めて見ると天下り的に見えるが，実はこれは<strong>Newton法（ニュートン法）</strong>そのものである。$f(x)=x^2-2$ という「$\sqrt2$ を根に持つ関数」に対して，Newton法の反復公式 $x_{n+1}=x_n-\dfrac{f(x_n)}{f'(x_n)}$ を計算してみると</p>
+      $$x_{n+1} = x_n - \frac{x_n^2-2}{2x_n} = \frac{2x_n^2-(x_n^2-2)}{2x_n} = \frac{x_n^2+2}{2x_n} = \frac12\left(x_n+\frac{2}{x_n}\right)$$
+      <p>と，本問の漸化式と完全に一致する。つまりこの数列は「$y=x^2-2$ のグラフに接線を引いて $x$ 軸との交点を次の近似値にする」という操作を繰り返すことで $\sqrt2$（$f(x)=0$ の正の根）にどんどん近づいていく，という幾何学的な意味を持つ。</p>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 相加相乗平均を使う発想はどこから来るか</div>
+        <p>$a_{n+1}=\dfrac12\left(a_n+\dfrac2{a_n}\right)$ という式をよく見ると，これは「$a_n$ と $\dfrac{2}{a_n}$ という2つの正の数の相加平均」になっている。ここで決定的に重要なのは，この2数の<strong>積が常に2で一定</strong>（$a_n\cdot\dfrac{2}{a_n}=2$）だということ。相加相乗平均の不等式 $\dfrac{x+y}{2}\ge\sqrt{xy}$ は「積が一定の2数の相加平均は，その積の平方根以上になる」ことを主張しているので，積が常に2である以上，相加平均である $a_{n+1}$ は常に $\sqrt2$ 以上になる——これが (1) で $a_n^2\ge2$ が出てくる理由の正体。この構造（「$x$ と $k/x$ の相加平均を取ると，積が $k$ で一定なので相加平均が $\sqrt k$ 以上になる」）に気づけば，(1) の不等式は天下りではなく必然的に導かれるものだと分かる。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 一般化：任意の $k>0$ に対する $\sqrt k$ の計算アルゴリズム</div>
+        <p>本問の漸化式を $2$ から一般の $k>0$ に置き換えた $a_{n+1}=\dfrac12\left(a_n+\dfrac{k}{a_n}\right)$（$a_1>0$ は任意）は，全く同じ議論（相加相乗平均 $\Rightarrow a_n^2\ge k$，差の計算 $\Rightarrow$ 単調減少，Weierstrassの定理 $\Rightarrow$ 収束，漸化式の両辺の極限 $\Rightarrow L^2=k$）によって $\sqrt k$ に収束する数列になる。つまり本問は「平方根を計算する一般的なアルゴリズム」の $k=2,\ a_1=2$ の場合に他ならない。実際にこの漸化式は，電卓や計算機の内部で平方根を計算する際に使われるアルゴリズムの原型でもある。</p>
+        <p><strong>収束の速さについて：</strong>Newton法は一般に「2次収束」と呼ばれる非常に速い収束をする（誤差 $|a_n-\sqrt2|$ が，おおよそ前の誤差の2乗のオーダーで小さくなっていく）。実際に $a_1=2$ から計算すると $a_2=\dfrac12(2+1)=1.5$，$a_3=\dfrac12(1.5+\frac{2}{1.5})=\dfrac{17}{12}\approx1.41667$（$\sqrt2\approx1.41421$）と，わずか数回の反復で小数点以下数桁まで一致することが確認できる。この「速さ」は，本問のような証明問題では直接問われないが，数値計算の文脈でNewton法が好まれる理由として知っておくとよい。</p>
+      </div>
+
+      <p><strong>よくある間違い：</strong>①(1) の相加相乗平均を使う際，$a_{n-1}>0$ であることの確認を怠る（相加相乗平均の不等式は非負の数に対してのみ成り立つ）。②(2) で「単調減少かつ下に有界」を，そのまま演習第2回・問3の定理（単調<em>増加</em>かつ上に有界）に当てはめようとして型が合わないことに気づかない（$\{-a_n\}$ に読み替えるか，「単調減少・下に有界」バージョンの定理を別途正当化する必要がある）。③(3) で漸化式の両辺の極限を取る際，$\dfrac{2}{a_n}\to\dfrac2L$ とするために $L\ne0$（あるいは $L>0$）を確認する手続きを省略してしまう。④$L^2=2$ から $L=\sqrt2$ の一意性を主張する際，$L\ge\sqrt2>0$（(1)からの極限による評価）を使わずに「数列だから正のはず」のように曖昧に済ませてしまう。</p>
+
+      <p><strong>別解（(2) を差ではなく比 $a_{n+1}/a_n$ で示す）：</strong>$\dfrac{a_{n+1}}{a_n}=\dfrac{1}{2}\left(1+\dfrac{2}{a_n^2}\right)$ を計算し，(1) の $a_n^2\ge2$ より $\dfrac{2}{a_n^2}\le1$ なので $\dfrac{a_{n+1}}{a_n}\le\dfrac12(1+1)=1$，すなわち $a_{n+1}\le a_n$（$a_n>0$ なので不等号の向きは保たれる）と示すこともできる。差を取るか比を取るかは本質的に同じ情報を使っているが，分数の形になる分だけ差を取る方がやや見通しがよい。</p>
+
+      <p><strong>一般化・本番での対応：</strong>「単調有界数列の収束」を使う問題は，本番では①漸化式から単調性を（差または比を計算して）示す，②有界性を（多くは帰納法または相加相乗平均で）示す，③Weierstrassの定理を適用して収束を結論する，④漸化式の両辺の極限を取って極限値の満たす方程式を立てる，という4段階がほぼ定型。この型を身につけておけば，本問のような「見慣れない漸化式」が出題されても慌てずに対応できる。極限値を求める際に，複数の解が出た場合は必ず「数列自体の範囲（$a_n\ge\sqrt2>0$ など）」から不適な解を除外する手順を忘れないこと。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">4</span> 上極限の劣加法性
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★★★</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>有界数列 $\{a_n\},\{b_n\}$ に対し，</p>
+      <ol>
+        <li>$\displaystyle\limsup_{n\to\infty}(a_n+b_n)\le\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n$ を示せ。</li>
+        <li>等号が成立しない例を挙げよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$\alpha=\limsup_{n\to\infty}a_n$，$\beta=\limsup_{n\to\infty}b_n$ とおく（演習第2回・問4より，有界数列に対してこれらは実数として存在する）。</p>
+      <p>任意の $\varepsilon>0$ をとる。$\limsup$ の定義（$\sup_{m\ge n}a_m\to\alpha$，$\sup_{m\ge n}b_m\to\beta$）より，ある正整数 $N_1,N_2$ が存在して</p>
+      $$n\ge N_1 \Rightarrow \sup_{m\ge n}a_m<\alpha+\frac{\varepsilon}{2}, \qquad n\ge N_2 \Rightarrow \sup_{m\ge n}b_m<\beta+\frac{\varepsilon}{2}$$
+      <p>$N=\max(N_1,N_2)$ とおくと，$n\ge N$ のとき両方が同時に成り立つ。このとき，任意の $m\ge n$ に対して</p>
+      $$a_m\le\sup_{k\ge n}a_k<\alpha+\frac{\varepsilon}{2}, \qquad b_m\le\sup_{k\ge n}b_k<\beta+\frac{\varepsilon}{2}$$
+      <p>なので，辺々を加えると $a_m+b_m<\alpha+\beta+\varepsilon$。これが任意の $m\ge n$ で成り立つので，$\alpha+\beta+\varepsilon$ は集合 $\{a_m+b_m\mid m\ge n\}$ の上界。よって</p>
+      $$\sup_{m\ge n}(a_m+b_m) \le \alpha+\beta+\varepsilon \qquad (n\ge N)$$
+      <p>左辺は $n\to\infty$ で $\limsup_{n\to\infty}(a_n+b_n)$ に収束する（演習第2回・問4より，これも単調減少・有界なので極限が存在する）ので，$n\to\infty$ とすると</p>
+      $$\limsup_{n\to\infty}(a_n+b_n) \le \alpha+\beta+\varepsilon$$
+      <p>この不等式は任意の $\varepsilon>0$ に対して成立する。もし $\limsup(a_n+b_n)>\alpha+\beta$ だったとすると，$\varepsilon=\limsup(a_n+b_n)-(\alpha+\beta)>0$ を代入した瞬間に矛盾するので，そのようなことは起こり得ない。よって</p>
+      $$\boxed{\limsup_{n\to\infty}(a_n+b_n)\le\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n} \qquad \blacksquare$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$a_n=(-1)^n$，$b_n=(-1)^{n+1}=-(-1)^n$ とする。</p>
+      <p><strong>$\limsup a_n=1$：</strong>$a_n$ は $n$ が偶数のとき $1$，奇数のとき $-1$ を交互に取る。$\sup_{m\ge n}a_m$ はどの $n$ から先を見ても，その中に偶数番目の項（値 $1$）が必ず含まれるので常に $1$。よって $b_n^{(\sup)}:=\sup_{m\ge n}a_m=1$（定数列）で，$\limsup a_n=1$。同様に $\limsup b_n=1$（$b_n$ も同じく $1$ と $-1$ を交互に取るだけで，偶奇が入れ替わっているだけなので同じ値になる）。</p>
+      <p><strong>一方，$a_n+b_n=(-1)^n+(-1)^{n+1}=(-1)^n-(-1)^n=0$</strong>（恒等的に，すべての $n$ で）。よって $\{a_n+b_n\}$ は定数列 $0$ であり，$\limsup_{n\to\infty}(a_n+b_n)=0$。</p>
+      <p>したがって</p>
+      $$\limsup_{n\to\infty}(a_n+b_n)=0 < 1+1=\limsup_{n\to\infty}a_n+\limsup_{n\to\infty}b_n$$
+      <p>となり，等号は成立しない。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>(1) の証明は，演習第2回・問4で確立した「$b_n:=\sup_{m\ge n}a_m$ という単調減少数列の極限として $\limsup$ を定義する」という枠組みをそのまま使い倒すだけで完成する。抽象的に見えるが，やっていることは「有限個の $\sup$ の和に関する不等式」を，$\varepsilon$ を使って極限に橋渡ししているだけ。</p>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 「$\sup$ of sum $\le$ sum of $\sup$」という補題はどこから来るか</div>
+        <p>証明の核心は次の一般に成り立つ不等式：任意の実数列 $\{a_m\},\{b_m\}$ と任意の添字集合 $S$（今回は $S=\{m\mid m\ge n\}$）に対して</p>
+        $$\sup_{m\in S}(a_m+b_m) \le \sup_{m\in S}a_m + \sup_{m\in S}b_m$$
+        <p>これは，任意の $m\in S$ に対して $a_m\le\sup_{k\in S}a_k$ かつ $b_m\le\sup_{k\in S}b_k$ が成り立つので，両辺を足せば $a_m+b_m\le\sup_k a_k+\sup_k b_k$。右辺は $m$ に依存しない定数なので，これは「$\{a_m+b_m\mid m\in S\}$ の任意の元が $\sup a_k+\sup b_k$ 以下」，すなわち $\sup a_k+\sup b_k$ がこの集合の上界であることを意味し，上限は最小の上界だから $\sup_m(a_m+b_m)\le\sup_m a_m+\sup_m b_m$ が従う，という理屈。この補題を $n\to\infty$ の極限に持ち込むために，$\varepsilon/2$ ずつを2つの数列に割り振る，という定番のテクニック（$\varepsilon$-論法で2つの誤差を扱うときに，それぞれに $\varepsilon/2$ を割り当てて合計を $\varepsilon$ に収める）を使っている。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 なぜ一般に等号が成立しないのか（直感）</div>
+        <p>$\limsup a_n$ は「$a_n$ が繰り返し到達する最大の高さ」，$\limsup b_n$ は「$b_n$ が繰り返し到達する最大の高さ」を表す。もし $a_n$ と $b_n$ が<em>同時に</em>その最大の高さに到達するタイミングが一致していれば，和の $\limsup$ もそれぞれの $\limsup$ の和に近づく。しかし(2)の例のように，$a_n$ が高い値（$1$）を取るタイミングでちょうど $b_n$ が低い値（$-1$）を取るように「タイミングがズレている」場合，和は常に打ち消し合って $0$ のまま——「それぞれの最大値のタイミングが噛み合わない」ことが，劣加法性が等号にならない現象の直感的な理由。この現象は，複数の確率変数や信号の「山」のタイミングがズレると和の最大値が個々の最大値の和より小さくなる，という他の分野でも頻出の直感と共通している。</p>
+        <p><strong>$\liminf$ に関する対応する不等式：</strong>同様の議論（不等号の向きを全て逆にする）により，$\liminf_{n\to\infty}(a_n+b_n)\ge\liminf_{n\to\infty}a_n+\liminf_{n\to\infty}b_n$（優加法性）が成り立つ。証明は(1)の $\sup$ を全て $\inf$ に，$<$ を $>$ に置き換えるだけで完全に並行する。(2)の同じ例で確認すると，$\liminf a_n=\liminf b_n=-1$ だが $\liminf(a_n+b_n)=0>-1+(-1)=-2$ となり，こちらも等号不成立になる（劣加法性・優加法性はどちらも「不等号」であって「等号」を期待してはいけない，という教訓）。</p>
+      </div>
+
+      <p><strong>よくある間違い：</strong>①$\varepsilon$ を2つの数列で共有してしまい，「$n\ge N_1$ かつ $n\ge N_2$」の代わりに片方の $N$ だけで議論を進めてしまう（$N=\max(N_1,N_2)$ を取る操作を忘れる）。②$\sup_{m\ge n}(a_m+b_m)\le\sup_{m\ge n}a_m+\sup_{m\ge n}b_m$ という補題部分を「明らか」として証明せずに使ってしまう（本問の採点上はここが核心なので，必ず一言でも理由を書く）。③(2) で反例を挙げる際，$\limsup$ を「数列の上限（$\sup$）」と取り違えて $\sup a_n=\sup b_n=1$ から直接「$\limsup$ も1」と結論してしまう（有界数列では一致することも多いが，論理的には別概念であり，本問のように振動する数列では特に $\limsup$ の定義（$n$ を先に進めても変わらない極限値）から丁寧に確認する必要がある——もっとも本問の例では実際に両者とも1で一致する）。④(2) で $a_n+b_n$ を計算する際に符号を間違え，恒等的に $0$ にならないと誤解してしまう。</p>
+
+      <p><strong>別解（(2) の反例を数列でなく部分列の言葉で説明する）：</strong>$a_n=(-1)^n$ は偶数番目の部分列が恒等的に $1$，奇数番目の部分列が恒等的に $-1$ に収束するので，$\limsup a_n$ はこれらの部分列の極限のうち最大のもの，すなわち $1$（$\liminf$ は最小のもの，$-1$）と特徴づけることもできる（$\limsup$ は「収束する部分列の極限値全体の集合の最大値」に一致するという別の特徴づけ，発展事項）。この見方をすれば，$a_n,b_n$ それぞれの「山」が偶奇で完全にズレているために和が恒等的に $0$ になる，という(2)の反例の構造がより直感的に見える。</p>
+
+      <p><strong>一般化・本番での対応：</strong>本問の(1)は $n$ 個の数列の和 $\sum_{i=1}^k a_n^{(i)}$ に対しても数学的帰納法で同様の劣加法性 $\limsup\sum a_n^{(i)}\le\sum\limsup a_n^{(i)}$ に一般化できる。本番でこの種の $\limsup/\liminf$ の不等式証明が出た場合は，①「$\sup$（または $\inf$）に関する有限の不等式をまず示す」，②「$\varepsilon/2,\varepsilon/3,\ldots$ のように誤差を分割して極限に橋渡しする」，③「任意の $\varepsilon>0$ で成り立つ不等式から，背理法または直接に $\varepsilon\to0$ の極限を取る」という3段階を踏むのが定石。等号の反例を求める問題では，本問のように「同じ絶対値で符号（タイミング）だけがズレている数列」を作るのが最も手早い。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第2回（上限・下限・Cauchy列・Weierstrassの定理・上極限下極限）を自力で解けるかセルフチェック</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>具体的な集合の $\sup/\inf$ を，「①上界であること」＋「②$\varepsilon$ を使った最小性（最大性）」の2段階で証明できるか</li>
+          <li>$\sup$ が集合自身に属するとは限らないこと（$[0,1]$ 型と開区間・無理数型の違い）を，本問(1)(2)の対比で説明できるか</li>
+          <li>Cauchy列の定義（項同士の関係）だけから，収束を仮定せずに有界性を示せるか（$\varepsilon=1$ を固定し，有限個の例外を最大値で吸収する定石を使えるか）</li>
+          <li>「収束数列は有界」（演習第2回・問2）と「Cauchy列は有界」（本問2）の証明の違い（基準点として極限を使うか，具体的な1項を使うか）を説明できるか</li>
+          <li>Newton法型の漸化式に対し，相加相乗平均を使って有界性を，差の計算で単調性を示し，Weierstrassの定理から収束を導けるか</li>
+          <li>単調減少・下に有界な数列に対して，$\{-a_n\}$ に読み替えることで演習第2回・問3の定理（単調増加・上に有界）を適用できるか</li>
+          <li>漸化式の両辺で極限を取り，極限値が満たす方程式から不適な解を数列の値域の情報で除外できるか</li>
+          <li>$\limsup(a_n+b_n)\le\limsup a_n+\limsup b_n$ を，$\sup$ of sum $\le$ sum of $\sup$ という補題と $\varepsilon/2$ の分割から証明できるか</li>
+          <li>等号が成立しない具体例（$(-1)^n$ 型）を作り，$\liminf$ に関する対応する不等式（優加法性）も言えるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

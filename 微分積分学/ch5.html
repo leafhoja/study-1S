@@ -1,0 +1,724 @@
+<!DOCTYPE html><!-- 「Ch.5 偏微分と全微分 — 微分積分学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>Ch.5 偏微分と全微分 — 微分積分学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="ch5">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="ch1.html" data-page="ch1">Ch.1</a>
+      <a href="ch2.html" data-page="ch2">Ch.2</a>
+      <a href="ch3.html" data-page="ch3">Ch.3</a>
+      <a href="ch4.html" data-page="ch4">Ch.4</a>
+      <a href="ch5.html" data-page="ch5" class="active">Ch.5</a>
+      <a href="ch6.html" data-page="ch6">Ch.6</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>Ch.5 偏微分と全微分</h1>
+  <p class="subtitle">講義日: 7/7 — 多変数関数の微分可能性</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#continuity">二変数関数の連続性</a>
+    <a href="#openset">近傍と開集合</a>
+    <a href="#counterexample">連続でない例</a>
+    <a href="#partial">偏微分の定義</a>
+    <a href="#total">全微分可能性</a>
+    <a href="#chain">合成関数の微分と方向微分</a>
+    <a href="#transform">変数変換とヤコビ行列</a>
+    <a href="#hierarchy">微分可能性の階層</a>
+    <a href="#examples">計算例と判定</a>
+  </div>
+
+  <!-- 二変数関数の連続性 -->
+  <div class="section" id="continuity">
+    <div class="sec-header">
+      <div class="sec-tag">Definition</div>
+      <h2>二変数関数の連続性</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">動機 — なぜ「2変数の微分」を考えるのか</span>
+        <p>
+          これまでの関数は $y=f(x)$ という1変数のものだった。しかし現実の量の多くは複数の変数に依存する——気温は場所（緯度・経度・高度）と時刻で決まり、気体の状態は温度と圧力の両方で決まる。経済学の効用関数も複数の財の消費量に依存する。こうした<strong>多変数関数</strong>の変化を微分でどう捉えるかが本章のテーマだ。
+        </p>
+        <p>
+          ここで壁にぶつかる。1変数のときの「微分可能」は接線が引けることと同じだったが、2変数では接線ではなく<strong>接平面</strong>が引けるかどうかが問題になる。
+          ところが、$x$ 方向だけの傾きと $y$ 方向だけの傾き（偏微分）がどちらも存在しても、それだけでは滑らかな接平面が存在するとは限らない——これが本章の核心的な落とし穴であり、後半で反例とともに詳しく見る。
+        </p>
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 5.1　二変数関数の連続性</span>
+        <p>$f(x,y)$ は点 $(a,b)$ の近傍で定義されているとする。</p>
+        $$\lim_{(x,y)\to(a,b)} f(x,y) = f(a,b)$$
+        <p>が成り立つとき、$f$ は $(a,b)$ で<strong>連続</strong>であるという。</p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">一変数との違い</span>
+        <p>
+          一変数では「$x\to a$」の近づき方は左・右の2方向しかない。
+          二変数では「$(x,y)\to(a,b)$」の近づき方は<strong>無限方向から</strong>あり得る。
+        </p>
+        <p>
+          極限 $\lim_{(x,y)\to(a,b)} f(x,y) = L$ が成り立つためには、<strong>どんな経路で近づいても</strong>同じ値 $L$ に収束しなければならない。
+          ある特定の経路では収束するが別の経路では収束しない（または別の値に収束する）場合は極限が存在しない。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 近傍と開集合 -->
+  <div class="section" id="openset">
+    <div class="sec-header">
+      <div class="sec-tag">Definition</div>
+      <h2>近傍と開集合</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 5.2　$\varepsilon$ 近傍と開集合</span>
+        <p>点 $p=(a,b)\in\mathbb{R}^2$ の<strong>$\varepsilon$ 近傍</strong>を</p>
+        $$U_\varepsilon(p) = \left\{(x,y)\in\mathbb{R}^2 \;\middle|\; \sqrt{(x-a)^2+(y-b)^2}<\varepsilon\right\}$$
+        <p>で定める（一変数における $\varepsilon$ 近傍 $\{x\mid |x-a|<\varepsilon\}$ の二変数版）。$D\subset\mathbb{R}^2$ が<strong>開集合</strong>であるとは、$D$ の任意の点 $p$ に対して、ある $\varepsilon>0$ が存在して $U_\varepsilon(p)\subset D$ となることをいう。</p>
+        <p>この記法を使うと、定義5.1の連続性は次のように書き換えられる：</p>
+        $$\forall\varepsilon>0\ \exists\delta>0,\qquad (x,y)\in U_\delta(a,b) \;\Longrightarrow\; |f(x,y)-f(a,b)|<\varepsilon.$$
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 5.1'　開集合の判定</span>
+        <p>$\{(x,y)\mid x^2+y^2<1\}$ は開集合。一方、境界を含む $\{(x,y)\mid x^2+y^2\le 1\}$ は開集合ではない
+        （境界上の点、例えば $(1,0)$ は、どんなに小さい $\varepsilon$ を取っても $U_\varepsilon(1,0)$ が集合からはみ出してしまう）。</p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">なぜ「開集合」を先に断るのか</span>
+        <p>
+          「$D$ 上で $f$ が連続」「$D$ 上で $f_x,f_y$ が存在する」といった主張は、$D$ のすべての点で周囲を含めた近傍が取れることを暗に使っている。
+          境界を含む集合では境界上の点の「片側」しか近傍が取れず、極限や微分の議論がそのままでは成立しない。以降、$f(x,y)$ の定義域は断りなく開集合とする。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 連続でない例 -->
+  <div class="section" id="counterexample">
+    <div class="sec-header">
+      <div class="sec-tag">Counterexample</div>
+      <h2>連続でない例と極座標の活用</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">例 5.1　$f(x,y)=\dfrac{xy}{x^2+y^2}$（原点で定義しない）</span>
+        <p>この関数は原点での極限が存在しない。</p>
+        <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+          <summary>確認</summary>
+          <div class="proof-body">
+            <p>$y=mx$（直線経路）で近づくと：
+            $f(x,mx)=\dfrac{x\cdot mx}{x^2+m^2x^2}=\dfrac{m}{1+m^2}$。これは $m$ に依存する。</p>
+            <p>例えば $m=0$（$x$軸）なら極限は $0$、$m=1$（$y=x$ の線）なら $\frac{1}{2}$。</p>
+            <p>よって経路によって値が異なるため、極限は存在しない。$\blacksquare$</p>
+          </div>
+        </details>
+        <p>したがって $f$ は原点で連続にできない（どんな値を定義しても連続にならない）。</p>
+      </div>
+
+      <div class="prop">
+        <span class="box-label">極座標による連続性の判定</span>
+        <p>$x=r\cos\theta$, $y=r\sin\theta$ と置くと $(x,y)\to(0,0)$ は $r\to 0^+$ に対応する。</p>
+        <p>$\theta$ によらず $r\to 0$ で $f(r\cos\theta, r\sin\theta)\to L$ ならば、$f$ は原点で連続（極限値 $=L$）。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 5.2　$f(x,y)=\dfrac{x^2 y}{x^2+y^2}$ は原点で連続</span>
+        <details>
+          <summary>確認（極座標使用）</summary>
+          <div class="proof-body">
+            <p>$x=r\cos\theta$, $y=r\sin\theta$ を代入：
+            $f = \dfrac{r^2\cos^2\theta \cdot r\sin\theta}{r^2} = r\cos^2\theta\sin\theta$。</p>
+            <p>$|\cos^2\theta\sin\theta|\le 1$ なので $|f|\le r\to 0$（$\theta$ によらず）。
+            $f(0,0)=0$ と定義すれば連続。$\blacksquare$</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 5.2'　$f(x,y)=\dfrac{x^3+y^3}{x^2+y^2}$ は原点で連続</span>
+        <details>
+          <summary>確認（極座標使用）</summary>
+          <div class="proof-body">
+            <p>$x=r\cos\theta$, $y=r\sin\theta$ を代入：</p>
+            $$\left|\frac{x^3+y^3}{x^2+y^2}\right| = \left|\frac{r^3(\cos^3\theta+\sin^3\theta)}{r^2}\right| \le \frac{2r^3}{r^2}=2r$$
+            <p>（$|\cos^3\theta+\sin^3\theta|\le 2$ を使った）。$\varepsilon>0$ に対して $\delta=\varepsilon/3$ とすれば、
+            $(x,y)\in U_\delta(0,0)$ のとき $|f(x,y)|\le 2r<\varepsilon$。$f(0,0)=0$ と定義すれば連続。$\blacksquare$</p>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 偏微分の定義 -->
+  <div class="section" id="partial">
+    <div class="sec-header">
+      <div class="sec-tag">Definition</div>
+      <h2>偏微分の定義</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 5.3　偏微分係数</span>
+        $$f_x(a,b) = \frac{\partial f}{\partial x}(a,b) = \lim_{h\to 0}\frac{f(a+h,b)-f(a,b)}{h}$$
+        $$f_y(a,b) = \frac{\partial f}{\partial y}(a,b) = \lim_{k\to 0}\frac{f(a,b+k)-f(a,b)}{k}$$
+        <p>これらが存在するとき、$f$ は $(a,b)$ で<strong>$x$ について（$y$ について）偏微分可能</strong>という。</p>
+      </div>
+
+      <div class="hist">
+        <span class="box-label">歴史的背景 — $\partial$ という記号はどこから来たのか</span>
+        <p>
+          偏微分に使う丸みを帯びた記号「$\partial$」（ラウンド・ディー）は、もともと1770年にニコラ・ド・コンドルセが偏微分方程式に関する論文で使い始めたものだ。
+          1786年にはルジャンドルが $\dfrac{\partial u}{\partial x}$ という現在の分数のような書き方を使ったが、後に自分では使うのをやめてしまう。
+          この記法を復活させて定着させたのはカール・グスタフ・ヤコビで、1841年の論文（行列式=ヤコビアンの由来にもなった論文）で広く用いたことにより標準記法となった。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">「1方向のスライス」という直感</span>
+        <p>
+          偏微分は「$y$ を固定したまま $x$ だけ動かしたときの変化率」だ。三次元グラフ $z=f(x,y)$ を
+          $y=b$ という平面で切ると断面曲線 $z=f(x,b)$ が得られる。$f_x(a,b)$ はその曲線の $x=a$ における接線の傾きだ。
+        </p>
+        <p>
+          一変数の微分と全く同じ計算規則が使えるが、注意すべきは「$x$ 偏微分のとき $y$ は定数扱い」という点だ。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 5.3　$f(x,y)=x^2+2xy+3y^2$ の偏微分</span>
+        $$f_x(x,y) = 2x+2y, \quad f_y(x,y) = 2x+6y.$$
+        <p>$f_x$ は $y$ を定数扱いして $x$ で微分、$f_y$ は $x$ を定数扱いして $y$ で微分。</p>
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 5.4　高次偏微分</span>
+        $$f_{xx} = \frac{\partial^2 f}{\partial x^2}, \quad
+        f_{xy} = \frac{\partial^2 f}{\partial y\partial x} = \frac{\partial}{\partial y}\left(\frac{\partial f}{\partial x}\right), \quad
+        f_{yx} = \frac{\partial^2 f}{\partial x\partial y}.$$
+        <p>$f$ が $C^2$ 級（2階偏微分がすべて連続）ならば $f_{xy}=f_{yx}$（シュワルツの定理）。</p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 5.4'　シュワルツの定理</span>
+        <p>
+          $f_x,f_y$ が $(a,b)$ の近傍で存在し、$f_{xy},f_{yx}$ が $(a,b)$ の近傍で存在してともに $(a,b)$ で連続とする
+          （$C^2$ 級ならこれを満たす）。このとき $f_{xy}(a,b)=f_{yx}(a,b)$。
+        </p>
+      </div>
+
+      <details>
+        <summary>証明を見る（2変数の平均値の定理を2方向から2回使う）</summary>
+        <div class="proof-body">
+          <p>
+            2階の差分 $\Delta(h,k) = f(a+h,b+k)-f(a+h,b)-f(a,b+k)+f(a,b)$（$h,k\ne 0$ は十分小さい）を、2つの方法で分解する。
+          </p>
+          <p><strong>分解①（$x$ を先に固定して $y$ で見る）：</strong>
+          $\varphi(x)=f(x,b+k)-f(x,b)$ とおくと $\Delta(h,k)=\varphi(a+h)-\varphi(a)$。
+          $\varphi'(x)=f_x(x,b+k)-f_x(x,b)$ なので、$x$ について平均値の定理を適用すると、ある $\theta_1\in(0,1)$ が存在して
+          </p>
+          $$\Delta(h,k) = \varphi'(a+\theta_1h)\,h = \bigl[f_x(a+\theta_1h,b+k)-f_x(a+\theta_1h,b)\bigr]h.$$
+          <p>
+            $[\ ]$ の中を今度は $y$ の関数として平均値の定理を適用すると、ある $\theta_2\in(0,1)$ が存在して
+          </p>
+          $$\Delta(h,k) = hk\cdot f_{xy}(a+\theta_1h,\,b+\theta_2k).$$
+          <p><strong>分解②（$y$ を先に固定して $x$ で見る）：</strong>
+          $\psi(y)=f(a+h,y)-f(a,y)$ とおくと $\Delta(h,k)=\psi(b+k)-\psi(b)$。全く同様の議論（先に $y$ について、次に $x$ について平均値の定理）により、
+          ある $\theta_3,\theta_4\in(0,1)$ が存在して
+          </p>
+          $$\Delta(h,k) = hk\cdot f_{yx}(a+\theta_3h,\,b+\theta_4k).$$
+          <p>
+            分解①と②は同じ $\Delta(h,k)$ を表しているので、$hk$（$\ne 0$）で割ると
+          </p>
+          $$f_{xy}(a+\theta_1h,\,b+\theta_2k) = f_{yx}(a+\theta_3h,\,b+\theta_4k).$$
+          <p>
+            $(h,k)\to(0,0)$ とすると、$\theta_1,\ldots,\theta_4\in(0,1)$ なので両辺の評価点はともに $(a,b)$ に近づく。
+            $f_{xy}$, $f_{yx}$ がそれぞれ $(a,b)$ で連続だから、左辺は $f_{xy}(a,b)$ に、右辺は $f_{yx}(a,b)$ に収束する。
+            両辺は常に等しいのでその極限も等しい：
+          </p>
+          $$f_{xy}(a,b) = f_{yx}(a,b). \quad \blacksquare$$
+        </div>
+      </details>
+
+      <div class="hist">
+        <span class="box-label">歴史的背景 — 「シュワルツの定理」なのに最初はオイラーとクレロー</span>
+        <p>
+          $f_{xy}=f_{yx}$ という性質は、18世紀半ばにレオンハルト・オイラーとアレクシス・クレローが（クレローは地球の形の研究など天体力学の文脈で）ほぼ同時に指摘していた（1740年頃）。
+          ラグランジュやコーシーがその後証明を精密化しようとしたが、1867年にロレンツ・リンデロフがゆるい仮定のもとでは反例が存在することを発見してしまう。
+          最終的に「2階の偏導関数の片方が連続であれば十分」という正しい十分条件を厳密に証明したのは、ヘルマン・シュワルツが1873年に示したものだ。100年以上かけて、直感的には明らかに見える事実の正確な適用条件が磨かれていった。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 全微分可能性 -->
+  <div class="section" id="total">
+    <div class="sec-header">
+      <div class="sec-tag">Definition</div>
+      <h2>全微分可能性</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 5.5　全微分可能性</span>
+        <p>定数 $A$, $B$ が存在して</p>
+        $$f(a+h, b+k) - f(a,b) = Ah + Bk + o\!\left(\sqrt{h^2+k^2}\right) \quad \bigl((h,k)\to(0,0)\bigr)$$
+        <p>が成り立つとき、$f$ は $(a,b)$ で<strong>全微分可能</strong>（微分可能）という。</p>
+        <p>このとき $A=f_x(a,b)$、$B=f_y(a,b)$ であることが示せる。</p>
+        <p><strong>全微分</strong>：$df = f_x\,dx + f_y\,dy$。</p>
+      </div>
+
+      <details>
+        <summary>全微分可能ならば偏微分可能であることの証明</summary>
+        <div class="proof-body">
+          <p>定義5.5の等式で $k=0$ とおくと</p>
+          $$f(a+h,b)-f(a,b) = Ah + o(|h|) \quad (h\to 0).$$
+          <p>両辺を $h$（$\ne 0$）で割ると</p>
+          $$\frac{f(a+h,b)-f(a,b)}{h} = A + \frac{o(|h|)}{h} \;\longrightarrow\; A \quad (h\to 0).$$
+          <p>よって $f_x(a,b)$ が存在して $A=f_x(a,b)$。同様に $h=0$ とおいて $k\to 0$ とすれば $B=f_y(a,b)$ を得る。$\blacksquare$</p>
+        </div>
+      </details>
+
+      <div class="mot">
+        <span class="box-label">「接平面が存在する」という直感</span>
+        <p>
+          一変数では「$f(x)$ が $x=a$ で微分可能 $\Leftrightarrow$ 接線が存在する」だった。
+          二変数では「$f(x,y)$ が $(a,b)$ で全微分可能 $\Leftrightarrow$ <strong>接平面が存在する</strong>」ということだ。
+        </p>
+        <p>
+          接平面 $z=f(a,b)+A(x-a)+B(y-b)$ による誤差が $(h,k)\to(0,0)$ のとき $\sqrt{h^2+k^2}$ より速く 0 に近づく
+          — これが全微分可能性の定義の意味だ。
+        </p>
+        <p>
+          偏微分可能は「$x$方向と $y$方向の断面だけ滑らか」に過ぎないが、
+          全微分可能は「<em>全ての方向で</em>線形近似できる」という、ずっと強い条件だ。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">小文字 $o$ の記法</span>
+        <p>
+          $g(h,k)=o(\sqrt{h^2+k^2})$ とは $\dfrac{g(h,k)}{\sqrt{h^2+k^2}}\to 0$（$(h,k)\to(0,0)$）を意味する。
+          「$\sqrt{h^2+k^2}$ より速く 0 に近づく」という意味で、誤差項が接平面からのズレより十分小さいことを表す。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 合成関数の微分と方向微分 -->
+  <div class="section" id="chain">
+    <div class="sec-header">
+      <div class="sec-tag">Application</div>
+      <h2>全微分可能性の使い道 — 合成関数の微分と方向微分</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">なぜ「全微分可能」が欲しかったのか、ここで分かる</span>
+        <p>
+          ここまで、全微分可能性が偏微分可能性より強い条件だと繰り返し述べてきたが、その「強さ」が具体的に何の役に立つのかはまだ見ていない。
+          これから見る<strong>合成関数の微分（chain rule）</strong>と<strong>方向微分</strong>は、全微分可能性がなければ証明できない代表的な応用だ。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 5.8　合成関数の微分（1変数の道に沿って進む場合）</span>
+        <p>
+          $z=f(x,y)$ が $(a,b)$ で全微分可能、$x=x(t)$, $y=y(t)$ が $t=t_0$ で微分可能、$x(t_0)=a$, $y(t_0)=b$ とする。
+          このとき $z(t)=f(x(t),y(t))$ は $t=t_0$ で微分可能で、
+        </p>
+        $$\frac{dz}{dt}\bigg|_{t=t_0} = f_x(a,b)\,x'(t_0) + f_y(a,b)\,y'(t_0).$$
+      </div>
+
+      <details>
+        <summary>証明を見る（全微分可能性の定義をそのまま使う）</summary>
+        <div class="proof-body">
+          <p>全微分可能性（定義5.5）より、$h=x(t_0+\Delta t)-a$, $k=y(t_0+\Delta t)-b$ に対して</p>
+          $$f(a+h,b+k)-f(a,b) = f_x(a,b)\,h + f_y(a,b)\,k + \varepsilon(h,k)\sqrt{h^2+k^2}, \quad \varepsilon(h,k)\to 0\;\bigl((h,k)\to(0,0)\bigr).$$
+          <p>両辺を $\Delta t$（$\ne 0$）で割ると</p>
+          $$\frac{z(t_0+\Delta t)-z(t_0)}{\Delta t} = f_x(a,b)\frac{h}{\Delta t} + f_y(a,b)\frac{k}{\Delta t} + \varepsilon(h,k)\cdot\frac{\sqrt{h^2+k^2}}{\Delta t}.$$
+          <p>
+            $\Delta t\to 0$ のとき $h/\Delta t\to x'(t_0)$、$k/\Delta t\to y'(t_0)$（微分の定義）。
+            $\dfrac{\sqrt{h^2+k^2}}{|\Delta t|}=\sqrt{(h/\Delta t)^2+(k/\Delta t)^2}\to\sqrt{x'(t_0)^2+y'(t_0)^2}$（有界な値に収束）であり、
+            $\Delta t\to 0$ ならば $(h,k)\to(0,0)$ なので $\varepsilon(h,k)\to 0$。よって最後の項は「有界な量」×「$0$ に収束する量」で $0$ に収束し、
+          </p>
+          $$\frac{dz}{dt}\bigg|_{t=t_0} = f_x(a,b)x'(t_0)+f_y(a,b)y'(t_0). \quad \blacksquare$$
+          <p>
+            <em>この証明のどこで「全」微分可能性を使ったかに注目してほしい。</em>誤差項 $\varepsilon(h,k)\sqrt{h^2+k^2}$ を $\Delta t$ で割った後も $0$ に収束することを言うには、
+            「$(h,k)$ がどんな方向・比率で $(0,0)$ に近づいても誤差が制御できる」という条件が必要だ。$x$方向・$y$方向だけの断面が滑らかという偏微分可能性だけでは、
+            この「任意の方向から近づく」状況をカバーできない。
+          </p>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 5.6　$z=x^2y$, $x=\cos t$, $y=\sin t$ のとき $\dfrac{dz}{dt}$</span>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            <p>$f_x=2xy$, $f_y=x^2$、$x'=-\sin t$, $y'=\cos t$ より</p>
+            $$\frac{dz}{dt} = 2xy\cdot(-\sin t) + x^2\cdot\cos t = -2\cos t\sin^2 t + \cos^3 t.$$
+            <p>
+              確認：$z=\cos^2t\sin t$ を直接 $t$ で微分すると、積の微分法則で
+              $z' = 2\cos t(-\sin t)\sin t+\cos^2t\cos t = -2\cos t\sin^2t+\cos^3t$ となり、一致する。
+            </p>
+          </div>
+        </details>
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 5.9　方向微分</span>
+        <p>単位ベクトル $\vec{u}=(u_1,u_2)$（$u_1^2+u_2^2=1$）方向への<strong>方向微分</strong>を</p>
+        $$D_{\vec u}f(a,b) = \lim_{t\to 0}\frac{f(a+tu_1,\,b+tu_2)-f(a,b)}{t}$$
+        <p>
+          で定義する。$\vec u=(1,0)$ なら $D_{\vec u}f=f_x(a,b)$、$\vec u=(0,1)$ なら $D_{\vec u}f=f_y(a,b)$ に一致する。
+          つまり<strong>偏微分は方向微分の特別な場合（座標軸方向）</strong>であり、方向微分はそれを任意の方向に一般化したものだ。
+        </p>
+      </div>
+
+      <div class="cor">
+        <span class="box-label">系 5.10　方向微分は勾配ベクトルとの内積で計算できる</span>
+        <p>$f$ が $(a,b)$ で全微分可能ならば、任意の単位ベクトル $\vec u=(u_1,u_2)$ に対して</p>
+        $$D_{\vec u}f(a,b) = f_x(a,b)u_1+f_y(a,b)u_2 = \nabla f(a,b)\cdot \vec u, \qquad \nabla f(a,b) := \bigl(f_x(a,b),\,f_y(a,b)\bigr).$$
+        <p>$\nabla f$ を $f$ の<strong>勾配ベクトル</strong>（gradient）という。</p>
+      </div>
+
+      <details>
+        <summary>証明を見る（定理5.8の直接の系）</summary>
+        <div class="proof-body">
+          <p>
+            $x(t)=a+tu_1$, $y(t)=b+tu_2$ とおくと $x'(t)=u_1$, $y'(t)=u_2$（定数）で、$x(0)=a,y(0)=b$。
+            定理5.8を $t_0=0$ に適用すれば
+          </p>
+          $$D_{\vec u}f(a,b) = \frac{d}{dt}f(x(t),y(t))\bigg|_{t=0} = f_x(a,b)u_1+f_y(a,b)u_2. \quad \blacksquare$$
+        </div>
+      </details>
+
+      <div class="mot">
+        <span class="box-label">勾配ベクトルの意味 — 「最も急な方向」</span>
+        <p>
+          $\vec u$ と $\nabla f(a,b)$ の間の角を $\alpha$ とすると、$|\vec u|=1$ より
+        </p>
+        $$D_{\vec u}f(a,b) = \nabla f(a,b)\cdot\vec u = |\nabla f(a,b)|\cos\alpha.$$
+        <p>
+          $\cos\alpha$ は $\alpha=0$（$\vec u$ が $\nabla f(a,b)$ と同じ向き）のときに最大値 $1$ を取る。
+          つまり<strong>勾配ベクトルの方向は、関数値が最も急に増加する方向</strong>であり、そのときの増加率（傾き）は $|\nabla f(a,b)|$（勾配ベクトルの大きさ）そのものに等しい。
+          天気図の等圧線に直交する方向が最も気圧変化が急な方向になる、というような話の数学的な正体がこれだ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">等圧線の話をもう一段掘る — 等高線とパラメータ表示</span>
+        <p>
+          いまの議論は「$\nabla f$ と単位ベクトル $\vec u$ の間の角」という間接的な言い方で
+          「勾配は等高線と直交し、$C$ が増加する方向を指す」ことを述べていた。これを、等高線
+          $f(x,y)=C$ 自身を1本の曲線として直接パラメータ表示し、その速度ベクトルを調べることで、
+          もう一度・より直接的に確認する。
+        </p>
+        <p>
+          $f(x,y)$ は $C^1$ 級とし、曲線 $f(x,y)=C$（等高線）上の点 $(p,q)$ で
+          $\nabla f(p,q)\ne(0,0)$ とする。この曲線を $t$ でパラメータ表示したものを
+          $(\varphi_1(t),\varphi_2(t))$、$(\varphi_1(0),\varphi_2(0))=(p,q)$、
+          $f(\varphi_1(t),\varphi_2(t))=C$（定数）とする。
+        </p>
+      </div>
+
+      <div class="cor">
+        <span class="box-label">系 5.12　勾配ベクトルは等高線と直交する</span>
+        <p>$V=(\varphi_1'(0),\varphi_2'(0))$（等高線の $(p,q)$ における速度ベクトル、すなわち接線方向）とすると、</p>
+        $$\langle \nabla f(p,q),\,V\rangle = 0.$$
+      </div>
+
+      <details>
+        <summary>証明を見る（$f(\varphi_1(t),\varphi_2(t))=C$ を $t$ で微分する）</summary>
+        <div class="proof-body">
+          <p>
+            $f(\varphi_1(t),\varphi_2(t))=C$（定数）の両辺を $t$ で微分する。定理5.8（連鎖律）より
+          </p>
+          $$f_x(p,q)\,\varphi_1'(0) + f_y(p,q)\,\varphi_2'(0) = 0,$$
+          <p>すなわち $\langle \nabla f(p,q),\,V\rangle=0$。$\blacksquare$</p>
+          <p>
+            これは系5.10の内容（$D_{\vec u}f=\nabla f\cdot\vec u=|\nabla f|\cos\alpha$）を等高線に沿った方向 $V$ に
+            当てはめたものに他ならない——等高線の接線方向は $f$ の値が変化しない方向、つまり方向微分が
+            $0$ になる方向なので、$\cos\alpha=0$、すなわち $\nabla f\perp V$ となるのは当然と言える。
+          </p>
+        </div>
+      </details>
+
+      <div class="cor">
+        <span class="box-label">系 5.13　勾配ベクトルは $C$ が増加する方向を指す</span>
+        <p>
+          $(p,q)$ を通る任意の曲線 $r(t)=(r_1(t),r_2(t))$ で $r(0)=(p,q)$, $r'(0)=\nabla f(p,q)$ を満たすものを取る
+          （$\nabla f(p,q)\ne(0,0)$、すなわち $(p,q)$ は臨界点でないとする）。$F(t)=f(r_1(t),r_2(t))$ とおくと、
+        </p>
+        $$F'(0) = \|\nabla f(p,q)\|^2 > 0.$$
+      </div>
+
+      <details>
+        <summary>証明を見る（連鎖律で $F'(0)$ を計算する）</summary>
+        <div class="proof-body">
+          <p>定理5.8（連鎖律）より</p>
+          $$F'(0) = f_x(p,q)\,r_1'(0)+f_y(p,q)\,r_2'(0) = \nabla f(p,q)\cdot\nabla f(p,q) = \|\nabla f(p,q)\|^2.$$
+          <p>$\nabla f(p,q)\ne(0,0)$ なので $\|\nabla f(p,q)\|^2>0$。$\blacksquare$</p>
+          <p>
+            $F(t)=f(r(t))$ が $t=0$ で狭義に増加している（$F'(0)>0$）ということは、$\nabla f(p,q)$ の方向に
+            動くと $f$ の値、つまり通過する等高線の $C$ の値が増加していく、ということ。系5.12（直交性）と
+            合わせると、<strong>勾配ベクトルは等高線と直交し、かつ $C$ が増加する側を向く</strong>ことが分かる。
+          </p>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 5.9　$f(x,y)=\dfrac{1}{\sqrt{x^2+y^2}}=\dfrac{1}{r}$ の勾配ベクトル場</span>
+        <p>$r=\sqrt{x^2+y^2}$ とすると、</p>
+        $$f_x = -\frac{x}{r^3}, \qquad f_y = -\frac{y}{r^3}, \qquad \|\nabla f\|^2 = \frac{x^2}{r^6}+\frac{y^2}{r^6} = \frac{1}{r^4}.$$
+        <p>
+          $\nabla f(x,y) = -\dfrac{1}{r^3}(x,y)$ は、位置ベクトル $(x,y)$ と反対方向、つまり<strong>原点を向く方向</strong>を指す。
+          これは系5.13と整合的：$f=1/r$ は原点に近づく（$r$ が小さくなる）ほど値が大きくなるので、
+          $f$ が増加する方向（$\nabla f$ の方向）は原点向きになる。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">物理への応用 — ポテンシャルと力</span>
+        <p>
+          物理では、位置エネルギー（ポテンシャル）$U(x,y)$ が与えられたとき、その点で働く力は
+          $F=-\nabla U$ で表される（系5.13の言葉で言えば、力はポテンシャルが<strong>減少する</strong>方向、
+          すなわち $-\nabla U$ の方向を向く——ボールは位置エネルギーが下がる方向へ転がる、という直感と一致する）。
+        </p>
+        <p>
+          例：質量 $M$ の質点が原点にあるとき、そこから距離 $r$ の点（質量 $m=1$）に働く万有引力の大きさは
+          $F=GM/r^2$（$G$ は万有引力定数）で、そのポテンシャルは $U(r)=-\dfrac{GM}{r}=-GM\cdot f(x,y)$
+          （例5.9の $f=1/r$ を使う）と書ける。実際、</p>
+        $$-\nabla U = GM\,\nabla f = -\frac{GM}{r^3}(x,y),$$
+        <p>
+          これは原点を向く（引力なので当然、原点に向かって引かれる）大きさ $GM/r^2$ のベクトルであり、
+          万有引力の法則と一致する。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 変数変換とヤコビ行列 -->
+  <div class="section" id="transform">
+    <div class="sec-header">
+      <div class="sec-tag">Application</div>
+      <h2>変数変換とヤコビ行列</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">動機 — 座標を取り替えたときの偏微分</span>
+        <p>
+          $z=f(x,y)$ で、さらに $x,y$ 自身が別の変数 $u,v$ の関数（$x=x(u,v)$, $y=y(u,v)$）である場合を考える
+          （例：直交座標 $(x,y)$ から極座標 $(r,\theta)$ への変換）。$z$ を $u,v$ で偏微分するには、定理5.8の連鎖律を
+          $t$ の1変数の場合から $u,v$ の2変数の場合に拡張すればよい。
+        </p>
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 5.11　変数変換の公式とヤコビ行列</span>
+        <p>$z=f(x,y)$, $x=x(u,v)$, $y=y(u,v)$ がすべて全微分可能とする。連鎖律（定理5.8を $u$ 方向・$v$ 方向にそれぞれ適用）より</p>
+        $$z_u = z_x x_u + z_y y_u, \qquad z_v = z_x x_v + z_y y_v \qquad \left(z_x=\frac{\partial f}{\partial x},\ z_y=\frac{\partial f}{\partial y}\right).$$
+        <p>行列を使ってまとめて書くと</p>
+        $$(z_u,\ z_v) = (z_x,\ z_y)\begin{pmatrix} x_u & x_v \\ y_u & y_v \end{pmatrix}.$$
+        <p>この $\begin{pmatrix} \partial x/\partial u & \partial x/\partial v \\ \partial y/\partial u & \partial y/\partial v \end{pmatrix}$ を
+        $(x,y)$ の $(u,v)$ に関する<strong>ヤコビ行列</strong>（Jacobi matrix）という。</p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">ヤコビ行列は「線形近似」そのもの</span>
+        <p>
+          写像 $(u,v)\mapsto(x(u,v),y(u,v))$ を線形写像で近似すると
+        </p>
+        $$x(u+h,v+k) = x(u,v)+x_uh+x_vk+r_1(h,k), \qquad y(u+h,v+k) = y(u,v)+y_uh+y_vk+r_2(h,k)$$
+        <p>となるので、増分 $(h,k)$ は近似的にヤコビ行列の掛け算 $\begin{pmatrix}h\\k\end{pmatrix}\mapsto\begin{pmatrix}x_u&x_v\\y_u&y_v\end{pmatrix}\begin{pmatrix}h\\k\end{pmatrix}$ で変換される。
+          ヤコビ行列は、写像を各点で最もよく近似する線形写像の行列表示にほかならない。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 5.8　極座標変換のヤコビ行列</span>
+        <p>$x=r\cos\theta$, $y=r\sin\theta$（$r>0$）のヤコビ行列を求めよ。</p>
+        <details>
+          <summary>解答</summary>
+          <div class="proof-body">
+            $$\begin{pmatrix} \dfrac{\partial x}{\partial r} & \dfrac{\partial x}{\partial\theta} \\[4pt] \dfrac{\partial y}{\partial r} & \dfrac{\partial y}{\partial\theta} \end{pmatrix}
+            = \begin{pmatrix} \cos\theta & -r\sin\theta \\ \sin\theta & r\cos\theta \end{pmatrix}.$$
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 微分可能性の階層 -->
+  <div class="section" id="hierarchy">
+    <div class="sec-header">
+      <div class="sec-tag">Key Theorem</div>
+      <h2>微分可能性の階層</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 5.6　微分可能性の含意関係</span>
+        $$C^1 \text{ 級（偏微分が連続）} \;\Rightarrow\; \text{全微分可能} \;\Rightarrow\; \text{連続かつ偏微分可能}$$
+        <p>逆方向はいずれも成り立たない。</p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">「連続かつ偏微分可能」 $\not\Rightarrow$ 全微分可能</span>
+        <p>反例：$f(x,y)=\dfrac{xy}{\sqrt{x^2+y^2}}$（原点で $f(0,0)=0$）</p>
+        <details>
+          <summary>確認（原点での状況）</summary>
+          <div class="proof-body">
+            <p><strong>連続性：</strong>$|f(x,y)|\le\dfrac{|x||y|}{\sqrt{x^2+y^2}}\le\dfrac{1}{2}\sqrt{x^2+y^2}\to 0$。連続。</p>
+            <p><strong>偏微分：</strong>$f_x(0,0)=\lim_{h\to 0}\dfrac{f(h,0)-f(0,0)}{h}=0$（同様に $f_y=0$）。</p>
+            <p><strong>全微分可能性の確認：</strong>もし全微分可能なら $A=B=0$ で
+            $$\lim_{(h,k)\to(0,0)}\frac{f(h,k)-0}{\sqrt{h^2+k^2}} = \lim \frac{hk}{h^2+k^2} = 0$$
+            が必要だが、$k=h$ で近づくと $\dfrac{h^2}{2h^2}=\dfrac{1}{2}\ne 0$。</p>
+            <p>よって全微分不可能。$\blacksquare$</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 5.7　もう一つの反例：$f(x,y)=\sqrt{|xy|}$</span>
+        <p>$x$ 軸・$y$ 軸上では $f=0$ なので $f_x(0,0)=f_y(0,0)=0$（偏微分可能）。しかし $(0,0)$ で全微分不可能。</p>
+        <details>
+          <summary>確認</summary>
+          <div class="proof-body">
+            <p>もし全微分可能なら $A=B=0$ より</p>
+            $$\lim_{(h,k)\to(0,0)}\frac{f(h,k)-f(0,0)}{\sqrt{h^2+k^2}} = \lim_{(h,k)\to(0,0)}\frac{\sqrt{|hk|}}{\sqrt{h^2+k^2}} = 0$$
+            <p>が必要。ところが $h=k=t$ とおくと $\dfrac{\sqrt{t^2}}{\sqrt{2t^2}}=\dfrac{1}{\sqrt2}\ne 0$ で、この経路では極限が $0$ にならない。
+            よって全微分不可能。$\blacksquare$</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 5.7　$C^1$ 級ならば全微分可能</span>
+        <p>偏微分 $f_x$, $f_y$ が $(a,b)$ の近傍で存在し、かつ $(a,b)$ で連続（$C^1$ 級）ならば、$f$ は $(a,b)$ で全微分可能。</p>
+        <details>
+          <summary>証明の概略</summary>
+          <div class="proof-body">
+            <p>$f(a+h,b+k)-f(a,b) = [f(a+h,b+k)-f(a,b+k)]+[f(a,b+k)-f(a,b)]$。</p>
+            <p>第1項に $x$ についての平均値の定理（$y$ を固定）を、第2項に $y$ についての平均値の定理を適用：</p>
+            $$= f_x(a+\theta_1 h, b+k)\cdot h + f_y(a, b+\theta_2 k)\cdot k \quad (0<\theta_1,\theta_2<1).$$
+            <p>$f_x$, $f_y$ の連続性から $(h,k)\to(0,0)$ で
+            $f_x(\cdots)\to f_x(a,b)=A$, $f_y(\cdots)\to f_y(a,b)=B$。よって全微分可能。$\blacksquare$</p>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 計算例と判定 -->
+  <div class="section" id="examples">
+    <div class="sec-header">
+      <div class="sec-tag">Examples</div>
+      <h2>計算例と全微分可能性の判定</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">例 5.4　$f(x,y)=x^2+y^2$ の全微分可能性（原点）</span>
+        <details>
+          <summary>解答</summary>
+          <div class="proof-body">
+            <p>$f_x=2x$, $f_y=2y$ は連続なので $C^1$ 級。定理5.7より全微分可能。</p>
+            <p>直接確認：$f(h,k)-f(0,0)=h^2+k^2=0\cdot h+0\cdot k+(h^2+k^2)$。</p>
+            <p>$\dfrac{h^2+k^2}{\sqrt{h^2+k^2}}=\sqrt{h^2+k^2}\to 0$。確かに $o(\sqrt{h^2+k^2})$。$\blacksquare$</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 5.5　全微分不可能の確認手順</span>
+        <p>$f$ が $(a,b)$ で全微分不可能であることを示すには：</p>
+        <ol>
+          <li>$f_x(a,b)$, $f_y(a,b)$ を定義から計算して $A$, $B$ を求める。</li>
+          <li>$\dfrac{f(a+h,b+k)-f(a,b)-Ah-Bk}{\sqrt{h^2+k^2}}$ が $(h,k)\to(0,0)$ で 0 にならない経路を見つける。</li>
+        </ol>
+        <p>（例：$k=h$ や $k=h^2$ などの経路を試す）</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">微分可能性の階層まとめ</span>
+        <table class="axiom-table">
+          <tr><th>条件</th><th>連続性</th><th>偏微分可能</th><th>全微分可能</th></tr>
+          <tr><td>$C^1$ 級</td><td>○</td><td>○</td><td>○</td></tr>
+          <tr><td>全微分可能</td><td>○</td><td>○</td><td>○</td></tr>
+          <tr><td>連続 + 偏微分可能</td><td>○</td><td>○</td><td>$\times$（一般に）</td></tr>
+          <tr><td>偏微分可能のみ</td><td>$\times$（一般に）</td><td>○</td><td>$\times$</td></tr>
+        </table>
+        <p>反例の要約：</p>
+        <ul>
+          <li>$\dfrac{xy}{x^2+y^2}$：偏微分可能だが<strong>連続でない</strong>（原点での極限が存在しない）</li>
+          <li>$\dfrac{xy}{\sqrt{x^2+y^2}}$：連続かつ偏微分可能だが<strong>全微分不可能</strong></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; margin-top:2rem; padding:0 .5rem;">
+    <a href="ch4.html" style="color:var(--accent); text-decoration:none; font-weight:700;">← Ch.4 べき級数と収束半径</a>
+    <a href="ch6.html" style="color:var(--accent); text-decoration:none; font-weight:700;">Ch.6 二変数のテーラーの定理と極値問題 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

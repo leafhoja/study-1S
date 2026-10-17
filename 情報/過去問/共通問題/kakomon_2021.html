@@ -1,0 +1,286 @@
+<!DOCTYPE html><!-- 「2021年度 | 情報 共通問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2021年度 | 情報 共通問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kyotsu-2021">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>共通問題 2021年度</h1>
+  <p class="subtitle">7月27日（火）3限｜大問3（うち大問3は選択）</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（DNSと日付計算）</a>
+    <a href="#q2">大問2（符号化と二分探索）</a>
+    <a href="#q3">大問3（選択：ローマ数字符号化／ワクチン予約の情報セキュリティ）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>DNSの仕組みと日付計算アルゴリズム</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>問1-1 — DNSとインターネットの仕組み</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>次の文章の空欄を、以下の語群にある語を用いて埋めよ。ただし、異なる記号の空欄に同じ語を用いてはならない。</p>
+        <p>
+          インターネットは局所ネットワークが互いに接続してできており、それらの接続点にある機器を<span class="blank">A</span>と呼ぶ。いま、http://www.example.com という<span class="blank">B</span>にインターネットを介してアクセスすることを考える。アクセスには、インターネット上の住所にあたる<span class="blank">C</span>と呼ばれる<span class="blank">D</span>ビットまたは128ビットの数値を知る必要がある。その数値の取得には<span class="blank">E</span>が用いられる。具体的にはまず、ルートサーバと呼ばれるサーバに<span class="blank">F</span>を担当するサーバの<span class="blank">C</span>を問い合わせる。続いて<span class="blank">F</span>を担当するサーバ、<span class="blank">G</span>を担当するサーバ、と順に問い合わせ、最終的に<span class="blank">H</span>に対応するWebサーバの<span class="blank">C</span>を得る。Webサーバの<span class="blank">C</span>が分かると、その<span class="blank">C</span>宛に送るメッセージを準備する。メッセージは<span class="blank">I</span>と呼ばれるものに分解され、宛先の<span class="blank">C</span>や順序を表す番号などが付加される。この<span class="blank">I</span>がインターネットを介してWebサーバに届く。Webサーバは受け取った<span class="blank">I</span>を順序を表す番号に従って結合し、元のメッセージを復元する。
+        </p>
+      </div>
+      <div class="note">
+        <span class="box-label">語群</span>
+        <p>DHCP・DNS・IPアドレス・PKI・URL・UTF・防火壁・認証・確認応答・再送要求・キャッシュ・クッキー・パケット・フルメッシュ・ポート番号・ルータ・www・com・www.example・example.com・www.example.com・8・16・32・1024</p>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p><span class="blank">A=ルータ</span>／<span class="blank">B=URL</span>／<span class="blank">C=IPアドレス</span>／<span class="blank">D=32</span>（IPv4は32ビット、文中の「または128ビット」はIPv6を指す）</p>
+          <p><span class="blank">E=DNS</span>／<span class="blank">F=com</span>（トップレベルドメイン）／<span class="blank">G=example.com</span>（セカンドレベル）／<span class="blank">H=www.example.com</span>（完全なホスト名）</p>
+          <p><span class="blank">I=パケット</span></p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>A=ルータ、B=URL、C=IPアドレス、D=32、E=DNS、F=com、G=example.com、H=www.example.com、I=パケット</div>
+        <div class="note">
+          <span class="box-label">語群の全用語</span>
+          <p><strong>DHCP</strong>：端末へIPアドレスなどのネットワーク設定を自動配布するプロトコル。／<strong>DNS</strong>：ホスト名・ドメイン名をIPアドレスなどに対応づける仕組み。／<strong>IPアドレス</strong>：IPネットワーク上の機器・接続先を識別する数値。／<strong>PKI</strong>：認証局と電子証明書により公開鍵の正当性を保証する公開鍵基盤。／<strong>URL</strong>：Web上の資源の場所と取得方法を表す文字列。／<strong>UTF</strong>：Unicodeの文字をバイト列に変換する符号化方式の総称。</p>
+          <p><strong>防火壁</strong>：通信を規則に基づいて許可・遮断するファイアウォール。／<strong>認証</strong>：相手や利用者が主張どおりの主体であることを確かめる処理。／<strong>確認応答</strong>：データを受信したことを送信側へ知らせる応答。／<strong>再送要求</strong>：欠落・破損したデータをもう一度送るよう求めること。／<strong>キャッシュ</strong>：再利用のため、取得済みの結果を一時保存する仕組み。／<strong>クッキー</strong>：Webサイトがブラウザ側に保存させる小さな状態情報。</p>
+          <p><strong>パケット</strong>：ネットワークで送るためにデータを分割し、宛先などの制御情報を付けた単位。／<strong>フルメッシュ</strong>：すべてのノード対を直接接続する構成。／<strong>ポート番号</strong>：同じ端末上のどのアプリケーション・サービス宛かを区別する番号。／<strong>ルータ</strong>：異なるネットワーク間でパケットの転送先を選ぶ機器。</p>
+          <p><strong>www</strong>：例のホスト名の左端のラベルで、慣習的にWebサーバを表す。／<strong>com</strong>：例の最上位ドメイン（TLD）。／<strong>www.example</strong>：文字列の一部分だが、右端から階層をたどるDNS名としてはこの例の問い合わせ単位にならない。／<strong>example.com</strong>：comの下にあるドメイン。／<strong>www.example.com</strong>：例でWebサーバを指す完全なホスト名。／<strong>8</strong>・<strong>16</strong>・<strong>32</strong>・<strong>1024</strong>：いずれもビット数の候補。この文ではIPv4の長さである32だけが該当し、8・16・1024は該当しない（IPv6は128ビット）。</p>
+        </div>
+      </details>
+
+      <h3>問1-2 — 88日後の日付を求める反復処理</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>流行病の予防のため、各国民に予防薬を2回ずつ投与することになった。その予防薬は、2回目の投与を1回目の投与の88日後以降にする必要がある。ある国民がa月b日に1回目を、c月d日に2回目を希望しているとする。この希望日が適切か判定する計算手順を考えよう。ただし、a月b日、a月b日の88日後、c月d日は全て同じ年であるとする。また、1月1日の1日後は1月2日、同2日後は1月3日であると数え、1月1日の2日後以降には1月3日も含むとする。</p>
+        <p>(1) 以下はa月b日の88日後の日付(x月y日)を計算する手順である。空欄を埋めよ。ここで、daymonth<sub>m</sub>はm月に含まれる日数を保持する配列である。</p>
+        <p>
+          <span class="mathblock">x ← <span class="blank">A</span>
+y ← <span class="blank">B</span> + 88
+while <span class="blank">C</span> &gt; daymonth<sub>x</sub> do
+&nbsp;&nbsp;y ← y − <span class="blank">D</span>
+&nbsp;&nbsp;x ← <span class="blank">E</span> + 1
+done</span>
+        </p>
+        <p>(2) 2回目の希望日(c月d日)が1回目の希望日の88日後(x月y日)以降である場合には1を、そうでない場合には0を解として計算を終了する手順を、教科書の表記に倣ってif, then, else, endif, returnを用いて示せ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>初期値は月をそのままx=a、日を88日後にy=b+88とし、yが月の日数を超える限り繰り越し（桁上がり）を行う：<span class="blank">A=a</span>／<span class="blank">B=b</span>／<span class="blank">C=y</span>（ループ条件）／<span class="blank">D=daymonth<sub>x</sub></span>（現在の月の日数分だけyを減らす）／<span class="blank">E=x</span>（月を1つ進める）。</p>
+          <p>(2) 月を先に比較し、同じ月なら日で比較する：</p>
+          <div class="mathblock">if c &gt; x then return 1
+else if c = x then
+  if d ≥ y then return 1 else return 0 endif
+else return 0
+endif</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>A=a、B=b、C=y、D=daymonth<sub>x</sub>、E=x</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「繰り上がり」を伴う反復処理の型</span>
+        <p>日付計算のように「ある単位を超えたら上位の単位に繰り上げる」処理は、while文で「まだ繰り上がる余地があるか」を判定しながら差し引き・加算を繰り返す、という同じ骨格を持つ（時計の秒→分→時、2進数の桁上がりなども同型）。DNSの階層的な問い合わせ（ルート→TLD→ドメイン→ホスト）も「上位から下位へ順に絞り込む」という共通のパターンを持つ点で、この大問全体に一貫したテーマがある。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>グレイ符号と二分探索</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>問2-1 — グレイ符号の変換表</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>グレイ符号は隣接する符号の間で1桁の文字だけが異なり、残りのすべての桁の文字が一致する符号化方式である。また文字列「0011」を2進符号、グレイ符号、10進符号として解釈した場合の数値を、教科書と同様に、それぞれ$(0011)_2$、$(0011)_{グレイ}$、$(0011)_{10}$と表記するものとする。(1) 下の表は4桁の2進符号とグレイ符号、10進符号の対応表である。空欄(a)〜(j)を埋めよ。</p>
+        <div class="table-scroll" role="region" aria-label="4桁の2進符号・グレイ符号・10進符号の対応表" tabindex="0">
+          <table class="q-table q-table-wide">
+            <tr><th>10進</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th></tr>
+            <tr><th>2進</th><td>0000</td><td>0001</td><td>0010</td><td>0011</td><td>0100</td><td>0101</td><td>0110</td><td>0111</td><td>1000</td><td class="blank">a</td><td class="blank">b</td><td class="blank">c</td><td class="blank">d</td><td class="blank">e</td><td>1110</td><td>1111</td></tr>
+            <tr><th>グレイ</th><td>0000</td><td>0001</td><td>0011</td><td>0010</td><td class="blank">f</td><td>0111</td><td>0101</td><td>0100</td><td>1100</td><td class="blank">g</td><td>1111</td><td>1110</td><td class="blank">h</td><td class="blank">i</td><td class="blank">j</td><td>1000</td></tr>
+          </table>
+        </div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>2進→グレイの変換は「2進数と、それを1ビット右シフトしたもののXOR」。2進側(a)〜(e)は単純に9〜13の2進数：</p>
+          <div class="mathblock">(a)=1001 (b)=1010 (c)=1011 (d)=1100 (e)=1101</div>
+          <p>グレイ側は各10進値の2進表現からXORで求める：4→0100^0010=<strong>(f)=0110</strong>／9→1001^0100=<strong>(g)=1101</strong>／12→1100^0110=<strong>(h)=1010</strong>／13→1101^0110=<strong>(i)=1011</strong>／14→1110^0111=<strong>(j)=1001</strong>。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>a=1001,b=1010,c=1011,d=1100,e=1101,f=0110,g=1101,h=1010,i=1011,j=1001</div>
+      </details>
+
+      <h3>問2-1(2)〜(4) — 符号の読み違いによる誤差</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>2進符号の文字列「0011」を誤って10進符号として解釈したと仮定する。本来、2進数の$(0011)_2$は3を意味していたはずのところ、10進数の$(0011)_{10}$と解釈したため、+8だけ大きく間違ったことになる。このように$a$だけ大きく間違った場合の差を$+a$、逆に小さく間違った場合の差を$-a$と書くものとする。</p>
+        <p>(2) 2進数$(0101)_2$を誤って10進数$(0101)_{10}$として解釈した場合の差を書け。<br>(3) 2進数の$(xyz1)_2$を誤って10進数$(xyz1)_{10}$として解釈した際の差を表す数式を書け（$x,y,z$はそれぞれ対応する0または1の数値を表す変数とする）。<br>(4) グレイ符号で表された数値$(xxyy)_{グレイ}$を誤って2進数$(xxyy)_2$として解釈した際の差を表す数式を書け（$x,y$はそれぞれ対応する0または1の数値を表す変数とする）。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(2) 真値=5、誤読=101。差=101−5=<strong>+96</strong>。</p>
+          <p>(3) 真値=$8x+4y+2z+1$、誤読（10進表記の数字を読む）=$1000x+100y+10z+1$。差＝$992x+96y+8z$。</p>
+          <p>(4) グレイ→2進変換：$b_3=x,\ b_2=b_3\oplus x=0,\ b_1=b_2\oplus y=y,\ b_0=b_1\oplus y=0$ より真値は$8x+2y$。誤読（そのまま2進数として読む）は$8x+4x+2y+y=12x+3y$。差＝$(12x+3y)-(8x+2y)=4x+y$。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(2) +96　(3) $992x+96y+8z$　(4) $4x+y$</div>
+      </details>
+
+      <h3>問2-2 — 二分探索で身長168cm以上の人数を数える</h3>
+      <div class="ex"><span class="box-label">問題</span><p>身長の低い順に整列させた学生の中に、身長168cm以上の学生が何人いるのか知りたい。どの学生も自身の身長を正確に把握していないため、一人の教員がメジャーテープを用いて身長168cm以上の学生数を調べる。全ての学生の身長は異なり、整列順の誤りはないものとする。(1) メジャーテープによる測定は手間がかかるため、なるべく測定回数を少なくしたい。教員はどのようなアルゴリズムを用いて身長168cm以上の学生数を調べるべきか。 (2) 全体で30人の学生がいる場合、測定回数が最も多くなる時は何回測定することになるか。 (3) 全体でN人の学生がいる場合、測定回数が最も多くなる時は何回測定することになるか。その理由も含めて答えよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(1) <strong>二分探索</strong>を用いる。並びの中央付近の学生を測定し、168cm以上かどうかで「168cm以上の人が始まる境界」がどちらの半分にあるかを絞り込み、範囲を半分ずつ狭めていく。</p>
+          <p>(2) $N=30$なら $\lceil\log_2 30\rceil=5$ 回。</p>
+          <p>(3) 一般に $\lceil\log_2 N\rceil$ 回。二分探索は1回の測定で候補範囲を半分にできるので、範囲が1人に絞られるまでに必要な回数は、候補人数Nを2で何回割れば1以下になるかで決まるため。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1)二分探索　(2)5回　(3)$\lceil\log_2 N\rceil$回</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — グレイ符号の用途</span>
+        <p>グレイ符号は「隣接する値どうしが1ビットしか変わらない」という性質から、ロータリーエンコーダなど機械的な回転角センサで、複数ビットが同時に切り替わる瞬間の誤読（グリッチ）を防ぐのに使われる。二分探索は「候補範囲を毎回半分にする」という発想で、計算量が$O(\log N)$になる代表例——共通問題2022・2024に出てきた平方根探索・対角線の長さ探索とも同じ発想である。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q3">
+    <div class="sec-header"><div class="sec-tag">大問 3（選択）</div><h2>問題A：ローマ数字の符号化／問題B：ワクチン予約サイトの情報セキュリティ</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="note"><span class="box-label">出題形式</span><p>問題A・Bのいずれか一方を選択。ここでは両方を掲載する。</p></div>
+
+      <div class="ex">
+        <span class="box-label">表1 — ローマ数字と整数の対応</span>
+        <table class="q-table">
+          <tr><th>整数</th><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>40</td><td>50</td><td>60</td><td>90</td><td>100</td></tr>
+          <tr><th>ローマ数字</th><td>I</td><td>II</td><td>III</td><td>IV</td><td>V</td><td>VI</td><td>VII</td><td>VIII</td><td>IX</td><td>X</td><td>XI</td><td>XL</td><td>L</td><td>LX</td><td>XC</td><td>C</td></tr>
+        </table>
+      </div>
+
+      <h3>問題A-1 — ローマ数字のビット符号化</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>整数列をカンマ区切りのローマ数字の列で表すことにする。例えば1と3と5という3つの整数がこの順に並んだ列は「I,III,V」と表される。さらにこれを、Iを0、Vを100、Xを101、Lを110、カンマを111というビット列で符号化するとする。なお90以上の数は考えない。<br>
+        (1) XII はどのようなビット列に符号化されるか。 (2) <code>11001110100</code>というビット列はどのような整数列を表しているか。整数列に対応しない場合には「なし」と答えよ。 (3) Aさんは「カンマの符号を111から11に変更すれば同じデータをより短いビット列で表現できる」と考えた。この符号化方法の問題点を1行程度で指摘せよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(1) X,I,I → <code>101</code>+<code>0</code>+<code>0</code> = <strong><code>10100</code></strong>。</p>
+          <p>(2) 先頭から接頭符号として区切っていく：<code>110</code>(L) → <code>0</code>(I) → <code>111</code>(カンマ) → <code>0</code>(I) → <code>100</code>(V)。すなわち L,I,(カンマ),I,V →「LI,IV」→ 整数列は <strong>51, 4</strong>。</p>
+          <p>(3) 新しいカンマの符号「11」は、既存の符号「110」（L）の先頭2ビットと一致してしまい、接頭符号の条件（どの符号も他の符号の接頭辞にならない）を破る。そのため「11」を受け取った時点で、それが「カンマ」で確定なのか「110（L）」の途中なのかを一意に判別できず、符号列を正しく復号できなくなる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) 10100　(2) 51, 4（LI,IV）　(3) 「11」がLの符号「110」の接頭辞になり、一意に復号できなくなる。</div>
+      </details>
+
+      <h3>問題A-2 — 平均符号長と情報源符号化定理</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>1から10までの整数に対応するローマ数字に含まれるアルファベットは、Iが14個、Vが5個、Xが2個である。<br>
+        (1) I・V・Xをそれぞれ長さ2のビット列に符号化するとする。このとき、IIIは長さ6、IVは長さ4のビット列となる。1から10までの整数に対応するローマ数字を符号化して得られるビット列の長さは平均何ビットか。ただし、どの整数に対する符号も等確率で現れるとする。<br>
+        (2) Iを0、Vを10、Xを110に符号化するとする。1から10までの整数に対応するローマ数字を符号化して得られるビット列の長さは平均何ビットか。ただしどの整数に対する符号も等確率で現れるものとする。<br>
+        (3) 1から10までの整数1つを伝えるメッセージが等確率で発せられるとき、これらのメッセージ全体の平均情報量は何ビットか。小数点以下1位まで求めよ。導出の過程も簡単に示すこと。<br>
+        (4) 問(2)の符号化方法は、1から10までの整数をビット列に符号化しているとみることができる。このとき、問(2)と問(3)の結果の関係について、情報源符号化定理の観点から3〜4行程度で論ぜよ。情報源符号化定理がどのような定理なのかの説明を含めること。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(1) 1〜10のローマ数字に含まれる文字数はI,II,III,IV,V,VI,VII,VIII,IX,Xでそれぞれ1,2,3,2,1,2,3,4,2,1文字＝合計21文字。1文字2ビットなので平均符号長 $=21/10\times2=\mathbf{4.2}$ ビット。</p>
+          <p>(2) I=0(1bit),V=10(2bit),X=110(3bit)として各数の符号長を足し合わせると合計30ビット、平均 $=30/10=\mathbf{3.0}$ ビット。</p>
+          <p>(3) $\log_2 10\approx\mathbf{3.3}$ ビット。</p>
+          <p>(4) 情報源符号化定理は「一意に復号可能な符号の平均符号長は、情報源のエントロピーを下回ることができない」という定理である。しかし(2)の平均符号長3.0ビットは(3)のエントロピー約3.3ビットを<em>下回って</em>いる。矛盾に見えるが、実は(2)の符号化は一意に復号可能ではない——たとえば1(I="0")の符号が2(II="00")の符号の接頭辞になっており、接頭性を満たしていない。つまり(2)はそもそも定理の前提（一意復号可能性）を満たさない不完全な符号なので、下限を下回っても定理とは矛盾しない。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) 4.2ビット　(2) 3.0ビット　(3) 3.3ビット　(4) (2)は接頭符号になっておらず一意に復号できないため、情報源符号化定理の前提を満たさない。</div>
+      </details>
+
+      <h3>問題B — ワクチン予約サイトの情報セキュリティ</h3>
+      <div class="ex">
+        <span class="box-label">問題文（新聞記事）</span>
+        <p>新型コロナウイルスワクチンの自衛隊大規模接種センターのWeb予約サイトに関する次の新聞記事を読み、以下の問B-1から問B-6に答えよ。</p>
+        <p>東京23区と大阪市に住む高齢者向けに17日始まった新型コロナウイルスワクチンの大規模集団接種のインターネット予約を巡り、市区町村から配られる接種券に記載されていない架空の数字を入力しても予約の手続きを進められることが、防衛省への取材で分かった。市区町村の予約システムと連結しておらず、接種券番号の情報を収集していないためという。実際には接種券などの確認があり、予約しても接種できないが、防衛省はこうした架空の予約をしないよう強く呼び掛けている。</p>
+        <p>（中見出し省略）</p>
+        <p>防衛省によると、予約システムは接種券の「市区町村コード」（6桁）▽接種券番号（10桁）▽生年月日──を打ち込み、希望日などを予約する仕組みだ。</p>
+        <p>こうした仕様のため、予約システムが正常に機能するかどうかを検証しようと毎日新聞記者が防衛省のサイトから、架空の市区町村コードや接種券番号の数字を入力したところ、予約作業を進めることができた。また、予約の対象は65歳以上だが、65歳未満となる生年月日を入力しても予約することができた。予約は既に取り消しているが、同じ方法で複数の予約を取ることは可能とみられる。</p>
+        <p>防衛省はこうした状況について、システム障害や不具合ではなく、元々可能な仕様だと説明する。接種会場では接種券と本人確認書類の提示を求めるため、架空の情報で予約しても、実際には接種は受けられない。だが予約をキャンセルしなければ、ワクチンが無駄になったり、接種現場が混乱したりする恐れがある。</p>
+        <p>防衛省人事教育局の担当者は「入力する人の善意に頼ったシンプルなシステム。いたずらで予約されては本来必要な人の予約ができなくなる。迷惑な行為はやめてほしい」と話している。同省はシステム改修の可否も検討しているという。</p>
+        <p style="font-size:.9em;color:var(--text-mute,#666);">出典: 北山夏帆・松浦吉剛「大規模接種予約，架空番号で可　防衛省「善意頼み」」『毎日新聞』2021年5月18日，朝刊，p.24</p>
+      </div>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p><strong>問B-1</strong> 仮に、意図的な「架空の予約」や「いたずら」がまったく行われないとしても、この記事で説明されている仕様の予約システムを運用し続けた場合に起こりうる問題がある。その問題を簡潔に説明せよ。また、そのような問題の影響を緩和するため、接種会場で取りうる対応についても簡潔に説明せよ。</p>
+        <p><strong>問B-2</strong> この記事に書かれている「予約システムが正常に機能するかどうかを検証」するための具体的行為が不正アクセス禁止法（「不正アクセス行為の禁止等に関する法律」）に違反しないと主張するための論拠を、同法が禁じている行為を具体的に挙げた上で説明せよ。</p>
+        <p><strong>問B-3</strong> 一般に、情報セキュリティの3側面として、しばしばConfidentiality、Integrity、Availabilityが挙げられる。それぞれについて、日本語での名称と30字程度以内の簡潔な説明を示せ。</p>
+        <p><strong>問B-4</strong> この「予約サイト」には、前記の仕様とは別に、運営者が意図したものではない欠陥を突いた攻撃によって、予約データが改ざんされる危険があるとの指摘もあった。もし実際にそのような改ざんが生じた場合、Confidentiality、Integrity、Availabilityのうちのいずれが最も侵害されたことになるか、一つを選んで答えよ。</p>
+        <p><strong>問B-5</strong> 経済産業省が所管する独立行政法人情報処理推進機構(IPA)は、「脆弱性関連情報の届出制度」を運営しており、「ソフトウェア製品やウェブサイトの機能や性能を損なう原因となるセキュリティ上の問題個所」としての「脆弱性」を発見した際には、「その脆弱性の情報を関係者以外には知られぬよう適切に管理のうえ関係者に情報を送り、速やかに対策を施」すために、まずはIPAに届け出ることを呼び掛けている。これに反して、そのような脆弱性の情報が発見者によりいきなり公開された場合に生じ得る問題は何か、簡潔に説明せよ。</p>
+        <p><strong>問B-6</strong> 冒頭の記事にあるような「検証」行為を通じてこの予約システムの問題を指摘する報道は、他の報道機関によってもなされ、賛否両論を呼んだ。あなた自身はどう考えるか、「情報」の授業で学んだ用語や概念も用いつつ、簡潔に論ぜよ。（概念や用語を正しく理解しており、それを用いて論理的に論じていれば、どのような立場の解答でも評価する。）</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>B-1</strong>　いたずらが一切なくても、実在の接種券情報との照合がないため、入力ミスや重複入力だけで見かけ上の予約枠が不当に埋まってしまい、実際に打つべき人の予約ができなくなる、あるいはワクチンが無駄になる問題が起こりうる。緩和策として、接種会場で接種券と本人確認書類の提示を求め、不備があれば接種せず、可能なら早期に予約を取り消して枠を解放する運用が考えられる。</p>
+          <p><strong>B-2</strong>　不正アクセス禁止法が禁じるのは、他人のID・パスワードを不正に用いる、あるいはアクセス制御機能自体の欠陥を突いて認証を回避する行為である。この予約システムはそもそも実在情報との照合というアクセス制御機能を備えておらず、入力された値の形式が正しければ誰でも通常の手順で利用できる仕様だった。記者は用意された入力フォームを通常どおり使っただけであり、アクセス制御を回避・突破する行為を行っていないため、同法が禁じる行為には該当しないと主張できる。</p>
+          <p><strong>B-3</strong>　機密性（Confidentiality）：許可された者だけが情報にアクセスできること。完全性（Integrity）：情報が改ざん・破壊されず正確な状態にあること。可用性（Availability）：必要なときに正当な利用者が支障なく利用できること。</p>
+          <p><strong>B-4</strong>　完全性（Integrity）が最も侵害されたことになる（データが改ざんされた＝正確性が損なわれたため）。</p>
+          <p><strong>B-5</strong>　修正前に脆弱性の詳細が公開されると、悪意ある第三者がその脆弱性を悪用してシステムを攻撃できてしまい、被害（データの改ざん・漏洩・サービス停止など）が実際に発生する危険が高まる。IPAへの届出制度は、運営者に修正の猶予を与えてからの公表を促すことでこれを防いでいる。</p>
+          <p><strong>B-6</strong>　（自由記述）例えば「検証行為が結果的に安全性向上に寄与した面はあるが、実際にシステムに影響を与える形での検証（本番環境での架空データ入力）は、意図せぬ障害を引き起こすリスクや、不正アクセス禁止法との境界が曖昧になるリスクを伴う。報道機関は、情報セキュリティの3要素や関連法規への影響を十分検討したうえで、可能な限り運営者への事前通報や、実害の生じない範囲での検証にとどめるべきだ」のように、授業で学んだ概念を用いて論理的に説明できていれば、立場を問わず評価されうる。</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「アクセス制御機能」の有無がカギ</span>
+        <p>不正アクセス禁止法の適用可否を考える際は、常に「その行為がアクセス制御機能（ID・パスワード等による認証）を回避・突破しているか」に着目するとよい。今回のケースのように、そもそも実効的なアクセス制御機能を欠くシステムに対しては、通常の手順内で入力しただけの行為は同法の対象になりにくい——ただしこれは法的責任の話であり、倫理的・社会的な妥当性とは別の論点である点にも注意（問B-6で問われている部分）。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2022.html">← 2022年度へ</a>
+    <a href="kakomon_2019.html">2019年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

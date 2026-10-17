@@ -1,0 +1,510 @@
+<!DOCTYPE html><!-- 「Ch.4 べき級数と収束半径 — 微分積分学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>Ch.4 べき級数と収束半径 — 微分積分学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="ch4">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="ch1.html" data-page="ch1">Ch.1</a>
+      <a href="ch2.html" data-page="ch2">Ch.2</a>
+      <a href="ch3.html" data-page="ch3">Ch.3</a>
+      <a href="ch4.html" data-page="ch4" class="active">Ch.4</a>
+      <a href="ch5.html" data-page="ch5">Ch.5</a>
+      <a href="ch6.html" data-page="ch6">Ch.6</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>Ch.4 べき級数と収束半径</h1>
+  <p class="subtitle">講義日: 6/23・6/30 — 収束半径の計算と項別演算</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#definition">べき級数の定義</a>
+    <a href="#radius">収束半径</a>
+    <a href="#computation">収束半径の計算</a>
+    <a href="#termwise">項別微分・積分</a>
+    <a href="#log">$\log(1+x)$ の展開</a>
+    <a href="#arctan">$\arctan x$ と $\pi$ の級数</a>
+    <a href="#product">べき級数の積</a>
+    <a href="#binomial">二項展開</a>
+  </div>
+
+  <!-- べき級数の定義 -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="definition">
+    <div class="sec-header">
+      <div class="sec-tag">Definition</div>
+      <h2>べき級数の定義</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 4.1　べき級数</span>
+        <p>定数列 $\{a_n\}$ に対して</p>
+        $$\sum_{n=0}^\infty a_n x^n = a_0 + a_1 x + a_2 x^2 + \cdots$$
+        <p>を<strong>べき級数</strong>（冪級数、power series）という。</p>
+        <p>より一般に、$x=a$ のまわりのべき級数 $\displaystyle\sum_{n=0}^\infty a_n(x-a)^n$ も同様に扱える（$t=x-a$ と置換）。</p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">動機</span>
+        <p>
+          テーラー展開（Ch.2）では各関数の展開を個別に計算した。Ch.3では無限級数の収束を学んだ。
+          Ch.4はこれらを統合し、「$x$ の関数として収束するべき級数」を体系的に扱う。
+        </p>
+        <p>
+          核心は<strong>収束半径 $R$</strong>の概念だ。べき級数は $|x|&lt;R$ で絶対収束し、$|x|>R$ で発散する。
+          $R$ は「最近傍の特異点までの距離」として解釈できる（複素解析と深く繋がっている）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 収束半径 -->
+  <div class="section" id="radius">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>収束半径の存在定理</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 4.2　収束半径の存在</span>
+        <p>
+          べき級数 $\displaystyle\sum_{n=0}^\infty a_n x^n$ に対して、$0 \le R \le \infty$ が唯一存在して次が成立する：
+        </p>
+        <ul>
+          <li>$|x|&lt;R$ のとき絶対収束する。</li>
+          <li>$|x|>R$ のとき発散する。</li>
+          <li>$|x|=R$（境界）では収束・発散どちらの場合もある（個別に調べる必要がある）。</li>
+        </ul>
+        <p>$R$ を<strong>収束半径</strong>、$(-R,R)$ を<strong>収束区間</strong>（開区間）という。</p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">「特異点までの距離」という直感</span>
+        <p>
+          なぜ収束する領域が「$|x|&lt;R$ の円板」になるのか？それは関数論的な理由がある。
+          $\frac{1}{1-x}$ は $x=1$ で特異点を持つが、$0$ からその距離は 1 だ。だから収束半径は $R=1$。
+          $e^x$ には特異点がないので $R=\infty$、$\sum n^n x^n$ は $x=0$ でさえ不安定なので $R=0$。
+        </p>
+        <p>
+          一般に、$x=a$ まわりのべき級数の収束半径は「$a$ から最近傍の特異点までの（複素平面上の）距離」だ。
+          実軸上に特異点がなくても、複素平面上の特異点が $R$ を決めることがある。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 収束半径の計算 -->
+  <div class="section" id="computation">
+    <div class="sec-header">
+      <div class="sec-tag">Method</div>
+      <h2>収束半径の計算法</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="prop">
+        <span class="box-label">命題 4.3　収束半径の公式（比判定法）</span>
+        <p>$a_n \ne 0$ として、$\displaystyle\lim_{n\to\infty}\left|\frac{a_n}{a_{n+1}}\right| = R$ ならばこれが収束半径。</p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>証明を見る（Ch.3の比判定法をそのまま使う）</summary>
+        <div class="proof-body">
+          <p>
+            $\displaystyle\sum a_n x^n$ に Ch.3の比判定法（定理3.6）を適用する。$x\ne 0$ を固定し、隣接する項の比を計算：
+          </p>
+          $$\left|\frac{a_{n+1}x^{n+1}}{a_n x^n}\right| = |x|\cdot\left|\frac{a_{n+1}}{a_n}\right| \xrightarrow{n\to\infty} |x|\cdot\frac{1}{R} = \frac{|x|}{R}.$$
+          <p>
+            比判定法より、$\dfrac{|x|}{R}<1$（つまり $|x|&lt;R$）ならば絶対収束、$\dfrac{|x|}{R}>1$（つまり $|x|>R$）ならば発散。
+            これはまさに「収束半径 $R$」の定義そのもの。$\blacksquare$
+          </p>
+          <p>
+            つまり「べき級数の収束半径」は、実は「係数列 $a_n x^n$ に比判定法を適用したときの境界」に過ぎない。
+            Ch.3の道具をそのまま $x$ という変数を含む形に応用しただけだ、という点が本質だ。
+          </p>
+        </div>
+      </details>
+
+      <div class="prop">
+        <span class="box-label">命題 4.4　収束半径の公式（コーシー＝アダマールの公式）</span>
+        $$R = \frac{1}{\limsup_{n\to\infty} \sqrt[n]{|a_n|}}.$$
+        <p>（$\limsup=0$ のとき $R=\infty$、$\limsup=\infty$ のとき $R=0$）</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">こちらも証明の骨格は同じ</span>
+        <p>
+          $\sqrt[n]{|a_nx^n|}=|x|\sqrt[n]{|a_n|}$ に Ch.3の $n$ 乗根判定法（定理3.7）を適用すれば、
+          $|x|\cdot\limsup\sqrt[n]{|a_n|}$ が $1$ 未満か超かで収束・発散が決まる。命題4.3と全く同じ論法だが、
+          $\limsup$（極限が存在しない場合にも対応する「上極限」）を使うことで、比の極限が存在しない場合にも適用できる、より一般的な公式になっている。
+        </p>
+      </div>
+
+      <div class="hist">
+        <span class="box-label">歴史的背景 — コーシー・アダマールの公式ができるまで</span>
+        <p>
+          収束半径の公式は「コーシー」の名を冠しているが、コーシーが1821年の『解析教程』で述べたのは $\lim\sqrt[n]{|a_n|}$ が実際に存在する場合に限られていた。
+          極限が存在しない一般の場合にも対応する $\limsup$（上極限）を用いた正確な形を与えたのは、ジャック・アダマールが1888年（のち1892年の学位論文）で示したのが最初とされる。
+          実際には、ベルンハルト・リーマンが1856年頃の未公表の講義ノートで同じ公式にすでに到達していたことが後に分かっている——「定説」がしばしば省略する中間の一歩だ。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">使い分け</span>
+        <ul>
+          <li>$a_n$ に $n!$ が含まれる → <strong>比判定法形の公式</strong>（計算が楽）</li>
+          <li>$a_n$ に $n$ 乗が含まれる → <strong>$n$ 乗根公式</strong></li>
+          <li>係数が飛び飛び（$\sum a_{2n}x^{2n}$ 等）→ $t=x^2$ と置換してから計算</li>
+        </ul>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 4.1　各べき級数の収束半径</span>
+        <table class="axiom-table">
+          <tr><th>べき級数</th><th>計算</th><th>$R$</th></tr>
+          <tr>
+            <td>$\displaystyle\sum \frac{x^n}{n!}$</td>
+            <td>$\dfrac{a_n}{a_{n+1}} = \dfrac{1/n!}{1/(n+1)!} = n+1\to\infty$</td>
+            <td>$R=\infty$</td>
+          </tr>
+          <tr>
+            <td>$\displaystyle\sum n^n x^n$</td>
+            <td>$\sqrt[n]{n^n}=n\to\infty$</td>
+            <td>$R=0$</td>
+          </tr>
+          <tr>
+            <td>$\displaystyle\sum x^n$</td>
+            <td>$\dfrac{1}{1}=1$</td>
+            <td>$R=1$</td>
+          </tr>
+          <tr>
+            <td>$\displaystyle\sum \frac{x^n}{n}$</td>
+            <td>$\dfrac{a_n}{a_{n+1}} = \dfrac{n+1}{n}\to 1$</td>
+            <td>$R=1$</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 4.2　境界点の調査</span>
+        <p>$\displaystyle\sum_{n=1}^\infty \dfrac{x^n}{n}$ の収束半径は $R=1$。</p>
+        <ul>
+          <li>$x=1$：$\displaystyle\sum \dfrac{1}{n}$（調和級数）→ <strong>発散</strong></li>
+          <li>$x=-1$：$\displaystyle\sum \dfrac{(-1)^n}{n}$（交代調和級数）→ ライプニッツの定理より<strong>収束</strong>（値は $-\log 2$）</li>
+        </ul>
+        <p>よって収束域は $-1 \le x < 1$。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 項別微分・積分 -->
+  <div class="section" id="termwise">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>項別微分・項別積分</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 4.5　項別微分・積分定理</span>
+        <p>べき級数 $f(x) = \displaystyle\sum_{n=0}^\infty a_n x^n$（収束半径 $R>0$）に対して、$|x|&lt;R$ において：</p>
+        <ul>
+          <li>
+            <strong>項別微分：</strong>$f(x)$ は何回でも微分可能で
+            $$f'(x) = \sum_{n=1}^\infty n a_n x^{n-1}.$$
+            微分後のべき級数の収束半径も $R$（同じ）。
+          </li>
+          <li>
+            <strong>項別積分：</strong>
+            $$\int_0^x f(t)\,dt = \sum_{n=0}^\infty \frac{a_n}{n+1} x^{n+1}.$$
+            積分後のべき級数の収束半径も $R$。
+          </li>
+        </ul>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">なぜ項別演算が許されるのか</span>
+        <p>
+          有限和ならば微分・積分を項別に行えるのは自明だ。無限和では一般には成立しないが、
+          収束半径の内部（$|x|&lt;R$）では<strong>一様収束</strong>が成り立つため、項別演算が正当化される。
+          この「一様収束 → 項別演算OK」は実解析の核心的な定理であり、厳密な証明は本講義の範囲を超える。
+          ただし「微分・積分後も収束半径が変わらない」という部分（定理4.5の主張の半分）は、Ch.3の道具だけで確認できる。
+        </p>
+      </div>
+
+      <details>
+        <summary>証明を見る（微分後も収束半径が変わらないことの確認）</summary>
+        <div class="proof-body">
+          <p>
+            元の級数 $\sum a_n x^n$ の収束半径を $R=1/\limsup\sqrt[n]{|a_n|}$（命題4.4）とする。
+            微分後の級数は $\sum n a_n x^{n-1}$ であり、その収束半径 $R'$ は係数 $na_n$ に同じ公式を当てはめて求まる：
+          </p>
+          $$\limsup_{n\to\infty}\sqrt[n]{n|a_n|} = \limsup_{n\to\infty}\Bigl(\sqrt[n]{n}\cdot\sqrt[n]{|a_n|}\Bigr).$$
+          <p>
+            ここで $\sqrt[n]{n}\to 1$（$n\to\infty$）という事実を使う（$\log(\sqrt[n]{n})=\frac{\log n}{n}\to 0$ が Ch.1の定理1.5「$\log x \ll x^p$」の系として従う）。
+            $\sqrt[n]{n}\to 1$ なので、$\limsup$ の値そのものは変わらない：
+          </p>
+          $$\limsup_{n\to\infty}\sqrt[n]{n|a_n|} = \limsup_{n\to\infty}\sqrt[n]{|a_n|}.$$
+          <p>
+            よって $R' = 1/\limsup\sqrt[n]{n|a_n|} = 1/\limsup\sqrt[n]{|a_n|} = R$。積分の場合（係数が $a_n/(n+1)$）も同様に
+            $\sqrt[n]{1/(n+1)}\to 1$ を使えば同じ結論が得られる。$\blacksquare$
+          </p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- log(1+x) の展開 -->
+  <div class="section" id="log">
+    <div class="sec-header">
+      <div class="sec-tag">Application</div>
+      <h2>$\log(1+x)$ のべき級数展開</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">項別積分で導く</span>
+        <p>
+          等比級数 $\dfrac{1}{1+t} = \displaystyle\sum_{n=0}^\infty (-t)^n = 1-t+t^2-\cdots$（$|t|<1$）を
+          $0$ から $x$ まで項別積分する：
+        </p>
+        $$\int_0^x \frac{1}{1+t}\,dt = \int_0^x \sum_{n=0}^\infty (-1)^n t^n\,dt = \sum_{n=0}^\infty \frac{(-1)^n x^{n+1}}{n+1}.$$
+        <p>左辺は $[\log(1+t)]_0^x = \log(1+x)$ なので</p>
+        $$\log(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots = \sum_{n=1}^\infty \frac{(-1)^{n-1} x^n}{n}.$$
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 4.3　境界 $x=1$ での収束：$\log 2$</span>
+        <p>
+          収束半径 $R=1$ だが、$x=1$（境界）では $\displaystyle\sum_{n=1}^\infty \dfrac{(-1)^{n-1}}{n} = 1-\dfrac{1}{2}+\dfrac{1}{3}-\cdots$ はライプニッツの定理で収束する。
+          値はちょうど $\log 2$。
+        </p>
+        <p>
+          これは「境界点でのべき級数の収束値 $=$ 関数の境界での値」という<strong>アーベルの定理</strong>の一例だ。
+        </p>
+      </div>
+
+      <div class="hist">
+        <span class="box-label">歴史的背景 — 26歳で夭折した天才アーベル</span>
+        <p>
+          境界点での収束を保証する「アーベルの定理」（1826年発表）を残したニールス・ヘンリック・アーベルは、ノルウェーの貧しい家庭に生まれ、無職・貧困のまま結核により1829年4月6日、26歳で世を去った。その2日後、ベルリン大学の教授職を提示する手紙が届いたが、本人はすでに亡くなっていた。
+          5次方程式が代数的に解けないことの証明（アーベル・ルフィニの定理）でも知られ、当時ほとんど評価されなかった彼の仕事は、死後になって級数の収束を厳密に扱う解析学の基礎として高く評価されるようになった。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">テーラー展開との対応</span>
+        <p>
+          $\log(1+x)$ をテーラーの定理（Ch.2）で展開しても同じ結果が得られる：
+          $f^{(n)}(x)=(-1)^{n-1}\dfrac{(n-1)!}{(1+x)^n}$ より $f^{(n)}(0)=(-1)^{n-1}(n-1)!$ なので
+          係数は $\dfrac{(-1)^{n-1}}{n}$。
+          項別積分のアプローチの方が係数計算が圧倒的に楽だ。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- arctan と π の級数 -->
+  <div class="section" id="arctan">
+    <div class="sec-header">
+      <div class="sec-tag">Application</div>
+      <h2>$\arctan x$ のべき級数展開と $\pi$ の級数</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">$\log(1+x)$ と同じ手順を別の関数に</span>
+        <p>
+          $\log(1+x)$ を導いたときは、等比級数を項別積分した。同じ手順を $\dfrac{1}{1+t^2}$ に対して行うと、
+          $\arctan x$ の展開が得られる。ここで使う等比級数の比は $-t^2$（$t$ ではなく $t^2$）である点に注意する。
+        </p>
+      </div>
+
+      <details open>
+        <summary>導出を見る</summary>
+        <div class="proof-body">
+          <p>等比級数 $\dfrac{1}{1+u}=\displaystyle\sum_{n=0}^\infty (-u)^n$（$|u|<1$）に $u=t^2$ を代入：</p>
+          $$\frac{1}{1+t^2} = \sum_{n=0}^\infty (-1)^n t^{2n} = 1-t^2+t^4-\cdots \quad (|t|<1).$$
+          <p>$0$ から $x$ まで項別積分する（Ch.4の定理4.5）：</p>
+          $$\int_0^x \frac{1}{1+t^2}\,dt = \sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{2n+1}.$$
+          <p>左辺は $[\arctan t]_0^x=\arctan x$ なので</p>
+          $$\arctan x = x-\frac{x^3}{3}+\frac{x^5}{5}-\cdots = \sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{2n+1} \quad (|x|<1,\text{ 収束半径 } R=1).$$
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 4.5　ライプニッツの $\pi/4$ 公式</span>
+        <p>
+          収束半径は $R=1$ だが、境界 $x=1$ ではどうか。$x=1$ を代入した級数は
+        </p>
+        $$1-\frac13+\frac15-\frac17+\cdots$$
+        <p>
+          一般項 $\dfrac{1}{2n+1}$ は単調減少で $0$ に収束するので、Ch.3のライプニッツの定理より収束する。
+          $\log(1+x)$ の例4.3と同じくアーベルの定理により、境界での級数の値は $\arctan(1)=\dfrac{\pi}{4}$ に一致する：
+        </p>
+        $$\frac{\pi}{4} = 1-\frac13+\frac15-\frac17+\cdots$$
+        <p>
+          これは「ライプニッツの $\pi/4$ 公式」として有名だが、Ch.2で見た $e$ の級数（例2.2、7項で小数第3位まで一致）と比べると
+          <strong>圧倒的に収束が遅い</strong>——小数点以下数桁の精度を得るだけで数百〜数千項が必要になる。
+          Ch.1で学んだ増大度の階層で言えば、$e$ の項は $1/n!$（階乗の速さで縮む）、この級数の項は $1/(2n+1)$（線形の遅さでしか縮まない）という違いが、収束の速さの差として直接現れている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- べき級数の積 -->
+  <div class="section" id="product">
+    <div class="sec-header">
+      <div class="sec-tag">Operation</div>
+      <h2>べき級数の積（コーシー積）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 4.5'　べき級数の積（コーシー積）</span>
+        <p>
+          $f(x)=\displaystyle\sum_{n=0}^\infty a_n x^n$（収束半径 $R_1$）、$g(x)=\displaystyle\sum_{n=0}^\infty b_n x^n$（収束半径 $R_2$）に対して、
+        </p>
+        $$f(x)g(x) = \sum_{n=0}^\infty c_n x^n, \qquad c_n = \sum_{k=0}^n a_k b_{n-k} = a_0b_n+a_1b_{n-1}+\cdots+a_nb_0.$$
+        <p>この右辺の級数は $|x|<\min(R_1,R_2)$ で（絶対）収束し、$f(x)g(x)$ に等しい。</p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">なぜ係数がこの形になるのか</span>
+        <p>
+          有限の多項式の積を展開するときと同じ発想だ。$(a_0+a_1x+a_2x^2+\cdots)(b_0+b_1x+b_2x^2+\cdots)$ を展開して
+          $x^n$ の係数を集めると、$a_kx^k \cdot b_{n-k}x^{n-k}$（$k=0,1,\ldots,n$）のすべての組み合わせが $x^n$ に寄与する。
+          これをそのまま無限級数に拡張したのがコーシー積であり、絶対収束する範囲では項の順序を気にせず展開してよい（Ch.3で見た絶対収束の強みがここでも活きている）。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 4.6　$\dfrac{1}{1-x}\cdot\dfrac{1}{1-x}=\dfrac{1}{(1-x)^2}$ の確認</span>
+        <p>$\dfrac{1}{1-x}=\displaystyle\sum_{n=0}^\infty x^n$（すべての係数が $1$）を使ってコーシー積を計算する。</p>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            <p>$a_n=b_n=1$（すべての $n$）なので、</p>
+            $$c_n = \sum_{k=0}^n a_k b_{n-k} = \sum_{k=0}^n 1\cdot 1 = n+1.$$
+            <p>よって</p>
+            $$\frac{1}{(1-x)^2} = \sum_{n=0}^\infty (n+1)x^n = 1+2x+3x^2+4x^3+\cdots \quad (|x|<1).$$
+            <p>
+              これは $\dfrac{1}{1-x}$ を項別微分して確認することもできる：
+              $\dfrac{d}{dx}\dfrac{1}{1-x}=\dfrac{1}{(1-x)^2}$ であり、$\dfrac{1}{1-x}=\sum x^n$ を項別微分すると
+              $\sum_{n=1}^\infty nx^{n-1} = \sum_{n=0}^\infty (n+1)x^n$ で、コーシー積の結果と一致する。$\blacksquare$
+            </p>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 二項展開 -->
+  <div class="section" id="binomial">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>二項展開（一般二項定理）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 4.6　一般二項係数</span>
+        <p>$\alpha \in \mathbb{R}$, $n \in \mathbb{N}$ に対して</p>
+        $$\binom{\alpha}{n} = \frac{\alpha(\alpha-1)(\alpha-2)\cdots(\alpha-n+1)}{n!}, \quad \binom{\alpha}{0}=1.$$
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 4.7　一般二項定理</span>
+        $$（1+x)^\alpha = \sum_{n=0}^\infty \binom{\alpha}{n} x^n = 1+\alpha x+\frac{\alpha(\alpha-1)}{2!}x^2+\cdots \quad (|x|<1).$$
+        <p>$\alpha$ が非負整数のとき、$n>\alpha$ では $\binom{\alpha}{n}=0$ となり有限和（多項式）になる。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 4.4　具体例</span>
+        <ul>
+          <li>
+            $\alpha=\frac{1}{2}$：$\sqrt{1+x}=1+\dfrac{x}{2}-\dfrac{x^2}{8}+\dfrac{x^3}{16}-\cdots$
+          </li>
+          <li>
+            $\alpha=-1$：$(1+x)^{-1}=1-x+x^2-x^3+\cdots = \dfrac{1}{1+x}$（等比級数と一致）
+          </li>
+          <li>
+            $\alpha=-\frac{1}{2}$：$\dfrac{1}{\sqrt{1+x}}=1-\dfrac{x}{2}+\dfrac{3x^2}{8}-\cdots$
+          </li>
+        </ul>
+      </div>
+
+      <details>
+        <summary>証明の方針（べき級数の一意性を使う）</summary>
+        <div class="proof-body">
+          <p>$f(x)=(1+x)^\alpha$ とおくと $f(0)=1$。$g(x)=\displaystyle\sum_{n=0}^\infty\binom{\alpha}{n}x^n$（$R=1$）とおく。</p>
+          <p>$(1+x)g'(x) = \alpha g(x)$（係数比較で確認できる）と $g(0)=1$ を満たすのは $f(x)$ のみ（常微分方程式の一意性）。よって $f=g$。$\blacksquare$</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">収束域のまとめ</span>
+        <table class="axiom-table">
+          <tr><th>関数</th><th>収束域</th><th>注意</th></tr>
+          <tr><td>$e^x$</td><td>全 $x$（$R=\infty$）</td><td></td></tr>
+          <tr><td>$\sin x$, $\cos x$</td><td>全 $x$（$R=\infty$）</td><td></td></tr>
+          <tr><td>$\dfrac{1}{1-x}$</td><td>$|x|<1$（$R=1$）</td><td>境界で発散</td></tr>
+          <tr><td>$\log(1+x)$</td><td>$-1&lt;x\le 1$（$R=1$）</td><td>$x=1$ で収束、$x=-1$ で発散</td></tr>
+          <tr><td>$(1+x)^\alpha$</td><td>$|x|<1$（$R=1$）</td><td>境界は $\alpha$ による</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; margin-top:2rem; padding:0 .5rem;">
+    <a href="ch3.html" style="color:var(--accent); text-decoration:none; font-weight:700;">← Ch.3 無限級数</a>
+    <a href="ch5.html" style="color:var(--accent); text-decoration:none; font-weight:700;">Ch.5 偏微分と全微分 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

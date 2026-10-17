@@ -1,0 +1,322 @@
+<!DOCTYPE html><!-- 「第3章 振り子の運動 | 力学A 講義ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第3章 振り子の運動 | 力学A 講義ノート</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="n3">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A 講義ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="n1.html" data-page="n1">第1章</a>
+      <a href="n2.html" data-page="n2">第2章</a>
+      <a href="n3.html" data-page="n3" class="active">第3章</a>
+      <a href="n4.html" data-page="n4">第4章</a>
+      <a href="n5.html" data-page="n5">第5章</a>
+      <a href="n6.html" data-page="n6">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>第3章　振り子の運動</h1>
+  <p class="subtitle">極座標表示・微小振動・大振幅の振動と楕円積分</p>
+  <p class="meta">講義ノート §5 にもとづく</p>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <strong>この章について</strong><br>
+    振り子の運動を記述するには，直交座標よりも極座標（動径 $r$ と角度 $\varphi$）の方が自然である。
+    まず極座標での速度・加速度の表式を丁寧に導出し，それを使って振り子の運動方程式を立てる。
+    振幅が小さいときは単振動（調和振動）に帰着するが，振幅が大きいときは非線形な方程式になり，
+    厳密な周期は「楕円積分」という特殊関数で表される。
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#s1">1. 極座標表示による運動の記述</a>
+    <a href="#s2">2. 振り子の運動方程式</a>
+    <a href="#s3">3. 振幅が小さいとき（単振動）</a>
+    <a href="#s4">4. 振幅が小さくないとき（楕円積分）</a>
+  </div>
+
+  <!-- =================== §1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="s1">
+    <div class="sec-header">
+      <div class="sec-tag">Section 1</div>
+      <h2>極座標表示による運動の記述</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>平面内の位置を極座標 $(r,\varphi)$ で表す：$x=r\cos\varphi,\ y=r\sin\varphi$。動径方向の単位ベクトル
+      $\mathbf e_r$ と角度方向の単位ベクトル $\mathbf e_\varphi$ は：</p>
+      <div class="mathblock">
+        $$\mathbf e_r = \cos\varphi\, \mathbf e_x + \sin\varphi\, \mathbf e_y, \qquad
+        \mathbf e_\varphi = -\sin\varphi\, \mathbf e_x + \cos\varphi\, \mathbf e_y$$
+      </div>
+      <p>これをまとめて行列で書くと：</p>
+      <div class="mathblock">
+        $$(\mathbf e_r\ \mathbf e_\varphi) = (\mathbf e_x\ \mathbf e_y)\begin{pmatrix}\cos\varphi & -\sin\varphi\\ \sin\varphi & \cos\varphi\end{pmatrix}$$
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足</span>
+        <p>
+          この行列 $\begin{pmatrix}\cos\varphi&-\sin\varphi\\\sin\varphi&\cos\varphi\end{pmatrix}$ は，ベクトルを
+          反時計回りに角度 $\varphi$ だけ回転させる回転行列である。$\mathbf e_r,\mathbf e_\varphi$ は，$\mathbf e_x,\mathbf e_y$
+          をそれぞれ角度 $\varphi$ だけ回転したもの，という意味になる。
+        </p>
+      </div>
+
+      <p>任意のベクトル $\mathbb A$ を２通りの基底で成分表示すると $\mathbb A = A_r\mathbf e_r+A_\varphi\mathbf e_\varphi = A_x\mathbf e_x+A_y\mathbf e_y$。
+      上の関係を用いて座標変換すると：</p>
+      <div class="mathblock">
+        $$\begin{pmatrix}A_r\\A_\varphi\end{pmatrix} = \begin{pmatrix}\cos\varphi & \sin\varphi\\ -\sin\varphi&\cos\varphi\end{pmatrix}\begin{pmatrix}A_x\\A_y\end{pmatrix}$$
+      </div>
+      <p>（$xy$成分から$r\varphi$成分への変換行列は，逆向きの回転＝転置行列になっている。）</p>
+
+      <h3 id="s1-1">速度ベクトル</h3>
+      <p>
+        質点の位置は $\begin{pmatrix}x\\y\end{pmatrix}=r\begin{pmatrix}\cos\varphi\\\sin\varphi\end{pmatrix}$。
+        速度 $\mathbf v=\dot{\mathbf r}$ を直交座標成分で計算し（積の微分法則を使う），それを極座標成分に変換する：
+      </p>
+      <div class="mathblock">
+        $$\begin{pmatrix}v_x\\v_y\end{pmatrix} = \begin{pmatrix}\dot x\\\dot y\end{pmatrix}
+        = \begin{pmatrix}\dot r\cos\varphi - r\dot\varphi\sin\varphi\\ \dot r\sin\varphi + r\dot\varphi\cos\varphi\end{pmatrix}
+        = \begin{pmatrix}\cos\varphi & -\sin\varphi\\ \sin\varphi&\cos\varphi\end{pmatrix}\begin{pmatrix}\dot r\\ r\dot\varphi\end{pmatrix}$$
+      </div>
+      <p>これは，$(v_r,v_\varphi)$ から $(v_x,v_y)$ への変換行列（回転行列）とちょうど同じ形なので，逆行列の関係から：</p>
+      <div class="mathblock">
+        $$\boxed{\begin{pmatrix}v_r\\v_\varphi\end{pmatrix} = \begin{pmatrix}\dot r\\ r\dot\varphi\end{pmatrix}}$$
+      </div>
+      <p>すなわち，動径方向の速度は $\dot r$，角度方向の速度は $r\dot\varphi$ である。</p>
+
+      <h3 id="s1-2">加速度ベクトル</h3>
+      <p>上の $(v_x,v_y)$ をもう一度 $t$ で微分する。$\dfrac{d}{dt}\begin{pmatrix}\cos\varphi&-\sin\varphi\\\sin\varphi&\cos\varphi\end{pmatrix}
+      = \dot\varphi\begin{pmatrix}-\sin\varphi&-\cos\varphi\\\cos\varphi&-\sin\varphi\end{pmatrix}$ に注意すると：</p>
+      <div class="mathblock">
+        $$\begin{pmatrix}a_x\\a_y\end{pmatrix}
+        = \dot\varphi\begin{pmatrix}-\sin\varphi&-\cos\varphi\\\cos\varphi&-\sin\varphi\end{pmatrix}\begin{pmatrix}\dot r\\r\dot\varphi\end{pmatrix}
+        + \begin{pmatrix}\cos\varphi&-\sin\varphi\\\sin\varphi&\cos\varphi\end{pmatrix}\begin{pmatrix}\ddot r\\\dot r\dot\varphi+r\ddot\varphi\end{pmatrix}$$
+      </div>
+      <p>これを極座標成分に変換すると，きれいな形にまとまる：</p>
+      <div class="mathblock">
+        $$\begin{pmatrix}a_r\\a_\varphi\end{pmatrix} = \begin{pmatrix}0&-1\\1&0\end{pmatrix}\begin{pmatrix}\dot r\dot\varphi\\r\dot\varphi^2\end{pmatrix}
+        + \begin{pmatrix}\ddot r\\\dot r\dot\varphi + r\ddot\varphi\end{pmatrix}
+        = \begin{pmatrix}\ddot r - r\dot\varphi^2\\ 2\dot r\dot\varphi + r\ddot\varphi\end{pmatrix}$$
+      </div>
+      <div class="thm">
+        <span class="box-label">極座標での加速度</span>
+        $$\boxed{a_r = \ddot r - r\dot\varphi^2, \qquad a_\varphi = 2\dot r\dot\varphi + r\ddot\varphi = \frac1r\frac{d}{dt}\left(\frac12 r^2\dot\varphi\right)}$$
+      </div>
+
+      <div class="warn">
+        <span class="box-label">注意</span>
+        <p>
+          $a_r \ne \ddot r$，$a_\varphi \ne r\ddot\varphi$ である点に注意。$-r\dot\varphi^2$ は<strong>遠心力</strong>に
+          対応する項（後の章で詳しく扱う）。また $mr^2\dot\varphi$ は<strong>角運動量</strong>であり，
+          $a_\varphi=0$（＝角度方向に力がはたらかない，中心力の場合）のとき $mr^2\dot\varphi$ が一定に保たれる
+          （面積速度一定の法則。第4章のケプラーの第２法則で再登場する）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §2 =================== -->
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <div class="sec-tag">Section 2</div>
+      <h2>振り子の運動方程式</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        長さ $\ell$ の糸につながれた質点（振り子）を考える。糸が鉛直下方となす角を $\varphi$ とする。
+        質点にはたらく力は，重力 $mg$（鉛直下向き）と，糸の張力 $T$（動径方向，質点を中心に向ける向き）。
+        運動方程式 $F_r=ma_r$，$F_\varphi=ma_\varphi$ に代入すると：
+      </p>
+      <div class="mathblock">
+        $$\begin{cases} mg\cos\varphi - T = m(\ddot r - r\dot\varphi^2) \\ -mg\sin\varphi = m(2\dot r\dot\varphi + r\ddot\varphi)\end{cases}$$
+      </div>
+      <p>
+        糸の長さが変化しない（$r=\ell$ で一定，$\dot r=\ddot r=0$）ことを使うと：
+      </p>
+      <div class="mathblock">
+        $$\begin{cases} mg\cos\varphi - T = -m\ell\dot\varphi^2 & (\text{未知数 }\varphi, T)\\ -mg\sin\varphi = m\ell\ddot\varphi & (\text{未知数 }\varphi)\end{cases}$$
+      </div>
+      <p>
+        第２式だけで $\varphi(t)$ が決定できる（第１式は，運動が決まった後で張力 $T$ を求めるのに使う）：
+      </p>
+      <div class="thm">
+        <span class="box-label">振り子の運動方程式</span>
+        $$\boxed{\ddot\varphi = -\frac{g}{\ell}\sin\varphi}$$
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §3 =================== -->
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <div class="sec-tag">Section 3</div>
+      <h2>(1) 振幅が小さいとき：単振動</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>$\varphi$ が小さいとき，$\sin\varphi = \varphi - \dfrac{\varphi^3}{6}+O(\varphi^5) \approx \varphi$ と近似できる。よって：</p>
+      <div class="mathblock">$$\ddot\varphi = -\frac{g}{\ell}\varphi$$</div>
+      <p>$\omega\equiv\sqrt{g/\ell}$ とおき，$\varphi = e^{rt}$ とアンザッツを置く（第1章の理論）と，特性方程式 $r^2=-\omega^2$
+      より $r=\pm i\omega$（複素数の根）。第1章 §3.4 の議論より：</p>
+      <div class="mathblock">
+        $$\varphi = C_1 e^{i\omega t} + C_2 e^{-i\omega t} = a\cos\omega t + b\sin\omega t = a\cos(\omega t+\alpha)$$
+      </div>
+      <div class="sol">
+        <span class="box-label">結論</span>
+        <p>
+          振り子は角振動数 $\omega=\sqrt{g/\ell}$ で単振動する。周期は $T_0 = 2\pi/\omega = 2\pi\sqrt{\ell/g}$
+          （振幅にはよらない — 「振り子の等時性」）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §4 =================== -->
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <div class="sec-tag">Section 4</div>
+      <h2>(2) 振幅が小さくないとき：楕円積分</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        振幅が大きいと $\sin\varphi\approx\varphi$ の近似が使えず，$\ddot\varphi=-\frac g\ell\sin\varphi$ は非線形方程式
+        のまま扱う必要がある。ここでは第2章で学んだ「力学的エネルギー保存則」の考え方を使う。
+      </p>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details open>
+        <summary>導出：エネルギー保存則から $\dot\varphi$ を求める</summary>
+        <div class="proof-body">
+          <p>$\ddot\varphi=-\frac g\ell\sin\varphi$ の両辺に $\ell\dot\varphi$ をかけると，左辺・右辺とも完全微分の形になる：</p>
+          <div class="mathblock">
+            $$\ell\dot\varphi\ddot\varphi = -g\dot\varphi\sin\varphi \quad\Longrightarrow\quad
+            \frac{d}{dt}\left(\frac12 \ell\dot\varphi^2\right) = \frac{d}{dt}\left(g\cos\varphi\right)
+            \quad\Longrightarrow\quad \frac{d}{dt}\left(\frac12 m\ell^2\dot\varphi^2 - mg\ell\cos\varphi\right)=0$$
+          </div>
+          <p>すなわち $\frac12 m v^2 - mg\ell\cos\varphi = (\text{一定})$。これはまさに力学的エネルギー保存則
+          （運動エネルギー $\frac12mv^2$，重力のポテンシャル $-mg\ell\cos\varphi$）にほかならない。</p>
+          <p>
+            振幅 $\varphi_A$（最大角，そこで質点は瞬間的に静止：$\dot\varphi=0$）を基準にとると，
+            $\dot\varphi^2 - 2\frac g\ell\cos\varphi = -2\frac g\ell\cos\varphi_A$（一定）より：
+          </p>
+          <div class="mathblock">
+            $$\dot\varphi^2 = 2\omega^2(\cos\varphi-\cos\varphi_A) = 2\omega^2\big[(1-2\sin^2\tfrac\varphi2)-(1-2\sin^2\tfrac{\varphi_A}2)\big]
+            = 4\omega^2\left(\sin^2\frac{\varphi_A}{2}-\sin^2\frac\varphi2\right)$$
+          </div>
+          <p>（半角公式 $\cos\theta=1-2\sin^2(\theta/2)$ を使った。）$\varphi$ が右端から振れ始めるとき，最初は $\dot\varphi<0$
+          （角度が減っていく）ので：</p>
+          <div class="mathblock">
+            $$\frac{d\varphi}{dt} = -2\omega\sqrt{\sin^2\frac{\varphi_A}2 - \sin^2\frac\varphi2}$$
+          </div>
+          <p>逆数をとって積分すると（振幅 $\varphi_A$ から出発して $t$ 経過後に角度 $\varphi$ になるまでの時間）：</p>
+          <div class="mathblock">
+            $$t = -\frac{1}{2\omega}\int_{\varphi_A}^{\varphi}\frac{d\varphi}{\sqrt{\sin^2\frac{\varphi_A}2-\sin^2\frac\varphi2}}$$
+          </div>
+        </div>
+      </details>
+
+      <details open>
+        <summary>周期 $T$ を第1種完全楕円積分で表す</summary>
+        <div class="proof-body">
+          <p>
+            振り子は $\varphi_A \to 0 \to -\varphi_A \to 0 \to \varphi_A$ と往復するので，$\varphi_A$ から $\varphi=0$
+            までの時間はちょうど周期の $\frac14$（$T/4$）である：
+          </p>
+          <div class="mathblock">
+            $$\frac T4 = \frac{1}{2\omega}\int_0^{\varphi_A}\frac{d\varphi}{\sqrt{\sin^2\frac{\varphi_A}2-\sin^2\frac\varphi2}}$$
+          </div>
+          <p>
+            ここで $k\equiv\sin\dfrac{\varphi_A}{2}$ とおき，置換 $\sin\dfrac\varphi2 = k\sin\theta$ を行う
+            （$\varphi=0\Rightarrow\theta=0$，$\varphi=\varphi_A\Rightarrow\theta=\pi/2$）。両辺を微分して：
+          </p>
+          <div class="mathblock">
+            $$\frac12\cos\frac\varphi2\,d\varphi = k\cos\theta\,d\theta \quad\Longrightarrow\quad
+            d\varphi = \frac{2k\cos\theta}{\cos(\varphi/2)}\,d\theta$$
+          </div>
+          <p>また，$\sin^2\frac{\varphi_A}2-\sin^2\frac\varphi2 = k^2-k^2\sin^2\theta = k^2\cos^2\theta$ より平方根は $k\cos\theta$。
+          さらに $\cos\frac\varphi2=\sqrt{1-k^2\sin^2\theta}$ を使うと：</p>
+          <div class="mathblock">
+            $$\frac{d\varphi}{\sqrt{\sin^2\frac{\varphi_A}2-\sin^2\frac\varphi2}}
+            = \frac{2k\cos\theta\,d\theta/\cos(\varphi/2)}{k\cos\theta} = \frac{2\,d\theta}{\sqrt{1-k^2\sin^2\theta}}$$
+          </div>
+          <p>したがって：</p>
+          <div class="mathblock">
+            $$\frac T4 = \frac1\omega\int_0^{\pi/2}\frac{d\theta}{\sqrt{1-k^2\sin^2\theta}}
+            \qquad(\text{第1種完全楕円積分})$$
+          </div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 小振幅への近似の一致確認</span>
+        <p>$k$（振幅）が小さいとき，$(1-x)^{-1/2}=1+\frac x2+O(x^2)$ を使うと：</p>
+        <div class="mathblock">
+          $$\frac1\omega\int_0^{\pi/2}\left(1+\frac12k^2\sin^2\theta+\cdots\right)d\theta
+          = \frac1\omega\left(\frac\pi2 + \frac{k^2}2\cdot\frac\pi4+\cdots\right) = \frac{\pi}{2\omega}\left(1+\frac{k^2}4+\cdots\right)$$
+        </div>
+        <p>（$\int_0^{\pi/2}\sin^2\theta\,d\theta=\pi/4$ を使った。）よって：</p>
+        <div class="mathblock">$$T = \frac{2\pi}{\omega}\left(1+\frac{k^2}{4}+\cdots\right),\qquad k=\sin\frac{\varphi_A}{2}\approx\frac{\varphi_A}{2}\ (\varphi_A\ \text{小})$$</div>
+        <p>
+          よって $T \approx T_0\left(1+\dfrac{\varphi_A^2}{16}\right)$（$T_0=2\pi/\omega$）という，
+          振り子時計の設計などで知られる有名な補正公式が得られる。振幅がゼロに近づく極限で §3 の単振動の周期
+          $T_0$ に一致していることも確認できる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="n2.html">← 第2章</a>
+    <a href="n4.html">第4章　万有引力とケプラーの法則 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

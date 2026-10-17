@@ -1,0 +1,463 @@
+/* ═══════════════════════════════════════════════
+   共通スタイル — 全科目サイト共通
+   ═══════════════════════════════════════════════ */
+
+/* ── CSS 変数 ── */
+/* 色・余白などの共通値に名前を付け、後の指定から同じ値を使えるようにする。 */
+:root {
+  --primary:    #1a365d;
+  --primary-dk: #122f4e;
+  --primary-lt: #2c5282;
+  --bg:         #f0f2f5;
+  --surface:    #ffffff;
+  --shadow-sm:  0 1px 6px rgba(0,0,0,.08);
+  --shadow-md:  0 6px 20px rgba(0,0,0,.13);
+  --radius:     12px;
+}
+
+/* ── リセット ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  background: var(--bg);
+  color: #2d3748;
+  line-height: 1.8;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  /* 数式が文字情報のまま埋め込まれている箇所（f(x)=... 等）が
+     空白なしの連続文字列だと、モバイル幅で折り返せず横にはみ出して
+     見切れてしまう。折り返せる箇所がなければ単語の途中でも折り返す。 */
+  overflow-wrap: break-word;
+}
+
+/* ── ナビバー（全ページ共通） ── */
+.navbar {
+  background: var(--primary);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0,0,0,.3);
+}
+.navbar-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+.navbar-brand {
+  font-size: .92rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 0;
+  flex-shrink: 0;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+.navbar-brand:hover { text-decoration: none; color: #fff; }
+.navbar-links {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.navbar-links::-webkit-scrollbar { display: none; }
+.navbar-links a {
+  color: #bee3f8;
+  text-decoration: none;
+  padding: 8px 13px;
+  border-radius: 5px;
+  font-size: .85rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  transition: background .18s, color .18s;
+}
+.navbar-links a:hover { background: rgba(255,255,255,.14); color: #fff; text-decoration: none; }
+.navbar-links a.active { background: rgba(255,255,255,.22); color: #fff; }
+.navbar-links a.nav-back {
+  color: rgba(255,255,255,.65);
+  border-right: 1px solid rgba(255,255,255,.22);
+  padding-right: 16px;
+  margin-right: 4px;
+  border-radius: 0;
+}
+.navbar-links a.nav-back:hover { background: transparent; color: rgba(255,255,255,.95); }
+
+/* ── アンカージャンプ時に固定ヘッダーへ隠れないよう余白を確保 ── */
+[id] { scroll-margin-top: 80px; }
+
+/* ── ページヒーロー（共通） ── */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-lt) 60%, #2b6cb0 100%);
+  color: #fff;
+  padding: 48px 24px 44px;
+  text-align: center;
+}
+.hero h1 { font-size: 2rem; letter-spacing: .03em; margin-bottom: 8px; font-weight: 700; }
+.hero .subtitle { color: #bee3f8; font-size: .95rem; }
+.hero .meta { color: #90cdf4; font-size: .82rem; margin-top: 6px; }
+.hero-sm { padding: 28px 24px 24px; }
+.hero-sm h1 { font-size: 1.4rem; letter-spacing: .02em; margin-bottom: 6px; }
+.hero-sm .subtitle { font-size: .85rem; }
+.hero-calc { background: linear-gradient(135deg, #1e3a8a 0%, #1e4799 60%, #2563eb 100%); }
+.hero-linear { background: linear-gradient(135deg, #14532d 0%, #166534 60%, #16a34a 100%); }
+
+/* ── サイトフッター ── */
+.site-footer {
+  background: var(--primary);
+  color: rgba(255,255,255,.5);
+  text-align: center;
+  padding: .9rem 1rem;
+  font-size: .75rem;
+}
+.site-footer a { color: rgba(255,255,255,.65); text-decoration: none; }
+.site-footer a:hover { color: #fff; }
+
+/* ── 後方互換：top-nav は navbar にリダイレクト ── */
+.top-nav {
+  background: var(--primary);
+  padding: .55rem 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+/* ── ページ先頭へ戻るボタン ── */
+#back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  z-index: 9000;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 3px 12px rgba(0,0,0,.28);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity .22s, transform .22s;
+}
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+#back-to-top:hover { background: var(--primary-lt); }
+
+/* ── 数式のはみ出し防止（ブロック数式） ── */
+mjx-container[display="true"] {
+  display: block !important;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── 文中数式（$...$）は原則そのまま display:inline のまま
+   （overflow を効かせる inline-block はベースラインがズレるため）。
+   画面に収まらない場合だけ common.js が .mjx-inline-scroll を個別に付与する。 ── */
+mjx-container.mjx-inline-scroll {
+  display: inline-block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  vertical-align: text-top;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ── 横スクロール可能な要素の共通インジケーター ──
+   ネイティブのスクロールバーは非表示にし、操作中〜1.2秒後まで
+   独自の薄いグレーバーを表示する（common.js が .js-hscroll を付与）。 */
+.js-hscroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  position: relative;
+}
+.js-hscroll::-webkit-scrollbar { display: none; height: 0; width: 0; }
+.js-hscroll::after {
+  content: '';
+  position: absolute;
+  left: var(--hs-left, 0%);
+  bottom: 1px;
+  width: var(--hs-width, 30%);
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(0, 0, 0, .28);
+  opacity: 0;
+  transition: opacity .3s ease;
+  pointer-events: none;
+}
+.js-hscroll.is-scrolling::after { opacity: 1; }
+
+/* ── レスポンシブ ── */
+/* 指定された画面幅などの条件で、文字サイズや配置を切り替える。 */
+@media (max-width: 640px) {
+  .navbar-links a { padding: 10px 8px; font-size: .78rem; }
+  .hero { padding: 32px 16px 28px; }
+  .hero h1 { font-size: 1.5rem; }
+  .hero-sm { padding: 20px 16px 18px; }
+  .hero-sm h1 { font-size: 1.2rem; }
+}
+/* 指定された画面幅などの条件で、文字サイズや配置を切り替える。 */
+@media (max-width: 400px) {
+  .navbar-brand { font-size: .82rem; }
+  #back-to-top { width: 44px; height: 44px; bottom: 16px; right: 12px; }
+}
+
+/* ── 汎用 目次サイドパネル（ハンバーガーメニューで開閉） ──
+   common.js が自動生成する目次、および熱力学ノートの独自サイドバーが
+   共通のトグルボタン・閉じるボタンの見た目としてこのクラスを使う。 */
+.gtoc-toggle {
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.3);
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: .3rem .6rem;
+  line-height: 1;
+  margin-right: .6rem;
+  flex-shrink: 0;
+  transition: background .15s;
+}
+.gtoc-toggle:hover { background: rgba(255,255,255,.28); }
+
+.gtoc-panel {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 270px;
+  max-width: 82vw;
+  height: 100vh;
+  background: var(--surface);
+  box-shadow: 4px 0 24px rgba(0,0,0,.18);
+  z-index: 500;
+  transform: translateX(-100%);
+  transition: transform .25s cubic-bezier(.4,0,.2,1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.gtoc-panel.gtoc-open { transform: translateX(0); }
+
+.gtoc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .9rem 1rem .75rem;
+  border-bottom: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+.gtoc-title {
+  font-weight: 700;
+  font-size: .78rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #718096;
+}
+.gtoc-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #718096;
+  font-size: .9rem;
+  padding: .2rem .45rem;
+  border-radius: 4px;
+  line-height: 1;
+  transition: background .12s;
+}
+.gtoc-close:hover { background: #f0f2f5; color: #1a202c; }
+
+.gtoc-body { flex: 1; overflow-y: auto; padding: .5rem 0 2rem; }
+.gtoc-body a {
+  display: block;
+  padding: .5rem 1.1rem;
+  font-size: .85rem;
+  color: #2d3748;
+  border-left: 3px solid transparent;
+  line-height: 1.5;
+  text-decoration: none;
+}
+.gtoc-body a:hover { background: #f0f2f5; text-decoration: none; }
+
+.gtoc-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  z-index: 450;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s;
+}
+.gtoc-backdrop.gtoc-open { opacity: 1; pointer-events: auto; }
+
+/* 指定された画面幅などの条件で、文字サイズや配置を切り替える。 */
+@media (max-width: 480px) {
+  .gtoc-panel { width: 240px; }
+}
+
+/* ── 教科内検索ボックス（各科目トップページに設置。search.js が動作を付与） ── */
+.search-box {
+  position: relative;
+  max-width: 560px;
+  margin: -22px auto 0;
+  padding: 0 20px;
+  z-index: 60;
+}
+.search-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border-radius: 999px;
+  box-shadow: var(--shadow-md);
+  padding: 11px 18px;
+}
+.search-input-row .search-icon { font-size: .95rem; opacity: .55; flex-shrink: 0; }
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: .92rem;
+  color: #2d3748;
+  min-width: 0;
+}
+.search-input::placeholder { color: #a0aec0; }
+
+.search-results {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  top: calc(100% + 8px);
+  max-height: 420px;
+  overflow-y: auto;
+  background: var(--surface);
+  border-radius: 10px;
+  box-shadow: var(--shadow-md);
+  padding: 6px;
+}
+.search-empty {
+  padding: 14px 12px;
+  font-size: .85rem;
+  color: #718096;
+  text-align: center;
+}
+.search-hit {
+  display: block;
+  padding: 9px 12px;
+  border-radius: 7px;
+  text-decoration: none;
+  color: inherit;
+}
+.search-hit:hover, .search-hit.sel { background: var(--bg); text-decoration: none; }
+.search-hit-path {
+  font-size: .72rem;
+  font-weight: 700;
+  color: var(--primary-lt);
+  letter-spacing: .02em;
+}
+.search-hit-title {
+  font-size: .88rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-top: 1px;
+}
+.search-hit-snippet {
+  font-size: .78rem;
+  color: #718096;
+  margin-top: 2px;
+  line-height: 1.55;
+}
+.search-hit-snippet mark {
+  background: #fefcbf;
+  color: inherit;
+  border-radius: 2px;
+  padding: 0 1px;
+}
+
+/* 指定された画面幅などの条件で、文字サイズや配置を切り替える。 */
+@media (max-width: 640px) {
+  .search-box { margin-top: -18px; padding: 0 14px; }
+  .search-results { left: 14px; right: 14px; }
+}
+
+/* ── 検索結果からの遷移先ハイライト（common.js が付与、約10秒で自動的に消える） ── */
+mark.search-arrive-highlight {
+  background: #fef08a;
+  color: #1a202c;
+  border-radius: 2px;
+  padding: 0 1px;
+  box-shadow: 0 0 0 2px #fef08a;
+  transition: background-color .4s ease, box-shadow .4s ease, color .4s ease;
+}
+mark.search-arrive-highlight-out {
+  background: transparent;
+  color: inherit;
+  box-shadow: 0 0 0 0 transparent;
+}
+
+/* ── アクセス制御：最下部までスクロールすると現れる管理者ページリンク ── */
+.admin-reveal {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+  background: rgba(26,54,93,.92);
+  transform: translateY(100%);
+  transition: transform .35s ease;
+}
+.admin-reveal.visible { transform: translateY(0); }
+.admin-reveal a {
+  color: #bee3f8;
+  font-size: .8rem;
+  text-decoration: none;
+  letter-spacing: .04em;
+}
+.admin-reveal a:hover { color: #fff; }
+
+/* ── 印刷スタイル ── */
+/* 印刷するときの配置や表示を調整する。 */
+@media print {
+  #back-to-top { display: none !important; }
+
+  /* 全科目共通のナビバー要素を非表示 */
+  .site-nav,
+  .top-nav,
+  .navbar,
+  .site-header,
+  .page-header,
+  .gtoc-panel,
+  .gtoc-toggle,
+  .gtoc-backdrop,
+  .sidebar,
+  .sidebar-backdrop,
+  .search-box,
+  nav { display: none !important; }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  a { color: inherit; text-decoration: none; }
+}
+/* アクセス判定が終わる前に、制限対象の名前やアイコンを描画しない。 */
+html:has(script[src$="access-ui.js"]):not(.access-ready) [data-subject],
+html:has(script[src$="access-ui.js"]):not(.access-ready) [data-page] {
+  visibility: hidden !important;
+}

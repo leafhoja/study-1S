@@ -1,0 +1,147 @@
+<!DOCTYPE html><!-- 「10 ユーザインターフェース | 神シケプリ | 情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>10 ユーザインターフェース | 神シケプリ | 情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kami-10">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">神シケプリ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>神シケプリ 10 — ユーザインターフェース</h1>
+  <p class="subtitle">GUI/CUI、デスクトップメタファとアフォーダンス</p>
+  <p class="meta">教科書対応箇所 pp.223-226</p>
+</div>
+
+<div class="container">
+
+  <div class="def">
+    <span class="box-label">定義 — GUI（Graphical User Interface）</span>
+    <p>
+      ウインドウ・アイコン・メニューをマウスなどで操作する種類のUI。ウインドウ（Window）・アイコン（Icon）・
+      メニュー（Menu）・マウス（Mouse pointer）の頭文字から<strong>WIMPシステム</strong>とも呼ばれる。
+      感覚的にわかりやすい一方、大量のデータやファイルを一度に処理するのには不向きである。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — CUI（Character User Interface）</span>
+    <p>
+      ターミナルのような、全てを文字だけで行うタイプのUI。マウスを使わず、キーボード入力のみで操作する。
+      慣れないとわかりづらいが、操作の自動化により大量データの処理には便利である。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — デスクトップメタファとアフォーダンス</span>
+    <p>
+      ファイル・フォルダ・ゴミ箱のアイコンをデスクトップ上に配置し、現実世界の卓上作業を模したデザインを
+      <strong>デスクトップメタファ</strong>という。ゴミ箱のアイコンが「中に不要なファイルを捨てられる」
+      という機能を直感的に伝えるように、モノの見た目・形状が使い方を示唆する性質を<strong>アフォーダンス</strong>という。
+    </p>
+  </div>
+
+  <div class="note">
+    <span class="box-label">出題対策のポイント</span>
+    <p>
+      GUI/CUIの長所・短所自体は難しくない。記述問題では「直接操作」「現実世界」「類推」「アフォーダンス」
+      といった講義で使われた用語を的確に使えているかがポイントになる。
+    </p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">第1問（2016年度共通問題3問題A問2）</a>
+  </div>
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">第1問</div><h2>2016年度共通問題3問題A問2 — デスクトップメタファとアイコンデザイン</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>以下のGUIに関する問に答えよ．</p>
+        <p>
+          (1) ゴミ箱にファイルをドラッグする操作を例に，GUIにおけるデスクトップメタファの利点を以下の語を
+          用いて3行程度で説明せよ．
+        </p>
+        <p style="margin-left:1.2rem;">直接操作　現実世界　類推</p>
+        <p>
+          (2) アイコンのデザインには，Ⓐ作業の内容を表すものとⒷ実世界での実物を模したものがある．それぞれの
+          タイプの表現は，多くの場合Ⓐはアプリケーションに，Ⓑはファイル，フォルダ，デバイスなどを表すのに
+          使われる．このような使い分けが効果的であると考えられる理由について，図記号による情報の表現と
+          デスクトップメタファの両面から4行程度で考察せよ．
+        </p>
+        <img src="img/ui-icons.png" alt="Ⓐの例：Numbers・mi・iTuneのアプリケーションアイコン　Ⓑの例：ゴミ箱・フォルダ・CDのアイコン" style="max-width:100%;display:block;margin:.8rem auto;">
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            (1) デスクトップメタファは、ファイル削除という抽象的な操作を、現実世界のゴミ箱にモノを捨てる
+            行為になぞらえて表現している。ユーザは命令文を入力する代わりに、ファイルのアイコンを直接
+            ドラッグするという直接操作によって、現実世界での経験からの類推でその意味を直感的に理解でき、
+            操作方法を覚える負担が小さくて済む。
+          </p>
+          <p>
+            (2) アプリケーションは特定の実世界の道具に一対一で対応するとは限らず、「表計算」「音楽再生」
+            のような抽象的な機能を担うものが多いため、その機能を象徴的に表す図記号（実物の外見ではなく
+            内容・機能を表すパターン表現に近い記号的アイコン）の方が、何をするものかを的確に伝えやすい。
+            一方、ファイルやフォルダ、CDのような対象は、デスクトップメタファの一部として、現実世界の道具
+            （紙束・容器・円盤）そのものを模したアイコンにすることで、ユーザは「フォルダに入れる」
+            「ゴミ箱に捨てる」といった直感的な操作イメージを、実世界での経験から類推しやすくなる。
+            このように、抽象的な機能には内容を象徴する図記号を、具体的なモノには実物を模した図記号を
+            使い分けることで、それぞれに適した理解のしやすさが得られると考えられる。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) 直接操作によって現実世界の経験（モノを捨てる行為）からの類推が働き、直感的に理解できる　(2) 抽象的な機能（アプリ）には象徴的な図記号を、具体的なモノ（ファイル等）には実物を模した図記号を使うことで、それぞれ理解しやすい表現になる</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識</span>
+        <p>
+          神シケプリ10分野の最後を締めくくるこの問題は、01の情報量から一貫して扱ってきた「情報をどう
+          表現し、どう人に伝えるか」というテーマが、人間とコンピュータのインターフェースという形で現れた
+          ものだといえる。デスクトップメタファやアフォーダンスは、情報量や符号化のような数式では表せない
+          が、根本にあるのは同じく「相手（ユーザ）に効率よく・誤りなく情報を伝える工夫」である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="09-データモデル.html">← 09 データモデル</a>
+    <a href="index.html">神シケプリ トップへ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

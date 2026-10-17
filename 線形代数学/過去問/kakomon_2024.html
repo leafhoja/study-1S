@@ -1,0 +1,312 @@
+<!DOCTYPE html><!-- 「線形代数学① 期末試験 2024年度 S2ターム 解説 | 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>線形代数学① 期末試験 2024年度 S2ターム 解説 | 線形代数学①</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    macros: { R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}', Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}', rank: '\\operatorname{rank}' }
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body data-nav-page="exam-2024">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>線形代数学① 期末試験</h1>
+  <p class="subtitle">2024年度 S2ターム &nbsp;|&nbsp; 7月30日4限（90分）&nbsp;|&nbsp; 1年 理一(7-9,13) 松本久義</p>
+</div>
+
+<div class="container">
+
+<div class="source-note">この解説は原本の答案用紙（画像）から問題文を書き起こして作成した。答えだけでなく「なぜそう解けるか」を <a href="../index.html">線形代数学① 解説ノート</a> の定義・定理番号に沿って説明する。</div>
+
+<!-- 第1問 -->
+<!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><section class="section" id="problem1">
+  <div class="sec-header"><span class="problem-num">1</span> &nbsp;Kernel と Image の次元</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>以下の (a)–(d) を行列表示に持つ複素縦ベクトル空間の間の $\C$-線形写像それぞれについて kernel と image の次元を求めよ。</p>
+      $$\text{(a)}\begin{pmatrix}1&0&0\\0&1&0\\0&2&1\\0&0&0\end{pmatrix},\quad
+      \text{(b)}\begin{pmatrix}1&2&3\\2&3&2\\3&2&1\end{pmatrix},\quad
+      \text{(c)}\begin{pmatrix}-1&2&3\\2&-1&2\\3&-3&-1\end{pmatrix},\quad
+      \text{(d)}\begin{pmatrix}1&1&3&1\\1&2&5&3\\1&1&3&2\\2&2&6&3\end{pmatrix}$$
+    </div>
+
+    <div class="read-box">
+      <div class="read-title">🔍 問題文の読み方</div>
+      <p>「以下の(a)〜(d)を<strong>行列表示に持つ</strong>…線形写像」とは，「標準基底に関してその行列を掛けるだけの写像 $T_A(\mathbf{x})=A\mathbf{x}$」を指す言い回し。まずやるべきことは行列のサイズから定義域・値域を確定すること——(a)は $4\times3$ 行列なので $T_A:\C^3\to\C^4$，(b)(c)は $3\times3$ 正方行列なので $\C^3\to\C^3$，(d)は $4\times4$ 正方行列なので $\C^4\to\C^4$（正方でない行列でも線形写像は定義できる，(a)がその例）。</p>
+      <p>「kernelとimageの次元を求めよ」は，$\Ker(T_A)\subseteq(\text{定義域})$ と $\Im(T_A)\subseteq(\text{値域})$ という2つの部分空間それぞれについて，「独立なベクトル何本で張れるか」を答えよ，ということ。</p>
+      <p>「複素…$\C$-線形写像」と言われているが，与えられた行列の成分はすべて実数（整数）。行基本変形で決まる rank は係数体を $\R$ から $\C$ に広げても変わらない（連立方程式の独立性という話は体を広げても同じ結論になる）ので，見慣れた実数の行基本変形をそのまま使ってよい。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：定理4.4・定理4.7・系4.8</div>
+      <p>$m\times n$ 行列 $A$ が定める写像 $T_A:\K^n\to\K^m$ について，<strong>定理4.4</strong> $\dim\Ker(T_A)=n-\rank A$，<strong>定理4.7</strong> $\dim\Im(T_A)=\rank A$，<strong>系4.8</strong>（次元定理）$n=\dim\Ker+\dim\Im$。つまり「$\rank A$ さえ求めれば両方の次元が同時に決まる」。$\rank A$ は行標準形の主成分（pivot）の個数（<strong>補題4.3</strong>）。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (a) — $4\times 3$ 行列，定義域 $\C^3$</div>
+      <p>列ベクトル $\mathbf{a}_1=(1,0,0,0)^\top,\ \mathbf{a}_2=(0,1,2,0)^\top,\ \mathbf{a}_3=(0,0,1,0)^\top$ は独立（$\mathbf{a}_1,\mathbf{a}_3$ が異なる行に単独の非零成分を持ち，$\mathbf{a}_2$ の第3成分 $2$ が第3行を独立に押し上げる）。よって $\rank A=3$。</p>
+      <p>$$\dim\Ker=3-3=\boxed{0},\qquad \dim\Im=\boxed{3}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (b) — $3\times 3$ 正方行列</div>
+      $$\det\begin{pmatrix}1&2&3\\2&3&2\\3&2&1\end{pmatrix}=1(3-4)-2(2-6)+3(4-9)=-1+8-15=-8\neq0$$
+      <p>正則なので $\rank A=3$。$$\dim\Ker=\boxed{0},\qquad \dim\Im=\boxed{3}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (c) — $3\times 3$ 正方行列</div>
+      $$\det\begin{pmatrix}-1&2&3\\2&-1&2\\3&-3&-1\end{pmatrix}=-1(1+6)-2(-2-6)+3(-6+3)=-7+16-9=0$$
+      <p>退化しているので $\rank<3$。第3行 $=(3,-3,-1)$ は第1行 $-1$ 倍と第2行の和：$-1\cdot(-1,2,3)+1\cdot(2,-1,2)=(3,-3,-1)$ ✓ 。第1行・第2行は比例しないので独立。よって $\rank A=2$。</p>
+      <p>$$\dim\Ker=3-2=\boxed{1},\qquad \dim\Im=\boxed{2}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (d) — $4\times 4$ 正方行列</div>
+      <p>行基本変形：$R_2-R_1=(0,1,2,2)$，$R_3-R_1=(0,0,0,1)$，$R_4-2R_1=(0,0,0,1)$。$R_4'-R_3'=0$ なので1つ従属。残る $R_1,\,R_2-R_1,\,R_3-R_1$ は階段状で独立。$\rank A=3$。</p>
+      <p>$$\dim\Ker=4-3=\boxed{1},\qquad \dim\Im=\boxed{3}$$</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 (a)〜(d) のrank判定：行列式と行基本変形の使い分け</div>
+      <p>(b)(c)は $3\times3$ 正方行列だったので行列式一発で「正則か退化か」が分かった（$\det\neq0\Rightarrow$ フルランク確定）。ただし行列式は退化していることまでしか教えてくれない——「rankがちょうどいくつか」を知るには，(c)でやったように退化を確認した<em>後</em>で改めてどの行が他の行の一次結合かを具体的に探す一手間が要る。(a)（$4\times3$ の非正方行列）と(d)（$4\times4$ だが行数の多さを生かす方が早い）では行列式がそもそも使いにくい（(a)は正方でない，(d)は $4\times4$ の行列式計算が面倒）ので，最初から行基本変形で階段状に持ち込んで独立な行を数える方針を取っている。</p>
+      <p><strong>使い分けの目安：</strong>小さい正方行列（$2\times2,3\times3$ 程度）でまず「フルランクかどうか」だけ知りたいときは行列式が最速。それ以外（非正方，サイズが大きい，あるいは正確な rank の値そのものが欲しい）では最初から行基本変形で明示的な従属関係を探す方が結局早い。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 第2問 -->
+<section class="section" id="problem2">
+  <div class="sec-header"><span class="problem-num">2</span> &nbsp;基底の取り替えと行列表示</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$T:\R^4\to\R^3$ を行列 $A=\begin{pmatrix}1&1&1&3\\1&1&2&4\\1&2&2&5\end{pmatrix}$ により定まる $\R$-線形写像とする。</p>
+      <ol>
+        <li>$\R^4$ の基底 $\mathbf{b}_1=(1,1,0,0)^\top,\mathbf{b}_2=(0,1,0,0)^\top,\mathbf{b}_3=(0,0,0,1)^\top,\mathbf{b}_4=(0,0,-1,0)^\top$ および $\R^3$ の基底 $\mathbf{c}_1=(1,1,2)^\top,\mathbf{c}_2=(2,2,3)^\top,\mathbf{c}_3=(2,3,4)^\top$ による $T$ の行列表示を求めよ。</li>
+        <li>$\R^3$ の基底であって，$\R^4$ の標準基底と組み合わせたときの $T$ の行列表示が $A$ と行同値な行標準形（行簡約行列）になるようなものを1つ与えよ。</li>
+      </ol>
+    </div>
+
+    <div class="read-box">
+      <div class="read-title">🔍 問題文の読み方</div>
+      <p>記号を整理する。$T$自体は標準基底に関して行列$A$で表される写像。問題文中の $\mathbf{b}_1,\ldots,\mathbf{b}_4$ は「$\R^4$の（標準基底とは別の）基底」，$\mathbf{c}_1,\mathbf{c}_2,\mathbf{c}_3$ は「$\R^3$の（標準基底とは別の）基底」であって，$T$自体が変わるわけではない。標準基底以外の基底が出てきたら，行列$A$をそのまま答えにしてはいけない，というのがこの問題の核心。</p>
+      <p>(1)で問われている「行列表示」とは，$j$列目が「$T(\mathbf{b}_j)$を基底$\{\mathbf{c}_i\}$の一次結合で表したときの係数」になっている新しい行列——標準基底での行列$A$とは別物であることに注意。</p>
+      <p>(2)は逆方向の問題：「これらの基底で計算せよ」ではなく「$\R^3$側の基底をうまく選べば，$\R^4$側は標準基底のままでも行列表示が行標準形（RREF）になる」——そのような都合の良い基底を<em>自分で構成して1つ挙げよ</em>，という問題であることに注意（一意に決まる答えではなく，条件を満たす基底を1つ作ればよい）。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：定義4.1〜系4.2 の「同型 = 基底の取り替え」という見方</div>
+      <p>行列表示とは「$T(\mathbf{b}_j)$ を目標側の基底 $\{\mathbf{c}_i\}$ の一次結合で表したときの係数を並べたもの」（$j$ 列目 $=$ $T(\mathbf{b}_j)$ の $\{\mathbf{c}_i\}$ 座標）。基底を替えるというのは「$\R^n\cong V$ という同型（<strong>定義1.7</strong>）を作り替える」ことに他ならない。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$A$ の列を $\mathbf{a}_1=(1,1,1)^\top,\mathbf{a}_2=(1,1,2)^\top,\mathbf{a}_3=(1,2,2)^\top,\mathbf{a}_4=(3,4,5)^\top$ とする。$T(\mathbf{b}_j)=A\mathbf{b}_j$ を計算し，$\mathbf{c}_1,\mathbf{c}_2,\mathbf{c}_3$ の一次結合として表す。</p>
+      <p>$T(\mathbf{b}_1)=\mathbf{a}_1+\mathbf{a}_2=(2,2,3)^\top=\mathbf{c}_2$（そのまま！）→ 座標 $(0,1,0)$</p>
+      <p>$T(\mathbf{b}_2)=\mathbf{a}_2=(1,1,2)^\top=\mathbf{c}_1$（そのまま！）→ 座標 $(1,0,0)$</p>
+      <p>$T(\mathbf{b}_3)=\mathbf{a}_4=(3,4,5)^\top$。$x\mathbf{c}_1+y\mathbf{c}_2+z\mathbf{c}_3=(3,4,5)$ を解くと $z=1,\ x+2y=1,\ 2x+3y=1\Rightarrow x=-1,y=1$。→ 座標 $(-1,1,1)$</p>
+      <p>$T(\mathbf{b}_4)=-\mathbf{a}_3=(-1,-2,-2)^\top$。同様に解いて $z=-1,\ x+2y=1,\ 2x+3y=2\Rightarrow x=1,y=0$。→ 座標 $(1,0,-1)$</p>
+      <p>列を並べて</p>
+      $$[T]_{\gamma,\beta}=\begin{pmatrix}0&1&-1&1\\1&0&1&0\\0&0&1&-1\end{pmatrix}$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$A$ の行簡約行列を求める：$R_2-R_1=(0,0,1,1)$，$R_3-R_1=(0,1,1,2)$。行を並べ替えて第1行から第2成分・第3成分を消すと</p>
+      $$\mathrm{RREF}(A)=\begin{pmatrix}1&0&0&1\\0&1&0&1\\0&0&1&1\end{pmatrix}$$
+      <p>ここでピボット列は第1〜3列。<strong>ピボット列に対応する $A$ の列 $\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ は自動的に $\R^3$ の基底になる</strong>（$\rank A=3=\dim\R^3$ かつ独立だから）。この3本を新しい基底に選べば，$\mathbf{a}_1,\mathbf{a}_2,\mathbf{a}_3$ 自身の座標はそのまま $(1,0,0),(0,1,0),(0,0,1)$ になり，$\mathbf{a}_4=\mathbf{a}_1+\mathbf{a}_2+\mathbf{a}_3$（実際 $(1,1,1)+(1,1,2)+(1,2,2)=(3,4,5)=\mathbf{a}_4$ ✓）から座標 $(1,1,1)$。これはちょうど $\mathrm{RREF}(A)$ の各列と一致する。</p>
+      <p>$$\boxed{\R^3\text{ の新しい基底}=\{(1,1,1)^\top,\ (1,1,2)^\top,\ (1,2,2)^\top\}}$$</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 なぜ「ピボット列を基底にする」だけで答えになるのか</div>
+      <p>標準基底 $\mathbf{e}_j$ を使う限り，$T(\mathbf{e}_j)=A\mathbf{e}_j=\mathbf{a}_j$（$A$ の第$j$列そのもの）。だから行列表示の各列は「新しい基底での $\mathbf{a}_j$ の座標」に過ぎない。新しい基底を $A$ 自身の列（の独立な部分）に取れば，独立な列はそのまま単位座標になり，従属な列（ここでは $\mathbf{a}_4$）はその従属関係の係数がそのまま座標になる——その係数こそが行簡約行列の該当列の中身（<strong>補題4.3</strong> の主張そのもの）。一般に「$m\times n$ 行列 $A$ が $\rank A=m$（つまり像が全体）を満たすとき，ピボット列を $\R^m$ の基底に選べば，標準基底とのペアでの行列表示は自動的に $\mathrm{RREF}(A)$ に一致する」という一般則が成り立つ。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 第3問 -->
+<section class="section" id="problem3">
+  <div class="sec-header"><span class="problem-num">3</span> &nbsp;微分作用素の kernel</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$V$ を次数が高々4であるような複素多項式のなす $\C$-ベクトル空間とする：$V=\{a_4X^4+a_3X^3+a_2X^2+a_1X+a_0\mid a_i\in\C\}$。$\lambda\in\C$ に対して $\C$-線形写像 $D_\lambda:V\to V$ を</p>
+      $$D_\lambda(f(X))=X^2\frac{d^2f}{dX^2}(X)-\lambda f(X)$$
+      <p>で定める。$\dim\Ker(D_\lambda)$ を求めよ。さらに $\dim\Ker(D_\lambda)>0$ となる全ての $\lambda\in\C$ に対して $\Ker(D_\lambda)$ の基底を1つ与えよ。</p>
+    </div>
+
+    <div class="read-box">
+      <div class="read-title">🔍 問題文の読み方</div>
+      <p>$V$は「次数が高々4の複素多項式全体」——ここでの「ベクトル」は多項式そのものであり，$V$自体は5次元の空間（基底は$1,X,X^2,X^3,X^4$）。$D_\lambda$は，多項式$f$を受け取って「$f$を2階微分し$X^2$を掛けたもの」から「$\lambda f$」を引いた新しい多項式を返す写像——$\lambda$を決めるごとに1つの写像$D_\lambda:V\to V$が決まる（$\lambda$は写像を指定するパラメータ）。</p>
+      <p>問題は2段構え。①「$\dim\Ker(D_\lambda)$を求めよ」は，$\lambda$の値ごとに変わる関数として（$\lambda$のすべての可能な値を場合分けして）答える必要がある。②「$\dim\Ker(D_\lambda)>0$となる全ての$\lambda$」——つまり$D_\lambda(f)=0$を満たす非零な多項式$f$が存在するような，ごく特別な$\lambda$の値——について，その$\Ker$の基底を具体的に書け，という要求。「全ての$\lambda\in\C$」という書き方に身構えなくてよい：ほとんどの$\lambda$では$\dim\Ker=0$（自明）になり，答えるべき特別な$\lambda$は有限個しかない，という見通しを持って読むと計算の見通しが立つ。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：単項式基底で「対角行列」に見える</div>
+      <p>$V$ の基底として単項式 $\{1,X,X^2,X^3,X^4\}$（<strong>系6.3</strong>：$\dim V=5$）を取ると，$D_\lambda$ はこの基底の各元をスカラー倍にしか送らない——つまり対角行列。対角なら $\Ker$ は「対角成分が $0$ になる基底ベクトルが張る空間」として即座に分かる（第3問の小テスト版で使った「固有値・固有ベクトル」と同じ発想）。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答</div>
+      <p>$f=X^k$（$k=0,\ldots,4$）に対し $f''=k(k-1)X^{k-2}$（$k=0,1$ でも $k(k-1)=0$ なので式は成立する）。よって</p>
+      $$D_\lambda(X^k)=X^2\cdot k(k-1)X^{k-2}-\lambda X^k=\bigl(k(k-1)-\lambda\bigr)X^k$$
+      <p>つまり $D_\lambda$ は基底 $\{1,X,X^2,X^3,X^4\}$ に関して対角行列 $\mathrm{diag}(-\lambda,\,-\lambda,\,2-\lambda,\,6-\lambda,\,12-\lambda)$（$k=0,1,2,3,4$ に対応する対角成分は $k(k-1)-\lambda$）で表される。</p>
+      <p>$X^k\in\Ker(D_\lambda)\iff \lambda=k(k-1)$。$k(k-1)$ の値は $k=0,1$ でともに $0$，$k=2,3,4$ でそれぞれ $2,6,12$（相異なる）。</p>
+      <table class="axiom-table">
+        <tr><th>$\lambda$</th><th>$\dim\Ker(D_\lambda)$</th><th>基底</th></tr>
+        <tr><td>$0$</td><td>$2$</td><td>$\{1,\ X\}$</td></tr>
+        <tr><td>$2$</td><td>$1$</td><td>$\{X^2\}$</td></tr>
+        <tr><td>$6$</td><td>$1$</td><td>$\{X^3\}$</td></tr>
+        <tr><td>$12$</td><td>$1$</td><td>$\{X^4\}$</td></tr>
+        <tr><td>その他</td><td>$0$</td><td>—</td></tr>
+      </table>
+      <p>一般に $$\boxed{\dim\Ker(D_\lambda)=\#\{k\in\{0,1,2,3,4\}\mid k(k-1)=\lambda\}}$$（$\lambda=0$ のときだけ2個の $k$ が対応するので $\dim=2$，他は高々1個）。</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 一般化：作用素が「基底に対して対角」に見える瞬間を見抜く</div>
+      <p>$D_\lambda$ は一見複雑な微分演算子だが，単項式基底 $\{1,X,\ldots,X^4\}$ に関しては行列を一切書き下さなくても<strong>各基底ベクトルをスカラー倍するだけ</strong>（$D_\lambda(X^k)=(k(k-1)-\lambda)X^k$）という性質だけで正体が分かる。一般に，ある基底の各元 $\mathbf{e}_i$ に対して線形作用素 $S$ が $S(\mathbf{e}_i)=\mu_i\mathbf{e}_i$（スカラー $\mu_i$ は $i$ ごとに違ってよい）を満たすなら，$S$ はその基底に関して対角行列 $\mathrm{diag}(\mu_1,\ldots,\mu_n)$ で表される。このとき $\Ker S=\langle\mathbf{e}_i\mid \mu_i=0\rangle$ が即座に読み取れ，$\dim\Ker S$ は「$\mu_i=0$ となる $i$ の個数」に一致する——固有値・固有ベクトルの理論（後の章で本格的に扱う「対角化」）の最も原初的な形がここに現れている。</p>
+      <p>この問題で「$\lambda=0$ のときだけ $\dim\Ker=2$」になったのは，$k(k-1)$ という関数が $k=0$ と $k=1$ で偶然同じ値 $0$ を取るため（$k(k-1)$ は $k=1/2$ について対称な放物線なので，$k=0,1$ のように和が $1$ になる2値では必ず同じ値を取る）。<strong>同じスカラー $\mu_i$ を共有する基底ベクトルが複数あるとき，そこで $\dim\Ker$（あるいは固有空間の次元）が1より大きくなる</strong>という現象は，後に学ぶ固有値の「重複度」の考え方そのものである。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 第4問 -->
+<section class="section" id="problem4">
+  <div class="sec-header"><span class="problem-num">4</span> &nbsp;冪零作用素の不変部分空間</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$T:\R^3\to\R^3$ を行列 $A=\begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix}$ により定まる $\R$-線形写像とする。$\R^3$ の部分空間 $V$ であって $T(V)\subseteq V$ を満たすものを全て求めそれぞれについて基底を1つずつ与えよ。ただし $\{\mathbf{0}\}$ の基底は与えなくてよい。</p>
+    </div>
+
+    <div class="read-box">
+      <div class="read-title">🔍 問題文の読み方</div>
+      <p>「$T(V)\subseteq V$ を満たす部分空間 $V$」とは，$T$-不変部分空間——「$V$の中のベクトルを$T$で写しても$V$の外に出ない」という性質を持つ部分空間のこと。「全て求め」という指示なので，条件を満たす$V$を1つか2つ見つければ終わりではなく，$\R^3$の部分空間を次元$0$（自明なので除外してよい），$1$，$2$，$3$の場合に分けて，各次元に「あり得る$V$を漏れなく」数え上げることが要求されている（存在を示すだけでなく，それ以外にはないことも示す必要がある）。</p>
+      <p>行列$A$は一見複雑に見えるかもしれないが，$A\mathbf{e}_1=\mathbf{0},\ A\mathbf{e}_2=\mathbf{e}_1,\ A\mathbf{e}_3=\mathbf{e}_2$——つまり「$\mathbf{e}_3\to\mathbf{e}_2\to\mathbf{e}_1\to\mathbf{0}$という一本道を作るだけの写像」と読み替えると，何をしているかが具体的に見えてくる。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：$T(\mathbf{e}_1)=\mathbf{0},\ T(\mathbf{e}_2)=\mathbf{e}_1,\ T(\mathbf{e}_3)=\mathbf{e}_2$ という「1本の鎖」</div>
+      <p>$A\mathbf{v}=(v_2,v_3,0)^\top$ なので $T$ は $\mathbf{e}_3\to\mathbf{e}_2\to\mathbf{e}_1\to\mathbf{0}$ という一直線の写り方をする（$T^3=O$，$T^2\neq O$：冪零，サイズ3のジョルダン細胞1本）。このような「単一の鎖」を持つ作用素の不変部分空間は，鎖に沿った $\{\mathbf{0}\}\subset\langle\mathbf{e}_1\rangle\subset\langle\mathbf{e}_1,\mathbf{e}_2\rangle\subset\R^3$ の4つ<strong>しかない</strong>——これを実際に証明する。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 — $\dim V=1$ の場合</div>
+      <p>$V=\langle\mathbf{v}\rangle$ が不変 $\iff$ $T\mathbf{v}\in\langle\mathbf{v}\rangle$，つまり $\mathbf{v}$ は $T$ の固有ベクトル。$A$ は狭義上三角（対角成分すべて $0$）なので唯一の固有値は $0$。$T\mathbf{v}=\mathbf{0}\iff\mathbf{v}\in\Ker T=\langle\mathbf{e}_1\rangle$（$A\mathbf{v}=(v_2,v_3,0)=\mathbf{0}\iff v_2=v_3=0$）。</p>
+      <p>$$\boxed{V=\langle\mathbf{e}_1\rangle=\langle(1,0,0)^\top\rangle}\quad\text{（これ以外に1次元の不変部分空間はない）}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 — $\dim V=2$ の場合</div>
+      <p>$T|_V$ も冪零（$T^3=O$ の制限だから）なので $\Ker(T)\cap V\neq\{0\}$（2次元空間上の冪零作用素は非自明な核を持つ）。$\Ker T=\langle\mathbf{e}_1\rangle$ は1次元なので $\mathbf{e}_1\in V$。$V=\langle\mathbf{e}_1,\mathbf{w}\rangle$（$\mathbf{w}=(x,y,z)$，$\mathbf{e}_1$ と独立）とすると $T\mathbf{w}=(y,z,0)\in V=\langle\mathbf{e}_1,\mathbf{w}\rangle$。$T\mathbf{w}$ の第3成分は常に $0$ なので実は自動的に条件を満たしそうだが，$T\mathbf{w}$ が $\mathbf{e}_1$ の定数倍になるには $\mathbf{w}$ の第3成分 $z=0$ が必要（そうでないと $T\mathbf{w}=(y,z,0)$ の第2成分 $z\neq0$ が $\langle\mathbf{e}_1,\mathbf{w}\rangle$ からはみ出す）。よって $\mathbf{w}=(x,y,0)$，$y\neq0$（$\mathbf{e}_1$ と独立であるため）。このとき $\langle\mathbf{e}_1,\mathbf{w}\rangle=\langle\mathbf{e}_1,\mathbf{e}_2\rangle$。</p>
+      <p>$$\boxed{V=\langle\mathbf{e}_1,\mathbf{e}_2\rangle=\langle(1,0,0)^\top,(0,1,0)^\top\rangle=\Ker(T^2)}$$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 — $\dim V=3$ の場合</div>
+      <p>$V=\R^3$（全体）のみ。基底は標準基底 $\{\mathbf{e}_1,\mathbf{e}_2,\mathbf{e}_3\}$。</p>
+    </div>
+
+    <div class="backward-think">
+      <div class="bt-title">🔄 一般化：単一ジョルダン細胞の不変部分空間は「鎖」しかない</div>
+      <p>サイズ $n$ の冪零ジョルダン細胞（$\mathbf{e}_n\to\mathbf{e}_{n-1}\to\cdots\to\mathbf{e}_1\to\mathbf{0}$）について，$T$-不変部分空間は $\{0\}=\Ker(T^0)\subset\Ker(T)\subset\Ker(T^2)\subset\cdots\subset\Ker(T^n)=\R^n$ の $n+1$ 個の「鎖」しか存在しない。これは各 $\Ker(T^k)=\langle\mathbf{e}_1,\ldots,\mathbf{e}_k\rangle$ が唯一の $k$ 次元不変部分空間であることの帰結（固有空間が1次元しかない＝ジョルダン細胞が1本しかないことが本質）。もし細胞が複数本あれば（後述の第4問2025年度のように），不変部分空間の組み合わせが増える。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 第5問 -->
+<section class="section" id="problem5">
+  <div class="sec-header"><span class="problem-num">5</span> &nbsp;$\rank(AB)\le\min\{\rank A,\rank B\}$</div>
+  <div class="sec-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$\ell,m,n$ を正整数とし $A$ を実 $\ell\times m$ 行列，$B$ を実 $m\times n$ 行列とする。このとき $\rank(AB)\le\min\{\rank A,\rank B\}$ を示せ。</p>
+    </div>
+
+    <div class="read-box">
+      <div class="read-title">🔍 問題文の読み方</div>
+      <p>これまでと違い，具体的な数値を求める問題ではなく<strong>抽象的な不等式を証明する</strong>問題。$A$ は $\ell\times m$ 行列（つまり $\R^m\to\R^\ell$ の写像），$B$ は $m\times n$ 行列（$\R^n\to\R^m$ の写像）なので，$AB$ は「$B$を先に，$A$を後に」適用する合成写像 $\R^n\xrightarrow{B}\R^m\xrightarrow{A}\R^\ell$ を表す $\ell\times n$ 行列になる（$B$の値域と$A$の定義域がどちらも$\R^m$で一致していないと合成できない，というのがサイズの整合性の意味）。</p>
+      <p>示すべき不等式は，「2つの写像を合成すると，rank（＝像の次元＝写像が実質的に持つ自由度）は，元の2つのどちらのrankよりも大きくなりようがない」という直感を厳密な議論に翻訳したもの。$\ell,m,n$ に具体的な数は与えられていないので，一般の$A,B$に対して常に成り立つ論証（証明）を書く必要があり，特定の数値例を1つ計算して終わりにしてはいけない。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答</div>
+      <p><strong>(i) $\rank(AB)\le\rank A$：</strong>$\Im(AB)=\{ABx\mid x\in\R^n\}=A(\Im(B))\subseteq A(\R^m)=\Im(A)$（$\Im(B)\subseteq\R^m$ が $A$ の定義域全体 $\R^m$ の部分集合だから）。部分集合なら次元も以下：$\dim\Im(AB)\le\dim\Im(A)$，すなわち $\rank(AB)\le\rank A$。</p>
+      <p><strong>(ii) $\rank(AB)\le\rank B$：</strong>$Bx=\mathbf{0}\Rightarrow ABx=\mathbf{0}$ なので $\Ker(B)\subseteq\Ker(AB)$，よって $\dim\Ker(AB)\ge\dim\Ker(B)=n-\rank B$（<strong>定理4.4</strong>）。<strong>系4.8</strong>（次元定理）を $AB:\R^n\to\R^\ell$ に適用すると</p>
+      $$\rank(AB)=n-\dim\Ker(AB)\le n-(n-\rank B)=\rank B$$
+      <p>(i)(ii) を合わせて $\rank(AB)\le\min\{\rank A,\rank B\}$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 出発点：像で押さえるか，核で押さえるか</div>
+      <p>「$A$ 側の上限」は像の包含関係 $\Im(AB)\subseteq\Im(A)$ で直接示せる。「$B$ 側の上限」は像で直接比較できない（$\Im(AB)$ と $\Im(B)$ は住んでいる空間が違う）ので，代わりに核の包含 $\Ker(B)\subseteq\Ker(AB)$ を経由し，次元定理で rank に変換する——「像を直接比べられないときは核で比べて次元定理を通す」という定石。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- チェックリスト -->
+<section class="section">
+  <div class="sec-header">📋 自力確認チェックリスト</div>
+  <div class="sec-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>この期末試験を自力で解けるかセルフチェック（クリックして展開）</summary>
+      <div class="proof-body">
+        <ul class="checklist">
+          <li>第1問：$\rank A$ 1つで $\dim\Ker,\dim\Im$ が両方決まる（定理4.4・4.7・系4.8）ことを使えるか</li>
+          <li>第2問(1)：行列表示の各列が「$T(\mathbf{b}_j)$ を新基底で表した係数」であることを理解しているか</li>
+          <li>第2問(2)：「ピボット列を新基底に選べば行列表示が自動的に RREF になる」という近道に気づけるか</li>
+          <li>第3問：単項式基底で作用素が対角行列になることを見抜き，$k(k-1)-\lambda=0$ から $\Ker$ を求められるか</li>
+          <li>第4問：不変部分空間の次元1は「固有ベクトル」，次元2は「$T|_V$ が冪零だから核が非自明」という論法を再現できるか</li>
+          <li>第5問：像の包含で $A$ 側，核の包含＋次元定理で $B$ 側，という2段構えの証明を書けるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

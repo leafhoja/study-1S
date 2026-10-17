@@ -1,0 +1,267 @@
+<!DOCTYPE html><!-- 「2012年度 | 情報 共通問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2012年度 | 情報 共通問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kyotsu-2012">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>共通問題 2012年度</h1>
+  <p class="subtitle">7月26日（木）2限｜大問3（うち大問3は選択）</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（ウェブページのハイパーリンクとグラフ探索）</a>
+    <a href="#q2">大問2（配列の最大値・2番目の最大値）</a>
+    <a href="#q3">大問3（選択：Winny事件とディジタル情報の所有権／棒への印付けと情報量）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>ウェブページのハイパーリンクとグラフ探索</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>ウェブブラウザで「1」と表示されクリックすると<code>http://z.jp/i.html</code>が表示されるハイパーリンクを<code>&lt;a href="http://z.jp/i.html"&gt;1&lt;/a&gt;</code>と表現する。以下の表は各URLのウェブページが持つハイパーリンクを示す。</p>
+        <table class="q-table">
+          <tr><th>URL</th><th>ハイパーリンク</th></tr>
+          <tr><td><code>http://z.jp/a.html</code></td><td><code>&lt;a href="http://z.jp/d.html"&gt;1&lt;/a&gt;</code></td></tr>
+          <tr><td><code>http://z.jp/b.html</code></td><td><code>&lt;a href="http://z.jp/h.html"&gt;2&lt;/a&gt;</code></td></tr>
+          <tr><td><code>http://z.jp/c.html</code></td><td><code>&lt;a href="http://z.jp/e.html"&gt;3&lt;/a&gt;</code>、<code>&lt;a href="http://z.jp/f.html"&gt;4&lt;/a&gt;</code></td></tr>
+          <tr><td><code>http://z.jp/d.html</code></td><td><code>&lt;a href="http://z.jp/c.html"&gt;5&lt;/a&gt;</code></td></tr>
+          <tr><td><code>http://z.jp/e.html</code></td><td><code>&lt;a href="http://z.jp/d.html"&gt;6&lt;/a&gt;</code>、<code>&lt;a href="http://z.jp/f.html"&gt;7&lt;/a&gt;</code>、<code>&lt;a href="http://z.jp/g.html"&gt;8&lt;/a&gt;</code></td></tr>
+          <tr><td><code>http://z.jp/f.html</code></td><td><code>&lt;a href="http://z.jp/i.html"&gt;9&lt;/a&gt;</code></td></tr>
+          <tr><td><code>http://z.jp/g.html</code></td><td><code>&lt;a href="http://z.jp/b.html"&gt;10&lt;/a&gt;</code>、<code>&lt;a href="http://z.jp/h.html"&gt;11&lt;/a&gt;</code></td></tr>
+          <tr><td><code>http://z.jp/h.html</code></td><td><code>&lt;a href="http://z.jp/i.html"&gt;12&lt;/a&gt;</code></td></tr>
+          <tr><td><code>http://z.jp/i.html</code></td><td><code>&lt;a href="http://z.jp/c.html"&gt;13&lt;/a&gt;</code>、<code>&lt;a href="http://z.jp/e.html"&gt;14&lt;/a&gt;</code></td></tr>
+        </table>
+        <p>
+          (1) <code>http://z.jp/a.html</code> から<code>http://z.jp/h.html</code> に至るには、どのようにハイパーリンクを辿ればよいかを調べたい。この問題を解くのに適したデータモデルの名称をあげ、それをどのように使うかを説明せよ。<br>
+          (2) <code>http://z.jp/a.html</code> からリンクを1回辿って見ることができるウェブページを全て示せ。次に、2回辿ることで初めて見ることができるページを全て示せ。これを新たに見ることができるページがなくなるまで繰り返せ。回数とページとの対応を全て列挙せよ。<br>
+          (3) 2.を使って、a.htmlからハイパーリンクをできるだけ少ない回数辿ることでh.htmlに至る辿り方を示せ。
+        </p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>まず、上の表のリンク関係をa〜iの9ページを頂点とする有向グラフとして整理しておく。矢印はハイパーリンクの向き（辿れる方向）を表す。</p>
+          <table class="q-table">
+            <tr><th>頂点</th><th>出て行くリンク（矢印の向き）</th></tr>
+            <tr><td>a</td><td>a→d</td></tr>
+            <tr><td>b</td><td>b→h</td></tr>
+            <tr><td>c</td><td>c→e、c→f</td></tr>
+            <tr><td>d</td><td>d→c</td></tr>
+            <tr><td>e</td><td>e→d、e→f、e→g</td></tr>
+            <tr><td>f</td><td>f→i</td></tr>
+            <tr><td>g</td><td>g→b、g→h</td></tr>
+            <tr><td>h</td><td>h→i</td></tr>
+            <tr><td>i</td><td>i→c、i→e</td></tr>
+          </table>
+
+          <p><strong>(1)</strong> 適したデータモデルは<strong>ネットワークモデル（有向グラフ）</strong>である。各ウェブページを1つのノード（頂点）、各ハイパーリンクをノードからノードへの有向エッジ（矢印）として表現する。すると「a.htmlからh.htmlへの辿り方」を求める問題は、このグラフ上で「aからhへの到達可能性・最短経路を求める」問題として扱うことができる。具体的には、a.htmlに対応するノードから出発し、エッジを1本ずつ辿って到達できるノードを、近い順（1回で着くもの、2回で着くもの、…）に段階的に探索していけばよい。これは幅優先探索（BFS：Breadth-First Search）と呼ばれる手法であり、グラフ上のある頂点から他の頂点までの最短到達回数（最短距離）を求めるのに適している。</p>
+
+          <p><strong>(2)</strong> aから出発し、リンクを辿って到達できるページをBFSで段階的に求める。</p>
+          <ul>
+            <li>0回（出発点）：<strong>a</strong></li>
+            <li>1回：aから出ているリンクはa→dのみなので、<strong>d</strong></li>
+            <li>2回：dから出ているリンクはd→cのみなので、<strong>c</strong></li>
+            <li>3回：cから出ているリンクはc→e、c→fなので、<strong>e、f</strong></li>
+            <li>4回：eから出ているリンクはe→d（dは既出）、e→f（fは既出）、e→g、fから出ているリンクはf→i、なので新たに到達するのは<strong>g、i</strong></li>
+            <li>5回：gから出ているリンクはg→b、g→h、iから出ているリンクはi→c（既出）、i→e（既出）、なので新たに到達するのは<strong>b、h</strong></li>
+          </ul>
+          <p>これでa〜iの9ページすべて（a, b, c, d, e, f, g, h, i）に到達し終えたので、6回目以降に新たに見えるページはない。回数とページの対応をまとめると次のとおり。</p>
+          <table class="q-table">
+            <tr><th>回数</th><th>新たに到達するページ</th></tr>
+            <tr><td>0回</td><td>a</td></tr>
+            <tr><td>1回</td><td>d</td></tr>
+            <tr><td>2回</td><td>c</td></tr>
+            <tr><td>3回</td><td>e、f</td></tr>
+            <tr><td>4回</td><td>g、i</td></tr>
+            <tr><td>5回</td><td>b、h</td></tr>
+          </table>
+
+          <p><strong>(3)</strong> h.htmlは(2)の表で5回目に初めて到達可能になったページなので、a.htmlからh.htmlへの最短の辿り方は<strong>5回</strong>である。具体的な経路は、h.htmlに5回目で到達する直前の状態を逆にたどると、<strong>a→d→c→e→g→h</strong>という辿り方になる（a→d(1回目)、d→c(2回目)、c→e(3回目)、e→g(4回目)、g→h(5回目)、で合計5回のハイパーリンクを辿ってh.htmlに到達する）。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) ネットワークモデル（有向グラフ）。ページをノード、リンクを有向エッジとし、幅優先探索（BFS）で最短到達回数を求める。　(2) 0回=a／1回=d／2回=c／3回=e,f／4回=g,i／5回=b,h　(3) 最短5回、経路の例：a→d→c→e→g→h</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — BFSとウェブクローラー・PageRank</span>
+        <p>この問題は、ウェブページをノード、ハイパーリンクを有向エッジとする「ウェブグラフ」の探索問題である。検索エンジンのクローラー（ロボット）が新しいページを発見していく過程も、本質的には既知のページに張られたリンクを辿って未知のページへ到達するという、本問と同じBFS的な探索によって行われている。また、あるページから別のページへの「到達しやすさ」や「距離」は、Googleが開発したPageRankのようなリンク解析アルゴリズムの土台にもなっている考え方であり、リンクを多く受けている（多くの経路から到達される）ページほど重要度が高いと評価する、というのがPageRankの基本的な発想である。本問のように「最短で何回リンクを辿れば到達できるか」を段階的に求めていく手続きは、グラフ理論における最短経路問題の最も基本的な解法の一つである。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>配列の最大値・2番目の最大値</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>n個の正の整数$a_1,\dots,a_n$からなる配列aが与えられている。以下の問いに、教科書の記法（変数、代入(←)、加算・減算・乗算、比較演算、if...then...else...endif、while...do...done、returnまたは表示）を用いて答えよ。</p>
+        <p>
+          (1) 配列aの要素の最大値を出力する計算を記述せよ。<br>
+          (2) 問題1の解の計算量のオーダーを（nに対して）表せ。<br>
+          (3) 配列aの要素のうち2番目に大きな値を出力する計算を記述せよ（配列の全要素は異なる値であると仮定してよい）。
+        </p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>(1)</strong> 最大値を保持する変数を$a_1$で初期化し、残りの要素を先頭から順に1つずつ走査しながら、それまでの最大値より大きい要素が見つかるたびに更新していけばよい。</p>
+          <div class="mathblock">最大値 ← a1
+i ← 2
+while i ≤ n do
+    if ai &gt; 最大値
+        then 最大値 ← ai
+    endif
+    i ← i+1
+done
+最大値を表示</div>
+
+          <p><strong>(2)</strong> この計算は配列を先頭から末尾まで1回だけ走査し、各要素につきちょうど1回の比較（<code>ai &gt; 最大値</code>）を行うだけなので、計算量のオーダーは要素数nに比例する。すなわち<strong>O(n)</strong>である。</p>
+
+          <p><strong>(3)</strong> 2番目に大きな値を求めるには、最大値を更新するたびに「これまでの最大値」を「2番目」に退避させながら走査すればよい。ただし比較の対象を1つ増やす必要があるため、最初の2要素であらかじめ最大値・2番目を初期化しておいてから、3番目以降の要素を走査する。</p>
+          <div class="mathblock">if a1 &gt; a2
+    then 最大値 ← a1、2番目 ← a2
+    else 最大値 ← a2、2番目 ← a1
+endif
+i ← 3
+while i ≤ n do
+    if ai &gt; 最大値
+        then 2番目 ← 最大値、最大値 ← ai
+        else if ai &gt; 2番目
+            then 2番目 ← ai
+        endif
+    endif
+    i ← i+1
+done
+2番目を表示</div>
+          <p>この手続きでは、新しい要素$a_i$が現在の最大値より大きければ、これまでの最大値が「繰り下がって」2番目になり、$a_i$自身が新しい最大値になる。$a_i$が最大値以下であっても、これまでの2番目より大きければ、2番目だけを$a_i$に更新する。いずれの場合も配列を1回走査するだけで済むため、(1)と同様に計算量はO(n)である。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) 配列を1回走査し逐次的に最大値を更新する（O(n)）　(2) O(n)　(3) 最初の2要素で最大値・2番目を初期化した後、3番目以降を1回走査しながら最大値・2番目を更新する（O(n)）</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — ソートを使わずにO(n)で「2番目」を求める</span>
+        <p>2番目に大きな値を求める最も素朴な方法として、配列全体を一度ソートしてから後ろから2番目の要素を取り出す、というやり方が考えられる。しかし一般的な比較ソートの計算量はO(n log n)であり、これは(3)の解法のO(n)よりも（nが大きくなるほど）確実に遅い。(3)の解法が優れているのは、「配列全体の順序」という余分な情報を一切求めず、常に「これまでに見た中での1位・2位」という最小限の情報だけを保持しながら1回の走査で答えを出している点にある。これは、必要な情報だけを過不足なく計算する、というアルゴリズム設計における効率化の基本的な考え方の好例であり、k番目に大きな値を求める一般の問題（k=1が(1)、k=2が(3)にあたる）でも、kが定数であれば同様にO(n)で解くことができる。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q3">
+    <div class="sec-header"><div class="sec-tag">大問 3（選択）</div><h2>問題A：Winny事件とディジタル情報の所有権／問題B：棒への印付けと情報量</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="note"><span class="box-label">出題形式</span><p>問題A・Bのいずれか一方を選択。ここでは両方を掲載する。</p></div>
+
+      <h3>問題A — Winny事件とディジタル情報の所有権</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>ファイル共有ソフトWinnyをめぐっては、2003年に利用者2名が逮捕され、2004年には開発者が逮捕された。開発者に対する裁判は、一審では有罪、二審では無罪となり、2011年に最高裁判所で無罪が確定した、という経緯をたどった。これに関して、以下の問いに答えよ。</p>
+        <p>
+          (1) Winny利用者2名の逮捕理由を、「著作権者」「ネットワーク」「ハードディスク」の用語を用いて簡潔に記述せよ（各用語が初めて現れる箇所に下線を引くこと）。<br>
+          (2) Winny開発者を起訴した側の主張を3行程度で述べよ。<br>
+          (3) 開発者の支援者の主張を3行程度で述べよ。<br>
+          (4) 情報技術の発展とディジタル情報の所有権に関して、今後考慮すべき課題を5行程度で述べよ。
+        </p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>(1)</strong> 利用者2名は、<u>著作権者</u>の許諾を得ずに、著作物のファイルを自己の<u>ハードディスク</u>に複製・保存した上で、Winnyの<u>ネットワーク</u>を通じて不特定多数に送信可能な状態に置いた（違法アップロード）ことにより、著作権法違反（公衆送信権侵害）の疑いで逮捕された。</p>
+          <p><strong>(2)</strong> 起訴側の主張は次のようなものである。Winnyは違法な著作権侵害目的での利用が大半を占めることを開発者が認識していながら、その事実を認識しつつ開発・公開を継続したのであるから、開発者は著作権侵害を幇助した（幇助犯）として刑事責任を負うべきである、という主張である。</p>
+          <p><strong>(3)</strong> 支援者の主張は次のようなものである。Winny自体はファイル共有という中立的な技術であり、技術それ自体には善悪の区別はない。それを違法な目的で使う利用者個人の責任を、技術を開発しただけの開発者にまで拡大して問うべきではなく、そのような判断は技術開発そのものを萎縮させる危険なものである、という主張である。</p>
+          <p><strong>(4)</strong> 技術は本来「用途中立」であることが多く、開発者が意図した使われ方と、実際の利用実態とは乖離しうる。今後は、技術開発者が負うべき責任の範囲をどこまでとするか（幇助犯の成立要件の明確化）という点、著作権の保護と技術革新の促進とをどう両立させるかという点、Winnyのような分散型（P2P型）システムでは特定の管理者が存在しないため責任主体の特定そのものが難しいという点、そして技術的な対策（DRM等）や利用者教育と法規制とのバランスをどのように図っていくかという点など、技術の進歩に合わせて法制度と社会的な合意を継続的に見直していく必要がある。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) 利用者は著作権者の許諾なく著作物をハードディスクに複製し、Winnyのネットワークを通じて公衆送信可能な状態に置いたため逮捕された。　(2) 開発者は違法利用が大半であることを認識しながら開発・公開を続けたため幇助犯として責任を負うべきという主張。　(3) 技術は中立であり利用者個人の責任を開発者にまで拡大すべきでないという主張。　(4) 開発者の責任範囲の明確化、著作権保護と技術革新の両立、分散型システムでの責任主体特定の難しさ、技術的対策と法規制のバランスなどを継続的に見直す必要がある。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識A — Winny事件が投げかけた「技術の中立性」という論点</span>
+        <p>Winny事件の最大の争点は、「著作権侵害に使われうる技術を開発・公開すること自体が犯罪の幇助にあたるか」という点であった。最高裁は最終的に、開発者がソフトウェアの違法利用を積極的に勧奨するなど特段の事情がない限り、価値中立的な技術の提供者を幇助犯として処罰すべきではない、という判断を示し無罪を確定させた。この論点は、その後もP2P技術に限らず、暗号技術、匿名化技術（Tor等）、生成AIなど、「善用も悪用もできる汎用技術」をどこまで規制すべきかという議論に繰り返し現れており、Winny事件は日本におけるこの種の議論の重要な先例となっている。</p>
+      </div>
+
+      <h3>問題B — 棒への印付けと情報量</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>長さ1mの棒に印を1つつけることで、「一端から印までの距離（m）」という0〜1の実数を表すことができる。この棒には、1マイクロメートル（$10^{-6}$m）単位で正確に印を付けることができ、また同じ精度で読み取ることができるものとする。以下の問いに答えよ。ただし$2^{10}\approx10^3$と近似してよい。</p>
+        <p>
+          (1) 印を1つつけることで、1からNまでの整数を符号化したい。表現できる最大のNはいくつか。<br>
+          (2) $2^{10}\approx10^3$という近似を用いるとき、(1)で求めたNは2進数で何桁の数に相当するか。<br>
+          (3) アルファベット26文字と空白の合計27文字を、印1つで符号化したい。27文字が等確率で現れるとして、$\log_2 27\approx4.75$を用いると、最大で何文字までを必ず表せるか。<br>
+          (4) 複数の印を付けることが許される場合、長さ1mの棒1本で最大でどれだけの情報を表せるか。10進数1つを符号化する場合の桁数で答えよ。
+        </p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>(1)</strong> 1マイクロメートル単位で0〜1mの範囲に印を付けられる位置の総数は、$1\text{m}\div10^{-6}\text{m}=10^6$通りである。したがって表現できる最大のNは<strong>$N=1{,}000{,}000$（$10^6$）</strong>である。</p>
+          <p><strong>(2)</strong> $10^6=(10^3)^2$であり、$10^3\approx2^{10}$という近似を用いると、$10^6\approx(2^{10})^2=2^{20}$となる。したがって、(1)のNは2進数で<strong>約20桁（20ビット）</strong>の数に相当する。</p>
+          <p><strong>(3)</strong> (2)より、この棒1本の印1つがもつ情報容量は約20ビットである。27文字を等確率で表現するには、1文字あたり$\log_2 27\approx4.75$ビットが必要になる。表現できる最大の文字数を$L$とすると、$L$文字の等確率な組合せを区別するのに必要なビット数は$4.75L$であるから、これが20ビット以下に収まる必要がある。すなわち
+          $$4.75L\le20 \iff L\le\frac{20}{4.75}\approx4.21$$
+          Lは整数でなければならないので、<strong>最大4文字</strong>まで必ず表すことができる。</p>
+          <p><strong>(4)</strong> 印の数を$k$個に増やすと、棒上の印1つあたりの精度（1マイクロメートル単位、約20ビット相当）がそのまま$k$個ぶん独立に得られると考えられるので、表現できる情報量はおよそ$20k$ビットに増加する。20ビットが10進数でおよそ6桁分の精度（$2^{20}\approx10^6$）に相当することを踏まえると、印を$k$個使えば、おおよそ$6k$桁の10進数を表現できることになる。印の数$k$には理論上の上限がないため、$k$をいくらでも大きくとることができ、したがって<strong>表現できる桁数にも理論上の上限はない</strong>（印の数を増やせば増やすほど、いくらでも多くの桁数の10進数を表現できる）。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) $N=10^6$　(2) 約20桁（20ビット）　(3) 最大4文字　(4) 印をk個使えばおよそ6k桁の10進数を表現でき、理論上の上限はない</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識B — アナログ量の理論上の無限精度と、現実の計測限界</span>
+        <p>この問題の本質は、「連続量（アナログ量）を使えば、理論上はいくらでも多くの情報を蓄えられる」という点にある。棒の上の位置は本来連続的な実数であり、印を付ける精度に理論的な上限がなければ、1本の棒だけで無限の情報を符号化できることになる。しかし現実には、(1)〜(3)で見たように「1マイクロメートル単位でしか印を付けたり読み取ったりできない」という計測精度の限界によって、1つの印がもつ情報量は有限（約20ビット）に制限されている。これは、標本化（サンプリング）・量子化によってアナログ信号を有限のビット列（ディジタル信号）に変換する際に生じる誤差・限界と対になる見方であり、「連続量は理論上無限の情報を持ちうるが、測定・記録の精度によって実質的な情報量は有限に切り詰められる」という情報理論の基本的な視点を、棒への印付けという具体的な設定を通じて確認させる問題になっている。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2013.html">← 2013年度へ</a>
+    <a href="kakomon_2011.html">2011年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

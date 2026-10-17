@@ -1,0 +1,154 @@
+<!DOCTYPE html><!-- 「アルゴリズムと計算量 — 押さえておきたい事項 | 情報」の内容を表示する学習ページ。 --><html lang="ja"><!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head><meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="theme-color" content="#0a4f5c"><title>アルゴリズムと計算量 — 押さえておきたい事項 | 情報</title><link rel="stylesheet" href="../../common.css"><link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+  MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-03-kp">
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>アルゴリズムと計算量 — 押さえておきたい事項</h1>
+  <p class="subtitle">公式・手順・典型的な考え方のまとめ</p>
+</div>
+
+<div class="container">
+
+<div class="page-toc">
+  <strong>目次</strong>
+  <ol>
+    <li><a href="#kp-order">計算量の見積り方の手順</a></li>
+    <li><a href="#kp-choose">数倍速いコンピュータより、オーダーの小さいアルゴリズム</a></li>
+    <li><a href="#kp-scale">オーダーの大小関係</a></li>
+    <li><a href="#kp-fib">フィボナッチとメモ化 — 同じ問題でも結果が変わる</a></li>
+    <li><a href="#kp-strategy">アルゴリズム戦略という考え方</a></li>
+    <li><a href="#kp-linear-binary">線形探索 vs 二分探索の対比</a></li>
+    <li><a href="#kp-general">二分法の一般化</a></li>
+    <li><a href="#kp-amortized">「見た目の二重ループ」の罠（ならし解析）</a></li>
+    <li><a href="#kp-lowerbound">最大値探索の下限</a></li>
+    <li><a href="#kp-kth">k番目に大きい値を求める</a></li>
+    <li><a href="#kp-divide">分割統治法は万能ではない</a></li>
+    <li><a href="#kp-copyright">著作権法とアルゴリズム・プログラム言語の保護範囲</a></li>
+    <li><a href="#kp-trace">機械語トレースの追い方の手順</a></li>
+  </ol>
+</div>
+
+<div class="kp-item">
+<div class="mot" id="kp-order"><span class="box-label">計算量の見積り方の手順</span>
+<p>計算量は次の3ステップで見積もる。</p>
+<ol>
+  <li>問題の大きさを変数で表す。</li>
+  <li>計算回数をその変数の式で表す。</li>
+  <li>詳細な式ではなく、オーダーを使う（定数を無視し、一番変化の激しい項だけを残す）。</li>
+</ol>
+</div>
+</div>
+
+<div class="kp-item">
+<div class="mot" id="kp-choose"><span class="box-label">数倍速いコンピュータより、オーダーの小さいアルゴリズムを選ぶ方が効果的</span>
+<p>ハードウェアを数倍速くするより、オーダーの小さいアルゴリズムに乗り換える方が効果は大きい。$x=2$、$\delta=10^{-10}$ の平方根計算の例では、反復法は約141億回の計算が必要になるのに対し、二分法は約35回ですむ。</p>
+</div>
+</div>
+
+<div class="kp-item">
+<div class="note" id="kp-scale"><span class="box-label">オーダーの大小関係</span>
+<p>基本的なオーダーの大小は次の順で大きくなる。</p>
+<p class="mathblock">$$O(1) < O(\log n) < O(n) < O(n \log n) < O(n^2)$$</p>
+</div>
+</div>
+
+<div class="kp-item">
+<div class="mot" id="kp-fib"><span class="box-label">フィボナッチとメモ化 — 同じ問題でも結果が変わる</span>
+<p>フィボナッチ数列を素朴な再帰でそのまま計算すると、同じ項を何度も計算し直すために計算量は指数的に増加する。ここにメモ化（一度計算した値を覚えておき、計算し直さない）を加えるとO(n)に収まる。同じ問題でも、アルゴリズムの選び方次第で「現実的な時間で終わる」か「手に負えなくなる」かが分かれる、という好例である。</p>
+</div>
+</div>
+
+<div class="kp-item">
+<div class="mot" id="kp-strategy"><span class="box-label">アルゴリズム戦略という考え方</span>
+<p>一見まったく異なる問題でも、同じ解き方の"型"に帰着することがある。</p>
+<ul>
+  <li>二分探索（辞書検索）と、平方根を求める二分法は、表面上は別の問題だが「解の存在範囲を毎回半分に絞り込む」という同一の型に帰着する。</li>
+  <li>最短経路長問題と、フィボナッチ数列のメモ化は、同じ動的計画法の型に帰着する。</li>
+</ul>
+</div>
+</div>
+
+<div class="kp-item">
+<div class="note" id="kp-linear-binary"><span class="box-label">線形探索 vs 二分探索の対比</span>
+<p>δを1/10にしたとき、線形探索はおよそ10倍の手間になるのに対し、二分探索は $\log_2 10 \approx 3.3$ 回増えるだけですむ。この対比は共通問題2013・2014・2016・2018・2019・2021・2022・2024で繰り返し出題される定番の題材である。</p>
+</div>
+</div>
+
+<div class="kp-item">
+<div class="note" id="kp-general"><span class="box-label">二分法の一般化（共通2018 q3）</span>
+<p>分割点が厳密に区間の中央でなくても、区間幅を毎回一定の「割合」以下に縮められるなら、反復回数は対数オーダーのまま変わらない。一方、区間幅を一定の「量」だけ縮める方法（割合ではなく絶対量を引く方法）は線形オーダーになってしまう。</p>
+</div>
+</div>
+
+<div class="kp-item">
+<div class="warn" id="kp-amortized"><span class="box-label">「見た目の二重ループ」の罠（ならし解析、共通2018 q1）</span>
+<p>二重ループに見えるコードでも、内側ループの変数がどこで初期化・リセットされるかを必ず確認すること。内側ループの変数が外側ループの外で1回だけ初期化される場合、総実行回数は（一見$O(n^2)$に見えても）線形になりうる。</p>
+</div>
+</div>
+
+<div class="kp-item">
+<div class="mot" id="kp-lowerbound"><span class="box-label">最大値探索の下限（共通2010・2012）</span>
+<p>n個の中から最大値を1つ確定するには、理論上最低$n-1$回の比較が必要である。逐次更新や、トーナメント方式による探索は、この下限をちょうど達成する（$O(n)$）。一方、バブルソートのように全体を整列してしまう方法は、目的（最大値1つを求めること）に対して過剰であり、$O(n^2)$になる。</p>
+</div>
+</div>
+
+<div class="kp-item">
+<div class="note" id="kp-kth"><span class="box-label">k番目に大きい値を求める（共通2012 q2）</span>
+<p>k番目に大きい値を求めるために、全体をソートする必要はない。kが定数であれば、必要な情報だけを保持しながら1回走査するだけで$O(n)$で求められる。</p>
+</div>
+</div>
+
+<div class="kp-item">
+<div class="warn" id="kp-divide"><span class="box-label">分割統治法は万能ではない（共通2006 q2）</span>
+<p>問題を分割して個別に解いても、それらを統合する過程に工夫の余地がなければ、全体のオーダーは改善しない。</p>
+</div>
+</div>
+
+<div class="kp-item">
+<div class="note" id="kp-copyright"><span class="box-label">著作権法とアルゴリズム・プログラム言語の保護範囲（共通2010 q3A・2022 q2）</span>
+<p>著作権法が保護するのは具体的な表現（ソースプログラム・オブジェクトプログラム）であり、プログラム言語そのものや、解法（アルゴリズム）・規約は著作権法第10条3項により保護対象外である。</p>
+</div>
+</div>
+
+<div class="kp-item">
+<div class="mot" id="kp-trace"><span class="box-label">機械語トレースの追い方の手順</span>
+<p>アルゴリズムをステップ数で評価するとき、機械語レベルのトレースは次の手順で追う。</p>
+<ol>
+  <li>各番地の役割（定数／変数／カウンタ）を先に特定する。</li>
+  <li>アキュムレータを1命令ずつ更新しながらトレースし、分岐命令では場合分けする。</li>
+  <li>ループ構造を見つけたら、1回あたりの変化と回数を求める。</li>
+  <li>実行ステップ数＝直線部分のステップ数＋ループ本体のステップ数×回数として求める（最終回は他の回と命令数が異なることがあるので分けて数える）。</li>
+</ol>
+</div>
+</div>
+
+<!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+  <a href="03-アルゴリズムと計算量-word.html">← 単語帳（用語一覧）</a>
+  <a href="03-アルゴリズムと計算量-descriptive.html">記述式で狙われる内容 →</a>
+</div>
+
+</div>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body></html>

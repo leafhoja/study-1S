@@ -1,0 +1,663 @@
+<!DOCTYPE html><!-- 「2023年度 | 力学A 過去問解説」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>2023年度 | 力学A 過去問解説</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kakomon_2023">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A 講義ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="n1.html" data-page="n1">第1章</a>
+      <a href="n2.html" data-page="n2">第2章</a>
+      <a href="n3.html" data-page="n3">第3章</a>
+      <a href="n4.html" data-page="n4">第4章</a>
+      <a href="n5.html" data-page="n5">第5章</a>
+      <a href="n6.html" data-page="n6">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023" class="active">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>力学A 過去問解説</h1>
+  <p class="subtitle">2023年度期末試験</p>
+  <p class="meta">担当：溝口俊弥｜前期課程 Sセメスター</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">問題1（外積・湯川ポテンシャル・保存力場）</a>
+    <a href="#q2">問題2（粘性流体中のバネ運動）</a>
+    <a href="#q3">問題3（太陽のまわりの惑星の運動）</a>
+    <a href="#q4">問題4（振り子の運動）</a>
+  </div>
+
+  <!-- =================== 問題1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header">
+      <div class="sec-tag">問題 1</div>
+      <h2>外積・湯川ポテンシャル・保存力場</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>次の各問いに答えよ。</p>
+      </div>
+
+      <h3 id="q1-1">(1) ベクトル三重積の展開</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          ３次元空間内の１次独立な３つのベクトル $\mathbf{a}$, $\mathbf{b}$, $\mathbf{c}$ に対して、$\times$ を外積とするとき
+        </p>
+        <div class="mathblock">$$\mathbf{v} = \mathbf{a}\times(\mathbf{b}\times\mathbf{c}) - (\mathbf{a}\times\mathbf{b})\times\mathbf{c}$$</div>
+        <p>で定義される $\mathbf{v}$ もまたベクトルとなる。$\mathbf{v}$ を $\mathbf{a}$, $\mathbf{b}$, $\mathbf{c}$ の線形結合で表せ。</p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            ベクトル三重積の公式（BAC&minus;CAB 則）$\mathbf{X}\times(\mathbf{Y}\times\mathbf{Z}) = \mathbf{Y}(\mathbf{X}\cdot\mathbf{Z}) - \mathbf{Z}(\mathbf{X}\cdot\mathbf{Y})$ を、第１項と第２項それぞれに適用する。
+          </p>
+          <p>第１項はそのまま公式を当てはめて</p>
+          <div class="mathblock">$$\mathbf{a}\times(\mathbf{b}\times\mathbf{c}) = \mathbf{b}(\mathbf{a}\cdot\mathbf{c}) - \mathbf{c}(\mathbf{a}\cdot\mathbf{b})$$</div>
+          <p>
+            第２項は、外積の反交換性 $(\mathbf{a}\times\mathbf{b})\times\mathbf{c} = -\mathbf{c}\times(\mathbf{a}\times\mathbf{b})$ を使ってから同じ公式を当てはめる（$\mathbf{X}=\mathbf{c}$, $\mathbf{Y}=\mathbf{a}$, $\mathbf{Z}=\mathbf{b}$ として）：
+          </p>
+          <div class="mathblock">$$\mathbf{c}\times(\mathbf{a}\times\mathbf{b}) = \mathbf{a}(\mathbf{c}\cdot\mathbf{b}) - \mathbf{b}(\mathbf{c}\cdot\mathbf{a})$$</div>
+          <p>したがって</p>
+          <div class="mathblock">$$-(\mathbf{a}\times\mathbf{b})\times\mathbf{c} = \mathbf{c}\times(\mathbf{a}\times\mathbf{b}) = \mathbf{a}(\mathbf{b}\cdot\mathbf{c}) - \mathbf{b}(\mathbf{a}\cdot\mathbf{c})$$</div>
+          <p>両者を足し合わせると、$\mathbf{b}(\mathbf{a}\cdot\mathbf{c})$ の項どうしが打ち消し合い、</p>
+          <div class="mathblock">$$\begin{aligned}
+          \mathbf{v} &= \big[\mathbf{b}(\mathbf{a}\cdot\mathbf{c}) - \mathbf{c}(\mathbf{a}\cdot\mathbf{b})\big] + \big[\mathbf{a}(\mathbf{b}\cdot\mathbf{c}) - \mathbf{b}(\mathbf{a}\cdot\mathbf{c})\big]\\[.3em]
+          &= \mathbf{a}(\mathbf{b}\cdot\mathbf{c}) - \mathbf{c}(\mathbf{a}\cdot\mathbf{b})
+          \end{aligned}$$</div>
+          <p>が得られる。</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$\mathbf{v} = (\mathbf{b}\cdot\mathbf{c})\,\mathbf{a} - (\mathbf{a}\cdot\mathbf{b})\,\mathbf{c}$$
+        </div>
+      </details>
+
+      <h3 id="q1-2">(2) 湯川ポテンシャルから力を求める</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          ３次元空間内の位置ベクトル $\mathbf{r}$ の点において、ある保存力のポテンシャル $V(\mathbf{r})$ が
+        </p>
+        <div class="mathblock">$$V(\mathbf{r}) = k\,\frac{e^{-\frac{|\mathbf{r}|}{\lambda}}}{|\mathbf{r}|}\tag{1}$$</div>
+        <p>
+          で与えられるとき、これを湯川ポテンシャルという。ただし $k$ と $\lambda$ はそれぞれの次元を持った定数である。直交座標系における $\mathbf{r}$ の座標を $(x,y,z)$ とするとき、そこでの力 $\mathbf{F}(\mathbf{r})$ の各成分を求めよ。
+        </p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>保存力なので $\mathbf{F}(\mathbf{r}) = -\nabla V = -\left(\dfrac{\partial V}{\partial x}, \dfrac{\partial V}{\partial y}, \dfrac{\partial V}{\partial z}\right)$ である。$r \equiv |\mathbf{r}| = \sqrt{x^2+y^2+z^2}$ とおくと、合成関数の微分と $\dfrac{\partial r}{\partial x} = \dfrac{x}{r}$ を使って</p>
+          <div class="mathblock">$$\frac{\partial V}{\partial x} = \frac{dV}{dr}\cdot\frac{\partial r}{\partial x} = \frac{dV}{dr}\cdot\frac{x}{r}$$</div>
+          <p>ここで $V(r) = k\,e^{-r/\lambda}/r$ の $r$ による微分は積の微分則より</p>
+          <div class="mathblock">$$\frac{dV}{dr} = k\left(-\frac{1}{\lambda}e^{-r/\lambda}\cdot\frac{1}{r} - e^{-r/\lambda}\cdot\frac{1}{r^2}\right) = -\frac{k(\lambda+r)}{\lambda r^2}\,e^{-r/\lambda}$$</div>
+          <p>したがって</p>
+          <div class="mathblock">$$\frac{\partial V}{\partial x} = -\frac{k(\lambda+r)}{\lambda r^2}\,e^{-r/\lambda}\cdot\frac{x}{r} = -\frac{k(\lambda+r)}{\lambda r^3}\,e^{-r/\lambda}\,x$$</div>
+          <p>$y$, $z$ 成分も $x\to y,\ x\to z$ と置き換えるだけで同じ形になる（$r$ が $x,y,z$ について対称なため）。よって $\mathbf{F} = -\nabla V$ の各成分は</p>
+          <div class="mathblock">$$F_x = \frac{k(\lambda+r)}{\lambda r^3}\,e^{-r/\lambda}\,x,\qquad
+          F_y = \frac{k(\lambda+r)}{\lambda r^3}\,e^{-r/\lambda}\,y,\qquad
+          F_z = \frac{k(\lambda+r)}{\lambda r^3}\,e^{-r/\lambda}\,z$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$\mathbf{F}(\mathbf{r}) = \frac{k(\lambda+r)}{\lambda r^3}\,e^{-r/\lambda}\,(x,\ y,\ z)\qquad(r=|\mathbf{r}|)$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 湯川ポテンシャルの意味</span>
+        <p>
+          $\lambda\to\infty$ の極限では $e^{-r/\lambda}\to1$ となり、$V(r)\to k/r$（クーロン型・万有引力型のポテンシャル）に帰着する。有限の $\lambda$ は力の到達距離（遮蔽長）を表しており、$r\gg\lambda$ では指数関数的に力が減衰する。素粒子物理では中間子交換による核力のモデルとして知られる。
+        </p>
+      </div>
+
+      <h3 id="q1-3">(3) ポテンシャルをもつ力の場</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>直交座標系において、次のような $(x, y, z)$ 成分を持つ４つの力のベクトル場</p>
+        <div class="mathblock">$$\begin{aligned}
+        (\mathrm{a})\quad \mathbf{F} &= (x,\ x,\ 0)\\
+        (\mathrm{b})\quad \mathbf{F} &= (y,\ 2y-x,\ 0)\\
+        (\mathrm{c})\quad \mathbf{F} &= (x-y,\ 2y-x,\ 0)\\
+        (\mathrm{d})\quad \mathbf{F} &= (y-x,\ 2x,\ 0)
+        \end{aligned}$$</div>
+        <p>
+          のうち、ポテンシャルをもつものが１つある。それはどれか。また、そのポテンシャル $U(x,y,z)$ を求めよ。ただし、原点 $(x,y,z)=(0,0,0)$ において $U(0,0,0)=0$ となるようにポテンシャルの基準点を設定せよ。
+        </p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            平面内（$F_z=0$）の力場が保存力である条件は、回転（渦度）のうち唯一非自明な $z$ 成分がゼロになること：
+          </p>
+          <div class="mathblock">$$\frac{\partial F_y}{\partial x} - \frac{\partial F_x}{\partial y} = 0$$</div>
+          <p>４つの場についてこれを確かめる。</p>
+          <ul>
+            <li>(a) $F_x=x,\ F_y=x$：$\partial F_y/\partial x - \partial F_x/\partial y = 1-0=1\neq0$。</li>
+            <li>(b) $F_x=y,\ F_y=2y-x$：$\partial F_y/\partial x - \partial F_x/\partial y = -1-1=-2\neq0$。</li>
+            <li>(c) $F_x=x-y,\ F_y=2y-x$：$\partial F_y/\partial x - \partial F_x/\partial y = -1-(-1)=0$。&nbsp;<strong>成立</strong>。</li>
+            <li>(d) $F_x=y-x,\ F_y=2x$：$\partial F_y/\partial x - \partial F_x/\partial y = 2-1=1\neq0$。</li>
+          </ul>
+          <p>したがってポテンシャルをもつのは <strong>(c)</strong> のみである。</p>
+          <p>
+            (c) のポテンシャル $U$ を求める。$-\dfrac{\partial U}{\partial x} = F_x = x-y$ より、$x$ で積分して
+          </p>
+          <div class="mathblock">$$U = -\frac{x^2}{2} + xy + f(y,z)$$</div>
+          <p>（$f(y,z)$ は積分定数にあたる関数）。これを $y$ で微分したものが $-F_y$ に等しいことから</p>
+          <div class="mathblock">$$-\frac{\partial U}{\partial y} = -x - \frac{\partial f}{\partial y} \overset{!}{=} F_y = 2y-x
+          \quad\Longrightarrow\quad \frac{\partial f}{\partial y} = -2y \quad\Longrightarrow\quad f(y,z) = -y^2 + g(z)$$</div>
+          <p>さらに $F_z=0$ より $-\dfrac{\partial U}{\partial z} = -g'(z) = 0$、すなわち $g(z)=C$（定数）。$U(0,0,0)=0$ より $C=0$。よって</p>
+          <div class="mathblock">$$U = -\frac{x^2}{2} + xy - y^2$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          ポテンシャルをもつのは (c) のみで、
+          $$U(x,y,z) = -\frac{x^2}{2} + xy - y^2$$
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題2 =================== -->
+  <div class="section" id="q2">
+    <div class="sec-header">
+      <div class="sec-tag">問題 2</div>
+      <h2>粘性流体中のバネ運動（過減衰）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>
+          図のように容器に粘性流体が入っており、その容器の側壁に弾性定数 $k$ のばねの一方の端が固定され、そのもう一方の端につながれた質量 $m$ の質点が行う、水平で滑らかな容器の底における１次元的な運動を考える。時間変数を $t$、運動方向の座標を $x$、質点の座標を $x(t)$ とし、質点は弾性力 $-kx(t)$ および粘性抵抗力 $-\kappa\dot{x}(t)$（$\kappa>0$）のみを受けて運動するものとするとき、次の各問いに答えよ。
+        </p>
+      </div>
+
+      <h3 id="q2-1">(1) 運動方程式</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>質点の運動方程式を書き下せ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>質点にはたらく力は弾性力 $-kx$ と粘性抵抗力 $-\kappa\dot x$ のみなので、Newton の運動方程式 $m\ddot x = (\text{力の和})$ より</p>
+          <div class="mathblock">$$m\ddot{x} = -kx - \kappa\dot{x}$$</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$m\ddot{x} = -kx - \kappa\dot{x}$</div>
+      </details>
+
+      <h3 id="q2-2">(2) 過減衰の一般解</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          質点の $t=0$ における位置 $x(0)$ を $x_0\ (>0)$、初速度 $\dot{x}(0)$ を $v_0\ (<0)$ として (1) の解を求めよ。ただし、$\omega_0\equiv\sqrt{k/m}$ が $\omega_0^2 < \dfrac{\kappa^2}{4m^2}$ をみたす場合のみ求めればよく、必要ならば
+        </p>
+        <div class="mathblock">$$\gamma_\pm \equiv -\frac{\kappa}{2m} \pm \sqrt{\frac{\kappa^2}{4m^2} - \omega_0^2}$$</div>
+        <p>を使って解答してもよい。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>運動方程式を $m$ で割って整理すると</p>
+          <div class="mathblock">$$\ddot{x} + \frac{\kappa}{m}\dot{x} + \frac{k}{m}x = 0$$</div>
+          <p>
+            この線形２階微分方程式の解を $x=e^{\gamma t}$ の形で探すと、特性方程式 $\gamma^2 + \dfrac{\kappa}{m}\gamma + \omega_0^2 = 0$ を得る。これを解くと
+          </p>
+          <div class="mathblock">$$\gamma = -\frac{\kappa}{2m} \pm \sqrt{\frac{\kappa^2}{4m^2}-\omega_0^2} = \gamma_\pm$$</div>
+          <p>
+            条件 $\omega_0^2 < \kappa^2/(4m^2)$（過減衰）のもとでは根号の中が正なので、$\gamma_+, \gamma_-$ はともに異なる実数（かつ $\gamma_+ > \gamma_- $、いずれも負）である。よって一般解は
+          </p>
+          <div class="mathblock">$$x(t) = A e^{\gamma_+ t} + B e^{\gamma_- t}$$</div>
+          <p>初期条件 $x(0)=x_0$, $\dot x(0)=v_0$ を代入すると、$A,B$ に関する連立方程式</p>
+          <div class="mathblock">$$A+B = x_0,\qquad \gamma_+ A + \gamma_- B = v_0$$</div>
+          <p>を得る。第１式から $B=x_0-A$ とし、第２式に代入すると</p>
+          <div class="mathblock">$$\gamma_+ A + \gamma_-(x_0-A) = v_0 \ \Longrightarrow\ A(\gamma_+-\gamma_-) = v_0 - \gamma_- x_0
+          \ \Longrightarrow\ A = \frac{v_0-\gamma_- x_0}{\gamma_+-\gamma_-}$$</div>
+          <p>これを $B=x_0-A$ に戻すと</p>
+          <div class="mathblock">$$B = x_0 - \frac{v_0-\gamma_- x_0}{\gamma_+-\gamma_-} = \frac{x_0(\gamma_+-\gamma_-)-v_0+\gamma_- x_0}{\gamma_+-\gamma_-} = \frac{\gamma_+ x_0 - v_0}{\gamma_+-\gamma_-} = \frac{v_0-\gamma_+ x_0}{\gamma_- -\gamma_+}$$</div>
+          <p>したがって</p>
+          <div class="mathblock">$$x(t) = \frac{1}{\gamma_+-\gamma_-}\Big[(v_0-\gamma_- x_0)\,e^{\gamma_+ t} - (v_0-\gamma_+ x_0)\,e^{\gamma_- t}\Big]$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$x(t) = \frac{(v_0-\gamma_- x_0)\,e^{\gamma_+ t} - (v_0-\gamma_+ x_0)\,e^{\gamma_- t}}{\gamma_+-\gamma_-}$$
+        </div>
+      </details>
+
+      <h3 id="q2-3">(3) 有限時間で原点に到達する条件</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>ある有限時間経過後に質点が原点 $x=0$ に到達するための初速度 $v_0$ の条件を求めよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(2) の $x(t)$ に $x=0$ を代入して整理すると</p>
+          <div class="mathblock">$$e^{(\gamma_+-\gamma_-)t} = \frac{v_0-\gamma_+ x_0}{v_0-\gamma_- x_0}$$</div>
+          <p>
+            右辺を $N/M$（$N \equiv v_0-\gamma_+ x_0$, $M \equiv v_0-\gamma_- x_0$）と書く。過減衰の場合 $\gamma_+ - \gamma_- = 2\sqrt{\kappa^2/(4m^2)-\omega_0^2} > 0$ なので、左辺は $t>0$ の範囲で単調増加し $1$ より大きい。したがって $t>0$ の解が存在するためには
+          </p>
+          <div class="mathblock">$$\frac{N}{M} > 1$$</div>
+          <p>が必要十分である。ここで、$\gamma_+>\gamma_-$ と $x_0>0$ より</p>
+          <div class="mathblock">$$N - M = -(\gamma_+-\gamma_-)x_0 < 0 \quad\text{すなわち}\quad N < M$$</div>
+          <p>
+            が常に成り立つ。$N&lt;M$ のもとで $N/M>1$ となるのは、$M$ が<strong>負</strong>のときに限られる（$M>0$ なら $N&lt;M$ から直ちに $N/M<1$ となり条件を満たさない。$M<0$ なら $N&lt;M<0$ より $|N|>|M|$、すなわち同符号の負の数どうしの比として $N/M=|N|/|M|>1$ となる）。
+          </p>
+          <p>よって求める条件は $M=v_0-\gamma_- x_0 < 0$、すなわち</p>
+          <div class="mathblock">$$v_0 < \gamma_- x_0$$</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$x_0>0$ のもとで、有限時間で原点に到達する条件は $v_0 < \gamma_- x_0$。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 条件の物理的な意味</span>
+        <p>
+          過減衰系は本来、振動せずに単調に平衡点へ漸近するだけで、有限時間で $x=0$ を通過することはできない（$e^{\gamma_\pm t}$ はどちらも $t\to\infty$ で $0$ に近づくのみ）。ただし、初速度 $v_0$ が十分大きな負の値（左向きに十分速い）であれば、勢い余って原点を通過してから減衰していくことができる。$v_0 < \gamma_- x_0$（$\gamma_- x_0$ 自体が大きな負の値）はその「十分な勢い」を要求する条件になっている。
+        </p>
+        <p>
+          興味深いことに、この条件 $v_0<\gamma_- x_0$（すなわち $M=v_0-\gamma_- x_0<0$）は、(2) で求めた係数 $A$（$e^{\gamma_+ t}$ の係数）が負になることとちょうど同値である。実際 $A=M/(\gamma_+-\gamma_-)$ であり $\gamma_+-\gamma_->0$ なので、$A$ と $M$ は常に同符号になる。$\gamma_+>\gamma_-$（より $0$ に近く、減衰が緩やか）であることから、時間が経つほど支配的になるのは $Ae^{\gamma_+t}$ の項であり、その係数 $A$ が負であれば、この支配的な項はいずれ符号を反転させて必ずどこかの有限時刻で $x=0$ を通過する。逆に $A\ge0$ なら支配的な項は常に非負のまま原点にゆっくり近づくだけで、通過しないままになる。
+        </p>
+      </div>
+
+      <h3 id="q2-4">(4) 速度が再びゼロになる時刻</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(3) の条件がみたされるとき、質点が原点を通過して速度がはじめて $0$ になる時刻 $t$ を求めよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>(2) の $x(t)$ を微分すると</p>
+          <div class="mathblock">$$\dot x(t) = \frac{1}{\gamma_+-\gamma_-}\Big[\gamma_+(v_0-\gamma_- x_0)\,e^{\gamma_+ t} - \gamma_-(v_0-\gamma_+ x_0)\,e^{\gamma_- t}\Big]$$</div>
+          <p>$\dot x = 0$ とおくと</p>
+          <div class="mathblock">$$\gamma_+(v_0-\gamma_- x_0)\,e^{\gamma_+ t} = \gamma_-(v_0-\gamma_+ x_0)\,e^{\gamma_- t}$$</div>
+          <p>したがって</p>
+          <div class="mathblock">$$e^{(\gamma_+-\gamma_-)t} = \frac{\gamma_-(v_0-\gamma_+ x_0)}{\gamma_+(v_0-\gamma_- x_0)}$$</div>
+          <p>
+            (3) より $v_0-\gamma_- x_0<0$ かつ $v_0-\gamma_+x_0 < v_0-\gamma_-x_0<0$ なので、右辺の分子・分母はいずれも「負 $\times$ 負」の積で正になり、対数の中身は正である（式として矛盾なく定義される）。両辺の対数をとって
+          </p>
+          <div class="mathblock">$$t = \frac{1}{\gamma_+-\gamma_-}\,\ln\!\left[\frac{\gamma_-(v_0-\gamma_+ x_0)}{\gamma_+(v_0-\gamma_- x_0)}\right]$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$t = \frac{1}{\gamma_+-\gamma_-}\,\ln\!\left[\frac{\gamma_-(v_0-\gamma_+ x_0)}{\gamma_+(v_0-\gamma_- x_0)}\right]$$
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題3 =================== -->
+  <div class="section" id="q3">
+    <div class="sec-header">
+      <div class="sec-tag">問題 3</div>
+      <h2>太陽のまわりの惑星の運動（ケプラー運動）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>
+          図のように、3次元直交座標系において、点 $(x,y,z)=(0,0,z_0)$ にある太陽から万有引力のみを受けて運動する惑星の運動を考える。時間変数を $t$ とし、ある時刻 $t=0$ においてその惑星が $z=z_0$ 平面内にあって、なおかつ $z$ 方向の速度成分ももたないとすると、惑星が受ける万有引力も $z$ 方向成分をもたないため、惑星は未来永劫 $z=z_0$ 平面内にあることになる。したがって $z$ 方向の運動は以後考えない。
+        </p>
+        <p>
+          時刻 $t$ における惑星の座標 $(x(t),y(t))$ を図のように極座標 $(r(t),\varphi(t))$ で表すと
+          $$x(t)=r(t)\cos\varphi(t),\qquad y(t)=r(t)\sin\varphi(t)$$
+          となる。惑星、太陽をそれぞれ質量 $m$、$M$ の質点とするとき、
+        </p>
+      </div>
+
+      <h3 id="q3-1">(1) 極座標での運動方程式</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>惑星の運動の運動方程式を極座標を用いて（つまり $r,\dot r,\ddot r,\varphi,\dot\varphi,\ddot\varphi$ などを用いて）書き下せ。ただし、万有引力定数（Newton's constant）を $G$ とせよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            平面極座標では、加速度ベクトルは動径方向単位ベクトル $\hat{\mathbf r}$ と角度方向単位ベクトル $\hat{\boldsymbol\varphi}$ を用いて
+          </p>
+          <div class="mathblock">$$\ddot{\mathbf r} = (\ddot r - r\dot\varphi^2)\,\hat{\mathbf r} + (r\ddot\varphi + 2\dot r\dot\varphi)\,\hat{\boldsymbol\varphi}$$</div>
+          <p>
+            と分解できる（標準的な結果）。万有引力は太陽（原点）に向かう向きで大きさ $GMm/r^2$、すなわち $-\dfrac{GMm}{r^2}\hat{\mathbf r}$ のみで、角度方向の成分をもたない。よって運動方程式 $m\ddot{\mathbf r} = -\dfrac{GMm}{r^2}\hat{\mathbf r}$ を動径・角度成分に分けて
+          </p>
+          <div class="mathblock">$$m(\ddot r - r\dot\varphi^2) = -\frac{GMm}{r^2}\qquad\text{（動径方向）}$$</div>
+          <div class="mathblock">$$m(r\ddot\varphi + 2\dot r\dot\varphi) = 0\qquad\text{（角度方向）}$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$m(\ddot r - r\dot\varphi^2) = -\frac{GMm}{r^2},\qquad m(r\ddot\varphi + 2\dot r\dot\varphi) = 0$$
+        </div>
+      </details>
+
+      <h3 id="q3-2">(2) 角運動量保存</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>質点 $m$ の、$z$ 軸（$(x,y)=(0,0)$）まわりの角運動量 $mr^2\dot\varphi$ が保存することを示せ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>$mr^2\dot\varphi$ を時間で微分すると、積の微分則より</p>
+          <div class="mathblock">$$\frac{d}{dt}\big(mr^2\dot\varphi\big) = m\big(2r\dot r\dot\varphi + r^2\ddot\varphi\big) = mr\big(2\dot r\dot\varphi + r\ddot\varphi\big)$$</div>
+          <p>
+            ここで (1) の角度方向の運動方程式 $m(r\ddot\varphi+2\dot r\dot\varphi)=0$ より、括弧の中身 $2\dot r\dot\varphi+r\ddot\varphi$ はまさに $0$ である。したがって
+          </p>
+          <div class="mathblock">$$\frac{d}{dt}\big(mr^2\dot\varphi\big) = 0$$</div>
+          <p>すなわち $mr^2\dot\varphi$ は時間によらず一定（保存量）である。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>角度方向の運動方程式から直ちに $\dfrac{d}{dt}(mr^2\dot\varphi)=0$ が従う。$\blacksquare$</div>
+      </details>
+
+      <h3 id="q3-3">(3) 万有引力のポテンシャル</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>万有引力のポテンシャルを $U(r)$ とするとき、その具体的な表式を書け。ただし（いつものように）無限遠で $U(r)=0$ となるようにポテンシャルの基準をとるものとする。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            動径方向の力 $F_r = -GMm/r^2$ は $U(r)$ を用いて $F_r = -\dfrac{dU}{dr}$ と書けるはずなので、$U(r)=-\dfrac{GMm}{r}$ とおくと
+          </p>
+          <div class="mathblock">$$-\frac{dU}{dr} = -\frac{GMm}{r^2} = F_r$$</div>
+          <p>が成り立ち、かつ $r\to\infty$ で $U\to0$ も満たされる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$$U(r) = -\frac{GMm}{r}$$</div>
+      </details>
+
+      <h3 id="q3-4">(4) １次元有効ポテンシャル</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          角運動量が保存するから $\dot\varphi$ は $r$ の関数として表され、したがってこの質点の２次元平面内の運動のエネルギー保存則は、ある１次元ポテンシャル $V(r)$ の中を質量 $m$ の質点が運動するときの１次元的な運動のエネルギー保存則
+          $$\frac12m\dot r^2+V(r)=E\qquad（E\text{ は全エネルギーを表す定数}）$$
+          と同じになる。保存する角運動量の大きさを $mh$ とするとき、この１次元ポテンシャル $V(r)$ を求めよ。
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>平面極座標での速さの２乗は $\dot r^2 + r^2\dot\varphi^2$ なので、全エネルギーは</p>
+          <div class="mathblock">$$E = \frac12 m\big(\dot r^2 + r^2\dot\varphi^2\big) + U(r) = \frac12 m\dot r^2 + \frac12 m r^2\dot\varphi^2 - \frac{GMm}{r}$$</div>
+          <p>角運動量保存 $mr^2\dot\varphi = mh$（一定）より $\dot\varphi = h/r^2$ なので</p>
+          <div class="mathblock">$$\frac12 m r^2\dot\varphi^2 = \frac12 m r^2\left(\frac{h}{r^2}\right)^2 = \frac{mh^2}{2r^2}$$</div>
+          <p>これを $U(r)$ と合わせて１次元有効ポテンシャルとすれば</p>
+          <div class="mathblock">$$\frac12 m\dot r^2 + \underbrace{\left(\frac{mh^2}{2r^2} - \frac{GMm}{r}\right)}_{V(r)} = E$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$V(r) = \frac{mh^2}{2r^2} - \frac{GMm}{r}$$
+        </div>
+      </details>
+
+      <h3 id="q3-5">(5) 実効ポテンシャルの最小値</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>(4) の $V(r)$ を最小とする $r$ の値 $r_c$ と、そのときの $V(r)$ の最小値 $V_{min}$ を、$G,M,m,h$ を用いてそれぞれ表せ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>$V(r)$ を $r$ で微分してゼロとおく：</p>
+          <div class="mathblock">$$V'(r) = -\frac{mh^2}{r^3} + \frac{GMm}{r^2} = 0 \quad\Longrightarrow\quad \frac{GM}{r^2} = \frac{h^2}{r^3} \quad\Longrightarrow\quad r_c = \frac{h^2}{GM}$$</div>
+          <p>
+            （$V''(r) = 3mh^2/r^4 - 2GMm/r^3$ を $r_c$ で評価すると正になるので、これは確かに極小点である。）これを $V(r)$ に代入すると
+          </p>
+          <div class="mathblock">$$V_{min} = \frac{mh^2}{2r_c^2} - \frac{GMm}{r_c} = \frac{mh^2}{2}\cdot\frac{(GM)^2}{h^4} - GMm\cdot\frac{GM}{h^2} = \frac{m(GM)^2}{2h^2} - \frac{m(GM)^2}{h^2} = -\frac{G^2M^2m}{2h^2}$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$r_c = \frac{h^2}{GM},\qquad V_{min} = -\frac{G^2M^2m}{2h^2}$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — $r_c$ は離心率によらない「軌道の物差し」</span>
+        <p>
+          ケプラー問題の軌道は一般に、極方程式 $r(\varphi)=\dfrac{p}{1+e\cos\varphi}$（$p$：半直弦、$e$：離心率）の形の円錐曲線になることが知られている。エネルギー保存・角運動量保存から運動方程式（Binet の方程式）を解くと、この $p$ は角運動量だけで決まり $p=h^2/(GM)$ となる——これは (5) で有効ポテンシャルの最小値を与える点として、円錐曲線の形にはいっさい触れず純粋に１次元の力学（$V'(r_c)=0$）だけから求めた $r_c=h^2/(GM)$ と完全に一致する。
+        </p>
+        <p>
+          つまり $r_c$ は、離心率 $e$（＝全エネルギー $E$）にはよらず角運動量 $h$ だけで決まる「軌道の物差し」であり、円軌道（$e=0$）はもちろん、同じ $h$ を持つ限りどんな楕円・放物線・双曲線軌道も、近日点をこの半直弦 $p=r_c$ を基準にした同じ形の式で表せる。
+        </p>
+      </div>
+
+      <h3 id="q3-6">(6) $E=V_{min}$ のときの軌道</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>この質点 $m$ の全エネルギー $E$ が $V_{min}$ に等しいとき、その質点の運動の軌道の形はどうなるか。その形とそうなる理由を簡潔に答えよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>エネルギー保存則 $\dfrac12 m\dot r^2 + V(r) = E$ より</p>
+          <div class="mathblock">$$\frac12 m\dot r^2 = E - V(r)$$</div>
+          <p>
+            左辺は常に $0$ 以上である。一方 $V(r)\ge V_{min}$（$V_{min}$ は $V(r)$ の最小値）が常に成り立つから、$E=V_{min}$ のときは $E-V(r) = V_{min}-V(r) \le 0$ となる。両者を両立させるには
+          </p>
+          <div class="mathblock">$$\frac12 m\dot r^2 = 0 \quad\text{かつ}\quad V(r) = V_{min}$$</div>
+          <p>
+            が常に成り立つしかない。すなわち $\dot r \equiv 0$（動径方向の速度が恒等的にゼロ）、$r \equiv r_c$（一定）となる。したがって軌道は太陽（原点）を中心とする<strong>半径 $r_c=h^2/(GM)$ の円軌道</strong>になる。
+          </p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          軌道は半径 $r_c = h^2/(GM)$ の円になる。理由：$V(r)\ge V_{min}$ が常に成り立つため、$E=V_{min}$ では $\dot r^2\le0$ かつ $\dot r^2\ge0$ が両立するには $\dot r\equiv0$、$r\equiv r_c$ しかない。
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 一般の軌道との関係</span>
+        <p>
+          一般に $E>V_{min}$ の場合、$r$ は $V(r)=E$ を満たす２つの値（近日点・遠日点）の間を振動し、軌道は楕円（束縛軌道の場合）になる。$E=V_{min}$ はその特別な場合として、近日点と遠日点が一致した「離心率 $0$ の楕円」＝円軌道に対応している。
+        </p>
+        <p>
+          さらに $E$ を大きくしていくと、$E=0$ でちょうど遠日点が無限遠に到達し（軌道は放物線）、$E>0$ では惑星はもはや束縛されず、双曲線軌道を描いて太陽に一度だけ接近したのち無限遠へ飛び去っていく。つまり全エネルギー $E$ の符号と大きさだけで、$E=V_{min}$（円）、$V_{min}&lt;E<0$（楕円）、$E=0$（放物線）、$E>0$（双曲線）という円錐曲線の種類がすべて決まる——(4) で作った実効ポテンシャル $V(r)$ のグラフを１枚眺めるだけで、あらゆる軌道の形が見渡せることになる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題4 =================== -->
+  <div class="section" id="q4">
+    <div class="sec-header">
+      <div class="sec-tag">問題 4</div>
+      <h2>振り子の運動</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>
+          図のように、重力加速度 $g$ の一様重力場中において、長さ $l$ の軽い糸とその先につけられた質量 $m$ の質点からなる振り子の運動を考える。
+        </p>
+      </div>
+
+      <h3 id="q4-1">(1) 極座標での運動方程式</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>振り子の糸が固定されている点を原点とする極座標 $(r,\varphi)$ を用いて、この系の運動方程式を書き下せ。ただし振り子の最下点（鉛直下向き方向）を $\varphi=0$ とせよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            動径方向の単位ベクトル $\hat{\mathbf r}$ を原点（固定点）から質点へ向かう向きにとり、$\varphi$ を鉛直下向きから測るものとする。質点にはたらく力は重力 $-mg$（鉛直下向き、一定ベクトル）と糸の張力 $-T\hat{\mathbf r}$（糸が質点を原点向きに引く力、$T\ge0$）である。
+          </p>
+          <p>
+            重力を動径・角度成分に分解すると、$\varphi=0$ で重力が完全に動径方向（外向き）を向くことから、動径成分は $mg\cos\varphi$、角度成分は $-mg\sin\varphi$ となる。加速度の極座標成分 $(\ddot r - r\dot\varphi^2,\ r\ddot\varphi+2\dot r\dot\varphi)$ を用いて運動方程式を立てると
+          </p>
+          <div class="mathblock">$$m(\ddot r - r\dot\varphi^2) = mg\cos\varphi - T\qquad\text{（動径方向）}$$</div>
+          <div class="mathblock">$$m(r\ddot\varphi + 2\dot r\dot\varphi) = -mg\sin\varphi\qquad\text{（角度方向）}$$</div>
+          <p>
+            糸はたるまない限り伸び縮みしないので $r\equiv l$（定数）、すなわち $\dot r = \ddot r = 0$ である。これを代入すると
+          </p>
+          <div class="mathblock">$$-ml\dot\varphi^2 = mg\cos\varphi - T \quad\Longrightarrow\quad T = m\left(g\cos\varphi + l\dot\varphi^2\right)$$</div>
+          <div class="mathblock">$$ml\ddot\varphi = -mg\sin\varphi \quad\Longrightarrow\quad \ddot\varphi = -\frac{g}{l}\sin\varphi$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          振り子の運動方程式（角度方向）：$\ l\ddot\varphi + g\sin\varphi = 0$。また張力は $T = m\left(g\cos\varphi + l\dot\varphi^2\right)$（$T\ge0$ が糸のたるまない条件）。
+        </div>
+      </details>
+
+      <h3 id="q4-2">(2) 力学的エネルギー保存則</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>この振り子を最下点で一旦静止させたのち、$\varphi$ 方向に初速度 $v_0$ を与えて振り子を振動させる。そのときこの系の力学的エネルギー保存を表す方程式を書け。ただし、糸がたるむことはないとする。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            $r=l$ 一定なので質点の速さは $l\dot\varphi$ であり、運動エネルギーは $\dfrac12 m l^2\dot\varphi^2$ となる。最下点（$\varphi=0$）を高さの基準にとると、角度 $\varphi$ での高さは $l(1-\cos\varphi)$（鉛直方向に $l-l\cos\varphi$ だけ持ち上がる）なので、位置エネルギーは $mgl(1-\cos\varphi)$。
+          </p>
+          <p>最下点で速さ $v_0$ を与えたときの力学的エネルギーは $\dfrac12 m v_0^2$（このとき位置エネルギーは $0$）。よってエネルギー保存則は</p>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$\frac12 m l^2\dot\varphi^2 + mgl(1-\cos\varphi) = \frac12 m v_0^2$$
+        </div>
+      </details>
+
+      <h3 id="q4-3">(3) 円運動するための最小初速度</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>$v_0$ が十分大きければ、糸はたるまずに最高点 $\varphi=\pi$ を通過して円運動を行う。そのようになるために必要な $v_0$ の最小値を求めよ。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            最高点 $\varphi=\pi$ では、質点は原点（固定点）の真上にあり、$\hat{\mathbf r}$ は鉛直上向きを向く。重力・張力はともに質点を原点（下）へ引く向き、すなわちどちらも円運動に必要な向心力の向きに寄与する。(1) の動径方向の式に $\varphi=\pi$（$\cos\pi=-1$）を代入すると
+          </p>
+          <div class="mathblock">$$T = m\big(g\cos\pi + l\dot\varphi^2\big) = m\left(l\dot\varphi^2 - g\right)$$</div>
+          <p>
+            糸がたるまない条件は $T\ge0$、すなわち $l\dot\varphi^2\ge g$、頂点での速さを $v_{top}=l\dot\varphi$ とすると $v_{top}^2 \ge gl$。最小値は等号 $v_{top}^2=gl$ のとき。
+          </p>
+          <p>次に (2) のエネルギー保存則を $\varphi=\pi$（$1-\cos\pi=2$）に適用すると</p>
+          <div class="mathblock">$$\frac12 m v_{top}^2 + mgl\cdot2 = \frac12 m v_0^2 \quad\Longrightarrow\quad v_0^2 = v_{top}^2 + 4gl$$</div>
+          <p>最小条件 $v_{top}^2=gl$ を代入すると</p>
+          <div class="mathblock">$$v_{0,min}^2 = gl + 4gl = 5gl$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$v_{0,min} = \sqrt{5gl}$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 最小速度で一周するとき、最下点の張力は自重の6倍</span>
+        <p>
+          $v_0=v_{0,min}=\sqrt{5gl}$ のとき、最下点（$\varphi=0$）での張力を (1) の式 $T=m(g\cos\varphi+l\dot\varphi^2)$ から直接評価してみる。最下点での速さはちょうど $v_0$ なので $l\dot\varphi(0)^2=v_0^2/l=5g$、したがって
+        </p>
+        <div class="mathblock">$$T(0) = m(g+5g) = 6mg$$</div>
+        <p>
+          最高点でぎりぎり糸が張るための条件が $T(\pi)=0$（重力だけで向心力をまかなう）だったのに対し、最下点では張力が自重の $6$ 倍にまで跳ね上がる——$l$ や $g$ の値によらない、純粋な比の数値である。垂直円運動を最小速度でちょうど一周するタイプの問題（ジェットコースターのループなど）に共通して現れる、覚えておくと便利な特徴的な数といえる。
+        </p>
+      </div>
+
+      <h3 id="q4-4">(4) 有限振幅による周期のずれ</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          振動が微小でないとき、その周期 $T$ は最大振れ角を $\varphi_A$、$k=\sin\dfrac{\varphi_A}{2}$ として
+        </p>
+        <div class="mathblock">$$T = 4\sqrt{\frac{l}{g}}\int_0^{\pi/2} \frac{d\theta}{\sqrt{1-k^2\sin^2\theta}}$$</div>
+        <p>
+          で与えられることを授業で説明した。$\varphi_A=30^\circ$ のとき、周期 $T$ は微小振動の周期 $T_0=2\pi\sqrt{l/g}$ と比べてどれだけ大きいか。被積分関数 $\dfrac{1}{\sqrt{1-k^2\sin^2\theta}}$ を $k^2=0$ のまわりで $k^2$ について１次までテイラー展開し、項別に積分して（微小振動の周期との比）$-1$（$=\dfrac{T}{T_0}-1$）を有効数字２けたまで求めよ。
+        </p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>被積分関数を $k^2$ の１次までテイラー展開する。$f(x)=(1-x\sin^2\theta)^{-1/2}$ とおくと $f(0)=1$、$f'(0)=\dfrac12\sin^2\theta$ なので</p>
+          <div class="mathblock">$$\frac{1}{\sqrt{1-k^2\sin^2\theta}} = 1 + \frac12 k^2\sin^2\theta + O(k^4)$$</div>
+          <p>これを $0$ から $\pi/2$ まで項別に積分する。$\displaystyle\int_0^{\pi/2}d\theta=\frac{\pi}{2}$、$\displaystyle\int_0^{\pi/2}\sin^2\theta\,d\theta=\frac{\pi}{4}$ を用いて</p>
+          <div class="mathblock">$$\int_0^{\pi/2}\frac{d\theta}{\sqrt{1-k^2\sin^2\theta}} \approx \frac{\pi}{2} + \frac12 k^2\cdot\frac{\pi}{4} = \frac{\pi}{2}\left(1+\frac{k^2}{4}\right)$$</div>
+          <p>したがって</p>
+          <div class="mathblock">$$T \approx 4\sqrt{\frac{l}{g}}\cdot\frac{\pi}{2}\left(1+\frac{k^2}{4}\right) = 2\pi\sqrt{\frac{l}{g}}\left(1+\frac{k^2}{4}\right) = T_0\left(1+\frac{k^2}{4}\right)$$</div>
+          <p>ゆえに $\dfrac{T}{T_0}-1 = \dfrac{k^2}{4}$。$\varphi_A=30^\circ$ のとき $k=\sin15^\circ$ であり、</p>
+          <div class="mathblock">$$\sin15^\circ = \sin(45^\circ-30^\circ) = \frac{\sqrt2}{4}(\sqrt3-1) \approx 0.2588$$</div>
+          <p>より $k^2\approx0.0670$、したがって</p>
+          <div class="mathblock">$$\frac{T}{T_0}-1 = \frac{k^2}{4} \approx \frac{0.0670}{4} \approx 0.017$$</div>
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          $$\frac{T}{T_0}-1 = \frac{k^2}{4} = \frac{\sin^2 15^\circ}{4} \approx 0.017\quad(\text{約 }1.7\%\text{ 大きい})$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 打ち切った次の項はどれくらい効くか</span>
+        <p>
+          実はこの展開は完全楕円積分 $K(k)$ の級数として、次の項まで知られている：
+        </p>
+        <div class="mathblock">$$\frac{T}{T_0} = 1+\frac14k^2+\frac{9}{64}k^4+\cdots$$</div>
+        <p>
+          $\varphi_A=30^\circ$（$k^2\approx0.0670$）で次数を上げて比べてみると、$1$次の項は $k^2/4\approx0.0167$、$2$次の項は $\frac{9}{64}k^4\approx0.00063$ であり、後者は前者のわずか４％程度に過ぎない。つまり本問で１次までの展開から得た「約1.7％増」という答えは、実際にはより精密には約1.74％であって、有効数字２桁の範囲では１次近似だけで十分正確だったことになる。振れ角が $30^\circ$ 程度までなら、単振動からのずれはほぼ $k^2$ の１次だけで説明がつく。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2022.html">← 2022年度へ</a>
+    <a href="kakomon_2024.html">2024年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

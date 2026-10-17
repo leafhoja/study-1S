@@ -1,0 +1,138 @@
+<!DOCTYPE html><!-- 「04 ネットワーク | 神シケプリ | 情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>04 ネットワーク | 神シケプリ | 情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kami-04">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">神シケプリ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>神シケプリ 04 — ネットワーク</h1>
+  <p class="subtitle">クライアント/サーバモデルとルータ・防火壁</p>
+  <p class="meta">教科書対応箇所 pp.16-18　p.92</p>
+</div>
+
+<div class="container">
+
+  <div class="def">
+    <span class="box-label">定義 — クライアント/サーバモデル</span>
+    <p>
+      <strong>サーバ</strong>とは、インターネット上でサービスを提供する大きなコンピュータのことをいう。
+      <strong>クライアント</strong>とは、サーバにサービスを要求し、それを受け取るアプリケーション・端末のことをいう。
+      サーバとクライアントの両者からなるシステムの構成を<strong>クライアント/サーバモデル</strong>という。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — ルータと防火壁（ファイアウォール）</span>
+    <p>
+      <strong>ルータ</strong>とは、経路表（配送先と、次に送るべきルータとの対応表）を参照して、
+      データを宛先まで次々にバケツリレーしていく接続機器である。経路表の管理方法には、人間が
+      あらかじめ設定・維持する<strong>静的経路制御</strong>と、ルータどうしが情報を交換して随時
+      内容を変更する<strong>動的経路制御</strong>とがある。
+    </p>
+    <p>
+      <strong>防火壁（ファイアウォール）</strong>とは、ネットワークの結節点においてセキュリティ上
+      問題のある通信を阻止するシステムのことをいう。
+    </p>
+  </div>
+
+  <div class="note">
+    <span class="box-label">出題対策のポイント</span>
+    <p>サーバ/クライアントモデルについての問題が頻出だが、内容自体は難しくない。</p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">第1問（2006年度共通問題3）</a>
+  </div>
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">第1問</div><h2>2006年度共通問題3 — クライアント/サーバ型の構成</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          ネットワーク上で分散処理を行うシステムの典型的な形態として，クライアント/サーバ型の構成がある．
+          このクライアント/サーバ型の構成について，クライアントとは何か，サーバとは何か，両者の間でどのように
+          やり取りがなされるか，を含め一般的に説明せよ．さらに代表的なクライアント/サーバ型のシステムを2つ挙げ，
+          それぞれクライアントとサーバの役割を説明せよ．
+        </p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            クライアント/サーバ型とは、ネットワークを介してサービスを提供する側（サーバ）と、それを要求し
+            利用する側（クライアント）とに役割を分けたシステム構成である。サーバは常時稼働し、複数の
+            クライアントからの要求を受け付けてデータの処理・提供を行う。クライアントはユーザの操作に応じて
+            サーバに要求（リクエスト）を送り、サーバから返された応答（レスポンス）を受け取って表示・利用する。
+            すなわち、処理やデータを一箇所（サーバ）に集約し、多数のクライアントがネットワーク越しにそれを
+            共有する分散処理の形態である。
+          </p>
+          <p>
+            <strong>具体例1：Webシステム</strong> — クライアントはWebブラウザであり、URLで指定した
+            Webサーバに<strong>HTTP</strong>というプロトコルでページの要求を送る。サーバはその要求に応じて
+            HTMLファイルなどを返す。
+          </p>
+          <p>
+            <strong>具体例2：電子メールシステム</strong> — クライアントはメールソフト（メーラー）であり、
+            メールの送信時には<strong>SMTP</strong>サーバへ、受信時には<strong>POP／IMAP</strong>サーバへ
+            接続することで、サーバを介してメールの送受信を行う。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>クライアント＝サービスを要求する側、サーバ＝サービスを提供する側。具体例：①Webシステム（ブラウザ⇄Webサーバ、HTTP）②電子メールシステム（メーラー⇄メールサーバ、SMTP/POP/IMAP）</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — DNSもクライアント/サーバモデルの一例</span>
+        <p>
+          この構成はDNSの階層的な名前解決（他の共通問題でも頻出のテーマ）とも関連が深い。
+          Webブラウザ（クライアント）はURL中のドメイン名からWebサーバのIPアドレスを得るために、
+          まずDNSサーバに問い合わせを行う。DNSサーバから応答としてIPアドレスを受け取ってから、
+          はじめてそのIPアドレス宛にWebサーバへ接続する、という一連の流れ自体が、
+          クライアント/サーバモデルの具体例になっている（DNSサーバもまた、問い合わせに対して
+          応答を返す一種のサーバである）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="03-標本化と量子化.html">← 03 標本化・量子化</a>
+    <a href="05-インターネット通信.html">05 インターネット通信へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

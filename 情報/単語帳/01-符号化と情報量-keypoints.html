@@ -1,0 +1,219 @@
+<!DOCTYPE html><!-- 「符号化と情報量 — 押さえておきたい事項｜情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>符号化と情報量 — 押さえておきたい事項｜情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-01-kp">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>符号化と情報量 — 押さえておきたい事項</h1>
+  <p class="subtitle">公式・手順・典型的な考え方のまとめ</p>
+</div>
+
+<div class="container">
+
+  <div class="page-toc">
+    <strong>この分野の要点</strong>
+    <ol>
+      <li><a href="#kp-1">情報量の加法性・連鎖律</a></li>
+      <li><a href="#kp-2">木構造をたどる場合の情報量</a></li>
+      <li><a href="#kp-3">一様分布とエントロピーの最大化</a></li>
+      <li><a href="#kp-4">情報を得た後のエントロピーの変化</a></li>
+      <li><a href="#kp-5">ノイズによる見かけ上の情報量の増加</a></li>
+      <li><a href="#kp-6">情報源符号化定理と等号成立条件</a></li>
+      <li><a href="#kp-7">ダイアディック分布でない場合のハフマン符号</a></li>
+      <li><a href="#kp-8">ブロック符号化</a></li>
+      <li><a href="#kp-9">区切り文字を使う符号化の非効率性</a></li>
+      <li><a href="#kp-10">一見矛盾に見えて矛盾しないパターン</a></li>
+      <li><a href="#kp-11">標本化＝時間軸、量子化＝値軸</a></li>
+      <li><a href="#kp-12">データ量計算の定石</a></li>
+      <li><a href="#kp-13">画像における標本化・量子化</a></li>
+      <li><a href="#kp-14">条件付き確率のときの情報量計算</a></li>
+      <li><a href="#kp-15">メッセージの情報量は何の確率から決まるか</a></li>
+      <li><a href="#kp-16">対称性を使った条件付き確率の計算</a></li>
+    </ol>
+  </div>
+
+  <h2 class="word-cat-title">情報量の加法性・連鎖律（最頻出の考え方）</h2>
+
+  <div class="mot" id="kp-1">
+    <span class="box-label">情報量の加法性・連鎖律</span>
+    <p>
+      $P(A)=P(B)\times P(A\mid B)$ という確率の連鎖律の両辺で $-\log_2$ をとると、
+      <strong>確率の積が情報量の和に変わる</strong>：$I(A)=I(B)+I(A\mid B)$。
+      「粗い分類→その中での詳細」という2段階に分けて情報を得ても、合計の情報量は変わらない
+      （シケプリ01・第3章・2008年度・2015年度で繰り返し確認）。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-2">
+    <span class="box-label">木構造をたどる場合の情報量</span>
+    <p>
+      木構造（フォルダ階層など）をたどって1つの要素を特定する場合、各段階の「絞り込み」の情報量を
+      足し合わせると全体の情報量に一致する（2015年度大問2）。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">エントロピーの性質</h2>
+
+  <div class="mot" id="kp-3">
+    <span class="box-label">一様分布とエントロピーの最大化</span>
+    <p>
+      エントロピーは確率分布が均等（一様）なほど大きく、偏っているほど小さい。
+      <strong>一様分布はエントロピーを最大化する</strong>（2011年度、2017年度、2018年度で確認）。
+    </p>
+  </div>
+
+  <div class="mot" id="kp-4">
+    <span class="box-label">情報を得た後のエントロピーの変化</span>
+    <p>
+      情報を受け取るとエントロピー（不確実性）は減る一方であり、<strong>増加することはない</strong>
+      （2022年度A(1)）。
+    </p>
+  </div>
+
+  <div class="note" id="kp-5">
+    <span class="box-label">ノイズによる見かけ上の情報量の増加</span>
+    <p>
+      ノイズ（誤り・反転）が加わると、受信側にとっての結果は「五分五分」に近づくため、
+      <strong>見かけ上の平均情報量はむしろ増加しうる</strong>が、これは「伝達の正確さ」とは別物
+      ——エントロピーは不確実性の大きさを測る量であり、真の内容が正しく伝わったかどうかとは異なる
+      （シケプリ01、2013年度問題B(4)、上に凸な関数の性質・イェンセンの不等式で証明）。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">情報源符号化定理・ハフマン符号の使いどころ</h2>
+
+  <div class="thm" id="kp-6">
+    <span class="box-label">情報源符号化定理と等号成立条件</span>
+    <p>
+      $L \ge H$ は絶対的下限。等号成立は、各記号の確率がすべて2の負整数乗（ダイアディック分布）の
+      ときにハフマン符号（＝木の深さをそのまま符号長にする配置）で達成できる（2011年度8面体サイコロ
+      問題、2015年度フォルダ問題、2019年度アンケート問題、2025年度成績符号化問題で繰り返し確認）。
+    </p>
+  </div>
+
+  <div class="note" id="kp-7">
+    <span class="box-label">ダイアディック分布でない場合のハフマン符号</span>
+    <p>
+      確率が2の負整数乗でない場合は、ハフマン符号でも下限に完全一致はしないが、限りなく近づけることが
+      できる（2025年度B(4)）。
+    </p>
+  </div>
+
+  <div class="note" id="kp-8">
+    <span class="box-label">ブロック符号化</span>
+    <p>
+      複数記号をまとめて符号化する「ブロック符号化」でも1記号あたりの平均符号長はエントロピーに
+      近づく（2019年度大問2(1)〜(4)：1人→3000人まとめる例）。
+    </p>
+  </div>
+
+  <div class="note" id="kp-9">
+    <span class="box-label">区切り文字を使う符号化の非効率性</span>
+    <p>
+      区切り文字（「.」など）を使う符号化は、区切り自体の符号長が余分にかかるため非効率
+      （2011年度8面体サイコロ問題）。
+    </p>
+  </div>
+
+  <div class="note" id="kp-10">
+    <span class="box-label">一見矛盾に見えて矛盾しないパターン</span>
+    <p>
+      「情報源符号化定理に反するように見えて実は矛盾しない」パターン：接頭性（一意復号可能性）を
+      満たさない符号は、平均符号長がエントロピーを下回っても定理の対象外（2021年度大問3問題A-2(4)）。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">標本化・量子化の使い分けと典型計算</h2>
+
+  <div class="mot" id="kp-11">
+    <span class="box-label">標本化＝時間軸、量子化＝値軸</span>
+    <p>
+      <strong>標本化＝時間（または空間）方向の分割、量子化＝値（振幅・明るさ）方向の近似</strong>という
+      役割分担を常に区別する。「可聴域20kHz→サンプリング周波数44.1kHz」の話と「量子化16ビット→音量の
+      段階数」の話は独立した別概念（2006年度・2013年度で「取り違えの誤り」として繰り返し出題）。
+    </p>
+  </div>
+
+  <div class="thm" id="kp-12">
+    <span class="box-label">データ量計算の定石</span>
+    <p>
+      データ量計算の定石：「サンプリング周波数 × 量子化ビット数 × チャンネル数（次元数） × 時間」の
+      順に単位を崩さず掛ける（2009年度・2013年度音楽CD計算、2013年度画像計算）。
+    </p>
+  </div>
+
+  <div class="note" id="kp-13">
+    <span class="box-label">画像における標本化・量子化</span>
+    <p>
+      画像でも「標本化＝画素への分割」「量子化＝明るさの近似」という全く同じ2段階構造が成り立つ
+      （2013年度大問1、シケプリ03問2）。
+    </p>
+  </div>
+
+  <h2 class="word-cat-title">情報量計算の実務的コツ</h2>
+
+  <div class="note" id="kp-14">
+    <span class="box-label">条件付き確率のときの情報量計算</span>
+    <p>
+      条件付き確率（「〜でないと分かった」「〜のどちらかだと分かった」）の情報量は、まず絞り込み後の
+      確率空間で分母を書き換え、その上で通常どおり計算すればよい（シケプリ01）。
+    </p>
+  </div>
+
+  <div class="note" id="kp-15">
+    <span class="box-label">メッセージの情報量は何の確率から決まるか</span>
+    <p>
+      「メッセージの情報量」は、そのメッセージ自体の見かけの確率ではなく、<strong>知りたい未知変数
+      についての確率</strong>から決まる場合がある（2019年度大問1(5)(6)：画像作成者を特定する文脈での
+      情報量）。
+    </p>
+  </div>
+
+  <div class="note" id="kp-16">
+    <span class="box-label">対称性を使った条件付き確率の計算</span>
+    <p>
+      対称性（交換可能性）を使うと、具体的にどれが該当するかを気にせず超幾何分布・二項分布の公式だけで
+      条件付き確率を計算できる（2022年度A、16問○×試験の問題）。
+    </p>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="01-符号化と情報量-word.html">← 単語一覧</a>
+    <a href="01-符号化と情報量-descriptive.html">記述式で狙われる内容 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

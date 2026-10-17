@@ -1,0 +1,395 @@
+{
+  "course": "線形代数学 I",
+  "term": "S2ターム",
+  "source_notes": ["線形代数学1as.pdf", "線形代数学2a.pdf"],
+  "scalar_field": "K（R または C）",
+
+  "sections": [
+
+    {
+      "id": "s1",
+      "title": "§1 ベクトル空間・線形写像",
+      "source": "線形代数学1as.pdf",
+
+      "items": [
+
+        {
+          "id": "motivation",
+          "type": "motivation",
+          "title": "動機",
+          "points": [
+            "曲面の接空間を R^3 と近似的に同一視したい。座標の取り方（原点・単位ベクトル）は恣意的で、どう選んでも同じ幾何的内容が得られる形式化が必要。",
+            "R^n より広い対象（関数空間など）を扱いたい。",
+            "線形代数の主役は線形写像。線形写像の定義に必要なのは加法とスカラー倍の2つだけ。"
+          ]
+        },
+
+        {
+          "id": "setup",
+          "type": "notation",
+          "title": "基本設定",
+          "items": [
+            {"symbol": "C^n", "latex": "\\mathbb{C}^n", "meaning": "複素 n 次元縦ベクトル空間"},
+            {"symbol": "M_{m,n}(C)", "latex": "M_{m,n}(\\mathbb{C})", "meaning": "m×n 複素行列全体"},
+            {"symbol": "K", "latex": "\\mathbb{K}", "meaning": "R か C のいずれか（固定）"},
+            {"symbol": "K^n", "latex": "\\mathbb{K}^n", "meaning": "R^n か C^n のどちらか"},
+            {"symbol": "M_{m,n}(K)", "latex": "M_{m,n}(\\mathbb{K})", "meaning": "実または複素 m×n 行列全体"}
+          ]
+        },
+
+        {
+          "id": "def1-1",
+          "type": "definition",
+          "number": "1.1",
+          "title": "K-ベクトル空間（vector space）",
+          "statement": "K = R または C。組 (V, +, 0, ·) が K-ベクトル空間であるとは、以下の (V1)〜(V11) をすべて満たすこと。",
+          "axioms": [
+            {"id": "V1", "content": "V は集合である"},
+            {"id": "V2", "content": "0 は V の元である（零元）"},
+            {"id": "V3", "content": "+ および · はそれぞれ写像である。+: V×V→V, (x,y)↦x+y（加法）。·: K×V→V, (a,x)↦ax（スカラー倍）"},
+            {"id": "V4", "name": "可換律", "content": "任意の x,y∈V に対し x+y = y+x", "latex": "x+y = y+x"},
+            {"id": "V5", "name": "結合律", "content": "任意の x,y,z∈V に対し (x+y)+z = x+(y+z)", "latex": "(x+y)+z = x+(y+z)"},
+            {"id": "V6", "name": "零元の性質", "content": "任意の x∈V に対し x+0 = 0+x = x", "latex": "x+0 = 0+x = x"},
+            {"id": "V7", "name": "逆元の存在", "content": "任意の x∈V に対し、ある y∈V が存在して x+y = y+x = 0", "latex": "x+y = y+x = 0"},
+            {"id": "V8", "name": "スカラー倍の分配（ベクトル側）", "content": "任意の a∈K, x,y∈V に対し a(x+y)=ax+ay", "latex": "a(x+y)=ax+ay"},
+            {"id": "V9", "name": "スカラー倍の分配（スカラー側）", "content": "任意の a,b∈K, x∈V に対し (a+b)x=ax+bx", "latex": "(a+b)x=ax+bx"},
+            {"id": "V10", "name": "スカラー倍の結合性", "content": "任意の a,b∈K, x∈V に対し (ab)x=a(bx)", "latex": "(ab)x=a(bx)"},
+            {"id": "V11", "name": "単位元", "content": "任意の x∈V に対し 1·x=x", "latex": "1 \\cdot x = x"}
+          ],
+          "groups": [
+            {"axioms": ["V1","V2","V3"], "meaning": "構造の定義（何が与えられているかの宣言）"},
+            {"axioms": ["V4","V5","V6","V7"], "meaning": "加法群（アーベル群）の公理"},
+            {"axioms": ["V8","V9","V10","V11"], "meaning": "スカラー倍の公理"}
+          ],
+          "examples": [
+            "C^n（C-ベクトル空間）",
+            "R^n（R-ベクトル空間）",
+            "M_{m,n}(K)（K-ベクトル空間）",
+            "C^∞((a,b))：(a,b)上のC^∞級複素数値関数全体",
+            "C((a,b))：(a,b)上の連続複素数値関数全体",
+            "{0}（零ベクトル空間）"
+          ],
+          "non_examples": [
+            "Z^2 は R-ベクトル空間でない（(1/2)(1,0)^T が Z^2 に入らないため (V3) 違反）"
+          ]
+        },
+
+        {
+          "id": "cor1-2",
+          "type": "corollary",
+          "number": "1.2",
+          "title": "ベクトル空間の基本性質",
+          "parts": [
+            {
+              "number": "1",
+              "name": "逆元の一意性",
+              "statement": "x+z=0 かつ x+y=0 ならば z=y。よってこの y を -x と書く。",
+              "latex": "x+z=0,\\ x+y=0 \\implies z=y"
+            },
+            {
+              "number": "2",
+              "statement": "0·x = 0 （x∈V）。スカラーの 0 で掛けるとゼロベクトル。",
+              "latex": "0 \\cdot x = 0"
+            },
+            {
+              "number": "3",
+              "statement": "(-1)·x = -x。-1 倍が逆元に一致する。",
+              "latex": "(-1) \\cdot x = -x"
+            }
+          ],
+          "note": "x+(-y) のことを x-y と書く。",
+          "proof_sketch": {
+            "1": "(z+x)+y = 0+y = y = z+(x+y) = z+0 = z より z=y（V5, V4, V6 使用）",
+            "2": "0x = 0x+0 = 0x+(x+(-x)) = (0x+1x)+(-x) = (0+1)x+(-x) = x+(-x) = 0",
+            "3": "x+(-1)x = (1+(-1))x = 0x = 0 より (-1)x=-x"
+          }
+        },
+
+        {
+          "id": "rem1-3",
+          "type": "remark",
+          "number": "1.3",
+          "title": "n 個の元の和と一次結合",
+          "statement": "n 個の元 x_1,...,x_n∈V に対して x_1+...+x_n を 2 個の元の和の繰り返しとして定義する。どのようなカッコのつけ方をしても結果は同じ（n についての帰納法）。",
+          "corollary": "a_1,...,a_n∈K、x_1,...,x_n∈V に対して一次結合（線形結合）a_1x_1+...+a_nx_n が意味を持つ。",
+          "n4_example": "n=4 のとき ((x_1+x_2)+x_3)+x_4、(x_1+x_2)+(x_3+x_4)、x_1+(x_2+(x_3+x_4))、(x_1+(x_2+x_3))+x_4、x_1+((x_2+x_3)+x_4) の 5 通りはすべて等しい。"
+        },
+
+        {
+          "id": "def1-4",
+          "type": "definition",
+          "number": "1.4",
+          "title": "K-線形写像（linear map）",
+          "statement": "V,W: K-ベクトル空間。写像 T:V→W が K-線形写像であるとは、以下の (L1),(L2) をともに満たすこと。",
+          "axioms": [
+            {
+              "id": "L1",
+              "content": "任意の x,y∈V に対して T(x+y) = T(x)+T(y)（加法を保つ）",
+              "latex": "T(x+y) = T(x)+T(y)"
+            },
+            {
+              "id": "L2",
+              "content": "任意の a∈K, x∈V に対して T(ax) = aT(x)（スカラー倍を保つ）",
+              "latex": "T(ax) = aT(x)"
+            }
+          ],
+          "combined": "T(ax+by) = aT(x)+bT(y)（一次結合を保つ）",
+          "examples": [
+            {
+              "id": "ex1",
+              "title": "行列による線形写像",
+              "description": "A∈M_{m,n}(K) に対して T_A: K^n→K^m, v↦Av は線形写像。逆に任意の線形写像 T:K^n→K^m は T = T_{(T(e_1)|...|T(e_n))} と行列で表示できる。"
+            },
+            {
+              "id": "ex2",
+              "title": "左積による線形写像",
+              "description": "A∈M_{m,n}(K) に対して M_{n,l}(K)→M_{m,l}(K), X↦AX は線形写像。"
+            },
+            {
+              "id": "ex3",
+              "title": "微分作用素",
+              "description": "P = f_k(x)(d^k/dx^k)+...+f_1(x)(d/dx)+f_0(x) による P:C^∞((a,b))→C^∞((a,b)), φ↦Pφ は C-線形写像。"
+            }
+          ],
+          "non_examples": [
+            "f(x)=x+1（f(0)=1≠0）",
+            "g(x)=x^2（g(1+1)=4≠g(1)+g(1)=2）"
+          ]
+        },
+
+        {
+          "id": "cor1-5",
+          "type": "corollary",
+          "number": "1.5",
+          "title": "線形写像の基本性質",
+          "parts": [
+            {"number": "1", "statement": "T(0) = 0", "latex": "T(0)=0"},
+            {"number": "2", "statement": "T(-x) = -T(x) （x∈V）", "latex": "T(-x)=-T(x)"},
+            {"number": "3", "statement": "T(a_1x_1+...+a_nx_n) = a_1T(x_1)+...+a_nT(x_n)", "latex": "T\\!\\left(\\sum a_i x_i\\right)=\\sum a_i T(x_i)"}
+          ]
+        },
+
+        {
+          "id": "def1-6",
+          "type": "definition",
+          "number": "1.6",
+          "title": "全単射線形写像の逆写像",
+          "statement": "T:V→W が K-線形写像かつ全単射であるならば、逆写像 T^{-1}:W→V も線形写像になる。"
+        },
+
+        {
+          "id": "def1-7",
+          "type": "definition",
+          "number": "1.7",
+          "title": "同型写像・同型",
+          "parts": [
+            {
+              "number": "1",
+              "statement": "T:V→W が全単射な線形写像のことを同型写像（isomorphism）といい、T:V→̃W と書く。"
+            },
+            {
+              "number": "2",
+              "statement": "V と W が同型であるとは、ある同型写像 T:V→̃W が存在することをいい、V≅W と書く。"
+            }
+          ],
+          "properties": [
+            "V≅V（反射律）",
+            "V≅W ならば W≅V（対称律）",
+            "V≅W かつ W≅U ならば V≅U（推移律）"
+          ],
+          "meaning": "V≅W のとき V と W はベクトル空間としては同一視できる。T:V→̃W はその同一視のやり方を具体的に定めているもの。",
+          "examples": [
+            {
+              "description": "C^mn ≅ M_{m,n}(C)",
+              "iso_example": "C^4→M_2(C), (a,b,c,d)^T ↦ [[a,b],[c,d]] は同型写像",
+              "non_iso_example": "C^4→M_2(C), (a,b,c,d)^T ↦ [[a,b],[c,a]] は同型写像でない（a が 2 か所に現れるため単射でない）"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "s2",
+      "title": "§2 部分空間",
+      "source": "線形代数学2a.pdf",
+
+      "items": [
+
+        {
+          "id": "def2-1",
+          "type": "definition",
+          "number": "2.1",
+          "title": "部分空間（subspace）",
+          "statement": "V: K-ベクトル空間、W⊆V とする。W が V の部分空間であるとは、以下の (S1)〜(S3) をすべて満たすこと。",
+          "axioms": [
+            {"id": "S1", "content": "0∈W", "meaning": "零元を含む"},
+            {"id": "S2", "content": "任意の x,y∈W に対し x+y∈W", "meaning": "加法について閉じている"},
+            {"id": "S3", "content": "任意の a∈K, x∈W に対し ax∈W", "meaning": "スカラー倍について閉じている"}
+          ],
+          "remark": "W が V の部分空間ならば (W,+|_W,0,·|_W) 自身が K-ベクトル空間。包含写像 W↪V は線形写像。V 自身も {0} も V の部分空間。",
+          "verification_strategy": "(V4)〜(V11) は V での成立が W にも自動継承されるため、(S1)〜(S3) の 3 条件だけ確認すればよい。",
+          "examples": [
+            {
+              "description": "W = {(x,y)^T∈R^2 | y=2x}（y=2x の直線）は R^2 の部分空間",
+              "verification": "(S1): (0,0)^T∈W ✓。(S2): (x_1,2x_1)+(x_2,2x_2)=(x_1+x_2,2(x_1+x_2))∈W ✓。(S3): a(x,2x)=(ax,2ax)∈W ✓"
+            },
+            {
+              "description": "W = {(x,y,z)^T∈R^3 | x+y+z=0}（原点を通る平面）は R^3 の部分空間",
+              "verification": "(S1): 0+0+0=0 ✓。(S2): (x_1+x_2)+(y_1+y_2)+(z_1+z_2)=0 ✓。(S3): a(x+y+z)=0 ✓"
+            },
+            {
+              "description": "Ax=0 の解全体（斉次連立一次方程式の解空間）は K^n の部分空間",
+              "verification": "(S1): A·0=0 ✓。(S2): A(x+y)=Ax+Ay=0 ✓。(S3): A(ax)=a(Ax)=0 ✓。これは §3 の Ker(T_A) に他ならない。"
+            }
+          ],
+          "non_examples": [
+            "W = {(x,y)^T | y=2x+1}（(S1) 違反：0∉W）",
+            "W = {(x,y)^T | xy≥0}（(S2) 違反：(1,0)+(0,-1)=(1,-1) で xy=-1<0）",
+            "W = Z^2⊂R^2（(S3) 違反：(1/2)(1,0)^T∉Z^2）"
+          ]
+        },
+
+        {
+          "id": "def2-2",
+          "type": "definition",
+          "number": "2.2",
+          "title": "生成される部分空間（span）",
+          "statement": "V: K-ベクトル空間、v_1,...,v_k∈V とする。",
+          "definition_latex": "\\langle v_1,\\ldots,v_k\\rangle_{\\mathbb{K}} = \\mathbb{K}v_1+\\cdots+\\mathbb{K}v_k = \\{a_1v_1+\\cdots+a_kv_k \\mid a_1,\\ldots,a_k\\in\\mathbb{K}\\}",
+          "is_subspace": true,
+          "names": ["生成される部分空間", "span", "a subspace generated by v_1,...,v_k"],
+          "proof_S1": "0 = 0v_1+...+0v_k ∈ span",
+          "proof_S2": "(∑ a_i v_i)+(∑ b_i v_i) = ∑(a_i+b_i)v_i ∈ span",
+          "proof_S3": "λ(∑ a_i v_i) = ∑(λa_i)v_i ∈ span",
+          "examples": [
+            {
+              "v": ["(1,2)^T"],
+              "span": "{t(1,2)^T | t∈R}（R^2 の直線）"
+            },
+            {
+              "v": ["e_1=(1,0)^T","e_2=(0,1)^T"],
+              "span": "R^2 全体"
+            },
+            {
+              "v": ["e_1","e_2","e_3"],
+              "space": "R^3",
+              "span": "R^3 全体"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "s3",
+      "title": "§3 線形写像の Kernel と Image",
+      "source": "線形代数学2a.pdf",
+
+      "items": [
+
+        {
+          "id": "def3-1",
+          "type": "definition",
+          "number": "3.1",
+          "title": "核（kernel）と像（image）",
+          "statement": "V,W: K-ベクトル空間、T:V→W を K-線形写像とする。",
+          "ker": {
+            "definition": "Ker(T) = {v∈V | T(v)=0} ⊆ V",
+            "latex": "\\operatorname{Ker}(T) = \\{v\\in V \\mid T(v)=0\\}",
+            "name": "核（kernel）"
+          },
+          "im": {
+            "definition": "Im(T) = {T(v) | v∈V} ⊆ W",
+            "latex": "\\operatorname{Im}(T) = \\{T(v) \\mid v\\in V\\}",
+            "name": "像（image）"
+          }
+        },
+
+        {
+          "id": "cor3-2",
+          "type": "corollary",
+          "number": "3.2",
+          "title": "Ker と Im の部分空間性",
+          "statement": "T:V→W を K-線形写像とすると、Ker(T) は V の部分空間、Im(T) は W の部分空間。",
+          "proof_ker": "T(0)=0 で (S1) ✓。T(x)=T(y)=0 ⇒ T(x+y)=0 で (S2) ✓。T(x)=0 ⇒ T(ax)=aT(x)=0 で (S3) ✓。",
+          "proof_im": "0=T(0)∈Im(T) で (S1) ✓。T(v_1)+T(v_2)=T(v_1+v_2)∈Im(T) で (S2) ✓。aT(v)=T(av)∈Im(T) で (S3) ✓。"
+        },
+
+        {
+          "id": "thm3-3",
+          "type": "theorem",
+          "number": "3.3",
+          "title": "単射の特徴付け",
+          "statement": "T:V→W を K-線形写像とする。以下は同値：(a) T は単射 ⟺ (b) Ker(T) = {0}",
+          "latex": "T \\text{ は単射} \\iff \\operatorname{Ker}(T) = \\{0\\}",
+          "proof": {
+            "a_to_b": "x∈Ker(T) とすると T(x)=0=T(0)。単射性より x=0。",
+            "b_to_a": "T(x)=T(y) とすると T(x-y)=0、Ker(T)={0} より x-y=0、つまり x=y。"
+          },
+          "key_insight": "T(x)=T(y) ⟺ T(x-y)=0（線形性）。だから単射条件 T(x)=T(y)⟹x=y は、T(z)=0⟹z=0 と同値になる（線形写像特有の性質）。"
+        },
+
+        {
+          "id": "cor3-4",
+          "type": "corollary",
+          "number": "3.4",
+          "title": "行列表示との関係",
+          "statement": "T:K^n→K^m の行列表示を A とすると、x∈K^n に対して次は同値：(a) x∈Ker(T) ⟺ (b) Ax=0 ⟺ (c) 斉次連立一次方程式の解。",
+          "system": "a_{11}x_1+...+a_{1n}x_n=0, ..., a_{m1}x_1+...+a_{mn}x_n=0"
+        },
+
+        {
+          "id": "cor3-5",
+          "type": "corollary",
+          "number": "3.5",
+          "title": "m < n のとき単射でない",
+          "statement": "m < n ならば、任意の K-線形写像 T:K^n→K^m は単射でない。",
+          "proof_sketch": "行列表示 A の行標準形 Ã の leading entry の数 ≤ m < n。よって自由変数が存在し、Ker(T)≠{0}。定理3.3 より単射でない。"
+        },
+
+        {
+          "id": "thm3-6",
+          "type": "theorem",
+          "number": "3.6",
+          "title": "次元の同型不変性",
+          "statement": "K^m ≅ K^n ならば m = n。",
+          "latex": "\\mathbb{K}^m \\cong \\mathbb{K}^n \\implies m = n",
+          "proof_sketch": "m≠n とすると m>n または n>m。同型写像 T:K^m→K^n は T も T^{-1} も単射でなければならないが、系3.5 より一方が単射でなくなり矛盾。",
+          "significance": "次元（dimension）はベクトル空間の同型類を決める基本的な指標。n 次元ベクトル空間は K^n と同型。"
+        }
+      ]
+    }
+  ],
+
+  "examples_index": [
+    {"id": "ex-R2-verification", "section": "s1", "title": "R^2 が R-ベクトル空間であることの確認（全 11 公理）"},
+    {"id": "ex-linear-map-check", "section": "s1", "title": "T(x,y)=(2x+y, x-3y) が線形写像であることの確認"},
+    {"id": "ex-matrix-rep", "section": "s1", "title": "行列表示を使った T の値の計算"},
+    {"id": "ex-isomorphism", "section": "s1", "title": "C^4→M_2(C) の同型写像と非同型写像の比較"},
+    {"id": "ex-subspace-line", "section": "s2", "title": "y=2x が R^2 の部分空間である確認"},
+    {"id": "ex-subspace-plane", "section": "s2", "title": "x+y+z=0 が R^3 の部分空間である確認"},
+    {"id": "ex-solution-space", "section": "s2", "title": "斉次方程式の解空間 = Ker（部分空間）"},
+    {"id": "ex-ker-im-2x2", "section": "s3", "title": "2×2 行列 [[1,2],[2,4]] の Ker と Im の計算"},
+    {"id": "ex-ker-im-2x3", "section": "s3", "title": "2×3 行列の Ker と Im の計算（全射だが非単射）"},
+    {"id": "ex-projection", "section": "s3", "title": "射影写像の Ker（z 軸）と Im（xy 平面）"}
+  ],
+
+  "theorems_dependency": {
+    "def1-1": [],
+    "cor1-2": ["def1-1"],
+    "rem1-3": ["def1-1", "cor1-2"],
+    "def1-4": ["def1-1"],
+    "cor1-5": ["def1-4", "cor1-2"],
+    "def1-6": ["def1-4"],
+    "def1-7": ["def1-4", "def1-6"],
+    "def2-1": ["def1-1"],
+    "def2-2": ["def2-1"],
+    "def3-1": ["def1-4"],
+    "cor3-2": ["def3-1", "def2-1", "cor1-5"],
+    "thm3-3": ["def3-1", "cor3-2", "cor1-5"],
+    "cor3-4": ["def3-1", "thm3-3"],
+    "cor3-5": ["cor3-4", "thm3-3"],
+    "thm3-6": ["def1-7", "cor3-5", "thm3-3"]
+  }
+}

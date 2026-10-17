@@ -1,0 +1,375 @@
+<!DOCTYPE html><!-- 「線形代数 小テスト 2025年7月 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>線形代数 小テスト 2025年7月 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-linear">
+  <h1>線形代数学演習　小テスト</h1>
+  <p class="subtitle">2026年 Sターム &nbsp;|&nbsp; 2025年7月8日（火）実施</p>
+</div>
+
+<div class="container">
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">1</span> 表現行列・核・像
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>線形写像 $f \colon \mathbb{R}^2 \to \mathbb{R}^2$ は</p>
+      $$f\!\left(\begin{pmatrix}2\\1\end{pmatrix}\right)=\begin{pmatrix}3\\2\end{pmatrix},\quad f\!\left(\begin{pmatrix}1\\-2\end{pmatrix}\right)=\begin{pmatrix}6\\4\end{pmatrix}$$
+      <p>を満たすとする。</p>
+      <ol>
+        <li>$f = f_A$（左から行列 $A$ を掛ける線形写像）と表すときの $2 \times 2$ 行列 $A$ を求めよ。</li>
+        <li>$\mathrm{Ker}(f)$ と $\mathrm{Im}(f)$ の基底をそれぞれ求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1) — 表現行列 A</div>
+      <p>$f_A(\mathbf{v}) = A\mathbf{v}$ なので，与えられた条件は行列方程式</p>
+      $$A\underbrace{\begin{pmatrix}2&1\\1&-2\end{pmatrix}}_{=:P} = \underbrace{\begin{pmatrix}3&6\\2&4\end{pmatrix}}_{=:Q}$$
+      <p>と書ける（$P$ の列が入力ベクトル，$Q$ の列が対応する出力ベクトル）。</p>
+      <p>$\det(P) = 2\cdot(-2) - 1\cdot 1 = -5 \ne 0$ なので $P$ は正則であり，</p>
+      $$P^{-1} = \frac{1}{-5}\begin{pmatrix}-2&-1\\-1&2\end{pmatrix} = \begin{pmatrix}\tfrac{2}{5}&\tfrac{1}{5}\\[4pt]\tfrac{1}{5}&-\tfrac{2}{5}\end{pmatrix}$$
+      $$A = QP^{-1} = \begin{pmatrix}3&6\\2&4\end{pmatrix}\begin{pmatrix}\tfrac{2}{5}&\tfrac{1}{5}\\[4pt]\tfrac{1}{5}&-\tfrac{2}{5}\end{pmatrix} = \begin{pmatrix}\tfrac{6}{5}+\tfrac{6}{5}&\tfrac{3}{5}-\tfrac{12}{5}\\[4pt]\tfrac{4}{5}+\tfrac{4}{5}&\tfrac{2}{5}-\tfrac{8}{5}\end{pmatrix} = \frac{1}{5}\begin{pmatrix}12&-9\\8&-6\end{pmatrix}$$
+      <p>確認：$A\begin{pmatrix}2\\1\end{pmatrix}=\frac{1}{5}\begin{pmatrix}24-9\\16-6\end{pmatrix}=\begin{pmatrix}3\\2\end{pmatrix}$ ✓，　$A\begin{pmatrix}1\\-2\end{pmatrix}=\frac{1}{5}\begin{pmatrix}12+18\\8+12\end{pmatrix}=\begin{pmatrix}6\\4\end{pmatrix}$ ✓</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2) — 核と像の基底</div>
+      <p>まず $\det(A) = \frac{1}{25}(12\cdot(-6) - (-9)\cdot 8) = \frac{-72+72}{25} = 0$ なので $A$ は退化行列（階数 1）。</p>
+      <p><strong>核 $\mathrm{Ker}(f)$：</strong>$A\mathbf{v} = \mathbf{0}$ を解く。</p>
+      $$\frac{1}{5}\begin{pmatrix}12&-9\\8&-6\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}0\\0\end{pmatrix}\;\Longleftrightarrow\; 4x = 3y$$
+      $$\mathrm{Ker}(f) = \mathrm{span}\!\left\{\begin{pmatrix}3\\4\end{pmatrix}\right\}$$
+      <p>確認：$A\begin{pmatrix}3\\4\end{pmatrix}=\frac{1}{5}\begin{pmatrix}36-36\\24-24\end{pmatrix}=\mathbf{0}$ ✓</p>
+      <p><strong>像 $\mathrm{Im}(f)$：</strong>$A$ の列ベクトルをみると，第1列 $\frac{1}{5}(12,8)^\top \propto (3,2)^\top$，第2列 $\frac{1}{5}(-9,-6)^\top \propto (3,2)^\top$（同じ方向）。</p>
+      $$\mathrm{Im}(f) = \mathrm{span}\!\left\{\begin{pmatrix}3\\2\end{pmatrix}\right\}$$
+      <p>（次元定理の確認：$\dim\mathrm{Ker}(f) + \dim\mathrm{Im}(f) = 1 + 1 = 2 = \dim\mathbb{R}^2$ ✓）</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p><strong>パターン認識：</strong>「2つ（以上）の入出力ペアから表現行列を求めよ」という問題を見たら，まず「入力ベクトルを列に並べた行列 $P$ は正則か」を確認する癖をつける。正則なら $A\cdot P = Q \Rightarrow A = QP^{-1}$ という一本道の式変形に落とせる——「連立方程式を解く」問題を「行列方程式を解く」問題に翻訳する典型例。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $A = QP^{-1}$ という式の導出</div>
+        <p>$f = f_A$ なので入出力の関係は「行列 $A$ を未知数として $A \cdot P = Q$ という行列方程式」として立てられる（$P$ の各列が入力ベクトル，$Q$ の各列が対応する出力ベクトル）。</p>
+        <p>$P$ が正則（$\det P \ne 0$）なら，右から $P^{-1}$ を掛けて $A = Q P^{-1}$ と解ける。$P$ が正則かどうかは $\det P$ を計算して確認する（正則でなければ $A$ は一意に決まらない可能性がある）。</p>
+        <p><strong>よくある間違い：</strong>行列方程式を $PA=Q$ の順に立ててしまい，$A=P^{-1}Q$ と誤って解いてしまうケースがある。$f_A(\mathbf{v})=A\mathbf{v}$ は $A$ を左から掛ける演算なので，列ごとの関係は必ず $A\mathbf{p}_i=\mathbf{q}_i$（つまり $AP=Q$）の形になる。行列の積は非可換なので，$AP$ と $PA$ は一般に全く別の行列になることを常に意識する。</p>
+      </div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 別解：逆行列を使わずに標準基底の像から $A$ を求める</div>
+        <p>$P^{-1}$ の計算を避けたい場合は，標準基底 $\mathbf{e}_1=(1,0)^\top,\ \mathbf{e}_2=(0,1)^\top$ を与えられた2本のベクトルの線形結合として表し，$f$ の線形性 $f(a\mathbf{u}+b\mathbf{v})=af(\mathbf{u})+bf(\mathbf{v})$ を直接使う方法もある（$A$ の列 $=$ 標準基底の像，という定義に忠実な方法）。</p>
+        <p>$\mathbf{e}_1 = \tfrac{2}{5}\begin{pmatrix}2\\1\end{pmatrix} + \tfrac{1}{5}\begin{pmatrix}1\\-2\end{pmatrix}$ なので，線形性より</p>
+        $$f(\mathbf{e}_1) = \tfrac{2}{5}\begin{pmatrix}3\\2\end{pmatrix} + \tfrac{1}{5}\begin{pmatrix}6\\4\end{pmatrix} = \begin{pmatrix}\tfrac{12}{5}\\[2pt]\tfrac{8}{5}\end{pmatrix}$$
+        <p>これが $A$ の第1列（$QP^{-1}$ の結果と一致）。同様に $\mathbf{e}_2 = \tfrac{1}{5}\begin{pmatrix}2\\1\end{pmatrix} - \tfrac{2}{5}\begin{pmatrix}1\\-2\end{pmatrix}$ から $f(\mathbf{e}_2) = \left(-\tfrac{9}{5},-\tfrac{6}{5}\right)^\top$ が第2列。この方法は実質的に $P^{-1}$ を陰に計算しているのと同じだが，「基底の像を線形性で運ぶ」という発想そのものは表現行列の定義の核心であり，見通しが良くなる場合がある。</p>
+      </div>
+      <p><strong>$\det(A)=0$ のとき，核は自明でない。</strong>$\mathrm{rank}(A)=1$ なら次元定理より $\dim\mathrm{Ker}=1$。Im は $A$ の列空間（全列が同じ方向を向いているので1次元）。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $4x = 3y$ という核の方程式はどこから来るか</div>
+        <p>$A = \frac{1}{5}\begin{pmatrix}12&-9\\8&-6\end{pmatrix}$ に対し $A\mathbf{v} = \mathbf{0}$ を解く。第1行から $12x - 9y = 0 \Rightarrow 4x = 3y$，第2行から $8x - 6y = 0 \Rightarrow 4x = 3y$（同じ式）。$\mathrm{rank}(A) = 1$ なのでどの行も同じ情報しか持っていない。$y = t$ とおくと $x = 3t/4$，整数比 $x:y = 3:4$ に取れば $\mathbf{v} = (3,4)^T$。</p>
+      </div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 幾何的な見方：$A$ はなぜ「階数1の外積分解」に書けるか</div>
+        <p>実は $A = \dfrac{1}{5}\begin{pmatrix}3\\2\end{pmatrix}\begin{pmatrix}4&-3\end{pmatrix}$ と書ける（外積・ランク1分解）。実際に計算すると $\begin{pmatrix}3\\2\end{pmatrix}\begin{pmatrix}4&-3\end{pmatrix}=\begin{pmatrix}12&-9\\8&-6\end{pmatrix}$，これを $5$ で割ればちょうど $A$ に一致する。</p>
+        <p>一般に，階数1の行列 $A$（$2\times2$ に限らず $m\times n$）は必ず $A = \mathbf{u}\,\boldsymbol{\varphi}^\top$（$\mathbf{u}\in\mathrm{Im}(A)$，$\boldsymbol{\varphi}^\top$ は行ベクトル）の形に書ける。この見方では $f(\mathbf{v}) = (\boldsymbol{\varphi}^\top\mathbf{v})\,\mathbf{u}$，つまり「$\mathbf{v}$ をスカラー $\boldsymbol{\varphi}^\top\mathbf{v}$ に落として，それを $\mathbf{u}$ 方向に伸ばす」という2段階の写像になっている。$\mathrm{Ker}(f)$ は線形汎関数 $\boldsymbol{\varphi}^\top\mathbf{v}=0$（ここでは $4x-3y=0$，先の核の方程式と同じ！）で決まり，$\mathrm{Im}(f)$ は $\mathbf{u}=(3,2)^\top$ 方向の直線になる。この構造が見えると，$\det A=0$ になる理由（1次元に潰れる写像だから）も直感的に納得できる。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">2</span> 直交行列と冪 $A^n = E$
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$n$ を正の整数とする。実数係数 $2\times 2$ 行列 $A$ が</p>
+      $${}^t\!A\,A = A\,{}^t\!A = E,\qquad A^n = E$$
+      <p>を満たすとする（ここで $E$ は単位行列）。</p>
+      <ol>
+        <li>$n$ が奇数のとき，$A$ は回転行列であることを示せ。</li>
+        <li>各 $n$ に対し，条件を満たす行列 $A$ を全て求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">2×2 実直交行列の分類</div>
+      <p>${}^t\!A\,A = E$ を満たす実 $2\times 2$ 行列（直交行列）は $\det A = \pm 1$ を満たし，次の2種類のみ存在する。</p>
+      <ul>
+        <li><strong>回転行列（$\det A = 1$）：</strong>$R(\theta) = \begin{pmatrix}\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta\end{pmatrix}$，　$R(\theta)^n = R(n\theta)$</li>
+        <li><strong>鏡映行列（$\det A = -1$）：</strong>$S(\alpha) = \begin{pmatrix}\cos\alpha & \sin\alpha \\ \sin\alpha & -\cos\alpha\end{pmatrix}$，　$S(\alpha)^2 = E$（対合）</li>
+      </ul>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1) — n が奇数のとき A は回転行列</div>
+      <p>$A$ が直交行列なので $\det A = \pm 1$。$A^n = E$ の行列式をとると，</p>
+      $$(\det A)^n = \det(A^n) = \det E = 1$$
+      <p>$n$ が奇数のとき，実数 $d$ が $d^n = 1$ を満たすのは $d = 1$ のみ（奇数乗は単調）。よって $\det A = 1$。</p>
+      <p>直交行列かつ $\det A = 1$ の $2\times 2$ 行列は回転行列に限る。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2) — 全ての解</div>
+      <p><strong>（i）回転行列の場合（任意の $n$）：</strong></p>
+      <p>$A = R(\theta)$ とおくと $A^n = R(n\theta) = E \Longleftrightarrow n\theta \equiv 0 \pmod{2\pi}$，すなわち $\theta = \dfrac{2\pi k}{n}$（$k \in \mathbb{Z}$）。$[0,2\pi)$ 内の互いに異なる角は $k = 0, 1, \ldots, n-1$ の $n$ 個。</p>
+      $$\boxed{A = R\!\left(\frac{2\pi k}{n}\right) = \begin{pmatrix}\cos\tfrac{2\pi k}{n} & -\sin\tfrac{2\pi k}{n} \\[4pt] \sin\tfrac{2\pi k}{n} & \cos\tfrac{2\pi k}{n}\end{pmatrix},\quad k = 0, 1, \ldots, n-1}$$
+      <p><strong>（ii）鏡映行列の場合：</strong></p>
+      <p>$A = S(\alpha)$ は $S(\alpha)^2 = E$ を満たす（対合）。よって</p>
+      <ul>
+        <li>$n$ が<strong>偶数</strong>のとき：$A^n = (S(\alpha)^2)^{n/2} = E^{n/2} = E$ ✓ → 全ての鏡映行列が解。</li>
+        <li>$n$ が<strong>奇数</strong>のとき：$A^n = S(\alpha)^{2\lfloor n/2\rfloor}\cdot S(\alpha) = S(\alpha) \ne E$ → 解なし（(1) と整合）。</li>
+      </ul>
+      <p><strong>まとめ：</strong></p>
+      <ul>
+        <li>$n$ が奇数：$R\!\left(\dfrac{2\pi k}{n}\right)$，$k=0,\ldots,n-1$（計 $n$ 個）</li>
+        <li>$n$ が偶数：上記 $n$ 個の回転行列，および $S(\alpha) = \begin{pmatrix}\cos\alpha&\sin\alpha\\\sin\alpha&-\cos\alpha\end{pmatrix}$（$\alpha \in \mathbb{R}$ 任意）の全て</li>
+      </ul>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p><strong>パターン認識：</strong>「行列の等式 $A^n=E$」を見たら，まず疑うべき定石は2つ——①「$\det$ は積を保つ（$\det(XY)=\det X\cdot\det Y$，つまり $\mathrm{GL}_n(\mathbb{R})\to\mathbb{R}^\times$ の準同型）」ので両辺に $\det$ を取ってスカラーの等式に落とす，②「固有値は冪で $\lambda^n$ になる」ので両辺の固有値を比較する。この問題の(1)は①のルート，以下で紹介する別解が②のルート。</p>
+      <p><strong>(1) の核心：</strong>「det は積の準同型」$\det(A^n) = (\det A)^n$。奇数乗が 1 になる実数は 1 のみ（偶数乗だと $-1$ も候補になる）。これを使うと det の値が決まり，分類定理から型が決まる。</p>
+      <p><strong>(2) の核心：</strong>直交行列は回転か鏡映の2種類しかない。鏡映の対合性 $S^2=E$ が偶数乗で効く。奇数のとき $S^n = S \ne E$ なので鏡映は排除される。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 「奇数乗が 1 になる実数は 1 のみ」の証明</div>
+        <p>$d^n = 1$（$n$ 奇数，$d \in \mathbb{R}$）を解く。$g(d) = d^n$ は奇数次の単調増加関数（$g'(d) = nd^{n-1} \geq 0$，等号は $d = 0$ のみ）。$g(1) = 1$ かつ $g$ は狭義単調増加（$d \ne 0$ では）なので $g(d) = 1 \Leftrightarrow d = 1$。</p>
+        <p>偶数のとき $g(-1) = (-1)^n = 1$ も成立するため $d = \pm 1$ の2解が候補になり，$\det A = -1$（鏡映）の可能性が残る。</p>
+      </div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 直交行列が「回転」か「鏡映」の2種類しかない理由（分類定理の証明）</div>
+        <p>$A=\begin{pmatrix}a&b\\c&d\end{pmatrix}$ が ${}^t\!AA=E$ を満たすとする。第1列 $(a,c)^\top$ は単位ベクトル（${}^t\!AA$ の $(1,1)$ 成分が $a^2+c^2=1$）なので $(a,c)=(\cos\theta,\sin\theta)$ と表せる。第2列 $(b,d)^\top$ も単位ベクトルで，かつ第1列と直交（${}^t\!AA$ の非対角成分 $ab+cd=0$）。平面上で $(\cos\theta,\sin\theta)$ に直交する単位ベクトルは，$90°$ 回転した $(-\sin\theta,\cos\theta)$ か，$-90°$ 回転した $(\sin\theta,-\cos\theta)$ の2方向しかない。</p>
+        <p>前者を選べば $A=\begin{pmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{pmatrix}=R(\theta)$（$\det A=\cos^2\theta+\sin^2\theta=1$，回転），後者を選べば $A=\begin{pmatrix}\cos\theta&\sin\theta\\\sin\theta&-\cos\theta\end{pmatrix}=S(\theta)$（$\det A=-\cos^2\theta-\sin^2\theta=-1$，鏡映）。定義に戻って手を動かせば，与えられた分類定理そのものがこの2行で証明できてしまう。</p>
+      </div>
+      <p><strong>別解（固有値による(1)の証明）：</strong>実 $2\times2$ 直交行列の固有値は，回転（$\theta\ne0,\pi$）なら共役な複素数 $e^{\pm i\theta}$（絶対値1），鏡映なら実固有値 $1,-1$（固有ベクトルはそれぞれ鏡映の軸の方向とそれに直交する方向）。$A^n=E$ の固有値はもとの固有値の $n$ 乗だから全て $1$ にならなければならない。鏡映の場合，固有値 $-1$ が $n$ 乗されて $(-1)^n$。$n$ が奇数なら $(-1)^n=-1\ne1$ となって矛盾するので鏡映は排除される。回転の場合，固有値 $e^{\pm i\theta}$ は絶対値が常に1なので $n$ 乗しても矛盾は生じず，$e^{in\theta}=1$（つまり $n\theta\equiv0\pmod{2\pi}$）という条件だけが残る——これが(2)で使う条件そのもの。行列式による議論と固有値による議論は，同じ結論に別の角度から到達する。</p>
+      <p><strong>誤解しやすい点：</strong>①「直交行列＝回転行列」という思い込み（鏡映行列 $\det A=-1$ も直交行列であることを忘れない）。②「$A^n=E$ だから $A=E$ のはず」という早合点——$n>1$ では $A\ne E$ の解が普通に多数存在する（例えば正 $n$ 角形の回転群を考えれば，$n$ 乗して初めて単位元に戻る非自明な回転がいくつもある）。③ この「直交行列＝回転か鏡映の2択」という分類定理は $2\times2$（$O(2)$）に特有のもので，$3\times3$ 以上の直交行列は回転の合成など更に複雑な形を取り得るため，同じ議論をそのまま高次元に拡張することはできない。</p>
+      <p><strong>一般化・関連する定理：</strong>この問題で登場した「$n$ 個の回転 $R(2\pi k/n)$ の集合」と「(偶数の場合の)鏡映全体を含む集合」は，直交群 $O(2)$ の有限部分群の分類——$n$ 元からなる巡回群 $C_n$（回転のみ）と，位数 $2n$ の二面体群 $D_n$（回転＋鏡映，正 $n$ 角形の対称群）——の具体例になっている。$n$ が奇数のとき解が回転のみになる現象は，鏡映が位数2の元であるため，奇数 $n>1$ の巡回部分群には（$2\nmid n$ なので）決して含まれ得ない，という群論的事実の反映である。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">3</span> 固有値・固有ベクトル・対角化・行列の冪
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>行列 $A = \begin{pmatrix}13&-30\\5&-12\end{pmatrix}$ に対し，次を求めよ。</p>
+      <ol>
+        <li>$\lambda$ に関する2次式 $\det(A - \lambda E) = 0$ の解 $\lambda_1,\lambda_2$ を求めよ。</li>
+        <li>(1) で求めた $\lambda_i$ に対し，$A\mathbf{v}_i = \lambda_i \mathbf{v}_i$ を満たす $\mathbf{0}$ でないベクトル $\mathbf{v}_i$ をそれぞれ一つずつ求めよ。</li>
+        <li>(2) で求めたベクトルを横に並べた $2\times 2$ 行列 $P := (\mathbf{v}_1,\mathbf{v}_2)$ を考える。このとき $P^{-1}AP$ を計算せよ。</li>
+        <li>自然数 $n$ に対し $A^n$ を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1) — 固有値</div>
+      $$\det(A - \lambda E) = \det\begin{pmatrix}13-\lambda&-30\\5&-12-\lambda\end{pmatrix}$$
+      $$= (13-\lambda)(-12-\lambda) - (-30)\cdot 5$$
+      $$= \lambda^2 - \lambda - 156 + 150 = \lambda^2 - \lambda - 6 = (\lambda-3)(\lambda+2)$$
+      <p>よって $\boxed{\lambda_1 = 3,\quad \lambda_2 = -2}$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2) — 固有ベクトル</div>
+      <p><strong>$\lambda_1 = 3$ のとき：</strong>$(A - 3E)\mathbf{v} = \mathbf{0}$</p>
+      $$\begin{pmatrix}10&-30\\5&-15\end{pmatrix}\mathbf{v}=\mathbf{0}\;\Longrightarrow\; x = 3y\;\Longrightarrow\; \mathbf{v}_1 = \begin{pmatrix}3\\1\end{pmatrix}$$
+      <p>確認：$A\mathbf{v}_1 = \begin{pmatrix}39-30\\15-12\end{pmatrix}=\begin{pmatrix}9\\3\end{pmatrix}=3\mathbf{v}_1$ ✓</p>
+      <p><strong>$\lambda_2 = -2$ のとき：</strong>$(A + 2E)\mathbf{v} = \mathbf{0}$</p>
+      $$\begin{pmatrix}15&-30\\5&-10\end{pmatrix}\mathbf{v}=\mathbf{0}\;\Longrightarrow\; x = 2y\;\Longrightarrow\; \mathbf{v}_2 = \begin{pmatrix}2\\1\end{pmatrix}$$
+      <p>確認：$A\mathbf{v}_2 = \begin{pmatrix}26-30\\10-12\end{pmatrix}=\begin{pmatrix}-4\\-2\end{pmatrix}=-2\mathbf{v}_2$ ✓</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (3) — $P^{-1}AP$</div>
+      $$P = \begin{pmatrix}3&2\\1&1\end{pmatrix},\quad \det(P) = 3-2 = 1,\quad P^{-1} = \begin{pmatrix}1&-2\\-1&3\end{pmatrix}$$
+      <p>対角化の原理：$A P = P\,\mathrm{diag}(\lambda_1,\lambda_2)$ なので $P^{-1}AP = \mathrm{diag}(\lambda_1,\lambda_2)$。</p>
+      <p>計算で確認：</p>
+      $$AP = \begin{pmatrix}13&-30\\5&-12\end{pmatrix}\begin{pmatrix}3&2\\1&1\end{pmatrix}=\begin{pmatrix}9&-4\\3&-2\end{pmatrix}$$
+      $$P^{-1}AP = \begin{pmatrix}1&-2\\-1&3\end{pmatrix}\begin{pmatrix}9&-4\\3&-2\end{pmatrix}=\begin{pmatrix}9-6&-4+4\\-9+9&4-6\end{pmatrix}=\boxed{\begin{pmatrix}3&0\\0&-2\end{pmatrix}}$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (4) — $A^n$</div>
+      <p>$A = P\,\mathrm{diag}(3,-2)\,P^{-1}$ より</p>
+      $$A^n = P\begin{pmatrix}3^n&0\\0&(-2)^n\end{pmatrix}P^{-1}$$
+      $$= \begin{pmatrix}3&2\\1&1\end{pmatrix}\begin{pmatrix}3^n&0\\0&(-2)^n\end{pmatrix}\begin{pmatrix}1&-2\\-1&3\end{pmatrix}$$
+      $$= \begin{pmatrix}3\cdot 3^n&2\cdot(-2)^n\\3^n&(-2)^n\end{pmatrix}\begin{pmatrix}1&-2\\-1&3\end{pmatrix}$$
+      $$= \boxed{\begin{pmatrix}3^{n+1}-2\cdot(-2)^n & 6\bigl((-2)^n - 3^n\bigr)\\[4pt] 3^n - (-2)^n & 3\cdot(-2)^n - 2\cdot 3^n\end{pmatrix}}$$
+      <p>確認（$n=1$）：$\begin{pmatrix}9+4&6(-2-3)\\3+2&-6-6\end{pmatrix}=\begin{pmatrix}13&-30\\5&-12\end{pmatrix}=A$ ✓</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p><strong>流れをつかむ：</strong>固有方程式 → 固有値 → 固有ベクトル → 対角化行列 $P$ → $A = P\Lambda P^{-1}$ → $A^n = P\Lambda^n P^{-1}$。この一連の流れは「行列の冪を求めよ」という問題の標準戦略——「$n$ 乗」「$A^n$」という文字を見たら，まず対角化（または後述のケーリー・ハミルトン）を疑う，というパターン認識。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $\mathrm{tr}\,A$，$\det A$ から固有値を速く求める（Vieta の公式）</div>
+        <p>$A = \begin{pmatrix}13&-30\\5&-12\end{pmatrix}$ の場合：$\mathrm{tr}\,A = 13+(-12) = 1$，$\det A = 13\cdot(-12)-(-30)\cdot 5 = -156+150 = -6$。</p>
+        <p>特性方程式 $\lambda^2 - (\mathrm{tr}\,A)\lambda + \det A = 0$ に代入すると $\lambda^2 - \lambda - 6 = 0$，解は「和が 1，積が $-6$」の2数。すぐに $\lambda = 3, -2$ と分かる（行列式の展開より先に Vieta で見当をつける方が速い）。</p>
+      </div>
+      <p><strong>固有ベクトルの求め方：</strong>$(A-\lambda_i E)\mathbf{v}=\mathbf{0}$ の非自明解を探す。$2\times2$ では1本の方程式だけで十分（2行は比例するはず）。スカラー倍の自由度があるので簡単な整数にとる。</p>
+      <p><strong>$\det(P)=1$ は計算のラッキー：</strong>$P^{-1}$ が整数行列になり，後の計算が楽になる。</p>
+      <p><strong>よくある間違い：</strong>$P=(\mathbf{v}_1,\mathbf{v}_2)$ の列の順序と対角行列 $\mathrm{diag}(\lambda_1,\lambda_2)$ の対応順序をそろえないと，$P^{-1}AP\ne\mathrm{diag}(\lambda_1,\lambda_2)$ になってしまう（$\mathbf{v}_1$ が第1列なら，対応する固有値 $\lambda_1$ も対角行列の第1成分，という対応を必ず保つ）。また $AP=P\Lambda$ の両辺に左から $P^{-1}$ を掛けるのだから正しいのは $P^{-1}AP=\Lambda$ であり，$PAP^{-1}$ と順序を逆にしてしまうミスにも注意する。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 別解：ケーリー・ハミルトンの定理で対角化を経由せずに $A^n$ を求める</div>
+        <p>対角化を経由せず，$A$ 自身が満たす特性方程式 $A^2 - A - 6E = O$（ケーリー・ハミルトンの定理——(1)で求めた $\lambda^2-\lambda-6=0$ に $\lambda$ の代わりに $A$ を代入したもの）を直接使う方法もある。$A^2=A+6E$ なので，$A$ のどんな高次の冪も次数下げによって $A$ と $E$ の1次式 $A^n = c_1(n)\,A + c_2(n)\,E$ の形に落とせる。</p>
+        <p>$c_1(n),c_2(n)$ は，固有値 $\lambda=3,-2$ を代入した式 $\lambda^n=c_1(n)\lambda+c_2(n)$ が両方成り立つように連立させて決める：</p>
+        $$3c_1+c_2=3^n,\qquad -2c_1+c_2=(-2)^n\ \Longrightarrow\ c_1(n)=\frac{3^n-(-2)^n}{5},\quad c_2(n)=\frac{2\cdot3^n+3\cdot(-2)^n}{5}$$
+        <p>$n=2$ で検証：$c_1=(9-4)/5=1$，$c_2=(18+12)/5=6$ なので $A^2=A+6E=\begin{pmatrix}19&-30\\5&-6\end{pmatrix}$。実際に $A$ を直接2乗しても同じ値になる（例えば $(1,1)$ 成分は $13\cdot13+(-30)\cdot5=169-150=19$）ので一致が確認できる。この方法は固有値が重複してジョルダン細胞が絡むような対角化できない場合にも拡張できる点で汎用性が高い。</p>
+      </div>
+      <p><strong>幾何的な見方：</strong>$A$ は $(3,1)^\top$ 方向を $3$ 倍に，$(2,1)^\top$ 方向を $-2$ 倍（拡大かつ反転）にする線形変換とみなせる。固有ベクトルの方向にそって座標軸を取り直すと（$P$ による基底の取り替え），$A$ は単なる軸ごとのスケーリング $\mathrm{diag}(3,-2)$ に見える——これが対角化の本質的な意味。$n$ を大きくするほど $|\lambda|$ が大きい固有値（$\lambda=3$ 方向）の影響が指数的に支配的になる，という定性的な観察も対角化から直接読み取れる。</p>
+      <p><strong>一般化：</strong>「固有値・固有ベクトルで対角化 → 冪や指数を計算」という手順は，2項間の連立線形漸化式（フィボナッチ数列の行列表現 $\begin{pmatrix}a_{n+1}\\a_n\end{pmatrix}=A\begin{pmatrix}a_n\\a_{n-1}\end{pmatrix}$ が典型例）や，線形微分方程式系 $\dot{\mathbf{x}}=A\mathbf{x}$ の解 $\mathbf{x}(t)=e^{At}\mathbf{x}(0)$ を求める際の標準的テクニックであり，この問題はその最も基本的な具体例になっている。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">
+    <span class="problem-num">4</span> $\mathrm{Hom}(V,W)$ のベクトル空間構造と同型
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$V$，$W$ を $\mathbb{R}$-ベクトル空間とする。</p>
+      <ol>
+        <li>$\mathrm{Hom}(V,W) := \{f : V \to W \mid f \text{ は線形写像}\}$ に，加法とスカラー倍を
+          $$(f+g)(v) := f(v)+g(v),\qquad (af)(v) := a\cdot f(v)$$
+          $（f,g\in\mathrm{Hom}(V,W),\;a\in\mathbb{R},\;v\in V）$ で定める。これにより $\mathrm{Hom}(V,W)$ は $\mathbb{R}$-ベクトル空間になることを示せ。</li>
+        <li>$V = \mathbb{R}$ のとき，写像 $\varphi \colon \mathrm{Hom}(\mathbb{R},W) \to W;\; f \mapsto f(1)$ は同型な線形写像であることを示せ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1) — $\mathrm{Hom}(V,W)$ がベクトル空間</div>
+      <p>ベクトル空間の公理（閉鎖性・零元・逆元・スカラー倍の規則）を順に確認する。</p>
+      <p><strong>Step 1：演算が $\mathrm{Hom}(V,W)$ に閉じる（$f+g$，$af$ が線形写像）。</strong></p>
+      <p>$f+g$ が線形：$a,b\in\mathbb{R}$，$v,w\in V$ に対し</p>
+      $$(f+g)(av+bw) = f(av+bw)+g(av+bw) = af(v)+bf(w)+ag(v)+bg(w) = a(f+g)(v)+b(f+g)(w)$$
+      <p>$af$ が線形：$(af)(bv+cw) = a\cdot f(bv+cw) = a(bf(v)+cf(w)) = b(af)(v)+c(af)(w)$</p>
+      <p><strong>Step 2：零元（零写像 $\mathbf{0}: v \mapsto 0_W$）の存在。</strong></p>
+      <p>$\mathbf{0}$ は線形（$\mathbf{0}(av+bw)=0=a\cdot 0+b\cdot 0$）かつ $(f+\mathbf{0})(v)=f(v)+0=f(v)$。</p>
+      <p><strong>Step 3：逆元（$-f: v\mapsto -f(v)$）の存在。</strong></p>
+      <p>$-f$ は線形（$(-f)$ は $(-1)f$ に同じ）かつ $(f+(-f))(v)=f(v)-f(v)=0=\mathbf{0}(v)$。</p>
+      <p><strong>Step 4：残りの公理（加法の交換・結合，スカラー倍の規則）は $W$ での等式から直接従う。</strong></p>
+      <p>例：$(f+g)(v) = f(v)+g(v) = g(v)+f(v) = (g+f)(v)$ （$W$ での加法の交換則を使用）。</p>
+      <p>以上より $\mathrm{Hom}(V,W)$ は $\mathbb{R}$-ベクトル空間である。$\blacksquare$</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2) — $\varphi: \mathrm{Hom}(\mathbb{R},W)\to W$ は同型</div>
+      <p>同型 ⟺ 線形 かつ 全単射，を示す。</p>
+      <p><strong>線形性：</strong></p>
+      $$\varphi(af+bg) = (af+bg)(1) = af(1)+bg(1) = a\varphi(f)+b\varphi(g)$$
+      <p><strong>単射（$\ker\varphi = \{\mathbf{0}\}$）：</strong></p>
+      <p>$\varphi(f)=0_W$，すなわち $f(1)=0_W$ とする。任意の $x\in\mathbb{R}$ に対し，$f$ の線形性より</p>
+      $$f(x) = f(x\cdot 1) = x\cdot f(1) = x\cdot 0_W = 0_W$$
+      <p>よって $f = \mathbf{0}$。ゆえに $\ker\varphi = \{\mathbf{0}\}$，$\varphi$ は単射。</p>
+      <p><strong>全射：</strong></p>
+      <p>任意の $w\in W$ に対し，$f_w\colon \mathbb{R}\to W;\; x\mapsto xw$ を定める。</p>
+      <p>$f_w$ は線形（$f_w(ax+by) = (ax+by)w = a(xw)+b(yw) = af_w(x)+bf_w(y)$）かつ $\varphi(f_w)=f_w(1)=w$。よって $\varphi$ は全射。</p>
+      <p>以上より $\varphi$ は同型な線形写像（$\mathbb{R}$-ベクトル空間の同型）である。$\blacksquare$</p>
+      <p style="color:#166534;font-size:0.88rem;font-family:var(--font-sans);">※ この同型は $\mathrm{Hom}(\mathbb{R},W)\cong W$ を示す。直感的には「$\mathbb{R}\to W$ の線形写像は $f(1)\in W$ で完全に決まる」ということ。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p><strong>(1) ベクトル空間の公理確認の戦略：</strong>「各演算が閉じているか」と「公理の各項目が成り立つか」を分けて考える。閉鎖性（$f+g,af\in\mathrm{Hom}$）は証明が必要。残りの公理は $W$ での性質を「点ごと（pointwise）に」引き継ぐだけなので比較的簡単。</p>
+      <p><strong>近道に気づけるか：$\mathrm{Hom}(V,W)$ は「関数空間の部分空間」である。</strong>すべての写像（線形とは限らない）$V\to W$ の集合を $\mathrm{Map}(V,W):=W^V$ と書くと，pointwise な加法・スカラー倍によって自然にベクトル空間になる（$W$ が持つ公理が点ごとにそのまま引き継がれるから，これは標準的な事実として認めてよい）。$\mathrm{Hom}(V,W)$ はこの $\mathrm{Map}(V,W)$ の部分集合で，零写像を含み，加法・スカラー倍について閉じている（解答の Step 1 がまさにこれ）。<strong>部分空間の判定法（零ベクトルを含み，加法とスカラー倍に関して閉じていれば部分空間，よってそれ自身ベクトル空間）</strong>を使えば，8つの公理を1つずつ律儀に確認する代わりに「閉鎖性さえ示せば十分」というショートカットに気づける。解答はより丁寧に全公理を辿っているが，本質的に示していることは同じ——<strong>実際に手を動かして確かめる必要があるのは閉鎖性（$f+g$，$af$ が線形写像であること）だけで，交換則・結合則・零元・逆元は $W$ の対応する性質からほぼ自動的に従う</strong>，という構造を見抜くのがこの問題の急所。</p>
+      <p><strong>よくある間違い：</strong>$\mathrm{Hom}(V,W)$ の零元を「数値の $0$」だと誤解してしまうケース。ここでの零元は零写像 $\mathbf{0}\colon v\mapsto 0_W$（$V$ の任意の元を $W$ の零ベクトルに送る<em>写像</em>）であり，$\mathrm{Hom}(V,W)$ の元はあくまで「$V\to W$ の関数」であって $W$ の元そのものではない，という点を混同しないこと。</p>
+      <p><strong>(2) 同型を示すには線形性・単射性・全射性の3つを示す。</strong>単射性を示すとき「$\varphi(f)=0 \Rightarrow f=\mathbf{0}$（零写像）」を示すのが定石（$\ker\varphi$ を調べる）。線形写像の単射性は $\varphi(f)-\varphi(g)=\varphi(f-g)$ という性質から必ず核だけで判定できるので，$\varphi(f)=\varphi(g)\Rightarrow f=g$ を直接示そうとして計算を煩雑にするより，核を調べる方が近道になる——「単射性を問われたら核を見る」という定石そのもののパターン認識。全射性では，$w\in W$ が与えられたとき「原像になる元を具体的に構成」するのが素直な方針。$V=\mathbb{R}$ のとき線形写像は $x\mapsto xw$ の形に書ける，という事実がそのまま全射の証明になる。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 全射性の証明はどこから $f_w(x)=xw$ を思いつくか</div>
+        <p>全射を示すには「$w\in W$ を与えられたとき，$\varphi(f)=f(1)=w$ を満たす $f\in\mathrm{Hom}(\mathbb{R},W)$ を1つ構成する」必要がある。ここで逆算する：$f$ は線形写像 $\mathbb{R}\to W$ なので，$f(1)=w$ が決まれば，任意の $x\in\mathbb{R}$ について $f(x)=f(x\cdot 1)=x\cdot f(1)=xw$ が線形性から自動的に決まってしまう（これは単射性の証明で使った等式 $f(x)=xf(1)$ と全く同じもの）。つまり「$f(1)=w$ を満たす線形写像」は存在するなら $f_w(x):=xw$ という形以外にありえない——だから答案では「候補を1つ挙げる」のではなく「唯一あり得る候補」を書けばよいと分かる。あとはこの $f_w$ が本当に線形であることを確認するだけで証明が完成する。</p>
+        <p>この観察は，単射性の証明（$f(1)=0\Rightarrow f\equiv0$）と全射性の証明（$f(1)=w$ となる $f$ は $f_w(x)=xw$ のみ）が<strong>同じ等式 $f(x)=xf(1)$ から同時に出てくる</strong>ことを示している。つまり $\varphi$ が全単射である理由は，本質的に「$\mathbb{R}\to W$ の線形写像は $f(1)$ の値だけで完全に決まる」という1つの事実に集約される。</p>
+      </div>
+      <div class="backward-think">
+        <div class="bt-title">🔄 一般化：$\mathrm{Hom}(\mathbb{R}^n,W)\cong W^n$ と，問1のテクニックとのつながり</div>
+        <p>同じ議論を $V=\mathbb{R}^n$ に一般化すると，標準基底 $\mathbf{e}_1,\ldots,\mathbf{e}_n$ を使って $\Phi\colon\mathrm{Hom}(\mathbb{R}^n,W)\to W^n;\ f\mapsto(f(\mathbf{e}_1),\ldots,f(\mathbf{e}_n))$ が同型になることが，全く同じ論法（線形性による値の一意な拡張，任意の像タプルに対する $f(x_1,\ldots,x_n)=\sum x_i f(\mathbf{e}_i)$ という具体的構成）で示せる。これはまさに<strong>問1</strong>で使った「線形写像は基底の像だけで完全に決まる」という事実（$f(2,1)^\top$ と $f(1,-2)^\top$ の2つの値だけから $f$ 全体，つまり表現行列 $A$ が一意に決まった）の抽象版になっている。</p>
+        <p>次元に注目すると，一般に（有限次元のとき）$\dim\mathrm{Hom}(V,W)=(\dim V)(\dim W)$ という公式が成り立つ。今回の $V=\mathbb{R}$（$\dim V=1$）の場合は $\dim\mathrm{Hom}(\mathbb{R},W)=1\times\dim W=\dim W$ となり，「同型な空間同士は次元が等しい」という必要条件と $\mathrm{Hom}(\mathbb{R},W)\cong W$ の結論がきちんと整合している。</p>
+      </div>
+      <p><strong>誤解しやすい点：</strong>「$\varphi$ が全単射だから同型」と考えて線形性の確認を省略してしまうミスに注意。ベクトル空間の<em>同型</em>とは「全単射な<em>線形</em>写像」のことであり，単なる集合としての全単射（1対1対応があるだけ）では不十分——線形性を保つことまで確認してはじめて，$\mathrm{Hom}(\mathbb{R},W)$ と $W$ が「ベクトル空間として同じ構造を持つ」ことが言える。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dcfce7; color:#166534;">📋 小テスト自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>小テストの問題を自力で解けるかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li><strong>問1：</strong>2つの入出力ペアから「$A \cdot P = Q$，$A = QP^{-1}$」という行列方程式を立てられるか</li>
+          <li><strong>問1：</strong>$\det A = 0$ を確認した後，$\ker(f)$ の基底を $Av=0$ の方程式1本で求められるか</li>
+          <li><strong>問1：</strong>次元定理 $\dim\ker + \dim\mathrm{Im} = 2$ を使って Im の次元を確認できるか</li>
+          <li><strong>問2(1)：</strong>$\det(A^n) = (\det A)^n = 1$ から $n$ 奇数なら $\det A = 1$ を導けるか</li>
+          <li><strong>問2(1)：</strong>$\det A = 1$ の直交行列は回転行列のみ，という分類定理を使えるか</li>
+          <li><strong>問2(2)：</strong>鏡映行列 $S(\alpha)^2 = E$ という対合性を，$n$ の偶奇で場合分けして使えるか</li>
+          <li><strong>問3：</strong>$\mathrm{tr}\,A$ と $\det A$ から特性方程式 $\lambda^2 - (\mathrm{tr})\ \lambda + (\det) = 0$ を書き，Vieta で固有値を速く求められるか</li>
+          <li><strong>問3：</strong>$A^n = P\Lambda^n P^{-1}$ の公式と，$P$ の形（固有ベクトルを列に並べる）を理解しているか</li>
+          <li><strong>問4(1)：</strong>$\mathrm{Hom}(V,W)$ が部分空間でなく新しい空間であるため，8公理すべての確認が必要な点を意識しているか</li>
+          <li><strong>問4(2)：</strong>$\varphi(f) = f(1)$ の単射性で「$f(1) = 0_W \Rightarrow f(x) = xf(1) = 0$ for all $x$」という線形性の使い方ができるか</li>
+          <li><strong>問4(2)：</strong>全射性で「任意の $w \in W$ に対し $f_w(x) = xw$ という原像を具体的に構成」できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

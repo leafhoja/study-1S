@@ -1,0 +1,339 @@
+<!DOCTYPE html><!-- 「微分積分 第2回 上界・下限とWeierstrass定理 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>微分積分 第2回 上界・下限とWeierstrass定理 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="calc_01.html" data-page="calculus/calc_01">← 前の回</a>
+      <a href="calc_03.html" data-page="calculus/calc_03">次の回 →</a>
+    </div>
+  </div>
+</nav>
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-calc">
+  <h1>微分積分学演習　第2回</h1>
+  <p class="subtitle">上界・下限・Weierstrass定理・単調収束・はさみうち</p>
+</div>
+
+<div class="container">
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 この回のテーマ</div>
+  <div class="section-card-body">
+    <p>実数の「完備性」に関わる性質を学ぶ。特に <strong>Weierstrass の定理（上に有界な単調増加数列は収束する）</strong> と，それを支える <strong>上限（supremum）・下限（infimum）</strong> の概念が中心テーマだ。</p>
+    <div class="def-box">
+      <div class="def-title">定義：上界・上限（sup）・下限（inf）</div>
+      <p>集合 $A \subset \mathbb{R}$ に対し：</p>
+      <ul>
+        <li><strong>上界：</strong>$b$ が $A$ の上界 $\Leftrightarrow$ 任意の $a \in A$ に対して $b \ge a$</li>
+        <li><strong>上限（supremum）：</strong>$A$ の上界の集合の <em>最小元</em>。$\sup A$ と書く。「最小の上界」</li>
+        <li>$\sup A$ の特徴付け：$\sup A = \alpha \Leftrightarrow$（i）任意の $a \in A$ に対して $\alpha \ge a$，かつ（ii）任意の $\varepsilon > 0$ に対して $\alpha - \varepsilon < a$ を満たす $a \in A$ が存在する</li>
+        <li>下限・下界も同様に定義（向きを逆に）</li>
+      </ul>
+    </div>
+    <div class="thm-box">
+      <div class="thm-title">定理（実数の連続性・Weierstrass の定理）</div>
+      <p>上に有界な（空でない）実数の部分集合は上限を持つ。</p>
+      <p>系：上に有界な単調増加数列は収束し，その極限は数列の上限である。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 問題1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">1</span> 具体的な集合の上限・下限
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>次の $\mathbb{R}$ の部分集合に対し，その上限や下限が存在すればそれを求めよ．</p>
+      <ol>
+        <li>$[0,1] := \{a \in \mathbb{R} \mid 0 \leq a \leq 1\}$</li>
+        <li>$(0,1) := \{a \in \mathbb{R} \mid 0 < a < 1\}$</li>
+        <li>$\{a \in \mathbb{Q} \mid a \leq \sqrt{2}\}$</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+
+      <p><strong>(1) $[0,1]$ の上限は 1，下限は 0</strong></p>
+      <p>$B = [0,1]$ の上界全体の集合を $U \subset \mathbb{R}$ とおく。</p>
+      <p><strong>$U \subset \{b \ge 1\}$ を示す：</strong>
+        $U$ の任意の元 $b$ を取る。上界の定義より，任意の $a \in [0,1]$ に対して $b \ge a$。特に $a = 1$ とすると $b \ge 1$。よって $U \subset \{b \in \mathbb{R} \mid b \ge 1\}$。
+      </p>
+      <p><strong>$\{b \ge 1\} \subset U$ を示す：</strong>
+        任意の実数 $b \ge 1$ を取る。任意の $a \in [0,1]$ に対して $b \ge 1 \ge a$ だから $b$ は $B$ の上界。よって $b \in U$。
+      </p>
+      <p>よって $U = \{b \ge 1\}$。$1$ はこの集合の最小元だから $\sup[0,1] = 1$。下限も同様に $\inf[0,1] = 0$。</p>
+
+      <p><strong>(2) $(0,1)$ の上限は 1（開区間だが $1 \notin (0,1)$）</strong></p>
+      <p>$(0,1)$ の上界全体の集合を $U$ とおく。$(0,1)$ の上界は $1$ 以上の数のみであることを示す。</p>
+      <p>$b < 1$ を仮定する。$b$ が $(0,1)$ の上界でないことを示す。実数の稠密性より $b < c < 1$ を満たす実数 $c$ が存在し，$c \in (0,1)$（$b$ が正なら $b < c$，$b \le 0$ なら $c = 1/2$ など）かつ $c > b$。よって $b$ は $(0,1)$ の上界でない。</p>
+      <p>逆に任意の $b \ge 1$ は $(0,1)$ の上界（任意の $a \in (0,1)$ に対して $b \ge 1 > a$）。</p>
+      <p>よって $U = \{b \ge 1\}$ で $\sup(0,1) = 1$。$\inf(0,1) = 0$ も同様。</p>
+
+      <p><strong>(3) $A = \{a \in \mathbb{Q} \mid a \le \sqrt{2}\}$ の上限は $\sqrt{2}$</strong></p>
+      <p>$\sqrt{2}$ が $A$ の上界であることは定義より明らか（$a \le \sqrt{2}$ が条件だから）。</p>
+      <p>$b < \sqrt{2}$ を仮定する。有理数の稠密性より $b < q < \sqrt{2}$ を満たす有理数 $q$ が存在する。$q \in A$ かつ $q > b$ だから $b$ は $A$ の上界でない。よって $\sup A = \sqrt{2}$。</p>
+      <p>下限が存在しない（$\inf A = -\infty$）理由：任意の実数 $b$ に対し，$n > -b$ を満たす自然数 $n$ をとると $-n < b$ かつ $-n \le 0 < \sqrt{2}$ より $-n \in A$。よって $b$ は $A$ の下界でない。$b$ は任意だったから $A$ に下界は存在しない。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p>上限の証明は必ず2段階の構造を持つ。この形を覚えてしまえば，どの集合についても機械的に適用できる。</p>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 上限の証明の2段階構造</div>
+        <p>上限 $\alpha$ を証明するには：</p>
+        <ol>
+          <li><strong>$\alpha$ が上界であること：</strong>集合の全ての元が $\alpha$ 以下であること</li>
+          <li><strong>$\alpha$ が最小の上界であること：</strong>任意の $b < \alpha$ に対して $b$ は上界でないこと（つまり $b < a \le \alpha$ を満たす $a$ が集合に存在する）</li>
+        </ol>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 $[0,1]$ と $(0,1)$ の違い</div>
+        <p>上限は同じ $1$ だが：$1 \in [0,1]$（最大値が存在）vs. $1 \notin (0,1)$（最大値が存在しない）。</p>
+        <p>sup は集合の元でなくてもよい。「いくらでも $1$ に近い元がある」という意味だ。</p>
+      </div>
+
+      <p>(3) は有理数の集合だが，上限は無理数 $\sqrt{2}$ になる。このことが「有理数は完備でない（$\mathbb{Q}$ では実数の連続性が成立しない）」ことを示している。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">2</span> 収束する数列は有界
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>収束する数列 $\{a_n\}_n$ は有界であることを示せ．</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$\{a_n\}$ の極限を $\alpha$ とおく。$\varepsilon$-$N$ 論法の定義に $\varepsilon = 1 > 0$ を代入する。すると正整数 $N$ があって，任意の正整数 $n$ に対して $n \ge N$ ならば $|a_n - \alpha| \le 1$ となる。</p>
+      <p>とくに $n \ge N$ ならば $a_n \le \alpha + 1$。</p>
+      <p>$A$ を $a_1, a_2, \ldots$ からなる $\mathbb{R}$ の部分集合とし，$M = \max\{a_1, a_2, \ldots, a_{N-1}, \alpha + 1\}$ とおく。$M$ は有限集合の最大値として存在する。この $M$ は $b = M$ が任意の $n = 1, 2, \ldots$ に対して $b \ge a_n$ を満たすので，$A$ の上界。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 考え方：$\varepsilon = 1$ を使う</div>
+        <p>収束数列 $a_n \to \alpha$ に $\varepsilon = 1$ を代入すると，ある $N$ があって $n \ge N$ では $|a_n - \alpha| < 1$，すなわち $a_n < \alpha + 1$。</p>
+        <p>$n < N$ の項（有限個）については単純に $a_1, \ldots, a_{N-1}$ の最大値を取る。</p>
+        <p>$M = \max\{a_1, \ldots, a_{N-1}, \alpha + 1\}$ とすれば任意の $n$ で $a_n \le M$。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 なぜ $\varepsilon = 1$ でよいのか</div>
+        <p>有界性を示すだけなら「定数以内に収まる」ことを示せばよい。その「定数」は何でもよく，1 が最もシンプル。$\varepsilon = 0.001$ でも $\varepsilon = 100$ でも有界性の証明には使える。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">3</span> 単調増加かつ上に有界 → 収束（Weierstrass の定理の応用）
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>数列 $\{a_n\}_n$ は上に有界であり，任意の $n$ に対し $a_n \leq a_{n+1}$ を満たすとする．このとき，$\{a_n\}_n$ は収束することを示せ．</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$\{a_n\}$ が上に有界だから，Weierstrass の定理より上限 $\alpha = \sup\{a_n \mid n = 1,2,\ldots\}$ が存在する。</p>
+      <p>任意の $\varepsilon > 0$ をとる。$\alpha - \varepsilon$ は $\alpha$ より小さいから上限の定義より（$\alpha - \varepsilon$ は上界でない），ある正整数 $N$ が存在して $a_N > \alpha - \varepsilon$。</p>
+      <p>$n \ge N$ に対して，単調増加の仮定より $a_n \ge a_N > \alpha - \varepsilon$。また上限の定義より $a_n \le \alpha$。合わせて</p>
+      $$\alpha - \varepsilon < a_n \le \alpha$$
+      <p>よって $|a_n - \alpha| = \alpha - a_n < \varepsilon$（$a_n \le \alpha$ なので絶対値は不要）。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 なぜ上限に収束するのか</div>
+        <p>直感：$\alpha$ は $a_n$ の「天井」。単調増加しているから $a_n$ はどんどん $\alpha$ に近づいていく。「上限の特徴付け」（任意の $\varepsilon > 0$ に対して $\alpha - \varepsilon < a$ を満たす $a$ が存在する）を使えばよい。</p>
+      </div>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 逆算：$|a_n - \alpha| < \varepsilon$ をどう示すか</div>
+        <p>$\alpha$ は上限だから $a_n \le \alpha$ は自動（①）。あとは $a_n > \alpha - \varepsilon$ を示せばよい（②）。</p>
+        <p>上限の性質より，ある $N$ があって $a_N > \alpha - \varepsilon$。$n \ge N$ かつ $a_n$ が単調増加だから $a_n \ge a_N > \alpha - \varepsilon$。</p>
+        <p>①②合わせて $\alpha - \varepsilon < a_n \le \alpha < \alpha + \varepsilon$，すなわち $|a_n - \alpha| < \varepsilon$。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 等号と不等号について</div>
+        <p>ε-N 論法の定義は $|a_n - \alpha| < \varepsilon$（<strong>狭不等号</strong>）だが，証明中では $|a_n - \alpha| \le \varepsilon$ も許容される場合がある（「$< \varepsilon$ ならば $\le \varepsilon$」は自明）。より一般に，$\varepsilon$ を $2\varepsilon$ や $\varepsilon/2$ などに置き換えた形でも「任意の $\varepsilon > 0$」に対して成立する。本質は「任意のεに対して…」の部分にある。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">4</span> 上極限・下極限と収束の特徴付け
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>有界な数列 $\{a_n\}_n$ に対し，新たな数列 $\{b_n\}_n$，$\{c_n\}_n$ をそれぞれ
+      $b_n := \sup\{a_m \mid m \ge n\}$，$c_n := \inf\{a_m \mid m \ge n\}$ と定義する。</p>
+      <ol>
+        <li>数列 $\{b_n\}_n$，$\{c_n\}_n$ は収束することを示せ。この極限値は
+          $$\limsup_{n\to\infty} a_n := \lim_{n\to\infty} b_n, \quad \liminf_{n\to\infty} a_n := \lim_{n\to\infty} c_n$$
+          と表記し，それぞれ $\{a_n\}_n$ の<strong>上極限</strong>，<strong>下極限</strong>という。
+        </li>
+        <li>$\{a_n\}_n$ が収束することは $\limsup_{n\to\infty} a_n = \liminf_{n\to\infty} a_n$ と同値であることを示せ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+
+      <div class="proof-box" style="background:#f8fafc; border-left:3px solid #94a3b8; padding:0.75rem 1.25rem; margin:0.75rem 0; border-radius:0 6px 6px 0;">
+        <strong>証明 (1)：$\{b_n\}$ の収束</strong>
+        <p>$\{a_n\}$ は有界だから，上限の定義より $b_n = \sup\{a_m \mid m \ge n\}$ は実数として存在する（Weierstrass の定理）。</p>
+        <p><strong>$\{b_n\}$ は単調減少：</strong>$m \ge n+1$ ならば $m \ge n$ なので $\{a_m \mid m \ge n+1\} \subset \{a_m \mid m \ge n\}$。</p>
+        <p style="margin-left:1rem; color:#374151; font-size:0.93em;">
+          <strong>なぜ上限が小さくなるか：</strong>集合 $S \subset T$ のとき $\sup S \le \sup T$。理由：$T$ の上界はすべて $S$ の上界でもある（$S \subset T$ なので）。よって $S$ の上界全体は $T$ の上界全体を含む。最小の上界（上限）を比べると $\sup S \le \sup T$。今回は $S = \{a_m \mid m \ge n+1\}$，$T = \{a_m \mid m \ge n\}$ で $S \subset T$ だから $b_{n+1} = \sup S \le \sup T = b_n$。
+        </p>
+        <p><strong>$\{b_n\}$ は下に有界：</strong>$\{a_n\}$ が有界だから下界 $m$ が存在し，$b_n = \sup\{a_m \mid m \ge n\} \ge a_n \ge m$。</p>
+        <p>よって $\{b_n\}$ は単調減少かつ下に有界だから，問題3の系（Weierstrass の定理）より収束する。$\{c_n\}$ については逆向きの議論（単調増加かつ上に有界）で同様。</p>
+      </div>
+
+      <div class="proof-box" style="background:#f8fafc; border-left:3px solid #94a3b8; padding:0.75rem 1.25rem; margin:0.75rem 0; border-radius:0 6px 6px 0;">
+        <strong>証明 (2)：収束 $\Leftrightarrow$ 上極限 $=$ 下極限</strong>
+        <p>任意の $n$ について $c_n \le a_n \le b_n$（inf $\le$ 元 $\le$ sup）が成立することに注意する。</p>
+        <p><strong>（$\Rightarrow$）$\{a_n\}$ が $\alpha$ に収束するならば $\limsup a_n = \liminf a_n = \alpha$：</strong></p>
+        <p>任意の $\varepsilon > 0$ をとる。$\lim a_n = \alpha$ より，ある $N$ があって $n \ge N \Rightarrow |a_n - \alpha| < \varepsilon$，すなわち $\alpha - \varepsilon < a_n < \alpha + \varepsilon$。</p>
+        <p>$n \ge N$ のとき，任意の $m \ge n$ について $m \ge n \ge N$ だから $|a_m - \alpha| < \varepsilon$，すなわち $a_m \in (\alpha-\varepsilon, \alpha+\varepsilon)$。</p>
+        <p style="margin-left:1rem; color:#374151; font-size:0.93em;"><strong>つまり：</strong>$\{a_m \mid m \ge n\} \subset (\alpha-\varepsilon, \alpha+\varepsilon)$（集合全体が $\varepsilon$-近傍に収まる）。</p>
+        <p>したがって $b_n = \sup\{a_m \mid m \ge n\} \le \alpha+\varepsilon$，$c_n = \inf\{a_m \mid m \ge n\} \ge \alpha-\varepsilon$。
+        よって $|b_n - \alpha| \le \varepsilon$，$|c_n - \alpha| \le \varepsilon$。$\limsup a_n = \liminf a_n = \alpha$。</p>
+        <p><strong>（$\Leftarrow$）$\limsup a_n = \liminf a_n = \alpha$ ならば $\lim a_n = \alpha$：</strong></p>
+        <p>任意の $\varepsilon > 0$ をとる。$\lim b_n = \lim c_n = \alpha$ より，ある $N$ があって $n \ge N \Rightarrow |b_n - \alpha| < \varepsilon$ かつ $|c_n - \alpha| < \varepsilon$，すなわち $\alpha - \varepsilon < c_n \le a_n \le b_n < \alpha + \varepsilon$。よって $|a_n - \alpha| < \varepsilon$。$\lim a_n = \alpha$。</p>
+      </div>
+    </div>
+
+    <div class="warn-box">
+      <div class="warn-title">⚠ $\{b_n\}$ は単調減少であり，問3の定理（単調増加＆有界→収束）を直接は使えない</div>
+      <p>問題3で示した「単調増加で上に有界 → 収束」という定理を $\{b_n\}$ に直接適用しようとすると，$\{b_n\}$ は単調<strong>減少</strong>なので型が合わない。正しい対応は「$\{-b_n\}$ は単調増加で上に有界（$-b_n \ge -M$）だから問3より収束する。よって $\{b_n\}$ も収束する」という議論，またはそもそも「単調減少で下に有界 → 収束」という定理を定式化して使う。</p>
+      <p>模範解答でも "Weierstrass の定理" と書いているが，これは「単調 & 有界 → 収束」の両方向を含む定理として述べている点に注意。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 $b_n$，$c_n$ の意味と単調性</div>
+        <p>$b_n = \sup\{a_m \mid m \ge n\}$ は「$n$ 番目以降の $a_m$ の最大値」。$n$ が大きくなると対象集合が小さくなる（より多くの項が除外される）ので，上限は小さくなる：$b_n$ は単調<strong>減少</strong>。</p>
+        <p>$c_n = \inf\{a_m \mid m \ge n\}$ は「$n$ 番目以降の最小値」。$n$ が大きくなると下限は大きくなる：$c_n$ は単調<strong>増加</strong>。</p>
+        <p>常に $c_n \le a_n \le b_n$ が成立する（$a_n$ 自身が集合に含まれるため）。特に $c_n \le b_n$ で，$n \to \infty$ のとき $b_n, c_n$ の極限が等しければ $a_n$ がはさみうちされる。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 常に $c_n \le a_n \le b_n$</div>
+        <p>$b_n = \sup\{a_m \mid m \ge n\} \ge a_n$（$a_n$ 自身が集合に含まれる），$c_n = \inf\{a_m \mid m \ge n\} \le a_n$。これにより $c_n \le a_n \le b_n$ が常に成立する。(2) の「$\Leftarrow$」方向ではこの不等式が本質的に機能する。</p>
+      </div>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 (2) の証明の構造</div>
+        <p>「$\limsup = \liminf$」の条件を使って $a_n$ をはさみうちする。$c_n \le a_n \le b_n$ かつ $b_n, c_n$ が同じ極限 $\alpha$ に収束するから，はさみうちの原理で $a_n \to \alpha$。</p>
+        <p>逆向きは「$a_n$ が収束するなら $b_n$ と $c_n$ も同じ極限に収束する」という直感を $\varepsilon$ の言葉で書き下す。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第2回を理解できているかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$\sup A$ の定義を「上界の最小値」として正確に言えるか。$\sup$ と max の違いは？</li>
+          <li>$[0,1]$ と $(0,1)$ の $\inf$ がともに 0 だが一方には最小値があり他方にないことを説明できるか</li>
+          <li>$\sup\{a \in \mathbb{Q} \mid a \le \sqrt{2}\} = \sqrt{2}$（有理数でないことに注意）を，$\sup$ の定義から証明できるか</li>
+          <li>収束数列が有界であることの証明で，$\varepsilon = 1$ として $M = \max(|a_1|,\ldots,|a_N|,|\alpha|+1)$ という上界を構成できるか</li>
+          <li>単調増加＆有界な数列の収束の証明で「上限 $\alpha$ より小さい値は上界でない → $a_N > \alpha - \varepsilon$ となる $N$ が存在」という論法を使えるか</li>
+          <li>$\{b_n\}$（$b_n = \sup_{m \ge n} a_m$）が単調<strong>減少</strong>であることを，集合の包含 $\{a_m | m\ge n+1\} \subset \{a_m | m \ge n\}$ から導けるか</li>
+          <li>$\limsup a_n = \liminf a_n = \alpha$ から $\lim a_n = \alpha$ を，$c_n \le a_n \le b_n$ のはさみうちで示せるか</li>
+          <li>「$\lim a_n$ が存在する $\Rightarrow$ $\limsup = \liminf$」の方向で，$\varepsilon$-近傍が $b_n$ と $c_n$ を $\alpha$ に近づける議論を追えるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- まとめ -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📌 第2回のまとめ</div>
+  <div class="section-card-body">
+    <ul>
+      <li><strong>sup の証明：</strong>「$\alpha$ が上界」＋「$\alpha$ より小さい数は上界でない」の2段構え</li>
+      <li><strong>Weierstrass：</strong>実数の連続性の本質。$\mathbb{Q}$ では成立しない</li>
+      <li><strong>有界性の証明：</strong>$\varepsilon = 1$ を代入して $M = 1 + |\alpha|$ を確保</li>
+      <li><strong>単調収束：</strong>上限 $\alpha$ に収束する証明は「$\alpha - \varepsilon < a_N$」という上限の特徴付けを使う</li>
+      <li><strong>上極限・下極限：</strong>$b_n = \sup_{m \ge n} a_m$ は単調減少，$c_n = \inf_{m \ge n} a_m$ は単調増加。$\limsup a_n = \liminf a_n \Leftrightarrow \{a_n\}$ が収束</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

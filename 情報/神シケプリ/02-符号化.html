@@ -1,0 +1,208 @@
+<!DOCTYPE html><!-- 「02 符号化 | 神シケプリ | 情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>02 符号化 | 神シケプリ | 情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kami-02">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">神シケプリ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>神シケプリ 02 — 符号化</h1>
+  <p class="subtitle">2進符号・グレイ符号・文字コードと、平均符号長・情報源符号化定理</p>
+  <p class="meta">教科書対応箇所 pp.57-59　pp.70-71</p>
+</div>
+
+<div class="container">
+
+  <div class="def">
+    <span class="box-label">定義 — 2進符号とグレイ符号</span>
+    <p>
+      整数などの情報をビット列（0と1の並び）に対応づけることを<strong>符号化</strong>という。
+      最も単純なのは2進数表現そのものを符号として使う<strong>2進符号</strong>だが、これは隣り合う数
+      （例：3と4）でもビット列が大きく変わることがある（$011 \to 100$ は3ビットとも変化する）。
+    </p>
+    <p>
+      これに対し、隣り合う数の符号語が必ず1ビットしか違わない（ハミング距離が1になる）ように
+      工夫した符号を<strong>グレイ符号</strong>という。位置や角度をアナログな回転部品などで読み取る
+      機器では、境目でビットが同時に複数変化すると誤読が起こりやすいため、グレイ符号のように
+      「近い値は近い符号になる」設計が実用上重要になる。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — 文字コード</span>
+    <p>
+      文字をビット列に対応づける規則を<strong>文字コード</strong>という。英数字だけなら
+      <strong>ASCII</strong>（7bit・128通りで表現）で足りるが、日本語のようにひらがな・カタカナ・
+      漢字を含む文字集合を表すには1バイト（8bit）では足りず、JIS・シフトJIS・EUC-JPなど
+      16bit系の符号化方式が使われてきた。
+    </p>
+    <p>
+      現在は世界中の文字をひとつの体系にまとめた<strong>Unicode</strong>と、それを実際のビット列に
+      落とし込む<strong>UTF-8</strong>・<strong>UTF-16</strong>などの符号化方式によって、文字コードの
+      違いによる文字化けを避けつつ多言語を統一的に扱えるようになっている。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — 符号化と圧縮</span>
+    <p>
+      データを符号化する際、元のデータより短いビット列に変換することを<strong>圧縮</strong>という。
+      圧縮後のデータから元のデータを完全に復元できるものを<strong>可逆圧縮</strong>（例：PNG）、
+      一部の情報を犠牲にしてより高い圧縮率を狙うものを<strong>不可逆圧縮</strong>（例：JPEG）という。
+    </p>
+  </div>
+
+  <div class="prop">
+    <span class="box-label">性質 — 平均符号長と情報源符号化定理</span>
+    <p>
+      各文字を固定長ではなく可変長の符号語に対応づける場合、1文字あたりの符号の長さの期待値を
+      <strong>平均符号長</strong>といい、各文字の登場確率を $p_i$、符号化後の長さを $l_i$ として
+    </p>
+    <div class="mathblock">$$(\text{平均符号長}) = \sum_i p_i \times l_i$$</div>
+    <p>
+      で求められる。よく出現する文字には短い符号を、めったに出現しない文字には長い符号を
+      割り当てると、平均符号長を縮めることができる。例えばA〜Dの4文字を2bit固定長で符号化すると
+      平均符号長は常に2だが、出現頻度に応じて可変長にすると平均1.6875のように短くできる場合がある。
+    </p>
+    <p>
+      ただし、どんなに工夫して符号を設計しても、平均符号長は元のデータの<strong>平均情報量
+      （エントロピー）</strong>を下回ることはできない。これを<strong>情報源符号化定理</strong>という。
+    </p>
+  </div>
+
+  <div class="note">
+    <span class="box-label">出題対策のポイント</span>
+    <p>
+      符号化の問題は、結局はビット列同士の対応関係を丁寧に手で追っていけば解けるものが多い。
+      特に「複数の符号語のうち、どれかが別の符号語の先頭部分（接頭辞）と一致していないか」
+      （接頭符号の条件）を意識しておくと、「一意に復号できるか」というタイプの設問を素早く
+      見抜けるようになる。
+    </p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">第1問（2012年度共通問題3問題B）</a>
+  </div>
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">第1問</div><h2>2012年度共通問題3問題B — 棒への印による符号化</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          長さ1メートルの棒に1つの印をつけると「棒の一端から印までの距離（メートル）」という
+          0から1の範囲の実数を表わすことができる。（どちらの端かは決まっているものとする。）
+          1マイクロメートル（$10^{-6}$ メートル）単位で正確に印を付け、読み取ることができるとき、
+          以下の問いに答えよ。
+        </p>
+        <p>(1) 上のように印を1つつけた棒1本で1からNまでの整数を符号化するとき、最大のNを答えよ。</p>
+        <p>(2) $2^{10} \fallingdotseq 10^3$ と近似するとき、(1)は2進数で何桁の数に相当するか。</p>
+        <p>
+          (3) アルファベット26文字と空白の計27文字の並びを印を1つつけた棒1本で符号化するとき、
+          最大何文字まで必ず表わすことができるか。ただし27文字は等しい確率で出現するものとする。
+          また $\log_2 27 \fallingdotseq 4.75$ としてよい。
+        </p>
+        <p>(4) 複数の印を付けた棒1本で、最大でどれだけの情報を表わすことができるか。10進数1つを符号化する場合の桁数で答えよ。</p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            (1) 1メートルを1マイクロメートル単位で区切ると、区別できる位置はちょうど $10^6$ 通り
+            ある（0μmから999999μmまでの1,000,000通りの位置、あるいは1μmから1,000,000μmの
+            1,000,000通り、と考えてもよい）。したがって1からNまでの整数を過不足なく符号化できる
+            最大のNは $N = 10^6$（100万）。
+          </p>
+          <p>
+            (2) $10^6 = (10^3)^2 \fallingdotseq (2^{10})^2 = 2^{20}$ なので、2進数で約20桁の数に
+            相当する。
+          </p>
+          <p>
+            (3) 27種類の文字が等確率で並ぶ文字列のうち、長さ $L$ の文字列は $27^L$ 通りある。
+            これを棒が表現できる $10^6$ 通り以内に収めるには $27^L \le 10^6$ が必要。両辺
+            $\log_2$ をとると
+          </p>
+          <div class="mathblock">$$L\log_2 27 \le \log_2 10^6 = 6\log_2 10 \fallingdotseq 6\times 3.32 = 19.9 \fallingdotseq 20$$</div>
+          <p>
+            （(1)(2)で求めた20桁と対応している点に注目したい）。よって
+            $L \le \dfrac{19.9}{4.75} \fallingdotseq 4.2$ なので、整数として最大4文字まで必ず
+            表現できる（5文字だと $27^5$ 通りが $10^6$ を超えてしまい、区別できない組み合わせが
+            出てきてしまう）。
+          </p>
+          <p>
+            (4) 棒上の約 $10^6$ 個の位置それぞれについて、「印がある」「印がない」の2通りを
+            選べる。したがって、印の配置の総数は
+          </p>
+          <div class="mathblock">$$2^{10^6}$$</div>
+          <p>
+            通りである。これを10進数の桁数に換算する。$D$ 桁の10進数に相当するとすると、
+          </p>
+          <div class="mathblock">$$D\fallingdotseq\log_{10}\left(2^{10^6}\right)
+            =10^6\log_{10}2$$</div>
+          <p>
+            $\log_{10}2\fallingdotseq0.301$ より、
+          </p>
+          <div class="mathblock">$$D\fallingdotseq10^6\times0.301=301{,}000$$</div>
+          <p>
+            したがって、約30万桁の10進数を符号化できる。厳密に配置総数に対応する最大値の
+            桁数を述べるなら、
+          </p>
+          <div class="mathblock">$$\left\lfloor10^6\log_{10}2\right\rfloor+1
+            =301{,}030$$</div>
+          <p>桁程度である。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) $N=10^6$（100万）　(2) 約20桁　(3) 最大4文字　(4) $2^{10^6}$ 通り＝約30万桁の10進数（最大値は301,030桁程度）。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 印の配置をビット列として数える</span>
+        <p>
+          1マイクロメートルごとの各位置を1bitと考えると、印ありを1、印なしを0として、棒全体は
+          約100万bitのビット列に対応する。印を複数付ける場合、同じ位置に同じ印を重ねても新しい
+          配置にはならないため、「印の個数」ではなく「各位置に印があるかどうか」で数えるのが
+          ポイントである。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="01-情報量.html">← 01 情報量</a>
+    <a href="03-標本化と量子化.html">03 標本化・量子化へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

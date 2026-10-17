@@ -1,0 +1,563 @@
+<!DOCTYPE html><!-- 「第1章 抵抗力と運動方程式 | 力学A 講義ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第1章 抵抗力と運動方程式 | 力学A 講義ノート</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="n1">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A 講義ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="n1.html" data-page="n1" class="active">第1章</a>
+      <a href="n2.html" data-page="n2">第2章</a>
+      <a href="n3.html" data-page="n3">第3章</a>
+      <a href="n4.html" data-page="n4">第4章</a>
+      <a href="n5.html" data-page="n5">第5章</a>
+      <a href="n6.html" data-page="n6">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>第1章　抵抗力と運動方程式</h1>
+  <p class="subtitle">粘性抵抗・慣性抵抗と，定数係数線形微分方程式の解法</p>
+  <p class="meta">講義ノート §3.2 にもとづく</p>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <strong>この章について</strong><br>
+    講義ノートの §3.2「いろいろな運動の運動方程式」を出発点とする。流体中を運動する球体が受ける
+    ２種類の抵抗力（粘性抵抗・慣性抵抗）を導入し，それらを含む運動方程式を実際にいくつか立てる。
+    後半では，力学に繰り返し登場する「定数係数線形微分方程式」の一般論をまとめ，最後に
+    はちみつ中を沈む球の具体的な数値問題を解く。ノートで省略・中断されていた計算（$e^{it}$ の导入など）は
+    本ページで補って説明する。
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#s1">1. 流体中の抵抗力</a>
+    <a href="#s2">2. 運動方程式の具体例</a>
+    <a href="#s3">3. 定数係数線形微分方程式</a>
+    <a href="#s4">4. 例題：はちみつ中のビー玉</a>
+  </div>
+
+  <!-- =================== §1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="s1">
+    <div class="sec-header">
+      <div class="sec-tag">Section 1</div>
+      <h2>流体中の抵抗力</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        半径 $a$ の球体が，速度ベクトル $v$ で流体中を運動しているとする。このとき球体が流体から受ける
+        抵抗力には，性質の異なる２種類がある。
+      </p>
+
+      <h3 id="s1-1">粘性抵抗（viscosity resistance）</h3>
+
+      <div class="def">
+        <span class="box-label">定義 1.1　粘性抵抗</span>
+        $$f_v = 6\pi a \eta\, |v|$$
+        <p>
+          $\eta$ は流体の粘性係数。向きは運動を妨げる向き（$-v$ 方向）。これは<strong>ストークスの法則</strong>
+          として知られる公式である。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 係数 $6\pi$ の由来（次元解析による見積り）</span>
+        <p>
+          ノートには「$f_v \propto \dfrac{v}{a}\times \pi a^2$ だろう」という見積りが書かれている。これは：
+        </p>
+        <ul>
+          <li>粘性による接線応力は，速度勾配のスケール $v/a$（球の近くで速度が $0$ から $v$ 程度まで変化する距離が
+            $a$ 程度）に粘性係数 $\eta$ をかけたもの，すなわち $\eta \cdot v/a$ 程度になる。</li>
+          <li>これに球の断面積 $\pi a^2$ をかければ，力の次元 $[\text{応力}]\times[\text{面積}]$ が得られる。</li>
+        </ul>
+        <p>
+          よって $f_v \sim \eta \dfrac{v}{a}\pi a^2 = \pi a \eta v$ という次元的な見積りが立つ。厳密な流体力学
+          （ナビエ–ストークス方程式を球のまわりの遅い流れ「ストークス流」で解く）によって，比例係数が
+          ちょうど $6$ になることが示される：$f_v = 6\pi a \eta v$。次元解析だけでは係数 $6$ までは出せないが，
+          $a$，$\eta$，$v$ への依存の仕方（$1$乗ずつ）は正しく言い当てている。
+        </p>
+      </div>
+
+      <h3 id="s1-2">慣性抵抗（inertial resistance）</h3>
+
+      <div class="def">
+        <span class="box-label">定義 1.2　慣性抵抗</span>
+        $$f_I = \frac{1}{2}C_D \cdot \pi a^2 \rho_0\, |v|^2$$
+        <p>
+          $\rho_0$ は流体の密度，$C_D$ は無次元の抗力係数（形状で決まる）。速度の<strong>２乗</strong>に比例する点が
+          粘性抵抗と違う。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 慣性抵抗の起源（運動量の受け渡しとして）</span>
+        <p>
+          球が速度 $v$ で流体を「押しのけながら」進むとき，単位時間あたりに球の前方の断面積 $\pi a^2$ を
+          通過する流体の体積は $\pi a^2 v$，その質量は $\pi a^2 v \rho_0$ である。この流体は，球とともに
+          速度 $v$ 程度まで加速される（あるいは球から見て静止していた流体が，球の後方に置き去りにされる）。
+          すなわち，単位時間に球が流体に与える運動量変化（＝流体が球に及ぼす反作用力）のオーダーは：
+        </p>
+        <div class="mathblock">
+          $$\underbrace{\pi a^2 v \rho_0}_{\text{単位時間に押しのける流体の質量}} \cdot \underbrace{\big(-(0-v)\big)}_{\text{速度変化}} = \pi a^2 v^2 \rho_0$$
+        </div>
+        <p>
+          これが慣性抵抗力の大きさのオーダーを与える。厳密な係数 $\frac12 C_D$ は，実際の流れのパターン
+          （どれだけの流体がどの程度加速されるか）に依存し，実験的に決められる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §2 =================== -->
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <div class="sec-tag">Section 2</div>
+      <h2>運動方程式の具体例</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3 id="s2-1">流体中の落下運動（浮力つき）</h3>
+
+      <p>
+        密度 $\rho$，粘性係数 $\eta$ の流体中で，半径 $a$，密度 $\rho_0$ の球が鉛直方向に落下する状況を考える。
+        鉛直上向きに座標 $z$ をとると，球にはたらく力は重力 $mg$（下向き），浮力 $F=\rho\cdot\frac43\pi a^3 g$（上向き），
+        粘性抵抗 $6\pi a \eta \dot z$（運動を妨げる向き）である。
+      </p>
+
+      <h4>粘性抵抗のみの場合</h4>
+      <div class="ex">
+        <span class="box-label">運動方程式</span>
+        $$m\frac{d^2z}{dt^2} = -mg + \frac{4}{3}\pi a^3 \rho_0\, g - 6\pi a \eta \frac{dz}{dt}$$
+        <p>両辺を $m = \frac43\pi a^3\rho_0$ で割ると：</p>
+        $$\ddot z + \frac{6\pi a\eta}{m}\dot z = -g\left(1-\frac{\rho}{\rho_0}\right)$$
+        <p>
+          これは<strong>２階線形非斉次微分方程式</strong>である（$z$ とその微分について１次式であり，
+          右辺に定数項がある）。§3 で一般論を整理したあと，§4 でこの形の方程式を実際に解く。
+        </p>
+      </div>
+
+      <h4>慣性抵抗のみの場合（沈降と上昇）</h4>
+      <div class="ex">
+        <span class="box-label">運動方程式</span>
+        $$m\frac{d^2z}{dt^2} = -mg\left(1-\frac{\rho}{\rho_0}\right) + \frac{1}{2}C_D\pi\rho\, a^2\left(\frac{dz}{dt}\right)^2$$
+        <p>$\mu \equiv \frac12 C_D \pi \rho a^2$ とおくと：</p>
+        $$\ddot z + \frac{\mu}{m}(\dot z)^2 = -g\left(1-\frac{\rho}{\rho_0}\right)$$
+        <p>
+          速度の２乗の項があるため，これは<strong>２階非線形微分方程式</strong>である（摩擦力に似た構造，と
+          ノートにコメントがある）。線形の場合と違って，重ね合わせの原理が使えない。
+        </p>
+      </div>
+
+      <h3 id="s2-2">真空中・流体中のばね振り子</h3>
+
+      <div class="ex">
+        <span class="box-label">真空中（harmonic oscillator = 調和振動子）</span>
+        $$m\ddot x = -kx \quad\Longrightarrow\quad \ddot x + \frac{k}{m}x = 0$$
+        <p>これは<strong>２階線形斉次微分方程式</strong>。（ノートの記号 $\ell$ はばね定数 $k$ に対応する。）</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">流体中（粘性抵抗つき）</span>
+        $$m\ddot x = -kx - 6\pi a \eta \dot x \quad\Longrightarrow\quad \ddot x + \frac{6\pi a \eta}{m}\dot x + \frac{k}{m}x = 0$$
+        <p>こちらも線形斉次だが，$\dot x$ の項（減衰項）が加わっている（減衰振動）。</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">整理</span>
+        <p>
+          ここまでの４つの例はすべて，$x$ とその導関数について１次式の微分方程式（線形）か，そうでない
+          （非線形）かのどちらかに分類できる。線形方程式は「解の重ね合わせ」という強力な性質を持つため，
+          非線形方程式よりずっと扱いやすい。次節でこれを一般的に扱う。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §3 =================== -->
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <div class="sec-tag">Section 3</div>
+      <h2>定数係数線形微分方程式</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3 id="s3-1">一般形と，$1$階連立系への還元</h3>
+
+      <div class="def">
+        <span class="box-label">定義 1.3　$n$ 階定数係数線形微分方程式</span>
+        <p>$x=x(t)$（$t$ は実数変数），$a_1,\dots,a_n \in \mathbb{C}$ として：</p>
+        $$\frac{d^n x}{dt^n} + a_1\frac{d^{n-1}x}{dt^{n-1}} + \cdots + a_{n-1}\frac{dx}{dt} + a_n x =
+        \begin{cases} 0 & (\text{斉次}) \\ f(t) & (\text{非斉次}) \end{cases} \qquad (n\ge 1)$$
+      </div>
+
+      <p>
+        $x^{(k)} \equiv \dfrac{d^k x}{dt^k}$（$x^{(0)}\equiv x$）とおくと，この $n$ 階の方程式は，$n$ 個の
+        未知関数 $x^{(0)},x^{(1)},\dots,x^{(n-1)}$ についての，連立した<strong>１階</strong>の微分方程式に書き直せる：
+      </p>
+      <div class="mathblock">
+        $$\begin{cases}
+        \dfrac{d}{dt}x^{(n-1)} = -a_1 x^{(n-1)} - a_2 x^{(n-2)} - \cdots - a_n x^{(0)} \\[4pt]
+        \dfrac{d}{dt}x^{(n-2)} = x^{(n-1)} \\
+        \qquad\vdots \\
+        \dfrac{d}{dt}x^{(0)} = x^{(1)}
+        \end{cases}
+        \;\Longrightarrow\;
+        \frac{d}{dt}\begin{pmatrix}x^{(n-1)}\\x^{(n-2)}\\\vdots\\x^{(0)}\end{pmatrix}
+        = \begin{pmatrix}-a_1x^{(n-1)}-\cdots-a_nx^{(0)}\\x^{(n-1)}\\\vdots\\x^{(1)}\end{pmatrix}$$
+      </div>
+
+      <div class="thm">
+        <span class="box-label">初期値問題の一意可解性（直感的な説明）</span>
+        <p>
+          $t=0$ において $x^{(0)}(0), x^{(1)}(0),\dots,x^{(n)}(0)$（すなわち $n$ 個の初期値）が与えられたとする。
+          上の連立式は，$n$ 個の未知関数それぞれの「次の瞬間への変化率」を，現在の $n$ 個の値だけから決めている
+          （$n$ 個の変数に対して $n$ 個の式）。したがって，微小時間 $\Delta t$ 経過後の値 $x^{(0)}(\Delta t),\dots,x^{(n-1)}(\Delta t)$
+          が一意に決まり，これを繰り返せば任意の時刻の解が（原理的には）決定される。
+        </p>
+      </div>
+
+      <h3 id="s3-2">演算子 $D$ と特性方程式</h3>
+
+      <p>
+        $D \equiv \dfrac{d}{dt}$ という記号（微分演算子）を導入すると，方程式は
+      </p>
+      $$D^n x + a_1 D^{n-1}x + \cdots + a_n x = \begin{cases}0\\f(t)\end{cases}$$
+      <p>
+        と書ける。力学では主に $n=2$ の場合を扱う。例えば：
+      </p>
+
+      <div class="ex">
+        <span class="box-label">例　$\ddot x - 5\dot x + 6x = 0$</span>
+        <p>これを $D^2x - 5Dx + 6x = 0$，すなわち $(D^2-5D+6)x=0$ と書く。$D$ を「文字」とみなして因数分解すると：</p>
+        $$(D-3)(D-2)x = 0$$
+        <p>
+          この演算子の積を実際に展開すると $(D-3)(D-2)x = D^2x -2Dx-3Dx+6x = D^2x-5Dx+6x$ となり，
+          もとの式と一致する（$D$ を数のように扱ってよい理由は，係数が定数だから）。
+        </p>
+        <p>
+          $(D-3)(D-2)x=0$ を満たすには，$(D-2)x=0$ または $(D-3)x=0$ であれば十分（両方でなくてよい）。
+          それぞれ $\dot x = 2x$，$\dot x = 3x$ という単純な１階線形方程式で，変数分離すると
+          $\log x = 2t+C$（あるいは $3t+C$）より $x = A e^{2t}$，$x = B e^{3t}$ という解が得られる。
+        </p>
+        <div class="sol">
+          <span class="box-label">一般解</span>
+          $$x = C_1 e^{3t} + C_2 e^{2t}$$
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 別の求め方（演算子の因数分解を１階線形方程式として使う）</span>
+        <p>
+          講義中に，もう一つのやり方も試みられていた（ノートには「これでもよくない？」という書き込みがある）。
+          $y \equiv (D-2)x$ とおくと，$(D-3)(D-2)x=0$ は $(D-3)y = 0$，すなわち $\dot y - 3y = 0$ となり，
+          これを解くと $y = A e^{3t}$。つまり：
+        </p>
+        <div class="mathblock">$$\dot x - 2x = A e^{3t}$$</div>
+        <p>
+          これは $x$ についての<strong>１階線形非斉次</strong>方程式である。積分因子 $e^{-2t}$ を両辺にかけると：
+        </p>
+        <div class="mathblock">$$\frac{d}{dt}\left(x e^{-2t}\right) = e^{-2t}\dot x - 2xe^{-2t} = A e^{3t}e^{-2t} = Ae^{t}$$</div>
+        <p>両辺を $t$ で積分して：</p>
+        <div class="mathblock">$$x e^{-2t} = A e^{t} + B \quad\Longrightarrow\quad x = Ae^{3t} + Be^{2t}$$</div>
+        <p>
+          先ほどと同じ一般解に到達する。つまり，特性方程式の因数分解によって根を求める方法と，
+          演算子を１つずつ外して１階方程式に帰着させる方法は，同じ結果を与える（後者の方が計算はやや面倒だが，
+          「なぜ $e^{3t}$ と $e^{2t}$ の重ね合わせでよいのか」がより直接的に見える）。
+        </p>
+      </div>
+
+      <h3 id="s3-3">線形微分方程式の性質：非斉次 = 斉次の一般解 + 特解</h3>
+
+      <div class="thm">
+        <span class="box-label">性質 1.4</span>
+        非斉次方程式の一般解は，対応する斉次方程式の一般解と，非斉次方程式の特解（１つでよい）との和で与えられる。
+        これは線形方程式であれば（微分方程式に限らず）常に成り立つ性質である。
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例（線形代数の１次方程式でのアナロジー）</span>
+        <p>
+          $3x+4y=7$ を考える。斉次方程式 $3x+4y=0$ の一般解は $x=4k,\ y=-3k\ (k\in\mathbb Z$，あるいは実数$)$。
+          非斉次方程式の特解の１つとして $(x,y)=(1,1)$ が見つかれば，一般解は：
+        </p>
+        <div class="mathblock">$$x = 4k+1,\qquad y=-3k+1$$</div>
+        <p>
+          「非斉次の解＝斉次の解＋特解の１つ」という構造は，線形微分方程式でもまったく同じ形で成り立つ。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">性質 1.5　斉次解の重ね合わせ（ベクトル空間の構造）</span>
+        <p>
+          $x=x_1(t)$，$x=x_2(t)$ が同じ線形斉次微分方程式の解であるとき，$x=x_1(t)+x_2(t)$ もまた解である。
+          また $\alpha\in\mathbb C$ に対して $\alpha\, x_1(t)$ も解である。
+        </p>
+        <div class="note" style="margin-top:.6rem;">
+          <span class="box-label">用語</span>
+          一般に，ある集合 $V$ の要素 $v_1,v_2$ に対して常に $\alpha_1 v_1+\alpha_2v_2\in V$（$\alpha_1,\alpha_2\in\mathbb C$）
+          となるとき，$V$ を「<strong>ベクトル空間</strong>」という。線形斉次微分方程式の解全体は，この意味でベクトル空間をなす。
+        </div>
+      </div>
+
+      <h3 id="s3-4">$e^{it}$ とは何か（オイラーの公式）</h3>
+
+      <div class="note">
+        <span class="box-label">補足 — ノートで中断していた箇所を埋める</span>
+        <p>
+          講義ノートはここで「寝てました すみません」という正直な書き込みとともに中断しているが，
+          流れから察するに，議論されていたのは<strong>複素指数関数 $e^{it}$ の意味</strong>である。
+          $\ddot x = -x$ という方程式（調和振動子で $k/m=1$ の場合）を考えると：
+        </p>
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義　オイラーの公式</span>
+        $$e^{it} \equiv \cos t + i\sin t$$
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>これが $\ddot x=-x$ の解になっていることの確認</summary>
+        <div class="proof-body">
+          <p>
+            $\cos t$，$\sin t$ はそれぞれ $\ddot x = -x$ の解である：
+          </p>
+          <div class="mathblock">$$\frac{d^2}{dt^2}(\cos t) = -\cos t, \qquad \frac{d^2}{dt^2}(\sin t) = -\sin t$$</div>
+          <p>したがって，性質 1.5（重ね合わせ）より，任意の複素数の組み合わせ</p>
+          <div class="mathblock">$$x(t) = \cos t + i \sin t$$</div>
+          <p>
+            もまた（複素数値関数として）$\ddot x=-x$ の解である。この特別な組み合わせを $e^{it}$ と<strong>定義</strong>する。
+            実際，$\dfrac{d}{dt}e^{it} = -\sin t + i\cos t = i(\cos t + i \sin t) = i\, e^{it}$ となり，これは
+            指数関数の性質 $\dfrac{d}{dt}e^{rt}=r\,e^{rt}$ を $r=i$ の場合に拡張したものと矛盾なく一致する。
+          </p>
+        </div>
+        <div class="qed">∎</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">なぜこれが便利か</span>
+        <p>
+          $\ddot x + \omega^2 x=0$ の特性方程式は $r^2=-\omega^2$，すなわち $r=\pm i\omega$ という<strong>複素数</strong>の根を持つ。
+          §3.2 でみた実数根の場合の理論（$x=Ae^{r_1t}+Be^{r_2t}$）を複素数の根にもそのまま形式的に拡張すると：
+        </p>
+        <div class="mathblock">$$x = C_1 e^{i\omega t} + C_2 e^{-i\omega t}$$</div>
+        <p>
+          $x$ が実数値関数であるという条件（$C_2=\overline{C_1}$）を課すと，$x = a\cos\omega t + b\sin \omega t$
+          という，見慣れた実数の三角関数解に書き直せる（この変形は第3章の振り子の運動で実際に使う）。
+        </p>
+      </div>
+
+      <h3 id="s3-5">重複根がある場合</h3>
+
+      <p>
+        特性方程式 $r^n + a_1 r^{n-1}+\cdots+a_n=0$ の根がすべて異なるとき，一般解は
+      </p>
+      <div class="mathblock">$$x = \sum_{i=1}^n c_i\, e^{r_i t}$$</div>
+      <p>
+        となり，$n$ 個の任意定数 $c_1,\dots,c_n$ を含む（これを<strong>一般解</strong>と呼ぶ）。この事実は，
+        初期値 $x(0),\dot x(0),\dots,x^{(n-1)}(0)$ から $c_1,\dots,c_n$ を決める連立１次方程式
+      </p>
+      <div class="mathblock">
+        $$\begin{pmatrix}x(0)\\\dot x(0)\\\vdots\\x^{(n-1)}(0)\end{pmatrix}
+        = \begin{pmatrix}1&\cdots&1\\r_1&&r_n\\\vdots&&\vdots\\r_1^{n-1}&\cdots&r_n^{n-1}\end{pmatrix}
+        \begin{pmatrix}c_1\\c_2\\\vdots\\c_n\end{pmatrix}$$
+      </div>
+      <p>
+        の係数行列（ヴァンデルモンド行列）の行列式が $\prod_{1\le i&lt;j\le n}(r_i-r_j)\ne 0$（根が相異なる限りゼロでない）
+        であることから保証される —— $n$ 個のベクトルが張る空間の体積がゼロでない，すなわち任意の初期値に対して
+        一意に $c_1,\dots,c_n$ が定まる，ということ。
+      </p>
+
+      <div class="thm">
+        <span class="box-label">重複根の場合の一般解</span>
+        <p>
+          重複度 $k$ の根が $r_0$（$2\le k\le n$），その他の根 $r_1,\dots,r_{n-k}$ がすべて異なるとする。
+          $e^{r_0t}$ は解だが，それだけでは $n$ 個の任意定数を出すのに解の数が足りない。他の解を求めるため，
+          $(D-r_0)^k x(t)=0$ を満たす $x(t)$ を考える。
+        </p>
+      </div>
+
+      <details>
+        <summary>導出：$(D-r_0)^k x = 0$ の一般解が $t$ の $(k-1)$ 次多項式 $\times e^{r_0t}$ になること</summary>
+        <div class="proof-body">
+          <p>
+            $x(t) = A(t)\, e^{r_0 t}$ と「アンザッツ」（仮定）を置いてみる：
+          </p>
+          <div class="mathblock">
+            $$0 = (D-r_0)^k\left(A(t)e^{r_0t}\right) = (D-r_0)^{k-1}\Big(\dot A e^{r_0t} + A r_0 e^{r_0t} - r_0 A e^{r_0 t}\Big)
+            = (D-r_0)^{k-1}\dot A\, e^{r_0t}$$
+          </div>
+          <p>
+            （$D$ を $Ae^{r_0t}$ に作用させると，積の微分法則から $A r_0 e^{r_0t}$ の項が出るが，これは
+            $(D-r_0)$ の $-r_0$ の項とちょうど打ち消し合い，$\dot A\, e^{r_0t}$ だけが残る。）
+          </p>
+          <p>
+            同じ手順を $k$ 回繰り返すと，最終的に：
+          </p>
+          <div class="mathblock">$$0 = A^{(k)}(t)\, e^{r_0t} \quad\Longrightarrow\quad A^{(k)}(t) = 0$$</div>
+          <p>
+            $A(t)$ を $k$ 回微分するとゼロになる，ということは $A(t)$ は<strong>$t$ の $(k-1)$ 次以下の多項式</strong>
+            でなければならない。よって：
+          </p>
+          <div class="mathblock">$$A(t) = c_0 + c_1 t + c_2 t^2 + \cdots + c_{k-1}t^{k-1}$$</div>
+        </div>
+        <div class="qed">∎</div>
+      </details>
+
+      <div class="sol">
+        <span class="box-label">結論</span>
+        $$x(t) = \left(c_0+c_1t+c_2t^2+\cdots+c_{k-1}t^{k-1}\right)e^{r_0t} + c_k\, e^{r_1t}+\cdots+c_{n-1}\, e^{r_{n-k}t}$$
+        <p>（全部で $n$ 個の任意定数 $c_0,\dots,c_{n-1}$。）例えば $k=2$（２重根）なら，$e^{r_0t}$ だけでなく
+        $t\,e^{r_0t}$ も独立な解として現れる。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §4 =================== -->
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <div class="sec-tag">Section 4</div>
+      <h2>例題：はちみつ中のビー玉</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題（講義ノートの練習問題）</span>
+        <p>
+          容器に入ったはちみつの中に，球状のビー玉が静止しており，初速度 $0\,\mathrm{m\,s^{-1}}$ で落下させる。
+          ビー玉の半径 $a$ を $12.5\,\mathrm{mm}$，質量 $m$ を $20.5\,\mathrm{g}$ とし，はちみつの粘性係数 $\eta$ を
+          $3.9\,\mathrm{Pa\,s}$，密度 $\rho_0$ を $1.4\,\mathrm{g\,cm^{-3}}$ とする。また，重力加速度 $g$ を
+          $9.8\,\mathrm{m\,s^{-2}}$ とする。ビー玉は重力，浮力，粘性抵抗力のみを受けて鉛直方向に運動するものとし，
+          慣性抵抗力は無視するとして，次の問いに答えよ。
+        </p>
+        <ol>
+          <li>ビー玉が最初の位置から $10\,\mathrm{cm}$ 沈むまでの時間を有効数字 $2$ けたで求めよ。</li>
+          <li>ビー玉が終端速度の $90\%$ に達するまでの時間を有効数字 $2$ けたで求めよ。</li>
+        </ol>
+      </div>
+
+      <details open>
+        <summary>解答</summary>
+        <div class="proof-body">
+
+          <p>
+            鉛直下向きに座標 $z$（沈んだ距離）をとる。ビー玉にはたらく力は，重力 $mg$（下向き＝正），
+            浮力 $\rho_0 \cdot\frac43\pi a^3 g$（上向き＝負），粘性抵抗 $6\pi a \eta \dot z$（運動を妨げる向き＝負）
+            である（§2 の「流体中の落下運動」と同型で，浮力の密度 $\rho$ の代わりに，ここでははちみつの
+            密度 $\rho_0$ とビー玉自身の密度が関係する）。運動方程式：
+          </p>
+          <div class="mathblock">$$m\ddot z = mg - \rho_0\cdot\frac43\pi a^3 g - 6\pi a \eta \dot z$$</div>
+
+          <p>両辺を $m$ で割り，$\lambda \equiv \dfrac{6\pi a \eta}{m}$，$g' \equiv g\left(1-\dfrac{\rho_0 V}{m}\right)$
+          （$V=\frac43\pi a^3$：ビー玉の体積）とおくと：</p>
+          <div class="mathblock">$$\ddot z + \lambda \dot z = g'$$</div>
+
+          <p>
+            速度 $v\equiv \dot z$ についての１階線形方程式 $\dot v + \lambda v = g'$ とみると，斉次解は
+            $v_h = C e^{-\lambda t}$，特解は定数 $v_p = g'/\lambda$（終端速度）。よって一般解は：
+          </p>
+          <div class="mathblock">$$v(t) = \frac{g'}{\lambda} + Ce^{-\lambda t}$$</div>
+          <p>初期条件 $v(0)=0$ より $C=-g'/\lambda$。終端速度を $v_\infty \equiv g'/\lambda$ とおくと：</p>
+          <div class="mathblock">$$v(t) = v_\infty\left(1-e^{-\lambda t}\right)$$</div>
+          <p>これを積分し（$z(0)=0$），沈んだ距離：</p>
+          <div class="mathblock">$$z(t) = v_\infty\left[t - \frac{1-e^{-\lambda t}}{\lambda}\right]$$</div>
+
+          <p><strong>数値の計算：</strong></p>
+          <div class="mathblock">
+            $$V = \frac43\pi a^3 = \frac43\pi(1.25\times10^{-2}\,\mathrm{m})^3 = 8.18\times10^{-6}\,\mathrm{m^3}$$
+          </div>
+          <div class="mathblock">
+            $$\lambda = \frac{6\pi a \eta}{m} = \frac{6\pi\times(1.25\times10^{-2})\times 3.9}{2.05\times10^{-2}} = 44.8\ \mathrm{s^{-1}}$$
+          </div>
+          <div class="mathblock">
+            $$g' = g\left(1-\frac{\rho_0 V}{m}\right) = 9.8\left(1-\frac{1.4\times10^3\times8.18\times10^{-6}}{2.05\times10^{-2}}\right) = 4.32\ \mathrm{m\,s^{-2}}$$
+          </div>
+          <div class="mathblock">
+            $$v_\infty = \frac{g'}{\lambda} = \frac{4.32}{44.8} = 9.65\times10^{-2}\ \mathrm{m\,s^{-1}}$$
+          </div>
+
+          <p><strong>問1：$z(t)=0.10\,\mathrm m$ となる $t$。</strong> 上の式に数値を入れて数値的に解くと：</p>
+          <div class="mathblock">$$t \approx 1.06\ \mathrm{s}$$</div>
+
+          <p>
+            <strong>問2：$v(t) = 0.9\, v_\infty$ となる $t$。</strong>
+            $v(t)/v_\infty = 1-e^{-\lambda t} = 0.9$ より $e^{-\lambda t}=0.1$，すなわち：
+          </p>
+          <div class="mathblock">$$t = \frac{\ln 10}{\lambda} = \frac{2.303}{44.8} \approx 0.0514\ \mathrm{s}$$</div>
+
+        </div>
+        <div class="sol">
+          <span class="box-label">解</span>
+          <p>
+            $\lambda \approx 44.8\,\mathrm{s^{-1}}$，終端速度 $v_\infty \approx 9.6\times10^{-2}\,\mathrm{m\,s^{-1}}$。
+          </p>
+          <p>
+            問1：$10\,\mathrm{cm}$ 沈むまでの時間 $\approx 1.1\,\mathrm{s}$（有効数字２桁）。<br>
+            問2：終端速度の $90\%$ に達するまでの時間 $\approx 5.1\times10^{-2}\,\mathrm{s}$（有効数字２桁）。
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 問２の答えの方が問１よりずっと速い理由</span>
+        <p>
+          $\lambda \approx 44.8\,\mathrm{s^{-1}}$ は非常に大きいので，速度の緩和時間 $1/\lambda \approx 22\,\mathrm{ms}$
+          はごく短い。つまりビー玉は落下を始めてから約 $0.05$ 秒というごく短い時間でほぼ終端速度に達し，
+          その後は終端速度でほぼ一定に沈み続ける。$10\,\mathrm{cm}$ という比較的大きな距離を沈むのにかかる時間
+          （$1.1\,\mathrm s$）のほとんどは，「終端速度に達したあとの定常的な沈降」に費やされていることが分かる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="index.html">← トップへ</a>
+    <a href="n2.html">第2章　仕事とエネルギー →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

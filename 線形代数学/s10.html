@@ -1,0 +1,298 @@
+<!DOCTYPE html><!-- 「§10 基底延長定理の応用 — 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>§10 基底延長定理の応用 — 線形代数学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams',
+        macros: {
+          R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}',
+          Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}',
+          rank: '\\operatorname{rank}'
+        }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="s10">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>§10 基底延長定理の応用</h1>
+  <p class="subtitle">講義ノート⑦ をもとに作成</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#lem10-1">補題10.1 独立な組の分割と共通部分</a>
+    <a href="#def10-2">定義10.2 部分空間の和</a>
+    <a href="#thm10-3">定理10.3 次元公式 $\dim(V_1+V_2)$・$\dim(V_1\cap V_2)$</a>
+    <a href="#summary">まとめ</a>
+  </div>
+
+  <!-- =================== 補題10.1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="lem10-1">
+    <div class="sec-header">
+      <div class="sec-tag">Lemma 10.1</div>
+      <h2>補題 10.1 — 独立な組を分割すると span の共通部分は $\{0\}$</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">この節の目標</span>
+        <p>
+          §6 の定理6.7（基底への延長）は，1次独立な組に元を足していくと基底に届くことを保証していた。
+          §10 ではこの延長定理を使って，2つの部分空間 $V_1,V_2\subseteq V$ の和 $V_1+V_2$ と共通部分 $V_1\cap V_2$ の
+          次元の間に成り立つ関係式（次元定理の部分空間版）を導く。まず準備として，1次独立な組を前半・後半に分割したとき，
+          それぞれが張る部分空間の共通部分が $\{0\}$ しかないことを確認しておく。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">補題 10.1</span>
+        $V$：$\mathbb{K}$-ベクトル空間，$v_1,\ldots,v_n\in V$ を $\mathbb{K}$上1次独立とする。このとき，任意の $1\le\ell\le n$ に対して
+        $$\langle v_1,\ldots,v_\ell\rangle_{\mathbb{K}}\cap\langle v_{\ell+1},\ldots,v_n\rangle_{\mathbb{K}}=\{0\}$$
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>証明の方針（クリックで展開）</summary>
+        <div class="proof-body">
+          $u\in\langle v_1,\ldots,v_\ell\rangle_{\mathbb{K}}\cap\langle v_{\ell+1},\ldots,v_n\rangle_{\mathbb{K}}$ とすると，
+          $u=a_1v_1+\cdots+a_\ell v_\ell=b_{\ell+1}v_{\ell+1}+\cdots+b_nv_n$ と2通りに書ける。辺々引くと
+          $$a_1v_1+\cdots+a_\ell v_\ell-b_{\ell+1}v_{\ell+1}-\cdots-b_nv_n=0$$
+          $v_1,\ldots,v_n$ は1次独立なので，すべての係数が $0$，すなわち $a_1=\cdots=a_\ell=0$（$b$ 側も同様）。
+          よって $u=0$。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">使いどころ</span>
+        <p>
+          この補題は「1次独立な組を2つのグループに分けても，それぞれのグループが張る空間は原点でしか交わらない」
+          という直感的に明らかな事実を保証するもので，定理10.3 の証明の最後（矛盾を導く場面）で使われる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定義10.2 =================== -->
+  <div class="section" id="def10-2">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 10.2</div>
+      <h2>定義 10.2 — 部分空間の和</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 10.2</span>
+        $V$：$\mathbb{K}$-ベクトル空間，$W_1,W_2\subseteq V$ を部分空間とする。
+        $$W_1+W_2:=\{w_1+w_2\mid w_1\in W_1,\ w_2\in W_2\}$$
+        と定める。このとき $W_1+W_2$ は $V$ の部分空間になる。
+      </div>
+
+      <details>
+        <summary>$W_1+W_2$ が部分空間であることの確認（クリックで展開）</summary>
+        <div class="proof-body">
+          定義2.1 の (S1)〜(S3) を確認すればよい。
+          (S1) $0=0+0\in W_1+W_2$（$W_1,W_2$ は部分空間なので $0$ を含む）。<br>
+          (S2) $w_1+w_2,\ w_1'+w_2'\in W_1+W_2$（$w_1,w_1'\in W_1$，$w_2,w_2'\in W_2$）に対し，
+          $(w_1+w_2)+(w_1'+w_2')=(w_1+w_1')+(w_2+w_2')$ で，$w_1+w_1'\in W_1$，$w_2+w_2'\in W_2$（$W_1,W_2$ が加法に閉）なので
+          $W_1+W_2$ に属す。<br>
+          (S3) $a\in\mathbb{K}$，$w_1+w_2\in W_1+W_2$ に対し，$a(w_1+w_2)=aw_1+aw_2$ で $aw_1\in W_1$，$aw_2\in W_2$（スカラー倍に閉）
+          なので $W_1+W_2$ に属す。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">生成される部分空間との関係</span>
+        <p>
+          $W_1=\langle v_1,\ldots,v_{n_1}\rangle_{\mathbb{K}}$，$W_2=\langle v_1',\ldots,v_{n_2}'\rangle_{\mathbb{K}}$ のように
+          それぞれ生成系で書けているなら，
+          $$W_1+W_2=\langle v_1,\ldots,v_{n_1},v_1',\ldots,v_{n_2}'\rangle_{\mathbb{K}}$$
+          である（$W_1+W_2$ の元 $w_1+w_2$ は $v_i$ と $v_j'$ の1次結合の和として書け，逆にこれらすべての1次結合は
+          明らかに $W_1+W_2$ に属す）。定理10.3 の証明はこの事実から出発する。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定理10.3 =================== -->
+  <div class="section" id="thm10-3">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem 10.3</div>
+      <h2>定理 10.3 — 部分空間の和・共通部分の次元公式</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 10.3</span>
+        $V$：$\mathbb{K}$-ベクトル空間，$V_1,V_2\subseteq V$ を部分空間とし，$n_1=\dim V_1&lt;+\infty$，$n_2=\dim V_2&lt;+\infty$ とする。
+        このとき
+        $$\dim(V_1+V_2)\le n_1+n_2$$
+        かつ
+        $$\dim(V_1\cap V_2)=n_1+n_2-\dim(V_1+V_2)$$
+      </div>
+
+      <details open>
+        <summary>定理 10.3 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+
+          <strong>Step 1：$\dim(V_1+V_2)\le n_1+n_2$。</strong><br>
+          $v_1,\ldots,v_{n_1}$ を $V_1$ の基底，$v_1',\ldots,v_{n_2}'$ を $V_2$ の基底とすると，定義10.2 の note より
+          $$\langle v_1,\ldots,v_{n_1},v_1',\ldots,v_{n_2}'\rangle_{\mathbb{K}}=V_1+V_2$$
+          すなわち $V_1+V_2$ は高々 $n_1+n_2$ 個の元 $v_1,\ldots,v_{n_1},v_1',\ldots,v_{n_2}'$ で生成される。
+          定理7.2(1)（生成系の個数は $\dim$ 以上）より
+          $$\dim(V_1+V_2)\le n_1+n_2$$
+          <br>
+
+          <strong>Step 2：$m:=\dim(V_1\cap V_2)$ とおき，基底を延長する。</strong><br>
+          $V_1\cap V_2$ は $V_1$（および $V_2$）の部分空間なので，定理7.5 より有限次元。その基底を $w_1,\ldots,w_m$ とする。
+          $w_1,\ldots,w_m$ は $V_1$ 内の1次独立な組なので，定理6.7（基底への延長）により，ある
+          $$x_1,\ldots,x_{n_1-m}\in V_1$$
+          が存在して，$w_1,\ldots,w_m,x_1,\ldots,x_{n_1-m}$ は $V_1$ の基底になる。同様に，ある
+          $$y_1,\ldots,y_{n_2-m}\in V_2$$
+          が存在して，$w_1,\ldots,w_m,y_1,\ldots,y_{n_2-m}$ は $V_2$ の基底になる。<br><br>
+
+          <strong>Step 3：主張——</strong>
+          $$(*)\qquad w_1,\ldots,w_m,\ x_1,\ldots,x_{n_1-m},\ y_1,\ldots,y_{n_2-m}$$
+          が $V_1+V_2$ の基底になる。これが示せれば，$(*)$ の個数は $m+(n_1-m)+(n_2-m)=n_1+n_2-m$ なので
+          $$\dim(V_1+V_2)=n_1+n_2-m=n_1+n_2-\dim(V_1\cap V_2)$$
+          となり，これは示すべき等式 $\dim(V_1\cap V_2)=n_1+n_2-\dim(V_1+V_2)$ と同じことである。<br><br>
+
+          <strong>Step 4：$(*)$ が $V_1+V_2$ を生成することは明らか。</strong><br>
+          $w_1,\ldots,w_m,x_1,\ldots,x_{n_1-m}$ が $V_1$ を生成し，$w_1,\ldots,w_m,y_1,\ldots,y_{n_2-m}$ が $V_2$ を生成するので，
+          これらを合わせた $(*)$ は $V_1+V_2=\langle V_1\text{ の生成系}, V_2\text{ の生成系}\rangle_{\mathbb{K}}$ を生成する
+          （定義10.2 の note）。残るは $(*)$ が1次独立であることを示すだけである。<br><br>
+
+          <strong>Step 5：$(*)$ の1次独立性——背理法。</strong><br>
+          $$a_1x_1+\cdots+a_{n_1-m}x_{n_1-m}+b_1w_1+\cdots+b_mw_m+c_1y_1+\cdots+c_{n_2-m}y_{n_2-m}=0 \qquad(\star)$$
+          で，係数 $a_i,b_j,c_k$ のうち少なくとも1つは $0$ でないものが存在すると仮定して矛盾を導く。<br><br>
+
+          もし $a_1=\cdots=a_{n_1-m}=0$ だとすると，$(\star)$ は
+          $$b_1w_1+\cdots+b_mw_m+c_1y_1+\cdots+c_{n_2-m}y_{n_2-m}=0$$
+          となるが，$w_1,\ldots,w_m,y_1,\ldots,y_{n_2-m}$ は $V_2$ の基底（＝1次独立）なので，
+          $$b_1=\cdots=b_m=c_1=\cdots=c_{n_2-m}=0$$
+          となり，$(\star)$ の係数がすべて $0$ になって仮定に反する。したがって
+          $$a_1,\ldots,a_{n_1-m}\ \text{のうち少なくとも1つは}\ 0\ \text{でない。}$$
+          全く同様に（$w_1,\ldots,w_m,x_1,\ldots,x_{n_1-m}$ が $V_1$ の基底であることを使うと），
+          $$c_1,\ldots,c_{n_2-m}\ \text{のうち少なくとも1つは}\ 0\ \text{でない。}$$
+          <br>
+
+          そこで
+          $$0\neq u:=a_1x_1+\cdots+a_{n_1-m}x_{n_1-m}\in V_1$$
+          とおく（$x_1,\ldots,x_{n_1-m}$ は $V_1$ の基底の一部で1次独立かつ係数が全部$0$でないので $u\neq0$）。
+          一方，$(\star)$ を移項すると
+          $$u=-\bigl(b_1w_1+\cdots+b_mw_m+c_1y_1+\cdots+c_{n_2-m}y_{n_2-m}\bigr)\in V_2$$
+          （$w_i,y_k\in V_2$ だから）。よって
+          $$u\in V_1\cap V_2$$
+          ところが，$w_1,\ldots,w_m,x_1,\ldots,x_{n_1-m}$ は $V_1$ の基底（1次独立）であり，$V_1\cap V_2=\langle w_1,\ldots,w_m\rangle_{\mathbb{K}}$
+          だから，補題10.1（$\ell=n_1-m$ の位置で分割）より
+          $$\langle x_1,\ldots,x_{n_1-m}\rangle_{\mathbb{K}}\cap\underbrace{\langle w_1,\ldots,w_m\rangle_{\mathbb{K}}}_{=V_1\cap V_2}=\{0\}$$
+          $u$ は左辺の共通部分に属するので $u=0$。これは $u\neq0$ に矛盾する。<br><br>
+
+          よって $(\star)$ の係数はすべて $0$ でなければならず，$(*)$ は1次独立。Step 4 と合わせて $(*)$ は $V_1+V_2$ の基底。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">数ベクトル空間の次元定理との対応</span>
+        <p>
+          §4 の次元定理 $n=\dim\Ker(T)+\dim\Im(T)$ は「$1$つの線形写像」の核と像を足したものが全体の次元になる，という主張だった。
+          定理10.3 はそれとは別の——「$2$つの部分空間」の和と共通部分に関する——次元の関係式であり，
+          $V_1\cap V_2=\{0\}$（このとき $V_1+V_2$ を直和と呼ぶ）の場合には $\dim(V_1+V_2)=n_1+n_2$ という，
+          最もシンプルな形に帰着する。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">関連する演習 — $\operatorname{rank}(A+B)\le\operatorname{rank}A+\operatorname{rank}B$</span>
+        <p>
+          $A,B$ を同じ型の $m\times n$ 行列とすると，$\operatorname{Im}(A+B)\subseteq\operatorname{Im}(A)+\operatorname{Im}(B)$ が成り立つので，
+          定理10.3 の前半 $\dim(V_1+V_2)\le n_1+n_2$ を $V_1=\operatorname{Im}(A),V_2=\operatorname{Im}(B)$ に適用すれば
+          $$\operatorname{rank}(A+B)=\dim\operatorname{Im}(A+B)\le\dim\bigl(\operatorname{Im}(A)+\operatorname{Im}(B)\bigr)\le\operatorname{rank}A+\operatorname{rank}B$$
+          が従う。教員が期末試験の証明問題として言及した問題の1つ（<a href="過去問/ばらし問題.html#hako3">期末前ばらし問題 候補3</a>）
+          はまさにこの不等式であり，詳しい解答・解説はそちらのページを参照。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== まとめ =================== -->
+  <div class="section" id="summary">
+    <div class="sec-header">
+      <div class="sec-tag">Summary</div>
+      <h2>まとめ — §10 の全体像</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">§10 の核心</span>
+        <table class="axiom-table">
+          <tr><th>結果</th><th>内容</th></tr>
+          <tr>
+            <td>補題10.1</td>
+            <td>1次独立な組を前半・後半に分割すると，それぞれの張る空間の共通部分は $\{0\}$</td>
+          </tr>
+          <tr>
+            <td>定義10.2</td>
+            <td>$W_1+W_2=\{w_1+w_2\mid w_1\in W_1,w_2\in W_2\}$ は $V$ の部分空間になる</td>
+          </tr>
+          <tr>
+            <td>定理10.3</td>
+            <td>$\dim(V_1+V_2)\le n_1+n_2$ かつ $\dim(V_1\cap V_2)=n_1+n_2-\dim(V_1+V_2)$。証明は $V_1\cap V_2$ の基底を$V_1,V_2$それぞれの基底に延長し，合わせた組が$V_1+V_2$の基底になることを示す</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <span class="box-label">§6・§7・§10 の繋がり</span>
+        <div style="overflow-x:auto">
+          <pre style="font-family:monospace; line-height:2; font-size:.87rem; color:#333">
+定理6.7（基底への延長）─┬─ 定理10.3 の証明で V1∩V2 の基底を V1,V2 それぞれの基底へ2回延長
+定理7.2（生成系は dim 以上）┘  └─ 補題10.1（分割した独立組の span は {0} でしか交わらない）
+                                    └─ 定理10.3：dim(V1+V2)≤n1+n2，dim(V1∩V2)=n1+n2−dim(V1+V2)
+                                          └─ 応用：rank(A+B)≤rankA+rankB（期末前ばらし問題 候補3）
+          </pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

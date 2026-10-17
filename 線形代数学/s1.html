@@ -1,0 +1,921 @@
+<!DOCTYPE html><!-- 「§1 ベクトル空間・線形写像 — 線形代数学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>§1 ベクトル空間・線形写像 — 線形代数学①</title>
+  <link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams',
+        macros: {
+          R: '\\mathbb{R}', C: '\\mathbb{C}', K: '\\mathbb{K}',
+          Ker: '\\operatorname{Ker}', Im: '\\operatorname{Im}'
+        }
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="s1">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">線形代数学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>§1 ベクトル空間と線形写像</h1>
+  <p class="subtitle">講義ノート① をもとに作成</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#motivation">動機</a>
+    <a href="#setup">基本設定</a>
+    <a href="#def1-1">定義1.1 ベクトル空間</a>
+    <a href="#cor1-2">系1.2</a>
+    <a href="#def1-3">定例1.3 一次結合</a>
+    <a href="#def1-4">定義1.4 線形写像</a>
+    <a href="#cor1-5">系1.5</a>
+    <a href="#examples">線形写像の例</a>
+    <a href="#inj-surj">全射・単射・全単射</a>
+    <a href="#iso">同型写像</a>
+  </div>
+
+  <!-- =================== 動機 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="motivation">
+    <div class="sec-header">
+      <div class="sec-tag">Motivation</div>
+      <h2>なぜ抽象的なベクトル空間を考えるか</h2>
+    </div>
+    <div class="sec-body">
+      <div class="mot">
+        <span class="box-label">Motivation</span>
+        <ol>
+          <li>
+            <strong>接空間の抽象化</strong>：曲面の接面と $\mathbb{R}^3$ を近似的に同一視したい。
+            座標を入れるためには原点・基本単位ベクトルが必要だが、これらは<em>恣意的</em>であり、どう選んでも同じ幾何的内容が得られるようにしたい。
+            結論：「どう定式化すればよいか？」→ 以下のように定める。
+            <ul style="margin-top:.4rem; list-style:disc; padding-left:1.2rem; font-size:.93em; color:#555">
+              <li><em>接空間</em>とは、曲面上の点 $p$ でその曲面に「接する」平面のこと。局所的には $\mathbb{R}^2$ に見えるが、$p$ をどの「原点」とし、どの「方向」を基本とするかは自由に選べる。どの選び方でも「同じ幾何的構造」が得られることを保証するために抽象的なベクトル空間を使う。</li>
+            </ul>
+          </li>
+          <li>
+            <strong>より一般の対象を扱いたい</strong>：$\mathbb{R}^n$ よりも広い対象（関数空間など）に対しても線形代数の枠組みを使いたい。
+            <ul style="margin-top:.4rem; list-style:disc; padding-left:1.2rem; font-size:.93em; color:#555">
+              <li>例：微分方程式 $y''+y=0$ の解の全体 $\{\sin x, \cos x, \ldots\}$ は関数の空間だが、「足す」「スカラー倍する」という操作が自然に定まり、ベクトル空間の公理を満たす。$\mathbb{R}^n$ とは全く異なる対象だが、<em>同じ理論</em>が使える。</li>
+            </ul>
+          </li>
+          <li>
+            <strong>線形代数の主役は線形写像</strong>：線形代数における主役はベクトルそのものではなく<em>線形写像</em>である。
+            線形写像が定義されるために必要なものは<em>加法とスカラー倍の 2 つだけ</em>であった。
+            <ul style="margin-top:.4rem; list-style:disc; padding-left:1.2rem; font-size:.93em; color:#555">
+              <li>「ベクトル空間の公理」の最小限の要件がまさに「線形写像を定義するために必要な構造」であり、これが公理の選び方の根拠になっている。</li>
+            </ul>
+          </li>
+        </ol>
+      </div>
+      <div class="note">
+        <span class="box-label">補足 — 「抽象化」の威力</span>
+        <p>
+          $\mathbb{R}^n$ の場合に成り立つことを証明するのに「成分」を使うと、$n$ ごとに別々の証明が必要になる。
+          抽象的なベクトル空間の公理だけから証明すれば、$\mathbb{R}^n$ でも $\mathbb{C}^n$ でも関数空間でも、<strong>同時に</strong>成立する。
+          これが抽象化の最大の恩恵である。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== 基本設定 =================== -->
+  <div class="section" id="setup">
+    <div class="sec-header">
+      <div class="sec-tag">Setup</div>
+      <h2>基本設定・記法</h2>
+    </div>
+    <div class="sec-body">
+      <div class="note">
+        <span class="box-label">設定</span>
+        以降は実数だけでなく複素数も考える。
+        <ul style="margin-top:.5rem">
+          <li>$\mathbb{C}^n = \left\{\left.\begin{pmatrix}a_1\\\vdots\\a_n\end{pmatrix}\right| a_1,\ldots,a_n\in\mathbb{C}\right\}$</li>
+          <li>$M_{m,n}(\mathbb{C}) = \left\{\left.\begin{pmatrix}a_{11}&\cdots&a_{1n}\\\vdots&&\vdots\\a_{m1}&\cdots&a_{mn}\end{pmatrix}\right| a_{ij}\in\mathbb{C},\ 1\le i\le m,\ 1\le j\le n\right\}$（$m\times n$ 複素行列全体）</li>
+          <li>$\mathbb{K}$ は $\mathbb{R}$ か $\mathbb{C}$ のいずれかとする。$\mathbb{K}^n$, $M_{m,n}(\mathbb{K})$ も同様。</li>
+          <li>$\mathbb{K}$ 上のベクトル空間を <strong>$\mathbb{K}$-ベクトル空間</strong> という。$\mathbb{R}$-ベクトル空間 ＝ 実ベクトル空間、$\mathbb{C}$-ベクトル空間 ＝ 複素ベクトル空間。</li>
+        </ul>
+      </div>
+      <div class="note">
+        <span class="box-label">記号まとめ</span>
+        <table class="axiom-table">
+          <tr><th>記号</th><th>意味</th><th>例</th></tr>
+          <tr><td>$\mathbb{R}$</td><td>実数全体</td><td>$1, -3, \sqrt{2}, \pi$</td></tr>
+          <tr><td>$\mathbb{C}$</td><td>複素数全体</td><td>$1+2i,\ e^{i\theta}$</td></tr>
+          <tr><td>$\mathbb{K}$</td><td>$\mathbb{R}$ または $\mathbb{C}$（どちらかを固定）</td><td>—</td></tr>
+          <tr><td>$\mathbb{K}^n$</td><td>$n$ 次元縦ベクトルの空間</td><td>$\begin{pmatrix}1\\2\\3\end{pmatrix}\in\mathbb{R}^3$</td></tr>
+          <tr><td>$M_{m,n}(\mathbb{K})$</td><td>$m\times n$ 行列の空間</td><td>$\begin{pmatrix}1&2\\3&4\end{pmatrix}\in M_{2,2}(\mathbb{R})$</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== 定義1.1 =================== -->
+  <div class="section" id="def1-1">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 1.1</div>
+      <h2>ベクトル空間（vector space）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 1.1 — $\mathbb{K}$-ベクトル空間</span>
+        $\mathbb{K} = \mathbb{R}$ または $\mathbb{C}$。
+        組 $(V, +, 0, \cdot)$ が <strong>$\mathbb{K}$-ベクトル空間</strong>（vector space）であるとは、以下の (V1)〜(V11) をすべて満たすことをいう：
+        <ol style="margin-top:.8rem">
+          <li><strong>(V1)</strong> $V$ は集合である</li>
+          <li><strong>(V2)</strong> $0$ は $V$ の元である（<em>零元</em>、ゼロベクトル）</li>
+          <li><strong>(V3)</strong> $+$ および $\cdot$ はそれぞれ以下の写像である：
+            <ul style="margin-top:.4rem; list-style:disc; padding-left:1.4rem">
+              <li>$+: V\times V\to V,\quad (x,y)\mapsto x+y$ （$V$ の<em>加法</em>）</li>
+              <li>$\cdot: \mathbb{K}\times V\to V,\quad (a,x)\mapsto ax$ （<em>スカラー倍</em>）</li>
+            </ul>
+          </li>
+          <li><strong>(V4)</strong>（<em>可換律</em>）任意の $x,y\in V$ に対し $x+y = y+x$</li>
+          <li><strong>(V5)</strong>（<em>結合律</em>）任意の $x,y,z\in V$ に対し $(x+y)+z = x+(y+z)$</li>
+          <li><strong>(V6)</strong>（<em>零元の性質</em>）任意の $x\in V$ に対し $x+0 = 0+x = x$</li>
+          <li><strong>(V7)</strong>（<em>逆元の存在</em>）任意の $x\in V$ に対し、ある $y\in V$ が存在して $x+y = y+x = 0$</li>
+          <li><strong>(V8)</strong>（スカラー倍の分配・ベクトル側）任意の $a\in\mathbb{K},\ x,y\in V$ に対し $a(x+y)=ax+ay$</li>
+          <li><strong>(V9)</strong>（スカラー倍の分配・スカラー側）任意の $a,b\in\mathbb{K},\ x\in V$ に対し $(a+b)x=ax+bx$</li>
+          <li><strong>(V10)</strong>（スカラー倍の結合性）任意の $a,b\in\mathbb{K},\ x\in V$ に対し $(ab)x=a(bx)$</li>
+          <li><strong>(V11)</strong>（単位元）任意の $x\in V$ に対し $1\cdot x=x$</li>
+        </ol>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 11 個の条件の意味</span>
+        <table class="axiom-table">
+          <tr>
+            <th>グループ</th><th>公理</th><th>意味</th>
+          </tr>
+          <tr>
+            <td><strong>構造の定義</strong></td>
+            <td>(V1)–(V3)</td>
+            <td>「何が与えられているか」を宣言。$V$ は集合、$0\in V$、$+$ と $\cdot$ という 2 種類の演算が存在する。</td>
+          </tr>
+          <tr>
+            <td><strong>加法群の公理</strong></td>
+            <td>(V4)–(V7)</td>
+            <td>$(V, +, 0)$ が<em>可換群（アーベル群）</em>をなすことを保証。加法に関して「合理的な計算」ができる。</td>
+          </tr>
+          <tr>
+            <td><strong>スカラー倍の公理</strong></td>
+            <td>(V8)–(V11)</td>
+            <td>スカラー倍と加法が「矛盾なく共存」できることを保証。(V8)(V9) は分配法則、(V10) は結合性、(V11) は $1$ 倍恒等性。</td>
+          </tr>
+        </table>
+        <ul style="margin-top:.6rem">
+          <li><strong>(V3) の $\cdot$ はスカラー倍</strong>：$\mathbb{K}$ の元（スカラー）を $V$ の元に掛ける演算。ベクトル同士の「内積」とは全く別物。</li>
+          <li><strong>なぜ $\mathbb{K}=\mathbb{R}$ か $\mathbb{C}$ か</strong>：より一般の「体（field）」上でも同じ理論が展開できるが、この講義では実数・複素数に限る。</li>
+          <li><strong>$(V,+,0)$ はアーベル群</strong>：群とは「結合律・単位元・逆元」を持つ代数的構造。さらに可換律が加わったものをアーベル群という。</li>
+        </ul>
+        <h4 style="margin-top:1rem; margin-bottom:.4rem; font-size:.93em">各公理が「なぜ必要か」をもう少し掘り下げる</h4>
+        <ul>
+          <li>
+            <strong>(V4) 可換律 $x+y=y+x$</strong>：
+            この条件がないと、$x+y$ と $y+x$ は原理上「別物」になりうる（実際、行列の積は $AB\ne BA$ が一般的）。
+            ベクトルの加法には特別に「順序によらない」性質を課すことで、自由に式変形できるようにする。
+          </li>
+          <li>
+            <strong>(V5) 結合律 $(x+y)+z=x+(y+z)$</strong>：
+            「カッコの位置によらず結果が同じ」という保証。
+            これがあって初めて $x_1+x_2+\cdots+x_n$ というカッコなしの和が意味を持つ（定例 1.3 参照）。
+          </li>
+          <li>
+            <strong>(V6) 零元 $x+0=x$</strong>：
+            「何も足さない」ことを表す特別なベクトル $0$ の存在を宣言する。
+            ここで言う $0$ は<em>スカラーの $0$（$\mathbb{K}$ の零元）とは別物</em>で、$V$ の元（ゼロベクトル）であることに注意。
+            両者が同じ記号を使うのは慣習で、文脈から区別する。
+          </li>
+          <li>
+            <strong>(V7) 逆元 $x+(-x)=0$</strong>：
+            各ベクトル $x$ に対して、足すとゼロベクトルになる元 $-x$ の<em>存在</em>を保証する。
+            これがあって初めて「$x$ を右辺に移項して $-x$ を左辺に持ってくる」操作が正当化され、
+            引き算 $x-y \overset{\mathrm{def}}{=} x+(-y)$ も定義できる。
+            ただし (V7) は存在のみを言い、一意性は系 1.2(1) で証明して初めて「$-x$」と一意に書ける。
+          </li>
+          <li>
+            <strong>(V8) 分配法則（ベクトル側）$a(x+y)=ax+ay$</strong>：
+            「先に足してからスカラー倍」＝「別々にスカラー倍して足す」という自明に見えて必要な性質。
+            たとえば $2(x+y) = 2x+2y$ は中学数学で自明に使うが、
+            抽象的なベクトル空間でそれを言うにはこの公理が必要。
+          </li>
+          <li>
+            <strong>(V9) 分配法則（スカラー側）$(a+b)x=ax+bx$</strong>：
+            「スカラーを先に足してからベクトルに掛ける」＝「別々に掛けて足す」。
+            (V8) とセットで「スカラー倍と加法が矛盾なく共存する」ことを保証する。
+          </li>
+          <li>
+            <strong>(V10) 結合性 $(ab)x=a(bx)$</strong>：
+            「$x$ を $b$ 倍してから $a$ 倍する」のと「$x$ を $ab$ 倍する」のが同じ結果になる。
+            これがないと $\mathbb{K}$ の乗法と $V$ のスカラー倍の「連鎖」が整合しなくなる。
+          </li>
+          <li>
+            <strong>(V11) 単位元 $1\cdot x=x$</strong>：
+            $\mathbb{K}$ の乗法単位元 $1$ でスカラー倍しても変わらない。
+            スカラー倍の演算が $\mathbb{K}$ の乗法と「食い違わない」最低限の要請。
+          </li>
+        </ul>
+      </div>
+
+      <h3>ベクトル空間の例</h3>
+      <div class="ex">
+        <span class="box-label">例 1.1 — 標準的なベクトル空間</span>
+        <ul>
+          <li>$\mathbb{C}^n$：$\mathbb{C}$-ベクトル空間（複素 $n$ 次元縦ベクトル空間）</li>
+          <li>$\mathbb{R}^n$：$\mathbb{R}$-ベクトル空間（実 $n$ 次元縦ベクトル空間）</li>
+          <li>$M_{m,n}(\mathbb{K})$：$\mathbb{K}$-ベクトル空間（$m\times n$ 行列空間）</li>
+          <li>$M_{1,n}(\mathbb{C})$：$n$ 次元複素横ベクトル空間</li>
+        </ul>
+        <p style="margin-top:.6rem"><strong>関数空間</strong>（$-\infty < a < b \le +\infty$）：</p>
+        <ul>
+          <li>$C^\infty((a,b)) = \{\varphi:(a,b)\to\mathbb{C} \mid \varphi \text{ は } C^\infty \text{ 級（何回でも微分可能）}\}$</li>
+          <li>$C((a,b)) = \{\varphi:(a,b)\to\mathbb{C} \mid \varphi \text{ は連続}\}$</li>
+        </ul>
+        <p>いずれも $(f+g)(x) \overset{\text{def}}{=} f(x)+g(x)$、$(af)(x) \overset{\text{def}}{=} a\cdot f(x)$ により $\mathbb{C}$-ベクトル空間となる。</p>
+        <p><strong>注</strong>：$\{0\} = \{$零元のみからなる集合$\}$ も $\mathbb{K}$-ベクトル空間（<em>零ベクトル空間</em>）。最小のベクトル空間である。</p>
+      </div>
+
+      <h3 id="verify-example">具体的な確認：$\mathbb{R}^2$ はベクトル空間か</h3>
+      <div class="ex">
+        <span class="box-label">例 — $\mathbb{R}^2$ が $\mathbb{R}$-ベクトル空間であることの確認</span>
+        <p>
+          $V = \mathbb{R}^2 = \left\{\begin{pmatrix}x\\y\end{pmatrix}\middle| x,y\in\mathbb{R}\right\}$,
+          $0 = \begin{pmatrix}0\\0\end{pmatrix}$,
+          $\begin{pmatrix}x_1\\y_1\end{pmatrix}+\begin{pmatrix}x_2\\y_2\end{pmatrix} = \begin{pmatrix}x_1+x_2\\y_1+y_2\end{pmatrix}$,
+          $a\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}ax\\ay\end{pmatrix}$
+          と定める。
+        </p>
+        <table class="axiom-table" style="margin-top:.6rem">
+          <tr><th>公理</th><th>確認</th><th style="text-align:center">成立</th></tr>
+          <tr>
+            <td>(V1)</td>
+            <td>$\mathbb{R}^2$ は集合である</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+          <tr>
+            <td>(V2)</td>
+            <td>$\begin{pmatrix}0\\0\end{pmatrix}\in\mathbb{R}^2$</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+          <tr>
+            <td>(V3)</td>
+            <td>$+$ は $\mathbb{R}^2\times\mathbb{R}^2\to\mathbb{R}^2$、$\cdot$ は $\mathbb{R}\times\mathbb{R}^2\to\mathbb{R}^2$（成分の演算は $\mathbb{R}$ に閉じている）</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+          <tr>
+            <td>(V4)</td>
+            <td>$\begin{pmatrix}x_1+x_2\\y_1+y_2\end{pmatrix} = \begin{pmatrix}x_2+x_1\\y_2+y_1\end{pmatrix}$（実数の可換律より）</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+          <tr>
+            <td>(V5)</td>
+            <td>$\begin{pmatrix}(x_1{+}x_2){+}x_3\\(y_1{+}y_2){+}y_3\end{pmatrix} = \begin{pmatrix}x_1{+}(x_2{+}x_3)\\y_1{+}(y_2{+}y_3)\end{pmatrix}$（実数の結合律より）</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+          <tr>
+            <td>(V6)</td>
+            <td>$\begin{pmatrix}x+0\\y+0\end{pmatrix} = \begin{pmatrix}x\\y\end{pmatrix}$</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+          <tr>
+            <td>(V7)</td>
+            <td>$\begin{pmatrix}x\\y\end{pmatrix}$ の逆元は $\begin{pmatrix}-x\\-y\end{pmatrix}$（$\mathbb{R}$ で $x+(-x)=0$）</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+          <tr>
+            <td>(V8)</td>
+            <td>$a\begin{pmatrix}x_1+x_2\\y_1+y_2\end{pmatrix} = \begin{pmatrix}a(x_1+x_2)\\a(y_1+y_2)\end{pmatrix} = \begin{pmatrix}ax_1+ax_2\\ay_1+ay_2\end{pmatrix}$</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+          <tr>
+            <td>(V9)</td>
+            <td>$(a+b)\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}(a+b)x\\(a+b)y\end{pmatrix} = \begin{pmatrix}ax+bx\\ay+by\end{pmatrix}$</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+          <tr>
+            <td>(V10)</td>
+            <td>$(ab)\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}abx\\aby\end{pmatrix} = a\begin{pmatrix}bx\\by\end{pmatrix}$</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+          <tr>
+            <td>(V11)</td>
+            <td>$1\cdot\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}1\cdot x\\1\cdot y\end{pmatrix} = \begin{pmatrix}x\\y\end{pmatrix}$</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+        </table>
+        <p style="margin-top:.5rem">11 個すべてを満たすので $\mathbb{R}^2$ は $\mathbb{R}$-ベクトル空間。<br>
+        同様に $\mathbb{K}^n$ も $\mathbb{K}$-ベクトル空間であることが成分ごとに確認できる。</p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">注意 — ベクトル空間でない例</span>
+        <p><strong>$\mathbb{Z}^2$（整数の格子点）は $\mathbb{R}$-ベクトル空間でない。</strong></p>
+        <p>
+          $\mathbb{Z}^2 = \left\{\begin{pmatrix}m\\n\end{pmatrix}\middle| m,n\in\mathbb{Z}\right\}$ に普通の加法・スカラー倍を入れると (V3) が破れる。
+          たとえば $\frac{1}{2}\in\mathbb{R}$ に対して
+          $\frac{1}{2}\cdot\begin{pmatrix}1\\0\end{pmatrix} = \begin{pmatrix}1/2\\0\end{pmatrix} \notin \mathbb{Z}^2$。
+          スカラー倍の結果が $\mathbb{Z}^2$ に入らないため、$\cdot$ が $\mathbb{R}\times\mathbb{Z}^2\to\mathbb{Z}^2$ という写像にならない。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系1.2 =================== -->
+  <div class="section" id="cor1-2">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 1.2</div>
+      <h2>系 1.2 — ベクトル空間の基本性質</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="prop">
+        <span class="box-label">系 1.2 — すぐわかること</span>
+        $V$ を $\mathbb{K}$-ベクトル空間とする。
+        <ol>
+          <li>（逆元の一意性）$x+z=0$ かつ $x+y=0$ ならば $z=y$。よってこのような元を $-x$ と書く。</li>
+          <li>$0\cdot x = 0 \quad (x\in V)$　&emsp;<span style="color:#555;font-size:.9em">（スカラーの $0$ で掛けるとゼロベクトルになる）</span></li>
+          <li>$(-1)\cdot x = -x$　&emsp;<span style="color:#555;font-size:.9em">（$-1$ 倍すると逆元になる）</span></li>
+        </ol>
+        また、$x+(-y)$ のことを $x-y$ と書く。
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>系 1.2 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          <strong>(1) 逆元の一意性</strong>：<br>
+          $x+z=0$ かつ $x+y=0$ と仮定する（どちらも $x$ の「逆元」の候補）。
+          $z=y$ を示す。各等号に使う公理を【】で示す：
+          $$\begin{aligned}
+            z &\overset{[\text{V6}]}{=} z + 0 \\
+              &\overset{[\text{V7}]}{=} z + (x+y) \quad (x+y=0\text{ を使用}) \\
+              &\overset{[\text{V5}]}{=} (z+x)+y \quad (\text{結合律}) \\
+              &\overset{[\text{V4}]}{=} (x+z)+y \quad (\text{可換律}) \\
+              &\overset{[\text{仮定}]}{=} 0+y \quad (x+z=0\text{ を使用}) \\
+              &\overset{[\text{V6}]}{=} y
+          \end{aligned}$$
+          <em>ポイント</em>：「$x+y=0$（一方の逆元条件）」と「$x+z=0$（もう一方の逆元条件）」を
+          うまく組み合わせて $z$ と $y$ が等しいことを導く。証明の出発点は $z = z+0$ という恒等式から始めること。<br><br>
+
+          <strong>(2) $0\cdot x = 0$</strong>：<br>
+          スカラーの $0$（$\mathbb{K}$ の零元）でベクトル $x$ を掛けるとゼロベクトルになることを示す。
+          $$\begin{aligned}
+            0\cdot x
+              &\overset{(\text{V9})}{=} (0+0)\cdot x = 0\cdot x + 0\cdot x
+          \end{aligned}$$
+          両辺に $-(0\cdot x)$ を加えると（V7）：
+          $$0 = 0\cdot x$$
+          <p style="margin-top:.3rem">
+            <em>ポイント</em>：$\mathbb{K}$ での等式 $0 + 0 = 0$（自明）を V9（分配法則）で使うと
+            $0 \cdot x = 0 \cdot x + 0 \cdot x$ が得られ，両辺から $0 \cdot x$ を引くだけで証明できる。
+            「当たり前に見えること」でも公理から厳密に導く必要があるが，最短の証明は案外シンプルである。
+          </p>
+          <br>
+
+          <strong>(3) $(-1)\cdot x = -x$</strong>：<br>
+          $x + (-1)x = 1x + (-1)x = (1+(-1))x = 0\cdot x = 0$ より、$(-1)x$ は $x$ の逆元。(1) の一意性より $(-1)x = -x$。
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 系 1.2 の読み方</span>
+        <ul>
+          <li><strong>(1) 逆元の一意性</strong>：(V7) は「逆元が存在する」と言っているが、一意性は保証していない。系 1.2(1) でそれが証明される。だから $-x$ という記法が一意に定まる。</li>
+          <li><strong>(2) ふたつの「$0$」の区別</strong>：$0\cdot x = 0$ の左辺の $0$ は<em>スカラー</em>（$\mathbb{K}$ の元）、右辺の $0$ は<em>ゼロベクトル</em>（$V$ の元）。同じ記号だが意味が違う。</li>
+          <li><strong>(3) 符号の整合性</strong>：「$-1$ 倍が逆元になる」は自明でなく、公理から証明が必要な事実。</li>
+          <li>同様に $a\cdot 0 = 0$（任意の $a\in\mathbb{K}$、$0\in V$）も公理から示せる。</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定例1.3 =================== -->
+  <div class="section" id="def1-3">
+    <div class="sec-header">
+      <div class="sec-tag">Remark 1.3</div>
+      <h2>定例 1.3 — $n$ 個の元の和と一次結合</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">定例 1.3 — $n \ge 3$ 個の和</span>
+        <p>
+          $n$ 個の元 $x_1,\ldots,x_n\in V$ に対して $x_1+\cdots+x_n$ を、「2 個の元の和」の繰り返しとして定義する。
+          <strong>どのようなカッコのつけ方をしても結果は同じ</strong>（$n$ についての帰納法で示せる）ので、カッコを外して書いてよい。
+        </p>
+        <h4>$n=4$ のときの例（カッコの付け方は 5 通り）</h4>
+        <p>$x_1, x_2, x_3, x_4 \in V$ に対して、以下の 5 通りはすべて等しい：</p>
+        <div class="mathblock">
+          $$\begin{aligned}
+            &((x_1+x_2)+x_3)+x_4 \\
+            &(x_1+x_2)+(x_3+x_4) \\
+            &x_1+(x_2+(x_3+x_4)) \\
+            &(x_1+(x_2+x_3))+x_4 \\
+            &x_1+((x_2+x_3)+x_4)
+          \end{aligned}$$
+        </div>
+        <p>これはみな結合律 (V5) を組み合わせて示せる。一般の $n$ については $n$ についての帰納法で証明（オンデマンドで配信予定）。</p>
+        <p style="margin-top:.6rem">
+          これにより、$a_1,\ldots,a_n\in\mathbb{K}$、$x_1,\ldots,x_n\in V$ に対して
+          $$a_1 x_1 + a_2 x_2 + \cdots + a_n x_n$$
+          という<strong>一次結合</strong>（線形結合、linear combination）が意味を持つ。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 — $\mathbb{R}^3$ における一次結合</span>
+        $v_1 = \begin{pmatrix}1\\0\\0\end{pmatrix}$, $v_2 = \begin{pmatrix}0\\1\\0\end{pmatrix}$, $v_3 = \begin{pmatrix}0\\0\\1\end{pmatrix}$ として、スカラー $a_1=2, a_2=-1, a_3=3$ による一次結合は：
+        $$2v_1 + (-1)v_2 + 3v_3 = \begin{pmatrix}2\\0\\0\end{pmatrix} + \begin{pmatrix}0\\-1\\0\end{pmatrix} + \begin{pmatrix}0\\0\\3\end{pmatrix} = \begin{pmatrix}2\\-1\\3\end{pmatrix}$$
+        実は $\mathbb{R}^3$ の任意のベクトルはこの $v_1, v_2, v_3$（基本単位ベクトル）の一次結合で表せる。
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 一次結合の幾何的イメージ</span>
+        <p>
+          一次結合 $a_1v_1+\cdots+a_kv_k$ は「$v_1$ を $a_1$ 倍し、$v_2$ を $a_2$ 倍し、…すべて足し合わせてできるベクトル」。
+          スカラー $a_i$ を動かすことで、どんなベクトルが作れるかが変わる。
+        </p>
+        <ul>
+          <li>
+            <strong>1 本のベクトル $v$ のスカラー倍全体</strong>：
+            $\{av \mid a\in\mathbb{R}\}$（$= \langle v\rangle_{\mathbb{R}}$）は、
+            $v$ を延長・縮小・反転させた直線（原点を通る）。
+            $a=2$ は「$v$ の 2 倍の長さ」、$a=-1$ は「逆向き」、$a=0$ は「原点」。
+          </li>
+          <li>
+            <strong>2 本のベクトル $v_1, v_2$（平行でない）の一次結合</strong>：
+            $\{a_1v_1+a_2v_2\mid a_1,a_2\in\mathbb{R}\}$ は平面全体に広がる。
+            $v_1, v_2$ が「2 方向の基準」となり、平面内の任意の点に到達できる。
+          </li>
+          <li>
+            <strong>2 本のベクトル $v_1, v_2$（平行）の一次結合</strong>：
+            $v_2 = cv_1$（$c$ は定数）のとき、$a_1v_1+a_2v_2 = (a_1+ca_2)v_1$。
+            結局 $v_1$ の実数倍全体と同じで、直線になるにとどまる。
+          </li>
+        </ul>
+        <p style="margin-top:.4rem">
+          「$v_1,\ldots,v_k$ の一次結合全体」が §2 で学ぶ
+          <strong>span $\langle v_1,\ldots,v_k\rangle$</strong>（生成された部分空間）であり、
+          どの方向が「$v_1,\ldots,v_k$ で到達可能か」を表す。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 定義1.4 線形写像 =================== -->
+  <div class="section" id="def1-4">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 1.4</div>
+      <h2>線形写像（linear map）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">準備 — 「写像」とは何か</span>
+        <p>
+          「写像（map）」とは、集合 $X$ の各元 $x$ に対して集合 $Y$ の元をちょうど 1 つ対応させる規則のこと。
+          $f: X\to Y$，$x\mapsto f(x)$ と書く。高校数学の「関数 $f(x)$」を、実数以外の集合に一般化した概念。
+        </p>
+        <table class="axiom-table">
+          <tr><th>名称</th><th>記号</th><th>意味</th><th>例</th></tr>
+          <tr>
+            <td>定義域（domain）</td>
+            <td>$X$</td>
+            <td>入力の集合。$f$ に「入れてよい値」の全体。</td>
+            <td>$f:\mathbb{R}^2\to\mathbb{R}$のとき $X=\mathbb{R}^2$</td>
+          </tr>
+          <tr>
+            <td>値域（codomain）</td>
+            <td>$Y$</td>
+            <td>出力の集合として宣言した集合。</td>
+            <td>同上のとき $Y=\mathbb{R}$</td>
+          </tr>
+          <tr>
+            <td>像（image）</td>
+            <td>$f(X)$</td>
+            <td>実際に出力として現れる $Y$ の部分集合 $\{f(x)\mid x\in X\}$。</td>
+            <td>$f(x,y)=x^2+y^2$ なら $f(\mathbb{R}^2)=[0,\infty)$</td>
+          </tr>
+        </table>
+        <p style="margin-top:.6rem">
+          <strong>「写像である」ことの確認</strong>：$f:X\to Y$ が写像であるための必要十分条件は、
+          $X$ の<em>すべての</em>元 $x$ に対して $f(x)\in Y$ がちょうど 1 つ定まること（多値でも未定義でもない）。
+          $V$ の元への作用を「式で与える」場合、式が $V$ の元から $W$ の元に一意に対応しているか確認すれば十分。
+        </p>
+        <p>
+          特に (V3) の「$+: V\times V\to V$」とは、2 つのベクトル $(x,y)$ の組に対して
+          $x+y$ というベクトルをちょうど 1 つ返す規則がある、という宣言である。
+          この写像が存在することは「ベクトルを足すと必ずまたベクトルが出てくる（$V$ の外に飛び出さない）」
+          ことを意味する。これを <strong>$V$ が加法に関して<em>閉じている</em></strong> ともいう。
+        </p>
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 1.4 — $\mathbb{K}$-線形写像</span>
+        $V, W$: $\mathbb{K}$-ベクトル空間。写像 $T: V\to W$ が <strong>$\mathbb{K}$-線形写像</strong> であるとは、以下の (L1), (L2) をともに満たすことをいう：
+        <ul style="margin-top:.6rem">
+          <li><strong>(L1)</strong> 任意の $x,y\in V$ に対して $T(x+y) = T(x)+T(y)$　（加法を保つ）</li>
+          <li><strong>(L2)</strong> 任意の $a\in\mathbb{K},\ x\in V$ に対して $T(ax) = aT(x)$　（スカラー倍を保つ）</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 線形写像の直感</span>
+        <ul>
+          <li>
+            <strong>(L1) 加法を保つ</strong>：「先に足してから $T$ を適用」しても「先に $T$ を適用してから足す」しても、結果が同じ。
+            <br>図式で書くと：
+            $$x, y \xrightarrow{\text{足す}} x+y \xrightarrow{T} T(x+y) \quad\text{と}\quad x, y \xrightarrow{T} T(x), T(y) \xrightarrow{\text{足す}} T(x)+T(y)$$
+            が等しい、ということ。「$T$ を適用する前後で足し算の結果が変わらない」。
+          </li>
+          <li>
+            <strong>(L2) スカラー倍を保つ</strong>：「先にスカラー倍してから $T$」しても「先に $T$ してからスカラー倍」しても、結果が同じ。
+            <br>すなわち、$ax \xrightarrow{T} T(ax)$ と $x \xrightarrow{T} T(x) \xrightarrow{a\text{ 倍}} aT(x)$ が等しい。
+          </li>
+          <li>
+            <strong>合わせると</strong>：$T(ax+by) = aT(x)+bT(y)$（一次結合を保つ）。これが「線形」の本質。<br>
+            さらに一般に $T(a_1x_1+\cdots+a_nx_n) = a_1T(x_1)+\cdots+a_nT(x_n)$（系 1.5(3) で証明）。
+          </li>
+          <li>
+            <strong>なぜ「線形」という名前か</strong>：
+            $\mathbb{R}\to\mathbb{R}$ の線形写像は $T(x)=cx$（原点を通る直線）の形のみ。
+            「定数 $c$ でスケーリングする」こと以外できない。
+            これを高次元・抽象的な設定に一般化したものが「線形写像」であり、
+            行列によるベクトルの変換がその典型例。
+          </li>
+          <li>
+            <strong>$\mathbb{K}^n\to\mathbb{K}^m$ の場合</strong>：線形写像は<strong>行列で完全に記述</strong>できる（例 1 参照）。
+            逆に言えば、$\mathbb{K}^n\to\mathbb{K}^m$ の線形写像と $m\times n$ 行列は 1 対 1 に対応する。
+          </li>
+        </ul>
+        <p style="margin-top:.5rem">
+          <strong>非線形写像との対比</strong>：$f(x)=x^2$, $g(x)=\sin x$, $h(x)=x+1$ はどれも非線形。
+          例えば $h(x+y)=(x+y)+1$ だが $h(x)+h(y)=(x+1)+(y+1)=x+y+2\ne h(x+y)$。
+          「$+1$」というシフトが線形性を壊す。線形写像は必ず $T(0)=0$（系 1.5(1)）を満たすから、
+          「原点を原点に移さない写像」はすべて非線形。
+        </p>
+      </div>
+
+      <h3>線形写像の確認例</h3>
+
+      <div class="ex">
+        <span class="box-label">例題 A — $T$ が線形写像であることの確認</span>
+        <p>$T: \mathbb{R}^2\to\mathbb{R}^2$, $T\begin{pmatrix}x\\y\end{pmatrix} = \begin{pmatrix}2x+y\\x-3y\end{pmatrix}$ は線形写像か？</p>
+        <div class="sol">
+          <span class="box-label">解答</span>
+          <strong>(L1) の確認</strong>：
+          $$T\!\left(\begin{pmatrix}x_1\\y_1\end{pmatrix}+\begin{pmatrix}x_2\\y_2\end{pmatrix}\right)
+            = T\begin{pmatrix}x_1+x_2\\y_1+y_2\end{pmatrix}
+            = \begin{pmatrix}2(x_1+x_2)+(y_1+y_2)\\(x_1+x_2)-3(y_1+y_2)\end{pmatrix}
+            = \begin{pmatrix}(2x_1+y_1)+(2x_2+y_2)\\(x_1-3y_1)+(x_2-3y_2)\end{pmatrix}$$
+          $$T\begin{pmatrix}x_1\\y_1\end{pmatrix}+T\begin{pmatrix}x_2\\y_2\end{pmatrix}
+            = \begin{pmatrix}2x_1+y_1\\x_1-3y_1\end{pmatrix}+\begin{pmatrix}2x_2+y_2\\x_2-3y_2\end{pmatrix}
+            = \begin{pmatrix}(2x_1+y_1)+(2x_2+y_2)\\(x_1-3y_1)+(x_2-3y_2)\end{pmatrix}$$
+          両者が一致するので (L1) が成立。<br><br>
+          <strong>(L2) の確認</strong>：
+          $$T\!\left(a\begin{pmatrix}x\\y\end{pmatrix}\right) = T\begin{pmatrix}ax\\ay\end{pmatrix} = \begin{pmatrix}2ax+ay\\ax-3ay\end{pmatrix} = a\begin{pmatrix}2x+y\\x-3y\end{pmatrix} = aT\begin{pmatrix}x\\y\end{pmatrix}$$
+          (L2) も成立。よって $T$ は線形写像。<br><br>
+          <strong>行列表示</strong>：$T = T_A$ （例 1 参照）で、$A = \begin{pmatrix}2&1\\1&-3\end{pmatrix}$。
+        </div>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">注意 — 線形写像でない例</span>
+        <p><strong>例 B：$f: \mathbb{R}\to\mathbb{R}$, $f(x) = x+1$ は線形写像でない。</strong></p>
+        <p>(L1) を確認する：$f(x+y) = (x+y)+1$, 一方 $f(x)+f(y) = (x+1)+(y+1) = x+y+2$。
+        一般に $f(x+y)\ne f(x)+f(y)$（$1\ne 2$）。また系 1.5(1) より線形写像は $T(0)=0$ を満たすが、$f(0)=1\ne 0$。</p>
+        <p><strong>例 C：$g: \mathbb{R}\to\mathbb{R}$, $g(x) = x^2$ は線形写像でない。</strong></p>
+        <p>$g(1+1) = 4$ だが $g(1)+g(1) = 1+1 = 2\ne 4$。</p>
+        <p style="margin-top:.4rem"><em>グラフが原点を通る直線でなければ（$\mathbb{R}\to\mathbb{R}$ の場合）線形でないことが多い。</em></p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 系1.5 =================== -->
+  <div class="section" id="cor1-5">
+    <div class="sec-header">
+      <div class="sec-tag">Corollary 1.5</div>
+      <h2>系 1.5 — 線形写像のすぐわかること</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="prop">
+        <span class="box-label">系 1.5</span>
+        $T: V\to W$ が線形写像ならば：
+        <ol>
+          <li>$T(0) = 0$</li>
+          <li>$T(-x) = -T(x) \quad (x\in V)$</li>
+          <li>$T(a_1 x_1+\cdots+a_n x_n) = a_1 T(x_1)+\cdots+a_n T(x_n)$　（一次結合を保つ）</li>
+        </ol>
+      </div>
+
+      <details>
+        <summary>系 1.5 の証明（クリックで展開）</summary>
+        <div class="proof-body">
+          <strong>(1)</strong>：$T(0) = T(0\cdot 0) = 0\cdot T(0) = 0$（L2 と 系1.2(2) より）<br><br>
+          <strong>(2)</strong>：$T(-x) = T((-1)x) = (-1)T(x) = -T(x)$（L2 と 系1.2(3) より）<br><br>
+          <strong>(3)</strong>：$n$ についての帰納法。<br>
+          <em>$n=1$ のとき</em>：$T(a_1 x_1)=a_1 T(x_1)$（(L2) そのもの）。✓<br>
+          <em>$n=2$ のとき</em>：$T(a_1 x_1 + a_2 x_2)=T(a_1 x_1)+T(a_2 x_2)$（(L1)）$= a_1 T(x_1)+a_2 T(x_2)$（(L2) を各項に適用）。✓<br>
+          <em>$n-1$ のとき成立すると仮定して $n$ のとき</em>：
+          $$T\!\left(\sum_{i=1}^n a_i x_i\right)
+            = T\!\left(\sum_{i=1}^{n-1}a_i x_i + a_n x_n\right)
+            \overset{(\text{L1})}{=} T\!\left(\sum_{i=1}^{n-1}a_i x_i\right) + T(a_n x_n)
+            \overset{\text{帰納法仮定}}{=} \sum_{i=1}^{n-1}a_i T(x_i) + a_n T(x_n)
+            = \sum_{i=1}^n a_i T(x_i)$$
+          <div class="qed">$\blacksquare$</div>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足 — 系 1.5 の使い方と意義</span>
+        <p><strong>(1) $T(0)=0$ の意義</strong>：
+          線形写像は必ず<em>原点を原点に写す</em>。これを逆用すると、$T(0)\ne 0$ であれば
+          $T$ は線形写像でないと即座に判定できる。
+          例えば $T(x)=x+1$（$T(0)=1\ne 0$）は線形写像でない。
+          「まず $T(0)$ を計算する」のは線形性確認の最初のチェックとして有効。
+        </p>
+        <p style="margin-top:.5rem"><strong>(2) $T(-x)=-T(x)$ の意義</strong>：
+          線形写像は符号（逆元）を保つ。$-x$ を写すと必ず $T(x)$ の逆元になる。
+          これも線形性チェックの補助として使える。
+        </p>
+        <p style="margin-top:.5rem"><strong>(3) 一次結合の保存（最重要）</strong>：
+          $T$ の値は $T(x_1),\ldots,T(x_n)$ を知れば、その一次結合
+          $a_1x_1+\cdots+a_nx_n$ の値がすべて決まる。
+          すなわち $V$ の「適切な有限個のベクトル（後に学ぶ「基底」）」における $T$ の値を
+          指定するだけで、$T$ 全体が決まる。
+        </p>
+        <p>
+          たとえば $T:\mathbb{R}^n\to\mathbb{K}^m$ の場合、基本単位ベクトル $e_1,\ldots,e_n$ に対する
+          $T(e_1),\ldots,T(e_n)$ を決めるだけで $T$ 全体が決まり、
+          それが行列 $A=(T(e_1)\mid\cdots\mid T(e_n))$ による表示に相当する（例 1 参照）。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 線形写像の例 =================== -->
+  <div class="section" id="examples">
+    <div class="sec-header">
+      <div class="sec-tag">Examples</div>
+      <h2>線形写像の例</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">例 1 — 行列による線形写像（最重要例）</span>
+        <p>$A\in M_{m,n}(\mathbb{K})$ とする。</p>
+        $$T_A: \mathbb{K}^n \to \mathbb{K}^m, \quad v \mapsto Av$$
+        <p>は $\mathbb{K}$-線形写像である（行列の演算規則から容易に確認できる）。</p>
+        <p><strong>逆方向（重要）</strong>：任意の線形写像 $T:\mathbb{K}^n\to\mathbb{K}^m$ に対して</p>
+        $$T = T_{(T(e_1)\mid T(e_2)\mid\cdots\mid T(e_n))}$$
+        <p>と行列で表示できる。ここで $e_1,\ldots,e_n$ は $\mathbb{K}^n$ の基本単位ベクトル（$e_j$ は $j$ 番目成分が 1、他は 0）。
+        この行列 $A = (T(e_1)\mid\cdots\mid T(e_n))$ を $T$ の<strong>行列表示</strong>という。</p>
+        <p><strong>理由</strong>：任意の $v = \begin{pmatrix}v_1\\\vdots\\v_n\end{pmatrix} = v_1 e_1+\cdots+v_n e_n$ に対して</p>
+        $$T(v) = v_1 T(e_1)+\cdots+v_n T(e_n) = (T(e_1)\mid\cdots\mid T(e_n))\begin{pmatrix}v_1\\\vdots\\v_n\end{pmatrix} = Av$$
+        （系 1.5(3) を使用）
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例題 — 行列表示を使った計算</span>
+        <p>$T:\mathbb{R}^3\to\mathbb{R}^2$ を線形写像で、基本単位ベクトルへの作用が</p>
+        $$T(e_1) = \begin{pmatrix}1\\2\end{pmatrix},\quad T(e_2) = \begin{pmatrix}3\\-1\end{pmatrix},\quad T(e_3) = \begin{pmatrix}0\\4\end{pmatrix}$$
+        <p>で与えられているとき、$T\begin{pmatrix}2\\-1\\3\end{pmatrix}$ を求めよ。</p>
+        <div class="sol">
+          <span class="box-label">解答</span>
+          行列表示は $A = \begin{pmatrix}1&3&0\\2&-1&4\end{pmatrix}$。
+          \begin{align}
+            T\begin{pmatrix}2\\-1\\3\end{pmatrix} &= 2T(e_1) - T(e_2) + 3T(e_3) \\
+            &= 2\begin{pmatrix}1\\2\end{pmatrix} - \begin{pmatrix}3\\-1\end{pmatrix} + 3\begin{pmatrix}0\\4\end{pmatrix} = \begin{pmatrix}2-3+0\\4+1+12\end{pmatrix} = \begin{pmatrix}-1\\17\end{pmatrix}
+          \end{align}
+          行列計算でも確認：$A\begin{pmatrix}2\\-1\\3\end{pmatrix} = \begin{pmatrix}1(2)+3(-1)+0(3)\\2(2)+(-1)(-1)+4(3)\end{pmatrix} = \begin{pmatrix}-1\\17\end{pmatrix}$。
+        </div>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 2 — 左積による線形写像</span>
+        $A\in M_{m,n}(\mathbb{K})$ とする。
+        $$M_{n,\ell}(\mathbb{K}) \to M_{m,\ell}(\mathbb{K}), \quad X \mapsto AX$$
+        は $\mathbb{K}$-線形写像である。（行列の分配法則 $A(X+Y)=AX+AY$, $A(\lambda X)=\lambda AX$ より。）
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 3 — 微分作用素（differential operator）</span>
+        <p>$-\infty < a < b < +\infty$, $f_0(x),\ldots,f_k(x)\in C^\infty((a,b))$ として、微分作用素</p>
+        $$P = f_k(x)\frac{d^k}{dx^k} + \cdots + f_1(x)\frac{d}{dx} + f_0(x)$$
+        <p>を次の写像として定める：</p>
+        $$P: C^\infty((a,b)) \to C^\infty((a,b)), \quad \varphi \mapsto \sum_{r=1}^k f_r(x)\frac{d^r\varphi}{dx^r} + f_0(x)\varphi(x)$$
+        <p>これは $\mathbb{C}$-線形写像である。</p>
+        <div class="note" style="margin-top:.5rem">
+          <span class="box-label">補足 — なぜ線形か</span>
+          微分は線形演算である：$(f+g)' = f'+g'$（和の微分）、$(cf)' = cf'$（定数倍の微分）。
+          これがまさに (L1)(L2) に対応する。よって $P$ の線形性は微分の線形性から従う。<br>
+          <strong>具体例</strong>：$P = \frac{d}{dx} - 2x$ のとき $P\varphi = \varphi' - 2x\varphi$。これが線形写像であることは、常微分方程式の理論において重要。
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 全射・単射（準備） =================== -->
+  <div class="section" id="inj-surj">
+    <div class="sec-header">
+      <div class="sec-tag">Preparation</div>
+      <h2>全射・単射・全単射</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="note">
+        <span class="box-label">用語の整理 — 全射・単射・全単射</span>
+        <p>
+          次節の同型写像の定義に「全単射」という概念が使われる。ここで整理しておく。
+          写像 $f: X\to Y$ に対して：
+        </p>
+        <table class="axiom-table">
+          <tr>
+            <th>名称</th><th>定義</th><th>直感</th><th>逆写像</th>
+          </tr>
+          <tr>
+            <td><strong>単射（injective）</strong></td>
+            <td>$x_1\ne x_2 \Rightarrow f(x_1)\ne f(x_2)$<br>
+              <em>同値：$f(x_1)=f(x_2)\Rightarrow x_1=x_2$</em></td>
+            <td>異なる入力は必ず異なる出力になる。「情報が失われない」。</td>
+            <td rowspan="2">全単射のときのみ存在</td>
+          </tr>
+          <tr>
+            <td><strong>全射（surjective）</strong></td>
+            <td>任意の $y\in Y$ に対し、$f(x)=y$ となる $x\in X$ が存在する</td>
+            <td>$Y$ の元すべてに「到達できる」。行き先のない $y$ がない。$f(X)=Y$。</td>
+          </tr>
+          <tr>
+            <td><strong>全単射（bijective）</strong></td>
+            <td>単射かつ全射</td>
+            <td>$X$ と $Y$ の元が完全に 1 対 1 に対応する。</td>
+            <td>逆写像 $f^{-1}:Y\to X$ が存在（$f\circ f^{-1}=\mathrm{id}_Y$，$f^{-1}\circ f=\mathrm{id}_X$）</td>
+          </tr>
+        </table>
+        <p style="margin-top:.7rem"><strong>具体例（$f:\mathbb{R}\to\mathbb{R}$）</strong></p>
+        <ul>
+          <li>$f(x)=2x+1$：単射かつ全射 → <strong>全単射</strong>。逆写像 $f^{-1}(y)=\frac{y-1}{2}$ が存在。</li>
+          <li>$f(x)=x^2$：全射でも単射でもない。$f(1)=f(-1)=1$（単射でない）、$y=-1$ に届かない（全射でない）。</li>
+          <li>$f(x)=e^x$：単射だが全射でない。$e^x>0$ なので $y\le 0$ に届かない。</li>
+          <li>$f(x)=x^3$：全単射。$f^{-1}(y)=y^{1/3}$。</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 単射性の言い換えがなぜ成り立つか</span>
+        <p>
+          単射の定義 「$x_1\ne x_2\Rightarrow f(x_1)\ne f(x_2)$」 の<em>対偶</em> をとると
+          「$f(x_1)=f(x_2)\Rightarrow x_1=x_2$」になる。
+          論理的に対偶は元の命題と同値なので、どちらを確認してもよい。
+          実際の証明では対偶形式 「$f(x_1)=f(x_2)$ と仮定して $x_1=x_2$ を示す」方が計算しやすいことが多い。
+        </p>
+        <p style="margin-top:.4rem">
+          線形写像 $T:V\to W$ の単射性判定には、さらに便利な特徴付けがある（定理 3.3）：
+          $$T\text{ が単射} \iff \operatorname{Ker}(T)=\{0\}$$
+          一般の写像では「すべての $y$ に対して $T^{-1}(y)$ が高々 1 元」を調べる必要があるが、
+          線形写像では $y=0$ の場合だけ確認すれば十分というのが驚くべき事実である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 同型写像 =================== -->
+  <div class="section" id="iso">
+    <div class="sec-header">
+      <div class="sec-tag">Definition 1.6 / 1.7</div>
+      <h2>同型写像・同型</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="prop">
+        <span class="box-label">命題 1.6</span>
+        $T: V\to W$ が $\mathbb{K}$-線形写像かつ<strong>全単射</strong>であるならば、逆写像 $T^{-1}:W\to V$ も線形写像になる。
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 1.7 — 同型写像・同型</span>
+        $V, W$: $\mathbb{K}$-ベクトル空間。
+        <ol>
+          <li>$T: V\to W$ が全単射な線形写像のことを <strong>同型写像（isomorphism）</strong> といい、$T: V\xrightarrow{\sim} W$ と書く。</li>
+          <li>$V$ と $W$ が<strong>同型（isomorphic）</strong>であるとは、ある同型写像 $T: V\xrightarrow{\sim} W$ が存在することをいい、$V\cong W$ と書く。</li>
+        </ol>
+      </div>
+
+      <div class="prop">
+        <span class="box-label">同型の基本性質（同値関係）</span>
+        <ul>
+          <li>$V \cong V$　（反射律：$\operatorname{id}_V$ が同型写像）</li>
+          <li>$V\cong W$ ならば $W\cong V$　（対称律：$T^{-1}$ が同型写像）</li>
+          <li>$V\cong W$ かつ $W\cong U$ ならば $V\cong U$　（推移律：$S\circ T$ が同型写像）</li>
+        </ul>
+        <p style="margin-top:.5rem">「$\cong$」はベクトル空間の間の同値関係をなす。</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 同型の直感</span>
+        <ul>
+          <li><strong>「同型 ＝ ラベルの貼り替え」</strong>：$V\cong W$ のとき、$T$ は $V$ の各元と $W$ の各元を 1 対 1 に対応させる「辞書」。ベクトル空間としての加法・スカラー倍の<em>構造は完全に同じ</em>で、元の「名前（ラベル）」だけが異なる。</li>
+          <li><strong>全単射が必要な理由</strong>：単射でないと複数の元が同じ行き先になり逆写像が存在しない。全射でないと対応のない元が生じて「辞書」が不完全になる。</li>
+          <li><strong>命題 1.6 の注意</strong>：「全単射な線形写像の逆写像が自動的に線形」であることは自明でない。これは証明が必要（定理 3.6 や次の講義で扱う）。</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <span class="box-label">補足 — 「逆写像が自動的に線形」は本当に自明でないのか</span>
+        <p>
+          「$T:V\xrightarrow{\sim}W$ が線形かつ全単射なら $T^{-1}:W\to V$ も線形」という事実は、
+          一見「当然」に見えるが実際に確認が必要。以下で確認してみる。
+        </p>
+        <p>
+          $w_1, w_2\in W$ とする。$T$ が全単射なので $T(v_1)=w_1$, $T(v_2)=w_2$ となる $v_1,v_2\in V$ が一意に存在する。
+          このとき $T^{-1}(w_i)=v_i$。<br>
+          (L1) の確認：
+          $$T^{-1}(w_1+w_2) = T^{-1}(T(v_1)+T(v_2)) \overset{(L1)}{=} T^{-1}(T(v_1+v_2)) = v_1+v_2 = T^{-1}(w_1)+T^{-1}(w_2)$$
+          (L2) の確認：任意の $a\in\mathbb{K}$ に対して
+          $$T^{-1}(aw_1) = T^{-1}(aT(v_1)) \overset{(L2)}{=} T^{-1}(T(av_1)) = av_1 = aT^{-1}(w_1)$$
+          いずれも $T$ の線形性（(L1)(L2)）を $T^{-1}$ の線形性に「転嫁」することで示せる。
+          見かけ上は「当然」だが、$T$ が線形であることを具体的に使っているため、
+          一般の（非線形な）全単射写像の逆写像は線形にならない場合がある。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 — $\mathbb{C}^4 \cong M_2(\mathbb{C})$</span>
+        <p>$\mathbb{C}^4$ と $M_2(\mathbb{C})$（$2\times2$ 複素行列）は同型。以下の写像はいずれも線形写像で、$\cong$ かどうかが異なる。</p>
+        <table class="axiom-table">
+          <tr>
+            <th>写像 $T:\mathbb{C}^4\to M_2(\mathbb{C})$</th>
+            <th style="text-align:center">単射</th>
+            <th style="text-align:center">全射</th>
+            <th style="text-align:center">同型</th>
+          </tr>
+          <tr>
+            <td>$\begin{pmatrix}a\\b\\c\\d\end{pmatrix}\mapsto\begin{pmatrix}a&b\\c&d\end{pmatrix}$</td>
+            <td class="ok" style="text-align:center">✓</td>
+            <td class="ok" style="text-align:center">✓</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+          <tr>
+            <td>$\begin{pmatrix}a\\b\\c\\d\end{pmatrix}\mapsto\begin{pmatrix}a&d\\b&c\end{pmatrix}$（行と列を入れ替え）</td>
+            <td class="ok" style="text-align:center">✓</td>
+            <td class="ok" style="text-align:center">✓</td>
+            <td class="ok" style="text-align:center">✓</td>
+          </tr>
+          <tr>
+            <td>$\begin{pmatrix}a\\b\\c\\d\end{pmatrix}\mapsto\begin{pmatrix}a&b\\c&a\end{pmatrix}$（$a$ が (1,1) と (2,2) 両方に登場）</td>
+            <td class="ng" style="text-align:center">✗</td>
+            <td class="ng" style="text-align:center">✗</td>
+            <td class="ng" style="text-align:center">✗</td>
+          </tr>
+        </table>
+        <p style="margin-top:.5rem">
+          3 番目が単射でない理由：
+          $\begin{pmatrix}1\\0\\0\\0\end{pmatrix}$ と $\begin{pmatrix}1\\0\\0\\1\end{pmatrix}$ はどちらも $\begin{pmatrix}1&0\\0&1\end{pmatrix}$ に送られる。
+          $d$ の情報が $(1,2)$ 成分に現れないため、$d$ を変えても出力が変わらない場合が生じる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">線形代数学①（松本久義）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+</body>
+</html>

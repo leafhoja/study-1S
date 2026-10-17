@@ -1,0 +1,328 @@
+<!DOCTYPE html><!-- 「微分積分 予想問題 第1回 ε-N論法と数列の収束 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>微分積分 予想問題 第1回 ε-N論法と数列の収束 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="yosou_calc_02.html" data-page="yosou/yosou_calc_02">次のテーマ →</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-calc">
+  <h1>微分積分学演習　予想問題　第1回</h1>
+  <p class="subtitle">ε-N論法・はさみうちの原理・部分列・Cesàro平均（全4問）</p>
+</div>
+
+<div class="container">
+
+<!-- 免責 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#fff5f5; color:#c53030;">⚠️ この問題セットについて</div>
+  <div class="section-card-body">
+    <div class="warn-box">
+      <div class="warn-title">AIが作成した予想問題です（実際の試験問題ではありません）</div>
+      <p>演習第1回（<a href="../calculus/calc_01.html">ε-N論法と数列の収束</a>）と過去の<a href="../kakomon/kakomon_calc_01.html">小テスト</a>と同程度〜少し発展した難易度で構成した学習用オリジナル問題です。全5回20問構成の第1回（ε-N論法・はさみうちの原理・部分列・Cesàro平均）です。中間試験（45分・範囲が狭く易しめ）とは異なり，期末試験は90分・より広い範囲を対象とするため，本セットでは証明の構成力・複数の道具の組み合わせを問う問題を中心に据えている。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 このテーマの要点</div>
+  <div class="section-card-body">
+    <p>数列の収束を厳密に扱う <strong>ε-N論法</strong> を土台に，収束の判定・発散の判定の両方に使える道具を横断的に練習する。特に「直接 ε-N で殴る」だけでなく，<strong>はさみうちの原理・部分列・既知の定理（Cesàro平均）を道具として再利用する</strong>という，答案の組み立て方そのものを鍛えることを狙う。</p>
+    <div class="def-box">
+      <div class="def-title">この4問で使う道具</div>
+      <ul>
+        <li><strong>ε-N論法の基本形：</strong>$\lim_{n\to\infty}a_n=\alpha \iff \forall\varepsilon>0,\ \exists N\in\mathbb{N},\ \forall n\ge N:\ |a_n-\alpha|<\varepsilon$</li>
+        <li><strong>はさみうちの原理（数列版）：</strong>十分大きな $n$ で $a_n\le b_n\le c_n$ かつ $\lim a_n=\lim c_n=L$ ならば $\lim b_n=L$</li>
+        <li><strong>部分列の性質：</strong>$a_n\to a$ ならば任意の部分列 $a_{n_k}\to a$。対偶を取ると，異なる極限を持つ2つの部分列が見つかれば $a_n$ は発散すると判定できる</li>
+        <li><strong>Cesàro平均の定理（既知の事実として利用）：</strong>過去の小テスト（<a href="../kakomon/kakomon_calc_01.html">kakomon_calc_01 問2</a>）で証明済み。$b_n\to\beta$ ならば算術平均 $\frac1n\sum_{k=1}^n b_k\to\beta$</li>
+        <li><strong>評価を「甘く見積もる」技法：</strong>$|a_n-\alpha|$ を厳密な式のまま扱うと $N$ が求めにくいとき，より簡単で $n$ について単調な式で上から押さえて逆算する</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">1</span> ε-Nによる直接証明
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★☆☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>数列 $a_n=\dfrac{3n-1}{n+2}$ が $3$ に収束することを，ε-N論法（$\varepsilon$-$N$ 論法）の定義に従って直接証明せよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>まず $a_n-3$ を1つの分数にまとめる。</p>
+      $$a_n-3=\frac{3n-1}{n+2}-3=\frac{3n-1-3(n+2)}{n+2}=\frac{3n-1-3n-6}{n+2}=\frac{-7}{n+2}$$
+      <p>よって</p>
+      $$|a_n-3|=\frac{7}{n+2}$$
+      <p>ここで，$n+2>n$（$n\ge1$）なので，分母を $n+2$ から $n$ に甘く見積もると</p>
+      $$|a_n-3|=\frac{7}{n+2}<\frac{7}{n}\qquad(n\ge1)$$
+      <div class="proof-box">
+        <div class="proof-title">証明（ε-N論法）</div>
+        <p>$\varepsilon>0$ を任意に取る。アルキメデスの原理より，$N>7/\varepsilon$ を満たす自然数 $N$ が存在する（例えば $N:=\left\lceil 7/\varepsilon\right\rceil+1$ とおけば，天井関数の性質 $\lceil x\rceil\ge x$ より $N\ge \lceil 7/\varepsilon\rceil+1>7/\varepsilon$ が保証される）。</p>
+        <p>このとき，任意の $n\ge N$ に対して</p>
+        $$|a_n-3|=\frac{7}{n+2}<\frac{7}{n}\le\frac{7}{N}<\varepsilon$$
+        <p>（2番目の不等号は上で示した評価，3番目は $n\ge N\Rightarrow 7/n\le7/N$，4番目は $N$ の取り方による。）</p>
+        <p>$\varepsilon>0$ は任意だったから，$\displaystyle\lim_{n\to\infty}a_n=3$。$\blacksquare$</p>
+      </div>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>ε-N証明の第一歩は「$a_n-\alpha$ を1つの分数にまとめて絶対値を取る」こと。今回は $|a_n-3|=7/(n+2)$ という厳密な式が得られるが，この式のまま $N$ を逆算しようとすると $n+2>7/\varepsilon$，すなわち $n>7/\varepsilon-2$ という「$-2$ 付き」の面倒な式になる。<strong>ここで「分母を甘く見積もる」という発想が効いてくる。</strong>$n+2>n$（$n\ge1$）なので $7/(n+2)<7/n$ と評価を緩めれば，逆算すべき不等式が $n>7/\varepsilon$ というシンプルな形になり，$N$ の構成が一気に楽になる。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 $N$ はどこから逆算されるか</div>
+        <p>ゴールは $|a_n-3|<\varepsilon$。証明の骨格は「$|a_n-3|=7/(n+2)<7/n\le7/N<\varepsilon$」という不等式の連鎖なので，最後の $7/N<\varepsilon$ さえ成立するように $N$ を選べば，あとは自動的に全体の連鎖が成立する。$7/N<\varepsilon \iff N>7/\varepsilon$ なので，この不等式を満たす自然数 $N$ を1つ用意すればよい——これが逆算の全貌。</p>
+        <p><strong>天井関数の使い方：</strong>$\lceil x\rceil$ は「$x$ 以上の最小の整数」。$\lceil 7/\varepsilon\rceil\ge7/\varepsilon$ は常に成り立つが，等号が起こりうる（$7/\varepsilon$ がちょうど整数のとき）ため，そのままでは $N>7/\varepsilon$ という<em>狭義</em>の不等号を保証できない。そこで安全のため $1$ を足して $N:=\lceil7/\varepsilon\rceil+1$ とすれば，$7/\varepsilon$ が整数であってもなくても確実に $N>7/\varepsilon$ が成り立つ。</p>
+      </div>
+      <p><strong>$N$ の取り方は一意ではない：</strong>上の議論は「$N>7/\varepsilon$ を満たす自然数が<em>1つでも</em>存在すればよい」という主張であり，$N=\lceil7/\varepsilon\rceil+1$ はその一例に過ぎない。$N=\lceil7/\varepsilon\rceil+100$ でも，$N=\lceil7/\varepsilon\rceil+1000$ でも証明は成立する（大きすぎる $N$ を選んでも定義の $\forall n\ge N$ の範囲が狭くなるだけで，論理的には何の問題もない）。採点上も「正しく機能する $N$」であればどの表現でもよい。</p>
+      <p><strong>よくある間違い：</strong>①$N$ を「ちょうど」求めようとして $7/(n+2)<\varepsilon$ を直接 $n$ について解こうとし，$n>7/\varepsilon-2$ のような扱いにくい式のまま計算を続けて符号ミスをする，②$n+2>n$ で不等号の向きを逆にしてしまい $7/(n+2)>7/n$ と書いてしまう（分母が大きいほど分数は小さいことに注意），③$N$ が自然数でなければならないことを忘れ，$N=7/\varepsilon$ とだけ書いて済ませてしまう（実数のままでは「$n\ge N$」の $N$ として使えない）。</p>
+      <p><strong>別解（甘く見積もらず直接解く）：</strong>$|a_n-3|=7/(n+2)<\varepsilon$ を直接解くと $n+2>7/\varepsilon$，すなわち $n>7/\varepsilon-2$ となるので，$N:=\lceil7/\varepsilon-2\rceil+1$（あるいは $7/\varepsilon-2\le0$ となる小さな $\varepsilon$ でない場合の場合分けが必要になることもある）とすれば同じ結論に到達する。理論上はこちらでも正しいが，「$-2$」が定数落ちのように見えて計算ミスを誘発しやすく，かつ $7/\varepsilon-2$ が負になりうる場合の場合分けが余計に発生する。分母を甘く見積もる方法は，この種の「定数のずれ」を最初から消してしまう点で見通しがよい。</p>
+      <p><strong>一般化・本番での対応：</strong>一般に $a_n=\dfrac{pn+q}{rn+s}\to p/r$（$r\ne0$）の形の数列に対しては，$a_n-p/r$ を計算すると分子は定数，分母は $n$ の1次式になる。分母を $rn$ 程度の簡単な式に甘く評価してから $N$ を逆算する，というのが本問の解法の一般形であり，今後この型の問題が出たら反射的にこの手順を踏めばよい。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">2</span> はさみうちの原理と $n^{1/n}\to1$
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <ol>
+        <li>はさみうちの原理（数列版）を ε-N論法を用いて証明せよ：$a_n\le b_n\le c_n$（十分大きな $n$ で）かつ $\lim a_n=\lim c_n=L$ ならば $\lim b_n=L$。</li>
+        <li>(1)を用いて $\displaystyle\lim_{n\to\infty} n^{1/n}=1$ を示せ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <div class="proof-box">
+        <div class="proof-title">証明</div>
+        <p>「十分大きな $n$」で $a_n\le b_n\le c_n$ が成り立つとは，ある自然数 $N_0$ が存在して $n\ge N_0\Rightarrow a_n\le b_n\le c_n$ ということ。$\varepsilon>0$ を任意に取る。</p>
+        <p>$\lim a_n=L$ より，ある自然数 $N_1$ が存在して $n\ge N_1\Rightarrow |a_n-L|<\varepsilon$，特に $L-\varepsilon<a_n$。</p>
+        <p>$\lim c_n=L$ より，ある自然数 $N_2$ が存在して $n\ge N_2\Rightarrow |c_n-L|<\varepsilon$，特に $c_n<L+\varepsilon$。</p>
+        <p>$N:=\max\{N_0,N_1,N_2\}$ とおく。任意の $n\ge N$ に対して，3つの条件がすべて同時に成り立つので</p>
+        $$L-\varepsilon<a_n\le b_n\le c_n<L+\varepsilon$$
+        <p>すなわち $|b_n-L|<\varepsilon$。$\varepsilon>0$ は任意だったから $\lim_{n\to\infty}b_n=L$。$\blacksquare$</p>
+      </div>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>$x_n:=n^{1/n}-1$（$n\ge1$）とおく。$n\ge1$ のとき $n^{1/n}\ge1$（$n\ge1$ ならば $n$ 乗根も $1$ 以上）なので $x_n\ge0$。</p>
+      <p>$n\ge2$ のとき，$n=(1+x_n)^n$ に二項定理を適用する。</p>
+      $$n=(1+x_n)^n=\sum_{k=0}^{n}\binom{n}{k}x_n^k \ge \binom{n}{2}x_n^2=\frac{n(n-1)}{2}x_n^2$$
+      <p>（$x_n\ge0$ なので，二項展開の全ての項が非負。$k=2$ の項だけ残し，他はすべて非負として捨てて不等式にした。）</p>
+      <p>両辺を $n$ で割って整理すると（$n\ge2$ なので $n(n-1)/2>0$）</p>
+      $$1\ge\frac{n-1}{2}x_n^2 \quad\Longrightarrow\quad x_n^2\le\frac{2}{n-1} \quad\Longrightarrow\quad 0\le x_n\le\sqrt{\frac{2}{n-1}}$$
+      <p>$\sqrt{2/(n-1)}\to0$（$n\to\infty$）なので，はさみうちの原理（(1)）より $x_n\to0$。よって</p>
+      $$n^{1/n}=1+x_n\longrightarrow 1+0=1\qquad\blacksquare$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>(2) の核心は「$n^{1/n}$ をそのまま扱うのは難しいが，$n^{1/n}-1=x_n\ge0$ とおいて $n=(1+x_n)^n$ という形に書き直すと，二項定理が使える」という発想の転換。二項定理を展開すると多数の項が出るが，<strong>$x_n\ge0$ より全ての項が非負</strong>なので，「必要な1項だけ残して残りを全部捨てる（不等式の向きを保ったまま）」という評価テクニックが使える。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ $\binom{n}{2}x_n^2$ の項を選ぶのか</div>
+        <p>目標は $x_n\to0$ を示すことなので，$x_n$ そのもの（あるいは $x_n$ のべき乗）についての不等式が欲しい。二項展開</p>
+        $$(1+x_n)^n=1+nx_n+\binom{n}{2}x_n^2+\binom{n}{3}x_n^3+\cdots$$
+        <p>の中で，$k=0$ の項（定数 $1$）や $k=1$ の項（$nx_n$）だけを残しても $x_n$ の1次式にしかならず，$x_n\le(n-1)/n$ 程度の弱い評価しか出ない（$n\to\infty$ で $0$ に収束する保証がない）。一方，$k=2$ の項 $\binom{n}{2}x_n^2$ まで残すと，$x_n^2$ についての不等式が得られ，これを解くと $x_n\le\sqrt{2/(n-1)}\to0$ という，$n\to\infty$ で確実に $0$ に収束する評価が手に入る。つまり「$x_n$ の指数が上がるほど評価が強くなる」ため，<em>収束を示すのに十分な次数の項まで残す</em>のが選択の理由。$k=2$ がその最小の次数だった，というわけ。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 「二項定理で必要な項だけ残す」技法の汎用性</div>
+        <p>この技法は $n$ 乗根がらみの極限で繰り返し使われる。例えば $\lim_{n\to\infty}(n!)^{1/n^2}$ や，$\lim_{n\to\infty}a^{1/n}$（$a>0$ 固定）のような問題でも，「$1+x_n$ の形に置いて二項定理，非負性を使って不要な項を捨てる」という同じ枠組みが機能することが多い。二項定理は展開すると項数が爆発的に増えて一見手に負えなさそうに見えるが，<strong>「不等式さえ出せればよい」場面では最初の数項だけに着目すればよい</strong>という点を覚えておくと，類題への対応力が大きく上がる。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①$x_n\ge0$ を確認せずに二項定理の不等式評価を使ってしまう（$x_n$ が負の可能性があると，項を捨てる操作で不等号の向きが保証されない），②$\binom{n}{2}=n(n-1)/2$ の計算を間違える，③(1)のはさみうちの原理を使う際，下から抑える数列（この場合は定数列 $0$）を明示せずに「$x_n\to0$ は明らかだから」と結論だけ書いてしまう。</p>
+      <p><strong>別解：</strong>対数を取って $\ln(n^{1/n})=\dfrac{\ln n}{n}$ とし，$\ln n<\sqrt n$（十分大きな $n$ で）のような評価から $\dfrac{\ln n}{n}<\dfrac{1}{\sqrt n}\to0$ を示し，指数関数の連続性から $n^{1/n}=e^{(\ln n)/n}\to e^0=1$ とする方法もある（実際，kakomon_calc_01 問2(2) の $k^{1/k}\to1$ の証明はこの対数を使う方針を採用している）。今回はその証明を「既知の結果」として流用せず，二項定理による別ルートで独立に示した——同じ結論に至る道が複数あることを確認しておくとよい。</p>
+      <p><strong>一般化・本番での対応：</strong>「$n$ 乗根の極限を求めよ」という問題が出たら，(i) 対数を取って $e^{(\ln(\cdot))/n}$ の形にする方針，(ii) $1+x_n$ とおいて二項定理を使う方針，の両方を持ち駒として用意しておくとよい。特に分母に $n$ の対数が絡む場合は(i)，多項式的な評価で済みそうな場合は(ii)が扱いやすい傾向がある。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">3</span> 部分列と発散の判定
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <ol>
+        <li>$a_n\to a$ ならば，任意の部分列 $\{a_{n_k}\}_k$ も $a$ に収束することを示せ。</li>
+        <li>(1)を用いて，数列 $a_n=(-1)^n+\dfrac1n$ が発散する（収束しない）ことを示せ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p><strong>補題：</strong>部分列の添字 $\{n_k\}_k$（$n_1<n_2<n_3<\cdots$ を満たす自然数の狭義単調増加列）に対して，常に $n_k\ge k$ が成り立つ。</p>
+      <div class="proof-box">
+        <div class="proof-title">補題の証明（数学的帰納法）</div>
+        <p><strong>基底：</strong>$n_1$ は自然数だから $n_1\ge1$。</p>
+        <p><strong>帰納段階：</strong>$n_k\ge k$ を仮定する。$n_{k+1}>n_k$ かつ $n_{k+1}$ は自然数（$n_k$ も自然数）なので $n_{k+1}\ge n_k+1\ge k+1$。よって全ての $k$ で $n_k\ge k$。$\blacksquare$</p>
+      </div>
+      <div class="proof-box">
+        <div class="proof-title">証明（本題）</div>
+        <p>$\varepsilon>0$ を任意に取る。$a_n\to a$ より，ある自然数 $N$ が存在して $n\ge N\Rightarrow |a_n-a|<\varepsilon$。</p>
+        <p>$K:=N$ とおく。任意の $k\ge K$ に対して，補題より $n_k\ge k\ge K=N$ なので，$|a_{n_k}-a|<\varepsilon$ が成り立つ。</p>
+        <p>$\varepsilon>0$ は任意だったから，$\displaystyle\lim_{k\to\infty}a_{n_k}=a$。$\blacksquare$</p>
+      </div>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p>偶数番目の部分列と奇数番目の部分列を考える。</p>
+      $$a_{2m}=(-1)^{2m}+\frac{1}{2m}=1+\frac{1}{2m}\longrightarrow1\qquad(m\to\infty)$$
+      $$a_{2m+1}=(-1)^{2m+1}+\frac{1}{2m+1}=-1+\frac{1}{2m+1}\longrightarrow-1\qquad(m\to\infty)$$
+      <p>ここで $\{2m\}_m$，$\{2m+1\}_m$ はどちらも自然数の狭義単調増加列なので，$\{a_{2m}\}_m$，$\{a_{2m+1}\}_m$ はいずれも $\{a_n\}$ の部分列である。</p>
+      <div class="proof-box">
+        <div class="proof-title">証明（背理法）</div>
+        <p>$\{a_n\}$ が何らかの実数 $\ell$ に収束すると仮定する。(1) より，任意の部分列も $\ell$ に収束するはずなので，特に</p>
+        $$\lim_{m\to\infty}a_{2m}=\ell \qquad\text{かつ}\qquad \lim_{m\to\infty}a_{2m+1}=\ell$$
+        <p>が成り立たなければならない。しかし上で計算した通り $\lim a_{2m}=1$，$\lim a_{2m+1}=-1$ であり，極限の一意性（演習第1回 問1）より $\ell=1$ かつ $\ell=-1$ となるが，$1\ne-1$ で矛盾。</p>
+        <p>よって $\{a_n\}$ は収束しない，すなわち発散する。$\blacksquare$</p>
+      </div>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>「数列が発散することを示せ」という問題は，実は「収束することを示せ」より扱いにくい。収束の証明は「$N$ を1つ具体的に構成する」という<strong>構成的</strong>な作業だが，発散（＝収束しないこと）の直接証明は「どんな $N$ を持ってきても定義が破れることを全ての $N$ について示す」という，量化子をひっくり返した扱いにくい主張になるからだ。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 部分列トリックが強力な理由</div>
+        <p>(1)の対偶を考えると，「異なる極限を持つ2つの部分列が存在する $\Rightarrow$ 元の数列は収束しない」という，非常に扱いやすい判定法が得られる。理由は単純：もし元の数列が収束していたなら，(1)よりどんな部分列も同じ極限に収束するはずだが，2つの部分列の極限が食い違っている以上，「収束している」という仮定自体が矛盾を生む。<strong>「発散を直接示す」代わりに「都合のよい2つの部分列を見つけて，その極限を計算するだけ」で済む</strong>という点が，このアプローチの最大の利点。今回のように $(-1)^n$ が絡む数列では，偶数番目・奇数番目に分けるのが定石。</p>
+      </div>
+      <p><strong>補題 $n_k\ge k$ の位置づけ：</strong>この補題は一見当たり前に思えるが，(1)の証明の中で「部分列の $k$ 番目の項の添字 $n_k$ が，少なくとも $k$ 番目の自然数であるおかげで，$k$ を十分大きくすれば $n_k$ も自動的に $N$ を超える」という部分を正当化する，論理的に不可欠なステップ。「部分列は元の数列を間引いたものなので，添字は元の数列より速く，あるいは同じ速さで増える」という直感を，帰納法できちんと形にしたものと理解するとよい。</p>
+      <div class="insight-box">
+        <div class="insight-title">💡 他の典型的な発散数列への一般化</div>
+        <p>$a_n=(-1)^n$（そのもの）や $a_n=(-1)^n n$ なども，全く同じ「偶数番目・奇数番目に分ける」方針で発散を示せる。一方，$a_n=\sin n$ のように周期性がずれている数列（$\pi$ が無理数であることに起因して，整数倍の角度は $2\pi$ の整数倍に一致しない）は，直接「都合のよい2つの部分列」を明示的な式で書き下すのが難しい。この場合も発散自体は成り立つが，証明にはより高度な議論（稠密性・エルゴード理論的な議論）が必要になり，本演習の範囲を超える。<strong>「部分列が明示的に構成できるか」が，このテクニックの守備範囲を決める</strong>点は覚えておいてよい。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①$\{2m\}_m$，$\{2m+1\}_m$ が本当に「狭義単調増加な自然数列」になっているかの確認を省略してしまう（これがないと，そもそも部分列の定義を満たしているかが曖昧になる），②「2つの部分の極限が違う」ことだけ書いて，(1)や極限の一意性との接続（なぜそれで矛盾が起きるのか）を明示しない答案を書いてしまう，③背理法の仮定「$a_n\to\ell$」を立てずに，いきなり「$a_{2m}\to1$ かつ $a_{2m+1}\to-1$ だから発散」と結論だけ書いてしまう（採点者に伝わる論理として不十分）。</p>
+      <p><strong>一般化・本番での対応：</strong>「$\{a_n\}$ が発散することを示せ」という問題を見たら，まず数列の振る舞いを観察し，周期的な振動やパリティ（偶奇）で違う値に近づいていないかを疑う。違う値に近づく部分列が2つ見つかれば，本問と全く同じ型（部分列の極限の一意性 → 矛盾）で発散が示せる。これは今後，関数の極限が存在しないことを示す問題（$x\to0$ での $\sin(1/x)$ など，kakomon_calc_01 問4 で既出）にもそのまま応用できる考え方。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">4</span> Cesàro平均の応用（Stolz–Cesàroの定理）
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★★☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>数列 $\{a_n\}$ が $\displaystyle\lim_{n\to\infty}(a_{n+1}-a_n)=L$ を満たすとする。このとき $\displaystyle\lim_{n\to\infty}\frac{a_n}{n}=L$ であることを示せ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$b_n:=a_{n+1}-a_n$ とおくと，仮定は $b_n\to L$。Cesàro平均の定理（過去の小テスト <a href="../kakomon/kakomon_calc_01.html">kakomon_calc_01 問2</a> で証明済みの既知の事実）より，算術平均も同じ極限を持つ：</p>
+      $$\frac1n\sum_{k=1}^{n}b_k \longrightarrow L$$
+      <p>ここで，和 $\sum_{k=1}^n b_k$ は望遠鏡和（telescoping sum）としてまとまる。</p>
+      $$\sum_{k=1}^{n}b_k=\sum_{k=1}^{n}(a_{k+1}-a_k)=(a_2-a_1)+(a_3-a_2)+\cdots+(a_{n+1}-a_n)=a_{n+1}-a_1$$
+      <p>よって</p>
+      $$\frac{a_{n+1}-a_1}{n}\longrightarrow L$$
+      <p>$a_1$ は $n$ に無関係な定数なので $\dfrac{a_1}{n}\to0$。したがって</p>
+      $$\frac{a_{n+1}}{n}=\frac{a_{n+1}-a_1}{n}+\frac{a_1}{n}\longrightarrow L+0=L$$
+      <p>さらに $\dfrac{n}{n+1}\to1$ なので，積の極限（演習第1回 問2）より</p>
+      $$\frac{a_{n+1}}{n+1}=\frac{a_{n+1}}{n}\cdot\frac{n}{n+1}\longrightarrow L\cdot1=L$$
+      <p>ここで $m:=n+1$ と添字を置き直す。$n\to\infty$ のとき $m\to\infty$ でもあり，$\{a_{n+1}/(n+1)\}_n$ と $\{a_m/m\}_m$ は同じ数列を異なる文字で表しているだけなので</p>
+      $$\lim_{m\to\infty}\frac{a_m}{m}=L\qquad\blacksquare$$
+      <p><strong>検算：</strong>$a_n=\sqrt n$ に適用してみる。$a_{n+1}-a_n=\sqrt{n+1}-\sqrt n=\dfrac{1}{\sqrt{n+1}+\sqrt n}\to0=L$ なので，定理の主張は $a_n/n\to L=0$ となるはず。実際 $a_n/n=\sqrt n/n=1/\sqrt n\to0$ で確かに一致している。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>この定理は「数列版のロピタルの定理」とも呼ばれる有名な<strong>Stolz–Cesàroの定理</strong>の特別な場合（分母を $n$ とした場合）。$a_{n+1}-a_n$ という「隣接する項の差（階差）」の極限から，$a_n/n$ という「平均的な増加率」の極限を導く，という構造を持つ。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ Cesàro平均の定理が使えるのか</div>
+        <p>本問の主役は数列 $\{a_n\}$ そのものではなく，その階差 $b_n=a_{n+1}-a_n$。仮定は「$b_n\to L$」という，まさに Cesàro平均の定理の前提の形をしている。<strong>既に証明済みの定理を「道具」として持ってきて，適用対象を選ぶだけで新しい結果が導ける</strong>——この視点の転換が本問の最大のポイント。$b_n$ の算術平均 $\frac1n\sum b_k$ を計算すると，これがちょうど望遠鏡和になって $a_{n+1}-a_1$ に潰れる，という「気づき」が2段目の鍵になる。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 望遠鏡和（telescoping sum）というテクニック</div>
+        <p>$\sum_{k=1}^n(a_{k+1}-a_k)$ を書き下すと，隣り合う項が $-a_k+a_k$ の形でちょうど打ち消し合い，最初の項の一部 $-a_1$ と最後の項の一部 $a_{n+1}$ だけが生き残る。これは「差の和は端点の差になる」という基本パターンで，離散版の微積分学の基本定理（$\int_a^b F'(x)dx=F(b)-F(a)$ の数列版）と見ることもできる。今後，級数の和を求める問題や漸化式の解析でも頻出する技法。</p>
+      </div>
+      <p><strong>$a_1/n\to0$ の一般的な意味：</strong>これは「有限個の項（あるいは $n$ に依存しない定数項）の寄与は，$n\to\infty$ の極限では消えてしまう」という直感の具体例。この発想は kakomon_calc_01 問2(1) の証明でも「前半の有限和 $C$ は $C/n\to0$ で無視できる」という形で使われており，Cesàro平均の定理の証明そのものの中に既に埋め込まれている考え方でもある。「有限個 or 定数個の例外は極限に影響しない」という原則は，ε-N論法を使う証明全般で繰り返し登場する。</p>
+      <p><strong>添字の置き直し $m=n+1$ について：</strong>$\{a_{n+1}/(n+1)\}_{n=1}^\infty$ という数列は，$\{a_m/m\}_{m=2}^\infty$ と全く同じ値の列を並べているだけ（単に「$2$ 番目以降から始まる数列」という意味）。数列の極限は「最初の有限個の項を無視しても変わらない」という基本性質（これも上の「有限個の例外は無視できる」の一種）より，$m=2$ から始まろうと $m=1$ から始まろうと極限値は変わらないので，$\lim_{m\to\infty}a_m/m=L$ と結論してよい。</p>
+      <p><strong>よくある間違い：</strong>①望遠鏡和の計算で符号を間違え，$a_{n+1}-a_1$ ではなく $a_1-a_{n+1}$ や $a_n-a_1$ としてしまう，②$a_1/n\to0$ の一言を省略し，$(a_{n+1}-a_1)/n\to L$ から直接 $a_{n+1}/n\to L$ に飛躍してしまう（本質的には正しい操作だが，答案としては極限の演算法則を明示すべき），③$n/(n+1)\to1$ の掛け算を忘れ，添字のずれ（$n$ と $n+1$）を無頓着に同一視してしまう。</p>
+      <p><strong>一般化・本番での対応：</strong>本問は Stolz–Cesàro の定理（$b_n/c_n$ 型，$c_n$ が狭義単調で $\infty$ に発散する場合の一般形）の $c_n=n$ の場合に相当する。本番でも「階差や比の極限から，別の形の極限を導け」という問題が出たら，まず望遠鏡和が使えないか，そして以前に証明した定理（Cesàro平均など）がそのまま適用できないか，という2点を確認する習慣をつけるとよい。既に手元にある補題を使い回す発想は，長い試験時間（90分）を効率よく使う上でも重要な戦略になる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第1回（ε-N論法・はさみうちの原理・部分列・Cesàro平均）を自力で解けるかセルフチェック</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$a_n-\alpha$ を1つの分数にまとめ，分母を簡単な式で甘く見積もってから $N$ を逆算する手順を自力で再現できるか</li>
+          <li>「$N>7/\varepsilon$ を満たす自然数」を天井関数を使って具体的に構成し，$N$ の取り方が一意でないことも説明できるか</li>
+          <li>はさみうちの原理を ε-N論法から証明でき，$N=\max\{N_0,N_1,N_2\}$ の意味（3条件の同時成立）を説明できるか</li>
+          <li>$n^{1/n}-1=x_n$ とおいて二項定理を適用し，「必要な項だけ残す」評価で $x_n\to0$ を導けるか</li>
+          <li>部分列の添字が $n_k\ge k$ を満たすことを帰納法で示し，それを使って「$a_n\to a$ ならば任意の部分列も $a$ に収束する」ことを証明できるか</li>
+          <li>異なる極限を持つ2つの部分列を見つけることで，数列の発散を（直接証明ではなく）背理法で示せるか</li>
+          <li>Cesàro平均の定理を既知の道具として使い，望遠鏡和・$a_1/n\to0$・添字の置き直しを組み合わせて $a_n/n\to L$（Stolz–Cesàroの定理）を導けるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

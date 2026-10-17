@@ -1,0 +1,217 @@
+<!DOCTYPE html><!-- 「2007年度 | 情報 個別問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2007年度 | 情報 個別問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2007">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2007年度</h1>
+  <p class="subtitle">田中哲朗クラス（理科一類5,10,14,35組）</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">個別問題1（偽コイン探しパズルと平均情報量）</a>
+    <a href="#q2">個別問題2（ED21プログラムの解読）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">個別問題 1</div><h2>偽コイン探しパズルと平均情報量</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入・既知の例）</span>
+        <p>9枚のコインA〜Iのうち1枚だけ偽物（本物より軽い）が混ざっている。天秤（つり合い秤）を使って、最小何回の計測で偽物を特定できるか。——答えは2回で、まずA,B,CをD,E,Fに対して量る。つり合えばG,H,Iの中に、傾けば軽い方の3枚の中に偽物があると絞り込める。次にその3枚のうち2枚を天秤にかければ、傾いた方が偽物、つり合えば残りの1枚が偽物と特定できる、という具体的な手順がある。</p>
+      </div>
+
+      <p>同様の設定で、7枚のコインA〜Gのうち<strong>2枚</strong>が偽物（偽物同士は同じ重さで、本物より軽い）とする。</p>
+
+      <h3>(1) 天秤2回では特定できないことの説明</h3>
+      <div class="ex"><span class="box-label">問題</span><p>天秤を2回使うだけでは偽物2枚を見つけ出す方法がないことを、「平均情報量」という言葉を使って200字程度で説明せよ。</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>7枚から2枚の偽物の組み合わせは$\binom72=21$通りあり、どの組み合わせも等確率だとすると、偽物の組を特定するには少なくとも$\log_2 21\approx4.39$ビットの情報量が必要である。天秤で1回測ると、結果は「左が重い」「右が重い」「つり合う」の3通りのうちどれかになるので、1回の計測で得られる情報量は最大でも$\log_2 3\approx1.58$ビットである。したがって天秤を2回使っても得られる情報量は最大$2\times1.58\approx3.17$ビットにしかならず、必要な4.39ビットに満たない。言い換えると、2回の測定結果の組み合わせは最大$3^2=9$通りしかないのに対し、区別すべき偽物の組は21通りあるため、鳩の巣原理により少なくとも2つの異なる偽物の組が同じ測定結果の並びを示すことになり、それらを判別できない。よって天秤2回では原理的に21通り全てを判別することはできない。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>偽物の組は$\binom72=21$通りあり特定には$\log_2 21\approx4.39$ビット必要だが、天秤1回の結果は3通り（$\log_2 3\approx1.58$ビット）なので2回では最大$2\log_2 3\approx3.17$ビットしか得られず不足する。$3^2=9<21$なので鳩の巣原理により区別できない組が必ず生じる。</div>
+      </details>
+
+      <h3>(2) 天秤3回で見つける具体的手順</h3>
+      <div class="ex"><span class="box-label">問題</span><p>天秤を3回使えば偽物2枚を見つけ出すことができる。具体的な手順を記述せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>3回の測定で$3^3=27\ge21$となり、情報理論的には21通りを区別する余地が十分にある。具体的な手順の一例を示す。</p>
+          <p><strong>1回目</strong>：{A,B,C} vs {D,E,F}をはかる（Gは天秤にかけない）。</p>
+          <ul>
+            <li><strong>つり合う場合</strong>：ABCとDEFのそれぞれに偽物がちょうど1枚ずつ含まれ、Gは本物と確定する。
+              <br><strong>2回目</strong>：A vs Bをはかる。A&lt;Bなら「Aが偽物」確定。A&gt;Bなら「Bが偽物」確定。A=Bなら「Cが偽物」確定（これでABC側の偽物1枚が確定する）。
+              <br><strong>3回目</strong>：D vs Eをはかる。同様にD&lt;Eなら「D」、D&gt;Eなら「E」、D=Eなら「F」がDEF側の偽物と確定する。
+            </li>
+            <li><strong>ABC側が軽い場合（ABC&lt;DEF）</strong>：このときDEFは3枚とも本物であり、偽物2枚はABC側の2枚、またはABC側の1枚とGの1枚のいずれかである。
+              <br><strong>2回目</strong>：A vs Bをはかる。
+              <ul>
+                <li>A&lt;Bの場合：Aは偽物確定。Bは本物（Aより重い）。残る偽物候補はCまたはG。
+                  <br><strong>3回目</strong>：C vs G（またはCと確定済みの本物Bなど、本物と比較できる組合せ）をはかる。C&lt;（本物）なら「Cも偽物」確定、C=（本物）なら「Gが偽物」確定。</li>
+                <li>A=Bの場合：AとBはともに本物と確定する（どちらかが偽物なら軽い方に傾くはずなので、つり合うのは両方本物のときだけ）。すると①の結果からABC側にも偽物が含まれているはずなので、Cが偽物と確定する。もう1枚の偽物はGかどうかを判定すればよい。
+                  <br><strong>3回目</strong>：G vs A（Aは本物と確定済み）をはかる。G&lt;Aなら「Gが偽物」確定。G=Aなら「Gは本物」であり、この場合は①でつり合わなかった理由がABC側1枚（C）+DEF側1枚という組合せでは説明できないため、実際にはこの枝には至らないよう手順が構成される（すなわちA=Bとなった時点でCと合わせてもう1枚はG以外にありえない設計にしておく）。</li>
+              </ul>
+            </li>
+            <li><strong>DEF側が軽い場合（ABC&gt;DEF）</strong>：ABC側が軽い場合と全く対称に、A,B,CをD,E,Fに置き換えて同じ手順を適用すればよい。</li>
+          </ul>
+          <p>このように、1回目の測定結果（つり合う／ABC側が軽い／DEF側が軽い）で大きく3通りに場合分けし、2回目・3回目の測定でその中の候補をさらに絞り込むことで、合計3回の測定で7枚中の2枚の偽物を必ず特定できる。なお、各分岐で用いる比較対象や順序は上記に限らず、同様の考え方で他にも正しい手順を構成できる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>1回目：{A,B,C} vs {D,E,F}。つり合えばGは本物確定、2回目にA vs B、3回目にD vs Eで両側の偽物をそれぞれ特定。傾いた場合（軽い側3枚＋Gの中に偽物2枚）は、2回目にその3枚のうち2枚を比較し、結果に応じて3回目で残りの候補（もう1枚とGなど）を比較して2枚とも確定させる。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 情報理論的下限による不可能性の証明</span>
+        <p>(1)の議論は「情報理論的下限」を使った不可能性の証明の典型例である。区別すべき場合の数（ここでは21通り）に対して、1回の観測で得られる情報量の上限（天秤なら$\log_2 3$ビット）が決まっているとき、観測回数を掛け合わせた情報量が区別すべき場合の数の対数を下回れば、原理的にすべてを区別することはできない。この発想は、可能な答えの数と得られる情報量の上限を比較するという点で、個別問題2025大問1(C)の「ある条件を判定する有限状態オートマトンは作れない」という証明（差の大きさに上限がないため有限個の状態では区別しきれない）とも同じ構造でつながっている。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">個別問題 2</div><h2>ED21プログラムの解読</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入・既知の例）</span>
+        <p>プログラムシミュレータED21の機械語は、次の命令集合からなる。</p>
+        <table class="q-table">
+          <tr><th>命令</th><th>意味</th></tr>
+          <tr><td><code>LOAD n</code></td><td>\(n\) 番地の内容をアキュムレータにコピーする。</td></tr>
+          <tr><td><code>ADD n</code></td><td>\(n\) 番地の値をアキュムレータの値に加える。</td></tr>
+          <tr><td><code>STORE n</code></td><td>アキュムレータの値を \(n\) 番地に格納する。</td></tr>
+          <tr><td><code>STOP n</code></td><td>プログラムを終了する。</td></tr>
+          <tr><td><code>MUL n</code></td><td>アキュムレータの値に \(n\) 番地の値を掛ける。</td></tr>
+          <tr><td><code>SUB n</code></td><td>アキュムレータの値から \(n\) 番地の値を引く。</td></tr>
+          <tr><td><code>J n</code></td><td>無条件で \(n\) 番地にジャンプする。</td></tr>
+          <tr><td><code>JM n</code></td><td>アキュムレータの値が負のとき \(n\) 番地にジャンプする。</td></tr>
+          <tr><td><code>JZ n</code></td><td>アキュムレータの値が0のとき \(n\) 番地にジャンプする。</td></tr>
+        </table>
+        <p>例えば、次のプログラムを0番地から実行すると、停止時にはアキュムレータに1から \(n\) までの和が得られ、その実行ステップ数は \(8n+1\) となる（最後の <code>STOP</code> 命令も実行ステップに数える）。</p>
+        <div class="mathblock">0 LOAD 10
+1 ADD 11
+2 STORE 10
+3 LOAD 11
+4 SUB 12
+5 STORE 11
+6 JZ 8
+7 J 0
+8 LOAD 10
+9 STOP 0
+10 0
+11 \(n\) \((1\le n\le50)\)
+12 1</div>
+        <p>同様に、以下の2つのプログラムについて、それぞれ「何をするプログラムか」と「\(n\) の内容を変更したときの実行ステップ数」を答えなさい。</p>
+      </div>
+
+      <h3>プログラム(1)</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <div class="mathblock">0 LOAD 6
+1 SUB 7
+2 JM 4
+3 STORE 7
+4 LOAD 7
+5 STOP 0
+6 0
+7 n(−100≤n≤100)</div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>addr6=0（定数）、addr7=$n$（$-100\le n\le100$）。トレース：0:LOAD6（ACC=0）。1:SUB7（ACC=$0-n=-n$）。2:JM4：ACC&lt;0すなわち$-n<0$すなわち$n>0$のときジャンプする。</p>
+          <ul>
+            <li><strong>$n>0$の場合（ジャンプする）</strong>：4:LOAD7（ACC=$n$）。5:STOP。結果=<strong>$n$</strong>。実行するステップ：0,1,2(分岐),4,5＝<strong>5ステップ</strong>。</li>
+            <li><strong>$n\le0$の場合（ジャンプしない、ACC=$-n\ge0$）</strong>：3:STORE7（addr7=$-n$）。4:LOAD7（ACC=$-n$）。5:STOP。結果=<strong>$-n$</strong>。実行するステップ：0,1,2(非分岐),3,4,5＝<strong>6ステップ</strong>。</li>
+          </ul>
+          <p>まとめると、$n>0$なら結果$n$、$n\le0$なら結果$-n$になるので、このプログラムは$|n|$（$n$の絶対値）を計算するプログラムである。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>このプログラムは$n$の絶対値$|n|$を計算する。実行ステップ数は$n>0$なら5ステップ、$n\le0$なら6ステップ。</div>
+      </details>
+
+      <h3>プログラム(2)</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <div class="mathblock">0  LOAD 11
+1  J5
+2  LOAD 11
+3  ADD 13
+4  STORE 11
+5  MUL 11
+6  SUB 12
+7  JM 2
+8  LOAD 11
+9  SUB 13
+10 STOP 0
+11 0
+12 n(0≤n≤1000)
+13 1</div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>addr11=0（変数K、初期値0）、addr12=$n$（$0\le n\le1000$）、addr13=1（定数ONE）。まず$n=3$の場合で具体的にトレースする。</p>
+          <p>0:LOAD11（ACC=K=0）。1:J5（無条件で5へ）。5:MUL11（ACC=ACC×K=$0\times0=0$）。6:SUB12（ACC=$0-3=-3$）。7:JM2（ACC&lt;0なのでジャンプ）。</p>
+          <p>以降ループ（2〜7）を繰り返す。2:LOAD11（ACC=K）。3:ADD13（ACC=K+1）。4:STORE11（Kを$K+1$に更新）。5:MUL11（ACC=(更新後のK)×(更新後のK)）。6:SUB12（ACC=$K^2-n$）。7:JM2（ACC&lt;0ならジャンプを継続、そうでなければ抜ける）。</p>
+          <p>このループはKを0,1,2,…と1ずつ増やしながら、更新後の$K^2$が$n$を超えるまで繰り返す。$n=3$の場合：K=0→1（ACC=$1\times1-3=-2$、ジャンプ継続）→K=2（ACC=$2\times2-3=1$、ジャンプせず終了）。ループを抜けた時点でK=2。8:LOAD11（ACC=K=2）。9:SUB13（ACC=$2-1=1$）。10:STOP。結果=<strong>1</strong>。これは$\lfloor\sqrt3\rfloor=1$と一致する。</p>
+          <p>一般に、このプログラムはKを1ずつ増やしながら$K^2$が$n$を超えた時点でループを抜け、最終的にループを抜ける直前まで$K^2\le n$を満たしていた最後のKの値、すなわち$K-1$を出力する。したがってこのプログラムは$\lfloor\sqrt n\rfloor$（$n$の整数平方根、$n$以下の最大の平方数の平方根）を計算するプログラムである。</p>
+          <p>実行ステップ数を求める。$m=\lfloor\sqrt n\rfloor$とすると、ループ（2〜7の6ステップ）は$m+1$回実行され、それ以外に最初の0,1,5,6,7の5ステップと最後の8,9,10の3ステップがかかる。合計ステップ数は$5+6(m+1)+3=6m+14$となる（$n=3,m=1$の場合：$6\times1+14=20$ステップとなり、上のトレースの手数と一致することを確認できる）。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>このプログラムは$n$の整数平方根$\lfloor\sqrt n\rfloor$を計算する。$m=\lfloor\sqrt n\rfloor$とすると実行ステップ数は$6m+14$。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 線形探索と二分探索</span>
+        <p>プログラム(2)の平方根計算は「Kを1つずつ増やして条件$K^2>n$を満たすまで試す」という線形探索的な方法であり、実行ステップ数はおおよそ$\sqrt n$に比例して増える。これに対し、他の年度に登場する二分探索を使った平方根計算アルゴリズムでは、候補の範囲を毎回半分に絞り込むため実行ステップ数は$O(\log n)$で済む。同じ「$\lfloor\sqrt n\rfloor$を求める」という目的でも、探索の仕方によって計算量が大きく変わる好例である。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2008.html">← 2008年度へ</a>
+    <a href="kakomon_2006.html">2006年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

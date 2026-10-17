@@ -1,0 +1,410 @@
+<!DOCTYPE html><!-- 「予想問題 第4回（Ch.4）— 微分積分学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>予想問題 第4回（Ch.4）— 微分積分学①</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="exam-ch4">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="yosou_ch1.html" data-page="過去問/yosou_ch1">第1回</a>
+      <a href="yosou_ch2.html" data-page="過去問/yosou_ch2">第2回</a>
+      <a href="yosou_ch3.html" data-page="過去問/yosou_ch3">第3回</a>
+      <a href="yosou_ch4.html" data-page="過去問/yosou_ch4" class="active">第4回</a>
+      <a href="yosou_ch5.html" data-page="過去問/yosou_ch5">第5回</a>
+      <a href="yosou_ch6.html" data-page="過去問/yosou_ch6">第6回</a>
+      <a href="yosou_keisan.html" data-page="過去問/yosou_keisan">番外編</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>予想問題 第4回</h1>
+  <p class="subtitle">Ch.4 べき級数と収束半径（全4問）</p>
+</div>
+
+<div class="container">
+
+  <div class="note">
+    <span class="box-label">この予想問題集について</span>
+    <p>
+      この第4回はCh.4（べき級数と収束半径）の内容に準拠した<strong>AI生成のオリジナル問題</strong>であり、
+      実際に出題された試験問題ではない。過去に配布された中間試験・レポート課題は出題範囲や出題者の傾向がある程度近いものの、
+      「微分積分学①」（河野俊丈先生、S2ターム）そのものと同一科目・同一出題者による資料ではないため、
+      あくまで傾向をつかむための参考程度に留め、本予想問題および講義ノート（<a href="../ch4.html">ch4.html</a>）の理解を優先してほしい。
+      Ch.4の核心は「収束半径を求める2つの公式（命題4.3・命題4.4）」「項別微分・積分（定理4.5）」「二項級数（定理4.7）」の
+      3本柱であり、本問題集の4問はこの3本柱をひと通りカバーしつつ、特に第3回（Ch.3）の問題3で登場した二項係数 $\binom{2n}{n}$ が
+      本問題集でも別の役割で再登場する構成になっている。各問題には模範解答に加えて、方針の立て方・別解・よくある間違い・
+      一般化のコメントを厚めに付けてある。
+    </p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#p4-1">問題4.1　比判定法公式の直接適用</a>
+    <a href="#p4-2">問題4.2　二項係数を含む級数の収束半径</a>
+    <a href="#p4-3">問題4.3　項別微分による新しい展開の導出</a>
+    <a href="#p4-4">問題4.4　二項級数と項別積分で導く $\arcsin x$</a>
+  </div>
+
+  <!-- =================== 問題4.1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="p4-1">
+    <div class="sec-header">
+      <span class="sec-tag">問題 4.1</span>
+      <span class="diff-badge">難易度 ★★☆☆☆</span>
+      <h2>比判定法公式の直接適用</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>次のべき級数の収束半径を求めよ。</p>
+        $$\sum_{n=1}^\infty \frac{n^2}{3^n}x^n$$
+      </div>
+
+      <div class="mot">
+        <span class="box-label">🧠 方針・出発点</span>
+        <p>
+          係数 $a_n=n^2/3^n$ は「$n$ のべき乗」と「一定の底の指数関数」の積という、収束半径の計算では最も基本的な形の一つである。
+          講義ノートの例4.1（<a href="../ch4.html#computation">../ch4.html#computation</a>、$\sum x^n/n!$ は $R=\infty$、
+          $\sum n^nx^n$ は $R=0$、$\sum x^n$ と $\sum x^n/n$ は $R=1$、という表）と同系統の「比判定法形の公式（命題4.3、
+          <a href="../ch4.html#computation">../ch4.html#computation</a>）を直接当てはめるだけの問題」だが、
+          係数列が違えば当然 $R$ の値も変わる。本問では特に、比を計算する途中で現れる
+          $\dfrac{n^2}{(n+1)^2}\to1$（$n\to\infty$）という基本極限を正しく処理できるかがポイントになる。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（1）— 比を立てる</span>
+        <p>$a_n=\dfrac{n^2}{3^n}$ とおく。命題4.3より、$\displaystyle R=\lim_{n\to\infty}\left|\frac{a_n}{a_{n+1}}\right|$ を計算すればよい。</p>
+        $$\frac{a_n}{a_{n+1}} = \frac{n^2/3^n}{(n+1)^2/3^{n+1}} = \frac{n^2}{3^n}\cdot\frac{3^{n+1}}{(n+1)^2} = 3\cdot\frac{n^2}{(n+1)^2}.$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（2）— 極限を取る</span>
+        <p>
+          $\dfrac{n^2}{(n+1)^2}=\left(\dfrac{n}{n+1}\right)^2=\left(\dfrac{1}{1+1/n}\right)^2\to1^2=1$（$n\to\infty$）なので、
+        </p>
+        $$R=\lim_{n\to\infty}3\cdot\frac{n^2}{(n+1)^2}=3\cdot1=3.$$
+        <p>よって収束半径は $R=3$。</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">📝 別解（検算）— コーシー＝アダマールの公式</span>
+        <p>
+          命題4.4（<a href="../ch4.html#computation">../ch4.html#computation</a>）でも検算できる。
+          $\sqrt[n]{|a_n|}=\sqrt[n]{n^2}/3=(\sqrt[n]{n})^2/3\to1^2/3=1/3$（$\sqrt[n]{n}\to1$ を使った）なので、
+        </p>
+        $$R=\frac{1}{\limsup_{n\to\infty}\sqrt[n]{|a_n|}}=\frac{1}{1/3}=3.$$
+        <p>比判定法形の公式と一致する。$n!$ を含まず $n$ のべき乗と定数の指数関数だけからなる係数では、
+          どちらの公式を使ってもほぼ同じ手間で計算できるという、命題4.3の「使い分け」の指針
+          （<a href="../ch4.html#computation">../ch4.html#computation</a>）通りの具体例になっている。</p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">⚠️ よくある間違い</span>
+        <p>
+          $\dfrac{a_n}{a_{n+1}}$ と $\dfrac{a_{n+1}}{a_n}$ を取り違え、$R=1/3$ と答えてしまう誤りが多い。
+          命題4.3の主張はあくまで $R=\lim|a_n/a_{n+1}|$（分子が「今の項」、分母が「次の項」）であることを、
+          計算の最初に式を立てる段階で確認する習慣をつけておきたい。また、$n^2/(n+1)^2\to1$ を
+          「$n^2$ と $(n+1)^2$ はどちらも $\infty$ に発散するから比は不定」のように誤解してしまうケースもあるが、
+          同じ次数の多項式どうしの比は最高次の係数比に収束するという基本事実（本問では係数比 $1/1=1$）を
+          落ち着いて確認すればよい。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題4.2 =================== -->
+  <div class="section" id="p4-2">
+    <div class="sec-header">
+      <span class="sec-tag">問題 4.2</span>
+      <span class="diff-badge">難易度 ★★★☆☆</span>
+      <h2>二項係数を含む級数の収束半径</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>次のべき級数の収束半径を求めよ。ただし $\dbinom{2n}{n}$ は通常の二項係数（$\dfrac{(2n)!}{n!\,n!}$）である。</p>
+        $$\sum_{n=0}^\infty \binom{2n}{n}x^n$$
+      </div>
+
+      <div class="mot">
+        <span class="box-label">🧠 方針・出発点</span>
+        <p>
+          係数に階乗が入っているので、比判定法形の公式（命題4.3、<a href="../ch4.html#computation">../ch4.html#computation</a>）が
+          「使い分け」の指針どおり計算しやすい。$\binom{2n}{n}$ は組み合わせ論でおなじみの「中央二項係数」であり、
+          階乗の比を丁寧に約分していけば $a_{n+1}/a_n$ が具体的な有理式として求まる。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（1）— 隣接項の比</span>
+        <p>$a_n=\dbinom{2n}{n}=\dfrac{(2n)!}{(n!)^2}$ とおく。</p>
+        $$\frac{a_{n+1}}{a_n} = \frac{\dbinom{2n+2}{n+1}}{\dbinom{2n}{n}} = \frac{(2n+2)!/((n+1)!)^2}{(2n)!/(n!)^2} = \frac{(2n+2)!}{(2n)!}\cdot\frac{(n!)^2}{((n+1)!)^2}.$$
+        <p>
+          $(2n+2)!/(2n)!=(2n+1)(2n+2)$、$(n!)^2/((n+1)!)^2=1/(n+1)^2$ なので、
+        </p>
+        $$\frac{a_{n+1}}{a_n} = \frac{(2n+1)(2n+2)}{(n+1)^2} = \frac{(2n+1)\cdot2(n+1)}{(n+1)^2} = \frac{2(2n+1)}{n+1}.$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（2）— 極限と収束半径</span>
+        <p>
+          $\dfrac{2(2n+1)}{n+1}\to4$（$n\to\infty$、分子・分母とも最高次の項 $4n$、$n$ で比を取ると $4$）なので、
+        </p>
+        $$\frac{a_{n+1}}{a_n}\to4,\qquad\text{よって}\qquad\left|\frac{a_n}{a_{n+1}}\right|\to\frac14.$$
+        <p>命題4.3より</p>
+        $$R=\lim_{n\to\infty}\left|\frac{a_n}{a_{n+1}}\right|=\frac14.$$
+      </div>
+
+      <div class="note">
+        <span class="box-label">🔄 振り返り — 第3回・問題3との連関（収束半径の内部と境界の役割分担）</span>
+        <p>
+          この問題は、実は本予想問題集の<strong>第3回・問題3</strong>で扱った級数 $\displaystyle\sum_{n=0}^\infty\binom{2n}{n}\frac{1}{4^n}$
+          と同じ二項係数 $\binom{2n}{n}$ を主役にしている。第3回・問題3では、比判定法を適用しても比の極限がちょうど $1$ になってしまい
+          判定不能となったため、比較判定法によって（$\binom{2n}{n}/4^n$ が $0$ に収束しない、あるいはより精密には
+          $1/\sqrt{n}$ のオーダーでしか減衰しないことなどから）この級数が<strong>発散する</strong>ことを示した。
+        </p>
+        <p>
+          ここで気づいてほしいのは、<strong>第3回・問題3の級数 $\sum\binom{2n}{n}4^{-n}$ は、ちょうど本問のべき級数
+          $\sum\binom{2n}{n}x^n$ を $x=\dfrac14$（収束半径の境界そのもの！）で評価したものに他ならない</strong>、という事実である。
+          本問で求めた $R=1/4$ は、定理4.2（<a href="../ch4.html#radius">../ch4.html#radius</a>）により
+          「$|x|<1/4$ では絶対収束、$|x|>1/4$ では発散する」ことを保証するが、
+          <strong>境界 $x=1/4$ そのものでの収束・発散は、収束半径の一般論だけからは何も分からない</strong>
+          （講義ノートの定理4.2でも繰り返し強調される「境界では収束・発散どちらの場合もある」という点そのものである）。
+          この境界を個別に調べて「発散」という結論を出したのが、まさに第3回・問題3だった。
+        </p>
+        <p>
+          つまり、「収束半径 $R$ を求める一般論（本問）」と「境界 $x=R$ での収束・発散を個別に調べる解析（第3回・問題3）」は、
+          役割がはっきり分かれた別の作業であり、どちらか一方だけでは級数の収束域を完全には決定できない、という
+          Ch.3とCh.4を橋渡しする教訓を、この2問はセットで体現している。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題4.3 =================== -->
+  <div class="section" id="p4-3">
+    <div class="sec-header">
+      <span class="sec-tag">問題 4.3</span>
+      <span class="diff-badge">難易度 ★★★★☆</span>
+      <h2>項別微分による新しい展開の導出</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          既出の等式 $\dfrac{1}{1+x^2}=\displaystyle\sum_{n=0}^\infty(-1)^nx^{2n}$（$|x|<1$、$\arctan x$ の導出
+          <a href="../ch4.html#arctan">../ch4.html#arctan</a>で使われた級数）を項別微分（定理4.5、
+          <a href="../ch4.html#termwise">../ch4.html#termwise</a>）することにより、$\dfrac{1}{(1+x^2)^2}$ のマクローリン展開を求めよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">🧠 方針・出発点</span>
+        <p>
+          講義ノートの本文（<a href="../ch4.html#arctan">../ch4.html#arctan</a>）では、この同じ等式 $\dfrac{1}{1+x^2}=\sum(-1)^nx^{2n}$ を
+          出発点として<strong>項別積分</strong>することで $\arctan x$ の展開を導いていた。本問はその同じ出発点を、
+          今度は逆方向の<strong>項別微分</strong>に使うという対照的な操作であり、
+          「項別微分・項別積分はどちらも収束半径を変えずに実行できる」（定理4.5）という定理の
+          <strong>両方向の使い方</strong>を確認する良い練習になる。また、既出の例4.6
+          （<a href="../ch4.html#product">../ch4.html#product</a>、コーシー積を使って $1/(1-x)^2$ の展開を確かめた）とは
+          異なる手法（コーシー積ではなく項別微分）で、類似の形の関数 $1/(1+x^2)^2$ を扱っている点にも注目したい。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（1）— 両辺を微分する</span>
+        <p>$f(x)=\dfrac{1}{1+x^2}=\displaystyle\sum_{n=0}^\infty(-1)^nx^{2n}$（$|x|<1$）の両辺を $x$ で微分する。左辺は</p>
+        $$\frac{d}{dx}(1+x^2)^{-1} = -1\cdot(1+x^2)^{-2}\cdot2x = \frac{-2x}{(1+x^2)^2}.$$
+        <p>
+          右辺は定理4.5（項別微分は収束半径を変えずに可能）より、各項を微分して足し合わせればよい。
+          $n=0$ の項（定数 $1$）は微分すると消えることに注意すると、
+        </p>
+        $$\frac{d}{dx}\sum_{n=0}^\infty(-1)^nx^{2n} = \sum_{n=1}^\infty(-1)^n\cdot2n\cdot x^{2n-1}.$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（2）— 整理して $\{-2x\}$ で割る</span>
+        <p>以上より</p>
+        $$\frac{-2x}{(1+x^2)^2} = \sum_{n=1}^\infty(-1)^n\,2n\,x^{2n-1}.$$
+        <p>両辺を $-2x$（$x\ne0$）で割ると</p>
+        $$\frac{1}{(1+x^2)^2} = \sum_{n=1}^\infty(-1)^n\,2n\,x^{2n-1}\cdot\left(-\frac{1}{2x}\right) = \sum_{n=1}^\infty(-1)^{n+1}\,n\,x^{2n-2}.$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（3）— 添字をそろえる</span>
+        <p>$m=n-1$（$n=m+1$）と置き直すと、$(-1)^{n+1}=(-1)^{m+2}=(-1)^m$ なので</p>
+        $$\frac{1}{(1+x^2)^2} = \sum_{m=0}^\infty(-1)^m(m+1)x^{2m} = 1-2x^2+3x^4-4x^6+\cdots.$$
+        <p>
+          収束半径は定理4.5より元の級数と変わらず $R=1$ のままである（$x=0$ での特異性はなく、$x=\pm i$ が
+          複素平面上の最近傍の特異点であることに対応する）。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">🔄 振り返り</span>
+        <p>
+          この問題は「$1/(1+x^2)$ という一つの等式から、$\arctan x$（積分方向）と $1/(1+x^2)^2$（微分方向）という
+          2つの異なる展開が、同じ定理4.5の左右対称な適用によって得られる」ことを示している。
+          また、例4.6の $1/(1-x)^2$ をコーシー積で導いた計算と見比べると、$1/(1-x)^2$ は「同じ関数どうしのコーシー積」、
+          本問の $1/(1+x^2)^2$ は「項別微分」と、出発点も手法も異なるにもかかわらず、
+          どちらも「もとの関数の2乗（あるいはそれに準ずる冪）」という似た形の関数を係数が等差数列的に増える
+          べき級数として得ている、という構造的な類似にも気づけると理解が深まる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 問題4.4 =================== -->
+  <div class="section" id="p4-4">
+    <div class="sec-header">
+      <span class="sec-tag">問題 4.4</span>
+      <span class="diff-badge">難易度 ★★★★★</span>
+      <h2>二項級数と項別積分で導く $\arcsin x$</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="problem">
+        <span class="box-label">問題</span>
+        <p>
+          二項級数（定理4.7、<a href="../ch4.html#binomial">../ch4.html#binomial</a>、$\alpha=-\dfrac12$）を用いて
+          $(1-x^2)^{-1/2}$ のマクローリン展開を求め、それを項別積分（定理4.5、
+          <a href="../ch4.html#termwise">../ch4.html#termwise</a>）することで $\arcsin x$ のマクローリン展開を導出せよ。
+          また収束半径を答えよ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">🧠 方針・出発点</span>
+        <p>
+          これは本問題集の総合問題である。講義ノート本文が $\log(1+x)$（<a href="../ch4.html#log">../ch4.html#log</a>、
+          等比級数を項別積分）と $\arctan x$（<a href="../ch4.html#arctan">../ch4.html#arctan</a>、
+          $1/(1+t^2)$ 型の級数を項別積分）を導出したのと完全に並行する構成で、
+          今度は二項級数（$\alpha=-1/2$、既出の例4.4で扱われた特殊化の一つ、
+          <a href="../ch4.html#binomial">../ch4.html#binomial</a>）を出発点に $\arcsin x$ を導く。
+          途中で一般二項係数 $\dbinom{-1/2}{n}$（定義4.6）を、問題4.2で扱った通常の二項係数 $\dbinom{2n}{n}$ を使って
+          書き換える古典的な等式が鍵になる。この等式さえ認めれば、あとは $\log(1+x)$・$\arctan x$ と全く同じ
+          「項別積分」の流れ作業である。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（1）— 二項級数を立てる</span>
+        <p>定理4.7より、$\alpha=-\dfrac12$ として</p>
+        $$(1+t)^{-1/2} = \sum_{n=0}^\infty\binom{-1/2}{n}t^n \qquad(|t|<1).$$
+        <p>定義4.6（<a href="../ch4.html#binomial">../ch4.html#binomial</a>）より一般二項係数を具体的に計算する。</p>
+        $$\binom{-1/2}{n} = \frac{(-\frac12)(-\frac32)(-\frac52)\cdots(-\frac12-n+1)}{n!} = \frac{(-\frac12)(-\frac32)\cdots(-\frac{2n-1}{2})}{n!}.$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（2）— $\dbinom{2n}{n}$ を使って整理する</span>
+        <p>分子の $n$ 個の因子から $(-1)$ を1つずつ、$1/2$ を1つずつくくり出すと</p>
+        $$(-\tfrac12)(-\tfrac32)\cdots(-\tfrac{2n-1}{2}) = (-1)^n\cdot\frac{1\cdot3\cdot5\cdots(2n-1)}{2^n}.$$
+        <p>
+          奇数の積 $1\cdot3\cdot5\cdots(2n-1)$ は、偶数を割り出す形 $\dfrac{(2n)!}{2\cdot4\cdot6\cdots(2n)}=\dfrac{(2n)!}{2^n\,n!}$ として
+          書き換えられるので、
+        </p>
+        $$(-\tfrac12)(-\tfrac32)\cdots(-\tfrac{2n-1}{2}) = (-1)^n\cdot\frac{(2n)!}{2^n\,n!\cdot2^n} = (-1)^n\frac{(2n)!}{4^n\,n!}.$$
+        <p>したがって</p>
+        $$\binom{-1/2}{n} = \frac{1}{n!}\cdot(-1)^n\frac{(2n)!}{4^n\,n!} = (-1)^n\frac{(2n)!}{4^n\,(n!)^2} = (-1)^n\binom{2n}{n}\frac{1}{4^n}.$$
+        <p>
+          これは一般二項係数 $\dbinom{-1/2}{n}$ と通常の二項係数 $\dbinom{2n}{n}$（問題4.2の主役）を結びつける古典的な等式である。
+        </p>
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（3）— $t=-x^2$ を代入する</span>
+        <p>模範解答（2）の結果を代入すると</p>
+        $$(1+t)^{-1/2} = \sum_{n=0}^\infty(-1)^n\binom{2n}{n}\frac{t^n}{4^n} \qquad(|t|<1).$$
+        <p>ここで $t=-x^2$ を代入する（$|t|<1\iff|x|<1$）。$(-1)^n\cdot(-x^2)^n=(-1)^n\cdot(-1)^nx^{2n}=x^{2n}$ と、$(-1)^n$ が打ち消し合うことに注意すると、</p>
+        $$(1-x^2)^{-1/2} = \sum_{n=0}^\infty\binom{2n}{n}\frac{x^{2n}}{4^n} \qquad(|x|<1).$$
+      </div>
+
+      <div class="sol">
+        <span class="box-label">📝 模範解答（4）— 項別積分して $\arcsin x$ へ</span>
+        <p>$\arcsin'(x)=\dfrac{1}{\sqrt{1-x^2}}=(1-x^2)^{-1/2}$ なので、両辺を $0$ から $x$ まで項別積分する（定理4.5）。
+          $\arcsin0=0$ を積分定数として使うと、</p>
+        $$\arcsin x = \int_0^x(1-t^2)^{-1/2}\,dt = \sum_{n=0}^\infty\binom{2n}{n}\frac{1}{4^n}\int_0^xt^{2n}\,dt = \sum_{n=0}^\infty\binom{2n}{n}\frac{x^{2n+1}}{4^n(2n+1)}.$$
+        <p>
+          すなわち $\arcsin x = x+\dfrac{1}{6}x^3+\dfrac{3}{40}x^5+\cdots$。
+          収束半径は項別積分で変わらないので $R=1$。
+        </p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">🔄 振り返り — $\dbinom{2n}{n}$ の3つの顔</span>
+        <p>
+          収束半径について一言補足する。本問の級数 $\displaystyle\sum_{n=0}^\infty\binom{2n}{n}\dfrac{x^{2n}}{4^n}$ は、
+          $y=x^2/4$ と置けば $\displaystyle\sum_{n=0}^\infty\binom{2n}{n}y^n$、すなわち<strong>問題4.2でまさに扱った級数そのもの</strong>になる。
+          問題4.2で求めた収束半径は $y$ について $R_y=1/4$ だったから、$|y|<1/4$ すなわち $|x^2/4|<1/4$ すなわち $|x|<1$ となり、
+          本問で項別積分の理論から直接得た $R=1$ と、変数変換を通じて完全に整合することが確認できる。
+        </p>
+        <p>
+          さらに視野を広げると、二項係数 $\dbinom{2n}{n}$ という同じ組み合わせ的な数列が、本予想問題集を通じて
+          3つの異なる文脈で連関して登場していることに気づく——
+          第3回・問題3では $\sum\binom{2n}{n}4^{-n}$ という具体的な級数の<strong>発散</strong>を証明する主役として、
+          第4回・問題4.2では $\sum\binom{2n}{n}x^n$ という<strong>べき級数の収束半径 $R=1/4$</strong> を決める係数として、
+          そして本問（第4回・問題4.4）では二項級数の係数の書き換えを通じて $\arcsin x$ の<strong>マクローリン展開の係数</strong>として。
+          同じ数列 $\binom{2n}{n}$ が、ある時は級数の発散の証拠に、ある時は収束半径の計算対象に、
+          またある時は別の関数の展開係数にと、文脈に応じて全く異なる役割を演じる——この統一感こそ、
+          Ch.3とCh.4を通して身につけてほしい「同じ数学的対象が形を変えて繰り返し現れる」という感覚である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+    <summary>第4回を自力で解けるかセルフチェック</summary>
+    <ul class="checklist">
+      <li>比判定法形の公式（命題4.3）で $R=\lim|a_n/a_{n+1}|$ を計算するとき、分子と分母（$a_n$ と $a_{n+1}$）を取り違えずに立式できるか。</li>
+      <li>階乗を含む係数（二項係数など）の比を、約分を丁寧に行って正しく整理し、収束半径を求められるか。</li>
+      <li>収束半径の内部（$|x|<R$）に対する一般論と、境界 $|x|=R$ での個別の収束・発散判定が、別の作業であることを説明できるか。</li>
+      <li>項別微分・項別積分（定理4.5）を使って、既知のべき級数から新しい関数の展開（$1/(1+x^2)^2$、$\arcsin x$ 等）を導出できるか。</li>
+    </ul>
+  </details>
+
+  <!-- ナビゲーション -->
+  <div style="display:flex; justify-content:space-between; margin-top:2rem; padding:0 .5rem;">
+    <a href="yosou_ch3.html" style="color:var(--accent); text-decoration:none; font-weight:700;">← 予想問題 第3回</a>
+    <a href="yosou_ch5.html" style="color:var(--accent); text-decoration:none; font-weight:700;">予想問題 第5回 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

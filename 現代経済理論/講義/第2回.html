@@ -1,0 +1,587 @@
+<!DOCTYPE html><!-- 「第2回 金融政策と物価｜現代経済理論」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第2回 金融政策と物価｜現代経済理論</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="lec-2">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">現代経済理論</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">HOME</a>
+      <a href="index.html" class="active">講義</a>
+      <a href="../kakomon_2025.html">過去問</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <div class="hero-badge">第2回</div>
+  <h1>金融政策と物価</h1>
+  <p class="subtitle">青木 浩介｜東京大学大学院経済学研究科</p>
+  <p class="meta">物価はなぜ動くのか — 300年の歴史とデフレの罠｜2026年度 Sターム</p>
+</div>
+
+<div class="container">
+
+  <div class="section-card">
+    <h2><span class="h2-icon">👤</span>講師プロフィール</h2>
+    <div class="teacher-profile">
+      <div class="teacher-icon">🏦</div>
+      <div class="teacher-info">
+        <h3>青木 浩介</h3>
+        <div class="affil">
+          東京大学大学院経済学研究科 教授
+        </div>
+        <div class="specialty">
+          専門：金融政策、金融市場とマクロ経済変動<br>
+          本郷での担当科目：国際経済II（国際金融）、上級マクロ経済学、ゼミ
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📖</span>講義概要</h2>
+    <div class="summary-text">
+      <p>
+        日本銀行は「消費者物価の前年比上昇率2%」を物価安定の目標として掲げている。しかし、なぜ中央銀行が物価を管理する必要があるのか、そしてその手段である金融政策はどのように物価に波及するのかは、意外と理解されていない。
+        本講義は、①<strong>歴史</strong>（過去200〜300年間、物価はどう動いてきたか）と②<strong>現代の理解</strong>（1970年代の高インフレ、2000〜2010年代の日本の低インフレ、これからのインフレの行方）という2つの軸で、金融政策と物価の関係を読み解く。
+      </p>
+      <p>
+        鍵となる道具立ては、①<strong>貨幣数量方程式</strong>（貨幣量と物価の関係）と②<strong>政府予算制約</strong>（財政と貨幣発行の関係）という2つの式、そして③<strong>フィッシャー方程式</strong>（名目金利と実質金利の関係）である。
+        これらを使って、1973-74年の「狂乱物価」がなぜ石油危機ではなく金融政策の失敗として理解されるのか、そして日本の長期デフレがなぜ「ゼロ金利下限」と「デフレの罠均衡」という現象として説明されるのかを学ぶ。
+      </p>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📋</span>主なトピック</h2>
+    <ul class="topic-list">
+
+      <li>
+        <div class="tn-col"><span class="tn">1</span></div>
+        <div class="topic-content">
+          <span class="topic-title">日本銀行と金融政策の役割</span>
+          <div class="topic-desc">
+            <p>
+              中央銀行の伝統的な役割は、①物価の安定、②金融市場（金融システム）の安定の2つである。日本銀行法は次のように定める。
+            </p>
+            <div class="def-box">
+              第一条：日本銀行は、我が国の中央銀行として、銀行券を発行するとともに、通貨及び金融の調節を行うことを目的とする。<br>
+              第二条：日本銀行は、通貨及び金融の調節を行うに当たっては、<strong>物価の安定を図ることを通じて国民経済の健全な発展に資する</strong>ことをもって、その理念とする。
+            </div>
+            <p>
+              日銀は「消費者物価の前年比上昇率2%」という物価安定の目標を掲げているが、日銀自身のアンケート調査（「生活意識に関するアンケート調査」）では、この目標の認知度は必ずしも高くない。
+              金融政策は経済学の理論と実務の距離が特に近い分野で、植田和男現総裁（東京大学、理学部数学科出身）をはじめ、Ben Bernanke（元FRB議長、2022年ノーベル経済学賞）、Janet Yellen（元FRB議長）など、多くの中央銀行幹部が経済学者出身である。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">2</span></div>
+        <div class="topic-content">
+          <span class="topic-title">金融政策の波及メカニズム</span>
+          <div class="topic-desc">
+            <p>金融政策は、次のような経路で消費・投資や物価に波及する。この骨格は講義全体を通じて繰り返し参照される。</p>
+            <div class="def-box">
+              <strong>金融引き締め</strong>：貨幣供給量の減少（または名目短期利子率の増加）→ 借入・貸出利子率の増加 → 消費や投資の減少 → 物価の下落<br><br>
+              <strong>金融緩和</strong>：貨幣供給量の増加（または名目短期利子率の減少）→ 借入・貸出利子率の減少 → 消費や投資の増加 → 物価の上昇
+            </div>
+            <p>中央銀行が短期利子率を下げると、家計の住宅ローンや消費者ローンのコスト、企業の資金調達コストが下がり、消費・投資が増加する。総需要が増えることで物価は上昇する——これが金融緩和の基本メカニズムである。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">3</span></div>
+        <div class="topic-content">
+          <span class="topic-title">貨幣数量説 — 長期・世界のデータで見る貨幣と物価</span>
+          <div class="topic-desc">
+            <div class="def-box">
+              <strong>貨幣数量方程式</strong>：M<sub>t</sub>v<sub>t</sub> = P<sub>t</sub>Y<sub>t</sub><br>
+              M：貨幣量、v：流通速度（お金が1年間に何回使われるか）、P：物価、Y：産出量（実質GDP）
+            </div>
+            <p>
+              流通速度vと産出量Yがあまり変化しないと仮定すると、貨幣量の変化率と物価の変化率（インフレ率）はだいたい同じになる。
+              この関係を成長率で書き直すと、m + v = π + g（それぞれの成長率）となり、v が一定（v の成長率＝0）なら次の式が成り立つ。
+            </p>
+            <div class="def-box">
+              <strong>インフレ率 π = m − g</strong>（m：貨幣成長率、g：経済成長率）<br>
+              経済成長率が貨幣成長率を上回る（g &gt; m）とき、π &lt; 0 となり物価は下落（デフレ）する。下落幅は両者の差（g − m）に等しい。
+            </div>
+            <div class="insight"><strong>数値例</strong>：貨幣量が年8%増え、実質GDPが年3%増え、流通速度が一定なら、物価を押し上げる「余分な貨幣」の伸びは8−3=<strong>5%</strong>なので、インフレ率も概ね5%と読む。ただし短期にはvやYも動くため、恒等式そのものと「v・Yが安定」という追加仮定を区別する必要がある。</div>
+            <p>
+              141カ国・2001-2023年のクロスカントリーデータでは、貨幣成長率とインフレ率には強い正の相関が見られる一方、貨幣成長率と実質GDP成長率はほとんど相関しない。
+              後者は<strong>貨幣の中立性</strong>（長期では貨幣の量そのものは実物経済の大きさを左右しない）と呼ばれる考え方に対応する。
+            </p>
+            <div class="insight">
+              貨幣数量説は「長期・大きなインフレ」を説明する力は強いが、後述するように日本のゼロ金利下の低インフレ期（貨幣量が激増しても物価が動かない）は、この単純な理論だけでは説明できない。</div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">4</span></div>
+        <div class="topic-content">
+          <span class="topic-title">現代の相対化 — イギリス300年の物価史</span>
+          <div class="topic-desc">
+            <p>
+              過去200〜300年間、物価はどう動いてきたか。多くの人は「物価はゆるやかに右肩上がりで増え続けてきた」と直感するが、実際のイギリスの物価データ（17〜20世紀）は<strong>長く平ら（ほぼ一定）で、20世紀に入って急上昇する</strong>という形をしている。
+            </p>
+            <div style="overflow-x:auto;">
+            <table class="q-table" style="width:100%;">
+              <tr><th>期間</th><th>できごと</th><th>物価への影響</th></tr>
+              <tr><td>1661–1797</td><td>1717年までは銀本位制、その後は事実上の金本位制（1694年イングランド銀行設立、1717年の造幣局長官はアイザック・ニュートン）</td><td>ほぼ一定</td></tr>
+              <tr><td>1797–1821</td><td>金本位制停止（対フランス戦争）</td><td>1797–1813に物価64%上昇</td></tr>
+              <tr><td>1821–1914</td><td>金本位制</td><td>物価は安定</td></tr>
+              <tr><td>1914–1920</td><td>金本位制停止（第一次世界大戦）</td><td>1914–1919に物価107%上昇</td></tr>
+              <tr><td>1921–1939</td><td>戦間期に金本位制へ復帰</td><td>1920–1923に物価36.5%下落</td></tr>
+              <tr><td>1931</td><td>金本位制から離脱</td><td>—</td></tr>
+              <tr><td>1946–1972</td><td>ブレトン・ウッズ体制</td><td>—</td></tr>
+              <tr><td>1972</td><td>ブレトン・ウッズ体制崩壊</td><td>—</td></tr>
+              <tr><td>1992</td><td>インフレ目標政策を採用</td><td>—</td></tr>
+            </table>
+            </div>
+            <p><strong>表の比較軸</strong>は「金との交換を維持した期間」と「停止した期間」である。年ごとの偶然な上下ではなく、制度変更の前後で貨幣発行の制約がどう変わり、物価水準がどう反応したかを追う。64%・107%はその期間を通じた物価水準の上昇幅で、年率インフレ率ではない。</p>
+            <p>この年表から見えるパターンは明快である。<strong>金本位制の間は物価がほぼ一定</strong>で、<strong>戦争などで金本位制を停止すると物価が上昇し、復帰すると下落して元に戻る</strong>。この仕組みを次の2つの式で理解する。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">5</span></div>
+        <div class="topic-content">
+          <span class="topic-title">2つの式で歴史を理解する</span>
+          <div class="topic-desc">
+            <div class="def-box">
+              <strong>貨幣数量方程式</strong>：M<sub>t</sub>v<sub>t</sub> = P<sub>t</sub>Y<sub>t</sub><br><br>
+              <strong>政府予算制約</strong>：B<sub>t</sub> = (1 + i<sub>t−1</sub>)B<sub>t−1</sub> + G<sub>t</sub> − T<sub>t</sub> − (M<sub>t</sub> − M<sub>t−1</sub>)<br>
+              B：国債残高、(1+i)B：国債費、G：政府支出、T：税、(M<sub>t</sub>−M<sub>t−1</sub>)：貨幣発行による調達額
+            </div>
+            <div class="insight"><strong>政府予算制約の読み方</strong>：左辺は今期末の国債残高、右辺は「前期の元利払い＋今期支出−税収−新規貨幣発行」である。最後の項にマイナスが付くのは、貨幣を発行した分だけ国債で借りる必要が減るからであり、貨幣発行が支出を減らすという意味ではない。</div>
+            <p>
+              政府の支出は、国債発行（借金）、税収、そして貨幣発行の3通りの方法で賄われる。金本位制のもとでは貨幣量はおおむね金保有量に等しく、金保有量は短期間では大きく変化しないため物価は安定する。
+              ところが戦争などで税収（T）が不足すると、政府は金本位制を一時停止して貨幣を発行（M<sub>t</sub>−M<sub>t−1</sub> を増やす）することで穴埋めする。これが貨幣数量方程式を通じて物価を押し上げる。戦争が終わると金本位制に復帰し、物価は元の水準に戻ろうとする。
+            </p>
+            <div class="insight">
+              <strong>応用：1945-1949年の日本の大インフレ</strong>——この時期、日本の物価は200倍超になった。戦後の生産能力の崩壊（課税ベースの縮小でTが取れない）と巨額の財政赤字（Gが大きい）が、貨幣発行による穴埋めを招き、ハイパーインフレを引き起こした。政府予算制約の式がこの歴史的事象をそのまま説明する。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">6</span></div>
+        <div class="topic-content">
+          <span class="topic-title">分析の準備 — インフレ目標・実質金利・フィッシャー方程式</span>
+          <div class="topic-desc">
+            <p>現代の金融政策の中心はインフレ目標政策である。すごく単純化すると、インフレ率が目標より高ければ引き締め（利上げ）、低ければ緩和（利下げ）という反応を行う。</p>
+            <div class="def-box">
+              <strong>インフレ目標政策のルール</strong>：i<sub>t</sub> = c + φ(π<sub>t</sub> − π*)， φ &gt; 1<br>
+              i：名目利子率、c：定数、π：インフレ率、π*：インフレ目標
+            </div>
+            <p>
+              1万円が1万1千円になっても、物価が10%上昇していれば実質的な価値は変わらない。名目利子率i と実質利子率r の関係は次のように書ける（<strong>フィッシャー方程式</strong>）。実質利子率が消費や投資に影響する。
+            </p>
+            <div class="def-box">
+              r<sub>t</sub> = i<sub>t</sub> − π<sub>t+1</sub>　（書き換えると i<sub>t</sub> = r<sub>t</sub> + π<sub>t+1</sub>）
+            </div>
+            <div class="insight">
+              <strong>φ &gt; 1 の重要性（テイラー原理）</strong>：インフレ率が1%上昇したときに名目利子率を1%<em>超</em>引き上げて初めて、実質利子率が上昇し金融引き締め効果が生まれる。消費・投資に効くのは名目利子率ではなく実質利子率だからである。φ &lt; 1 だと、インフレが上がっても実質利子率はむしろ下がり、引き締めにならない。
+            </div>
+            <p>たとえば予想インフレ率が2%から3%へ1ポイント上がったとき、φ=1.3なら名目金利は1.3ポイント上がり、実質金利は差し引き0.3ポイント上がる。この0.3ポイントが需要を冷やす方向に働く。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">7</span></div>
+        <div class="topic-content">
+          <span class="topic-title">1973-74年 狂乱物価 — 「石油危機ではなく金融政策の失敗」</span>
+          <div class="topic-desc">
+            <p>
+              高校の教科書では、1973-74年の戦後最高のインフレ（狂乱物価）の原因を第一次石油危機（1973年10月、第4次中東戦争に伴う原油価格の4倍高騰）とする。
+              しかし現代のマクロ経済学者は、<strong>石油危機は悪化要因であって原因ではない</strong>と考える。実際、インフレ率は石油危機の前からすでに上昇していた（1972年末で5%台後半）。
+            </p>
+            <div style="overflow-x:auto;">
+            <table class="q-table" style="width:100%;">
+              <tr><th>時期</th><th>できごと</th></tr>
+              <tr><td>1971年8月</td><td>ブレトン・ウッズ体制崩壊／ニクソン・ショック</td></tr>
+              <tr><td>1971年12月</td><td>スミソニアン合意（1ドル=308円、16.88%の円切上げ）</td></tr>
+              <tr><td>1972年6月</td><td>★ 金利引き下げ ── 後に「ミス」と評価される</td></tr>
+              <tr><td>1972年7月</td><td>田中角栄、首相就任（大型財政支出＝日本列島改造論を公約）</td></tr>
+              <tr><td>1973年2月</td><td>円が変動相場制へ移行</td></tr>
+              <tr><td>1973年4月</td><td>★ 金利引き上げ開始 ── ただし遅すぎた</td></tr>
+              <tr><td>1973年10月</td><td>第四次中東戦争 → 第一次石油危機</td></tr>
+              <tr><td>1973年12月</td><td>金利を9%まで急速に引き上げ（計5回の利上げ）</td></tr>
+              <tr><td>1974年</td><td>CPI上昇率ピーク約25%（月次ピークは1974年2月の約26.3%）、実質GDPはマイナス成長</td></tr>
+            </table>
+            </div>
+            <p><strong>失敗1：1972年6月の利下げ</strong>——1972年初め、景気はすでに回復局面でインフレ率は約5%だったが、政府はスミソニアン合意後の円高圧力を避けたいことと国内需要の刺激を望んで利下げを希望した。日銀は当初は利下げ不要としていたが、1972年5月10日に佐々木総裁が佐藤首相と会談した翌日、一転して利下げに同意し、6月24日に政策金利を4.75%から4.25%へ引き下げた。利下げ後、インフレは加速した。</p>
+            <p><strong>失敗2：引き締めが遅すぎた</strong>——1972年後半にはインフレ圧力が明白になり（12月時点で5.7%）、本来なら10〜12月に利上げすべき状況だった。しかし田中政権の拡張財政、衆議院解散（1972年11月）と総選挙（12月）、予算審議期間中は金融政策を動かさない慣例が重なり、実際の利上げは1973年4月2日（+0.75%pt）までずれ込んだ。</p>
+            <p>この間、インフレに強く反応できなかったため実質利子率はマイナスになっていた（緩和的な状態のまま高インフレを放置した）。Ito (2010) は、日銀がインフレの高まりを認識していなかった（仮説A）は当時の資料から否定され、日銀は認識していたが政府への提案を控えた、または提案したが大蔵省・首相の圧力で拒否された（仮説B・C）が部分的に正しいとしている——中央銀行の独立性の重要性を示す事例である。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">8</span></div>
+        <div class="topic-content">
+          <span class="topic-title">第2次石油危機との対比、そしてφの推定</span>
+          <div class="topic-desc">
+            <p>
+              1979-80年の第2次石油危機（OPEC値上げ＋イラン革命）は第1次と同規模のショックだったが、日銀は1973-74年の教訓を生かし、1979年から政策金利を連続的に引き上げて政府・大蔵省を説得した。
+              結果、日本のインフレはピーク約8.5%に抑えられた（同時期の米国のピークは約15%）——迅速な金融引き締めの成功例とされる。
+            </p>
+            <p>
+              日銀の政策パフォーマンスが良かった時期（1982-1995年）のデータから政策反応係数を推計すると、<strong>φ ≈ 1.3</strong> となる。
+              反実仮想分析——仮に1972年にも φ=1.3 のルールで行動していたら、実際よりもはるかに大幅な利上げをしていたはずだとシミュレーションできる。この結果は「1973-74年の狂乱物価は金融政策の失敗だった」という仮説を支持する。
+            </p>
+            <div class="insight">
+              ここでも、第1回で学んだ「反実仮想」という道具が使われている。歴史上の「if」を、推定したモデルで定量的にシミュレーションするのが構造的なマクロ経済分析の手法である。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">9</span></div>
+        <div class="topic-content">
+          <span class="topic-title">ゼロ金利下限（ZLB）とは何か</span>
+          <div class="topic-desc">
+            <p>
+              2000年代以降、日米欧のインフレ率を比べると日本だけが一貫して低い（ゼロ近傍〜マイナス）。日銀の政策金利（短期のコールレート）は1990年代後半からほぼ0%に張り付いている。
+              一方で貨幣量／GDP比率は約20%から120%超へ激増したにもかかわらず、物価は上がらなかった——単純な貨幣数量説では説明できないパズルである。
+            </p>
+            <div class="def-box">
+              <strong>ゼロ金利下限（ZLB: Zero Lower Bound）</strong>：名目金利はゼロ（もしくは小さな負の値）以下にはなり得ない。<br>
+              理由：現金（紙幣・硬貨）は名目金利がゼロの資産である。もし国債や預金の名目金利が大きく負になれば、誰もそれらを持たず現金を保有するようになるため、名目金利は実質的にゼロを下回れない。
+            </div>
+            <p>
+              貨幣市場で考えると、中央銀行が利子率を制御する場合は目標利子率の下で貨幣をいくらでも供給する（水平な供給曲線）。貨幣需要曲線は右下がりで金利ゼロ近傍では横軸に漸近するように寝ていくため、貨幣量を増やしても名目利子率をゼロ以下には押し下げられない。
+              貨幣量を制御する場合（垂直な供給曲線）でも同様に、貨幣量をある水準より増やしても金利はそれ以上下がらない。これが「量的緩和には限界がある」という直感の背景である。
+            </p>
+            <div class="insight"><strong>図を読むときの軸</strong>：縦軸が名目金利i、横軸が貨幣量Mである。右下がりの貨幣需要は「金利が低いほど、利息を諦める費用が小さく現金を多く持つ」ことを表す。ゼロ付近の平らな部分で供給を右へ動かしても縦軸の値が下がらない、という点がZLBの意味である。</div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">10</span></div>
+        <div class="topic-content">
+          <span class="topic-title">デフレの罠均衡</span>
+          <div class="topic-desc">
+            <p>ゼロ金利下限を考慮すると、インフレ目標政策のルールは次のように修正される。</p>
+            <div class="def-box">
+              i<sub>t</sub> = max[ 0, r + π* + φ(π<sub>t</sub> − π*) ]　（フィッシャー方程式 i<sub>t</sub> = r + π<sub>t+1</sub>、簡単化のため実質利子率rは一定と仮定）
+            </div>
+            <p>
+              この2本の式を π–i 平面で図示すると、交点が<strong>2つ</strong>存在する。1つは π = π*（インフレ目標が達成される<strong>正常均衡</strong>）、もう1つは i = 0 かつ π = −r（ゼロ金利のまま定常的にデフレが続く<strong>罠均衡</strong>）である。
+            </p>
+            <div class="insight"><strong>図の読み方</strong>：横軸をインフレ率π、縦軸を名目金利iとする。政策ルールはZLBのためi=0で水平になった後、傾きφで右上がりになる。フィッシャー方程式は傾き1の直線である。交点では「中央銀行が設定する金利」と「家計・企業の実質収益率と整合する金利」が一致するため、どちらも均衡候補になる。</div>
+            <p>動学的に見ると、名目利子率が正のとき π<sub>t+1</sub> = φπ<sub>t</sub> + (1−φ)π* という関係が成り立ち、ゼロ金利下限（i<sub>t</sub> = r + π<sub>t+1</sub> ≥ 0 より π<sub>t+1</sub> ≥ −r）を考慮すると次のようになる。</p>
+            <div class="def-box">
+              π<sub>t+1</sub> = max[ φπ<sub>t</sub> + (1−φ)π*，−r ]
+            </div>
+            <p>
+              φ &gt; 1 のとき、この式は「平時にはインフレを目標に引き戻す安定化装置」として働くが、いったんインフレ率が目標を大きく下回ると、逆に乖離を<strong>拡大</strong>させながら階段状に低下し、最終的に π = −r という「罠」に落ち込んでしまう。
+              一度ゼロ金利に達すると金利をこれ以上下げられないため、インフレ率をさらに引き上げる政策手段を失うのである。
+            </p>
+            <div class="def-box">
+              <strong>計算例</strong>：インフレ目標3%、実質利子率1%で一定の国がデフレ均衡にあるとき、i=0 とフィッシャー方程式 0 = 1% + π より、均衡インフレ率は <strong>π = −1%</strong> となる。
+            </div>
+            <p>
+              日本の政策金利とインフレ率の推移を見ると、1970年代・1980年代は高インフレ・高金利の領域を動いていたが、1990年代末以降はゼロ金利・低インフレの領域に長く滞留してきた（「罠にはまった」ように見える）。
+              2022年以降はインフレ率が2〜4%程度まで上昇しており、「罠から脱出したか？」という問いが投げかけられる——脱出したとすればなぜか、罠に戻ることはないか、1970年代のような高インフレになる危険はないのか、という開かれた問題として講義は締めくくられる。
+            </p>
+            <div class="insight">
+              「デフレの罠均衡」仮説の検証はまだ十分ではない。低インフレを説明する他の仮説として、巨大な負のショック、インフレ予想の低下、産業間競争の激化などが挙げられている。金融政策には、政府債務とインフレの関係、資源価格の高騰とインフレの関係など、他にも多くの研究課題が残る。
+            </div>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">🏷️</span>重要キーワード</h2>
+    <div class="concept-tags">
+      <span class="concept-tag t-blue">金融政策</span>
+      <span class="concept-tag t-blue">物価安定の目標（2%）</span>
+      <span class="concept-tag t-blue">金融政策の波及メカニズム</span>
+      <span class="concept-tag t-orange">貨幣数量説</span>
+      <span class="concept-tag t-orange">流通速度</span>
+      <span class="concept-tag t-orange">貨幣の中立性</span>
+      <span class="concept-tag">金本位制</span>
+      <span class="concept-tag">政府予算制約</span>
+      <span class="concept-tag t-purple">インフレ目標政策</span>
+      <span class="concept-tag t-purple">テイラー原理（φ&gt;1）</span>
+      <span class="concept-tag t-purple">フィッシャー方程式</span>
+      <span class="concept-tag t-purple">実質利子率</span>
+      <span class="concept-tag t-red">ゼロ金利下限（ZLB）</span>
+      <span class="concept-tag t-red">デフレの罠均衡</span>
+      <span class="concept-tag t-gray">反実仮想分析</span>
+      <span class="concept-tag t-gray">狂乱物価</span>
+    </div>
+
+    <div class="kw-detail-list">
+      <p class="kw-detail-label">各キーワードの解説（クリックで展開）</p>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details class="kw-item">
+        <summary class="kw-summary">金融政策</summary>
+        <div class="kw-body">中央銀行が行う政策の一部。物価の安定と金融市場の安定を目的とする。日本銀行法第2条で「物価の安定を図ることを通じて国民経済の健全な発展に資する」ことが理念とされている。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">物価安定の目標（2%）</summary>
+        <div class="kw-body">日本銀行が掲げる「消費者物価の前年比上昇率2%」という目標。1992年にイギリスがインフレ目標政策を採用したのを皮切りに、多くの中央銀行が採用する枠組み。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">金融政策の波及メカニズム</summary>
+        <div class="kw-body">金融緩和なら「貨幣供給量↑または名目短期利子率↓ → 借入・貸出利子率↓ → 消費・投資↑ → 物価↑」という経路。金融引き締めはこの逆。講義全体を貫く基本骨格。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">貨幣数量説</summary>
+        <div class="kw-body">M<sub>t</sub>v<sub>t</sub>=P<sub>t</sub>Y<sub>t</sub>（貨幣量×流通速度＝物価×産出量）という関係から、流通速度と産出量が一定なら貨幣量の変化率とインフレ率がほぼ一致するという理論。長期・高インフレの説明力は強いが、ゼロ金利下では機能しにくい。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">流通速度</summary>
+        <div class="kw-body">貨幣数量方程式のv。1単位のお金が一定期間（通常1年）に何回、取引の決済に使われるかを表す。貨幣数量説は、この流通速度があまり変化しないことを前提とする。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">貨幣の中立性</summary>
+        <div class="kw-body">長期的には、貨幣量の変化は物価水準には影響するが、実質GDPなど実物経済の大きさには影響しないという考え方。141カ国のクロスカントリーデータで、貨幣成長率と実質GDP成長率がほぼ無相関であることが示された。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">金本位制</summary>
+        <div class="kw-body">貨幣の価値を金と結びつけ、貨幣量がおおむね金の保有量で決まる制度。金保有量は短期間で大きく変わらないため物価が安定する一方、戦争などで停止されると財政赤字の穴埋めに貨幣が増発され、物価が急騰する歴史が繰り返された。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">政府予算制約</summary>
+        <div class="kw-body">B<sub>t</sub>=(1+i<sub>t−1</sub>)B<sub>t−1</sub>+G<sub>t</sub>−T<sub>t</sub>−(M<sub>t</sub>−M<sub>t−1</sub>) という、国債費・政府支出・税・貨幣発行の関係を表す式。税収が不足すると貨幣発行に頼らざるを得なくなり、それが物価上昇を招くメカニズムを説明する。1945-49年の日本の大インフレの理解に使われる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">インフレ目標政策</summary>
+        <div class="kw-body">i<sub>t</sub>=c+φ(π<sub>t</sub>−π*) というルールで、インフレ率が目標を上回れば利上げ、下回れば利下げを行う政策運営の枠組み。テイラー・ルールの単純化された形。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">テイラー原理（φ&gt;1）</summary>
+        <div class="kw-body">インフレ目標政策のルールでφ（インフレへの反応係数）が1を超えている必要があるという条件。φ&gt;1のとき、インフレが1%上がれば名目金利を1%超引き上げることになり、実質金利が上昇して初めて引き締め効果が生まれる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">フィッシャー方程式</summary>
+        <div class="kw-body">名目利子率i、実質利子率r、（期待）インフレ率πの関係を表す i=r+π（あるいはr=i−π）という恒等式。消費や投資に影響するのは名目金利ではなく実質金利である、という考え方の基礎。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">実質利子率</summary>
+        <div class="kw-body">名目利子率から期待インフレ率を差し引いたもの。「1万1千円になっても物価が10%上がれば実質的な価値は変わらない」という直感を定式化したもの。金融政策の効果は実質利子率の変化を通じて現れる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">ゼロ金利下限（ZLB）</summary>
+        <div class="kw-body">名目金利はゼロ（または小さな負の値）以下にはなり得ないという制約。現金という名目金利ゼロの資産が存在するため、預金や国債の金利を大きく負にすると誰もそれらを持たなくなることに起因する。デフレの罠均衡が存在する根本理由。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">デフレの罠均衡</summary>
+        <div class="kw-body">ゼロ金利下限のもとで、名目金利がゼロに張り付いたまま低インフレ・デフレが定常的に続く均衡。インフレ目標が達成される「正常均衡」と並ぶ、もう1つの均衡として理論上存在する。日本の1990年代末以降の状況がこれにあたるかが議論されている。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">反実仮想分析</summary>
+        <div class="kw-body">「もし1972年にもφ=1.3のルールで行動していたら」のように、実際には起きなかった政策・状況をモデルでシミュレーションする分析手法。1973-74年の狂乱物価が金融政策の失敗だったという仮説を補強する材料として使われた。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">狂乱物価</summary>
+        <div class="kw-body">1973-74年、日本で発生した戦後最高のインフレ（CPI上昇率ピーク約25〜26%）。高校教科書では石油危機が原因とされるが、現代のマクロ経済学では、石油危機以前からのインフレ圧力の高まりと金融政策の対応の遅れ（1972年の利下げ、1973年の利上げの遅延）が本質的な原因とされる。</div>
+      </details>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📝</span>過去問との対応</h2>
+    <div class="exam-ref-box">
+
+      <!-- 2025 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2025年度 期末試験</span>
+          <a href="../kakomon_2025.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+            <div class="exam-qa-header"><span class="eq-num">Q11</span><span class="eq-topic">金融政策・インフレ目標</span></div>
+            <div class="exam-qa-q">インフレ目標政策において、現在のインフレ率が目標を上回っている場合、中央銀行が取るべき政策として適切なものはどれか。</div>
+            <ul class="options">
+              <li class="opt"><span class="opt-label">(a)</span>政策金利を引き下げる</li>
+              <li class="opt correct"><span class="opt-label">(b)</span>政策金利を引き上げる<span class="correct-mark">正解</span></li>
+              <li class="opt"><span class="opt-label">(c)</span>貨幣供給量を増やす</li>
+              <li class="opt"><span class="opt-label">(d)</span>消費税減税をする</li>
+            </ul>
+            <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+            <div class="exp-body"><p>インフレ率が目標を上回る場合は、政策金利を引き上げて借入・消費・投資を抑え、総需要とインフレ率を低下させる金融引き締めが必要となる。</p></div>
+          </div>
+          <div class="exam-qa-item">
+            <div class="exam-qa-header"><span class="eq-num">Q12</span><span class="eq-topic">金融政策史・金本位制</span></div>
+            <div class="exam-qa-q">1930年代に金本位制から早期に離脱した国々が、離脱しなかった国よりも早期に景気回復した理由として正しいものはどれか。</div>
+            <ul class="options">
+              <li class="opt"><span class="opt-label">(a)</span>輸入関税を大幅に引き上げることが可能となったから</li>
+              <li class="opt"><span class="opt-label">(b)</span>財政黒字が増え、国債利子率が低下したから</li>
+              <li class="opt"><span class="opt-label">(c)</span>離脱国はもともと景気が良かったから</li>
+              <li class="opt correct"><span class="opt-label">(d)</span>平価切下げにより貨幣供給が拡大し、輸出と総需要が増加したから<span class="correct-mark">正解</span></li>
+            </ul>
+            <button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+            <div class="exp-body"><p>金本位制からの離脱により通貨切下げと金融緩和が可能になり、輸出と総需要が増加した。金本位制に残った国は金融政策が制約され、デフレと不況が長期化した。</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2024年度 期末試験</span>
+          <a href="../kakomon_2024.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q17</span><span class="eq-topic">貨幣数量説（成長率）</span></div>
+<div class="exam-qa-q">貨幣数量説が成り立っており流通速度が一定と仮定する。経済成長率も貨幣成長率も正であると仮定する。経済成長率が貨幣成長率よりも高い場合、以下のどれが正しいか？</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>貨幣成長率に従って物価が上がっていく</li>
+<li class="opt"><span class="opt-label">(b)</span>経済成長率と貨幣成長率の差の分だけ物価が上がっていく</li>
+<li class="opt correct"><span class="opt-label">(c)</span>経済成長率と貨幣成長率の差の分だけ物価が下がっていく<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>貨幣成長率に従って物価が下がっていく</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>貨幣数量説：MV = PY（M:貨幣量、V:流通速度、P:物価、Y:実質GDP）</p>
+<div class="formula">Vが一定のとき、成長率の関係：
+m + v = π + g  （それぞれの成長率）
+v = 0 → m = π + g
+
+∴ インフレ率 π = m - g
+  （m:貨幣成長率, g:経済成長率）
+
+g &gt; m のとき：π = m - g &lt; 0 （デフレ）
+デフレの大きさ ＝ g - m</div>
+<p>経済成長率が貨幣成長率を上回ると、実物経済の拡大に対して貨幣供給が不足し、物価が下落（デフレ）する。下落幅はその差（g-m）に相当する。</p>
+<p>(a)「貨幣成長率mに従って物価が上がる」：π = m - g であり、g &gt; 0 なので π &lt; m。貨幣成長率より物価上昇率は小さく、g &gt; m のときは物価は<em>下落</em>する（上がらない）。(b)「差の分だけ物価が上がる」：g &gt; m のとき π = m - g &lt; 0 なので物価は「<em>下がる</em>」（上がらない）。符号を間違えた選択肢。(d)「貨幣成長率mに従って物価が下がる」：π = m - gであり、貨幣成長率m単体が下落幅ではなく、差（g-m）が下落幅。また「mに従う」という表現は不正確。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q18</span><span class="eq-topic">デフレ均衡でのインフレ率</span></div>
+<div class="exam-qa-q">ある国の中央銀行のインフレ目標が3%、実質利子率が1%で一定と仮定する。この国がデフレ均衡にあるとき、均衡インフレ率は何%か？</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>-3%</li>
+<li class="opt"><span class="opt-label">(b)</span>-2%</li>
+<li class="opt correct"><span class="opt-label">(c)</span>-1%<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(d)</span>0%</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>デフレ均衡ではゼロ下限（ZLB）が拘束される：名目利子率 i = 0。</p>
+<div class="formula">フィッシャー方程式: i = r + π^e
+ZLBより: i = 0
+実質利子率: r = 1%
+
+0 = 1% + π^e
+π^e = -1%</div>
+<p>デフレ均衡では、名目利子率がゼロに張りついたまま、均衡インフレ率（期待インフレ率）が -1% になる。これが「デフレの罠」：実質利子率 = 0 - (-1%) = 1% で高止まりし、需要が抑制されさらなるデフレを呼ぶ悪循環。インフレ目標3%は「正常均衡」での目標であり、デフレ均衡での計算には使わない。</p>
+<p>(a)-3%：インフレ目標値3%をそのまま符号反転させた値。ZLBとフィッシャー方程式を使っておらず誤り。(b)-2%：インフレ目標3% - 実質利子率1% = 2% とし、それを負にした誤計算。デフレ均衡ではZLB（i=0）を使うのであり、インフレ目標は計算に入らない。(d)0%：名目利子率がゼロと混同して均衡インフレ率もゼロとした誤り。フィッシャー方程式で i=0, r=1% とすると π = i-r = 0-1% = -1% となる。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2023年度 期末試験</span>
+          <a href="../kakomon_2023.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q19</span><span class="eq-topic">金融政策の波及</span></div>
+<div class="exam-qa-q">以下から正しい文章を選びなさい。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>中央銀行が短期利子率を下げると消費や投資が減少して物価が下落する。</li>
+<li class="opt"><span class="opt-label">(b)</span>中央銀行が短期利子率を下げると消費や投資が増加して物価が下落する。</li>
+<li class="opt"><span class="opt-label">(c)</span>中央銀行が短期利子率を下げると消費や投資が減少して物価が上昇する。</li>
+<li class="opt correct"><span class="opt-label">(d)</span>中央銀行が短期利子率を下げると消費や投資が増加して物価が上昇する。<span class="correct-mark">正解</span></li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>金融政策の波及メカニズム（IS-LMフレームワーク）：</p>
+<div class="formula">短期利子率↓ → 借入コスト低下 → 消費↑・投資↑ → 総需要↑ → 物価↑</div>
+<p>中央銀行が政策金利（短期利子率）を引き下げると：<br/>
+    ①家計の住宅ローンや消費者ローンのコストが下がり、消費が増える。<br/>
+    ②企業の資金調達コストが下がり、設備投資が増える。<br/>
+    ③総需要が増加し、経済が活性化されてインフレ（物価上昇）が生じる。</p>
+<p>これが金融緩和（expansionary monetary policy）の基本メカニズム。</p>
+<p>(a)「消費・投資が<em>減少</em>して物価が<em>下落</em>」：利子率を下げると借入コストが低下し、消費・投資は<em>増加</em>する（逆）。物価も需要増を受けて上昇する。(b)「消費・投資が<em>増加</em>して物価が<em>下落</em>」：消費・投資の方向は正しいが、総需要増加→物価は<em>上昇</em>（逆）。(c)「消費・投資が<em>減少</em>して物価が<em>上昇</em>」：消費・投資の方向が逆。利子率引き下げは緩和政策であり需要を刺激する。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q20</span><span class="eq-topic">デフレの罠均衡が存在する理由</span></div>
+<div class="exam-qa-q">デフレの罠均衡はなぜ存在するか？</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>中央銀行が金融政策の政策変数として名目利子率を採用しているから</li>
+<li class="opt correct"><span class="opt-label">(b)</span>通貨の名目利子率がゼロだから<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(c)</span>中央銀行のインフレ目標値がゼロだから</li>
+<li class="opt"><span class="opt-label">(d)</span>貨幣数量説が成り立っていないから</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>デフレの罠（流動性の罠）均衡が存在する根本理由は、<em>名目利子率のゼロ下限（ZLB: Zero Lower Bound）</em>。</p>
+<p>現金（紙幣・硬貨）の名目リターンはゼロ。預金・債券の名目利子率がマイナスになると、合理的な主体は全て現金を保有するため、名目利子率は原則としてゼロ以下にはならない。</p>
+<div class="formula">フィッシャー方程式: 実質利子率 = 名目利子率 - 期待インフレ率
+デフレ均衡: 名目利子率 = 0, 期待インフレ率 &lt; 0
+→ 実質利子率 &gt; 0 （高止まり）
+→ 消費・投資抑制 → さらなるデフレ → 悪循環</div>
+<p>ZLBがあるためデフレ期待が強い状態で金融政策が効かなくなり、デフレ均衡が「罠」として安定的に存在しうる。</p>
+<p>(a)「名目利子率を採用しているから」：名目利子率を政策変数に使うこと自体はデフレの罠の<em>原因</em>ではなく、どの中央銀行も普通に使う手段。問題はその名目利子率がゼロの<em>下限に達した</em>ことにある。(c)「インフレ目標がゼロだから」：インフレ目標は中央銀行が設定する<em>目標値</em>であり、デフレの罠はZLBという<em>物理的・市場的制約</em>によって生まれる。目標がゼロかどうかとは別問題。(d)「貨幣数量説が成り立っていないから」：貨幣数量説の成否は関係ない。ZLBに達した状態では量的緩和など他の手段を使うが、デフレの罠の根本はあくまでZLB。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="lecture-nav">
+    <a href="第1回.html">← 第1回</a>
+    <a href="index.html" class="center">講義一覧</a>
+    <a href="第3回.html">第3回 →</a>
+  </div>
+
+</div>
+
+<script>
+// 押されたボタンに対応する解説欄の表示を切り替える。
+function toggleExp(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const opt = e.target.closest('.opt');
+  if (!opt) return;
+  const options = opt.closest('.options');
+  if (!options || options.classList.contains('revealed')) return;
+  options.classList.add('revealed');
+  opt.classList.add('selected');
+});
+</script>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">現代経済理論（渡辺安虎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+</body>
+</html>

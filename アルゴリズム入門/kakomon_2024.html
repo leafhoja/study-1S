@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#164e63">
+<title>2024年度 過去問解説 | アルゴリズム入門</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="style.css">
+<script>
+MathJax = {tex: {inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams'}, options: {skipHtmlTags: ['script','noscript','style','textarea','pre','code']}};
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body class="algorithm-page" data-nav-page="kakomon_2024">
+<nav class="navbar">
+<div class="navbar-inner"><a class="navbar-brand" href="index.html">アルゴリズム入門</a>
+<div class="navbar-links"><a href="../index.html" class="nav-back">← 学習ノート</a><a href="index.html">トップ</a><a href="lecture1.html" data-page="lecture1">第1回</a><a href="lecture2.html" data-page="lecture2">第2回</a><a href="index.html#exams">過去問</a>
+</div>
+</div></nav>
+<div class="hero">
+<h1>2024年度 過去問解説</h1>
+<p class="subtitle">破産確率のモンテカルロ法・二分探索・台形積分</p>
+<p class="meta">1A · 共通試験 · 年度は原本の表題に準拠</p>
+</div>
+<main class="container">
+<div class="intro-box">
+<p>共通試験の解答例と解説。破産確率のモンテカルロ法・二分探索・台形積分を扱う。問題番号・空欄記号は原本に対応する。<a href="https://lecture.ecc.u-tokyo.ac.jp/johzu/joho-kagaku/exam/common-exam-2024.pdf" target="_blank" rel="noopener">2024年度 共通試験問題（出典）</a>を手元で参照しながら読もう。</p>
+<p>以下は独自に作成した解答例であり、公式解答ではない。計算量は、特記がなければ基本演算を定数時間とする問題文のモデルで評価する。</p>
+</div>
+<nav class="toc" aria-label="ページ内目次"><a href="#q1">問題1 破産のシミュレーション</a><a href="#q2">問題2 二分探索の境界と等号</a><a href="#q3">問題3 台形積分と誤差の向き</a></nav>
+<section class="section" id="q1">
+<div class="sec-header">
+<h2>問題1 破産のシミュレーション</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>箇所</th><th>解答</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>1</td></tr>
+<tr><td>B</td><td>−1</td></tr>
+<tr><td>f</td><td><code>x[t+1] = x[t] + z</code>（引数を <code>f(x,t,z)</code> とする）</td></tr>
+<tr><td>C</td><td><code>while t &lt;= T and x[t-1] &gt; 0</code></td></tr>
+<tr><td>D</td><td><code>10000 - c</code></td></tr></tbody></table>
+</div>
+<p>(1) 一様乱数がtheta未満となる確率はthetaなので、勝ちを1、負けを−1で表せばよい。</p>
+<p>(2) 配列のt番目がt回終了後、t+1番目が次の賭けの終了後である。</p>
+<p>(3) ループは所持金が正で、かつT回までの間だけ続ける。コード内のcは破産しなかった回数なので、返すのは補数。550なら推定破産確率は $550/10000=\boxed{0.055}$（5.5%）。初期所持金は非負整数と仮定する。</p>
+<p>(4) 望ましい性質の例は、値が指定区間に偏りなく分布することと、系列間の相関が小さく独立な試行に近く見えること。擬似乱数は有限の内部状態を決定的に更新して作るため、真の独立乱数ではない。周期が十分長いことも望ましい。</p>
+</div>
+</section>
+<section class="section" id="q2">
+<div class="sec-header">
+<h2>問題2 二分探索の境界と等号</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>ed</td></tr>
+<tr><td>B</td><td>st</td></tr>
+<tr><td>C</td><td>st</td></tr></tbody></table>
+</div>
+<h3>(2) search([4,5,5,7],6)</h3>
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>条件を評価する時点</th><th>st</th><th>ed</th></tr></thead>
+<tbody>
+<tr><td>初回</td><td>0</td><td>4</td></tr>
+<tr><td>中央2を確認後</td><td>2</td><td>4</td></tr>
+<tr><td>中央3を確認後（終了）</td><td>2</td><td>3</td></tr></tbody></table>
+</div>
+<p>返値は2。値5が複数あるうち、右端の位置を返す。</p>
+<h3>(3)・(4) 計算量と不変条件</h3>
+<p>区間の長さは反復ごとにほぼ半分なので $O(\log n)$。kと等しい要素がない場合、常に $x[st]&lt;k$、edが実要素なら $k&lt;x[ed]$。終了時には両者が隣接する。</p>
+<h3>(5) 等しい要素がある場合</h3>
+<p>元のコードは「k以下の最大値を持つ要素のうち、最も右の要素」の添字を返す。kを含むならkの一番右を返すので、「k未満」という元の目的とはずれる。</p>
+<h3>(6) 1行の修正</h3>
+<p><code>if k &lt; x[c]:</code> を <code>if k &lt;= x[c]:</code> に変える。等しい要素も右側へ送ることで、stがk未満の側に保たれる。原題の「kは最小要素より大きい」という前提が必要。</p>
+</div>
+</section>
+<section class="section" id="q3">
+<div class="sec-header">
+<h2>問題3 台形積分と誤差の向き</h2>
+</div>
+<div class="sec-body">
+<div class="table-wrap">
+<table>
+<thead>
+<tr><th>空欄</th><th>解答</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>b - a</td></tr>
+<tr><td>B</td><td>n</td></tr>
+<tr><td>C</td><td>a + d * i</td></tr>
+<tr><td>D</td><td><code>(s + f(b)/2) * d</code></td></tr></tbody></table>
+</div>
+<h3>(1) 端点の重み</h3>
+<p>内点は左右の台形から1回分ずつ寄与し、全体では重み1。両端点だけが重み1/2となる。</p>
+<h3>(2a) 分割を細かくする効果</h3>
+<p>この滑らかな関数では台形公式の離散化誤差はおおむね$O(n^{-2})$。nを10倍にすると、表の初期の範囲では誤差が約1/100になる。</p>
+<h3>(2b) 誤差の符号</h3>
+<p>$9x^8$はどちらの区間でも下に凸なので、両端を結ぶ線分は曲線の上にある。台形近似は真値1を過大評価する。$10^1$〜$10^6$の結果がともに1より大きいことと一致する。</p>
+<h3>(2c) n=10⁷、10⁸の変化</h3>
+<p>離散化誤差が十分小さくなると、演算回数の増加による丸めの累積や情報落ちが目立つ。特に[−1,0]では真値より小さくなり、過大評価だけでは説明できなくなる。分割を増やせば無条件に精度が上がるわけではない。</p>
+<h3>(2d) 二つの区間の差</h3>
+<p>主な要因として<strong>加算順序による情報落ちの差</strong>が考えられる。[−1,0]では大きい項から小さい項へ加えるため、既に大きい累積和に末尾の微小な項を加えることになる。[0,1]では小さい項から足し始めるため、より保持しやすい。</p>
+<p>根拠は、関数の対称性から本来の台形近似の誤差は等しいこと、負側では小さい項を後から足すこと、負側で分割を増すほど不足が大きくなるという実行結果。<code>a+d*i</code> の計算誤差もあり得るため、単一の実行結果だけから全寄与を一意に断定することはできない。</p>
+</div>
+</section>
+<div class="page-nav"><a href="index.html">← 科目トップ</a><a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">ページ上部へ ↑</a>
+</div></main>
+<footer class="site-footer">アルゴリズム入門 · 1A · 学習ノート</footer>
+<script src="../common.js"></script>
+<script src="nav.js"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html><!-- 「試験対策まとめ｜ジェンダー論」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#5c1240">
+  <title>試験対策まとめ｜ジェンダー論</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="exam-taisaku">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">ジェンダー論</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">HOME</a>
+      <a href="../講義/index.html">講義</a>
+      <a href="index.html" class="active">過去問</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>試験対策まとめ ― 何を書けば点になるか</h1>
+  <p class="subtitle">17年度分の過去問と歴代シケプリ委員会の指南を体系化した、期末試験の総合対策ページ</p>
+  <p class="meta">担当：瀬地山角／福永玄弥｜2026年 Sセメスター</p>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <strong>このページについて</strong><br>
+    このページは<strong>年度別の過去問ページとは別に、この科目の試験全体を貫く「型」と「べからず」を一枚にまとめた
+    総合対策ページ</strong>。1996〜2025年度の17年度分の過去問、答案作成の「べからず集」（2017年度シケタイ作成）、
+    2025年度テスト講評、歴代の過去問集・シケプリに残る「傾向と対策」コメント、そして本サイトの
+    <a href="../講義/index.html">講義解説12回分</a>を横断して整理している。
+    <br><br>
+    出題者は今年度から福永玄弥先生に変わるが、<strong>試験の形式・採点の考え方は瀬地山先生のスタイルをそのまま
+    引き継ぐ</strong>と案内されている（<a href="../講義/第11回.html">第11回</a>で告知された2026年度サンプル問題も参照）。
+    したがって、このページの内容は今年度の試験にもそのまま通用する前提でまとめてある。
+  </div>
+
+  <!-- ① 出題形式のルール -->
+  <div class="section-card">
+    <h2><span class="h2-icon">📋</span>① 出題形式の基本ルール</h2>
+    <div class="summary-text">
+      <p>2008〜2025年度は一貫して、<strong>論述問題1・2問（各12行前後）＋問題99（おまけ・自由記述）</strong>という
+      構成。1990年代〜2000年代前半は「1・2から1題を選択」形式が多く、2010年代以降は「1・2をともに解答」形式が
+      主流になった年度が多い（年度ごとの詳細は各年度ページの「この年度の出題形式」欄を参照）。</p>
+
+      <div class="stance-box">
+        <span class="stance-label">文字数・行数の換算ルール（このサイト全体の統一基準）</span>
+        行数指定がある場合は<strong>1行30字換算</strong>で計算する（12行指定なら約360字が目安）。行数指定がない、
+        または不明瞭な場合は<strong>300字程度</strong>を目安にする。実際の解答用紙はB4またはA3の東大共通用紙で、
+        行の幅・行数は年度で変動するため、あくまで目安と考えること。
+      </div>
+
+      <div class="def-box">
+        <strong>問題99（おまけ）は別枠。</strong>年度によって番号が「99」だったり「3」（1990年代〜2000年代前半）
+        だったりするが、性質は同じ<strong>ボーナス自由記述</strong>で、単位の可否を左右する採点対象ではない。
+        詳しい書き方の傾向は<a href="q99.html">問題99の共通ページ</a>にまとめてあるので、ここでは繰り返さない。
+      </div>
+
+      <div class="def-box">
+        <strong>試験当日の実務ルールにも過去に出題差がある。</strong>2018年度・2019年度は「解答提出後の途中退出は
+        試験開始30分後からの5分間のみ」という指定があり、2019年度の問題用紙にはその理由として
+        「大量の答案を学籍番号順に並べないといけないため」と明記されていた。飲み物のみ持ち込み可・持ち込み物不可、
+        解答時間75分という条件も2019年度で確認できる。年度によって変わりうる実務ルールなので、
+        <strong>試験当日は問題用紙の指示を最優先</strong>すること。
+      </div>
+
+      <div class="def-box">
+        <strong>2026年度の新形式（第11回で告知）。</strong>大問3つ・持ち込み不可・試験時間75分・途中退出不可。
+        ①<strong>選択式15問</strong>（性の商品化を含む）、②<strong>短文記述</strong>（3行以内・100字程度）、
+        ③<strong>長文論述</strong>（400〜500字程度、瀬地山先生の過去問がベース）、そして問題99（おまけ・最大+10点）。
+        2021年度の「問1：マーク15問＋問2：語句問題＋問3：論述」という構成に近い、選択式と論述を組み合わせた形式。
+        詳細は<a href="../講義/第11回.html">第11回</a>・<a href="2026sample.html">2026年度サンプル問題</a>を参照。
+      </div>
+    </div>
+  </div>
+
+  <!-- ② 採点の考え方 -->
+  <div class="section-card">
+    <h2><span class="h2-icon">🎯</span>② 採点の考え方 ― 何が点になり、何が点にならないか</h2>
+    <div class="summary-text">
+      <p>この科目の採点は、<strong>「立場」ではなく「論点の網羅と論証の筋道」</strong>を見ている、というのが
+      歴代シケプリ・過去問集に共通するメッセージである。過去問集の「傾向と対策」欄には、次のような
+      教員自身の発言が記録されている。</p>
+
+      <div class="stance-box">
+        <span class="stance-label">教員の発言（過去問集より）</span>
+        「授業を聴いて学習した跡が見られず、自分が既に持っていた知識のみで書いた答案は不可にした」。
+        批判的な視点自体は歓迎されるが、<strong>講義で扱った固有名詞・データ・論法を答案に残せているか</strong>が、
+        「聴いた跡」の有無として直接評価に響く。
+      </div>
+
+      <div class="def-box">
+        <strong>「立場は自由、評価は変わらない」の本当の意味。</strong>2014年度Q1（性労働の是非）・1996年度と
+        1999年度のQ1（性の商品化）のように「肯定・否定いずれの立場でも評価は変わらない」と明記される設問が
+        繰り返し出る。これは<strong>好きな結論を書いてよいという意味ではなく、「対論」で言及された論点を
+        網羅した上で、そこから結論を導けているか</strong>を見る、という意味。結論に飛びついて対立する論点に
+        触れない答案がもっとも点にならない。
+      </div>
+
+      <div class="insight">
+        <strong>2025年度テスト講評の実例（IV：正誤問題）。</strong>「両者の違いを説明する際に<strong>『構造的差別』
+        という言葉が使われているかどうか</strong>が、評価の分かれ目になります」「逆にここで<strong>本質主義、
+        構築主義を持ち出すと大きな減点対象になります</strong>。これはネット上にある間違ったシケプリに頼ったり
+        したためだと思われます」。<br><br>
+        これは③のマップが示す通り、<strong>本質主義／構築主義は1990年代の設問では明示的に使うことを要求された
+        必須キーワードだったが、2025年度の設問では逆に「不用意に持ち出すと減点される空語」に変わった</strong>
+        ことを意味する。<strong>用語そのものではなく、その設問が本当に求めている概念（この例では「構造的差別」）
+        を見極める</strong>ことが年々重要になっている。
+      </div>
+
+      <div class="def-box">
+        <strong>用語のトラップ：構造主義と構築主義。</strong>2014年度のシケプリに<strong>「構造主義と構築主義は
+        全く異なる。構造主義と書いたら大減点必至」</strong>という明確な注記がある。ジェンダー論で必要なのは
+        <strong>構築主義（constructionism＝性の意味づけは社会的に構築される）</strong>であり、
+        <strong>構造主義（structuralism＝人類学・言語学の別の理論的立場）</strong>ではない。似た字面のため
+        誤記しやすく、「知っているのに書き間違えて減点される」典型パターンなので特に注意する。
+      </div>
+
+      <div class="def-box">
+        <strong>採点者の意図を汲み取る（第11回・福永先生の説明）。</strong>「LGBTとSOGIが異なる概念であることが
+        分かるように、それぞれ説明しなさい」という型の設問で、「LGBTとは○○です／SOGIとは○○です」と
+        用語を並べるだけでは満点は来ない。<strong>「ここが違う」という差異まで踏み込んで初めて満点</strong>になる、
+        という具体的な注意が2026年度の試験説明で示されている。「対比を求める設問には対比で答える」という
+        姿勢は、2016年度Q2（女性活躍推進<em>ではなく</em>男性の問題として）・2018年度Q2（特殊性＋男性を含めた
+        意味）のような過去の設問にも共通する。
+      </div>
+    </div>
+  </div>
+
+  <!-- ③ 頻出テーママップ -->
+  <div class="section-card">
+    <h2><span class="h2-icon">🗺️</span>③ 頻出テーマ体系マップ（17年度分の出題実績）</h2>
+    <div class="summary-text">
+      <p>過去問全体をテーマ別に束ねると、繰り返し出題される<strong>4〜5個の大きな柱</strong>に収斂する。
+      歴代の「論述問題総まとめ」資料も同じ結論に達しており、<strong>「出題されやすい範囲は
+      ①本質主義と構築主義（+社会学的な性の語り方）／②性の商品化／③東アジアの比較社会学から見る
+      ジェンダー論／④日本社会における男性・女性の問題（少子高齢化・ワークライフバランスなど）」</strong>と
+      整理されている。同性愛・性的マイノリティそのものを問う出題は比較的少ないが、<strong>第1回・第8回・
+      第10回・第11回・第13回の復習が論述対策として特に有効</strong>という指摘は、下の年度別実績とも一致する。</p>
+
+      <div style="overflow-x:auto;">
+        <table class="q-table" style="width:100%;">
+          <tr><th>テーマの柱</th><th>対応する回</th><th>出題された年度</th></tr>
+          <tr>
+            <td style="text-align:left;">A. 本質主義／構築主義・性の意味づけの変化</td>
+            <td><a href="../講義/第1回.html" class="lec-ref-link">第1回</a><a href="../講義/第2回.html" class="lec-ref-link">第2回</a><a href="../講義/第3回.html" class="lec-ref-link">第3回</a></td>
+            <td><a href="kakomon_1996.html">1996</a>・<a href="kakomon_1998.html">1998</a>・<a href="kakomon_1999.html">1999</a>・<a href="kakomon_2005.html">2005</a>・<a href="kakomon_2008.html">2008</a></td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">A'. 「性欲は本能」批判・似而非科学批判</td>
+            <td><a href="../講義/第2回.html" class="lec-ref-link">第2回</a><a href="../講義/第3回.html" class="lec-ref-link">第3回</a><a href="../講義/第7回.html" class="lec-ref-link">第7回</a></td>
+            <td><a href="kakomon_2006.html">2006</a>・<a href="kakomon_2016.html">2016</a>・<a href="kakomon_2017.html">2017</a></td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">B. 主婦・家父長制・比較社会学</td>
+            <td><a href="../講義/第10回.html" class="lec-ref-link">第10回</a><a href="../講義/第12回.html" class="lec-ref-link">第12回</a></td>
+            <td><a href="kakomon_1996.html">1996</a>・<a href="kakomon_1998.html">1998</a>・<a href="kakomon_1999.html">1999</a>・<a href="kakomon_2005.html">2005</a>・<a href="kakomon_2012.html">2012</a></td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">C. 東アジア比較（北朝鮮・高齢者労働）</td>
+            <td><a href="../講義/第10回.html" class="lec-ref-link">第10回</a><a href="../講義/第11回.html" class="lec-ref-link">第11回</a><a href="../講義/第12回.html" class="lec-ref-link">第12回</a></td>
+            <td><a href="kakomon_2004.html">2004</a>・<a href="kakomon_2007.html">2007</a>・<a href="kakomon_2017.html">2017</a>・<a href="kakomon_2019.html">2019</a>・<a href="kakomon_2021.html">2021</a></td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">D. 日本社会の特殊性・女性就労パターン</td>
+            <td><a href="../講義/第12回.html" class="lec-ref-link">第12回</a><a href="../講義/第13回.html" class="lec-ref-link">第13回</a></td>
+            <td><a href="kakomon_2008.html">2008</a>・<a href="kakomon_2015.html">2015</a>・<a href="kakomon_2016.html">2016</a>・<a href="kakomon_2018.html">2018</a></td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">E. 性の商品化・性労働（sex work）</td>
+            <td><a href="../講義/第11回.html" class="lec-ref-link">第11回</a></td>
+            <td><a href="kakomon_1996.html">1996</a>・<a href="kakomon_1999.html">1999</a>・<a href="kakomon_2004.html">2004</a>・<a href="kakomon_2014.html">2014</a>・<a href="kakomon_2025.html">2025サンプル</a></td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">F. 同性愛の歴史・法制度・府中青年の家</td>
+            <td><a href="../講義/第4回.html" class="lec-ref-link">第4回</a><a href="../講義/第5回.html" class="lec-ref-link">第5回</a><a href="../講義/第6回.html" class="lec-ref-link">第6回</a></td>
+            <td><a href="kakomon_2007.html">2007</a>・<a href="kakomon_2012.html">2012</a>・<a href="kakomon_2015.html">2015</a>・<a href="kakomon_2019.html">2019</a></td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">G. 少子高齢化・ワークライフバランス</td>
+            <td><a href="../講義/第8回.html" class="lec-ref-link">第8回</a><a href="../講義/第13回.html" class="lec-ref-link">第13回</a></td>
+            <td><a href="kakomon_2006.html">2006</a>・<a href="kakomon_2014.html">2014</a>・<a href="kakomon_2016.html">2016</a></td>
+          </tr>
+          <tr>
+            <td style="text-align:left;">H. セクハラ・#MeToo・性的自己決定</td>
+            <td><a href="../講義/第2回.html" class="lec-ref-link">第2回</a><a href="../講義/第13回.html" class="lec-ref-link">第13回</a></td>
+            <td><a href="kakomon_2018.html">2018</a>・<a href="kakomon_2021.html">2021</a>（語句問題）</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="insight">
+        テーマAとCが最も出題頻度が高く、複数の言い方（本質主義/構築主義そのものを問う年、性欲＝本能論批判として
+        問う年、似而非科学批判として問う年）で繰り返し形を変えて出る。<strong>「本質主義を退けて構築主義に立つ」
+        という科目全体の基本姿勢</strong>と、<strong>「東アジアという儒教を共有しつつ体制の異なる地域を比較する
+        ことで、日本の常識を相対化する」</strong>という比較の方法論の2つは、どのテーマの設問が出ても
+        通用する土台として必ず押さえておく。
+      </div>
+    </div>
+  </div>
+
+  <!-- ④ 回別・必修知識ダイジェスト -->
+  <div class="section-card">
+    <h2><span class="h2-icon">📚</span>④ 回別・必修知識ダイジェスト（講義12回分の中身）</h2>
+    <div class="summary-text">
+      <p>③の頻出テーママップは「どの回がどの年度に出たか」を示すマップだったが、ここでは<strong>各回で
+      実際に押さえておくべき用語・データ・教員のスタンス</strong>を、講義解説ページの内容から凝縮して並べる。
+      論述は「型」だけでは書けず、<strong>その回固有の固有名詞・数字・事例を答案に残せているか</strong>が
+      「授業を聴いた跡」として直接評価される（②参照）。各回の詳しい解説は見出しの回数リンクから本編へ。</p>
+
+      <div class="kw-detail-list">
+        <div class="kw-detail-label">回別ダイジェスト（クリックで展開）</div>
+
+        <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details class="kw-item" open>
+          <summary class="kw-summary"><a href="../講義/第1回.html" class="lec-ref-link" style="margin:0 8px 0 0;">第1回</a>恋愛結婚という「変な」制度</summary>
+          <div class="kw-body">
+            <p><strong>用語：</strong>本質主義（essentialism）／構築主義（constructionism）／ロマンティック・ラブ・イデオロギー（恋愛・結婚・性・生殖は同一の相手と一続きであるべきという近代の規範）／近代家族（性役割分業＋情緒的結合の2本柱）。</p>
+            <p><strong>データ・事例：</strong>旧刑法186条・姦通罪（妻の不倫のみ処罰）／主婦の誕生（19世紀半ば、1844年イギリス工場法で女性の就労が制限され労働市場から排除）／日本で恋愛結婚がお見合い結婚を上回ったのは<strong>1960年代半ば</strong>。</p>
+            <div class="stance-box">
+              <span class="stance-label">教員のスタンス</span>
+              恋愛結婚を「人間の自然」と考えてはいけない。特定の時代・経済条件のもとで<strong>作られた</strong>制度。この講義は一貫して構築主義に立つ。
+            </div>
+            <p><strong>トラップ：</strong>構築主義と<strong>構造主義</strong>を書き間違えない（大減点）。</p>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary"><a href="../講義/第2回.html" class="lec-ref-link" style="margin:0 8px 0 0;">第2回</a>社会科学と性 ― 婚姻外の性と「本能」批判</summary>
+          <div class="kw-body">
+            <p><strong>用語：</strong>sexuality（セクシュアリティ）／性的自己決定権の2原則（①自己決定②相手の性の尊重）／不同意性交罪（2023年、旧強制性交等罪・準強制性交等罪を統合、非親告罪化、性交同意年齢13→16歳）。</p>
+            <p><strong>データ・事例：</strong>NHK『日本人の性行動・性意識』調査（1960年代生まれから初交相手が「配偶者」→「恋人」へ逆転＝婚前性交渉の一般化）／東大生の7〜8割が「愛があればOK」（女子校出身は「結婚まで待つ」が高め）／モーニングアフターピル＝<strong>ノルレボ（高い方・1万円強）</strong>と後発薬<strong>レボノルゲストレル（安い方）</strong>、72時間以内服用、OTC化進行中／離婚率（30年累計）31%。</p>
+            <div class="stance-box">
+              <span class="stance-label">教員のスタンス</span>
+              「離婚の多い社会は、離婚すら『できない』社会よりマシ」。避妊は女性だけの問題ではなく男性が引き受けるべき問題。門限は「子の性を見て見ぬふりする、親の無責任な制度」。
+            </div>
+            <p><strong>関連団体：</strong>#YourChoiceProject（地方出身女子学生の進学の「選べなさ」を支援）。</p>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary"><a href="../講義/第3回.html" class="lec-ref-link" style="margin:0 8px 0 0;">第3回</a>結婚・離婚（2）／理系とジェンダー</summary>
+          <div class="kw-body">
+            <p><strong>用語：</strong>インターセクショナリティ（交差性。地方×女性の「二重の差別」に応用）／ニューロセクシズム／有責主義・破綻主義（離婚をめぐる2つの法理）。</p>
+            <p><strong>データ・事例：</strong>PISA調査で数学・理科の女子平均が男子を上回る国が現に存在（リトアニア・スウェーデン等）／四本裕子（東大准教授）論文「『男性脳・女性脳』説の有害性」（月刊保団連2019）＝平均値の差と個人差の混同・脳の性差はモザイク状・出版バイアス・ニューロセクシズムを批判／桜蔭は理系が女子の約7割／選択的夫婦別姓は法制審議会が<strong>1996年に答申済み</strong>で約30年未改正／女性専用車両は関西＝終日、関東＝朝ラッシュ中心。</p>
+            <div class="stance-box">
+              <span class="stance-label">教員のスタンス</span>
+              「個人差は性差を上回る」。「男性は女性と比べて〜」式の言い切りは厳禁。夫婦同姓は「伝統」ではなく明治期の輸入品で、選択的夫婦別姓を「家族の一体感が失われる」と書くのは授業内容と真っ向対立。
+            </div>
+            <p><strong>批判対象として名指し：</strong>黒川伊保子（「男女脳」論はエセ科学）。</p>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary"><a href="../講義/第4回.html" class="lec-ref-link" style="margin:0 8px 0 0;">第4回</a>同性愛の歴史を遡る</summary>
+          <div class="kw-body">
+            <p><strong>用語：</strong>sin → crime → disease（同性愛観の歴史的変遷の枠組み）／buggery（1533年ヘンリー8世の法で犯罪化）／行為から人格へ（19世紀に「同性愛者」という人格カテゴリーが誕生）／野傾論（江戸期、男色と女色を等価に論じた議論）。</p>
+            <p><strong>データ・事例：</strong>江戸期の男色文化（井原西鶴『男色大鏡』）／イギリスの脱犯罪化は<strong>1967年</strong>／ドイツ刑法175条は<strong>1969年</strong>まで存続／フランスは<strong>1804年ナポレオン法典</strong>で早期に脱犯罪化。</p>
+            <div class="stance-box">
+              <span class="stance-label">教員のスタンス</span>
+              「同性愛者」というカテゴリーは太古から自然にあった実体ではなく<strong>19世紀の産物</strong>（フーコー『監獄の誕生』の権力観）。行為をもって人格を断定しない（行為の人格化はNG）。
+            </div>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary"><a href="../講義/第5回.html" class="lec-ref-link" style="margin:0 8px 0 0;">第5回</a>同性愛と現代</summary>
+          <div class="kw-body">
+            <p><strong>用語：</strong>MSM（men having sex with men。アイデンティティでなく「行為」に照準する公衆衛生上の概念）／「0（ゼロ）の視線」（異性愛を中心に置かない捉え直し）。</p>
+            <p><strong>データ・事例：</strong><strong>府中青年の家事件</strong>（1990年利用拒否→1994年3月東京地裁でアカー側全面勝訴→1997年9月東京高裁で「公権力の行使者として許されない」と確定）／性的マイノリティの割合は社人研調査で<strong>「だいたい3%程度」</strong>が妥当（ネット調査の「約10%」はバイアスあり）／同性婚はオランダが世界初（2001年）、台湾がアジア初、日本は2021年札幌地裁が違憲判断／ストーンウォール事件（1969年6月28日、プライドパレードの由来）。</p>
+            <div class="stance-box">
+              <span class="stance-label">教員のスタンス</span>
+              行為と人格を同一視しない。カミングアウトへの応答は「そんな大事なことを教えてくれてありがとう」。渋谷区条例は区長への権限集中を問題視し、世田谷区型（簡素な運用）の方を評価。
+            </div>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary"><a href="../講義/第6回.html" class="lec-ref-link" style="margin:0 8px 0 0;">第6回</a>LGBTの「T」って？</summary>
+          <div class="kw-body">
+            <p><strong>用語：</strong>LGB＝性的指向／T＝性自認（両者は問題設定が異なる）／GID（Gender Identity Disorder。トランスジェンダーのうち医療介入を求める一部にすぎない）／Xジェンダー・ノンバイナリー／性別違和（DSM-5）・性別不合（ICD-11、「性同一性障害」に代わる用語）／SOGI（マイノリティだけを名指さず誰にでもある属性として捉え直す語）。</p>
+            <p><strong>データ・事例：</strong>台湾は2017年に大法官会議が違憲判断、2018年住民投票を経て特別法で同性婚制度化／日本のGID承認の年表＝1997年ガイドライン→2003年性同一性障害特例法→2023年最高裁が手術要件を違憲判断／特例法は<strong>婚姻していないこと</strong>という要件が今も残る。</p>
+            <div class="stance-box">
+              <span class="stance-label">教員のスタンス</span>
+              Tに関する法整備がLGBより早く進んだ理由は<strong>「医者が病気だと言ったから」</strong>（医療化のメカニズム、価値判断ではなく分析）。特例法に婚姻要件が残るのは、これを外すと同性婚が成立してしまうため＝性的指向と性自認が独立していることの証左。
+            </div>
+            <p><strong>トラップ：</strong>T＝GIDと同一視しない。「性同一性障害」「性転換手術」は法律用語としてのみ残る旧称。</p>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary"><a href="../講義/第7回.html" class="lec-ref-link" style="margin:0 8px 0 0;">第7回</a>マスターベーションの社会学</summary>
+          <div class="kw-body">
+            <p><strong>用語：</strong><strong>因果関係の逆措定</strong>（精神病院患者に自慰経験者が多い、という相関を「自慰→発狂」という因果と誤って取り違えること。この回の核心概念）／精液漏（精液は放出しすぎると体を壊すという19世紀の観念）。</p>
+            <p><strong>データ・事例：</strong>NHK調査でマスターベーション経験率は男女とも世代・地域で大きく変動（本能なら一定のはず、という反証）／シルヴェスター・グレアム（グレアムクラッカー）、ジョン・ハーヴェイ・ケロッグ（コーンフレーク）は性欲を鎮める食品として開発／中国データは政治の時代（文革期に低下、近年急上昇）で経験率が変動＝文化的所産の証拠。</p>
+            <div class="stance-box">
+              <span class="stance-label">教員のスタンス</span>
+              「オナニー禁止論（オナ禁）には科学的根拠がない」。有害論はすべて因果関係の逆措定に立つ。「性欲があるからする」のではなく<strong>「性欲を刺激されるからする」</strong>＝学習されるものという結論。
+            </div>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary"><a href="../講義/第8回.html" class="lec-ref-link" style="margin:0 8px 0 0;">第8回</a>炎上CMとジェンダーの4象限</summary>
+          <div class="kw-body">
+            <p><strong>用語：</strong>炎上CMの<strong>4象限</strong>（訴求対象〔女性/男性〕×メッセージ内容〔性役割の肯定/性・美のメッセージ〕）／「手伝う」という語の問題（父親の家事育児を「手伝う」と捉えること自体が固定的性役割分業）／ゾーニング／「半歩先」（炎上を避けるCMは社会の均衡点の半歩先を行く）。</p>
+            <p><strong>データ・事例：</strong>味の素「日本のお母さん」（2012、原始時代の母を描き炎上）／資生堂インテグレート「25歳、もう女の子じゃない」（炎上）と「高校生のヒミツ」（回避例）／宮城県観光PR・碧志摩メグ（炎上）とバナナ姫ルナ（回避例）／育休給付は当初67%、7か月目から50%に低下（父母でスイッチすると得な設計）。</p>
+            <div class="stance-box">
+              <span class="stance-label">教員のスタンス</span>
+              「感謝するくらいなら家事をやれ」。男性は<strong>月単位</strong>で育休を取れ（数日〜数週間では戦力にならない）。「表現の自由」は擁護側の筋違い（その表現が存在できている時点で自由は守られている）。
+            </div>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary"><a href="../講義/第10回.html" class="lec-ref-link" style="margin:0 8px 0 0;">第10回</a>瀬地山「ジェンダー論」を継承する</summary>
+          <div class="kw-body">
+            <p>福永玄弥先生への引き継ぎ回。<strong>この回自体は「試験には出ません」と明言されている</strong>が、科目の知的スタンスを確認する回として押さえておくとよい。</p>
+            <p><strong>用語・事実：</strong>ケアの定義（ケア・コレクティヴ『ケア宣言』＝相互依存を支え、生命のウェルフェアと繁栄に必要なものを育む持続的な社会的能力と実践）／瀬地山角先生の急逝（2026年6月17日未明、急性虚血性心疾患、62歳）。</p>
+            <div class="stance-box">
+              <span class="stance-label">福永先生の視点</span>
+              感情の配分は男女で非対称（男性は感情がないふりをして自らの傷つきが分からなくなり、女性は「本質的に感情的」として理性以下の存在に貶められてきた）。瀬地山＝マジョリティ男性を宛先に「お笑い」で変える／福永＝周縁化された経験を宛先に構造をあぶり出す、という2つのアプローチはどちらも不完全。
+            </div>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary"><a href="../講義/第11回.html" class="lec-ref-link" style="margin:0 8px 0 0;">第11回</a>性の商品化とセックスワーク</summary>
+          <div class="kw-body">
+            <p><strong>用語：</strong>性の商品化の定義（性に関するサービス・商品・情報が金銭を媒介に流通すること）／否定の4論理（保守主義＝私的領域論／近代主義＝人格論／ラディカルフェミニズム＝家父長制の実践論／反資本主義・犯罪の温床論）／肯定論（セックスワークは労働＝身体労働・感情労働の一形態）／ゲイル・ルービンの「魅惑の円」（善良とされる性／邪悪とされる性の境界は社会が引いたもの）。</p>
+            <p><strong>データ・事例：</strong>売春防止法（1956年）は「売る側」のみを処罰し「買う側」を罰してこなかった／コロナ禍の持続化給付金から性風俗関連特殊営業だけが除外され、2022〜2025年に地裁・高裁・最高裁いずれも原告敗訴（「性の商品化は不健全」という規範の司法追認）。</p>
+            <div class="stance-box">
+              <span class="stance-label">瀬地山の到達点と福永の一歩先</span>
+              瀬地山＝「よりよい性の商品化」＝規制か自由かでなく<strong>同意・安全・手続き・労働者の権利</strong>を問う。福永＝それだけでは「自己決定が成立する社会的条件（構造化された同意）」への分析が手薄になると指摘し、<strong>脱犯罪化・労働権・生活保障・反差別</strong>、その先の反資本主義の視点を提示。
+            </div>
+            <p><strong>トラップ：</strong>「経済的な理由で性産業に従事するしかない人もいる」と単純化して書かない（授業で明確に否定）。</p>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary"><a href="../講義/第12回.html" class="lec-ref-link" style="margin:0 8px 0 0;">第12回</a>東アジアの家父長制</summary>
+          <div class="kw-body">
+            <p><strong>用語：</strong>家父長制の定義対立（上野千鶴子＝男性による女性の労働力支配という物質的基盤論／瀬地山＝性と世代に基づき権力・役割が不均等・固定的に配分される規範と関係の総体）／良妻賢母（儒教の伝統ではなく明治期の近代イデオロギー。日本＝良妻賢母／中国＝賢妻良母／韓国＝賢母良妻）／M字型就労（日本・韓国）／三歳児神話（科学的根拠のない規範）／キロギアッパ現象（韓国、父は国内で稼ぎ母子は教育のため海外へ）／ケア労働の社会化（中国の単位制度、北朝鮮の託児所）。</p>
+            <p><strong>データ・事例：</strong>瀬地山『東アジアの家父長制』（1996年）の方法論＝儒教という共通文化規範を揃えつつ資本主義／社会主義という異なる体制を対比／イギリス工場法（1833年＝児童労働規制で「子ども」誕生、1844年＝成人女性労働規制で「主婦」誕生）／台湾は儒教規範が弱くM字を描かない（南方の女子労働文化＋人的資本論）。</p>
+            <div class="stance-box">
+              <span class="stance-label">瀬地山 vs 福永</span>
+              瀬地山＝ゴールは「女性の解放」ではなく<strong>「性に関して自由で平等な社会の構想」</strong>。福永＝家父長制は単なる役割分業の力だけでなく、人間を「男か女か」に二分しヒエラルキーと異性愛規範を作る権力そのものだと批判的に上塗りする。「儒教規範が今も最も強いのは中国ではなく朝鮮半島」という指摘も押さえる。
+            </div>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary"><a href="../講義/第13回.html" class="lec-ref-link" style="margin:0 8px 0 0;">第13回</a>ケア責任を分かち合う社会へ（最終回）</summary>
+          <div class="kw-body">
+            <p><strong>用語：</strong>専業主婦モデルの終焉／「植林をしない林業者」のたとえ（労働力再生産コストを負担しない企業への批判。CSRと企業メリットの両アプローチの根拠になる。詳しくは第13回ページの追記を参照）／SRHR（性と生殖に関する健康と権利）／消滅可能性自治体（指標は若年女性人口の減少）。</p>
+            <p><strong>データ・事例：</strong>共働き世帯1300万・専業主婦世帯508万（90年代後半に逆転）／6歳未満の子を持つ共働き夫婦の家事関連時間＝夫1時間55分・妻6時間33分（社会生活基本調査2021）／2024年の人口動態＝出生68.6万人・死亡160.5万人・自然減約91.9万人／育休は基本1年、父母でスイッチすると給付率が上がる仕組み。</p>
+            <div class="stance-box">
+              <span class="stance-label">教員のスタンス</span>
+              「一度正規雇用ルートから外れると二度と戻れない」から専業主婦は女性にとってリスク。「共働きで男並みに働きつつ家でもケアを担うのは無理。人間にできる仕事じゃない」。ジェンダーは「私」の問題ではなく「私たち」の問題として考える。
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ べからず集 -->
+  <div class="section-card">
+    <h2><span class="h2-icon">🚫</span>⑤ 答案でやってはいけないこと（べからず集・全項目）</h2>
+    <div class="summary-text">
+      <p>2017年度のシケプリ委員が「せめてこれだけは」とまとめた「べからず集」は、<strong>この科目の教員の
+      思想的立場そのものを裏側から示す一次資料</strong>。以下、原資料の項目をテーマ別に整理し、
+      それぞれ「なぜNGか」「どう書けば正しいか」まで補って再構成した。</p>
+
+      <div class="kw-detail-list">
+        <div class="kw-detail-label">カテゴリ別チェックリスト</div>
+
+        <details class="kw-item" open>
+          <summary class="kw-summary">① 本質主義・生得論に基づく言い切り</summary>
+          <div class="kw-body">
+            <p><strong>NG：</strong>「性欲は本能だ」「男がマスターベーションするのは本能なので仕方ない」
+            「男性は女性と比べて〜」式の一般化。「ヤる時は裸なのが“普通”」のような、特定の性行動を
+            自明の規範として語ること。</p>
+            <p><strong>なぜNGか：</strong>性欲・性行動は本能ではなく、消費社会論的に「欲望が文化的に作り出される」
+            ものと捉えるのが講義の立場（中国の男性の自慰経験率の地域差・時代差が反例として挙がる）。
+            この科目の大原則は<strong>「個人差は性差を上回る」</strong>――これは絶対に外さない。</p>
+            <p><strong>正しい書き方：</strong>性行動の差は生得的な性差ではなく、時代・地域・世代・階層といった
+            社会的要因の差として説明する。第2回・第7回・第16年度（似而非科学批判）の論法がそのまま使える。</p>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary">② 性行動への規範の押しつけ（「〜べきだ」）</summary>
+          <div class="kw-body">
+            <p><strong>NG：</strong>「子作り以外でセックスするのはNG」のようなカトリック的規範の自明視。
+            不倫を無条件に叩くこと（合意があり刑法上の犯罪でもない以上、自己決定・相手の性の尊重という
+            2条件で判断すべきという立場）。夫婦別姓選択制を「家族の一体感が失われる」と叩くこと
+            （授業の内容と真っ向から対立し、出席を疑われる）。</p>
+            <p><strong>正しい書き方：</strong>判断基準は<strong>「自己決定」と「相手の性の尊重（合意）」</strong>
+            の二点のみに置く。性の意味づけは多様でよい、という構築主義の立場を貫く。</p>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary">③ LGBTQ・性的マイノリティに関する表現</summary>
+          <div class="kw-body">
+            <p><strong>NG：</strong>行為と人格を同一視すること（例：同性との性交渉があったからといって
+            「ゲイである」と決めつけない。江戸期以前の日本の男色は、西洋由来の「ホモ／異性愛」という
+            分類が明治期に流入する以前の現象）。「知らなかったから仕方ない」という態度（府中青年の家事件で
+            示された姿勢そのものの否定）。LGBを病気として書くこと（同性愛は性的指向であり病気ではない）。
+            「レズ」「ホモ」という略称（正しくは「レズビアン」「ゲイ」）。LGBTと少子化を安易に結びつけること。
+            カミングアウトの強制、または「そんなの関係ない」という無視の反応（正しくは「教えてくれてありがとう、
+            一緒に学ぼう」という態度）。</p>
+            <div class="stance-box">
+              <span class="stance-label">LGBとTの違い（頻出の混同ポイント）</span>
+              LGB（性的指向）とT・トランスジェンダー（性自認）は<strong>法整備の文脈が異なる</strong>。
+              性自認は変えられないため、性自認に合わない身体の方が「治療」の対象になったという理解で、
+              Tに関する法改正はLGBより早く進んだ。「LGBT」を一括りにして論じると、この違いを潰してしまう。
+            </div>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary">④ 性の商品化・性労働をめぐる単純化</summary>
+          <div class="kw-body">
+            <p><strong>NG：</strong>説明なしに「子供の教育に悪いからダメ」と書くこと（どのように悪いのか、
+            論理を示さないのは思考停止）。フェミニズム（女性の不当な従属への異議）と売買春（両者の合意を
+            前提とする行為）を安易に同一視すること。<strong>「経済的な理由で性産業に従事するしかない人も
+            いる」と単純化して書くこと</strong>（授業で明確に否定されている。女性の方が稼げる面もあり、
+            そもそもあらゆる職業に制約がある以上、特定の産業だけを経済的理由で「追い込まれた」と断言できるかは
+            慎重に扱うべき、というのが教員の立場）。</p>
+            <p><strong>正しい書き方：</strong>個人の選択を断罪するのでも、「自己決定だから自由」と丸投げする
+            のでもなく、<strong>その選択肢しか残らない社会構造を問う</strong>という<a href="../講義/第11回.html">第11回</a>の
+            立ち位置で書く。</p>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary">⑤ 子育て・家族をめぐる断定</summary>
+          <div class="kw-body">
+            <p><strong>NG：</strong>「良妻賢母」を儒教そのものの伝統として扱うこと（正しくは、儒教の語彙で
+            国民の再生産＝西洋近代の論理を語り直した、明治期の近代イデオロギー）。「子供は母親のもとに
+            いるべき」という主張（異母兄弟が百人いようが、パパが二人いようが、鍵っ子でも子供は育つ、という
+            具体例で否定される）。「子供がかわいそう」という不用意な決めつけ（子供に見せたくないものを
+            見せないのは、論理的な検討を欠いたペアレンタルコントロールと同じ）。</p>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary">⑥ 主婦・男女別学・ジェンダーの矮小化</summary>
+          <div class="kw-body">
+            <p><strong>NG：</strong>主婦を擁護すること、特に「お母さんが家にいてよかった」のような実体験を
+            論拠にすること（主婦の擁護は、高度成長期の性別役割分業＝「一頭立て馬車」体制の擁護と地続きで、
+            その体制はもはや維持できなくなりつつある）。男女別学を積極的に肯定すること（「お茶の水女子大は
+            違憲だ」という趣旨の発言があり、学問を性別で分けることには否定的）。ジェンダー論を女性だけの
+            問題として捉えること（男性の生きづらさ、家事を「手伝う」という表現への違和感も同じ重みで扱う）。</p>
+          </div>
+        </details>
+
+        <details class="kw-item">
+          <summary class="kw-summary">⑦ 実証面での注意（用語のトラップ・些末な事実確認）</summary>
+          <div class="kw-body">
+            <p><strong>NG：</strong>本質主義・構築主義という語を、必要のない設問で不用意に持ち出すこと
+            （2025年度講評で明確に減点対象）。<strong>構造主義</strong>と<strong>構築主義</strong>を混同すること
+            （書き間違えると大減点）。オナニー禁止論を科学的根拠があるかのように扱うこと（科学的根拠はない、
+            というのが講義の立場）。首都圏の定義のような、教員を混乱させかねない範囲設定の曖昧さ。</p>
+            <p><strong>実証的スタイルの徹底：</strong>相関と因果を取り違えない（第7回・2021年度語句問題の
+            「疑似相関」）、統計的根拠を伴わない主張をしない、という態度は、他のどの設問にも通底する
+            この科目全体のスタイルである。</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑥ パターン別の書き方 -->
+  <div class="section-card">
+    <h2><span class="h2-icon">✍️</span>⑥ 頻出パターン別・書き方の型</h2>
+    <div class="summary-text">
+      <p>過去問を見る限り、出題は形を変えながらも、いくつかの決まった「型」に収まる。型を先に頭に入れておくと、
+      本番でどの設問が出ても骨組みだけは崩れずに書ける。</p>
+
+      <div class="topic-list">
+        <li>
+          <div class="tn-col"><span class="tn">1</span></div>
+          <div class="topic-content">
+            <span class="topic-title">本質主義／構築主義型 ―「なぜそう見えるが、実は社会が作ったものか」</span>
+            <div class="topic-desc">
+              <p>例：1996〜1999年度Q1、2005年度Q1、2016年度Q1（似而非科学）。<strong>①一見自明・本能的に
+              見える性の現象を挙げる → ②それが実は時代・地域・階層で変動する（本能なら一定のはず）ことを
+              データや反例で示す → ③そこから構築主義の立場を導く</strong>、という3段構成。指定語句（本質主義・
+              構築主義・家父長制など）が明示されている年度は、<strong>初出時に必ず下線を引く</strong>という
+              指示も見落とさないこと。</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="tn-col"><span class="tn">2</span></div>
+          <div class="topic-content">
+            <span class="topic-title">東アジア比較社会学型 ―「比較することにどんな意味があるか」</span>
+            <div class="topic-desc">
+              <p>例：2004年度Q2（北朝鮮）、2007年度Q2、2017年度Q2、2019年度Q2、2021年度問3。
+              <strong>①東アジアは儒教という共通の文化規範を持ちながら、資本主義／社会主義という異なる体制を
+              含む → ②そのため「文化」と「体制」のどちらが女性・高齢者の労働のあり方を規定するかを
+              切り分けられる（準実験的な比較） → ③日本の「常識」（M字型就労・三歳児神話など）が普遍でも
+              伝統でもなく、変更可能な産物だと相対化できる</strong>、という論法を骨格にする。</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="tn-col"><span class="tn">3</span></div>
+          <div class="topic-content">
+            <span class="topic-title">二重アプローチ区別型 ―「2つの理由づけを混ぜずに立てる」</span>
+            <div class="topic-desc">
+              <p>例：2014年度Q2（CSR／企業メリット）、2016年度Q2・2018年度Q2（対比構造）。設問が
+              「区別しつつ」「〜ではなく〜として」と明示している場合、<strong>段落そのものを分けて、
+              2つの理由づけをそれぞれ独立に立ててから、必要なら最後に統合する</strong>。片方だけで
+              終わらせると設問の要求を満たさず大きく減点される。</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="tn-col"><span class="tn">4</span></div>
+          <div class="topic-content">
+            <span class="topic-title">「対論」型 ―「立場は自由、論点の網羅度で決まる」</span>
+            <div class="topic-desc">
+              <p>例：2014年度Q1（性労働）、1996・1999年度Q1（性の商品化）。<strong>①否定側の複数の論理を
+              腑分けする（1つの立場として一括りにしない） → ②肯定側の論理を立てる → ③その両方を踏まえて
+              自分の結論を導く</strong>。結論の中身では差がつかず、対立する論点をどれだけ拾えたかで差がつく。</p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="tn-col"><span class="tn">5</span></div>
+          <div class="topic-content">
+            <span class="topic-title">語句・短答型 ―「知識の正確さがそのまま得点になる」</span>
+            <div class="topic-desc">
+              <p>例：2021年度問2（モーニングアフターピルの名称・疑似相関の第三変数）、2026年度サンプルの
+              選択式・短答。論述と違って解釈の幅がない分、<strong>講義で出た固有名詞・数値を正確に覚えているか</strong>
+              が直接の得点になる。第2回・第7回の細部（薬品名、統計の数字）は軽視しないこと。</p>
+            </div>
+          </div>
+        </li>
+      </div>
+    </div>
+  </div>
+
+  <!-- 問題99 -->
+  <div class="q99-box" style="margin-top:8px;">
+    <div class="q99-head">
+      <span class="q99-badge">99</span>
+      <span class="q99-title">問題99（おまけ）の扱い方</span>
+    </div>
+    <div class="q99-body">
+      毎年恒例のボーナス自由記述。単位の可否を左右する採点対象ではないが、書き方の傾向・良い例は
+      <a href="q99.html">問題99の共通ページ</a>に別途まとめてある。
+    </div>
+  </div>
+
+  <!-- ⑦ 直前チェックリスト -->
+  <div class="section-card" style="margin-top:20px;">
+    <h2><span class="h2-icon">✅</span>⑦ 直前チェックリスト</h2>
+    <div class="summary-text">
+      <ul style="margin:0 0 0 20px; line-height:2;">
+        <li><strong>本質主義と構築主義の定義</strong>を即座に、正確な字面（<em>構造主義ではない</em>）で書けるか。</li>
+        <li><strong>「個人差は性差を上回る」</strong>という大原則を、どのテーマが出ても答案の軸に据えられるか。</li>
+        <li>東アジア比較の論法（<strong>儒教＝共通文化、体制＝資本主義／社会主義の対比</strong>）を、
+          国・地域の固有名詞（日・韓・中・北朝鮮・台湾）つきで説明できるか。</li>
+        <li>「対論を網羅してから結論を導く」型の設問（性の商品化・性労働など）で、<strong>否定側を単一の
+          立場として一括りにしていないか</strong>。</li>
+        <li>「〜ではなく〜として」「区別しつつ」型の設問で、<strong>2つの視点を段落ごとに分けて書けているか</strong>。</li>
+        <li>べからず集の7カテゴリ（⑤参照）に該当する表現を、無意識に使っていないか読み返す。</li>
+        <li>④の回別ダイジェストにある<strong>固有名詞・データ・事例</strong>（第2回のモーニングアフターピル、
+          第7回の疑似相関、第12回の東アジアM字型就労のグラフなど）を、抽象論だけで済ませず答案に残せているか。</li>
+        <li>問題99は単位に影響しないボーナスと割り切り、<strong>本問（1・2、またはそれに相当する設問）に
+          時間を使い切る</strong>配分になっているか。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="index.html">← 過去問一覧</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">ジェンダー論（瀬地山角・福永玄弥）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

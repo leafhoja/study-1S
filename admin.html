@@ -1,0 +1,118 @@
+<!DOCTYPE html><!-- 管理者用のパスワード入力と認証済みの案内を表示するページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理者ページ — 学習ノート</title>
+  <link rel="stylesheet" href="common.css">
+  <style>/* このページ内の要素に適用する、色・文字サイズ・配置などの指定。 */
+    body { min-height: 100vh; display: flex; flex-direction: column; }
+    .admin-main {
+      flex: 1;
+      max-width: 420px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+    .admin-main h1 { font-size: 1.5rem; color: var(--primary); margin-bottom: .6rem; }
+    .admin-main p { font-size: .88rem; color: #718096; margin-bottom: 1.6rem; }
+    .admin-input {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 1rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      margin-bottom: .9rem;
+      text-align: center;
+    }
+    .admin-btn {
+      width: 100%;
+      padding: 12px 16px;
+      font-size: .95rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--primary);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background .18s;
+    }
+    .admin-btn:hover { background: var(--primary-lt); }
+    .admin-error { color: #c53030; font-size: .82rem; margin-top: .7rem; }
+    .admin-authed p.status { color: #2f855a; font-size: .85rem; margin-bottom: 1.6rem; }
+  </style>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <span class="navbar-brand">学習ノート</span>
+    <div class="navbar-links">
+      <a href="index.html" class="nav-back">← 学習ノート</a>
+    </div>
+  </div>
+</nav>
+
+<main class="admin-main">
+  <!-- パスワードの入力欄・ログインボタン・入力エラーを表示する領域。 --><div id="login-panel">
+    <h1>管理者ページ</h1>
+    <p>パスワードを入力してください。</p>
+    <input type="password" id="pw-input" class="admin-input" placeholder="パスワード" autocomplete="off">
+    <button id="login-btn" class="admin-btn">ログイン</button>
+    <p id="pw-error" class="admin-error" hidden>パスワードが正しくありません。</p>
+  </div>
+
+  <!-- 認証に成功した後の案内と、全ページの入口へ移動するボタンを表示する領域。 --><div id="authed-panel" class="admin-authed" hidden>
+    <h1>管理者ページ</h1>
+    <p class="status">認証済みです。このブラウザは今後、パスワード入力なしですべての教科にアクセスできます。</p>
+    <button id="show-all-btn" class="admin-btn">すべてのページを確認</button>
+  </div>
+</main>
+
+<script src="access_control.js"></script>
+<script>
+(function () {
+  // 入力欄・ボタン・案内欄を取得し、認証結果に合わせて表示を切り替えられるようにする。
+  var loginPanel = document.getElementById("login-panel");
+  var authedPanel = document.getElementById("authed-panel");
+  var pwInput = document.getElementById("pw-input");
+  var loginBtn = document.getElementById("login-btn");
+  var pwError = document.getElementById("pw-error");
+  var showAllBtn = document.getElementById("show-all-btn");
+
+  // パスワード入力欄を隠し、認証済みの案内と全ページ確認ボタンを表示する。
+  function showAuthed() {
+    loginPanel.hidden = true;
+    authedPanel.hidden = false;
+  }
+
+  // このブラウザに有効な認証が保存されていれば、最初から認証済みの案内を出す。
+  if (window.ACCESS_CONTROL.isAdminBypass()) {
+    showAuthed();
+  }
+
+  // 入力されたパスワードを設定値と比べ、一致すれば認証を保存し、違えばエラーを表示する。
+  function tryLogin() {
+    if (pwInput.value === window.ACCESS_CONTROL.adminPassword) {
+      window.ACCESS_CONTROL.setAdminBypass();
+      pwError.hidden = true;
+      showAuthed();
+    } else {
+      pwError.hidden = false;
+    }
+  }
+
+  // ログインボタンを押したとき、または入力欄でEnterを押したときに、パスワードを確認する。
+  loginBtn.addEventListener("click", tryLogin);
+  pwInput.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") tryLogin();
+  });
+
+  showAllBtn.addEventListener("click", function () {
+    location.href = "index.html";
+  });
+})();
+</script>
+</body>
+</html>

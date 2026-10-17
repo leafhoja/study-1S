@@ -1,0 +1,621 @@
+<!DOCTYPE html><!-- 「Ch.1 コーシーの定理とロピタルの定理 — 微分積分学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>Ch.1 コーシーの定理とロピタルの定理 — 微分積分学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="ch1">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="ch1.html" data-page="ch1" class="active">Ch.1</a>
+      <a href="ch2.html" data-page="ch2">Ch.2</a>
+      <a href="ch3.html" data-page="ch3">Ch.3</a>
+      <a href="ch4.html" data-page="ch4">Ch.4</a>
+      <a href="ch5.html" data-page="ch5">Ch.5</a>
+      <a href="ch6.html" data-page="ch6">Ch.6</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>Ch.1 コーシーの定理とロピタルの定理</h1>
+  <p class="subtitle">講義日: 6/9・6/16 — 平均値の定理の応用</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#cauchy-mvt">コーシーの平均値の定理</a>
+    <a href="#lhopital-00">ロピタルの定理（0/0）</a>
+    <a href="#lhopital-inf">ロピタルの定理（∞/∞）</a>
+    <a href="#lhopital-infx">ロピタルの定理（x→∞）</a>
+    <a href="#examples">例題</a>
+    <a href="#growth">増大度の比較</a>
+    <a href="#caution">注意点</a>
+  </div>
+
+  <!-- =================== 概要 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="overview">
+    <div class="sec-header">
+      <div class="sec-tag">Introduction</div>
+      <h2>S2ターム 微分積分学① の概要</h2>
+    </div>
+    <div class="sec-body">
+      <p>S2ターム（6/9〜7/7）では次の3つのテーマを扱う。</p>
+      <ol>
+        <li><strong>平均値の定理の応用</strong> — コーシーの平均値の定理・ロピタルの定理（本章）</li>
+        <li><strong>テーラーの定理とテーラー展開</strong>（Ch.2〜4）</li>
+        <li><strong>二変数関数の偏微分と全微分</strong>（Ch.5）</li>
+      </ol>
+      <div class="mot">
+        <span class="box-label">動機</span>
+        <p>
+          S1ターム（微分積分学の前半）で学んだ平均値の定理は、「$f(b)-f(a) = f'(c)(b-a)$」という形で関数の変化量と微分値を結びつけた。
+          S2ではこれを2方向に拡張する：<br>
+          (1) <strong>コーシーの平均値の定理</strong>：2つの関数 $f,g$ の「変化の比」を微分の比で表せるか？ → ロピタルの定理へ<br>
+          (2) <strong>テーラーの定理</strong>：関数を「多項式で近似」したとき誤差はどのくらいか？ → テーラー展開・べき級数へ
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- =================== コーシーの平均値の定理 =================== -->
+  <div class="section" id="cauchy-mvt">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>コーシー（Cauchy）の平均値の定理</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">直感的な理解 — 曲線の平均値の定理</span>
+        <p>
+          通常の平均値の定理は、区間 $[a,b]$ で「平均の傾き $\dfrac{f(b)-f(a)}{b-a}$ に等しい瞬間の傾き $f'(c)$ がどこかにある」という定理だった。
+          コーシーの平均値の定理はこれを<strong>媒介変数表示された曲線</strong>に一般化したものだ。
+        </p>
+        <p>
+          $t \in [a,b]$ として平面上の点 $(g(t), f(t))$ が描く曲線を考えると、
+          始点 $(g(a),f(a))$ と終点 $(g(b),f(b))$ を結ぶ弦の傾き $\dfrac{f(b)-f(a)}{g(b)-g(a)}$ に等しい
+          接線の傾き $\dfrac{f'(c)}{g'(c)}$ を持つ点 $c$ が存在する——これが「曲線版の平均値の定理」だ。
+        </p>
+        <p>
+          <strong>注意：$f$ と $g$ に別々に平均値の定理を使うのとは違う。</strong><br>
+          $f$ 単独で使うと $c_f$、$g$ 単独で使うと $c_g$ が得られるが、$c_f \ne c_g$ が一般的だ。
+          コーシーの定理の価値は「<strong>同じ1つの $c$</strong>」で $f'(c)/g'(c)$ が弦の傾きと一致することにある。
+          特に $g(x)=x$ とおくと通常の平均値の定理に帰着する。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">補助定理　ロールの定理</span>
+        <p>
+          $f(x)$ は $[a,b]$ で連続、$(a,b)$ で微分可能とし、$f(a)=f(b)$ とする。
+          このとき $f'(c)=0$ を満たす $c\in(a,b)$ が存在する。
+        </p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>証明を見る（最大値・最小値の存在を使う）</summary>
+        <div class="proof-body">
+          <p>
+            $f$ が定数関数なら、すべての $x$ で $f'(x)=0$ なので自明。以下 $f$ は定数でないとする。
+          </p>
+          <p>
+            $[a,b]$ は有界閉区間で $f$ は連続なので、最大値・最小値の定理により $f$ は $[a,b]$ 上で最大値 $M$・最小値 $m$ を持つ。
+            $f$ は定数でないから $M > f(a)$ または $m < f(a)$ の少なくとも一方が成り立つ（$f(a)=f(b)$ に注意）。
+          </p>
+          <p>
+            $M>f(a)=f(b)$ の場合を考える（$m&lt;f(a)$ の場合も同様）。このとき最大値 $M$ は端点 $a,b$ では達成されないので、
+            ある内点 $c\in(a,b)$ で $f(c)=M$（最大）となる。
+          </p>
+          <p>
+            $c$ が内点での最大値を与える微分可能点であることから、$f'(c)=0$ が従う：
+            もし $f'(c)>0$ なら $c$ のすぐ右で $f$ はさらに大きな値を取り $M$ が最大値であることに反する。
+            もし $f'(c)<0$ なら $c$ のすぐ左で $f$ はさらに大きな値を取り、同様に矛盾する。
+            よって $f'(c)=0$。$\blacksquare$
+          </p>
+        </div>
+      </details>
+
+      <div class="thm">
+        <span class="box-label">定理 1.1　コーシーの平均値の定理</span>
+        <p>
+          $f(x),\, g(x)$ は $[a,b]$ で連続、$(a,b)$ で微分可能とする。
+          さらに $g(a) \ne g(b)$（したがって $a < x < b$ では $g'(x) \ne 0$）と仮定する。
+          このとき、
+        </p>
+        $$\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(c)}{g'(c)}$$
+        <p>を満たす $c \in (a,b)$ が存在する。</p>
+        <p class="note" style="background:none;border:none;padding:0;margin-top:.4rem;font-size:.9rem;color:var(--muted);">
+          注：$g(x)=x$ とおくと通常の平均値の定理。$f$ と $g$ について同じ $c$ が成り立つとは限らない。
+        </p>
+      </div>
+
+      <details open>
+        <summary>証明を見る</summary>
+        <div class="proof-body">
+          <p>$k = \dfrac{f(b)-f(a)}{g(b)-g(a)}$ とおき、補助関数</p>
+          $$F(x) = f(x) - k\bigl(g(x)-g(a)\bigr)$$
+          <p>を定義する。$F$ は $[a,b]$ で連続、$(a,b)$ で微分可能であり、</p>
+          $$F(a) = f(a), \quad F(b) = f(b) - k\bigl(g(b)-g(a)\bigr) = f(b) - \bigl(f(b)-f(a)\bigr) = f(a).$$
+          <p>よって $F(a)=F(b)$。ロールの定理（閉区間上の連続関数の最大・最小の存在に基づく）より、</p>
+          $$\exists\, c \in (a,b),\quad F'(c) = 0.$$
+          <p>$F'(x) = f'(x) - k\,g'(x)$ であるから $F'(c)=0$ より $k = f'(c)/g'(c)$、すなわち</p>
+          $$\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(c)}{g'(c)}. \quad \blacksquare$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">補足：仮定「$g(a)\ne g(b)$」と「$g'(x)\ne 0$」の関係</span>
+        <p>
+          定理の左辺 $\dfrac{f(b)-f(a)}{g(b)-g(a)}$ が意味を持つには $g(a)\ne g(b)$ が必要だが、実はこの仮定を置けば
+          $(a,b)$ で $g'(x)\ne 0$ であることまで自動的に保証される。理由は<strong>ロールの定理の対偶</strong>だ：
+          もし $(a,b)$ のある点 $c_0$ で $g'(c_0)=0$ だったとしても、それだけでは $g(a)=g(b)$ は導けない
+          （ロールの定理は逆方向、「$g(a)=g(b)$ ならば $g'=0$ となる点が存在する」を主張するもの）。
+          つまり両方の仮定は独立に確認する必要があるが、実用上は「$g'(x)\ne 0$ が $(a,b)$ 全体で成り立つ」ことを先に示せば、
+          ロールの定理の対偶により $g(a)\ne g(b)$ が自動的に従う（$g(a)=g(b)$ だったらロールの定理よりどこかで $g'=0$ となり矛盾するため）。
+          証明の中で「$g(b)-g(a)$ で割ってよいか」を確認する際は、この関係を思い出すとよい。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 1.1　具体的な $c$ の計算</span>
+        <p>$f(x)=x^2$、$g(x)=x^3$、$[a,b]=[0,1]$ でコーシーの定理の $c$ を求めよ。</p>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            <p>左辺：$\dfrac{f(1)-f(0)}{g(1)-g(0)} = \dfrac{1-0}{1-0} = 1$</p>
+            <p>右辺：$\dfrac{f'(c)}{g'(c)} = \dfrac{2c}{3c^2} = \dfrac{2}{3c}$</p>
+            <p>よって $1 = \dfrac{2}{3c}$、つまり $c = \dfrac{2}{3}$。</p>
+            <p>一方、$f$ 単独で平均値の定理を使うと $f'(c_f)=2c_f=1$ より $c_f=1/2$。
+            $g$ 単独では $g'(c_g)=3c_g^2=1$ より $c_g=1/\sqrt{3}\approx 0.577$。
+            コーシー版の $c=2/3$ はどちらとも異なる。</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="hist">
+        <span class="box-label">歴史的背景 — なぜ「コーシー」の名がつくのか</span>
+        <p>
+          平均値の定理そのものの起源は17世紀末、ミシェル・ロールが1691年に示した「代数方程式の根の間に導関数の根がある」という代数的な形（現在の<strong>ロールの定理</strong>）に遡る。
+          それを2つの関数の比という現在の形に一般化し、厳密に証明したのがオーギュスタン＝ルイ・コーシー（1789–1857）だ。彼は著書『無限小解析の教程講義』（1823年）でこの定理を与えている。
+          コーシーは $\varepsilon$-$\delta$論法の原型を整備した人物としても知られ、「直感的に正しそうな計算」を「厳密に証明された定理」へ書き換える、当時のフランス数学界の近代化を象徴する存在だった。
+          この章で見るロピタルの定理も、まさにコーシーの定理という厳密な土台の上に立っている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== ロピタルの定理（0/0型） =================== -->
+  <div class="section" id="lhopital-00">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>ロピタル（L'Hôpital）の定理 — 0/0 型</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="hist">
+        <span class="box-label">歴史的背景 — 「ロピタルの定理」なのに発見者はロピタルではない</span>
+        <p>
+          この定理を最初に出版したのはギヨーム・ド・ロピタル侯爵で、1696年刊の『無限小解析』（世界最初の微分積分学の教科書）に収録した。
+          しかし実際に証明したのはロピタルの家庭教師だったヨハン・ベルヌーイだ。1694年3月、ベルヌーイは「毎年一定の報酬を払う代わりに数学上の発見を教え、ロピタルが自由に使ってよい」という契約をロピタルと結び、同年7月22日付の書簡でこの0/0型の定理をロピタルに送っている。
+          ロピタルはそれを（当時の慣習として）自分の教科書に収録した。ベルヌーイは生涯「あれは自分の発見だ」と主張し続けたが、決定的な証拠となる契約書と書簡が発見されたのは1921〜22年——彼の死から実に190年近く後のことだった。
+          教科書に名前が残ることと、実際に発見したことは必ずしも一致しない、という好例だ。
+        </p>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">なぜ 0/0 → f'/g' が成り立つか</span>
+        <p>
+          $f(a)=g(a)=0$ のとき、$x$ が $a$ に十分近ければ 1次近似
+          $f(x)\approx f'(a)(x-a)$、$g(x)\approx g'(a)(x-a)$ が使えるので、
+        </p>
+        $$\frac{f(x)}{g(x)} \approx \frac{f'(a)(x-a)}{g'(a)(x-a)} = \frac{f'(a)}{g'(a)}.$$
+        <p>
+          つまり「0 に近づく速さの比は、1次近似（接線）の傾きの比で決まる」というのが直感だ。
+          この $\approx$ を厳密に正当化するのがコーシーの平均値の定理であり、
+          分子と分母を<strong>同じ1つの $c$</strong> で評価できることが本質的に効いている。
+        </p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">使用前に必ず確認する4条件</span>
+        <ol>
+          <li>$\lim_{x\to a} f(x) = 0$（分子が 0 に収束）</li>
+          <li>$\lim_{x\to a} g(x) = 0$（分母が 0 に収束）</li>
+          <li>$a$ の近傍（$x\ne a$）で $g'(x) \ne 0$</li>
+          <li>$\lim_{x\to a} \dfrac{f'(x)}{g'(x)}$ が存在する（または $\pm\infty$）</li>
+        </ol>
+        <p style="margin-top:.5rem;">
+          条件4が特に見落とされやすい。$f'/g'$ の極限が<strong>存在しないとき</strong>、定理は何も言っておらず、
+          元の $f/g$ の極限が存在する可能性は残っている（逆方向は成り立たない）。
+        </p>
+        <p>
+          <strong>使ってはいけない反例：</strong>
+          $\displaystyle\lim_{x\to 0}\frac{x^2\sin(1/x)}{x}$。
+          これは約分すれば $x\sin(1/x)\to 0$（はさみうち）と即座にわかるが、
+          形式的にロピタルを適用すると
+          $\dfrac{2x\sin(1/x)-\cos(1/x)}{1}$ となり $\cos(1/x)$ が振動するため
+          極限が存在しない。条件4が破れており、ロピタルは使えない。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 1.2　ロピタルの定理（0/0 型）</span>
+        <p>
+          $a$ を含む開区間 $J$ において $f,g$ は微分可能とする。$x\ne a$ では $g'(x)\ne 0$ とし、
+          $\lim_{x\to a} f(x)=0$、$\lim_{x\to a} g(x)=0$ とする。
+          このとき
+        </p>
+        $$\lim_{x\to a}\frac{f'(x)}{g'(x)} = \ell \quad \text{（有限または } \pm\infty \text{）が存在するならば、}$$
+        $$\lim_{x\to a}\frac{f(x)}{g(x)} = \lim_{x\to a}\frac{f'(x)}{g'(x)} = \ell.$$
+      </div>
+
+      <details>
+        <summary>証明を見る（コーシーの定理を使う）</summary>
+        <div class="proof-body">
+          <p>$f(a)=g(a)=0$ と定義（または連続拡張）しておく。$x > a$ のとき、$[a,x]$ にコーシーの平均値の定理を適用すると、ある $c \in (a,x)$ が存在して</p>
+          $$\frac{f(x)}{g(x)} = \frac{f(x)-f(a)}{g(x)-g(a)} = \frac{f'(c)}{g'(c)}.$$
+          <p>$x \to a^+$ のとき $c \to a^+$ となるので、</p>
+          $$\lim_{x\to a^+}\frac{f(x)}{g(x)} = \lim_{c\to a^+}\frac{f'(c)}{g'(c)} = \ell.$$
+          <p>$x < a$ のときも同様。$\blacksquare$</p>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 1.2　$\lim_{x\to 0}\dfrac{x-\sin x}{x^3}$</span>
+        <p>分子・分母ともに $x\to 0$ で $0$ に収束することを確認してからロピタルを適用する（3回必要）。</p>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            <p><strong>1回目：</strong> $x\to 0$ で $x-\sin x \to 0$、$x^3 \to 0$（0/0 型 ✓）</p>
+            $$\lim_{x\to 0}\frac{x-\sin x}{x^3} = \lim_{x\to 0}\frac{1-\cos x}{3x^2}.$$
+            <p><strong>2回目：</strong> $x\to 0$ で $1-\cos x \to 0$、$3x^2 \to 0$（0/0 型 ✓）</p>
+            $$= \lim_{x\to 0}\frac{\sin x}{6x}.$$
+            <p><strong>3回目：</strong> $x\to 0$ で $\sin x \to 0$、$6x \to 0$（0/0 型 ✓）</p>
+            $$= \lim_{x\to 0}\frac{\cos x}{6} = \frac{1}{6}.$$
+          </div>
+        </details>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 1.3　$\lim_{x\to 0}\dfrac{e^x-1-x}{x^2}$</span>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            <p>$x\to 0$ で $e^x-1-x \to 0$、$x^2\to 0$（0/0 型 ✓）</p>
+            $$\lim_{x\to 0}\frac{e^x-1-x}{x^2} = \lim_{x\to 0}\frac{e^x-1}{2x}.$$
+            <p>再度 0/0 型（$e^x-1\to 0$, $2x\to 0$ ✓）なのでもう一度：</p>
+            $$= \lim_{x\to 0}\frac{e^x}{2} = \frac{1}{2}.$$
+            <p><em>別解（マクローリン展開）：</em>
+            $e^x = 1+x+\dfrac{x^2}{2}+O(x^3)$ より
+            $\dfrac{e^x-1-x}{x^2} = \dfrac{\frac{x^2}{2}+O(x^3)}{x^2} = \dfrac{1}{2}+O(x) \to \dfrac{1}{2}$。
+            「ロピタルを $n$ 回繰り返すこと」と「展開を $n$ 次まで見ること」は実質同じ情報を使っている。</p>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== ロピタルの定理（∞/∞型） =================== -->
+  <div class="section" id="lhopital-inf">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>ロピタルの定理（補足）— ∞/∞ 型</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">∞/∞ 型の直感</span>
+        <p>
+          $\dfrac{0}{0}$ 型が「0 に近づく<strong>速さの比</strong>」を測るものだったのに対し、
+          $\dfrac{\infty}{\infty}$ 型は「無限大に発散する<strong>速さの比</strong>」を測るものだ。
+          分子も分母も無限に大きくなるとき、値を決めるのは増大のスピードであり、
+          それは導関数の比 $\dfrac{f'}{g'}$ に反映される——という点で、両者は同じ発想の兄弟だ。
+        </p>
+        <p>
+          証明は 0/0 型と同様にコーシーの定理を直接適用する（$x \to a^+$ で $f,g\to\infty$ の場合）。
+          $1/f(x)\to 0$, $1/g(x)\to 0$ を利用して 0/0 型に変換する道もある。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 1.3　ロピタルの定理（∞/∞ 型）</span>
+        <p>
+          $f,g$ は $(a,b)$ で微分可能、$(a,b)$ で $g'(x)\ne 0$ とする。
+          $\lim_{x\to a^+} f(x) = \infty$、$\lim_{x\to a^+} g(x) = \infty$ のとき、
+        </p>
+        $$\lim_{x\to a^+}\frac{f'(x)}{g'(x)} = \ell \implies \lim_{x\to a^+}\frac{f(x)}{g(x)} = \ell.$$
+      </div>
+
+      <details>
+        <summary>証明の概要（コーシーの定理を繰り返す）</summary>
+        <div class="proof-body">
+          <p>任意の $\varepsilon'>0$ に対して、ある $\delta>0$ が存在して $0 < x-a < \delta$ ならば
+          $|f'(c)/g'(c)-\ell|<\varepsilon'$ となるものが取れる。</p>
+          <p>$a < x_1 < x < a+\delta$ として $x, x_1$ にコーシーの定理を適用すると、</p>
+          $$\frac{f(x)-f(x_1)}{g(x)-g(x_1)} = \frac{f'(c)}{g'(c)}, \quad x_1 < c < x.$$
+          <p>左辺を $f(x)/g(x)$ を使って書き直すと</p>
+          $$\frac{f(x)-f(x_1)}{g(x)-g(x_1)} = \frac{f(x)\bigl(1 - f(x_1)/f(x)\bigr)}{g(x)\bigl(1 - g(x_1)/g(x)\bigr)} = \frac{f(x)}{g(x)} \cdot \frac{1-\dfrac{f(x_1)}{f(x)}}{1-\dfrac{g(x_1)}{g(x)}}$$
+          <p>となるので、これを先の式と合わせて</p>
+          $$\frac{f(x)}{g(x)} = \frac{f'(c)}{g'(c)} \cdot \frac{1-\dfrac{g(x_1)}{g(x)}}{1-\dfrac{f(x_1)}{f(x)}}.$$
+          <p>$x\to a^+$ のとき $f(x_1)/f(x)\to 0$、$g(x_1)/g(x)\to 0$ なので、</p>
+          $$\lim_{x\to a^+}\frac{f(x)}{g(x)} = \lim_{c\to a^+}\frac{f'(c)}{g'(c)} = \ell. \quad \blacksquare$$
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">注：不定型の種類</span>
+        <p>
+          ロピタルが直接使えるのは $\dfrac{0}{0}$ 型と $\dfrac{\infty}{\infty}$ 型。他の不定型は次のように変換する：
+        </p>
+        <ul>
+          <li>$0 \cdot \infty$ 型 → $\frac{0}{1/\infty}$（0/0 型）または $\frac{\infty}{1/0}$（∞/∞ 型）に変換</li>
+          <li>$\infty - \infty$ 型 → 通分や変数変換で 0/0 型か ∞/∞ 型に帰着</li>
+          <li>$0^0,\, 1^\infty,\, \infty^0$ 型 → 対数を取って $0\cdot\infty$ 型に帰着</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== ロピタルの定理（x→∞型） =================== -->
+  <div class="section" id="lhopital-infx">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>ロピタルの定理（2） — $x \to \infty$ 型</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 1.4　ロピタルの定理（$x\to\infty$ 型）</span>
+        <p>
+          ある $b>0$ に対して $f,g$ は $(b,\infty)$ で微分可能、$g'(x)\ne 0$ とする。
+          $\lim_{x\to\infty} f(x)=0$、$\lim_{x\to\infty} g(x)=0$ のとき（$\infty/\infty$ も同様）、
+        </p>
+        $$\lim_{x\to\infty}\frac{f'(x)}{g'(x)} = \ell \implies \lim_{x\to\infty}\frac{f(x)}{g(x)} = \ell.$$
+      </div>
+
+      <details>
+        <summary>証明の概要（$y=1/x$ で変数変換）</summary>
+        <div class="proof-body">
+          <p>$y=1/x$ とおいて $F(y)=f(1/y)$、$G(y)=g(1/y)$ と定義する。
+          $f,g$ が $(b,\infty)$ で微分可能なので $F,G$ は $(0,1/b)$ で微分可能であり、</p>
+          $$F'(y) = -\frac{1}{y^2}f'\!\left(\frac{1}{y}\right), \quad G'(y) = -\frac{1}{y^2}g'\!\left(\frac{1}{y}\right).$$
+          <p>$\frac{F'(y)}{G'(y)} = \frac{f'(1/y)}{g'(1/y)}$ となり、$y\to 0^+$（$x=1/y\to\infty$）で 0/0 型のロピタルが使える。</p>
+          $$\lim_{x\to\infty}\frac{f(x)}{g(x)} = \lim_{y\to 0^+}\frac{F(y)}{G(y)} = \lim_{y\to 0^+}\frac{F'(y)}{G'(y)} = \lim_{x\to\infty}\frac{f'(x)}{g'(x)} = \ell. \quad \blacksquare$$
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- =================== 例題 =================== -->
+  <div class="section" id="examples">
+    <div class="sec-header">
+      <div class="sec-tag">Examples</div>
+      <h2>例題集</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">例題 1.A　$\lim_{x\to +0}\dfrac{e^x-1}{\sqrt{x}}$</span>
+        <p>区間 $(0,a)$ で考える（$x=0$ では $\sqrt{x}$ が微分不可なので $x>0$ に限定）。</p>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            <p>$x\to +0$ で $e^x-1\to 0$、$\sqrt{x}\to 0$（0/0 型 ✓）。ロピタルを適用：</p>
+            $$\lim_{x\to +0}\frac{e^x-1}{\sqrt{x}} = \lim_{x\to +0}\frac{e^x}{\dfrac{1}{2\sqrt{x}}} = \lim_{x\to +0} 2\sqrt{x}\cdot e^x = 0.$$
+          </div>
+        </details>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例題 1.B　$\lim_{x\to +0} x\log x$</span>
+        <p>$0\cdot(-\infty)$ 型（$0\cdot\infty$ 型）。変数変換 $x=1/y$（$y\to\infty$）で ∞/∞ 型に変換する。</p>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            $$\lim_{x\to +0} x\log x = \lim_{y\to\infty}\frac{1}{y}\log\frac{1}{y} = \lim_{y\to\infty}\frac{-\log y}{y}.$$
+            <p>$\log y \to \infty$、$y\to\infty$（∞/∞ 型 ✓）なのでロピタル：</p>
+            $$= \lim_{y\to\infty}\frac{-1/y}{1} = 0.$$
+          </div>
+        </details>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例題 1.C　$\lim_{x\to\infty} x\,e^{-x}$</span>
+        <p>$\infty\cdot 0$ 型 → $x/e^x$ として ∞/∞ 型に変換。</p>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            $$\lim_{x\to\infty} xe^{-x} = \lim_{x\to\infty}\frac{x}{e^x} = \lim_{x\to\infty}\frac{1}{e^x} = 0.$$
+          </div>
+        </details>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例題 1.D　$\lim_{x\to +0} x^x$（$0^0$ 型）</span>
+        <p>指数に変数がある不定型は、対数を取って $0\cdot\infty$ 型（さらに $\infty/\infty$ 型）に帰着させる。</p>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            <p>$y=x^x$ とおき両辺の対数を取る：$\log y = x\log x$。</p>
+            <p>例題1.Bより $\lim_{x\to+0} x\log x = 0$ なので $\log y \to 0$、よって $y=e^{\log y}\to e^0=1$。</p>
+            $$\lim_{x\to+0} x^x = 1.$$
+          </div>
+        </details>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例題 1.E　$\lim_{x\to\infty}\left(1+\dfrac{1}{x}\right)^x$（$1^\infty$ 型）</span>
+        <p>これは $e$ の定義そのものだが、ロピタルの定理でも確認できる。</p>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            <p>$y=\left(1+\frac1x\right)^x$ の対数を取ると $\log y = x\log\left(1+\frac1x\right)$。$t=1/x$（$t\to+0$）と置換：</p>
+            $$\log y = \frac{\log(1+t)}{t}.$$
+            <p>$t\to 0$ で分子・分母ともに $0$（0/0 型 ✓）。ロピタルを適用：</p>
+            $$\lim_{t\to 0}\frac{\log(1+t)}{t} = \lim_{t\to 0}\frac{1/(1+t)}{1} = 1.$$
+            <p>よって $\log y\to 1$、すなわち $y\to e^1=e$。</p>
+            $$\lim_{x\to\infty}\left(1+\frac1x\right)^x = e.$$
+          </div>
+        </details>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例題 1.F　$\lim_{x\to 0}\left(\dfrac{1}{x}-\dfrac{1}{\sin x}\right)$（$\infty-\infty$ 型）</span>
+        <p>通分して分数の形にすれば 0/0 型に帰着する。</p>
+        <details>
+          <summary>解答を見る</summary>
+          <div class="proof-body">
+            <p>通分：</p>
+            $$\frac{1}{x}-\frac{1}{\sin x} = \frac{\sin x - x}{x\sin x}.$$
+            <p>$x\to 0$ で分子・分母ともに $0$（0/0 型 ✓）。1回目のロピタル：分子・分母を微分すると</p>
+            $$\frac{\cos x - 1}{\sin x + x\cos x}.$$
+            <p>$x=0$ でこれも $0/0$（分子 $\cos0-1=0$、分母 $\sin0+0=0$）なのでもう1回：</p>
+            $$\frac{-\sin x}{2\cos x - x\sin x} \xrightarrow{x\to 0} \frac{0}{2} = 0.$$
+            <p>2回目では分母が $x=0$ で $2\ne 0$ になったので、ここで停止してよい。</p>
+            $$\lim_{x\to 0}\left(\frac1x-\frac1{\sin x}\right) = 0.$$
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 増大度の比較 =================== -->
+  <div class="section" id="growth">
+    <div class="sec-header">
+      <div class="sec-tag">Application</div>
+      <h2>応用：関数の増大度の比較</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">動機 — 「どちらが速く大きくなるか」を比較する</span>
+        <p>
+          $x\to\infty$ のとき、$\log x$, $x^p$（$p>0$）, $a^x$（$a>1$）, $x!$ はすべて $\infty$ に発散するが、
+          発散する<strong>速さ</strong>には明確な序列がある。この序列は、アルゴリズムの計算量比較や物理量のスケール比較など
+          応用上いつも顔を出す。ロピタルの定理を使えば、この序列を厳密に証明できる。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 1.5　対数・べき・指数関数の増大度</span>
+        <p>任意の $p>0$、$a>1$ に対して</p>
+        $$\lim_{x\to\infty}\frac{\log x}{x^p} = 0, \qquad \lim_{x\to\infty}\frac{x^p}{a^x} = 0.$$
+      </div>
+
+      <details>
+        <summary>証明を見る（ロピタルを使う）</summary>
+        <div class="proof-body">
+          <p><strong>1つ目：</strong>$x\to\infty$ で $\log x\to\infty$、$x^p\to\infty$（∞/∞ 型 ✓）。ロピタルを適用：</p>
+          $$\lim_{x\to\infty}\frac{\log x}{x^p} = \lim_{x\to\infty}\frac{1/x}{px^{p-1}} = \lim_{x\to\infty}\frac{1}{px^p} = 0.$$
+          <p><strong>2つ目：</strong>$p$ が正の整数のときは $\lceil p\rceil$ 回ロピタルを繰り返せば分子は定数になり、分母は $(\log a)^n a^x\to\infty$ のままなので $0$ に収束する。
+          $p$ が整数でない場合も、$n>p$ となる整数 $n$ を取って $x^p \le x^n$（$x$ が十分大きいとき）と比較すればよい。$\blacksquare$</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">増大度の階層のまとめ</span>
+        <p>
+          定理1.5と、Ch.2で示す $\lim_{n\to\infty} a^n/n! = 0$（すべての定数 $a>0$ について成立）を組み合わせると、$x\to\infty$ での増大度の階層が完成する：
+        </p>
+        $$\log x \;\ll\; x^p \;\ll\; a^x \;\ll\; x!$$
+        <p>
+          （記号 $f\ll g$ は $f(x)/g(x)\to 0$ を意味する。）どの隣接対も比を取ってロピタル（または階乗の場合は比判定法的な議論）で $0$ に収束することが確認できる。
+          「掛ける数自体が大きくなる」階乗が最も速く、「足す数が一定割合で増える」指数関数がそれに次ぎ、べき関数、対数関数の順に遅くなる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== 注意点・落とし穴 =================== -->
+  <div class="section" id="caution">
+    <div class="sec-header">
+      <div class="sec-tag">Caution</div>
+      <h2>ロピタルの定理を使うときの注意</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="warn">
+        <span class="box-label">落とし穴①：不定型かどうかを確認しない誤り</span>
+        <p>
+          $\lim_{x\to 1} \dfrac{x^2-1}{x-1}$ を「ロピタルで $\frac{2x}{1}=2$」とするのは<strong>誤り</strong>ではないが無駄。
+          因数分解 $\frac{(x-1)(x+1)}{x-1}=x+1 \to 2$ のほうが簡単。
+        </p>
+        <p>
+          危険なのは、不定型でない極限にロピタルを使う場合だ。たとえば
+          $\lim_{x\to 0}\frac{\sin x}{x+1}$ は $0/0$ 型ではない（分母は $1$ に収束）。
+          正しい値は $0/1=0$ だが、ロピタルを誤用すると $\frac{\cos x}{1}\to 1$ と誤答する。
+        </p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">落とし穴②：$f'(x)/g'(x)$ の極限が存在しない場合</span>
+        <p>
+          $\lim_{x\to\infty}\dfrac{f'(x)}{g'(x)}$ が存在しなくても $\lim_{x\to\infty}\dfrac{f(x)}{g(x)}$ が存在することはある。
+          ロピタルは「$f'/g'$ の極限が存在するならば $f/g$ の極限も同じ」という<strong>一方向の定理</strong>であり、逆は成り立たない。
+        </p>
+        <p>
+          <strong>反例：</strong>$f(x) = x+\sin x$、$g(x)=x$ とすると、
+          $\dfrac{f(x)}{g(x)}=1+\dfrac{\sin x}{x}\to 1$（収束）だが、
+          $\dfrac{f'(x)}{g'(x)}=1+\cos x$ は $[0,2]$ の間を振動し、$x\to\infty$ で極限を持たない。
+          $f'/g'$ の極限が存在しないと判明した時点で、ロピタルは使えないと認め、別の方法を探す必要がある。
+        </p>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">落とし穴③：$\sin x / x$ への適用は循環論法</span>
+        <p>
+          $\lim_{x\to 0}\frac{\sin x}{x}$ にロピタルを使うと $\frac{\cos x}{1}=1$ を得るが、
+          $(\sin x)' = \cos x$ の証明にはそもそも $\lim_{x\to 0}\frac{\sin x}{x}=1$ が必要だ。
+          よってこれは<strong>循環論法</strong>になっており、正当な証明ではない。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ナビゲーション -->
+  <div style="display:flex; justify-content:space-between; margin-top:2rem; padding:0 .5rem;">
+    <span></span>
+    <a href="ch2.html" style="color:var(--accent); text-decoration:none; font-weight:700;">Ch.2 テーラーの定理 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

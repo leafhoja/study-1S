@@ -1,0 +1,301 @@
+<!DOCTYPE html><!-- 「微分積分 予想問題 番外編 極限計算とその正当化 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>微分積分 予想問題 番外編 極限計算とその正当化 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="yosou_calc_03.html" data-page="yosou/yosou_calc_03">関連：第3回（Taylor展開）</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-calc">
+  <h1>微分積分学演習　予想問題　番外編</h1>
+  <p class="subtitle">極限計算とその手法の正当化 — テイラー展開・ロピタルの定理（全4問）</p>
+</div>
+
+<div class="container">
+
+<!-- 免責 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#fff5f5; color:#c53030;">⚠️ この問題セットについて</div>
+  <div class="section-card-body">
+    <div class="warn-box">
+      <div class="warn-title">AIが作成した予想問題です（実際の試験問題ではありません）</div>
+      <p>これは全5回20問の本編（<a href="yosou_calc_01.html" data-page="yosou/yosou_calc_01">第1回</a>〜<a href="yosou_calc_05.html" data-page="yosou/yosou_calc_05">第5回</a>）には含まれない，追加の<strong>ボーナス問題集（番外編）</strong>である。中間試験後のレポート課題で出題された「テイラー展開を用いた極限計算」（$\lim_{x\to0}\left(\frac1{x(x+1)}-\frac{\log(1+x)}{x^2}\right)$ のような不定形の極限，$\sqrt{1+x}$ の近似誤差評価，$\arctan x$ のマクローリン展開と収束範囲など）の傾向を踏まえつつ，本セットでは<strong>同じ問題は出題せず</strong>，別の題材を用いる。</p>
+      <p>本編の20問は「解ける」ことに主眼を置いた構成だが，この番外編は<strong>結果だけでなく，なぜその公式・手法がその場面で使ってよいのか（テイラー展開なら収束半径の確認，ロピタルの定理なら適用条件の確認など）という知識確認</strong>に主眼を置いている。計算問題としては本編より易しく見える問題もあるが，「なぜ使えるか」を説明する部分こそがこの番外編の本題であることに注意してほしい。学習用のオリジナル問題であり，AIが生成したものである。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 この4問で使う道具</div>
+  <div class="section-card-body">
+    <p>この番外編は純粋な計算力ではなく，「その計算手法が今この場面で正当化されるか」を判定する知識を問う。次の3点を必ず押さえておくこと。</p>
+    <div class="def-box">
+      <div class="def-title">知識確認ポイント</div>
+      <ul>
+        <li><strong>テイラーの定理（有限次＋剰余項）とテイラー級数（無限和）の違い：</strong>テイラーの定理は関数が $C^{n+1}$ 級でありさえすれば，展開の中心から評価点までの<strong>大域的な収束半径によらず</strong>局所的な評価に使ってよい（有限次の多項式と剰余項だけの議論のため）。これに対し，<strong>無限級数（マクローリン級数）をそのまま代入する</strong>場合は，代入する値が収束半径の内部にあることの確認が必須。この2つを区別できるかどうかが本番で最も差がつくポイント。</li>
+        <li><strong>ロピタルの定理の適用条件（3つ）：</strong>①$\frac00$ または $\frac{\infty}{\infty}$ の不定形であること，②分子・分母がその近傍で微分可能（分母の導関数が0でない）こと，③<strong>導関数の比の極限が存在する（有限か $\pm\infty$）</strong>こと。③が満たされない場合，ロピタルの定理からは何の結論も出せない（原式の極限が存在しないことを意味するわけではない点に要注意）。</li>
+        <li><strong>同じ次数まで展開する：</strong>テイラー展開で極限を求める際は，分子・分母（あるいは差の各項）を<strong>同じ次数まで</strong>展開しないと，一方だけ情報が欠落して誤った答えに至る。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 問1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">1</span> テイラー展開とロピタルの定理，二つの解法の一致
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★☆☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$$\lim_{x\to0}\frac{\cos x-1+\dfrac{x^2}2}{x^4}$$</p>
+      <p>を，(a) テイラー展開を用いる方法，(b) ロピタルの定理を用いる方法，の<strong>両方</strong>で計算し，一致することを確認せよ。また，(b) の方法で「なぜロピタルの定理を4回連続で適用してよいのか」を，適用条件を毎回確認する形で説明せよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (a) テイラー展開を用いる方法</div>
+      <p><strong>手法が使える理由：</strong>$\cos x$ は整関数（$\mathbb{C}$ 全体で正則）であり，そのマクローリン級数の収束半径は無限大である。よって $x=0$ の近くのどんな値を代入しても，級数として関数の値そのものに等しいという等式が無条件に成り立つ。この点を確認したうえで展開を代入する。</p>
+      $$\cos x = 1-\frac{x^2}2+\frac{x^4}{24}-\frac{x^6}{720}+\cdots$$
+      <p>よって</p>
+      $$\cos x-1+\frac{x^2}2 = \frac{x^4}{24}-\frac{x^6}{720}+\cdots$$
+      <p>$x^4$（$x\ne0$）で割ると</p>
+      $$\frac{\cos x-1+\frac{x^2}2}{x^4} = \frac1{24}-\frac{x^2}{720}+\cdots$$
+      <p>$x\to0$ で第2項以降はすべて $0$ に収束するので</p>
+      $$\lim_{x\to0}\frac{\cos x-1+\frac{x^2}2}{x^4} = \boxed{\frac1{24}}$$
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (b) ロピタルの定理を用いる方法</div>
+      <p>$f(x)=\cos x-1+\dfrac{x^2}2$，$g(x)=x^4$ とおく。</p>
+      <p><strong>1回目：</strong>$f(0)=1-1+0=0$，$g(0)=0$（$\frac00$ 型）。$f,g$ は $x=0$ の近傍で何回でも微分可能，$g'(x)=4x^3$ は $x\ne0$ で $0$ でない。よってロピタルの定理が適用でき，</p>
+      $$\lim_{x\to0}\frac{f(x)}{g(x)} = \lim_{x\to0}\frac{f'(x)}{g'(x)} = \lim_{x\to0}\frac{-\sin x+x}{4x^3}\quad(\text{右辺の極限が存在すれば})$$
+      <p><strong>2回目：</strong>$f'(0)=-\sin0+0=0$，$g'(0)=0$（再び $\frac00$ 型）。$g''(x)=12x^2\ne0$（$x\ne0$）を確認してから再度適用：</p>
+      $$\lim_{x\to0}\frac{-\sin x+x}{4x^3} = \lim_{x\to0}\frac{-\cos x+1}{12x^2}$$
+      <p><strong>3回目：</strong>$f''(0)=-1+1=0$，$g''(0)=0$（三たび $\frac00$ 型）。$g'''(x)=24x\ne0$（$x\ne0$）を確認してから適用：</p>
+      $$\lim_{x\to0}\frac{-\cos x+1}{12x^2} = \lim_{x\to0}\frac{\sin x}{24x}$$
+      <p><strong>4回目：</strong>$f'''(0)=\sin0=0$，$g'''(0)=0$（四たび $\frac00$ 型）。$g''''(x)=24\ne0$（定数）を確認してから適用：</p>
+      $$\lim_{x\to0}\frac{\sin x}{24x} = \lim_{x\to0}\frac{\cos x}{24}$$
+      <p>ここで初めて $\frac00$ 型でなくなり（分母が定数 $24$ に確定した），$x\to0$ で $\cos x\to1$ なので</p>
+      $$\lim_{x\to0}\frac{\cos x-1+\frac{x^2}2}{x^4} = \boxed{\frac1{24}}$$
+      <p>(a)・(b) の両方の値が一致した。$\blacksquare$</p>
+      <p><strong>手法が使える理由（4回連続適用の正当化）：</strong>ロピタルの定理を1回適用してよいのは，そのつど「現在の分数が $\frac00$（または $\frac\infty\infty$）型であること」を確認したときに限られる。本問では，1回目〜4回目の適用の<em>直前</em>にそれぞれ分子・分母の値が両方 $0$ になっていることを確かめてから次の微分に進んでいる（4回目の適用の後，ようやく分母が非零定数 $24$ になり，不定形が解消して計算が終了する）。この「毎回チェックする」手順を踏まずに機械的に4回微分しただけでは，論理として正当化されたことにはならない。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>この問題の眼目は，答えの数値そのものより「ロピタルの定理は1回適用するごとに，次の分数が再び不定形になっているかを毎回チェックしなければならない」という手続き上の注意にある。本問はたまたま4回とも $\frac00$ 型が続いたが，これは<strong>偶然そうなっただけ</strong>であり，一般には途中の段階で分母（または分子）が $0$ でなくなれば，その時点で不定形が解消し，その分数の値がそのまま極限になる。「不定形でなくなった時点で止める」という判断を怠って機械的に微分を繰り返すのは，手順としては誤りである。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 テイラー展開の方が見通しがよい理由</div>
+        <p>(a) の方法では，$\cos x$ の展開を $x^4$ の項まで一度に書き下してしまえば，あとは $x^4$ で割って $x\to0$ とするだけで答えが出る。微分を4回繰り返す必要も，そのたびに $\frac00$ 型かどうかを確認する必要もない。「必要な次数まで一気に展開すれば，微分を繰り返す手間なく係数を直接読み取れる」というのがテイラー展開による極限計算の効率のよさであり，次数が上がるほど（本問のように4次），ロピタルの定理との計算量の差は顕著になる。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 なぜ $\cos x$ の展開はどこでも自由に使えるのか</div>
+        <p>$\cos x$ は整関数（収束半径 $=\infty$）なので，マクローリン級数は実数直線上のどの点でも関数の値と等しい。だからこそ (a) で「$x=0$ の近くで代入する」という操作に何の留保も要らなかった。しかし，収束半径が有限な関数（例えば $\log(1+x)$，収束半径 $1$）では話が別で，展開の中心から離れた点に無条件で代入すると誤りになる——これは問3で詳しく扱う。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①ロピタルを適用する際に分子と分母を取り違えて微分してしまう（分母を微分し忘れる，あるいは逆に分子を放置する），②テイラー展開で必要な次数（本問なら $x^4$ の項）まで展開せずに $x^2$ の項までで止めてしまい，分子が恒等的に $0$ になったと誤認する，③ロピタルの定理を適用する前に，分母の導関数が本当に $0$ でないか（あるいは分子・分母がともに $0$ か）を確認せずに機械的に微分だけ繰り返す。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">2</span> 分子・分母を同じ次数まで展開する
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★☆☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$$\lim_{x\to0}\frac{\tan x-x}{x-\sin x}$$</p>
+      <p>を求めよ。この計算において，分子と分母をどこまでテイラー展開する必要があるか，その理由とともに説明せよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>手法が使える理由：</strong>$\tan x$（収束半径 $\frac\pi2$）・$\sin x$（整関数，収束半径 $\infty$）とも，$x\to0$ という極限では $x=0$ のごく近くだけを考えればよく，どちらの収束半径にも十分収まる。よってマクローリン展開をそのまま代入してよい。</p>
+      $$\tan x = x+\frac{x^3}3+\frac{2x^5}{15}+\cdots,\qquad \sin x = x-\frac{x^3}6+\frac{x^5}{120}-\cdots$$
+      <p>分子：</p>
+      $$\tan x-x = \frac{x^3}3+\frac{2x^5}{15}+\cdots = \frac{x^3}3+O(x^5)$$
+      <p>分母：</p>
+      $$x-\sin x = \frac{x^3}6-\frac{x^5}{120}+\cdots = \frac{x^3}6+O(x^5)$$
+      <p>比を取ると</p>
+      $$\frac{\tan x-x}{x-\sin x} = \frac{\dfrac{x^3}3+O(x^5)}{\dfrac{x^3}6+O(x^5)} = \frac{\dfrac13+O(x^2)}{\dfrac16+O(x^2)}$$
+      <p>（分子・分母を $x^3$ でくくって約分した。ここで $O(x^2)\to0$（$x\to0$）となることが約分後に極限を取れる根拠。）$x\to0$ のとき</p>
+      $$\lim_{x\to0}\frac{\tan x-x}{x-\sin x} = \frac{1/3}{1/6} = \boxed{2}$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点</div>
+      <p>「分子・分母を同じ次数まで展開する」の意味を具体的に言うと，<strong>両方とも最初にゼロでなくなる項（leading term）が明確になるまで</strong>展開する，ということ。まず確認すべきは，分子・分母それぞれの leading term が<strong>同じ次数</strong>（本問ではどちらも $x^3$）で現れるかどうか。もし次数がズレていたら（例えば分子が $x^3$，分母が $x^2$ から始まるなら），比を取ったときに $x\to0$ で $0$ になったり $\pm\infty$ に発散したりする。本問は両方とも $x^3$ の項で決着がつくので，$x^3$ でくくった後は $O(x^2)\to0$ となり，$x^5$ 以降の項は最初から書き下す必要すらない（無視してよい）。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 なぜ $x^5$ 以降を無視してよいのか</div>
+        <p>分子・分母を $x^3$ でくくった時点で，比の分子は $\frac13+(\text{$x^2$ 以上の項})$，分母は $\frac16+(\text{$x^2$ 以上の項})$ という形になる。$x\to0$ の極限を取るのはこの「くくった後」の式であり，残りの項は $x\to0$ ですべて $0$ に収束するから無視できる。つまり「必要な次数」とは，分子・分母の leading term が確定するまでの次数であって，それ以上の高次項は最初から計算しなくても結論に影響しない——これが「どこまで展開すればよいか」の判断基準になる。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 ロピタルの定理との比較</div>
+        <p>同じ極限をロピタルの定理で解こうとすると，$f(x)=\tan x-x$，$g(x)=x-\sin x$ に対して $f(0)=g(0)=0$，$f'(x)=\sec^2x-1$，$g'(x)=1-\cos x$，これも $x=0$ で共に $0$（$\frac00$ 型が継続）。$f''(x)=2\sec^2x\tan x$，$g''(x)=\sin x$，これもまた $x=0$ で共に $0$。3回目でようやく $f'''(0)=2$，$g'''(0)=1$ となり不定形が解消して比が $2$ に確定する。つまりロピタルでは3回の微分と，そのたびの $\frac00$ 型の確認が必要になる。テイラー展開なら，展開表さえ覚えていれば「$x^3$ の係数を比べるだけ」で同じ結論に達するため，見通しが良い。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①分子だけ高次（$x^5$）まで展開して分母を低次（$x^3$）で止めてしまい，次数の対応が崩れたまま比を取って誤答する，②$\tan x$ の展開の符号や係数（$+\frac{x^3}3$）を，$\sin x$ の展開（$-\frac{x^3}6$）と混同して符号を取り違える，③「同じ次数まで展開する」を「両方とも $x^5$ まで書けばよい」のように機械的に捉え，本当に必要な次数（本問では $x^3$ で十分）を見極めずに無駄な計算をする。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">3</span> 収束半径の外側でテイラー級数を代入する誤り
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★★☆</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$$\lim_{x\to2}\frac{\log(1+x)-\log3}{x-2}$$</p>
+      <p>を求めたい。</p>
+      <ol>
+        <li>$\log(1+x)$ のマクローリン級数（$x=0$ を中心とする展開）に $x=2$ を形式的に代入して求めようとするのがなぜ誤りか，収束半径の観点から説明せよ。</li>
+        <li>正しい方法でこの極限を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (1)</div>
+      <p>$\log(1+x)$ のマクローリン級数は</p>
+      $$\log(1+x) = \sum_{k=1}^{\infty}\frac{(-1)^{k-1}}{k}x^k = x-\frac{x^2}2+\frac{x^3}3-\cdots$$
+      <p>であり，この級数の収束半径は $1$ である（$|x|<1$ で絶対収束，$x=1$ で条件収束，$|x|>1$ では発散）。$x=2$ は $|x|=2>1$ であり，収束半径の<strong>外側</strong>に位置する。</p>
+      <p><strong>この手法が使えない理由：</strong>収束半径の外側では，この無限級数はそもそも収束せず（発散し），級数として意味のある実数値を持たない。したがって「級数に $x=2$ を代入する」という操作自体が数学的に無効であり，代入して出てくる（発散する）式を関数の値 $\log3$ の近似や計算に使うことはできない。「マクローリン級数だから $x=0$ から離れた点でも無条件に使ってよい」という思い込みが，この誤りの正体である。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 解答 (2)</div>
+      <p><strong>手法が使える理由：</strong>この極限は $\dfrac00$ の不定形であり（分子 $\log(1+x)-\log3\to0$，分母 $x-2\to0$，$x\to2$ で），かつ $f(x)=\log(1+x)$ は $x=2$ の近傍で何回でも微分可能，分母の導関数 $g'(x)=1$ は $0$ でない。よってロピタルの定理をそのまま適用してよい（マクローリン級数の収束半径とは無関係に，$x=2$ の近傍だけで完結する議論であることに注意）。</p>
+      $$\lim_{x\to2}\frac{\log(1+x)-\log3}{x-2} = \lim_{x\to2}\frac{\frac{d}{dx}\log(1+x)}{\frac{d}{dx}(x-2)} = \lim_{x\to2}\frac{\frac1{1+x}}{1} = \frac1{1+2} = \boxed{\frac13}$$
+      <p>（別の見方：この式はそもそも $f(x)=\log(1+x)$ の $x=2$ における微分係数の定義 $\displaystyle\lim_{x\to2}\frac{f(x)-f(2)}{x-2}=f'(2)$ そのものであり，$f'(x)=\frac1{1+x}$ より $f'(2)=\frac13$ と直接計算しても同じ結果になる。）</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点・背景（この番外編で最も重要な確認事項）</div>
+      <p>この問題の核心は，「テイラーの定理（有限次＋剰余項）」と「テイラー級数（無限和として関数の値そのものと等しいと主張すること）」の違いを明確に区別することにある。<strong>前者（テイラーの定理）は，関数がその点の近傍で $C^{n+1}$ 級でありさえすれば，評価点がどこであっても局所的な評価に使ってよい</strong>（有限次の多項式＋剰余項という主張であり，級数の収束・発散とは無関係）。一方，<strong>後者（無限級数として関数の値と等しいと主張する）は，収束半径の内部でしか正当化されない</strong>。演習第3回（<a href="yosou_calc_03.html" data-page="yosou/yosou_calc_03">yosou_calc_03.html 問4</a>）で扱った $\log(1+x^2)$ のマクローリン展開の収束半径の議論を思い出してほしい——あのときは代入後の変数 $x^2$ が収束半径 $|u|<1$ の内側に収まる範囲（$|x|<1$）でのみ展開が正当化されていた。本問の $x=2$ はまさにその範囲の外側にある。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 展開の中心から離れた点の値が欲しいときはどうするか</div>
+        <p>「展開の中心（$x=0$）から離れた点での関数の値・極限を知りたい」場合，$x=0$ を中心とする級数を無理に使い続けるのではなく，<strong>その点自身を新しい中心として微分係数を直接使う（＝ロピタルの定理や微分の定義に立ち返る）</strong>のが正しい一般的な対応である。実際，解答(2)では $x=0$ の情報を一切使わず，$x=2$ の近傍だけで完結する議論（ロピタルの定理，あるいは $x=2$ における微分係数の定義）に切り替えている。「級数の収束半径の外側に出たら，展開の中心を乗り換えるか，別の道具（微分の定義・ロピタルの定理）に頼る」という教訓は，この種の問題全般に応用できる。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 「級数として使えない」≠「関数として値を持たない」</div>
+        <p>誤解しやすい点として，「$x=0$ を中心とするマクローリン級数が $x=2$ で発散する」ことは，「$\log(1+x)$ という関数が $x=2$ で定義されない・値を持たない」ことを全く意味しない。$\log(1+x)$ は $x>-1$ で普通に定義され，微分可能な関数であり，$\log3$ という具体的な値も存在する。<strong>問題があるのは「特定の中心（$x=0$）まわりの級数表示」が $x=2$ という遠い点では通用しない，という表示方法の限界だけ</strong>であり，関数そのものの性質とは別問題である。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①収束半径を確認せずに「マクローリン展開だから」と無条件に級数を信頼して代入してしまう，②$x=1$（収束半径のちょうど境界で条件収束する点）と $x=2$（収束半径の外側で発散する点）を混同し，「境界に近いから多少のズレで済むはず」のように誤って判断してしまう，③「テイラーの定理」と「テイラー級数」を同じものだと思い込み，前者が持つ「収束半径によらない局所評価」という性質まで後者に混同して適用してしまう。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問4 -->
+<section class="section-card" id="problem4">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">4</span> ロピタルの定理が使えない（適用条件を満たさない）例
+    <span style="margin-left:auto; font-size:0.8rem; font-weight:600; color:#b45309;">難易度 ★★★★★</span>
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>$$\lim_{x\to\infty}\frac{x+\sin x}{x}$$</p>
+      <p>を求めよ。この極限にロピタルの定理を形式的に適用するとどうなるか調べ，その結果から何が結論できて何が結論できないかを論ぜよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>正しい計算：</strong></p>
+      $$\frac{x+\sin x}{x} = 1+\frac{\sin x}x$$
+      <p><strong>手法が使える理由：</strong>$\left|\dfrac{\sin x}x\right|\le\dfrac1x$（$x>0$ で $|\sin x|\le1$ より）であり，$\dfrac1x\to0$（$x\to\infty$）なので，はさみうちの原理（演習第1回で扱った道具）より $\dfrac{\sin x}x\to0$。はさみうちの原理は「振動する項を含む極限」でもロピタルの定理のような微分可能性の仮定を必要とせず，不等式評価だけで結論を出せる点が強み。よって</p>
+      $$\lim_{x\to\infty}\frac{x+\sin x}{x} = 1+0 = \boxed{1}$$
+      <p><strong>ロピタルの定理を形式的に適用すると：</strong>分子 $x+\sin x\to\infty$，分母 $x\to\infty$ なので $\frac\infty\infty$ 型の不定形である。分子の導関数は $1+\cos x$，分母の導関数は $1$。</p>
+      $$\frac{(x+\sin x)'}{x'} = \frac{1+\cos x}{1} = 1+\cos x$$
+      <p>$x\to\infty$ のとき $\cos x$ は $-1$ と $1$ の間を永遠に振動し続け，どこにも収束しない。すなわち<strong>導関数の比 $\dfrac{f'(x)}{g'(x)}=1+\cos x$ の極限は存在しない</strong>。</p>
+      <p><strong>ここから何が結論できて，何が結論できないか：</strong>ロピタルの定理の正確な主張は「$\lim f'/g'$ が存在すれば，$\lim f/g$ も存在してそれと一致する」という<strong>片方向の含意</strong>である。$f'/g'$ の極限が存在しないという今回の事実からは，<strong>定理の適用対象外になる（＝この定理からは何も結論できない）</strong>ことしか言えず，「$f/g$ の極限が存在しない」と結論することは論理的に誤りである。実際，原式の極限は上で示した通り明確に存在し $1$ に等しい。ロピタルの定理を形式的に適用して「振動するから極限なし」と早合点するのは，定理の逆（成り立たない主張）を使ってしまう典型的な誤りである。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考の出発点（ロピタルの定理の誤用への警鐘）</div>
+      <p>この問題は，微分積分学で非常に有名な「ロピタルの定理の誤用に対する警鐘」の典型例である。ロピタルの定理の3つの適用条件——①$\frac00$ または $\frac\infty\infty$ の不定形であること，②分子・分母が微分可能（分母の導関数が0でない）こと，③<strong>導関数の比の極限が存在する</strong>こと——のうち，本問は①・②は満たすが，③だけが満たされない。この場合，定理そのものが適用対象外になるのであって，「ロピタルが使えなかったから原式の極限は存在しない」という結論には決して至らない。この論理構造（「定理の逆は成り立たない」）を正確に理解しているかどうかが，この問題で最も試されているポイントである。</p>
+      <div class="backward-think">
+        <div class="bt-title">🔄 「反射的にロピタルを使う」習慣への警鐘</div>
+        <p>不定形（$\frac00$ や $\frac\infty\infty$）を見た瞬間に反射的にロピタルの定理を持ち出す解答習慣は，本問のような振動項を含む極限では通用しない，あるいは誤った印象を与えてしまう危険がある。本番の試験でこの種の極限（$\sin x$，$\cos x$ のような周期的に振動する項が分子・分母に混ざっている極限）を見たら，まず「ロピタルの定理の③（導関数比の極限の存在）が本当に満たされそうか」を一瞬立ち止まって考える価値がある。もし振動が疑われるなら，はさみうちの原理や，$1+\frac{\sin x}{x}$ のように式を分解して有界な振動項を分離する，といった別の道具に切り替えるべきである。</p>
+      </div>
+      <div class="insight-box">
+        <div class="insight-title">💡 はさみうちの原理という頼れる代替手段</div>
+        <p>本問のように「$x\to\infty$ で有界な振動項（$\sin x$，$\cos x$ など）を $x$ のような発散項で割ったり，発散項に加えたりする」形の極限は，ロピタルの定理より，はさみうちの原理（演習第1回の道具）の方が圧倒的に相性がよい。$|\sin x|\le1$ という有界性さえ分かれば，$\left|\frac{\sin x}{x}\right|\le\frac1x\to0$ という評価だけで議論が完結し，微分可能性やロピタルの適用条件を一切気にする必要がない。「振動する項が絡む不定形」を見たら，ロピタルより先に，まず有界性を使ったはさみうちが使えないかを検討する習慣をつけておくとよい。</p>
+      </div>
+      <p><strong>よくある間違い：</strong>①「ロピタルの定理を適用して極限が求まらなかった（振動した）ので，原式の極限も存在しない」と誤って結論する（定理の逆を使ってしまう誤り。本問全体で最も注意すべき点），②不定形であることだけを確認して，条件③（導関数比の極限の存在）を確認せずにロピタルの結果をそのまま答えとして採用してしまう，③$\frac{x+\sin x}{x}$ を $1+\frac{\sin x}{x}$ に分解する発想に至らず，複雑な形のまま無理にロピタルで押し切ろうとして行き詰まる。</p>
+      <p><strong>一般化・本番での対応：</strong>「不定形 $\Rightarrow$ ロピタル」という機械的な発想だけに頼らず，①式を分解・整理して既知の極限（$\frac{\sin x}x\to0$ など）に帰着できないか，②有界性を使ったはさみうちが使えないか，③ロピタルの定理の3条件（特に③）が本当に満たされているか，を毎回チェックする習慣が，期末試験本番で不定形の極限に出会ったときの安全な対応策になる。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>番外編（極限計算とその正当化）を自力で解けるかセルフチェック</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>「テイラーの定理（有限次＋剰余項）」と「テイラー級数（無限和として関数の値と等しい）」の違いを説明でき，前者は収束半径によらず局所的に使える一方，後者は収束半径の内部でしか正当化されないことを理解しているか</li>
+          <li>ある関数のマクローリン級数の収束半径を求め，代入したい値がその内部にあるかどうかを毎回確認する習慣がついているか</li>
+          <li>展開の中心から離れた点での関数の値・極限が欲しいとき，級数を無理に使い続けず，微分の定義やロピタルの定理に立ち返る判断ができるか</li>
+          <li>ロピタルの定理の3つの適用条件（不定形・微分可能性・導関数比の極限の存在）をすべて言えるか</li>
+          <li>ロピタルの定理を複数回連続で適用するとき，そのたびに「現在の分数が不定形かどうか」を確認しているか</li>
+          <li>導関数比の極限が存在しない場合，原式の極限の存在・非存在について何も結論できないことを理解しているか（定理の逆は成り立たない）</li>
+          <li>テイラー展開で極限を求めるとき，分子・分母の leading term が同じ次数で現れるかを先に確認し，必要な次数まで（それ以上でも以下でもなく）展開できるか</li>
+          <li>振動する項（$\sin x$，$\cos x$ など）を含む不定形の極限で，ロピタルではなくはさみうちの原理を使う判断ができるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+</div><!-- /container -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

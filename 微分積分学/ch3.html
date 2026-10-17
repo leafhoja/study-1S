@@ -1,0 +1,489 @@
+<!DOCTYPE html><!-- 「Ch.3 無限級数 — 微分積分学①」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#08442d">
+  <title>Ch.3 無限級数 — 微分積分学①</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="ch3">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">微分積分学①</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="ch1.html" data-page="ch1">Ch.1</a>
+      <a href="ch2.html" data-page="ch2">Ch.2</a>
+      <a href="ch3.html" data-page="ch3" class="active">Ch.3</a>
+      <a href="ch4.html" data-page="ch4">Ch.4</a>
+      <a href="ch5.html" data-page="ch5">Ch.5</a>
+      <a href="ch6.html" data-page="ch6">Ch.6</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm">
+  <h1>Ch.3 無限級数</h1>
+  <p class="subtitle">講義日: 6/16・6/23 — 収束・発散の判定法</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#definition">定義と基本</a>
+    <a href="#necessary">収束の必要条件</a>
+    <a href="#positive">正項級数の判定</a>
+    <a href="#ratio">比判定法</a>
+    <a href="#root">n乗根判定法</a>
+    <a href="#absolute">絶対収束と条件収束</a>
+    <a href="#alternating">交代級数</a>
+  </div>
+
+  <!-- 定義 -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="definition">
+    <div class="sec-header">
+      <div class="sec-tag">Definition</div>
+      <h2>無限級数の定義</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="mot">
+        <span class="box-label">動機</span>
+        <p>
+          「無限に足し続けた和」は、そのまま計算できない。だから<strong>部分和の極限</strong>として定義する。
+          $S_n = a_1+a_2+\cdots+a_n$（第 $n$ 部分和）を計算し、$n\to\infty$ での極限が存在するかを調べる。
+        </p>
+        <p>
+          直感的には、「足す数がどんどん小さくなり、合計がある値に近づく」ときに収束するが、
+          これは必要条件に過ぎない（後述）。
+        </p>
+      </div>
+
+      <div class="def">
+        <span class="box-label">定義 3.1　無限級数の収束</span>
+        <p>数列 $\{a_n\}$ に対して $S_n = \displaystyle\sum_{k=1}^n a_k$ とおく。</p>
+        <p>$\lim_{n\to\infty} S_n = S$ が存在するとき、級数 $\displaystyle\sum_{n=1}^\infty a_n$ は $S$ に<strong>収束する</strong>という。</p>
+        <p>$\lim_{n\to\infty} S_n$ が存在しないとき、<strong>発散する</strong>という。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 3.1　等比級数</span>
+        <p>$\displaystyle\sum_{n=0}^\infty r^n$ は $|r|<1$ のとき $\dfrac{1}{1-r}$ に収束し、$|r|\ge 1$ のとき発散する。</p>
+        <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+          <summary>確認</summary>
+          <div class="proof-body">
+            <p>$S_n = 1+r+\cdots+r^{n-1}=\dfrac{1-r^n}{1-r}$（$r\ne 1$）。$|r|<1$ なら $r^n\to 0$ なので $S_n\to\dfrac{1}{1-r}$。</p>
+            <p>
+              $|r|\ge 1$ のとき発散することも確認する。$r=1$ のときは $S_n=n\to\infty$ で発散。
+              $r=-1$ のときは $S_n$ が $1,0,1,0,\ldots$ を繰り返し極限が存在しないので発散（振動）。
+              $|r|>1$ のときは $|r^n|\to\infty$ なので $S_n=\dfrac{1-r^n}{1-r}$ も有界に収まらず発散する
+              （$r>1$ なら単調に $+\infty$、$r<-1$ なら符号を交互に変えながら絶対値が増大する振動発散）。$\blacksquare$
+            </p>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 収束の必要条件 -->
+  <div class="section" id="necessary">
+    <div class="sec-header">
+      <div class="sec-tag">Warning</div>
+      <h2>収束の必要条件と調和級数</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="prop">
+        <span class="box-label">命題 3.2　収束の必要条件</span>
+        <p>$\displaystyle\sum_{n=1}^\infty a_n$ が収束するならば $\lim_{n\to\infty} a_n = 0$。</p>
+        <details>
+          <summary>証明</summary>
+          <div class="proof-body">
+            <p>$S_n\to S$ とすると $a_n = S_n - S_{n-1} \to S - S = 0$。$\blacksquare$</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">逆は成り立たない — 調和級数</span>
+        <p>$a_n\to 0$ であっても発散しうる。典型例：</p>
+        $$\sum_{n=1}^\infty \frac{1}{n} = 1+\frac{1}{2}+\frac{1}{3}+\cdots = +\infty.$$
+        <details>
+          <summary>証明（群分け法）</summary>
+          <div class="proof-body">
+            <p>各グループで以下の評価を行う：</p>
+            $$\frac{1}{2} \ge \frac{1}{2}, \quad
+            \frac{1}{3}+\frac{1}{4} \ge \frac{1}{4}+\frac{1}{4}=\frac{1}{2}, \quad
+            \frac{1}{5}+\cdots+\frac{1}{8} \ge \frac{4}{8}=\frac{1}{2}, \ldots$$
+            <p>第 $2^n$ 項までの部分和 $\ge 1+\dfrac{n}{2}\to\infty$。$\blacksquare$</p>
+          </div>
+        </details>
+        <p>$\dfrac{1}{n}\to 0$ なのに級数は発散する。
+        <em>「一般項が 0 に近づく」は収束の十分条件ではない。</em></p>
+      </div>
+
+      <div class="hist">
+        <span class="box-label">歴史的背景 — 調和級数の発散は微積分より400年古い</span>
+        <p>
+          この発散の証明は、実は微分積分学が確立する遥か以前、14世紀半ばのフランスの学者ニコル・オレームによって与えられていた（1350年頃、『ユークリッド幾何学問題集』所収）。
+          そこで使われている「グループ分けして各グループを $1/2$ 以上で押さえる」という論法は、まさに上の証明そのものだ。ただしオレームの証明は写本のまま長らく忘れられていた。
+          近代的な文脈で最初に公表された証明は、1650年にイタリアの数学者ピエトロ・メンゴリが（オレームの仕事とは無関係に）独立に与えたものだ。
+          「一般項が0に近づくのに発散する」という直感に反する事実は、700年近く数学者を惹きつけ続けている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 正項級数 -->
+  <div class="section" id="positive">
+    <div class="sec-header">
+      <div class="sec-tag">Test</div>
+      <h2>正項級数の判定法</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 3.3　正項級数</span>
+        <p>$a_n \ge 0$ をすべての $n$ について満たすとき、$\displaystyle\sum a_n$ を<strong>正項級数</strong>という。</p>
+        <p>正項級数では部分和 $S_n$ が単調増加なので、「上に有界 $\Leftrightarrow$ 収束」が成り立つ。</p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 3.4　比較判定法</span>
+        <p>$0 \le a_n \le b_n$ のとき：</p>
+        <ul>
+          <li>$\displaystyle\sum b_n$ が収束するならば $\displaystyle\sum a_n$ も収束する。</li>
+          <li>$\displaystyle\sum a_n$ が発散するならば $\displaystyle\sum b_n$ も発散する。</li>
+        </ul>
+      </div>
+
+      <details>
+        <summary>証明を見る</summary>
+        <div class="proof-body">
+          <p>$A_n=\displaystyle\sum_{k=1}^n a_k$、$B_n=\displaystyle\sum_{k=1}^n b_k$ とおく。$a_k,b_k\ge 0$ より $A_n,B_n$ はともに単調増加で、$0\le a_k\le b_k$ から $A_n\le B_n$。</p>
+          <p>
+            $\sum b_n$ が収束するとき $B_n\to B$（有界）なので $A_n\le B_n\le B$。$A_n$ は単調増加かつ上に有界だから収束する
+            （有界な単調数列は収束するという実数の基本性質による）。
+          </p>
+          <p>
+            後半は前半の対偶：$\sum a_n$ が発散するのに $\sum b_n$ が収束すると仮定すると、前半の結果から $\sum a_n$ も収束してしまい矛盾。$\blacksquare$
+          </p>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 3.2　$\sum \frac{1}{n^2}$</span>
+        <p>$\dfrac{1}{n^2} \le \dfrac{1}{n(n-1)} = \dfrac{1}{n-1}-\dfrac{1}{n}$（$n\ge 2$）より、比較判定法で収束する。</p>
+        <p>実際の値：$\displaystyle\sum_{n=1}^\infty \frac{1}{n^2} = \frac{\pi^2}{6}$（バーゼル問題）。</p>
+      </div>
+
+      <div class="hist">
+        <span class="box-label">歴史的背景 — 90年間誰も解けなかったバーゼル問題</span>
+        <p>
+          $\sum 1/n^2=\pi^2/6$ という結果は「バーゼル問題」と呼ばれる。1644年にピエトロ・メンゴリが提起してから、ヤコブ・ベルヌーイやライプニッツ、スターリング、ド・モアブルら当時一流の数学者たちが挑んでも厳密な値は求まらず、約90年間未解決のままだった。
+          1734年（発表は1735年、サンクトペテルブルク科学アカデミーで報告）、レオンハルト・オイラーが $\sin x$ を無限次の多項式のように因数分解するという大胆な発想で $\pi^2/6$ を導いた。
+          この手法は当時まだ厳密には正当化されておらず（無限積を有限多項式と同じように扱ってよいかという問題が残っていた）、後年になって厳密化されている。
+        </p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">定理 3.5　積分判定法</span>
+        <p>$f(x)$ が $[1,\infty)$ で正値・単調減少・連続とする。このとき</p>
+        $$\sum_{n=1}^\infty f(n) \text{ が収束} \;\Longleftrightarrow\; \int_1^\infty f(x)\,dx \text{ が収束}.$$
+      </div>
+
+      <details>
+        <summary>証明を見る（面積による評価）</summary>
+        <div class="proof-body">
+          <p>
+            $f$ は単調減少なので、$n\le x\le n+1$ のとき $f(n+1)\le f(x)\le f(n)$。これを $[n,n+1]$ で積分すると
+          </p>
+          $$f(n+1) \le \int_n^{n+1} f(x)\,dx \le f(n).$$
+          <p>$n=1,2,\ldots,N-1$ について足し合わせると</p>
+          $$\sum_{n=2}^{N} f(n) \;\le\; \int_1^{N} f(x)\,dx \;\le\; \sum_{n=1}^{N-1} f(n).$$
+          <p>
+            $f\ge 0$ なので $\int_1^N f(x)\,dx$ は $N$ について単調増加。この不等式から、
+            級数の部分和 $\displaystyle\sum_{n=1}^N f(n)$ と積分 $\displaystyle\int_1^N f(x)\,dx$ は、片方が有界（収束）なら他方も有界（収束）になることが分かる。
+            どちらも単調増加なので、有界性と収束性は同値。$\blacksquare$
+          </p>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 3.3　$p$ 級数</span>
+        <p>積分判定法より：$\displaystyle\sum_{n=1}^\infty \dfrac{1}{n^p}$ は $p>1$ のとき収束、$p\le 1$ のとき発散。</p>
+        <details>
+          <summary>確認</summary>
+          <div class="proof-body">
+            <p>$\displaystyle\int_1^\infty x^{-p}\,dx = \left[\frac{x^{1-p}}{1-p}\right]_1^\infty$（$p\ne 1$）。</p>
+            <p>$p>1$ なら $x^{1-p}\to 0$ なので収束、$p<1$ なら $x^{1-p}\to\infty$ なので発散。$p=1$ のとき $\int_1^\infty \frac{1}{x}\,dx = [\log x]_1^\infty=\infty$。$\blacksquare$</p>
+          </div>
+        </details>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 比判定法 -->
+  <div class="section" id="ratio">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>比判定法（ダランベールの判定法）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 3.6　比判定法</span>
+        <p>$a_n > 0$ とし、$\ell = \lim_{n\to\infty}\dfrac{a_{n+1}}{a_n}$ が存在するとする。</p>
+        <ul>
+          <li>$\ell < 1$ ならば収束する。</li>
+          <li>$\ell > 1$ ならば発散する。</li>
+          <li>$\ell = 1$ ならばこの判定法では判断できない。</li>
+        </ul>
+      </div>
+
+      <div class="mot">
+        <span class="box-label">直感</span>
+        <p>
+          $\ell < 1$ のとき、$n$ が十分大きければ毎回 $\ell$ 倍ずつ縮んでいく。つまり等比級数 $\sum \ell^n$ で上から抑えられ、収束する。逆に $\ell > 1$ なら項が増えていくので発散する。
+        </p>
+        <p>
+          $\ell = 1$ の場合は判断できない。実際、$\sum \frac{1}{n}$（発散）も $\sum \frac{1}{n^2}$（収束）も $\ell = 1$ になる。
+        </p>
+      </div>
+
+      <details>
+        <summary>証明を見る</summary>
+        <div class="proof-body">
+          <p>
+            <strong>$\ell<1$ のとき：</strong>$\ell&lt;r<1$ となる $r$ を1つ取る。$a_{n+1}/a_n\to\ell$ より、ある $N$ が存在して
+            $n\ge N$ ならば $a_{n+1}/a_n < r$。このとき $n>N$ に対して
+          </p>
+          $$a_n = a_N\cdot\frac{a_{N+1}}{a_N}\cdot\frac{a_{N+2}}{a_{N+1}}\cdots\frac{a_n}{a_{n-1}} < a_N\, r^{\,n-N}.$$
+          <p>
+            右辺は等比級数 $\sum r^{n-N}$（$r<1$ より収束）の一般項の定数倍なので、比較判定法（定理3.4）より $\sum_{n>N} a_n$ は収束し、有限個の項を除いた収束性は全体の収束性と同じなので $\sum a_n$ も収束する。
+          </p>
+          <p>
+            <strong>$\ell>1$ のとき：</strong>同様にある $N$ が存在して $n\ge N$ ならば $a_{n+1}/a_n>1$、つまり $a_{n+1}>a_n$。
+            よって $n\ge N$ で $\{a_n\}$ は単調増加であり、正の値から増加し続けるので $a_n\to 0$ となることはない。
+            収束の必要条件（命題3.2）の対偶より $\sum a_n$ は発散する。$\blacksquare$
+          </p>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 3.4　$\sum \dfrac{n!}{n^n}$</span>
+        <p>比を計算する：</p>
+        $$\frac{a_{n+1}}{a_n} = \frac{(n+1)!}{(n+1)^{n+1}} \cdot \frac{n^n}{n!}
+        = \frac{n^n}{(n+1)^n} = \left(\frac{n}{n+1}\right)^n = \frac{1}{\left(1+\frac{1}{n}\right)^n} \to \frac{1}{e} < 1.$$
+        <p>よって収束する。$\ell = 1/e \approx 0.368$。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 3.5　$\sum \dfrac{x^n}{n!}$ （$x$ は任意の実数）</span>
+        <p>$\dfrac{|x|^{n+1}/(n+1)!}{|x|^n/n!} = \dfrac{|x|}{n+1} \to 0 < 1$。</p>
+        <p>よってすべての $x$ について収束する（$e^x$ の展開が全実数で成立することの根拠）。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- n乗根判定法 -->
+  <div class="section" id="root">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>$n$ 乗根判定法（コーシーの判定法）</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 3.7　$n$ 乗根判定法</span>
+        <p>$a_n \ge 0$ とし、$\ell = \lim_{n\to\infty} \sqrt[n]{a_n}$ が存在するとする。</p>
+        <ul>
+          <li>$\ell < 1$ ならば収束する。</li>
+          <li>$\ell > 1$ ならば発散する。</li>
+          <li>$\ell = 1$ ならばこの判定法では判断できない。</li>
+        </ul>
+      </div>
+
+      <details>
+        <summary>証明を見る（比判定法と同じ発想）</summary>
+        <div class="proof-body">
+          <p>
+            <strong>$\ell<1$ のとき：</strong>$\ell&lt;r<1$ となる $r$ を取ると、ある $N$ が存在して $n\ge N$ ならば $\sqrt[n]{a_n}&lt;r$、
+            すなわち $a_n < r^n$。等比級数 $\sum r^n$（$r<1$）は収束するので、比較判定法より $\sum a_n$ も収束する。
+          </p>
+          <p>
+            <strong>$\ell>1$ のとき：</strong>ある $N$ が存在して $n\ge N$ ならば $\sqrt[n]{a_n}>1$、すなわち $a_n>1$。
+            よって $a_n\to 0$ とはならず、収束の必要条件（命題3.2）の対偶より発散する。$\blacksquare$
+          </p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">比判定法との使い分け</span>
+        <p>
+          $a_n$ の形に $n$ 乗が含まれている場合は $n$ 乗根判定法が計算しやすい。
+          $a_n$ に階乗 $n!$ が含まれている場合は比判定法が計算しやすい。
+          どちらも $\ell=1$ では判断できないのが弱点。
+        </p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 3.6　$\sum \left(\dfrac{n}{2n+1}\right)^n$</span>
+        <p>$\sqrt[n]{a_n} = \dfrac{n}{2n+1} \to \dfrac{1}{2} < 1$。</p>
+        <p>よって収束する。</p>
+      </div>
+
+      <div class="ex">
+        <span class="box-label">例 3.7　$\sum n^n x^n$（$x>0$）</span>
+        <p>$\sqrt[n]{a_n} = n|x| \to \infty$（$x\ne 0$ なら）なので発散する（$x=0$ は自明に収束）。</p>
+        <p>べき級数としての収束半径は $R=0$（後のCh.4で扱う）。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 絶対収束と条件収束 -->
+  <div class="section" id="absolute">
+    <div class="sec-header">
+      <div class="sec-tag">Definition</div>
+      <h2>絶対収束と条件収束</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">定義 3.8　絶対収束・条件収束</span>
+        <ul>
+          <li>$\displaystyle\sum_{n=1}^\infty |a_n|$ が収束するとき、$\displaystyle\sum a_n$ は<strong>絶対収束する</strong>という。</li>
+          <li>$\displaystyle\sum a_n$ は収束するが $\displaystyle\sum |a_n|$ は発散するとき、<strong>条件収束する</strong>という。</li>
+        </ul>
+      </div>
+
+      <div class="prop">
+        <span class="box-label">命題 3.9　絶対収束ならば収束</span>
+        <p>$\displaystyle\sum |a_n|$ が収束するならば $\displaystyle\sum a_n$ も収束する。</p>
+        <details>
+          <summary>証明の概略</summary>
+          <div class="proof-body">
+            <p>$b_n = |a_n|+a_n \ge 0$ とおくと $b_n \le 2|a_n|$。</p>
+            <p>$\sum |a_n|$ が収束するから $\sum b_n$ も収束（比較判定法）。
+            $a_n = b_n - |a_n|$ より $\sum a_n$ も収束する。$\blacksquare$</p>
+          </div>
+        </details>
+      </div>
+
+      <div class="warn">
+        <span class="box-label">条件収束の注意 — リーマンの定理</span>
+        <p>
+          条件収束する級数は項の並べ替えによって任意の値に収束させられる（リーマンの再配列定理）。
+          これは非常に反直感的だ。絶対収束する場合は並べ替えても値が変わらない。
+        </p>
+        <p>
+          このため、数学的に扱いやすいのは<strong>絶対収束</strong>する場合に限られる。条件収束の扱いには常に注意が必要だ。
+        </p>
+      </div>
+
+      <div class="hist">
+        <span class="box-label">歴史的背景 — リーマンの再配列定理</span>
+        <p>
+          条件収束する級数の並べ替えでどんな値にも収束させられるという事実を証明したのは、ベルンハルト・リーマン（1826–1866）だ。
+          フーリエ級数に関する教授資格論文（1853年頃に完成）の一部として示されたが、リーマン自身は1866年に39歳で早世してしまい、この結果が公表されたのは友人リヒャルト・デーデキントの手によって1867年、彼の死後のことだった。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 交代級数 -->
+  <div class="section" id="alternating">
+    <div class="sec-header">
+      <div class="sec-tag">Theorem</div>
+      <h2>交代級数とライプニッツの定理</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="thm">
+        <span class="box-label">定理 3.10　ライプニッツの定理</span>
+        <p>$\{a_n\}$ が単調減少列で $a_n > 0$, $a_n\to 0$ を満たすとき、交代級数</p>
+        $$\sum_{n=1}^\infty (-1)^{n-1} a_n = a_1 - a_2 + a_3 - a_4 + \cdots$$
+        <p>は収束する。また誤差評価：部分和 $S_n$ による誤差 $|S-S_n| \le a_{n+1}$。</p>
+      </div>
+
+      <details>
+        <summary>証明を見る（偶数番目・奇数番目の部分和を挟み撃ちにする）</summary>
+        <div class="proof-body">
+          <p>偶数番目の部分和 $S_{2n}=\displaystyle\sum_{k=1}^{2n}(-1)^{k-1}a_k$ を考える。</p>
+          <p><strong>$S_{2n}$ は単調増加：</strong></p>
+          $$S_{2n+2}-S_{2n} = a_{2n+1}-a_{2n+2} \ge 0 \quad (\{a_n\}\text{ が単調減少なので}).$$
+          <p><strong>$S_{2n}$ は上に有界：</strong>$S_{2n}$ をペアに区切り直すと</p>
+          $$S_{2n} = a_1-(a_2-a_3)-(a_4-a_5)-\cdots-(a_{2n-2}-a_{2n-1})-a_{2n} \le a_1$$
+          <p>（各括弧内 $a_{2k}-a_{2k+1}\ge 0$ なので、引く量はすべて非負）。</p>
+          <p>
+            $S_{2n}$ は単調増加かつ上に有界なので収束する：$S_{2n}\to S$（実数の連続性による）。
+            奇数番目の部分和は $S_{2n+1}=S_{2n}+a_{2n+1}$ であり、$a_{2n+1}\to 0$ なので $S_{2n+1}\to S+0=S$。
+          </p>
+          <p>偶数番目・奇数番目どちらの部分列も同じ極限 $S$ に収束するので、$S_n\to S$（全体の部分和が収束）。</p>
+          <p>
+            <strong>誤差評価：</strong>$S_{2n}$ は単調増加で $S$ に収束し、$S_{2n+1}$ は単調減少で $S$ に収束するので、
+            $S$ は常に $S_n$ と $S_{n+1}$ の間にある。よって $|S-S_n|\le |S_{n+1}-S_n|=a_{n+1}$。$\blacksquare$
+          </p>
+        </div>
+      </details>
+
+      <div class="ex">
+        <span class="box-label">例 3.8　$\sum \dfrac{(-1)^{n-1}}{n} = 1-\dfrac{1}{2}+\dfrac{1}{3}-\cdots = \log 2$</span>
+        <p>ライプニッツの定理より収束する（$a_n=\frac{1}{n}$ は単調減少で $0$ に収束）。</p>
+        <p>しかし $\sum \dfrac{1}{n}$ は発散するので、これは<strong>条件収束</strong>の例。</p>
+        <p>収束値 $\log 2$ はCh.4で $\log(1+x)$ のテーラー展開に $x=1$ を代入することで得られる。</p>
+      </div>
+
+      <div class="note">
+        <span class="box-label">判定法まとめ</span>
+        <table class="axiom-table">
+          <tr><th>判定法</th><th>適用場面</th><th>$\ell=1$</th></tr>
+          <tr><td>比較判定法</td><td>既知の収束・発散級数と比べられるとき</td><td>—</td></tr>
+          <tr><td>積分判定法</td><td>$f(n)$ が単調減少の正関数のとき</td><td>—</td></tr>
+          <tr><td>比判定法</td><td>$a_n$ に $n!$ や指数が含まれる</td><td>判断不可</td></tr>
+          <tr><td>$n$ 乗根判定法</td><td>$a_n$ に $n$ 乗が含まれる</td><td>判断不可</td></tr>
+          <tr><td>ライプニッツ</td><td>交代級数 $\sum(-1)^n a_n$</td><td>—</td></tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:space-between; margin-top:2rem; padding:0 .5rem;">
+    <a href="ch2.html" style="color:var(--accent); text-decoration:none; font-weight:700;">← Ch.2 テーラーの定理</a>
+    <a href="ch4.html" style="color:var(--accent); text-decoration:none; font-weight:700;">Ch.4 べき級数と収束半径 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">微分積分学①（河野俊丈）ー2026前期課程S2ターム</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

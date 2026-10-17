@@ -1,0 +1,365 @@
+<!DOCTYPE html><!-- 「第4章 万有引力とケプラーの法則 | 力学A 講義ノート」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第4章 万有引力とケプラーの法則 | 力学A 講義ノート</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        tags: 'ams'
+      },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="n4">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">力学A 講義ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html">トップ</a>
+      <a href="n1.html" data-page="n1">第1章</a>
+      <a href="n2.html" data-page="n2">第2章</a>
+      <a href="n3.html" data-page="n3">第3章</a>
+      <a href="n4.html" data-page="n4" class="active">第4章</a>
+      <a href="n5.html" data-page="n5">第5章</a>
+      <a href="n6.html" data-page="n6">第6章</a>
+      <a href="kakomon_2020.html" data-page="kakomon_2020">2020</a>
+      <a href="kakomon_2021.html" data-page="kakomon_2021">2021</a>
+      <a href="kakomon_2022.html" data-page="kakomon_2022">2022</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2024.html" data-page="kakomon_2024">2024</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>第4章　万有引力とケプラーの法則</h1>
+  <p class="subtitle">軌道方程式の導出・円錐曲線・エネルギーによる軌道の分類</p>
+  <p class="meta">講義ノート §6 にもとづく（「今回後半が重要」との書き込みあり）</p>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <strong>この章について</strong><br>
+    万有引力のもとで運動する質点（惑星）の軌道が，なぜ楕円（あるいは放物線・双曲線）になるのかを，
+    第2・3章で準備した「保存力・ポテンシャル」「極座標での運動方程式」を武器にして導出する。
+    ケプラーの３法則すべてが，たった１つの運動方程式から導かれることを見る。
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#s1">1. 万有引力とケプラーの3法則</a>
+    <a href="#s2">2. 運動方程式（第2法則）</a>
+    <a href="#s3">3. 軌道の方程式（第1法則）</a>
+    <a href="#s4">4. 周期（第3法則）</a>
+    <a href="#s5">5. エネルギーによる軌道の分類</a>
+    <a href="#s6">6. 円軌道近傍の微小振動</a>
+  </div>
+
+  <!-- =================== §1 =================== -->
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="s1">
+    <div class="sec-header">
+      <div class="sec-tag">Section 1</div>
+      <h2>万有引力とケプラーの3法則</h2>
+    </div>
+    <div class="sec-body">
+
+      <div class="def">
+        <span class="box-label">万有引力の法則</span>
+        <p>質量 $m$ の質点と質量 $M$ の質点（距離 $r$）の間には，引力</p>
+        $$|\mathbb F| = G\frac{mM}{r^2}$$
+        <p>がはたらく（$G$：万有引力定数）。これは第2章の意味で中心力であり，したがって保存力である。</p>
+      </div>
+
+      <div class="thm">
+        <span class="box-label">ケプラーの3法則</span>
+        <ol>
+          <li>惑星の軌道は，太陽を１つの焦点とする<strong>楕円</strong>である。</li>
+          <li><strong>面積速度</strong>（単位時間に動径が掃く面積）は一定である。</li>
+          <li>公転周期の２乗は，軌道の長半径の３乗に比例する：$(\text{周期})^2\propto(\text{長半径})^3$。</li>
+        </ol>
+      </div>
+
+      <p>
+        惑星の位置を，太陽を原点とする極座標 $(r,\varphi,z)$（$xy$平面内の運動として $z$ 方向は考えなくてよい）
+        で表す。第3章の極座標での運動方程式を使うと：
+      </p>
+      <div class="mathblock">
+        $$\begin{cases}
+        m(\ddot r - r\dot\varphi^2) = -\dfrac{GmM}{r^2} & (r\text{方向})\\[6pt]
+        m(2\dot r\dot\varphi + r\ddot\varphi) = 0 & (\varphi\text{方向})\\[4pt]
+        m\ddot z = 0 & \Rightarrow z\text{方向は考慮しなくてよい}
+        \end{cases}$$
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §2 =================== -->
+  <div class="section" id="s2">
+    <div class="sec-header">
+      <div class="sec-tag">Section 2</div>
+      <h2>第2法則：面積速度一定</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>$\varphi$方向の式 $2\dot r\dot\varphi+r\ddot\varphi=0$ の両辺を $r$ で割ると：</p>
+      <div class="mathblock">
+        $$\frac1r\frac{d}{dt}(r^2\dot\varphi) = 0 \quad\Longrightarrow\quad r^2\dot\varphi = h\ (\text{一定})$$
+      </div>
+      <p>
+        図形的には，微小時間 $dt$ の間に動径ベクトルが掃く面積は $dS=\frac12 r\cdot r\,d\varphi=\frac12r^2\dot\varphi\,dt$
+        なので，面積速度 $\dfrac{dS}{dt}=\dfrac12 r^2\dot\varphi=\dfrac h2$ は一定 —— これがケプラーの第2法則である。
+        （$h$ は，質量で割った角運動量 $mr^2\dot\varphi$ に等しい。）
+      </p>
+
+    </div>
+  </div>
+
+  <!-- =================== §3 =================== -->
+  <div class="section" id="s3">
+    <div class="sec-header">
+      <div class="sec-tag">Section 3</div>
+      <h2>第1法則：軌道の方程式（楕円軌道の導出）</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        万有引力は保存力であり，そのポテンシャルは $U(r)=-\dfrac{GmM}{r}$（第2章の定義に基づいて計算できる）。
+        力学的エネルギー保存則：
+      </p>
+      <div class="mathblock">
+        $$\frac12m\left(\dot r^2+(r\dot\varphi)^2\right) - \frac{GmM}{r} = E \quad\cdots(0)$$
+      </div>
+      <p>第2法則 $r^2\dot\varphi=h$（一定）$\cdots(1)$ を使って $\dot\varphi=h/r^2$ を(0)に代入すると：</p>
+      <div class="mathblock">
+        $$\frac12m\dot r^2 + \frac{mh^2}{2r^2} - \frac{GmM}{r} = E \quad\cdots(2)$$
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details open>
+        <summary>導出：軌道の方程式 $r=r(\varphi)$ を求める</summary>
+        <div class="proof-body">
+          <p>(1)から $\dot\varphi^2=h^2/r^4$，(2)から $\dot r^2 = \dfrac{2E}m+\dfrac{2GM}r-\dfrac{h^2}{r^2}$ が出るので，比をとると：</p>
+          <div class="mathblock">
+            $$\left(\frac{dr}{d\varphi}\right)^2 = \frac{\dot r^2}{\dot\varphi^2}
+            = \frac{r^4}{h^2}\left(\frac{2E}m+\frac{2GM}r-\frac{h^2}{r^2}\right)$$
+          </div>
+          <p>
+            ここで $u\equiv 1/r$ という変数に置き換える（$\dfrac{du}{d\varphi}=-\dfrac1{r^2}\dfrac{dr}{d\varphi}$ に注意）：
+          </p>
+          <div class="mathblock">
+            $$\left(\frac{du}{d\varphi}\right)^2 \equiv u'^2 = \frac{2E}{mh^2} + \frac{2GM}{h^2}u - u^2$$
+          </div>
+          <p>両辺を $\varphi$ でもう一度微分すると（$u'\ne0$ として両辺を $2u'$ で割る）：</p>
+          <div class="mathblock">
+            $$2u'u'' = \frac{2GM}{h^2}u' - 2uu' \quad\Longrightarrow\quad u'' + u = \frac{GM}{h^2} \equiv \frac1\ell$$
+          </div>
+          <p>
+            （$\ell\equiv h^2/(GM)$ とおいた。）これは第1章でみた「２階線形非斉次微分方程式」であり，
+            斉次解は $\cos\varphi,\sin\varphi$，特解は定数 $1/\ell$ だから，一般解は：
+          </p>
+          <div class="mathblock">$$u = A\cos(\varphi+\alpha) + \frac1\ell$$</div>
+          <p>
+            これを $u'^2=\frac{2E}{mh^2}+\frac{2GM}{h^2}u-u^2$ に戻して代入すると（$\psi\equiv\varphi+\alpha$ とおき，
+            $GM/h^2=1/\ell$ に注意すれば），$\psi$ に依存する項がすべて消えて：
+          </p>
+          <div class="mathblock">$$A^2 = \frac{2E}{mh^2}+\frac1{\ell^2} \quad\Longrightarrow\quad A = \sqrt{\frac{2E}{mh^2}+\frac1{\ell^2}}$$</div>
+        </div>
+        <div class="qed">∎</div>
+      </details>
+
+      <div class="thm">
+        <span class="box-label">軌道の方程式</span>
+        $$\boxed{r = \frac{\ell}{1+e\cos(\varphi+\alpha)}}, \qquad \ell = \frac{h^2}{GM},\quad e\equiv \ell A = \ell\sqrt{\frac{2E}{mh^2}+\frac1{\ell^2}}$$
+        <p>
+          これは，離心率 $e$ の<strong>円錐曲線</strong>の極座標表示に他ならない（$0\le e<1$ で楕円，$e=1$ で放物線，
+          $e>1$ で双曲線 —— §5 で詳しく分類する）。すなわち，惑星（束縛された天体）の軌道はケプラーの第1法則の通り，
+          太陽を焦点の１つとする楕円になる。長半径・短半径は：
+        </p>
+        $$(\text{長半径}) = \frac{\ell}{1-e^2}, \qquad (\text{短半径}) = \frac{\ell}{\sqrt{1-e^2}}$$
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §4 =================== -->
+  <div class="section" id="s4">
+    <div class="sec-header">
+      <div class="sec-tag">Section 4</div>
+      <h2>第3法則：周期</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        面積速度 $\dfrac{dS}{dt}=\dfrac12 r^2\dot\varphi = \dfrac h2$（一定）なので，１周期 $T$ の間に掃く全面積は：
+      </p>
+      <div class="mathblock">$$S = \int_0^T \frac h2\,dt = \frac{hT}{2}$$</div>
+      <p>一方，楕円の面積は $S=\pi\times(\text{長半径})\times(\text{短半径}) = \pi\cdot\dfrac{\ell}{1-e^2}\cdot\dfrac{\ell}{\sqrt{1-e^2}}=\dfrac{\pi\ell^2}{(1-e^2)^{3/2}}$。よって：</p>
+      <div class="mathblock">
+        $$T = \frac{2S}{h} = \frac{2\pi\ell^2}{h(1-e^2)^{3/2}}$$
+      </div>
+      <p>$\ell=h^2/(GM)$，すなわち $h=\sqrt{GM\ell}$ を代入して整理すると：</p>
+      <div class="mathblock">
+        $$T = \frac{2\pi}{\sqrt{GM}}\left(\frac{\ell}{1-e^2}\right)^{3/2} = \frac{2\pi}{\sqrt{GM}}\,(\text{長半径})^{3/2}$$
+      </div>
+      <div class="sol">
+        <span class="box-label">結論</span>
+        $T^2 = \dfrac{4\pi^2}{GM}(\text{長半径})^3$ —— これがケプラーの第3法則である。比例定数 $4\pi^2/(GM)$ は
+        （太陽の場合）中心天体の質量 $M$ だけで決まり，惑星の質量 $m$ にはよらない。
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §5 =================== -->
+  <div class="section" id="s5">
+    <div class="sec-header">
+      <div class="sec-tag">Section 5</div>
+      <h2>運動エネルギーと軌道の分類（重要）</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        (2)式 $\frac12m\dot r^2 + \dfrac{mh^2}{2r^2} - \dfrac{GmM}{r} = E$ は，「$r$ 方向の１次元運動」として読み直せる：
+      </p>
+      <div class="mathblock">
+        $$\underbrace{\frac12m\dot r^2}_{\text{運動エネルギー}} + \underbrace{U_r(r)}_{\text{有効ポテンシャル}} = E,
+        \qquad U_r(r) \equiv -\frac{GmM}{r}+\frac{mh^2}{2r^2} = U(r)+U_{\rm cen}(r)$$
+      </div>
+      <p>
+        $U(r)=-GmM/r$ は万有引力本来のポテンシャル，$U_{\rm cen}(r)=mh^2/(2r^2)$ は「遠心力のポテンシャル」
+        （角運動量を固定して動径方向だけ見たときに現れる，遠心力に対応する項）である。$r\to0$ では $1/r^2$ の
+        $U_{\rm cen}$ の方が $1/r$ の $U(r)$ よりも急激に発散するため支配的（斥力的）になり，$U_r(r)$ 全体としては
+        ある有限の $r=\ell$ で最小値をとる「井戸型」のグラフになる（右図イメージ：質点はこの井戸の中を転がる）。
+      </p>
+
+      <h3 id="s5-1">$E$ の下限と軌道の分類</h3>
+      <p>
+        $\dot r^2 = \dfrac{2E}m+\dfrac{2GM}r-\dfrac{h^2}{r^2}\ge0$ でなければならない（実数の速度である以上）。
+        $u=1/r$ とおくと，$r>0$ の解が存在する条件は $u>0$ の解が存在する条件と同じで：
+      </p>
+      <div class="mathblock">
+        $$\frac{2E}m+2GMu-h^2u^2 \ge 0\ \text{を満たす}\ u>0\ \text{が存在}$$
+      </div>
+      <p>
+        左辺は $u$ の（上に凸な）２次式だから，実根を持つ条件 $0\le \dfrac D4=G^2M^2+\dfrac{2Eh^2}m$ より：
+      </p>
+      <div class="mathblock">
+        $$\boxed{E \ge -\frac{G^2M^2m}{2h^2}} \equiv E_{\min}$$
+      </div>
+
+      <p>
+        §3 で求めた $x=r\cos(\varphi+\alpha)$，$y=r\sin(\varphi+\alpha)$ とおいて軌道の方程式を直交座標に書き直すと，
+        （計算を進めると）$y^2=(e^2-1)x^2-2e\ell x+\ell^2$ という円錐曲線の一般形が得られる。これにより：
+      </p>
+
+      <table class="axiom-table">
+        <thead><tr><th>離心率 $e=\ell A$</th><th>エネルギー</th><th>軌道の形</th></tr></thead>
+        <tbody>
+          <tr><td>$0\le e<1$</td><td>$E_{\min}\le E<0$</td><td>楕円（$e=0$ は円，$E=E_{\min}$）</td></tr>
+          <tr><td>$e=1$</td><td>$E=0$</td><td>放物線</td></tr>
+          <tr><td>$e\ge1$</td><td>$E>0$</td><td>双曲線</td></tr>
+        </tbody>
+      </table>
+
+      <div class="note">
+        <span class="box-label">補足</span>
+        <p>
+          $E<0$（束縛状態，$r\to\infty$ には行けない）なら楕円軌道＝惑星のような周期運動。
+          $E\ge0$（非束縛，$r\to\infty$ まで到達できる）なら放物線・双曲線軌道＝彗星の１回限りの通過などに対応する。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- =================== §6 =================== -->
+  <div class="section" id="s6">
+    <div class="sec-header">
+      <div class="sec-tag">Section 6</div>
+      <h2>円軌道近傍の微小振動</h2>
+    </div>
+    <div class="sec-body">
+
+      <p>
+        $E=E_{\min}$ のとき軌道は半径 $r=\ell$ の円軌道になる（$U_r'(\ell)=0$，すなわち有効ポテンシャルの底）。
+        ここで，円軌道からわずかにずれた（ほぼ円に近い楕円の）場合の $r$ 方向の微小振動の周期を，
+        円運動そのものの周期と比較してみる。
+      </p>
+
+      <details open>
+        <summary>導出</summary>
+        <div class="proof-body">
+          <p>有効ポテンシャル $U_r(r)=\dfrac{mh^2}{2r^2}-\dfrac{GMm}{r}$ を最小にする $r$ を求める：</p>
+          <div class="mathblock">
+            $$\frac{dU_r}{dr} = -\frac{mh^2}{r^3}+\frac{GMm}{r^2} = 0 \quad\Longrightarrow\quad r=\frac{h^2}{GM}=\ell
+            \quad(U_r'(\ell)=0)$$
+          </div>
+          <p>$U_r(\ell) = -\dfrac{G^2M^2m}{2h^2} = E_{\min}$ となることも確認できる。$r=\ell$ のまわりでテイラー展開すると：</p>
+          <div class="mathblock">
+            $$U_r(r) = U_r(\ell) + \frac12 U_r''(\ell)(r-\ell)^2+\cdots$$
+          </div>
+          <p>（１次の項は $U_r'(\ell)=0$ より消える。）$U_r''(r) = \dfrac{3mh^2}{r^4}-\dfrac{2GMm}{r^3}$ に $r=\ell$ を代入すると：</p>
+          <div class="mathblock">
+            $$U_r''(\ell) = \frac{G^4M^4m}{h^6} \equiv \kappa$$
+          </div>
+          <p>
+            これは，質量 $m$ のばね定数 $\kappa$ の単振動（第1章 §2 の調和振動子）とまったく同じ形。よって微小振動の周期は：
+          </p>
+          <div class="mathblock">
+            $$T_{\rm osc} = 2\pi\sqrt{\frac{m}{\kappa}} = 2\pi\,\frac{h^3}{G^2M^2}$$
+          </div>
+          <p>一方，円運動そのものの周期は $\dot\varphi = h/\ell^2$ より：</p>
+          <div class="mathblock">
+            $$T_{\rm circ} = \frac{2\pi}{\dot\varphi} = \frac{2\pi \ell^2}{h} = 2\pi\,\frac{h^3}{G^2M^2}$$
+          </div>
+        </div>
+        <div class="qed">∎</div>
+      </details>
+
+      <div class="sol">
+        <span class="box-label">結論</span>
+        $T_{\rm osc}=T_{\rm circ}$。動径方向の微小振動の周期は，円運動そのものの周期にちょうど一致する。
+      </div>
+
+      <div class="note">
+        <span class="box-label">見通し — 近日点は動かない（逆２乗力の特別な性質）</span>
+        <p>
+          この一致は，逆２乗則の万有引力に特有の性質である。もし力の距離依存性が $1/r^2$ からわずかにずれると
+          （例えば一般相対論的な補正項が加わると），この２つの周期は一致しなくなり，楕円軌道の近日点（最も
+          太陽に近づく点）が公転ごとに少しずつ回転する「近日点移動」が生じる。水星の近日点移動が観測され，
+          一般相対論の重要な検証例になったことは有名である。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="n3.html">← 第3章</a>
+    <a href="n5.html">第5章　地球の重力場と回転座標系 →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">力学A（溝口俊弥）ー2026前期課程Sセメスター</footer>
+
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+</body>
+</html>

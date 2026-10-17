@@ -1,0 +1,355 @@
+<!DOCTYPE html><!-- 「熱力学ノート — 東京大学」の一覧ページ。掲載されたページへ移動する入口をまとめる。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../access_control.js"></script>
+  <script src="../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>熱力学ノート — 東京大学</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="td.css">
+<link rel="stylesheet" href="../subject-home.css">
+<link rel="stylesheet" href="guide.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$']],
+    displayMath: [['$$', '$$']],
+    macros: {
+      pd: ['\\left(\\frac{\\partial #1}{\\partial #2}\\right)_{#3}', 3]
+    }
+  },
+  options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] }
+};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml.min.js"></script>
+<style>/* このページ内の要素に適用する、色・文字サイズ・配置などの指定。 */
+.index-body { max-width: 980px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+.notice {
+  background: #fff8e8;
+  border: 1px solid #c8a520;
+  border-radius: 6px;
+  padding: .8rem 1.2rem;
+  font-size: .83rem;
+  color: #5a4010;
+  margin-bottom: 2.5rem;
+}
+@media (max-width: 640px) {
+  .index-body { padding: 1.5rem 1rem 3rem; }
+}
+</style>
+</head>
+<body class="subject-home home-thermodynamics" data-nav-page="note-index">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">熱力学ノート</a>
+    <div class="navbar-links">
+      <a href="../index.html" class="nav-back">← 学習ノート</a>
+      <a href="index.html" class="active">ホーム</a>
+      <a href="ch0.html" data-page="ch0">第0章</a>
+      <a href="ch1.html" data-page="ch1">第1章</a>
+      <a href="ch2.html" data-page="ch2">第2章</a>
+      <a href="ch3.html" data-page="ch3">第3章</a>
+      <a href="ch4.html" data-page="ch4">第4章</a>
+      <a href="ch5.html" data-page="ch5">第5章</a>
+      <a href="taisaku_yosou.html" data-page="taisaku_yosou">予想問題</a>
+      <a href="taisaku_essence.html" data-page="taisaku_essence">精選問題</a>
+      <a href="kakomon_2025.html" data-page="kakomon_2025">2025</a>
+      <a href="kakomon_2023.html" data-page="kakomon_2023">2023</a>
+      <a href="kakomon_2014.html" data-page="kakomon_2014">2014</a>
+      <a href="kakomon_2012.html" data-page="kakomon_2012">2012</a>
+      <a href="kakomon_2011.html" data-page="kakomon_2011">2011</a>
+      <a href="kakomon_2010.html" data-page="kakomon_2010">2010</a>
+      <a href="kakomon_2009.html" data-page="kakomon_2009">2009</a>
+      <a href="kakomon_2008.html" data-page="kakomon_2008">2008</a>
+      <a href="kakomon_2007.html" data-page="kakomon_2007">2007</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ヒーロー -->
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>熱力学 講義ノート</h1>
+  <p class="subtitle">東京大学 · 全12回講義の完全まとめ</p>
+</div>
+
+<!-- この科目のノートを探す入力欄と検索結果欄。検索の動作は共通のsearch.jsが担当する。 --><div class="search-box" data-search>
+  <div class="search-input-row">
+    <span class="search-icon" aria-hidden="true">🔍</span>
+    <input type="search" class="search-input" placeholder="熱力学ノート内を検索（用語・キーワード）…" autocomplete="off" aria-label="熱力学ノート内を検索">
+  </div>
+  <div class="search-results" hidden></div>
+</div>
+
+<div class="index-body">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <strong>数式の記法</strong><br>
+    不完全微分（経路依存量の微小変化）は $\delta Q$，$\delta W$ と表記。
+    完全微分（状態量の変化）は $dU$，$dS$ など。
+    偏微分は $\left(\partial V/\partial T\right)_P$（添字は固定変数）。
+    状態係数 $\beta$（定圧膨張率），$\kappa$（等温圧縮率），$\alpha_P$（圧力係数）は実験で測定可能な量。
+  </div>
+
+  <!-- 章一覧 -->
+  <h2 class="home-section-title">章一覧</h2>
+  <!-- 章ごとのリンクと説明をカードの一覧として並べる。 --><div class="chapter-grid">
+
+    <a href="ch0.html" class="chapter-card" data-page="ch0">
+      <div class="card-stripe stripe-0" style="background:var(--muted)"></div>
+      <div class="card-inner">
+        <div class="card-num">第 0 章</div>
+        <div class="card-title">ガイダンス</div>
+        <ul class="card-topics">
+          <li>自然界の階層（ミクロ→マクロ）</li>
+          <li>物理学の体系と熱力学の位置</li>
+          <li>ミクロとマクロの関係</li>
+          <li>熱力学の考え方・全体マップ</li>
+          <li>熱力学 4 つの法則の概観</li>
+        </ul>
+      </div>
+    </a>
+
+    <a href="ch1.html" class="chapter-card" data-page="ch1">
+      <div class="card-stripe stripe-1"></div>
+      <div class="card-inner">
+        <div class="card-num">第 1 章</div>
+        <div class="card-title">熱力学の基礎概念</div>
+        <ul class="card-topics">
+          <li>温度と経験温度・定圧膨張率</li>
+          <li>偏微分の復習・全微分</li>
+          <li>熱平衡・第ゼロ法則</li>
+          <li>状態量・示量性・示強性</li>
+          <li>状態方程式と偏微分値の関係</li>
+        </ul>
+      </div>
+    </a>
+
+    <a href="ch2.html" class="chapter-card" data-page="ch2">
+      <div class="card-stripe stripe-2"></div>
+      <div class="card-inner">
+        <div class="card-num">第 2 章</div>
+        <div class="card-title">熱力学第一法則</div>
+        <ul class="card-topics">
+          <li>内部エネルギーと仕事・熱</li>
+          <li>準静的過程・$\delta W = -PdV$</li>
+          <li>定積・定圧熱容量 $C_V, C_P$</li>
+          <li>理想気体・Mayerの関係式</li>
+          <li>断熱曲線 $PV^\gamma = \mathrm{const}$</li>
+        </ul>
+      </div>
+    </a>
+
+    <a href="ch3.html" class="chapter-card" data-page="ch3">
+      <div class="card-stripe stripe-3"></div>
+      <div class="card-inner">
+        <div class="card-num">第 3 章</div>
+        <div class="card-title">熱力学第二法則</div>
+        <ul class="card-topics">
+          <li>可逆過程・不可逆過程</li>
+          <li>Clausiusの原理・Kelvinの原理</li>
+          <li>Carnotサイクルと熱効率</li>
+          <li>熱力学温度・Clausiusの不等式</li>
+          <li>エントロピーと増大則</li>
+        </ul>
+      </div>
+    </a>
+
+    <a href="ch4.html" class="chapter-card" data-page="ch4">
+      <div class="card-stripe stripe-4"></div>
+      <div class="card-inner">
+        <div class="card-num">第 4 章</div>
+        <div class="card-title">熱力学関数</div>
+        <ul class="card-topics">
+          <li>完全な熱力学関数</li>
+          <li>Helmholtz自由エネルギー $F$</li>
+          <li>Gibbs自由エネルギー $G$・エンタルピー $H$</li>
+          <li>Maxwell関係式・エネルギー方程式</li>
+          <li>最大仕事の原理・熱平衡の安定条件</li>
+        </ul>
+      </div>
+    </a>
+
+    <a href="ch5.html" class="chapter-card" data-page="ch5">
+      <div class="card-stripe stripe-5"></div>
+      <div class="card-inner">
+        <div class="card-num">第 5 章</div>
+        <div class="card-title">応用例</div>
+        <ul class="card-topics">
+          <li>2相共存系・相転移</li>
+          <li>Clausius-Clapeyronの関係式</li>
+          <li>ゴムの熱力学</li>
+          <li>Gough-Joule効果</li>
+          <li>van der Waals気体と安定性</li>
+        </ul>
+      </div>
+    </a>
+
+  </div><!-- /chapter-grid -->
+
+  <!-- 章ナビ -->
+  <h2 class="home-section-title">初めて読む人へ — 章ナビ</h2>
+  <p style="margin:-.7rem 0 1.2rem;color:var(--mid);font-size:.86rem">
+    各章が「何をしたいのか」を先につかむための短いガイドです。講義ノートと併用してください。
+  </p>
+  <!-- 学習ガイド各ページへのリンクをカードで並べる。 --><div class="guide-index-grid">
+    <a class="guide-index-card" href="guide1.html"><strong>第1章ナビ</strong><span>状態を表す言葉と座標</span></a>
+    <a class="guide-index-card" href="guide2.html"><strong>第2章ナビ</strong><span>熱と仕事のエネルギー収支</span></a>
+    <a class="guide-index-card" href="guide3.html"><strong>第3章ナビ</strong><span>自然な変化の向き</span></a>
+    <a class="guide-index-card" href="guide4.html"><strong>第4章ナビ</strong><span>条件に合う判定関数</span></a>
+    <a class="guide-index-card" href="guide5.html"><strong>第5章ナビ</strong><span>相転移とゴムへの応用</span></a>
+  </div>
+
+  <!-- 試験対策 -->
+  <h2 class="home-section-title">試験対策</h2>
+  <div class="chapter-grid">
+    <a href="taisaku_yosou.html" class="chapter-card" data-page="taisaku_yosou">
+      <div class="card-stripe" style="background:#7c5cbf"></div>
+      <div class="card-inner">
+        <div class="card-num">予想問題</div>
+        <div class="card-title">2026年度 想定模試</div>
+        <ul class="card-topics">
+          <li>光子気体とStefan–Boltzmannの法則</li>
+          <li>熱力学第二法則（3設問）</li>
+          <li>$F(T,V)$ から出発するvan der Waals気体</li>
+          <li>2025・2023年度の出題形式を踏襲</li>
+        </ul>
+      </div>
+    </a>
+    <a href="taisaku_essence.html" class="chapter-card" data-page="taisaku_essence">
+      <div class="card-stripe" style="background:#7c5cbf"></div>
+      <div class="card-inner">
+        <div class="card-num">精選問題集</div>
+        <div class="card-title">本質問題 全7問</div>
+        <ul class="card-topics">
+          <li>2007〜2025年度の全過去問から核心を抽出</li>
+          <li>エネルギー方程式・Carnotの定理の証明</li>
+          <li>Maxwell関係式・ルジャンドル変換</li>
+          <li>各問に詳細な解説を併記</li>
+        </ul>
+      </div>
+    </a>
+  </div>
+
+  <!-- 過去問 -->
+  <h2 class="home-section-title">過去問解説</h2>
+  <!-- 年度などの区分ごとに、過去問ページへのリンクをカードで並べる。 --><div class="year-grid">
+    <a class="year-card" href="kakomon_2025.html" data-page="kakomon_2025">
+      <div class="yn">2025</div>
+    </a>
+    <a class="year-card" href="kakomon_2023.html" data-page="kakomon_2023">
+      <div class="yn">2023</div>
+    </a>
+    <a class="year-card" href="kakomon_2014.html" data-page="kakomon_2014">
+      <div class="yn">2014</div>
+    </a>
+    <a class="year-card" href="kakomon_2012.html" data-page="kakomon_2012">
+      <div class="yn">2012</div>
+    </a>
+    <a class="year-card" href="kakomon_2011.html" data-page="kakomon_2011">
+      <div class="yn">2011</div>
+    </a>
+    <a class="year-card" href="kakomon_2010.html" data-page="kakomon_2010">
+      <div class="yn">2010</div>
+    </a>
+    <a class="year-card" href="kakomon_2009.html" data-page="kakomon_2009">
+      <div class="yn">2009</div>
+    </a>
+    <a class="year-card" href="kakomon_2008.html" data-page="kakomon_2008">
+      <div class="yn">2008</div>
+    </a>
+    <a class="year-card" href="kakomon_2007.html" data-page="kakomon_2007">
+      <div class="yn">2007</div>
+    </a>
+  </div>
+
+  <!-- 公式集 -->
+  <h2 class="home-section-title">重要公式クイックリファレンス</h2>
+  <div class="formula-grid">
+
+    <div class="formula-group">
+      <div class="formula-group-head">第一法則・基本関係</div>
+      <table class="formula-table">
+        <tr><td>第一法則</td><td>$dU = \delta Q + \delta W$</td></tr>
+        <tr><td>準静的仕事</td><td>$\delta W = -P\,dV$</td></tr>
+        <tr><td>第一法則（準静的）</td><td>$dU = TdS - PdV$</td></tr>
+        <tr><td>定積熱容量</td><td>$C_V = \left(\dfrac{\partial U}{\partial T}\right)_V$</td></tr>
+        <tr><td>定圧熱容量</td><td>$C_P = C_V + \left[\left(\dfrac{\partial U}{\partial V}\right)_T + P\right]\left(\dfrac{\partial V}{\partial T}\right)_P$</td></tr>
+        <tr><td>Mayerの関係（理想気体）</td><td>$C_P = C_V + nR$</td></tr>
+      </table>
+    </div>
+
+    <div class="formula-group">
+      <div class="formula-group-head">理想気体</div>
+      <table class="formula-table">
+        <tr><td>状態方程式</td><td>$PV = nRT$</td></tr>
+        <tr><td>内部エネルギー</td><td>$U = C_V T + \mathrm{const}$</td></tr>
+        <tr><td>断熱曲線</td><td>$TV^{\gamma-1} = \mathrm{const}$，$PV^\gamma = \mathrm{const}$</td></tr>
+        <tr><td>比熱比</td><td>$\gamma = C_P/C_V > 1$</td></tr>
+        <tr><td>等温仕事</td><td>$W = -nRT\ln(V_B/V_A)$</td></tr>
+        <tr><td>断熱仕事</td><td>$W = \dfrac{nR}{\gamma-1}(T_B - T_A)$</td></tr>
+      </table>
+    </div>
+
+    <div class="formula-group">
+      <div class="formula-group-head">第二法則・エントロピー</div>
+      <table class="formula-table">
+        <tr><td>Clausiusの不等式</td><td>$\displaystyle\oint \frac{\delta Q}{T} \le 0$</td></tr>
+        <tr><td>エントロピー定義</td><td>$S_B - S_A = \displaystyle\int_{A \to B}^{\text{可逆}} \frac{\delta Q}{T}$</td></tr>
+        <tr><td>増大則（断熱）</td><td>$\Delta S \ge 0$</td></tr>
+        <tr><td>Carnot効率</td><td>$\eta = 1 - T_2/T_1$</td></tr>
+        <tr><td>理想気体のエントロピー</td><td>$S = S_0 + C_V\ln\dfrac{T}{T_0} + nR\ln\dfrac{V}{V_0}$</td></tr>
+        <tr><td>$T$と$S$の関係</td><td>$T = \left(\dfrac{\partial U}{\partial S}\right)_V$</td></tr>
+      </table>
+    </div>
+
+    <div class="formula-group">
+      <div class="formula-group-head">熱力学関数</div>
+      <table class="formula-table">
+        <tr><td>Helmholtz自由エネルギー</td><td>$F = U - TS$，$dF = -SdT - PdV$</td></tr>
+        <tr><td>Gibbs自由エネルギー</td><td>$G = F + PV$，$dG = -SdT + VdP$</td></tr>
+        <tr><td>エンタルピー</td><td>$H = U + PV$，$dH = TdS + VdP$</td></tr>
+        <tr><td>エネルギー方程式</td><td>$\left(\dfrac{\partial U}{\partial V}\right)_T = T\left(\dfrac{\partial P}{\partial T}\right)_V - P$</td></tr>
+        <tr><td>Fのmaxwell関係式</td><td>$\left(\dfrac{\partial P}{\partial T}\right)_V = \left(\dfrac{\partial S}{\partial V}\right)_T$</td></tr>
+        <tr><td>Gのmaxwell関係式</td><td>$\left(\dfrac{\partial S}{\partial P}\right)_T = -\left(\dfrac{\partial V}{\partial T}\right)_P$</td></tr>
+      </table>
+    </div>
+
+    <div class="formula-group">
+      <div class="formula-group-head">偏微分の数学的関係</div>
+      <table class="formula-table">
+        <tr><td>全微分</td><td>$dz = \left(\dfrac{\partial z}{\partial x}\right)_y dx + \left(\dfrac{\partial z}{\partial y}\right)_x dy$</td></tr>
+        <tr><td>三変数の関係</td><td>$\left(\dfrac{\partial x}{\partial y}\right)_z \left(\dfrac{\partial y}{\partial z}\right)_x \left(\dfrac{\partial z}{\partial x}\right)_y = -1$</td></tr>
+        <tr><td>定圧膨張率</td><td>$\beta = \dfrac{1}{V}\left(\dfrac{\partial V}{\partial T}\right)_P$</td></tr>
+        <tr><td>等温圧縮率</td><td>$K_T = -\dfrac{1}{V}\left(\dfrac{\partial V}{\partial P}\right)_T &gt; 0$</td></tr>
+      </table>
+    </div>
+
+    <div class="formula-group">
+      <div class="formula-group-head">安定性条件・応用</div>
+      <table class="formula-table">
+        <tr><td>熱的安定性</td><td>$C_V > 0$，$C_P \ge C_V$</td></tr>
+        <tr><td>力学的安定性</td><td>$K_T > 0$ （等温圧縮率が正）</td></tr>
+        <tr><td>最大仕事の原理</td><td>等温過程：外に取り出せる仕事 $\le -\Delta F$</td></tr>
+        <tr><td>Clausius-Clapeyron</td><td>$\dfrac{dP_S}{dT} = \dfrac{Q_{0\to1}}{T(V_1 - V_0)}$</td></tr>
+        <tr><td>断熱曲線の一般的性質</td><td>$\dfrac{C_P}{C_V} = \dfrac{(\partial P/\partial V)_{ad}}{(\partial P/\partial V)_T}$</td></tr>
+      </table>
+    </div>
+
+  </div><!-- /formula-grid -->
+
+</div><!-- /index-body -->
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">熱力学（福島孝治）ー2026前期課程Sセメスター</footer>
+
+<script src="td.js"></script>
+<script src="nav.js"></script>
+<script src="../common.js?v=20260718-texcopy"></script>
+<script src="../access-ui.js"></script>
+<script src="../search.js"></script>
+</body>
+</html>

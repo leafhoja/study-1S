@@ -1,0 +1,308 @@
+<!DOCTYPE html><!-- 「07 プログラミング | 神シケプリ | 情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>07 プログラミング | 神シケプリ | 情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kami-07">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">神シケプリ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>神シケプリ 07 — プログラミング</h1>
+  <p class="subtitle">プログラム内蔵方式・擬似プログラミング言語・機械語トレースと計算量のオーダー</p>
+  <p class="meta">教科書対応箇所 pp.105-114　pp.118-119　pp.181-187</p>
+</div>
+
+<div class="container">
+
+  <div class="def">
+    <span class="box-label">定義 — コンピュータの基本構成とプログラム内蔵方式</span>
+    <p>
+      コンピュータは、データに対して計算処理を施す<strong>演算装置</strong>、データやプログラムを保持する
+      <strong>主記憶装置</strong>、主記憶装置上のプログラムに従って演算装置を駆動したり主記憶装置への
+      データの読み書きを行う<strong>制御装置</strong>から構成される。演算装置と制御装置を組み合わせたものを
+      <strong>中央処理装置（CPU）</strong>という。
+    </p>
+    <p>
+      プログラムを他のデータと同列に扱い、主記憶装置に内蔵する方式を<strong>プログラム内蔵方式</strong>といい、
+      この方式を発表した人物の名前にちなんで<strong>フォン・ノイマン型コンピュータ</strong>と呼ぶこともある。
+      プログラムをデータと同じように書き換え可能な形で保持することで、物理的な機械としての内部構造を
+      変えることなく、どのような計算でも行えるようになる。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — 言語処理系</span>
+    <p>
+      人間が読み書きしやすいプログラミング言語で書かれたプログラムを、コンピュータが実行できる機械語に
+      変換する仕組みを<strong>言語処理系</strong>という。代表的なものに次の3種類がある。
+    </p>
+    <p>
+      <strong>アセンブラ</strong>：機械語と1対1に対応するアセンブリ言語を機械語に変換する。<br>
+      <strong>コンパイラ</strong>：高水準言語で書かれたプログラム全体を一括で機械語に翻訳してから実行する。
+      翻訳に時間がかかる一方、翻訳済みの機械語をそのまま実行するので実行自体は速い。<br>
+      <strong>インタプリタ</strong>：高水準言語のプログラムを1行ずつ解釈しながらその場で実行する。
+      翻訳を待たずにすぐ実行を開始できる一方、実行のたびに解釈し直すので実行は遅い。
+    </p>
+  </div>
+
+  <div class="def">
+    <span class="box-label">定義 — 擬似プログラミング言語の構文</span>
+    <p>教科書で用いられる擬似プログラミング言語の基本構文は次の4つ。</p>
+    <p>
+      <strong>代入</strong>：<code>変数名 ← 式</code>（式の値を変数名に代入する）<br>
+      <strong>条件分岐</strong>：<code>if 条件 then 処理1 else 処理2 endif</code>（条件が真なら処理1、
+      偽なら処理2を実行する）<br>
+      <strong>反復</strong>：<code>while 条件 do 処理 done</code>（条件が真である限り処理を繰り返す）<br>
+      <strong>出力</strong>：<code>return 変数名</code>（変数名の値を解として出力する）
+    </p>
+    <p>
+      また、通し番号（添字）を付けた変数の集合を<strong>配列</strong>といい、$x_1, x_2, \ldots$ のように
+      同種のデータをまとめて扱うのに用いる。
+    </p>
+  </div>
+
+  <div class="prop">
+    <span class="box-label">性質 — 計算量のオーダー</span>
+    <p>
+      あるアルゴリズムについて、入力の精度やサイズを表す変数（許容誤差 $\delta$ や対象の個数など）を
+      変化させたとき、解を求めるのに必要な計算回数がおよそ何に比例して増えるかを表す指標を
+      <strong>計算量のオーダー</strong>という。反復処理を含むアルゴリズムでは、反復処理の回数が
+      その変数に対してどう増えるかに着目すれば求められる。
+    </p>
+    <p>
+      典型例として、許容誤差 $\delta$ で解を求める2つの方法を比較する。<strong>反復法</strong>は
+      $0$ から $\delta$ ずつ刻んで候補を1つずつ調べる方法で、必要な反復回数はおよそ $\dfrac{1}{\delta}$
+      に比例する（オーダー $\dfrac{1}{\delta}$）。一方<strong>二分法</strong>は、解の存在する範囲を
+      毎回半分に絞り込んでいく方法で、必要な反復回数はおよそ $\log_2\dfrac{1}{\delta}$ に比例する
+      （オーダー $\log_2\dfrac{1}{\delta}$）。同じ精度 $\delta$ を得るのに、二分法は反復法よりはるかに
+      少ない反復回数で済む。
+    </p>
+  </div>
+
+  <div class="note">
+    <span class="box-label">出題対策のポイント</span>
+    <p>プログラミングは演習でコツをつかむことが大事。毎年のように出題されていて過去問もたくさんあるので、とにかく練習を積むこと。</p>
+  </div>
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">第1問（2015年度共通問題1-1）</a>
+    <a href="#q2">第2問（2015年度共通問題3問題B）</a>
+  </div>
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">第1問</div><h2>2015年度共通問題1-1 — コンピュータの基本構成の穴埋め</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>下記の用語群の中から適切な語を選び，次の文章の穴を埋めよ．</p>
+        <p>
+          　現在のコンピュータでは，プログラムを他のデータと同列に扱うことにより，物理的な機械としての
+          内部構造を変えることなく，どのような計算でも行うことができる．このような機構を
+          　<span class="blank">a</span>　方式といい，発表した人物の名前にちなんで　<span class="blank">b</span>
+          　型コンピュータと呼ぶこともある．
+        </p>
+        <p>
+          　<span class="blank">a</span>　方式のコンピュータでは，データに対して計算処理を施す
+          　<span class="blank">c</span>　装置，データやプログラムを保持する　<span class="blank">d</span>
+          　装置，　<span class="blank">d</span>　装置上のプログラムに従って　<span class="blank">c</span>
+          　装置を駆動したり，　<span class="blank">d</span>　装置へのデータの読み書きを行う
+          　<span class="blank">e</span>　装置によって構成される．　<span class="blank">c</span>　装置と
+          　<span class="blank">e</span>　装置を組み合わせたものを　<span class="blank">f</span>　装置といい，
+          　<span class="blank">g</span>　とも呼ぶ．
+        </p>
+        <p>
+          用語群　チューリング，フォンノイマン，制御，演算，加算，プログラム内蔵，アドレス，オペランド，
+          パケット交換，入出力，中央処理，主記憶，CPU，CCD
+        </p>
+      </div>
+
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body blank-ans">
+          <p>
+            <span class="blank">a=プログラム内蔵</span>／<span class="blank">b=フォンノイマン</span>／
+            <span class="blank">c=演算</span>／<span class="blank">d=主記憶</span>／
+            <span class="blank">e=制御</span>／<span class="blank">f=中央処理</span>／<span class="blank">g=CPU</span>
+          </p>
+          <p>
+            （判定の根拠：cは「データに計算処理を施す」装置なので演算装置。dは「データやプログラムを保持する」
+            装置なので主記憶装置。eは「dのプログラムに従ってcを駆動し、dへの読み書きを行う」装置なので制御装置。
+            fはc（演算）とe（制御）を組み合わせたものなので中央処理装置。gには用語群に残っている別名として
+            CPUが対応する。）
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>a=プログラム内蔵　b=フォンノイマン　c=演算　d=主記憶　e=制御　f=中央処理　g=CPU</div>
+      </details>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">第2問</div><h2>2015年度共通問題3問題B — 平方根計算の機械語トレース</h2></div>
+    <div class="sec-body">
+
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>
+          正の実数 $x$ の平方根を計算する方法を図1に示す．アルゴリズム1は高水準言語による記述，プログラム1は
+          それを機械語レベルで記述したものである．これらに関する以下の設問(1)〜(5)に答えよ．ただし
+          $\sqrt3=1.73205\cdots$ であることを利用してよい．また各命令の意味は下表の通りである．レジスタや
+          各メモリアドレスはデータとして実数値を保持でき，また add 等の演算命令も実数を処理できるものとする．
+        </p>
+
+        <div class="mathblock" style="overflow-x:auto;">
+          <table class="q-table">
+            <tr><th>命令</th><th>意味</th></tr>
+            <tr><td>load A</td><td>アドレスAのデータを演算レジスタに読み込む</td></tr>
+            <tr><td>store A</td><td>演算レジスタのデータをアドレスAに書き込む</td></tr>
+            <tr><td>add A</td><td>アドレスAのデータを演算レジスタの値に加える</td></tr>
+            <tr><td>multiply A</td><td>アドレスAのデータを演算レジスタの値に掛ける</td></tr>
+            <tr><td>less_eq A</td><td>アドレスAのデータと演算レジスタの値を比較し，演算レジスタの値が小さいか同じならば演算レジスタの値を1，大きければ0にする</td></tr>
+            <tr><td>jump A</td><td>アドレスAにプログラムの実行を移す</td></tr>
+            <tr><td>jumpzero A</td><td>演算レジスタの値が0の場合，アドレスAにプログラムの実行を移す</td></tr>
+            <tr><td>write</td><td>演算レジスタのデータを出力する</td></tr>
+            <tr><td>halt</td><td>プログラムの実行を停止する</td></tr>
+          </table>
+        </div>
+
+        <p>【図1（1）アルゴリズム1（高水準言語）】</p>
+        <div class="mathblock"><pre style="white-space:pre-wrap;font-family:inherit;margin:0;">y ← 0
+while (y+δ)^2 ≤ x do
+    y ← y + δ
+done
+return y</pre></div>
+
+        <p>【図1（2）プログラム1（機械語レベル）】</p>
+        <div class="mathblock"><pre style="white-space:pre-wrap;font-family:inherit;margin:0;">1001  load 2003
+1002  add 2002
+1003  store 2004
+1004  multiply 2004
+1005  less_eq 2001
+1006  jumpzero 1011
+1007  load 2003
+1008  add  A
+1009  store 2003
+1010  jump 1001
+1011  load  B
+1012  write
+1013  halt
+
+2001  x の値
+2002  δ の値
+2003  0
+2004  0</pre></div>
+
+        <p>
+          (1) アルゴリズム1を $x=3.0$，$\delta=0.03$ として実行したとき得られる結果を答えよ．<br>
+          (2) アルゴリズム1を実行したとき，結果が得られるまでに実行される繰り返しの回数を $x$ と
+          $\delta$ を用いて表せ．<br>
+          (3) プログラム1を $x=3.0$，$\delta=0.03$ として実行する．アドレス1005の命令をはじめて実行する
+          直前の演算レジスタのデータを答えよ．<br>
+          (4) プログラム1がアルゴリズム1と対応するよう，空欄　<span class="blank">A</span>　および
+          　<span class="blank">B</span>　を埋めよ．<br>
+          (5) プログラム1を $x=3.0$，$\delta=0.03$ として実行する．1命令実行するのに0.001秒かかるとき，
+          プログラムが停止するまでに要する時間を答えよ．導出の過程も簡単に示すこと．
+        </p>
+      </div>
+
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            (1) アルゴリズムは $y=0$ から $\delta=0.03$ ずつ増やしながら、$(y+\delta)^2 \le 3.0$ が成り立つ限り
+            $y$ を更新し続ける。$n$ 回更新後は $y=0.03n$ であり、次の更新（$n+1$回目）を行うかどうかは
+            $0.03(n+1) \le \sqrt3=1.73205\ldots$ すなわち $n+1 \le 57.7\ldots$ で判定される。$n+1=57$
+            （$0.03\times57=1.71\le1.732\ldots$）は条件を満たすので更新されるが、$n+1=58$
+            （$0.03\times58=1.74>1.732\ldots$）は満たさないので、更新は合計57回で止まる。よって
+            最終的な結果は $y=\mathbf{1.71}$。
+          </p>
+          <p>
+            (2) 更新回数は「$n\delta \le \sqrt x$ を満たす最大の整数 $n$」、すなわち
+            $n=\left\lfloor \dfrac{\sqrt x}{\delta} \right\rfloor$ 回。
+          </p>
+          <p>
+            (3) プログラムをトレースする。1001 <code>load 2003</code> で演算レジスタに $y$（初期値0）を読み込み、
+            1002 <code>add 2002</code> で $\delta$ を加えてレジスタは $y+\delta$、1003 <code>store 2004</code>
+            でアドレス2004に $y+\delta$ を書き込み、1004 <code>multiply 2004</code> でレジスタを
+            $(y+\delta)\times(y+\delta)=(y+\delta)^2$ にする。ここまでで初めて1005
+            <code>less_eq 2001</code> を実行する直前になるので、そのときの値は $x=3.0,\ \delta=0.03,\ y=0$
+            を代入して $(0+0.03)^2=\mathbf{0.0009}$。
+          </p>
+          <p>
+            (4) アドレス1007〜1010はアルゴリズムの <code>y ← y + δ</code> に対応する処理（$y$ を $\delta$
+            だけ増やして格納し直す）なので、1008の <code>add A</code> は $\delta$ の値が格納されている
+            アドレスを指す必要があり、$\mathbf{A=2002}$。アドレス1011は結果としての $y$ を出力する直前の
+            読み込みなので、$y$ の値が格納されているアドレスを指す必要があり、$\mathbf{B=2003}$。
+          </p>
+          <p>
+            (5) プログラムの流れを整理すると、1001〜1006（6命令）を毎回実行して条件を判定し、条件が真
+            （続行）ならば1007〜1010（4命令、$y$ の更新）も実行してから1001に戻る、という1周10命令の
+            ループになっている。(1)より、条件が真で更新まで行われる反復は57回（$n=1,\ldots,57$）。
+            58回目のチェックで初めて条件が偽になり、そこでは1007〜1010は実行されずに1011〜1013（3命令）
+            に進んでプログラムが停止する。したがって命令の実行総数は
+          </p>
+          <div class="mathblock">$$57\times10 + 6 + 3 = 570+9 = 579\ \text{命令}$$</div>
+          <p>
+            （57回分のフルループ10命令ずつに加えて、条件が偽と判定される最後の1周は1001〜1006の6命令のみ、
+            さらに停止処理の1011〜1013の3命令）。1命令0.001秒なので、要する時間は
+          </p>
+          <div class="mathblock">$$579\times0.001 = \mathbf{0.579}\ \text{秒}$$</div>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1) $y=1.71$　(2) $n=\left\lfloor\dfrac{\sqrt{x}}{\delta}\right\rfloor$ 回　(3) 0.0009　(4) A=2002，B=2003　(5) 0.579秒（命令数579×0.001秒）</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 反復法と二分法：機械語レベルで見るオーダーの違い</span>
+        <p>
+          この問題のアルゴリズム1・プログラム1は、上の「計算量のオーダー」で触れた<strong>反復法</strong>
+          そのものを機械語レベルまで具体的にトレースしたものになっている。$\delta$ を $0$ から1刻みずつ
+          足しながら候補を1つずつ調べていくので、(5)で数えたとおり必要な命令実行回数（実質的な反復回数）は
+          およそ $\dfrac{\sqrt x}{\delta}$ に比例する。もし同じ精度 $\delta=0.03$ を<strong>二分法</strong>
+          （$y^2 \le x$ を満たす範囲を毎回半分に絞り込む方式）で達成しようとすると、反復回数はおよそ
+          $\log_2\dfrac{1}{\delta}\approx\log_2\dfrac{1}{0.03}\approx5.1$、つまり6回程度で足りる計算になり、
+          反復法の57回と比べてはるかに少ない反復で同じ精度に到達できる。プログラム1のような素朴な
+          ループ構造から、探索範囲を毎回半分にする分岐構造に書き換えるだけで、計算量のオーダーが
+          $\dfrac{1}{\delta}$ から $\log_2\dfrac{1}{\delta}$ に改善される、という好対照な具体例になっている。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="06-安全な通信.html">← 06 安全な通信</a>
+    <a href="08-論理関数.html">08 論理関数へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

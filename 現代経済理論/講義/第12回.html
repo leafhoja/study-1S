@@ -1,0 +1,623 @@
+<!DOCTYPE html><!-- 「第12回 金融工学入門｜現代経済理論」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+  <title>第12回 金融工学入門｜現代経済理論</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body data-nav-page="lec-12">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">現代経済理論</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">HOME</a>
+      <a href="index.html" class="active">講義</a>
+      <a href="../kakomon_2025.html">過去問</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <div class="hero-badge">第12回</div>
+  <h1>金融工学入門</h1>
+  <p class="subtitle">藤井 優成｜東京大学大学院経済学研究科</p>
+  <p class="meta">デリバティブの誤解を解く — 先渡し契約・オプション・リスク中立価格｜2026年7月3日</p>
+</div>
+
+<div class="container">
+
+  <div class="section-card">
+    <h2><span class="h2-icon">👤</span>講師プロフィール</h2>
+    <div class="teacher-profile">
+      <div class="teacher-icon">📐</div>
+      <div class="teacher-info">
+        <h3>藤井 優成（Fujii, Masaaki）</h3>
+        <div class="affil">
+          東京大学大学院経済学研究科 マネジメント専攻 数量ファイナンスコース<br>
+          理科一類 → 理学部物理学科 → 理学系研究科物理学専攻（初期宇宙論：インフレーション模型・物質創成・暗黒物質の研究）→ Morgan Stanley証券 債券統括本部 金利為替派生商品部のクオンツ → 退職して経済学研究科を受験、32歳で学生生活を再開
+        </div>
+        <div class="specialty">
+          専門：数理ファイナンス・確率的最適制御（Stochastic Optimal Control）・平均場ゲーム理論（Mean-Field Game Theory）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📖</span>講義概要</h2>
+    <div class="summary-text">
+      <p>
+        「デリバティブ（金融派生商品）は難解な数学で誤魔化した錬金術だ」「金融取引はお金が一方から他方へ移動するだけの虚業だ」——金融工学には、ネット上も含めて多くの誤解が広まっている。
+        本講義は、物理学からモルガン・スタンレーのクオンツを経て経済学研究科に転じた講師が、こうした<strong>誤解を解く</strong>ことを目的に、金融工学の最も基本的な考え方を解説する。
+      </p>
+      <p>
+        中心となるのは<strong>先渡し契約（フォワード）</strong>と<strong>オプション契約</strong>という2つのデリバティブである。驚くべきことに、これらの価格は「将来、資産価格がどうなるか」を予測しなくても、<strong>「市場に裁定機会が存在しない」という仮定だけ</strong>で決定できる。
+        この無裁定の原理から、先渡し価格の公式、そして一期間二項モデルによる<strong>リスク中立価格</strong>の考え方までを学び、金融工学が社会に果たす本来の役割（リスクの取引）と、それが悪用された「仕組み預金」のような不適切な商品との違いを理解する。
+      </p>
+      <div class="insight"><strong>この回の読み方</strong>：tは契約時点、Tは決済時点、X(t)は今の現物価格、Kは今決めてTに払う金額である。記号をこの日本語に戻し、契約と複製ポートフォリオの収支を時点ごとに比べると、式の意味を追いやすい。</div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📋</span>主なトピック</h2>
+    <ul class="topic-list">
+
+      <li>
+        <div class="tn-col"><span class="tn">1</span></div>
+        <div class="topic-content">
+          <span class="topic-title">金融派生商品（デリバティブ）とは何か</span>
+          <div class="topic-desc">
+            <div class="def-box">
+              <strong>金融派生商品（デリバティブ）</strong>：金融資産価格や金利などの種々の「参照指標」の将来の実現値に応じて、受け渡しするキャッシュフローの大きさ（や契約の継続・停止）が決まるような金融商品・契約。指標が資産価格の場合、その資産を<strong>原資産</strong>と呼ぶ。
+            </div>
+            <p>
+              原資産・参照指標になりうるものは非常に幅広い。通貨、債券、株、鉄・アルミ・銅などの工業用金属、金・銀などの貴金属、オイル・ガス・電力などのエネルギー価格、発電所の収益、各種金利、物価指数、海運指数、平均寿命、牛・豚・羊などの畜産物や穀物の価格指数、都市の気温・降水量・降雪量、各種ローンの束、不動産の賃料収入、さらには他のデリバティブまでもが対象になりうる。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">2</span></div>
+        <div class="topic-content">
+          <span class="topic-title">デリバティブと保険の違い</span>
+          <div class="topic-desc">
+            <p>デリバティブと保険はどちらも将来の不確実な事象に対する金融商品だが、性質は異なる。</p>
+            <ul>
+              <li><strong>保険</strong>：損害に対して支払いが生じる。受け取るには、実際に損害が発生したことを証明する必要がある。必要な数学は<strong>大数の法則</strong>（多数の契約者の損害発生率を統計的に平均する）。</li>
+              <li><strong>デリバティブ</strong>：損害の有無は無関係で、参照指標の値だけで決まる。例えば特定の都市の一定期間の降雨量に対するデリバティブは、対応する保険契約なら「降雨で損害が発生しなければ保険金が出ない」場合でも、降雨量に応じてキャッシュフローが発生する。必要な数学は<strong>確率微分方程式</strong>など（大数の法則は使えない）。</li>
+            </ul>
+            <div class="insight">
+              変額保険はデリバティブと生命保険を組み合わせた商品。また、平均寿命を参照指標とするデリバティブや、保険契約の束を裏付け資産とするデリバティブ、海外では生命保険を第三者に売却できるセカンダリーマーケットも存在する。誰の生命保険をいくらで買い取るかという価格付けに、居住地域や人種といった属性の統計分析が使われることもあり、倫理的な論点も伴う分野である。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">3</span></div>
+        <div class="topic-content">
+          <span class="topic-title">金融工学とは、そしてよくある2つの誤解</span>
+          <div class="topic-desc">
+            <div class="def-box">
+              <strong>金融工学（Financial Engineering）</strong>：金融派生商品の価格評価やリスク管理のための理論体系、およびそれに関連して発展した応用分野の総称。数理ファイナンス・クオンツファイナンスとも呼ばれる。中心となる数学は確率論で、確率的最適制御など様々な応用数理分野と密接に関係する。
+            </div>
+            <p><strong>誤解(I)：「将来のことは誰にもわからないのに、デリバティブや金融工学は詐欺だ」</strong></p>
+            <p>
+              確かに将来のことはわからない。しかし金融工学は将来を予測する営みとは無関係である。デリバティブのキャッシュフローは、まだ不確かな将来の参照指標の実現値に依存するが、驚くべきことに「将来、指標がどんな値をとるか」に依らずに「現在」のデリバティブ価格が決定できる——これが金融工学の面白いところである。
+            </p>
+            <p><strong>誤解(II)：「金融派生商品を買っても損するだけ」</strong></p>
+            <p>
+              そんなことはない。有意義な金融契約はいつでも可能だが、悲しいことにその逆（不必要な契約）も真である。不必要な契約を避け、適切な契約を要求し、営業担当が有能で誠実かどうかを判断するためにも、金融工学の知識は不可欠である。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">4</span></div>
+        <div class="topic-content">
+          <span class="topic-title">先渡し契約（フォワード）の基本設定</span>
+          <div class="topic-desc">
+            <div class="def-box">
+              <strong>ゼロクーポン債</strong>：クーポン支払いがなく、満期に元本1が償還される債券。時刻tにおける満期T（≥t）のボンド1単位あたりの市場価格をP(t,T)と表す。任意のTに対しP(T,T)=1。金利が正でt&lt;TならP(t,T)&lt;1。<br>
+              <strong>資産X</strong>：株や通貨など、時刻tの1単位あたりの市場価格をX(t)と表す（配当なしと仮定）。X(t)もP(t,T)も、時刻tから見て将来の値は不確定（確率的）である。
+            </div>
+            <p>
+              契約を結ぶ2社を甲・乙とする。<strong>資産Xに対する満期Tの先渡し契約</strong>とは、現在の契約時刻tにおいて、満期T（&gt;t）に資産Xの1単位（またはそれに相当するキャッシュX(T)）とサイズKのキャッシュを交換する契約である。Kは契約時刻tにおいて甲乙が合意の上で決めておく。金銭のやり取りは満期Tのみで、契約時点tでは交換の約束のみが行われる（決済方法には、資産を直接受け渡す現物決済と、価格差を現金でやり取りする現金決済がある）。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">5</span></div>
+        <div class="topic-content">
+          <span class="topic-title">先渡し価格の決定と無裁定の仮定</span>
+          <div class="topic-desc">
+            <p>
+              契約に使うKはどう決まるのか。契約時点で金銭のやり取りが行われないため、将来Tに行う交換の、契約時点tにおける価値がゼロになるようにKを決めておく必要がある。このようなKを<strong>先渡し価格（Forward Price）</strong>と呼ぶ。
+            </p>
+            <div class="def-box">
+              <strong>先渡し価格の公式</strong>：F(t, T) = X(t) / P(t, T)<br>
+              （非金融資産の場合は保管費用や便益による修正が必要だが、議論の本筋は変わらない）
+            </div>
+            <div class="insight"><strong>数値例</strong>：X(t)=100円、「1年後の1円」の現在価値がP(t,T)=0.98円なら、F=100/0.98≈102.04円。これは「1年後の現物価格は102.04円」という予測ではない。今100円で現物を買って保有する取引とつり合う、将来決済額である。</div>
+            <p>この公式が成り立つための仮定は次の通り。</p>
+            <ul>
+              <li>資産X（無配当）、ゼロクーポン債、資産Xの先渡し契約のいずれにも高い流動性を持つ市場が存在する</li>
+              <li>取引手数料は無視できる</li>
+              <li>甲・乙の信用リスクは無視できる（実際の取引では担保契約で信用補完される）</li>
+              <li>市場に<strong>裁定機会</strong>は存在しない</li>
+            </ul>
+            <div class="def-box">
+              <strong>裁定機会（Arbitrage Opportunity）</strong>：必要な元手がゼロ、損失を出す確率がゼロ、なおかつプラスの利益を生む可能性がプラスであるような取引機会（そのような戦略を裁定戦略と呼ぶ）。自由で競争的な金融市場では、裁定機会が存在しても多くの投資家がそこに殺到して価格が是正されるため、裁定機会はすぐに消滅すると考えてよい。
+            </div>
+            <div class="insight">
+              <strong>練習問題</strong>：経済学でいう「均衡価格」は需要と供給が一致する価格のことだが、「裁定機会が存在しないこと」は均衡価格が存在するための必要条件である。なぜか？——裁定機会が存在すると、その機会を使おうとする需要（または供給）の一方が際限なく増え、無限に利益を出せてしまうため、需要と供給が一致する有限な均衡価格そのものが存在しなくなってしまう。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">6</span></div>
+        <div class="topic-content">
+          <span class="topic-title">先渡し価格の導出 — 無裁定の証明</span>
+          <div class="topic-desc">
+            <div class="def-box">
+              <strong>空売り（Short Sale）</strong>：手元に資産がない場合に、他人から資産を借りてきて売却すること。借りているので、いつか買い戻して貸主に返却する必要がある。
+            </div>
+            <p>K ≠ F(t, T) だと裁定機会が生じることを、次の取引で確認する。</p>
+            <ul>
+              <li><strong>時刻t</strong>：①資産Xの受け取り側として先渡し契約を結ぶ　②資産Xを1単位空売りする　③満期Tのゼロクーポン債をX(t)/P(t,T)単位分購入する</li>
+              <li><strong>時刻T</strong>：①先渡し契約に従いKを支払い資産Xを1単位受け取る　②受け取った資産Xで空売りを解消（返却）する　③満期になったゼロクーポン債からX(t)/P(t,T)の償還を受ける</li>
+            </ul>
+            <p>
+              この一連の取引をネットすると、時刻Tのキャッシュフローは X(t)/P(t,T) − K であり、それ以外の時刻ではゼロになる。この値は時刻tの時点ですでに確定しており、もしこれが正であれば、元手もリスクもゼロで確実に儲かる裁定戦略になってしまう（負の場合も売買を逆転させれば同様）。
+            </p>
+            <p><strong>なぜ未知のX(T)が消えるのか</strong>：時点tでは空売りの受取額X(t)をそのまま債券購入に使うため収支はゼロ。Tでは先渡しで受け取った資産をそのまま空売りの返却に使う。したがってX(T)で買い戻す必要はなく、確定額X(t)/P(t,T)−Kだけが残る。</p>
+            <p>したがって、裁定機会が存在しないためには K = X(t)/P(t,T) でなければならず、これは F(t, T) に等しい。</p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">7</span></div>
+        <div class="topic-content">
+          <span class="topic-title">誤解(III) — 金融取引はゼロサムの虚業か</span>
+          <div class="topic-desc">
+            <p><strong>誤解(III)：「金融取引は、お金が一方から一方へ移動しているだけのゼロサムゲームで、何も生み出さない虚業だ」</strong></p>
+            <p>
+              我々が農家から野菜を買う場合を考えると、現金が我々から農家へ、野菜が農家から我々へ移動しているだけである。しかし、もしこの取引が不可能になったら大問題になる——我々は農家のようには野菜を作れないからだ。つまり、野菜の価値は「我々」と「農家」とでは異なり、この取引は<strong>非ゼロサム</strong>である。
+            </p>
+            <div class="insight">
+              金融取引で、この「野菜」に対応するものは<strong>リスク</strong>である。金融取引で移動（変化）するのは、企業の将来の利益・損失を左右する「リスクの形状（プロファイル）」そのものであり、単なるお金の付け替えではない。取引可能なリスクには、証券やエネルギー価格はもとより、気温・降水量・船賃・二酸化炭素排出権・平均寿命に至るまで原理的な制限はなく、条件はその指標に対する需要（流動性）があり、人為的操作が不可能で公平性が保たれることだけである。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">8</span></div>
+        <div class="topic-content">
+          <span class="topic-title">先渡し契約の利用例 — リスクヘッジと金融機関の役割</span>
+          <div class="topic-desc">
+            <p>
+              商品の製造販売に資産Xを必要とする会社（丙）は、Xの価格変動リスクにさらされている。丙が金融機関との間でXの受け取り側として先渡し契約を結べば、Xのランダムな仕入れコストを契約時点の先渡し価格に固定できる（手数料を除けばコストはかからない）。
+            </p>
+            <div class="def-box">
+              <strong>問い</strong>：会社（丙）にとって、①満期Tにランダムな値X(T)を支払うことと、②満期Tに既に確定しているK=F(t,T)を支払うことは、等価だろうか？<br>
+              <strong>答え：No。</strong>リスクが異なる（ランダム ⇔ 確定値）。丙がリスク回避的であれば、後者の方が望ましい。
+            </div>
+            <p>
+              一方、丙の取引相手である金融機関にとっては、ランダムなX(T)と確定値Kは<strong>等価</strong>になる。なぜなら金融機関は、先渡し価格の導出で使った戦略の逆取引（ヘッジ取引）を市場で行うことで、価格変動リスクを相殺できるからだ。2つの支払い方法が等価だと言えるのは、実質的にこのヘッジ取引をコストなしで実行できる金融機関に限られる。
+            </p>
+            <div class="insight">
+              <strong>結論</strong>：金融機関は少額の手数料を乗せて先渡し契約を丙に提供することで、お互いの効用を増やせる——金融機関は手数料収入を、丙は仕入れ価格の安定化を得る（自社だけでは不可能なこと）。「野菜」に対応するのはリスクであり、農家の野菜作りの能力に対応するのが、金融機関の市場取引を通じたリスク制御能力である。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">9</span></div>
+        <div class="topic-content">
+          <span class="topic-title">先渡し契約の利用例 — 信用補完とシェールガス開発</span>
+          <div class="topic-desc">
+            <p>
+              丙が銀行からローンによる資金調達を望んでいても、信用リスクが大きすぎて銀行が貸せない（または非常に高い金利になる）場合がある。このとき金融機関は、先渡し契約によって丙の仕入れコストを固定し、値上がりによる倒産リスクを軽減した上で、この先渡し契約とパッケージでローンを提供できる。信用リスクが低減される分、ローン単体より低い金利で提供できるようになる。
+            </p>
+            <p>
+              この「ローン＋先渡し契約」に似たパッケージ（実際はより複雑な条項を含む）は、米国の新興企業によるシェールガス（オイル）田開発の資金調達スキームとして実際に盛んに利用された。開発企業がガス・オイルの生産・売却に至るまでには多額の投資と長い期間が必要で、将来のガス・オイル価格が最大のリスクとなる。開発企業がXの支払い側として先渡し契約を結んで売却価格を確定し、金融機関がそれとセットで開発資金を融資する仕組みである。
+            </p>
+            <div class="insight">
+              このスキームによってシェールガス開発への参入障壁は大きく下がり、資金力の乏しい新興企業でも開発に参入できるようになった。しかしその結果、採算が悪化した小規模企業が撤退・倒産する際に、井戸の適切な閉鎖処理（キャッピング）が行われないまま放棄され、メタンガスの漏出などの環境問題を引き起こす例も報告されている。金融技術が実体経済の行動（誰が、どれだけのリスクを取って参入するか）を変えてしまう典型例であり、ファイナンスの設計は実物経済や環境への副作用も含めて評価する必要がある。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">10</span></div>
+        <div class="topic-content">
+          <span class="topic-title">「手数料に騙された」「理論価格＝公正価格」という誤解</span>
+          <div class="topic-desc">
+            <p>
+              丙が手数料cを払い、先渡し価格F(t,T)でXの受け取り契約を結んだとする。満期Tでたまたま資産Xの価格が安く X(T) &lt; F(t,T) だったとすると、丙の損失は F(t,T) − X(T) − c となり、「本来安く買えたはずのXを高く買わされ、手数料まで取られた、金融機関に騙された」と感じるかもしれない。
+            </p>
+            <div class="insight">
+              しかしこの手数料cは、金銭的な実現値（結果的に得したか損したか）に対する対価ではなく、<strong>リスクを避けたこと自体</strong>への対価である。がん保険に加入してがんにならなかった場合を想像すればわかりやすい——保険料が「無駄になった」わけではなく、不安を避けられたこと自体に価値がある。
+            </div>
+            <p>
+              もう一つのよくある誤解は「弊社は手数料を低く抑え、理論値に近い公正な価格で商品を提供している」という宣伝文句である。これはナンセンスに近い。金融工学で決まる理論価格は、金融市場に参加して動的に複雑な取引が実行できることを前提としており、事業法人や一般個人にとって理論価格は公正でも何でもない。手数料が高くても顧客の効用を増やす場合はあるし、逆に手数料が実質マイナスに見えても顧客の効用を減らす場合がある——後者の典型例が「仕組み預金」である。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">11</span></div>
+        <div class="topic-content">
+          <span class="topic-title">オプション契約 — リスク形状の変更</span>
+          <div class="topic-desc">
+            <p>
+              先渡し契約では、値上がり・値下がりのどちらでも先渡し価格で取引することになる。値上がりリスクだけを回避したい場合に使えるのがオプション契約である。
+            </p>
+            <div class="def-box">
+              <strong>（ヨーロピアン）コールオプション</strong>：時刻Tに特定の価格K（ストライク価格）で資産Xを購入する<em>権利</em>。ペイオフは max(X(T) − K, 0)。購入にはオプション代金C（プレミアム）の支払いが必要（さもなくば裁定機会が生じる）。X(T)≤Kなら権利を放棄すればよい。<br><br>
+              <strong>（ヨーロピアン）プットオプション</strong>：時刻Tに特定の価格Kで資産Xを売る権利。ペイオフは max(K − X(T), 0)。
+            </div>
+            <p>
+              会社（丙）が満期T・行使価格Kのコールオプションを購入すると、TでのX購入費用は X(T) − max(X(T)−K, 0) となり、これは実質的に購入費用の最大値をKに固定したことになる——先渡し契約と違い、値下がりした場合の恩恵は享受できる。プレミアムCの支払いの代わりに購入費用の最大値をKに変更できたことになり、これがオプションによる<strong>リスク形状の変更</strong>である。
+            </p>
+            <div class="insight"><strong>場合分け</strong>：X(T)=150、K=100なら権利行使による受取りは50で、実質仕入れは150−50=100。X(T)=80なら権利を使わず、仕入れは80。ゆえに満期の仕入れ額はmin(X(T),K)。ただし契約時に払うプレミアムCとその金利分は別途コストである。</div>
+            <p>
+              初期費用（プレミアム）を抑えたい場合は、K′&lt;Kとして、ストライクK′のプットオプションを<em>売り</em>ながらストライクKのコールオプションを<em>購入</em>する（カラー取引）。プットの売却代金でコールの購入費用を相殺し、K′とKの大きさを調整すれば初期費用をゼロにすることもできる。ただしその代わり、資産Xが大きく値下がりしたときの恩恵（利益）は放棄することになる。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">12</span></div>
+        <div class="topic-content">
+          <span class="topic-title">オプションの価格評価 — 一期間二項モデル</span>
+          <div class="topic-desc">
+            <p>
+              オプションのプレミアムはどう決まるのか。先渡し価格と同様、「市場に裁定機会が存在しない」という仮定だけで決定できる。ここでは最も単純な<strong>一期間二項モデル</strong>で考える。
+            </p>
+            <div class="def-box">
+              <strong>設定</strong>：時刻0と満期Tの一期間。無リスク債券Bは B(0)=1, B(T)=e<sup>rT</sup>（rは金利）。資産Xは初期価格X<sub>0</sub>から、確率p<sub>u</sub>でX<sub>0</sub>u（上昇）、確率p<sub>d</sub>=1−p<sub>u</sub>でX<sub>0</sub>d（下降）のいずれかになる（0&lt;d&lt;e<sup>rT</sup>&lt;u）。
+            </div>
+            <p>
+              満期Tにペイオフ Ψ(X(T)) を持つ派生商品を考える（コールオプションなら Ψ(x)=max(x−K,0)）。資産Xと無リスク債券Bを α株・β単位保有するポートフォリオ (α, β) をうまく選べば、上昇時も下降時もこの派生商品と<strong>全く同じペイオフ</strong>を再現できる（複製ポートフォリオ）。
+            </p>
+            <p><strong>ここのαとβの意味</strong>：αは原資産Xの保有数、βは「時点0の価格が1」である無リスク債券Bの保有単位数である。β&gt;0は貸し付け（債券保有）、β&lt;0は借り入れを表す。このβは第4回の「入札戦略β<sub>i</sub>(·)」とは無関係で、分野ごとに同じギリシャ文字を別の意味で使っている。</p>
+            <div class="def-box">
+              α = [Ψ(X<sub>0</sub>u) − Ψ(X<sub>0</sub>d)] / [X<sub>0</sub>(u−d)]，　β = [Ψ(X<sub>0</sub>d)u − Ψ(X<sub>0</sub>u)d] / [B(T)(u−d)]
+            </div>
+            <p>
+              このポートフォリオの構築に必要な資金V(0) = αX<sub>0</sub> + β が、裁定機会がないための派生商品価格になる。もし市場価格がこれと異なれば、高い方を売り安い方を買って差額を無リスク資産に投資することで裁定戦略が組めてしまうからである。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">13</span></div>
+        <div class="topic-content">
+          <span class="topic-title">リスク中立確率とリスク中立価格</span>
+          <div class="topic-desc">
+            <p>
+              前項の価格V(0)を整理すると、驚くべき表現が得られる。実際の上昇・下降確率(p<sub>u</sub>, p<sub>d</sub>)の代わりに、次の確率 Q=(q<sub>u</sub>, q<sub>d</sub>) を定義する。
+            </p>
+            <div class="def-box">
+              q<sub>u</sub> = (e<sup>rT</sup> − d) / (u − d)，　q<sub>d</sub> = (u − e<sup>rT</sup>) / (u − d)　（q<sub>u</sub>&gt;0, q<sub>d</sub>&gt;0, q<sub>u</sub>+q<sub>d</sub>=1）
+            </div>
+            <p>このQを使うと、派生商品の価格は次のように書ける。</p>
+            <div class="def-box">
+              V(0) = e<sup>−rT</sup>[q<sub>u</sub>Ψ(X<sub>0</sub>u) + q<sub>d</sub>Ψ(X<sub>0</sub>d)] = e<sup>−rT</sup>E<sub>Q</sub>[Ψ(X(T))]
+            </div>
+            <div class="insight"><strong>ミニ計算例</strong>：金利0%、X<sub>0</sub>=100、u=1.2、d=0.8、K=100のコールなら、満期ペイオフは上昇時20、下落時0。q<sub>u</sub>=(1−0.8)/(1.2−0.8)=0.5なので価格は0.5×20+0.5×0=10。この10は「実際の上昇確率が50%」と予測した結果ではなく、両状態で支払いを再現するポートフォリオの構築費である。</div>
+            <p>
+              つまり、「資産Xの上昇・下降確率を実際の(p<sub>u</sub>, p<sub>d</sub>)ではなく(q<sub>u</sub>, q<sub>d</sub>)とした架空の世界では、派生商品価格はペイオフの期待値を金利で割り引いただけの値になる」ということである。実際、Qのもとでは E<sub>Q</sub>[X(T)] = X<sub>0</sub>e<sup>rT</sup> となり、資産Xの期待成長率が無リスク資産と同じになる——このような性質を持つQを<strong>リスク中立確率測度</strong>と呼ぶ。
+            </p>
+            <div class="insight">
+              価格Cは、あたかも「リスクに無関心（中立）」で支払い額の期待値だけを気にする人がつける価格に見える。金融機関がこの価格で商品を提供できるのは、Cを元手に動的な複製ポートフォリオ（ヘッジポートフォリオ）を構築し、資産Xの価格変動に関わらず買い手への支払いに必要な資金を準備できるからである。連続時間の一般的な設定でも同様の<strong>リスク中立価格公式</strong> E<sub>Q</sub>[e<sup>−∫r ds</sup>Ψ(X(T))] が成り立ち、その厳密な理論（確率積分、確率微分方程式、Black-Scholes方程式、Feynman-Kac公式など）はより進んだ講義の主題になる。
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">14</span></div>
+        <div class="topic-content">
+          <span class="topic-title">仕組み預金という搾取的商品</span>
+          <div class="topic-desc">
+            <div class="def-box">
+              <strong>仕組み預金</strong>：顧客に為替や金利などのオプションの「売りポジション」を取らせ、そのオプションの売却代金（プレミアム）から大きな手数料を差し引いたものを、見た目の金利として満期に支払う商品。満期を調整することで、見た目の金利を非常に高く演出できる。
+            </div>
+            <p>
+              顧客（預金者）は、市場でリスクを複製・相殺する能力がないにもかかわらず、「リスクに無関心な人がつける値段」（からさらに手数料分だけ安い値段）でオプションを金融機関に売っていることになる。複製能力のないリスク回避的な個人であれば、本来は市場価格よりずっと高く売らないと効用は減らない。金融機関は業者間取引で手に入れるより安くオプションを仕入れられる——非常に特殊な事情のある顧客を除けば、見た目の高金利で射幸心を煽る、情報と知識の非対称性に基づく搾取的な商品と言える。
+            </p>
+          </div>
+        </div>
+      </li>
+
+      <li>
+        <div class="tn-col"><span class="tn">15</span></div>
+        <div class="topic-content">
+          <span class="topic-title">金融市場の意義、そして「その先」</span>
+          <div class="topic-desc">
+            <p>
+              流動性が高く様々なリスクが取引可能な金融市場と、高度な動的取引を実行できる有能な金融機関が存在すれば、市場外の事業法人や個人に「リスクに無関心な人」がつける値段でリスク回避手段を提供できる。この活動を支える理論的基盤が数理ファイナンス・金融工学である。
+            </p>
+            <div class="def-box">
+              <strong>Coffee Break：一物一価は成立するか</strong><br>
+              2つの金融商品A<sub>1</sub>・A<sub>2</sub>の価格をa<sub>1</sub>・a<sub>2</sub>とするとき、両者のセットの価格が常にa<sub>1</sub>+a<sub>2</sub>になる性質を「線形性」と呼ぶ。理想的な仮定の下ではリスク中立価格公式は線形性を満たすが、借入金利と貸出金利が異なる（現実にはほぼ常にそう）といった条件を外すと非線形性が現れる。金融機関ごとに同じ商品への提示価格が異なりうる（Funding Value Adjustment, xVA と呼ばれる問題群）——一物一価は必ずしも成立しない。
+            </div>
+            <p>金融工学とその先には、数理的手法を社会に直接活かせる稀有な応用分野が広がっている。</p>
+            <ul>
+              <li><strong>確率的最適制御</strong>：確率的に変動する環境下での最適な意思決定理論（例：天候・燃料価格・電力需要が確率的に変動する中での発電所の最適発電問題）</li>
+              <li><strong>確率微分ゲーム</strong>：複数の参加者が競争・協調しながら確率的最適制御を行う状況の均衡分析（例：EV利用者が一斉に充電・売電する場合の電力価格の均衡）</li>
+              <li><strong>平均場ゲーム（Mean Field Game）</strong>：対称的な相互作用を持つ確率微分ゲームで参加者数を極限までとったモデル。統計物理学の平均場理論を社会科学に応用したもので、多人数ゲームの均衡の近似解が得られる</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">🏷️</span>重要キーワード</h2>
+    <div class="concept-tags">
+      <span class="concept-tag t-blue">デリバティブ（金融派生商品）</span>
+      <span class="concept-tag t-blue">金融工学</span>
+      <span class="concept-tag t-orange">ゼロクーポン債</span>
+      <span class="concept-tag t-orange">先渡し契約（フォワード）</span>
+      <span class="concept-tag t-orange">先渡し価格</span>
+      <span class="concept-tag t-red">裁定機会・無裁定</span>
+      <span class="concept-tag t-red">空売り</span>
+      <span class="concept-tag">リスクヘッジ</span>
+      <span class="concept-tag">仕組み預金</span>
+      <span class="concept-tag t-purple">コールオプション</span>
+      <span class="concept-tag t-purple">プットオプション</span>
+      <span class="concept-tag t-purple">プレミアム</span>
+      <span class="concept-tag t-gray">二項モデル</span>
+      <span class="concept-tag t-gray">複製ポートフォリオ</span>
+      <span class="concept-tag t-gray">リスク中立確率</span>
+      <span class="concept-tag t-gray">平均場ゲーム</span>
+    </div>
+
+    <div class="kw-detail-list">
+      <p class="kw-detail-label">各キーワードの解説（クリックで展開）</p>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details class="kw-item">
+        <summary class="kw-summary">デリバティブ（金融派生商品）</summary>
+        <div class="kw-body">参照指標の将来実現値に応じてキャッシュフローが決まる金融商品・契約。原資産は株・通貨から気温・平均寿命まで極めて幅広い。保険と異なり、損害の証明を必要とせず指標の値のみで決まる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">金融工学</summary>
+        <div class="kw-body">デリバティブの価格評価・リスク管理のための理論体系。数理ファイナンス・クオンツファイナンスとも呼ばれ、確率論を中心とした数学を用いる。将来を予測する学問ではない点が最大の誤解ポイント。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">ゼロクーポン債</summary>
+        <div class="kw-body">クーポン支払いがなく満期に元本1が償還される債券。時刻tでの満期T単位価格をP(t,T)と表す。先渡し価格の公式 F(t,T)=X(t)/P(t,T) の分母に登場する基本的な金融商品。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">先渡し契約（フォワード）</summary>
+        <div class="kw-body">満期Tに、資産Xとあらかじめ決めたキャッシュKを交換する契約。契約時点では金銭のやり取りがなく、将来の交換のみを約束する。原油・シェールガスなどの価格変動リスクをヘッジする実務で広く使われる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">先渡し価格</summary>
+        <div class="kw-body">先渡し契約時点で契約の価値がゼロになるように決められる交換価格K。F(t,T)=X(t)/P(t,T) という式で、将来の価格を予測せずに「無裁定」の仮定だけから決定できる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">裁定機会・無裁定</summary>
+        <div class="kw-body">裁定機会とは、元手ゼロ・損失確率ゼロでプラスの利益が出せる取引機会。自由な市場では存在してもすぐに消滅すると考えられ、金融工学の価格公式はすべて「市場に裁定機会が存在しない」という仮定の上に成り立つ。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">空売り</summary>
+        <div class="kw-body">手元にない資産を他人から借りてきて売却すること。いずれ買い戻して返却する必要がある。先渡し価格が無裁定条件を満たすことを証明する際の中心的な道具。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">リスクヘッジ</summary>
+        <div class="kw-body">価格変動などのリスクを、先渡し契約やオプションを使って相殺・軽減すること。金融機関は市場でのヘッジ取引によりリスクを相殺できるため、事業会社にランダムな支払いと確定した支払いを「等価」に提供できる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">仕組み預金</summary>
+        <div class="kw-body">顧客に見えない形でオプションの売りポジションを取らせ、その売却代金から手数料を引いた分を高い見た目の金利として提示する商品。情報の非対称性を利用した搾取的な商品の典型例とされる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">コールオプション</summary>
+        <div class="kw-body">満期Tに、あらかじめ決めたストライク価格Kで資産Xを購入する権利。ペイオフは max(X(T)−K, 0)。値上がりリスクだけを回避したい場合に、先渡し契約より柔軟なリスク管理ができる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">プットオプション</summary>
+        <div class="kw-body">満期Tに、あらかじめ決めたストライク価格Kで資産Xを売る権利。ペイオフは max(K−X(T), 0)。コールオプションと組み合わせる（カラー取引）ことで、購入費用の上限と下限を同時にコントロールできる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">プレミアム</summary>
+        <div class="kw-body">オプションを購入する際に支払う代金。プレミアムを支払わずにオプションを持てるとすれば裁定機会が生じてしまうため、無裁定条件から一意に決まる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">二項モデル</summary>
+        <div class="kw-body">資産価格が一期間後に2通り（上昇u・下降d）にしか動かないと単純化した価格評価モデル。複製ポートフォリオとリスク中立確率という金融工学の核心的なアイデアを、最小限の数学で理解できる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">複製ポートフォリオ</summary>
+        <div class="kw-body">派生商品と全く同じペイオフを、原資産と無リスク債券の組み合わせ（α株・β単位）で再現したポートフォリオ。この構築コストが、無裁定条件のもとでの派生商品の価格になる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">リスク中立確率</summary>
+        <div class="kw-body">実際の上昇・下降確率の代わりに、資産の期待成長率が無リスク金利と一致するように定義し直した確率測度Q。この測度の下で「ペイオフの期待値を割り引いた値」が派生商品の無裁定価格になる。</div>
+      </details>
+      <details class="kw-item">
+        <summary class="kw-summary">平均場ゲーム</summary>
+        <div class="kw-body">対称的な相互作用を持つ確率微分ゲームで参加者数を極限までとったモデル。統計物理学の平均場理論の社会科学への応用で、EVの充電・売電行動が引き起こす電力価格の均衡など、金融工学の先にある研究領域として紹介された。</div>
+      </details>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h2><span class="h2-icon">📝</span>過去問との対応</h2>
+    <div class="exam-ref-box">
+
+      <!-- 2025 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2025年度 期末試験</span>
+          <a href="../kakomon_2025.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q5</span><span class="eq-topic">リスク中立確率</span></div>
+<div class="exam-qa-q">現在の株価が100円、金利と配当はともに0、一期間後に株価は120円または80円のどちらかになる。無裁定の仮定の下、株価が120円になる場合のリスク中立確率はどれか。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>0.6</li>
+<li class="opt correct"><span class="opt-label">(b)</span>0.5<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(c)</span>0.4</li>
+<li class="opt"><span class="opt-label">(d)</span>0.25</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>リスク中立確率qは「リスク中立世界での期待株価 = 現在株価×(1+r)」から求める。</p>
+<div class="formula">金利 r = 0 なので:
+q × 120 + (1-q) × 80 = 100 × (1 + 0) = 100
+120q + 80 - 80q = 100
+40q = 20
+q = 0.5</div>
+<p>直感：株価が120と80の間で無リスク利子率ゼロでの均衡なので、リスク中立確率は上昇・下落で対称に近い。</p>
+<p>(a)0.6の誤り：q × 120 + (1-q) × 80 = 100を解く際に符号ミスや係数を誤ると0.6が出ることがある（例えば 40q = 24 と計算した場合など）。あるいは「(100-80)/(120-80) = 20/40 = 0.5」を「(120-100)/(120-80) = 20/40 = 0.5」と計算しながら符号を逆にしたとき。(c)0.4の誤り：下落確率（1-q = 0.5）を間違えて上昇確率と答えた場合、または(100-80)の代わりに(80-100)を使うなどの誤りが生じた場合。(d)0.25の誤り：デルタ（Δ = 0.25株）の数値をリスク中立確率と混同したケース。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q6</span><span class="eq-topic">オプションの複製ポートフォリオ</span></div>
+<div class="exam-qa-q">同設定（株価100円、金利・配当0、120円または80円）で、一期間後が満期の行使価格110円のコールオプションを5円で売ったとき、ペイオフを複製する借金と株の保有量として正しいものはどれか。</div>
+<ul class="options">
+<li class="opt correct"><span class="opt-label">(a)</span>銀行から20円借りて0.25株を保有する<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(b)</span>銀行から25円借りて0.25株を保有する</li>
+<li class="opt"><span class="opt-label">(c)</span>銀行から20円借りて0.2株を保有する</li>
+<li class="opt"><span class="opt-label">(d)</span>銀行から15円借りて0.2株を保有する</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>行使価格110円のコールオプションのペイオフ：</p>
+<div class="formula">株価120: max(120-110, 0) = 10円 → オプション売り手は-10円支払う
+株価80:  max(80-110, 0) = 0円  → 支払いなし
+
+デルタ（Δ）= (10 - 0) / (120 - 80) = 10/40 = 0.25株
+
+複製ポートフォリオ: Δ株 + 借入B
+株価80: 0.25×80 - B = 0  → B = 20
+確認: 株価120: 0.25×120 - 20 = 30 - 20 = 10 ✓</div>
+<p>オプション売り手はこの複製ポートフォリオ（0.25株保有＋20円借入）を持つことで、満期のオプション行使に完全に対応できる（デルタヘッジ）。オプション売却価格5円は、無裁定価格確認の問題ではなく複製戦略を問う設問。</p>
+<p><strong>本文の記号との対応</strong>：この解説では借金額を正の数B=20円で表している。一方、本文の複製ポートフォリオ(α,β)ではβは「無リスク資産の保有量」なので、借入れは負の保有としてβ=−20と書く。したがってB=20とβ=−20は同じ取引を異なる符号約束で表したものである。</p>
+<p>(b)「25円借りて0.25株」の誤り：デルタ（株数）は正しく0.25株だが、借入額が誤り。株価80の場合: 0.25×80-B=0 より B=20円（25円ではない）。(c)「20円借りて0.2株」の誤り：借入額は正しく20円だが、デルタ（株数）が誤り。正しくは Δ = (10-0)/(120-80) = 0.25株（0.2は 10/50 = 0.2 のような誤った計算）。(d)「15円借りて0.2株」の誤り：株数・借入額ともに誤り。株数0.2は上記と同じ誤り、15円は Δ×株価80 の計算でΔを誤った場合（0.2×80=16に近い値など）。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2024年度 期末試験</span>
+          <a href="../kakomon_2024.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q21</span><span class="eq-topic">先渡し価格（無配当）</span></div>
+<div class="exam-qa-q">現在時刻t=0で、ある無配当の株式が一株あたり10,000円で取引されている。満期1年のゼロクーポン債（元本1円）の価格は0.98円。当該株式一株に対する満期1年の先渡し価格として正しいものを選べ。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>9,800円</li>
+<li class="opt"><span class="opt-label">(b)</span>10,000円</li>
+<li class="opt"><span class="opt-label">(c)</span>10,020円</li>
+<li class="opt correct"><span class="opt-label">(d)</span>10,204円<span class="correct-mark">正解</span></li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>ゼロクーポン債の価格 P(0,T) = 0.98 → 1年後のディスカウントファクター = 0.98、無リスク利子率 r = (1/0.98) - 1 ≒ 2.04%</p>
+<div class="formula">先渡し価格 F = S₀ / P(0,T)
+   = 10,000 / 0.98
+   ≒ 10,204.08 ≒ 10,204円</div>
+<p>直感：今10,000円の株を現物で保有するか、先渡し契約で1年後に10,204円で買うかは無裁定（コスト-収益が等しい）。今10,000円で買えば、その資金を0.98円で借りること（利子率2.04%）に相当するため、先渡し価格は10,000円に利子を上乗せした価格になる。</p>
+<p>(a)9,800円：F = S₀ × P(0,T) = 10,000 × 0.98 = 9,800 という誤り。割り算と掛け算を混同している（ディスカウントファクターで<em>割る</em>べきところを<em>かけた</em>）。(b)10,000円：「先渡し価格は現在価格と同じ」という誤解。金利がゼロでなければ利子分を上乗せする必要がある。(c)10,020円：S₀ × (1 + r/50) のような誤った利子率計算や概算ミスによる値。正しい計算は10,000/0.98 = 10,204。</p>
+</div>
+</div>
+          <div class="exam-qa-item">
+<div class="exam-qa-header"><span class="eq-num">Q22</span><span class="eq-topic">先渡し価格（配当あり）</span></div>
+<div class="exam-qa-q">Q21の株式が半年後に「正」の配当支払い（例えば100円）を行う配当付き株式だとする。その他の条件を不変とした場合、この配当付き株式の一株に対する満期1年の先渡し価格として正しい記述を選べ。</div>
+<ul class="options">
+<li class="opt"><span class="opt-label">(a)</span>(1)の先渡し価格より高い。</li>
+<li class="opt correct"><span class="opt-label">(b)</span>(1)の先渡し価格より低い。<span class="correct-mark">正解</span></li>
+<li class="opt"><span class="opt-label">(c)</span>(1)の先渡し価格と等しい。</li>
+<li class="opt"><span class="opt-label">(d)</span>(a)-(c)のいずれであるかは与えられた条件では不明である。</li>
+</ul>
+<button class="exp-toggle" onclick="toggleExp(this)">💡 解説を見る <span class="arrow">▼</span></button>
+<div class="exp-body">
+<p>配当付き株式の先渡し価格：</p>
+<div class="formula">F = (S₀ - PV(配当)) / P(0,T)
+
+PV(配当) = 半年後の配当の現在価値 &gt; 0
+
+F_配当付き = (10,000 - PV(D)) / 0.98 &lt; 10,000 / 0.98 = F_無配当</div>
+<p>配当は満期前に株主に支払われるため、先渡し保有者は配当を受け取れない。その分だけ先渡し価格は無配当の場合より低くなる（配当落ちの効果）。</p>
+<p>(a)「先渡し価格が高くなる」：配当を受け取れない分、先渡しは不利になるはずなので価格は<em>低く</em>なければ裁定機会が生じる。「高くなる」は逆。(c)「等しい」：配当があれば現物株保有は途中で配当を受け取れるが、先渡し保有者は受け取れない。この非対称性が価格に反映されるため等しくはならない。(d)「条件だけでは不明」：配当が「正」であることは明示されているため、PV(配当)&gt;0 → 先渡し価格が低くなることは確定できる。不明ではない。</p>
+</div>
+</div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="exam-year-block">
+        <div class="exam-year-head">
+          <span>2023年度 期末試験</span>
+          <a href="../kakomon_2023.html">過去問ページへ →</a>
+        </div>
+        <div class="exam-year-body">
+          <div class="exam-no-data">2023年度は本講義（金融工学入門）に対応する問題が出題されていません。デリバティブ・先渡し価格・リスク中立確率を扱う出題は2024年度以降に登場しています。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="lecture-nav">
+    <a href="第11回.html">← 第11回</a>
+    <a href="index.html" class="center">講義一覧</a>
+    <span style="width:120px;"></span>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">現代経済理論（渡辺安虎）ー2026前期課程Sセメスター</footer>
+
+<script>
+// 押されたボタンに対応する解説欄の表示を切り替える。
+function toggleExp(btn) {
+  btn.classList.toggle('open');
+  const body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  const opt = e.target.closest('.opt');
+  if (!opt) return;
+  const options = opt.closest('.options');
+  if (!options || options.classList.contains('revealed')) return;
+  options.classList.add('revealed');
+  opt.classList.add('selected');
+});
+</script>
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+</body>
+</html>

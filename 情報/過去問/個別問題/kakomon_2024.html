@@ -1,0 +1,251 @@
+<!DOCTYPE html><!-- 「2024年度 | 情報 個別問題（田中哲郎クラス）」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2024年度 | 情報 個別問題（田中哲郎クラス）</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2024">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2024年度</h1>
+  <p class="subtitle">田中哲郎クラス｜7月26日 3限｜大問2</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（進数と倍数判定オートマトン）</a>
+    <a href="#q2">大問2（論理関数の設計・マルチプレクサ）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>3進数・2進数と倍数判定オートマトン（下位桁から入力）</h2></div>
+    <div class="sec-body">
+
+
+
+      <h3>(A) 3進数・下位桁から・2の倍数判定</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>3進数（0を a、1を b、2を c で表現）で<strong>下位の桁から</strong>与えていき（最上位に0が来る入力も扱う）、2の倍数だと受理し（終了状態になり）、2の倍数でない時は拒否する（非終了状態になる）オートマトンを作成した。下図左のチェック表の(a)〜(e)に「受理」または「拒否」のどちらが入るかを答えよ。また、下図右の(1)〜(4)の状態遷移の規則の文字の部分に集合{a,b,c}の部分集合を入れると完成するが、(1)〜(4)のそれぞれに入れる部分集合を答えよ。</p>
+        <p>チェック表（下図左。上7行は既知の例、(a)〜(e)が解答対象）：</p>
+        <table class="q-table">
+          <tr><th>入力</th><th>停止時の状態</th><th>10進表現</th></tr>
+          <tr><td>a</td><td>受理</td><td>0</td></tr>
+          <tr><td>b</td><td>拒否</td><td>1</td></tr>
+          <tr><td>c</td><td>受理</td><td>2</td></tr>
+          <tr><td>ac</td><td>受理</td><td>6</td></tr>
+          <tr><td>ab</td><td>拒否</td><td>3</td></tr>
+          <tr><td>bc</td><td>拒否</td><td>7</td></tr>
+          <tr><td>cc</td><td>受理</td><td>8</td></tr>
+          <tr><td>bacb</td><td>(a)</td><td></td></tr>
+          <tr><td>caab</td><td>(b)</td><td></td></tr>
+          <tr><td>bcac</td><td>(c)</td><td></td></tr>
+          <tr><td>bacab</td><td>(d)</td><td></td></tr>
+          <tr><td>aaabb</td><td>(e)</td><td></td></tr>
+        </table>
+        <div class="diagram">
+          <img src="img/2024/automaton-mod2-base3.png" alt="2状態オートマトン。左が受理状態（2重丸）で、4本の遷移に(1)から(4)の番号が付いている" style="max-width:480px;width:100%;height:auto;">
+          <div class="diagram-cap">設問の2状態オートマトン（原本PDFより切り出し）</div>
+        </div>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            3進数は3が奇数なので、$3^k \bmod 2 = 1$（すべての桁の重みが奇数）。したがって値全体の偶奇は「桁の数字（0,1,2）の合計の偶奇」と一致し、さらに偶数の桁（0=a, 2=c）は合計の偶奇に影響しないので、結局<strong>「bの個数が偶数か奇数か」だけ</strong>で2の倍数かどうかが決まる（a,cは無視してよい）。
+          </p>
+          <p>状態遷移：a,cを読んでも偶奇は変わらない（自己ループ）。bを読むと偶奇が反転する。</p>
+          <div class="mathblock">(1)={a,c}（偶数状態の自己ループ）　(2)={b}（偶数→奇数）
+(3)={a,c}（奇数状態の自己ループ）　(4)={b}（奇数→偶数）</div>
+          <p>チェック表（bの個数の偶奇で判定）：</p>
+          <ul>
+            <li>bacb：bが2個（偶数）→<strong>受理</strong>(a)</li>
+            <li>caab：bが1個（奇数）→<strong>拒否</strong>(b)</li>
+            <li>bcac：bが1個（奇数）→<strong>拒否</strong>(c)</li>
+            <li>bacab：bが2個（偶数）→<strong>受理</strong>(d)</li>
+            <li>aaabb：bが2個（偶数）→<strong>受理</strong>(e)</li>
+          </ul>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(1)={a,c} (2)={b} (3)={a,c} (4)={b}。チェック表：(a)受理 (b)拒否 (c)拒否 (d)受理 (e)受理</div>
+      </details>
+
+      <h3>(B) 2進数・下位桁から・3の倍数判定（最小状態数）</h3>
+      <div class="ex"><span class="box-label">問題</span><p>2進法（0を a、1を b で表現）を下位の桁から与えていき、3の倍数だと受理するオートマトンをなるべく少ない状態数で実現し、(A)の上図右と同じような図（状態遷移図）を書きなさい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>普通の余りだけを記録すると、次の桁の重み$2^n\bmod 3$が$1,2,1,2,\ldots$と交互に変わる。しかし、余りを次のように<strong>正規化</strong>すれば、その位相を別の状態として持たずに済む。</p>
+          <p>$n$文字読んだ時点で表される数を$N_n$とし、状態$q$を</p>
+          <div class="mathblock">q ≡ N_n 2^{-n} (mod 3)</div>
+          <p>で定める。法3では$2^{-1}\equiv2\pmod3$なので、この値は常に定義できる。$q_0,q_1,q_2$をそれぞれ$q\equiv0,1,2\pmod3$の状態とする。初期状態は$q_0$であり、$2^{-n}$は法3で0ではないため、$N_n$が3の倍数であることと$q=0$は同値である。したがって受理状態も$q_0$である。</p>
+          <p>次に読む桁を$d\in\{0,1\}$とすると$N_{n+1}=N_n+d2^n$だから、</p>
+          <div class="mathblock">q' ≡ N_{n+1}2^{-(n+1)}
+   ≡ (N_n2^{-n}+d)2^{-1}
+   ≡ 2(q+d) (mod 3)</div>
+          <p>$a=0,\ b=1$を代入すると、遷移は次の表になる。</p>
+        </div>
+        <table class="q-table">
+          <tr><th>現在の状態</th><th>a（0）</th><th>b（1）</th></tr>
+          <tr><td>$q_0$（開始・受理）</td><td>$q_0$</td><td>$q_2$</td></tr>
+          <tr><td>$q_1$</td><td>$q_2$</td><td>$q_1$</td></tr>
+          <tr><td>$q_2$</td><td>$q_1$</td><td>$q_0$</td></tr>
+        </table>
+        <div class="diagram">
+          <svg viewBox="0 0 660 360" role="img" aria-labelledby="automaton-title automaton-desc" style="max-width:660px;width:100%;height:auto;">
+            <title id="automaton-title">3の倍数を受理する3状態オートマトン</title>
+            <desc id="automaton-desc">初期かつ受理状態q0、状態q1、q2からなる。q0はaで自己ループ、q1はbで自己ループ。q0とq2はbで双方向、q1とq2はaで双方向に遷移する。</desc>
+            <defs>
+              <marker id="arrow-mod3" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                <path d="M0,0 L0,6 L9,3 z" fill="currentColor"></path>
+              </marker>
+            </defs>
+            <g fill="none" stroke="currentColor" stroke-width="2.5" marker-end="url(#arrow-mod3)">
+              <path d="M32 93 H142"></path>
+              <path d="M185 55 C135 4 259 4 209 55"></path>
+              <path d="M220 103 C320 67 402 67 490 103"></path>
+              <path d="M485 125 C394 162 310 162 225 125"></path>
+              <path d="M505 151 C468 225 414 270 350 291"></path>
+              <path d="M325 286 C389 257 438 211 477 143"></path>
+              <path d="M270 336 C225 367 216 292 246 287"></path>
+            </g>
+            <g fill="var(--surface, white)" stroke="currentColor" stroke-width="2.5">
+              <circle cx="185" cy="105" r="45"></circle>
+              <circle cx="185" cy="105" r="38"></circle>
+              <circle cx="520" cy="115" r="45"></circle>
+              <circle cx="290" cy="295" r="45"></circle>
+            </g>
+            <g fill="currentColor" font-size="22" font-family="sans-serif" text-anchor="middle">
+              <text x="185" y="113">q₀</text>
+              <text x="520" y="123">q₂</text>
+              <text x="290" y="303">q₁</text>
+              <text x="195" y="26">a</text>
+              <text x="355" y="73">b</text>
+              <text x="355" y="158">b</text>
+              <text x="450" y="229">a</text>
+              <text x="389" y="270">a</text>
+              <text x="213" y="347">b</text>
+              <text x="75" y="82" font-size="17">初期状態</text>
+            </g>
+          </svg>
+          <div class="diagram-cap">$q_0$が初期状態かつ受理状態（二重丸）。同じ2状態間に往復の矢印があることに注意。</div>
+        </div>
+        <div class="proof-body">
+          <p>検算：3は下位桁から「bb」と読む。$q_0\xrightarrow{b}q_2\xrightarrow{b}q_0$となり、受理される。</p>
+          <p>また、$q_0$は受理状態なので他の2状態と区別できる。$q_1$と$q_2$も、文字bを1つ読むと$q_1\xrightarrow{b}q_1$（非受理）、$q_2\xrightarrow{b}q_0$（受理）となるため区別でき、統合できない。よって<strong>最小状態数は3</strong>である。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$q\equiv N_n2^{-n}\pmod3$を記録する3状態オートマトン。初期・受理状態は$q_0$。遷移は$q_0\xrightarrow{a}q_0,\ q_0\xrightarrow{b}q_2,\ q_1\xrightarrow{a}q_2,\ q_1\xrightarrow{b}q_1,\ q_2\xrightarrow{a}q_1,\ q_2\xrightarrow{b}q_0$。最小状態数は3。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 下位桁から読む倍数判定と余りの正規化</span>
+        <p>
+          最上位桁から読む場合、$b$進数の値は「これまでの余り×b＋新しい桁」で更新でき、状態は「余りmod $m$」だけで済む。下位桁から読む場合、そのままの余りでは次の桁の重み$b^n\bmod m$の位相も必要になるが、$b$が法$m$で逆元を持つときは、本問のように$N_nb^{-n}$で正規化すると位相を余りへ吸収できる。逆元を持たない場合にはこの方法は使えず、重みの位相を含む別の状態設計が必要になる。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>論理関数の設計（2:1マルチプレクサ）</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>下の図はある論理関数$O=f(X,Y,S)$をMIL記法で書いたものである。この回路は「XとNOT(S)」「SとY」をそれぞれORでまとめ、その2つの出力をANDで結合する構成——主乗法標準形（和積標準形）を直接ゲートに落とし込んだ形になっている。</p>
+        <div class="diagram">
+          <img src="img/2024/mux-circuit.png" alt="MIL記法の回路：上段OR(X,NOT S)、下段OR(S,Y)、最後にANDでOを出力" style="max-width:600px;width:100%;height:auto;">
+          <div class="diagram-cap">上OR(X,¬S)・下OR(S,Y)・最後にAND → O=(X+\bar S)(Y+S)（原本PDFより切り出し）</div>
+        </div>
+      </div>
+
+      <h3>(A) 真理値表</h3>
+      <div class="ex"><span class="box-label">問題</span><p>$O=f(X,Y,S)$の真理値表を書け。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>回路式 $O=(X+\bar S)(Y+S)$ を$S=0,1$で場合分けすると分かりやすい：$S=0$なら$O=(X+1)(Y+0)=1\cdot Y=Y$、$S=1$なら$O=(X+0)(Y+1)=X\cdot1=X$。つまり<strong>$S=0$なら$Y$を、$S=1$なら$X$を選んで出力する2:1マルチプレクサ</strong>になっている。</p></div>
+        <table class="q-table">
+          <tr><th>X</th><th>Y</th><th>S</th><th>O</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+        </table>
+      </details>
+
+      <h3>(B) 主加法標準形</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この関数の主加法標準形（積和標準形）を書け（回路のMIL記法は主乗法標準形＝和積標準形に対応している）。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>主加法標準形は、$O=1$の各行に対応する最小項をORで結ぶ。010→$\bar X Y\bar S$、101→$X\bar YS$、110→$XY\bar S$、111→$XYS$である。前者と3項目をまとめると$Y\bar S(\bar X+X)=Y\bar S$、2項目と4項目をまとめると$XS(\bar Y+Y)=XS$となるため、回路式まで簡単化できる：</p></div>
+        <div class="sol"><span class="box-label">解</span>$$O=\bar X Y\bar S+X\bar Y S+XY\bar S+XYS = XS+Y\bar S$$</div>
+      </details>
+
+      <h3>(C) NANDのみでの実現</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この論理関数を4個以下のNANDのみを使ってMIL記法で書け。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>$O=XS+Y\bar S$ の形（積和標準形の2項）は、ド・モルガンの法則を使うとNAND-NANDネットワークとして直接実現できる：$\bar S$を1個のNAND（NAND(S,S)）で作り、$XS$と$Y\bar S$をそれぞれ1個のNANDの否定として作り（NANDの出力はすでに否定形なので、これをそのまま次段のNANDの入力にすればよい）、最後にもう1個のNANDで合成する。</p>
+          <div class="mathblock">N1 = NAND(S,S) = S̄
+N2 = NAND(X,S) = ￢(XS)
+N3 = NAND(Y,N1) = ￢(Y·S̄)
+N4 = NAND(N2,N3) = ￢(￢(XS)·￢(YS̄)) = XS+YS̄ = O　（ド・モルガンにより2つのNAND出力のNANDがORになる）</div>
+          <p>ちょうど4個のNANDで実現できる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>N1=NAND(S,S)、N2=NAND(X,S)、N3=NAND(Y,N1)、O=NAND(N2,N3)（NAND4個）</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — マルチプレクサとNAND-NAND実現</span>
+        <p>
+          「$S$の値によって$X$か$Y$のどちらかを選んで出力する」回路を<strong>マルチプレクサ（MUX）</strong>と呼び、$O=XS+Y\bar S$（積和形）で表される。積和標準形の論理関数は、ド・モルガンの法則により常に「NANDのNAND」というちょうど2段のネットワークに変換できる——各積項（AND）をNANDに、それらをまとめるOR段もNANDに置き換えられるため、NANDだけで（否定の否定を利用して）ANDとORの両方の役割を代替できる。これはNAND素子だけからどんな論理関数も作れる（NANDが関数的完全性を持つ）ことの具体例。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2025.html">← 2025年度へ</a>
+    <a href="kakomon_2022.html">2022年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

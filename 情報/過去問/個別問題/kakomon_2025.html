@@ -1,0 +1,244 @@
+<!DOCTYPE html><!-- 「2025年度 | 情報 個別問題（田中哲郎クラス）」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2025年度 | 情報 個別問題（田中哲郎クラス）</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2025">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2025年度</h1>
+  <p class="subtitle">田中哲郎クラス｜7月29日 3限｜大問2</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">大問1（有限状態機械とチューリングマシン）</a>
+    <a href="#q2">大問2（論理関数と全加算器）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">大問 1</div><h2>有限状態機械の限界とチューリングマシン</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>文字集合$\Sigma=\{a,b\}$として、判定問題$L_1$を考える：</p>
+        <div class="mathblock">$$L_1(x)=\begin{cases}\text{真} & x\text{に現れるaの個数がbの個数よりも大きいとき}\\ \text{偽} & \text{そうでないとき}\end{cases}$$</div>
+      </div>
+
+      <h3>(A) チェック表の完成</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>A君は問題$L_1$が有限状態機械で解けると主張して、下のチェック表を作成した。表の(a)〜(e)に「受理」または「拒否」のどちらが入るかを答えよ。</p>
+        <table class="q-table">
+          <tr><th>入力</th><th>停止時の状態</th></tr>
+          <tr><td>a</td><td>受理</td></tr>
+          <tr><td>b</td><td>拒否</td></tr>
+          <tr><td>ab</td><td>拒否</td></tr>
+          <tr><td>aba</td><td>受理</td></tr>
+          <tr><td>ab</td><td>拒否</td></tr>
+          <tr><td>bbb</td><td>拒否</td></tr>
+          <tr><td>aaa</td><td>受理</td></tr>
+          <tr><td>baa</td><td>(a)</td></tr>
+          <tr><td>abb</td><td>(b)</td></tr>
+          <tr><td>bbaabaa</td><td>(c)</td></tr>
+          <tr><td>aaabbab</td><td>(d)</td></tr>
+          <tr><td>bbaa</td><td>(e)</td></tr>
+        </table>
+      </div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>aの個数とbの個数を数えて比較するだけでよい。</p>
+          <ul>
+            <li>baa：a=2,b=1 → 2&gt;1 → <strong>受理</strong></li>
+            <li>abb：a=1,b=2 → 1&gt;2は偽 → <strong>拒否</strong></li>
+            <li>bbaabaa：a=4,b=3 → 4&gt;3 → <strong>受理</strong></li>
+            <li>aaabbab：a=4,b=3 → 4&gt;3 → <strong>受理</strong></li>
+            <li>bbaa：a=2,b=2 → 2&gt;2は偽 → <strong>拒否</strong></li>
+          </ul>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a)受理 (b)拒否 (c)受理 (d)受理 (e)拒否</div>
+      </details>
+
+      <h3>(B) $M_1$の反例</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>下図の有限状態機械$M_1$は$L_1$を正しく解いていない。$L_1(x_1)=$真なのに$M_1$が拒否する$x_1$、$L_1(x_2)=$偽なのに$M_1$が受理する$x_2$を、最短のもので答えよ。</p>
+        <div class="diagram">
+          <img src="img/2025/m1-automaton.png" alt="有限状態機械M1：6状態の直線チェーン。状態1〜3は非受理（灰色1重丸）、4〜6は受理（2重丸）。開始状態は状態3（外部から矢印が入っている）。隣接状態間はaで右へ・bで左へ、状態1はbで自己ループ、状態6はaで自己ループ。" style="max-width:640px;width:100%;height:auto;">
+          <div class="diagram-cap">有限状態機械$M_1$（原本PDFより切り出し）：状態1〜3は非受理（1重丸）、4〜6は受理（2重丸）。開始状態は状態3（外部から入る矢印で示されている）。aで右へ、bで左へ移動。状態1はbで、状態6はaで自己ループ。</div>
+        </div>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            この機械は6状態の一直線のチェーンで、状態1（左端）で「b」を読むと自己ループ（それ以上左に進めない）、状態6（右端）で「a」を読むと自己ループする。「a」で右隣へ、「b」で左隣へ移り、状態4・5・6だけが受理状態である。<strong>開始状態は状態3</strong>（図で外部から矢印が入っている状態）である。
+          </p>
+          <p>
+            状態3から出発するので、両端の自己ループに触れずに済んでいる間は、状態番号は「$3+(\text{aの個数})-(\text{bの個数})$」に一致し、受理状態（4以上）に届く条件はちょうど「aの個数がbの個数より1つでも多い」——すなわち$L_1$の条件そのものと一致する。ところが状態は1〜6の6個しかないため、差が$-2$を下回る（状態1で自己ループして以降のbが無かったことにされる）か、$+3$を上回る（状態6で自己ループして以降のaが無かったことにされる）と、それ以上の差の情報が失われてしまう。この「端での取りこぼし」こそが、$L_1$と$M_1$のズレの原因である。
+          </p>
+          <p>
+            <strong>$x_1$：</strong>入力「aaaabbb」（長さ7）。$L_1(\text{"aaaabbb"})$は a=4,b=3 で 4&gt;3 なので<strong>真</strong>。しかし$M_1$は開始状態3から「a」を4つ読んで 3→4→5→6→6 と進む（4つ目のaは状態6で自己ループし、無かったことにされる）。続く「b」を3つ読んで 6→5→4→3 と進み、状態3（非受理）で停止する——$M_1$は拒否してしまう。状態6での自己ループを1回でも発生させるには少なくとも4つのaが要り（3つで状態3→6に届き、4つ目が自己ループ分）、そこから非受理領域（状態3以下）に戻るには少なくとも3つのbが要るので、これより短い入力では真に真かつ$M_1$拒否という組み合わせは作れず、7文字が最短である。
+          </p>
+          <p>
+            <strong>$x_2$：</strong>入力「bbbaaa」（長さ6）。$L_1$はa=3,b=3で 3&gt;3 は偽なので<strong>偽</strong>（拒否が正しい）。しかし$M_1$は、開始状態3から最初の2つの「b」で 3→2→1 と進んだあと、3つ目の「b」は状態1で自己ループして無かったことにされる（これ以上左に進めないため）。続く3つの「a」で状態1→2→3→4と進み、状態4（受理）で停止してしまう——受理してしまう。状態1での自己ループを1回でも発生させるには少なくとも3つのbが要り（2つで状態3→1に届き、3つ目が自己ループ分）、そこから受理領域（状態4以上）に届くには状態1から少なくとも3つのaが要るので、これより短い入力では真に偽かつ$M_1$受理という組み合わせは作れず、6文字が最短である。
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$x_1=$「aaaabbb」、$x_2=$「bbbaaa」</div>
+      </details>
+
+      <h3>(C) 有限状態機械では解けないことの証明</h3>
+      <div class="ex"><span class="box-label">問題</span><p>$L_1$を解く有限状態機械が存在しないことを証明せよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            背理法で示す。$L_1$を解く有限状態機械$M$が存在し、状態数が$n$個であるとする。文字列$a^0,a^1,\ldots,a^n$（$n+1$個）を$M$の開始状態から読ませたときに到達する状態を考えると、状態は$n$種類しかないので、鳩の巣原理により、ある$0\le i&lt;j\le n$について$a^i$と$a^j$を読んだ後の到達状態が一致する。
+          </p>
+          <p>
+            有限状態機械の遷移は「現在の状態」だけで決まるので、$a^i$の後にも$a^j$の後にも同じ文字列$b^i$を続けて読ませれば、$M$は$a^ib^i$と$a^jb^i$のどちらについても同じ状態（受理／拒否）で停止するはずである。
+          </p>
+          <p>
+            しかし真の$L_1$の値は、$L_1(a^ib^i)$は $i&gt;i$ が偽なので<strong>偽</strong>、$L_1(a^jb^i)$は $i&lt;j$ より $j&gt;i$ が真なので<strong>真</strong>——両者は異なる。$M$がどちらも同じ答えを返す以上、$M$は少なくとも一方について誤った答えを返すことになり、「$M$が$L_1$を正しく解く」という仮定に矛盾する。よって$L_1$を解く有限状態機械は存在しない。
+          </p>
+        </div>
+      </details>
+
+      <h3>(D) $L_1$を解くチューリングマシン</h3>
+      <div class="ex"><span class="box-label">問題</span><p>$L_1$を解く、なるべく状態数の少ないチューリングマシンを示せ。チューリングマシンを記述するのに、教科書の表記あるいは演習で用いたオートマトンシミュレータ以外の記述法を用いる場合は、記述法に関する説明も書くこと。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            「1つの未処理のaと1つの未処理のbを見つけて印をつける（消し込む）」ことを繰り返し、bが尽きた時点でaが1つでも残っていれば受理、aが（bより先に、あるいは同時に）尽きたら拒否、という素朴な消し込み法で解ける。印には$X$（消し込んだa）・$Y$（消し込んだb）を使う。
+          </p>
+          <ul>
+            <li><strong>$q_0$（未処理のaを右方向に探す）：</strong>aを読んだら$X$に書き換え右へ進み$q_1$へ。$b,X,Y$は読み飛ばして$q_0$のまま右へ。空白（テープ終端）を読んだら——もう未処理のaがない、すなわちaの個数はこれ以上増えないので<strong>拒否</strong>で停止。</li>
+            <li><strong>$q_1$（見つけたaと対にする未処理のbを右方向に探す）：</strong>a,$X$は読み飛ばして$q_1$のまま右へ。bを読んだら$Y$に書き換え、左へ進み$q_2$へ。$Y$は読み飛ばし。空白を読んだら——このaに対応するbがもう存在しない、つまりこの時点で未消し込みのaが（少なくとも1つ）残ってbは尽きているということなので<strong>受理</strong>で停止。</li>
+            <li><strong>$q_2$（テープの先頭に戻る）：</strong>どの文字でも左へ進み$q_2$のまま。空白（テープ左端）を読んだら右へ1つ進み$q_0$に戻る（次の未処理のaを探す）。</li>
+          </ul>
+          <p>実質3状態（$q_0,q_1,q_2$）＋受理・拒否の停止動作という、非常にコンパクトな構成で$L_1$を解ける。</p>
+        </div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 正則言語の限界と「消し込み法」</span>
+        <p>
+          有限状態機械（正則言語）は「有限個の状態」しか記憶できないため、入力の長さに応じて際限なく大きくなりうる「差の大きさ」（$a$の個数と$b$の個数の差）を正確に記憶できない。(C)の証明はまさにこの限界——鳩の巣原理を使って「十分長い入力では必ず状態が使い回される」ことを突く、正則言語の非正則性を示す標準的な手法（ポンピング補題の考え方と同じ精神）である。
+          一方チューリングマシンはテープに印をつけられるため、(D)のように「1対1で消し込んでいく」操作を通じて、有限状態機械では原理的に不可能な「際限のない比較」を実現できる——これがチューリングマシンが有限状態機械より真に強力である所以。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">大問 2</div><h2>論理関数の設計と全加算器</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>下の図はある論理関数$O=f(X,Y,Z)$をMIL記法で書いたものである（AND(X,Y)、OR(X,Y)、AND(OR出力,Z)、最後にOR(AND1,AND2)という4ゲート構成）。</p>
+        <div class="diagram">
+          <img src="img/2025/mil-circuit.png" alt="MIL記法の論理回路：AND(X,Y)、OR(X,Y)、AND(OR出力,Z)、最後にOR(AND1,AND2)でOを出力" style="max-width:600px;width:100%;height:auto;">
+          <div class="diagram-cap">上段AND(X,Y)、中段OR(X,Y)、下段AND(中段出力,Z)、右端OR（上段・下段の出力）→ O（原本PDFより切り出し）</div>
+        </div>
+      </div>
+
+      <h3>(A) 真理値表</h3>
+      <div class="ex"><span class="box-label">問題</span><p>$O=f(X,Y,Z)$の真理値表を書け。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>回路式は $O = XY + Z(X+Y)$。分配法則で展開すると $XY+XZ+YZ$となる。各積項はそれぞれ「XとY」「XとZ」「YとZ」がともに1の場合を表すため、3つの入力のうち<strong>2つ以上が1のとき1を出力する多数決関数</strong>である。したがって1が0個・1個の行は0、2個・3個の行は1と埋められる。</p>
+        </div>
+        <table class="q-table">
+          <tr><th>X</th><th>Y</th><th>Z</th><th>O</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+        </table>
+      </details>
+
+      <h3>(B) 主加法標準形</h3>
+      <div class="ex"><span class="box-label">問題</span><p>$O$の主加法標準形（積和標準形）を書け。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body"><p>$O=1$の各行で、0の入力を否定、1の入力をそのまま使って最小項を作ると、011→$\bar XYZ$、101→$X\bar YZ$、110→$XY\bar Z$、111→$XYZ$となる。これらのORが主加法標準形である。さらに111の項を各隣接項との簡単化に使えば、$(\bar X+X)YZ=YZ$、$X(\bar Y+Y)Z=XZ$、$XY(\bar Z+Z)=XY$となり、多数決関数の形に戻る：</p></div>
+        <div class="sol"><span class="box-label">解</span>$$O=\bar X Y Z + X\bar Y Z + XY\bar Z + XYZ = XY+YZ+ZX$$</div>
+      </details>
+
+      <h3>(C) 1ビット全加算器との関係</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この論理関数と1ビット全加算器との関係を述べよ。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>
+            1ビット全加算器は、2つの加数$X,Y$と下位からの桁上げ$Z$（キャリーイン）を入力とし、和$S$と桁上げ出力$C_{out}$（キャリーアウト）を出力する回路である。桁上げ出力は「$X,Y,Z$のうち少なくとも2つが1なら1を出力する」多数決関数 $C_{out}=XY+YZ+ZX$ に等しい。
+          </p>
+          <p>
+            この論理関数$O=f(X,Y,Z)=XY+YZ+ZX$は、まさにこの<strong>全加算器の桁上げ出力$C_{out}$と完全に一致する</strong>。（なお和$S$の方は$X\oplus Y\oplus Z$であり、この回路とは別の論理関数になる。）
+          </p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>$O$は1ビット全加算器の桁上げ出力（キャリーアウト）$C_{out}=XY+YZ+ZX$に等しい。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 全加算器と多数決関数</span>
+        <p>
+          全加算器の2つの出力は $S=X\oplus Y\oplus Z$（和、3入力XOR）と $C_{out}=XY+YZ+ZX$（桁上げ、多数決関数）である。多数決関数は「2 of 3」とも呼ばれ、投票回路や多数決回路（個別問題2018の大問1もこの一種）でも登場する、論理設計の基本部品の一つ。$XY+YZ+ZX$を$XY+Z(X+Y)$と書き換えるとAND2個・OR2個の計4ゲートで実現でき、素朴に3つのANDと2つのORで作る（5ゲート）よりも少ない素子数で済む、というのがこの回路の工夫点。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <span></span>
+    <a href="kakomon_2024.html">2024年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

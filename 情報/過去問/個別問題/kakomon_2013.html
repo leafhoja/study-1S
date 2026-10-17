@@ -1,0 +1,347 @@
+<!DOCTYPE html><!-- 「2013年度 | 情報 個別問題」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>2013年度 | 情報 個別問題</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="kobetsu-2013">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>個別問題 2013年度</h1>
+  <p class="subtitle">田中哲朗クラス（理科一類8,24,26組）｜7月29日（月）4限（訂正版）</p>
+</div>
+
+<div class="container">
+
+  <!-- 本文の各節へ移動するページ内リンクをまとめる。 --><div class="toc">
+    <a href="#q1">個別問題1（ED21機械語シミュレータ）</a>
+    <a href="#q2">個別問題2（XOR回路とオートマトン）</a>
+  </div>
+
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section" id="q1">
+    <div class="sec-header"><div class="sec-tag">個別問題 1</div><h2>ED21機械語シミュレータ</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>プログラムシミュレータED21の機械語の命令集合の一部を以下に示す。</p>
+        <ul>
+          <li>LOAD n：n番地の内容をアキュムレータにコピーする</li>
+          <li>ADD n：n番地の値をアキュムレータの値に加える</li>
+          <li>STORE n：アキュムレータの値をn番地に格納する</li>
+          <li>STOP n：プログラムを終了する</li>
+          <li>MUL n：アキュムレータの値にn番地の値を掛ける</li>
+          <li>SUB n：アキュムレータの値からn番地の値を引く</li>
+          <li>J n：無条件でn番地にジャンプ</li>
+          <li>JM n：アキュムレータの値が負のときにn番地にジャンプ</li>
+          <li>JZ n：アキュムレータの値がゼロのときにn番地にジャンプ</li>
+        </ul>
+        <p>たとえば、プログラムシミュレータED21の機械語で書かれた以下のプログラムを考える。</p>
+        <table class="q-table">
+          <tr><th>番地</th><th>内容</th></tr>
+          <tr><td>0</td><td>LOAD 1000</td></tr>
+          <tr><td>1</td><td>ADD 1001</td></tr>
+          <tr><td>2</td><td>STORE 1000</td></tr>
+          <tr><td>3</td><td>LOAD 1001</td></tr>
+          <tr><td>4</td><td>SUB 1002</td></tr>
+          <tr><td>5</td><td>STORE 1001</td></tr>
+          <tr><td>6</td><td>JZ 8</td></tr>
+          <tr><td>7</td><td>J 0</td></tr>
+          <tr><td>8</td><td>LOAD 1000</td></tr>
+          <tr><td>9</td><td>STOP 0</td></tr>
+          <tr><td>1000</td><td>0</td></tr>
+          <tr><td>1001</td><td>n（$1\le n\le50$）</td></tr>
+          <tr><td>1002</td><td>1</td></tr>
+        </table>
+        <p>このプログラムを0番地から実行すると、停止時にはアキュムレータに1からnまでの和が得られ、その実行ステップ数は$8n+1$である（最後のSTOP命令も実行ステップに数える）。</p>
+        <p>同様にプログラム(1)について、</p>
+        <ul>
+          <li>(a) 何をするプログラムか?</li>
+          <li>(b) 実行ステップ数はいくつか?</li>
+        </ul>
+        <p>を答えなさい。また、プログラム(2)はプログラム(1)と同じ計算をおこなうプログラムである。</p>
+        <ul>
+          <li>(c) プログラム(1)と同じ計算をおこなっていることの説明</li>
+          <li>(d) 実行ステップ数はいくつか?</li>
+        </ul>
+        <p>を答えなさい。プログラム(2)はプログラム(1)と同じ計算をおこなっているにも関わらず、プログラム(1)よりも少ない実行ステップ数で計算できる。</p>
+        <ul>
+          <li>(e) プログラム(1),(2)と同じ計算をおこない、実行ステップ数がプログラム(2)よりも小さいプログラムを作成しなさい。</li>
+        </ul>
+      </div>
+
+      <h3>プログラム(1)</h3>
+      <table class="q-table">
+        <tr><th>番地</th><th>内容</th></tr>
+        <tr><td>0</td><td>LOAD 1001</td></tr>
+        <tr><td>1</td><td>ADD 1000</td></tr>
+        <tr><td>2</td><td>STORE 1001</td></tr>
+        <tr><td>3</td><td>LOAD 1002</td></tr>
+        <tr><td>4</td><td>SUB 1003</td></tr>
+        <tr><td>5</td><td>STORE 1002</td></tr>
+        <tr><td>6</td><td>JZ 8</td></tr>
+        <tr><td>7</td><td>J 0</td></tr>
+        <tr><td>8</td><td>LOAD 1001</td></tr>
+        <tr><td>9</td><td>STOP</td></tr>
+        <tr><td>1000</td><td>n（$0\le n\le20$）</td></tr>
+        <tr><td>1001</td><td>0</td></tr>
+        <tr><td>1002</td><td>31</td></tr>
+        <tr><td>1003</td><td>1</td></tr>
+      </table>
+
+      <h3>プログラム(2)</h3>
+      <table class="q-table">
+        <tr><th>番地</th><th>内容</th></tr>
+        <tr><td>0</td><td>LOAD 1000</td></tr>
+        <tr><td>1</td><td>ADD 1000</td></tr>
+        <tr><td>2</td><td>STORE 1001</td></tr>
+        <tr><td>3</td><td>ADD 1001</td></tr>
+        <tr><td>4</td><td>STORE 1002</td></tr>
+        <tr><td>5</td><td>ADD 1002</td></tr>
+        <tr><td>6</td><td>STORE 1003</td></tr>
+        <tr><td>7</td><td>ADD 1003</td></tr>
+        <tr><td>8</td><td>ADD 1003</td></tr>
+        <tr><td>9</td><td>ADD 1002</td></tr>
+        <tr><td>10</td><td>ADD 1001</td></tr>
+        <tr><td>11</td><td>ADD 1000</td></tr>
+        <tr><td>12</td><td>STORE 1001</td></tr>
+        <tr><td>13</td><td>STOP</td></tr>
+        <tr><td>1000</td><td>n（$0\le n\le20$）</td></tr>
+        <tr><td>1001</td><td>0</td></tr>
+        <tr><td>1002</td><td>0</td></tr>
+        <tr><td>1003</td><td>0</td></tr>
+      </table>
+
+      <h3>(a)(b) プログラム(1)の動作とステップ数</h3>
+      <div class="ex"><span class="box-label">問題</span><p>プログラム(1)は何をするプログラムか。また実行ステップ数はいくつか。</p></div>
+      <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>導入例と同じ読み方で、番地1000〜1003の役割を確認する。1000番地は定数$n$、1001番地は累積用の変数$Y$（初期値0）、1002番地はカウンタ$Z$（初期値31）、1003番地は定数1である。ループ本体（アドレス0〜5）を1回分たどると次のようになる。</p>
+          <p>LOAD 1001（ACC$=Y$）→ ADD 1000（ACC$=Y+n$）→ STORE 1001（$Y\leftarrow Y+n$、すなわち$Y$に$n$を加算）→ LOAD 1002（ACC$=Z$）→ SUB 1003（ACC$=Z-1$）→ STORE 1002（$Z\leftarrow Z-1$）。</p>
+          <p>つまりループ1回で「$Y$に$n$を加算し、$Z$を1減らす」という処理をおこなっている。$Z$は31から始まり、JZ 8の判定で$Z=0$になった時点でループを抜けるので、このループはちょうど31回実行され、$Y$は最終的に$n\times31$になる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(a) $n$を31倍する（$31n$を計算する）プログラムである。<br>(b) ループは合計31回実行される。JZ 8で分岐しない30回は毎回8ステップ（アドレス0〜7）、最後の1回（$Z=0$になった回）はJZが成立してアドレス6でジャンプするため7ステップ（アドレス0〜6）、その後アドレス8,9の2ステップが実行される。合計は$30\times8+7+2=240+9=249$ステップ。（導入例の公式「$8n+1$」のパターンにループ回数31を当てはめると$8\times31+1=249$となり一致する。）</div>
+      </details>
+
+      <h3>(c)(d) プログラム(2)の動作とステップ数</h3>
+      <div class="ex"><span class="box-label">問題</span><p>プログラム(2)がプログラム(1)と同じ計算をおこなっていることを説明せよ。また実行ステップ数はいくつか。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>アドレス0から順にアキュムレータの値をトレースする。</p>
+          <ul>
+            <li>0: LOAD 1000 → ACC$=n$</li>
+            <li>1: ADD 1000 → ACC$=2n$</li>
+            <li>2: STORE 1001 → $Y=2n$</li>
+            <li>3: ADD 1001 → ACC$=2n+2n=4n$</li>
+            <li>4: STORE 1002 → $Z=4n$</li>
+            <li>5: ADD 1002 → ACC$=4n+4n=8n$</li>
+            <li>6: STORE 1003 → $W=8n$</li>
+            <li>7: ADD 1003 → ACC$=8n+8n=16n$</li>
+            <li>8: ADD 1003（再度） → ACC$=16n+8n=24n$</li>
+            <li>9: ADD 1002 → ACC$=24n+4n=28n$</li>
+            <li>10: ADD 1001 → ACC$=28n+2n=30n$</li>
+            <li>11: ADD 1000 → ACC$=30n+n=31n$</li>
+            <li>12: STORE 1001 → $Y=31n$</li>
+            <li>13: STOP</li>
+          </ul>
+          <p>最終的にACCは$31n$となり、プログラム(1)と同じ結果になる。</p>
+          <p>説明の骨子：プログラム(2)は「2倍を繰り返す」ことで$n\to2n\to4n\to8n$という値の系列を作り出し、それらの必要な組み合わせを最後に一直線に加算することで$31n$を得ている。ちょうど$31=16+8+4+2+1$（2進数で$11111_2$）という2進展開に対応する部分和を、ループを一切使わずに順番に加え合わせている、と説明できる。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>(c) プログラム(2)は2倍を繰り返して$n,2n,4n,8n$を作り、それらの和$n+2n+4n+8n+8n=31n$（$31=16+8+4+2+1$の2進展開に対応）を一直線の計算で求めており、プログラム(1)と同じ$31n$を計算している。<br>(d) 命令はアドレス0から13までの<strong>14ステップ</strong>（ループがないため命令数がそのまま実行ステップ数になる）。</div>
+      </details>
+
+      <h3>(e) より高速なプログラム</h3>
+      <div class="ex"><span class="box-label">問題</span><p>プログラム(1),(2)と同じ計算をおこない、実行ステップ数がプログラム(2)よりも小さいプログラムを作成しなさい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>$31n=32n-n$と考えれば、「2倍を5回繰り返して$32n$を作り、そこから$n$を引く」だけで済む。$32=2^5$なので2倍は5回でよく、プログラム(2)より少ない命令数になる。</p>
+        </div>
+        <table class="q-table">
+          <tr><th>番地</th><th>内容</th></tr>
+          <tr><td>0</td><td>LOAD 1000</td></tr>
+          <tr><td>1</td><td>ADD 1000</td></tr>
+          <tr><td>2</td><td>STORE 1001</td></tr>
+          <tr><td>3</td><td>ADD 1001</td></tr>
+          <tr><td>4</td><td>STORE 1001</td></tr>
+          <tr><td>5</td><td>ADD 1001</td></tr>
+          <tr><td>6</td><td>STORE 1001</td></tr>
+          <tr><td>7</td><td>ADD 1001</td></tr>
+          <tr><td>8</td><td>STORE 1001</td></tr>
+          <tr><td>9</td><td>ADD 1001</td></tr>
+          <tr><td>10</td><td>SUB 1000</td></tr>
+          <tr><td>11</td><td>STOP</td></tr>
+          <tr><td>1000</td><td>n（$0\le n\le20$）</td></tr>
+          <tr><td>1001</td><td>（初期値不要、最初に書き込むため）</td></tr>
+        </table>
+        <div class="proof-body">
+          <p>トレース：LOAD 1000（ACC$=n$）→ ADD 1000（ACC$=2n$）→ STORE 1001（$Y=2n$）→ ADD 1001（ACC$=2n+2n=4n$）→ STORE 1001（$Y=4n$）→ ADD 1001（ACC$=8n$）→ STORE 1001（$Y=8n$）→ ADD 1001（ACC$=16n$）→ STORE 1001（$Y=16n$）→ ADD 1001（ACC$=32n$）→ SUB 1000（ACC$=32n-n=31n$）→ STOP。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>上記の命令列（アドレス0〜11の<strong>12ステップ</strong>）で$31n$を計算できる。プログラム(2)の14ステップより少ない（$31n=32n-n$、$32=2^5$という考え方を利用。他の組み方でも同様に14ステップ未満なら正解になりうる）。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — ループ加算から倍々計算へ：繰り返し二乗法の入門</span>
+        <p>この一連の設問（プログラム(1)→(2)→(e)）は、「ループによる繰り返し加算」（$Z$を1つずつ減らしながら31回加算する、$O(n)$回のループ）から、「2倍を繰り返す方法」（$O(\log n)$回の操作だけで済む、いわゆる倍々計算）への改良を体験させる問題である。$31n$を計算するのに31回足すのではなく、$n\to2n\to4n\to8n\to16n\to32n$という2倍の系列を作り、そこから必要な項を選んで加える（あるいは(e)のように$32n-n$として引く）ことで、計算量を大きく減らせる。これは計算機科学で頻出する「繰り返し二乗法（exponentiation by squaring）」的な発想——ある操作を繰り返し2倍していくことで、線形時間の計算を対数時間に短縮する——の入門的な例になっている。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="section" id="q2">
+    <div class="sec-header"><div class="sec-tag">個別問題 2</div><h2>XOR回路とオートマトン</h2></div>
+    <div class="sec-body">
+
+
+
+      <div class="ex">
+        <span class="box-label">問題（導入）</span>
+        <p>以下の図は3つの基本素子XOR, NAND, ANDをMIL記法で表したものである。</p>
+        <div class="diagram">
+          <img src="img/2013/gates-xor-nand-and.png" alt="XOR, NAND, ANDの3つの基本素子をMIL記法で描いた図。左からXOR,NAND,ANDの順に並び、それぞれ出力にoutのラベルがついている。" style="max-width:600px;width:100%;height:auto;">
+          <div class="diagram-cap">XOR・NAND・ANDのMIL記法（原本PDFより切り出し）</div>
+        </div>
+        <p>これらの基本素子の真理値表は以下のように表される。</p>
+        <table class="q-table">
+          <tr><th>x</th><th>y</th><th>XOR(x,y)</th><th>NAND(x,y)</th><th>AND(x,y)</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+        </table>
+        <p>これらの素子のうちXORを2つ組み合わせて以下の図のように、3入力(x,y,z)で1出力(out)の組み合わせ回路を作成した。</p>
+        <div class="diagram">
+          <img src="img/2013/circuit-initial.png" alt="x,y,zの3入力・1出力(out)の組み合わせ回路。素子1(xとyを入力とするXORゲート)の出力と入力zを、素子2(もう1つのXORゲート)に入力する構成。" style="max-width:560px;width:100%;height:auto;">
+          <div class="diagram-cap">開始状態の回路：素子1・素子2ともにXOR（原本PDFより切り出し）</div>
+        </div>
+      </div>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 排他的論理和2つの直列接続はパリティ関数</span>
+        <p>素子1の出力を$m$とすると$m=\mathrm{XOR}(x,y)=x\oplus y$、そして$\mathrm{out}=\mathrm{XOR}(m,z)=x\oplus y\oplus z$となる。XORは「入力のうち1の個数が奇数なら1」という性質を持つ演算なので、2つのXORを直列につなぐと、3入力全体で「1の個数が奇数なら1」を判定する<strong>奇数パリティ関数</strong>が得られる。この考え方を拡張すれば、XORをさらに直列に繋いでいくことで、任意個の入力についてのパリティ（1の個数の偶奇）を計算する回路を作れる。</p>
+      </div>
+
+      <h3>(a) 真理値表</h3>
+      <div class="ex"><span class="box-label">問題</span><p>この回路の真理値表を書きなさい。</p></div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p>各行について、まず素子1の出力$m=\mathrm{XOR}(x,y)$を計算し、次に$\mathrm{out}=\mathrm{XOR}(m,z)$を計算する。</p>
+          <ul>
+            <li>$(x,y,z)=(0,0,0)$：$m=\mathrm{XOR}(0,0)=0$、$\mathrm{out}=\mathrm{XOR}(0,0)=0$</li>
+            <li>$(0,0,1)$：$m=0$、$\mathrm{out}=\mathrm{XOR}(0,1)=1$</li>
+            <li>$(0,1,0)$：$m=\mathrm{XOR}(0,1)=1$、$\mathrm{out}=\mathrm{XOR}(1,0)=1$</li>
+            <li>$(0,1,1)$：$m=1$、$\mathrm{out}=\mathrm{XOR}(1,1)=0$</li>
+            <li>$(1,0,0)$：$m=\mathrm{XOR}(1,0)=1$、$\mathrm{out}=\mathrm{XOR}(1,0)=1$</li>
+            <li>$(1,0,1)$：$m=1$、$\mathrm{out}=\mathrm{XOR}(1,1)=0$</li>
+            <li>$(1,1,0)$：$m=\mathrm{XOR}(1,1)=0$、$\mathrm{out}=\mathrm{XOR}(0,0)=0$</li>
+            <li>$(1,1,1)$：$m=0$、$\mathrm{out}=\mathrm{XOR}(0,1)=1$</li>
+          </ul>
+          <p>結果を見ると、$x,y,z$のうち1の個数が奇数（1個または3個）のときちょうどout=1になっており、冒頭のnoteで述べた「奇数パリティ」と一致する。</p>
+        </div>
+        <table class="q-table">
+          <tr><th>x</th><th>y</th><th>z</th><th>m（素子1出力）</th><th>out</th></tr>
+          <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+          <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+          <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+          <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+          <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+          <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+        </table>
+        <div class="sol"><span class="box-label">解</span>上表の通り。$x,y,z$のうち1の個数が奇数のときout=1となる（$\mathrm{out}=x\oplus y\oplus z$、奇数パリティ関数）。</div>
+      </details>
+
+      <h3>(b) 回路の取り換え操作とオートマトン</h3>
+      <div class="ex">
+        <span class="box-label">問題</span>
+        <p>回路の「素子1」、「素子2」の位置にある基本素子を取り換えると、同じ入力に対して、異なる出力が得られるようになる。基本素子を取り換える操作を以下のように定義する。</p>
+        <ul>
+          <li>A：「素子1」の位置の基本素子をNANDに取り換える。</li>
+          <li>B：「素子1」の位置の基本素子をANDに取り換える。</li>
+          <li>C：「素子2」の位置の基本素子をNANDに取り換える。</li>
+          <li>D：「素子2」の位置の基本素子をANDに取り換える。</li>
+        </ul>
+        <p>たとえば、「素子1」、「素子2」共にXORの回路である開始状態から「A」「A」「C」「B」という操作をおこなった後の回路は、以下の図のようになる。</p>
+        <div class="diagram">
+          <img src="img/2013/circuit-modified.png" alt="開始状態からA,A,C,Bの操作を適用した後の回路。素子1がANDゲート、素子2がNANDゲートに置き換えられている。" style="max-width:560px;width:100%;height:auto;">
+          <div class="diagram-cap">操作「A,A,C,B」適用後：素子1=AND、素子2=NAND（原本PDFより切り出し）</div>
+        </div>
+        <p>「状態」を回路として、「入力」をA〜Dの操作とすると、オートマトン（有限状態機械）と見なすことができる。$\{x=1,y=1,z=0\}$という入力に対する出力がout=1となる回路を終了状態として、このオートマトン（有限状態機械）を図示しなさい。</p>
+      </div>
+      <details>
+        <summary>解答を見る</summary>
+        <div class="proof-body">
+          <p><strong>操作A,A,C,Bの検証：</strong>開始状態（素子1=XOR, 素子2=XOR）に、A（素子1→NAND）、A（素子1→NAND、変化なし）、C（素子2→NAND）、B（素子1→AND）を順に適用すると、最終的に素子1=AND、素子2=NANDになり、これは掲載図（circuit-modified.png）と一致する。ここで重要なのは、A,B,C,Dは「その位置の素子をXORから別の素子に切り替える」という<strong>一方的な指定操作</strong>であり、トグル（前の状態を反転させる）ではないという点である。つまり、素子1に何度A,Bを押してもその位置の素子は最後に押したA/Bで決まり（AならNAND、BならAND）、同様に素子2はC/Dのうち最後に押した方で決まる。したがって回路の「状態」は、素子1の値（XOR/NAND/AND）と素子2の値（XOR/NAND/AND）の組だけで決まり、押した順番やそれ以前の操作の履歴には依存しない。</p>
+          <p><strong>状態数：</strong>素子1、素子2はそれぞれ独立に{XOR,NAND,AND}の3通りの値を取りうる（A,Bで素子1をNAND/ANDに、C,Dで素子2をNAND/ANDに設定できるが、いずれの操作も一度NANDやANDにした後にXORへ戻すことはできない）ので、回路全体の「状態」は$3\times3=9$通り考えられる。</p>
+          <p><strong>終了状態（受理状態）の判定：</strong>$\{x=1,y=1,z=0\}$を入力したときの出力を9状態すべてについて計算する。まず素子1の出力（$x=1,y=1$を入力）は、$\mathrm{XOR}(1,1)=0$、$\mathrm{NAND}(1,1)=0$、$\mathrm{AND}(1,1)=1$。次に素子2の出力（素子1の出力と$z=0$を入力）は、素子1出力が0の場合$\mathrm{XOR}(0,0)=0$、$\mathrm{NAND}(0,0)=1$、$\mathrm{AND}(0,0)=0$、素子1出力が1の場合$\mathrm{XOR}(1,0)=1$、$\mathrm{NAND}(1,0)=1$、$\mathrm{AND}(1,0)=0$。これらを組み合わせて9通り全てのoutを求める。</p>
+        </div>
+        <table class="q-table">
+          <tr><th>素子1＼素子2</th><th>XOR</th><th>NAND</th><th>AND</th></tr>
+          <tr><td>XOR</td><td>out=0</td><td>out=<strong>1</strong></td><td>out=0</td></tr>
+          <tr><td>NAND</td><td>out=0</td><td>out=<strong>1</strong></td><td>out=0</td></tr>
+          <tr><td>AND</td><td>out=<strong>1</strong></td><td>out=<strong>1</strong></td><td>out=0</td></tr>
+        </table>
+        <div class="proof-body">
+          <p>したがって、終了状態（受理状態）となるのは4つの回路状態：<strong>(XOR,NAND)、(NAND,NAND)、(AND,XOR)、(AND,NAND)</strong>である。残り5状態（(XOR,XOR)、(XOR,AND)、(NAND,XOR)、(NAND,AND)、(AND,AND)）は非終了状態（非受理状態）となる。</p>
+          <p><strong>遷移規則：</strong>状態を(素子1,素子2)の組で表すと、操作の効果は次のように単純である。</p>
+          <ul>
+            <li>操作A：(素子1,素子2) → (NAND,素子2)（素子2は保持）</li>
+            <li>操作B：(素子1,素子2) → (AND,素子2)（素子2は保持）</li>
+            <li>操作C：(素子1,素子2) → (素子1,NAND)（素子1は保持）</li>
+            <li>操作D：(素子1,素子2) → (素子1,AND)（素子1は保持）</li>
+          </ul>
+          <p>開始状態は(XOR,XOR)。この9状態を素子1（行）×素子2（列）の$3\times3$のグリッドとして図示し、受理状態を上表のように太字でマークすれば、オートマトンの図（状態遷移図）に相当する情報を明快に表せる。各状態から、A,Bの矢印は同じ行の中で列を保ったまま「NAND列」「AND列」へ、C,Dの矢印は同じ列の中で行を保ったまま「NAND行」「AND行」へ向かう、という規則的な構造を持つ（XOR行・XOR列へ戻る矢印は存在しない）。</p>
+        </div>
+        <div class="sol"><span class="box-label">解</span>状態は(素子1,素子2)の$3\times3=9$通り。開始状態は(XOR,XOR)。受理状態（$\{x{=}1,y{=}1,z{=}0\}$でout=1になる状態）は(XOR,NAND)、(NAND,NAND)、(AND,XOR)、(AND,NAND)の4つ。遷移はA:素子1→NAND、B:素子1→AND、C:素子2→NAND、D:素子2→AND（他方の素子は変化しない）。</div>
+      </details>
+
+      <div class="note">
+        <span class="box-label">背景知識 — 「回路の構成」を状態と見なす抽象化</span>
+        <p>この問題の面白さは、回路そのものの入出力（x,y,z→out）ではなく、<strong>回路の構成（どの位置にどの素子が入っているか）</strong>を「状態」とみなし、素子を取り換える操作を「入力」とみなすことで、論理回路という全く別の対象にもオートマトンの枠組みをそのまま適用できる点にある。オートマトンの状態は文字列の読み取り位置や暗証番号の一致状況である必要はなく、任意の「現在の構成」を状態として抜き出せば良い、という抽象化の考え方を体験できる設問になっている。個別問題1で見たED21のプログラム比較（ループ的な繰り返し加算 vs 倍々計算）もまた、同じ計算対象（$31n$を求めること）を異なる手法・異なる視点から捉え直す発想であり、「同じ問題を複数の見方で表現し直す」ことがこの科目全体を通じたテーマの一つになっている。</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="kakomon_2014.html">← 2014年度へ</a>
+    <a href="kakomon_2012.html">2012年度へ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+<script src="../../nav.js"></script>
+<script src="../../../common.js?v=20260718-texcopy"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

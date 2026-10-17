@@ -1,0 +1,124 @@
+<!DOCTYPE html><!-- 「コンピュータの仕組みと論理回路 — 記述式で狙われる内容｜情報」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>コンピュータの仕組みと論理回路 — 記述式で狙われる内容｜情報</title>
+  <link rel="stylesheet" href="../../common.css">
+  <link rel="stylesheet" href="../style.css">
+  <script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+    MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']], tags: 'ams' },
+      options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] } };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" async></script>
+</head>
+<body data-nav-page="tango-04-desc">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">トップ</a>
+      <a href="index.html">単語帳</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>コンピュータの仕組みと論理回路 — 記述式で狙われる内容</h1>
+  <p class="subtitle">過去問の記述問題と得点ポイント</p>
+</div>
+
+<div class="container">
+
+  <div class="ex" id="desc-vonneumann">
+    <span class="box-label desc-q">共通2015 問1、共通2025 問1問2 <span class="desc-src">プログラム内蔵方式の説明</span></span>
+    <p>プログラム内蔵方式によってなぜ配線を変えずに異なる計算ができるかを説明する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>フォン・ノイマン型の本質（プログラムをデータと同列に主記憶へ格納し、内容を書き換えるだけで
+      別の処理を実行できること）を説明できるかが得点の核心。</p>
+  </div>
+
+  <div class="ex" id="desc-trace">
+    <span class="box-label desc-q">個別2007・2010・2013・2019・2022、共通2015 問3B・共通2023 問3A <span class="desc-src">機械語プログラムの動作説明</span></span>
+    <p>与えられた機械語プログラムが何をするプログラムかを説明する問題群（最頻出パターンのひとつ）。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>各番地に意味（定数・変数・カウンタ）を正しく割り当て、ループが何を何回繰り返すか、
+      最終的にACに残る値が何を表すかを明示することが得点要素。</p>
+  </div>
+
+  <div class="ex" id="desc-selfrewrite">
+    <span class="box-label desc-q">共通2023 問3A <span class="desc-src">命令の自己書き換え</span></span>
+    <p>命令の書き換え・自己書き換えに関する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>プログラム内蔵方式では命令もデータと同じメモリにあるため、命令をデータとして読み込んだり
+      書き換えたりできる、という背景知識に基づいて説明する。</p>
+  </div>
+
+  <div class="ex" id="desc-majority">
+    <span class="box-label desc-q">個別2025 問2C <span class="desc-src">多数決関数と全加算器の桁上げ出力</span></span>
+    <p>与えられた3入力論理関数が全加算器の桁上げ出力$C_{\text{out}}=XY+YZ+ZX$（多数決関数）と
+      一致することを指摘する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>和$S=X\oplus Y\oplus Z$は別の論理関数であり、桁上げ出力（多数決関数）と混同しないことに
+      触れる必要がある。</p>
+  </div>
+
+  <div class="ex" id="desc-nandonly">
+    <span class="box-label desc-q">個別2006・2008・2011・2015・2018・2022・2024、共通2009・2014・2019 <span class="desc-src">NAND単体／NOR単体による構成（最頻出）</span></span>
+    <p>NANDだけ、またはNORだけで他の演算（NOT・AND・OR・XORなど）を構成せよという設問群。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>積和標準形を求め→NAND-NANDの2段構成に機械的変換→全入力パターンでの検算、という手順を示す。
+      中間信号を複数出力の計算に再利用してゲート数を削減する工夫の明示、カルノー図による簡単化も
+      加点対象。</p>
+  </div>
+
+  <div class="ex" id="desc-complement">
+    <span class="box-label desc-q">個別2012 問2a <span class="desc-src">2の補数表現の一意性</span></span>
+    <p>2の補数表現が表現可能かつ一意であることを説明する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>非負数の範囲がちょうど$2^{n-1}$通り、負数の範囲が残り$2^{n-1}$通りを重複なく埋め、n桁で
+      表せる$2^n$通りすべてを1対1に使い切るため、という値域の数え上げによる論法で説明する。</p>
+  </div>
+
+  <div class="ex" id="desc-completeness">
+    <span class="box-label desc-q">共通2009・2014・2019 <span class="desc-src">NAND/NORの完備性の意義</span></span>
+    <p>NAND/NORの完備性の意義を説明する問題。</p>
+  </div>
+  <div class="sol">
+    <span class="box-label">書くべきポイント</span>
+    <p>1種類のゲートだけを大量生産すればよいという、LSI設計上の製造単純化・標準化の利点を
+      説明できるかがポイント。</p>
+  </div>
+
+  <!-- 本文を読み終えた後に、前後のページや目次へ移動するリンクを置く。 --><div class="page-nav">
+    <a href="04-コンピュータの仕組みと論理回路-keypoints.html">← 押さえておきたい事項</a>
+    <a href="index.html">単語帳トップ →</a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../nav.js"></script>
+<script src="../../common.js"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>

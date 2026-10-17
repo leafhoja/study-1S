@@ -1,0 +1,155 @@
+<!DOCTYPE html><!-- 「共通問題 | 情報 過去問」の一覧ページ。掲載されたページへ移動する入口をまとめる。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+  <meta charset="UTF-8">
+  <script src="../../../access_control.js"></script>
+  <script src="../../../access-guard.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0a4f5c">
+  <title>共通問題 | 情報 過去問</title>
+  <link rel="stylesheet" href="../../../common.css">
+  <link rel="stylesheet" href="../../style.css">
+</head>
+<body data-nav-page="kyotsu-index">
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../../index.html">情報</a>
+    <div class="navbar-links">
+      <a href="../../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../../index.html">トップ</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero">
+  <h1>過去問 — 共通問題</h1>
+  <p class="subtitle">全クラス共通で出題される部分（大問1〜3、90分の一部）</p>
+</div>
+
+<div class="container">
+
+  <!-- 一覧に入る前に、ノートの内容や読み方を案内する。 --><div class="intro-box">
+    <p>
+      共通問題は、担当教員やクラスによらず全受験者が解く部分で、例年おおむね<strong>大問3つ</strong>
+      （うち大問3は2つの選択問題からどちらか一方を選ぶ形式）で構成される。出題範囲は年度によって
+      具体的な題材こそ変わるものの、扱われる分野は下記のようにかなり安定しており、教科書の各章に
+      対応する形で「ネットワーク」「情報量・符号化」「アルゴリズムとプログラム」「コンピュータの構成」
+      「UI/UXデザイン」「情報社会・法律・倫理」がバランスよく出題される。
+    </p>
+  </div>
+
+  <!-- 見出しと本文を節としてまとめる。id付きの節には目次などから直接移動できる。 --><div class="section">
+    <div class="sec-header">
+      <div class="sec-tag">分野マップ</div>
+      <h2>共通問題で繰り返し問われる6つの柱</h2>
+    </div>
+    <div class="sec-body">
+
+      <h3>1. ネットワーク・暗号技術</h3>
+      <div class="def">
+        <span class="box-label">頻出テーマ</span>
+        <p>
+          DNS の階層的な名前解決（ルートサーバ→TLD→…の逐次問い合わせ、キャッシュの仕組みとLRU的な
+          置き換え規則）、IPアドレス（ネットワークアドレス/ホスト番号の分割、CIDR表記）、クライアント・
+          サーバとポート番号の役割、公開鍵暗号・共通鍵暗号・ディジタル署名・PKI（認証局）を組み合わせた
+          認証やDRMの仕組み、情報セキュリティの3要素（機密性 Confidentiality・完全性 Integrity・
+          可用性 Availability）。
+        </p>
+      </div>
+      <p>2021・2023・2024・2025のすべての年度で、何らかの形でDNSまたは公開鍵暗号・PKIのどちらか（あるいは両方）が出題されている、共通問題1の定番テーマ。</p>
+
+      <h3>2. 情報量・符号化理論</h3>
+      <div class="def">
+        <span class="box-label">頻出テーマ</span>
+        <p>
+          エントロピー（自己情報量 $-\log_2 p$、平均情報量）の計算、グレイ符号・2進符号・10進符号の相互変換、
+          ハフマン符号のような可変長の接頭符号（プレフィックスフリー）による平均符号長の最小化、
+          情報源符号化定理。「等確率でない事象ほど、短い符号を割り当てれば平均符号長を縮められる」という
+          発想が繰り返し問われる。
+        </p>
+      </div>
+
+      <h3>3. アルゴリズムとプログラム（教科書の疑似言語）</h3>
+      <div class="def">
+        <span class="box-label">頻出テーマ</span>
+        <p>
+          <code>while</code> / <code>if-then-else-endif</code> を使った反復処理の穴埋め（日付計算、
+          二分探索、配列を使った集計処理など）、計算量（測定回数・比較回数が入力サイズ $N$ に対して
+          どう増えるか）、配列の添字と画素・グラフィックス表示の対応関係。
+        </p>
+      </div>
+
+      <h3>4. コンピュータの構成・機械語</h3>
+      <div class="def">
+        <span class="box-label">頻出テーマ</span>
+        <p>
+          プログラム内蔵方式（フォン・ノイマン型）、CPU（演算装置・制御装置）と主記憶装置の関係、
+          機械語命令の実行トレース（アキュムレータの値やメモリの内容を1命令ずつ追う）。
+        </p>
+      </div>
+
+      <h3>5. UI/UXデザイン</h3>
+      <div class="def">
+        <span class="box-label">頻出テーマ</span>
+        <p>
+          アフォーダンス（モノの形状・見た目が使い方を示唆する性質）、ピクトグラムにおける
+          パターン表現（現実世界の見た目をそのまま模す）と記号表現（恣意的な取り決めに基づく）の違い、
+          フィッツの法則（ポインティングデバイスでの到達時間のモデル）。
+        </p>
+      </div>
+
+      <h3>6. 情報社会・法律・倫理</h3>
+      <div class="def">
+        <span class="box-label">頻出テーマ</span>
+        <p>
+          著作権法とプログラム／デジタルコンテンツ（Winny事件、生成AIと著作権）、不正アクセス禁止法、
+          個人情報保護法とプライバシー、自動運転の責任分界、選挙とインターネット（サイバーカスケード、
+          ネット投票とCIA）。「授業で学んだ用語・概念を正しく使って論理的に説明できるか」を問う記述式問題。
+        </p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="box-label">出題形式について</span>
+    <p>
+      大問1・2は全員必答、大問3のみ「問題A」「問題B」のいずれか一方を選択する形式が例年の基本形
+      （担当教員から指示があればそれに従う）。空欄補充・記述問題・簡単な計算問題が組み合わさっており、
+      「教科書に出てくる用語を正確に覚えているか」と「その場で考えて説明・計算できるか」の両方が
+      バランスよく問われる。
+    </p>
+  </div>
+
+  <!-- 年度などの区分ごとに、過去問ページへのリンクをカードで並べる。 --><div class="year-grid">
+    <a class="year-card" href="kakomon_2025.html"><div class="yn">2025</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2024.html"><div class="yn">2024</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2023.html"><div class="yn">2023</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2022.html"><div class="yn">2022</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2021.html"><div class="yn">2021</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2019.html"><div class="yn">2019</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2018.html"><div class="yn">2018</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2017.html"><div class="yn">2017</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2016.html"><div class="yn">2016</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2015.html"><div class="yn">2015</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2014.html"><div class="yn">2014</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2013.html"><div class="yn">2013</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2012.html"><div class="yn">2012</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2011.html"><div class="yn">2011</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2010.html"><div class="yn">2010</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2009.html"><div class="yn">2009</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2008.html"><div class="yn">2008</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2007.html"><div class="yn">2007</div><div class="yc">解答つき</div></a>
+    <a class="year-card" href="kakomon_2006.html"><div class="yn">2006</div><div class="yc">解答つき</div></a>
+  </div>
+
+</div>
+
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">情報（田中哲郎）ー2026前期課程Sセメスター</footer>
+
+<script src="../../nav.js"></script>
+<script src="../../../common.js"></script>
+<script src="../../../access-ui.js"></script>
+</body>
+</html>

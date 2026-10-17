@@ -1,0 +1,305 @@
+<!DOCTYPE html><!-- 「微分積分 第3回 微分の定義とCauchy方程式 | 数理科学基礎演習」の内容を表示する学習ページ。 -->
+<html lang="ja">
+<!-- 文字コード・ページの題名・表示に使うCSSやJavaScriptの読み込みを指定する。 --><head>
+<meta charset="UTF-8">
+  <script src="../../access_control.js"></script>
+  <script src="../../access-guard.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a365d">
+<title>微分積分 第3回 微分の定義とCauchy方程式 | 数理科学基礎演習</title>
+<link rel="stylesheet" href="../../common.css">
+<link rel="stylesheet" href="../style.css">
+<script>// 数式の区切り文字や表示用の指定を、MathJax（数式を表示するライブラリ）に渡す。
+
+MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+  }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+
+<!-- ページ上部の移動リンク。科目トップや関連ページへ戻れるようにする。 --><nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="../index.html">数理科学基礎演習</a>
+    <div class="navbar-links">
+      <a href="../../index.html" class="nav-back">← 学習ノート</a>
+      <a href="../index.html">↑ 目次</a>
+      <a href="calc_02.html" data-page="calculus/calc_02">← 前の回</a>
+      <a href="calc_04.html" data-page="calculus/calc_04">次の回 →</a>
+    </div>
+  </div>
+</nav>
+<!-- ページの題名と概要を、本文より上の見出し領域に表示する。 --><div class="hero hero-sm hero-calc">
+  <h1>微分積分学演習　第3回</h1>
+  <p class="subtitle">微分の定義・Cauchy 方程式・$x^{x^x}$ の極限と微分</p>
+</div>
+
+<div class="container">
+
+<!-- 概観 -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 この回のテーマ</div>
+  <div class="section-card-body">
+    <p>この回の中心は「<strong>微分可能性の定義的証明</strong>」。直感的な「傾き」という概念を差分商の極限として厳密化する。また Cauchy の関数方程式と塔型累乗 $x^{x^x}$ という非標準的な関数を扱う。</p>
+    <div class="def-box">
+      <div class="def-title">定義：微分可能性と微分係数</div>
+      <p>関数 $f : U \to \mathbb{R}$（$U$ は開集合）が点 $a \in U$ で<strong>微分可能</strong>とは，極限</p>
+      $$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}$$
+      <p>が存在すること。この値を $a$ における<strong>微分係数</strong>という。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 問題1 -->
+<section class="section-card" id="problem1">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">1</span> $f(x) = x^2 \sin(1/x)$ の微分可能性
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>関数
+      $$f(x) = \begin{cases} x^2 \sin\dfrac{1}{x} & (x \ne 0) \\ 0 & (x = 0) \end{cases}$$
+      は $x = 0$ で何回微分可能か求めよ。</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>（一階微分可能性）</strong></p>
+      <p>差分商の極限を計算する：</p>
+      $$f'(0) = \lim_{x \to 0} \frac{f(x) - f(0)}{x - 0} = \lim_{x \to 0} \frac{x^2 \sin(1/x)}{x} = \lim_{x \to 0} x \sin\frac{1}{x}$$
+      <p>$|\sin(1/x)| \le 1$ より $|x \sin(1/x)| \le |x| \to 0$（$x \to 0$）。はさみうちの原理より $f'(0) = 0$。よって $f$ は $x = 0$ で微分可能。</p>
+      <p><strong>（二階微分不可能性）</strong></p>
+      <p>$x \ne 0$ では積の微分・合成関数の微分法則より：</p>
+      $$f'(x) = 2x \sin\frac{1}{x} - \cos\frac{1}{x}$$
+      <p>$f''(0)$ が存在するとすれば：</p>
+      $$f''(0) = \lim_{x \to 0} \frac{f'(x) - f'(0)}{x} = \lim_{x \to 0} \frac{2x\sin(1/x) - \cos(1/x)}{x} = \lim_{x \to 0}\left(2\sin\frac{1}{x} - \frac{1}{x}\cos\frac{1}{x}\right)$$
+      <p>$h_n := \dfrac{1}{2n\pi}$（$n = 1, 2, 3, \ldots$）とおくと $h_n \to 0$（$n \to \infty$）。</p>
+      <p>$\sin(1/h_n) = \sin(2n\pi) = 0$，$\cos(1/h_n) = \cos(2n\pi) = 1$ より：</p>
+      $$\frac{f'(h_n) - f'(0)}{h_n} = 2\sin\frac{1}{h_n} - \frac{1}{h_n}\cos\frac{1}{h_n} = 0 - 2n\pi = -2n\pi \to -\infty$$
+      <p>よって極限 $\lim_{x\to 0} \dfrac{f'(x) - f'(0)}{x}$ は存在しない。$f$ は $x = 0$ で2回微分可能でない。$\blacksquare$</p>
+
+      <p><strong>（$C^1$ 級でないことの確認）</strong></p>
+      <p>$f$ が $C^1$ 級（1回<em>連続</em>微分可能）であるためには，$f$ が微分可能なだけでなく，<strong>導関数 $f'$ が連続</strong>でなければならない。$x \ne 0$ での $f'(x) = 2x\sin\dfrac{1}{x} - \cos\dfrac{1}{x}$ において，</p>
+      $$\lim_{x \to 0} f'(x) = \lim_{x \to 0} \left(2x\sin\frac{1}{x} - \cos\frac{1}{x}\right)$$
+      <p>第1項 $2x\sin(1/x) \to 0$ だが，第2項 $\cos(1/x)$ は $x\to 0$ のとき $[-1,1]$ の間を振動し続け極限が存在しない。したがって $\lim_{x\to 0}f'(x)$ は存在せず，$f'$ は $x = 0$ で不連続。$f$ は $x = 0$ で<strong>1回微分可能だが $C^1$ 級でない</strong>。</p>
+    </div>
+
+    <div class="warn-box">
+      <div class="warn-title">⚠ 「1回微分可能」と「$C^1$ 級」は別物</div>
+      <p>$C^k$ 級（$k$ 回連続微分可能）とは，「$k$ 回微分可能」<strong>かつ</strong>「第 $k$ 次導関数 $f^{(k)}$ が連続」の両方を要求する。$f(x) = x^2\sin(1/x)$ はその違いを示す典型例で，$f'(0) = 0$ は存在する（1回微分可能）が $\lim_{x\to 0}f'(x)$ が存在しないため $f' $ が不連続，すなわち $f \notin C^1$ である。</p>
+    </div>
+
+    <div class="warn-box">
+      <div class="warn-title">⚠ よくある間違い：$x \ne 0$ の微分公式を $x = 0$ に転用する</div>
+      <p>$x \ne 0$ では $f'(x) = 2x\sin(1/x) - \cos(1/x)$ が成立するが，この式に $x = 0$ を代入することはできない（$\cos(1/0)$ は未定義）。$f'(0)$ は定義式 $\displaystyle\lim_{x\to 0} \frac{f(x)-f(0)}{x}$ から直接求めること。「微分可能なら微分公式を使える」は $x \ne 0$ の範囲でしか保証されていない。</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>なぜ $x^2 \sin(1/x)$ を考えるのか？</strong></p>
+      <p>$\sin(1/x)$ は $x \to 0$ で激しく振動し，そのままでは $x=0$ で連続でさえない。$x^2$ を掛けることで「振動を抑制」し，連続・微分可能にする。しかし1回微分すると抑制力が弱まり，2回微分で崩壊する。</p>
+      <p><strong>$f'(0)$ の求め方：定義に戻る</strong></p>
+      <p>$x \ne 0$ での微分公式はそのまま $x = 0$ で使えない（合成関数の微分は $1/x$ が $x=0$ で定義されないため）。必ず差分商の極限に戻る。</p>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 $f''(0)$ が存在しない理由を見抜く</div>
+        <p>$f''(0)$ の候補式：$\lim_{x\to 0}\left(2\sin\dfrac{1}{x} - \dfrac{1}{x}\cos\dfrac{1}{x}\right)$</p>
+        <p>$2\sin(1/x)$ の部分は有界（$[-2, 2]$ に収まる）だから問題ない。問題は $\dfrac{1}{x}\cos\dfrac{1}{x}$：$x \to 0$ で $1/x \to \infty$ だが，$\cos(1/x)$ が振動するため符号が定まらない。この項が $\pm\infty$ に発散する点列を見つければ極限が存在しないことが言える。</p>
+        <p><strong>なぜ $h_n = \dfrac{1}{2n\pi}$ を選ぶか：</strong></p>
+        <p style="margin-left:1rem; color:#374151; font-size:0.93em;">
+          $\cos(1/x)$ を「$= 1$ で固定」したい。$\cos\theta = 1$ になるのは $\theta = 2n\pi$（$n$ 整数）のとき。
+          $1/h_n = 2n\pi$ となるよう $h_n = \dfrac{1}{2n\pi}$ と選ぶと，$\cos(1/h_n) = \cos(2n\pi) = 1$ が確定し，
+          $\dfrac{1}{h_n}\cos\dfrac{1}{h_n} = 2n\pi \to \infty$。一方 $\sin(1/h_n) = \sin(2n\pi) = 0$ なので
+          第1項 $2\sin(1/h_n) = 0$ は消える。結果として
+          $\dfrac{f'(h_n) - f'(0)}{h_n} = 0 - 2n\pi = -2n\pi \to -\infty$。
+        </p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 このような関数が存在する理由</div>
+        <p>$x^2 \sin(1/x)$ の $x^2$ は $x \to 0$ のとき非常に速く $0$ に収束し，$\sin(1/x)$ の激しい振動を「抑制」する。これが1回微分可能性を保証する。しかし微分すると $x\sin(1/x)$ という項が出てきて「抑制力」が弱まり，$\cos(1/x)/x$ の振動に打ち負けてしまう。</p>
+        <p>一般に「$k$ 回微分可能だが $k+1$ 回は不可能」という関数は $x^{2k}\sin(1/x)$（または $x^{2k+1}\sin(1/x)$，$k \ge 1$）のような形で構成できる。$x^n\sin(1/x)$ はちょうど $\lfloor n/2 \rfloor$ 回微分可能で，$C^k$ 級の例としては $x^{2k+1}\sin(1/x)$ がちょうど $C^k$ 級かつ $(k+1)$ 回微分不可能の例になる。なお $x^{k+1}\sin(1/x)$ が $k$ 回微分可能になるのは $k=1$ のみで，$k \ge 2$ では $\lfloor(k+1)/2\rfloor$ 回しか微分できない。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題2 -->
+<section class="section-card" id="problem2">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">2</span> Cauchy の関数方程式
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>連続関数 $f : \mathbb{R} \to \mathbb{R}$ が任意の有理数 $x, y$ に対して $f(x + y) = f(x) + f(y)$ を満たすとする。このときある定数 $a$ が存在して $f(x) = ax$ と表せることを示せ．</p>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p>$a := f(1)$ とおき，$g(x) := f(x) - ax$ と定義する。$g$ は連続で，任意の有理数 $x, y$ に対して</p>
+      $$g(x+y) = f(x+y) - a(x+y) = f(x)+f(y) - ax - ay = g(x) + g(y)$$
+      <p>また $g(1) = f(1) - a = 0$。以下 $g \equiv 0$ を示す。</p>
+      <p><strong>Step 1（非負整数）：</strong>$g(0) = g(0+0) = g(0) + g(0)$ より $g(0) = 0$。帰納法：$g(n) = 0$ と仮定すると $g(n+1) = g(n) + g(1) = 0$。</p>
+      <p><strong>Step 2（負の整数）：</strong>$0 = g(0) = g(n + (-n)) = g(n) + g(-n)$ より $g(-n) = 0$。</p>
+      <p><strong>Step 3（有理数）：</strong>整数 $m$，正整数 $n$ に対して加法性を $n$ 回適用すると $g(m) = g(n \cdot (m/n)) = n \cdot g(m/n)$。$g(m) = 0$ だから $g(m/n) = 0$。よってすべての有理数で $g = 0$。</p>
+      <p><strong>Step 4（実数）：</strong>任意の実数 $x$ に対して，有理数の稠密性より $x$ に収束する有理数列 $\{q_k\}$ が存在する。$g(q_k) = 0$ かつ $g$ は連続だから $g(x) = \lim_{k\to\infty} g(q_k) = 0$。</p>
+      <p>よって任意の実数 $x$ に対して $f(x) = g(x) + ax = ax = f(1) \cdot x$。$\blacksquare$</p>
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>証明の構造：補助関数 $g$ の導入</strong></p>
+      <p>結論が $f(x) = ax$（$a = f(1)$）なので，$g(x) = f(x) - ax$ とおけば $g \equiv 0$ を示すことに帰着する。$g$ も加法性と連続性を満たし，かつ $g(1) = 0$ という強い条件が付く。</p>
+      <p><strong>整数 → 有理数 → 実数の順に拡張するパターン</strong></p>
+      <ol>
+        <li>加法性を繰り返し使うと整数値は決まる</li>
+        <li>$n \cdot g(m/n) = g(m)$ で有理数値も決まる</li>
+        <li>連続性と有理数の稠密性で実数全体に拡張できる</li>
+      </ol>
+      <p>この「離散 → 稠密 → 連続」の拡張パターンは解析学で頻出する。</p>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 連続性がなければ？（Hamel 基底と病理的解）</div>
+        <p>連続性の仮定を外すと，$f(x+y) = f(x) + f(y)$ を満たす $f$ で $f(x) = ax$ の形でないものが存在する。選択公理（Axiom of Choice）を認めると，$\mathbb{R}$ を有理数体 $\mathbb{Q}$ 上のベクトル空間と見なしたときの基底（Hamel 基底）$B$ が存在する。すると「$b \in B$ ごとに異なる実数値 $c_b$ を割り当て，$\mathbb{Q}$-線形に拡張する」という構成で，$f \ne ax$ の Cauchy 方程式の解が得られる。</p>
+        <p>こうした「病理的解」は至る所で不連続であり，グラフは $\mathbb{R}^2$ の中で稠密になる（可視化不可能）。<strong>連続性（または単調性，可測性など）があると病理解は消える</strong>—これが連続性仮定の本質的な役割だ。</p>
+      </div>
+      <div class="warn-box">
+        <div class="warn-title">⚠ 問題文の「有理数 $x, y$」に注意</div>
+        <p>この問題では函数方程式 $f(x+y)=f(x)+f(y)$ が「任意の有理数 $x, y$」に対して成立することから出発し，連続性を使って実数全体に拡張する。「任意の実数 $x,y$ で成立」と読み間違えると，Step 4（連続性による実数への拡張）が不要に見えてしまう。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- 問題3 -->
+<section class="section-card" id="problem3">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">
+    <span class="problem-num">3</span> $f_n(x) = x^{x^{\cdots^x}}$（塔型累乗）の極限と微分
+  </div>
+  <div class="section-card-body">
+
+    <div class="problem-box">
+      <h3>問題文</h3>
+      <p>自然数 $n$ に対し関数 $f_n(x)$（$x > 0$）を，$f_1(x) := x$，$f_{n+1}(x) := x^{f_n(x)}$ と帰納的に定義する。</p>
+      <ol>
+        <li>$\lim_{x \to 0} f_n(x)$ を求めよ。</li>
+        <li>導関数 $f_2'(x)$，$f_3'(x)$ を求めよ。</li>
+      </ol>
+    </div>
+
+    <div class="answer-box">
+      <div class="answer-title">📝 模範解答</div>
+      <p><strong>（1）帰納法による証明</strong></p>
+      <p>$n$ が奇数のとき $\lim_{x\to+0} f_n(x) = 0$，偶数のとき $1$ となることを帰納法で示す。</p>
+      <p><strong>基底：</strong>$f_1(x) = x$ だから $\lim_{x\to+0} f_1(x) = 0$（奇数 $n=1$）。</p>
+      <p><strong>帰納ステップ（奇数 → 偶数）：</strong>$\lim_{x\to+0} f_{2m-1}(x) = 0$ と仮定する。$\lim_{x\to+0} x\log x = 0$ を用いて：</p>
+      $$f_{2m}(x) = x^{f_{2m-1}(x)} = e^{f_{2m-1}(x) \log x} \to e^0 = 1$$
+      <p>（$f_{2m-1}(x) \to 0$ かつ $\log x \to -\infty$ だが積 $f_{2m-1}(x)\log x \to 0$）。</p>
+      <p><strong>帰納ステップ（偶数 → 奇数）：</strong>$\lim_{x\to+0} f_{2m}(x) = 1$ と仮定する。</p>
+      <p>$\varepsilon_0 = 1/4$ に対してある $\delta > 0$ があって，$0 < x < \delta$ では $|f_{2m}(x) - 1| < 1/4$，すなわち $f_{2m}(x) > 3/4$。よって $f_{2m}(x) - 1/2 > 1/4 > 0$。</p>
+      <p>$0 < x < \delta$ に対して：</p>
+      $$x^{f_{2m}(x)} = x^{f_{2m}(x) - 1/2} \cdot x^{1/2}$$
+      <p>$f_{2m}(x) - 1/2 > 1/4$ かつ $0 < x < 1$ だから $0 < x^{f_{2m}(x) - 1/2} < x^{1/4} \to 0$。また $x^{1/2} \to 0$。はさみうちより $f_{2m+1}(x) = x^{f_{2m}(x)} \to 0$。</p>
+      <p>以上より，すべての自然数 $n$ に対して命題が成り立つ。$\blacksquare$</p>
+
+      <p><strong>（2）導関数</strong></p>
+      <p>$f_2(x) = x^x = e^{x\log x}$（$x > 0$）と書く。合成関数の微分より：</p>
+      $$f_2'(x) = e^{x\log x} \cdot (x\log x)' = x^x(\log x + 1)$$
+      <p>$f_3(x) = x^{x^x} = e^{x^x \log x}$（$x > 0$）と書く。</p>
+      $$f_3'(x) = e^{x^x \log x} \cdot \frac{d}{dx}(x^x \log x)$$
+      $$= x^{x^x} \cdot \left[(x^x)' \log x + x^x \cdot \frac{1}{x}\right]$$
+      $$= x^{x^x} \cdot \left[x^x(\log x + 1)\log x + \frac{x^x}{x}\right]$$
+      $$= x^{x^x} \cdot x^x \left[(\log x + 1)\log x + \frac{1}{x}\right]$$
+    </div>
+
+    <div class="think-box">
+      <div class="think-title">🧠 思考法・解説</div>
+      <p><strong>(1) 帰納法の構造：なぜこの分解か</strong></p>
+      <p>帰納法の向きは「奇数（$f_1=x\to0$）→ 偶数（$x^{\to0}\to1$）→ 奇数（$x^{\to1}\to0$）→ …」という交互の流れ。</p>
+      <p>「偶数 → 奇数」方向（$x^{f_{2m}(x)} \to 0$ の証明）：$f_{2m}(x) \approx 1$ を使って $x^{f_{2m}(x)} \approx x^1 \to 0$ と言いたいが，$x^{f_{2m}(x)}$ の指数自体が $x$ に依存しているので単純な置き換えは厳密でない。</p>
+      <div class="backward-think" style="margin:0.5rem 0 0.75rem;">
+        <div class="bt-title">🔄 $x^{f_{2m}(x)} = x^{f_{2m}(x)-1/2} \cdot x^{1/2}$ という分解の理由</div>
+        <p>$f_{2m}(x) > 3/4$ という下界だけ確保されている。$0 < x < 1$ のとき $x^{\alpha}$ は $\alpha > 0$ が大きいほど <em>小さく</em>なる（$x < 1$ だから）。だから指数が大きい方が $0$ に近い。</p>
+        <p>目標：$x^{f_{2m}(x)}$ を「指数が確定している $x^\alpha$（$\alpha > 0$）」で上から抑えたい。</p>
+        <ul>
+          <li>$f_{2m}(x) - 1/2 > 3/4 - 1/2 = 1/4 > 0$ （$f_{2m}(x) > 3/4$ より）</li>
+          <li>$0 < x < 1$ かつ指数が $1/4$ より真に大きいので $0 < x^{f_{2m}(x)-1/2} < x^{1/4}$（指数を下げると値が大きくなる；等号なし）</li>
+          <li>$x > 0$ より $x^{f_{2m}(x)} > 0$。よって $0 < x^{f_{2m}(x)} = x^{f_{2m}(x)-1/2} \cdot x^{1/2} < x^{1/4} \cdot x^{1/2} = x^{3/4} \to 0$（はさみうち）</li>
+        </ul>
+        <p>分解 $x^{f_{2m}(x)-1/2} \cdot x^{1/2}$ は，指数の一部 $1/2$ を「定数」として切り出すことで，残りの $f_{2m}(x)-1/2$ を下から抑えて $x^{1/4}$ で評価できるようにする工夫だ。</p>
+      </div>
+
+      <div class="backward-think">
+        <div class="bt-title">🔄 $x\log x \to 0$（$x \to +0$）の証明</div>
+        <p>これは奇数→偶数ステップの核心。$x \to +0$ で $\log x \to -\infty$ だが $x \to 0$ の速さが勝る。</p>
+        <p>$x\log x = -\dfrac{\log(1/x)}{1/x}$。$u = 1/x \to \infty$ として $-\dfrac{\log u}{u} \to 0$（$\log u / u \to 0$ as $u \to \infty$）。</p>
+        <p>あるいは $t = \sqrt{x} \to 0$ として $x\log x = t^2 \cdot 2\log t = 2t^2 \log t \to 0$（$t^2 \log t \to 0$ の既知極限を使う）。</p>
+      </div>
+
+      <div class="insight-box">
+        <div class="insight-title">💡 $\lim_{x\to +0} x\log x = 0$ の証明</div>
+        <p>$x\log x = 2(\sqrt{x})^2 \log((\sqrt{x})^2) = 2(\sqrt{x})^2 \cdot 2 \log \sqrt{x}$。$t = \sqrt{x} \to 0$ として $4t^2 \log t \to 0$（$t^2$ が $\log t$ の発散を抑える）。より直接的には：$x \log x = -\dfrac{\log(1/x)}{1/x} \to 0$（$\log u / u \to 0$ as $u \to \infty$）。</p>
+      </div>
+
+      <p><strong>(2) $x^{f(x)}$ の微分：対数を使う</strong></p>
+      <p>底も指数も変数の関数のとき，$x^{f(x)} = e^{f(x)\log x}$ と書き直すのが定石。あとは合成関数・積の微分公式を機械的に適用する。</p>
+      <p>$f_3'(x)$ の計算では $(x^x)' = x^x(\log x + 1)$ という $f_2'$ の結果を使い回す。複雑に見えても「まず $f_2$ の結果を書いておく」という意識で整理する。</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- 自力確認チェックリスト -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📋 自力確認チェックリスト</div>
+  <div class="section-card-body">
+    <!-- summaryの見出しを押すと、この中の説明を開いたり閉じたりできる。 --><details>
+      <summary>第3回を理解できているかセルフチェック（クリックして展開）</summary>
+      <div class="details-body">
+        <p style="font-family:var(--font-sans); font-size:0.85rem; color:#6b7280; margin-bottom:0.5rem;">できると思ったら ✓，できない・怪しいなら解説を再読する。</p>
+        <ul class="checklist">
+          <li>$f'(0)$ を求めるとき，差分商の定義 $\lim_{x\to 0}(f(x)-f(0))/x$ に必ず戻れるか</li>
+          <li>$f''(0)$ が存在しないことを証明するために，極限が存在しない点列を具体的に構成できるか</li>
+          <li>なぜ $h_n = 1/(2n\pi)$ を選んだかを自分の言葉で説明できるか</li>
+          <li>$x\log x \to 0$（$x\to+0$）を $u=1/x$ で置換して証明できるか</li>
+          <li>Cauchy 方程式の証明で「整数 → 有理数 → 実数」の拡張の各ステップの意味を言えるか</li>
+          <li>$f(x+y)=f(x)+f(y)$ が有理数でのみ成立しているのに実数全体で $f(x)=ax$ が示せる理由を説明できるか</li>
+          <li>$x^{x^x} = e^{x^x \log x}$ と変形して，積の微分と連鎖率だけで $f_3'(x)$ を求められるか</li>
+          <li>$\lim_{x\to+0} f_n(x)$ の奇偶による違いを帰納法の骨格で説明できるか</li>
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- まとめ -->
+<section class="section-card">
+  <div class="section-card-header" style="background:#dbeafe; color:#1e3a8a;">📌 第3回のまとめ</div>
+  <div class="section-card-body">
+    <ul>
+      <li><strong>微分可能性の証明：</strong>差分商の極限を直接計算する（$x = 0$ での証明は特に丁寧に）</li>
+      <li><strong>微分不可能の証明：</strong>極限が存在しない数列を構成して反例を示す</li>
+      <li><strong>Cauchy 方程式：</strong>整数 → 有理数 → 実数の順に連続性で拡張するパターン</li>
+      <li><strong>$x^{f(x)}$ の微分：</strong>$e^{f(x)\log x}$ と書いて合成関数の微分法則を適用</li>
+      <li><strong>$x\log x \to 0$（$x\to+0$）：</strong>$\sqrt{x}$ で分解するか，$\log u / u \to 0$（$u\to\infty$）に帰着</li>
+    </ul>
+  </div>
+</section>
+
+</div>
+<!-- 本文の下に、サイトや科目の案内を表示する。 --><footer class="site-footer">数理科学基礎演習（榎園誠）ー2026前期課程S1ターム</footer>
+<script src="../nav.js"></script>
+<script src="../../common.js?v=20260718-texcopy"></script>
+<script src="../../access-ui.js"></script>
+</body>
+</html>
